@@ -1,0 +1,113 @@
+@media screen and (max-width: 1220px) {
+    .container { width: 1100px; }
+    .header_menuwrap ul li a { padding: 12px 15px; }
+    .list_col { width: 530px; }
+    .list_img { background: #222222; }
+    .profile_active_details { width: 825px; }
+}
+
+@media screen and (max-width: 1120px) {
+    .container { width: 1000px; }
+    .list_col { width: 490px; }
+    .header_form { width: 440px; }
+    .foot_logo, .policy { margin-right: 25px; }
+    .profile_active_details { width: 75%; }
+}
+
+@media screen and (max-width: 1020px) {
+    .container { width: 900px; }
+    .header_menuwrap ul li a { font-size: 12px; }
+    .list_col { width: 100%; margin: 0 0 25px; }
+    .header_form { width: 350px; }
+    .foot_logo, .policy { margin-right: 15px; }
+    .list_row { margin: 0; }
+    .list_img { text-align: center; }
+    .list_img img { margin: 0 auto; }
+    .foot_rgt { width: 260px; }
+    .profile_active_details { width: 70%; }
+    .fllow_bns { position: relative; margin-bottom: 15px; top: auto; right: auto; }
+    .followers ul { margin-bottom: 15px; }
+}
+
+@media screen and (max-width: 920px) {
+    .container { width: 100%; padding: 0 15px; }
+    .comment_section { width: 90%; }
+    .header_form { width: 350px; }
+    .foot_logo, .policy, .comp_info, .foot_rgt { width: 48%; float: left; margin: 15px 0; }
+    .list_row { margin: 0; }
+    .list_img { text-align: center; }
+    .list_img img { margin: 0 auto; }
+    .header_form { width: 255px; }
+    .icons_wrap { width: 115px; }
+    .main_menu { display: none; }
+    .nav_triger{ display: block; }
+    .profile_active_details { width: 65%; }
+    .newsfeed_inner { width: 700px; }
+}
+
+@media screen and (max-width: 768px) {
+    .foot_logo, .policy, .comp_info, .foot_rgt { width: 100%; float: none; margin: 15px 0; box-shadow: 0 2px 10px 0 #ccc; padding: 15px; }  
+    .list_decp, .list_img, .list_col_inner { width: 100%; display: block; }
+    .header_form { width: 100%; margin: 0; }
+    .signup_wrap, .category_menu { margin: 0; }
+    .section_menu{ margin-bottom: 30px; height: 45px; overflow: hidden; padding-right: 30px; background: #616161; }
+    .section_menu.more_menu { height: auto; min-height: 45px; }
+    .more_items { display: block; }
+    .category_menu li { margin-bottom: 5px; }
+    .signup_wrap_inner { width: 100%; }
+    .double_input .form_field_inner:first-child { margin-right: 0px; margin-bottom: 15px; }
+    .signup_form_section label { font-size: 12px; }
+    .facebook, .google_plus { font-size: 14px; }
+    .profile_active_details, .profile_photo_wrap { width: 100%; display: block; margin: 0; text-align: center; }
+    .fllow_bns { width: 100%; text-align: center; }
+    .newsfeed_inner { width: 100%; padding: 0 15px; }
+    .feed_like_share ul li { width: auto; margin-right: 12px; }
+    .feed_like_share ul li a { font-size: 12px; }
+    .feed_like_share ul li a i { font-size: 18px; }
+    .newsfeed_menu li a { font-size: 14px; padding: 8px; }
+    .write_img, .write_text { float: none; width: 100%; text-align: center; }
+    .toggle_feed { float: right; }
+    .feed_name h4, .feed_body_text h4 { font-size: 20px; margin: 0; }
+    .feed_name { width: 60%; }
+    .comment_img > img, .comment_img { width: 45px; height: 45px; }
+    .comment_box_wrap { width: 88%; }
+    .follow_request ul li { width: 45%; margin: 12px 2%; }
+}
+
+@media screen and (max-width: 600px) {
+    .write_post .form_field { width: 100%; display: block; }
+    .write_text input[type="text"], .write_text input[type="email"], .write_text input[type="password"], .write_text textarea, .write_text select { margin-bottom: 15px; }
+    .newsfeed_menu li { width: 50%; }
+}
+
+@media screen and (max-width: 500px) {
+    .double_input .form_field_inner, .double_input .form_field_inner:last-child { width: 100%; float: none; text-align: left; }
+    .signup_form_section .switch-field { float: none; }
+    .follow_request .lft_img_fllw, .follow_request .rgt_txt_fllw { width: 100%; }
+}
+
+@media screen and (max-width: 480px) {
+    .signup_wrap { margin: 0; padding-top: 12px; text-align: right; width: 70%; }
+    .signup_wrap ul li a { padding: 0 0 0 5px; }
+    .facebook, .google_plus { float: none; width: 100%; margin: 0 0 8px; }
+    .followers ul li { width: 45%; margin: 12px 1%; }
+    .fllow_bns a.btn { width: 100%; display: block; margin: 8px 0; }
+    .form_field .input_field { width: 100%; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
