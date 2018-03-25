@@ -168,7 +168,236 @@ class Products extends CI_Controller {
 
 	public function add_to_cart()
 	{
-		echo json_encode(array('status'=>'ok','cartreplace_html'=>1));
+		$userid = get_user_id();
+		check_site_ajax_request();
+		if($userid !='')
+		{
+			$this->form_validation->set_rules ( 'reference_id', 'lang:rest_customer_id_required', 'trim|callback_validate_cutomer' );
+			$this->form_validation->set_rules ( 'product_name', 'lang:rest_product_name', 'trim|required' );
+			$this->form_validation->set_rules ( 'product_sku', 'lang:rest_product_sku', 'required' );
+			$this->form_validation->set_rules ( 'product_qty', 'lang:rest_product_cart_qty', 'trim|required' );
+			$this->form_validation->set_rules ( 'product_unit_price', 'lang:rest_product_unit_price', 'trim|required' );
+			$this->form_validation->set_rules ( 'product_total_price', 'lang:rest_product_total_price', 'trim|required' );
+			if ($this->form_validation->run () == TRUE) {
+				
+				/* post values */
+				$reference_id = $this->post ( 'reference_id' ); /* mobile device id or browser session id */
+				$customer_id = $this->post ( 'customer_id' );
+				$product_id = $this->post ( 'product_id' );
+				$product_price = $this->post ( 'product_total_price' );
+				$product_qty = $this->post ( 'product_qty' );
+				
+				/* validate product */
+				$products = $this->validate_product ($product_id);
+				$user_where = ($reference_id == "") ? array (
+						'cart_customer_id' => $customer_id 
+				) : array (
+						'cart_session_id' => $reference_id 
+				);
+				
+				$cart_exists = $this->Mydb->get_record ( 'cart_id', 'cart_details', array_merge ( array (
+						'cart_app_id' => $app_id,
+						'cart_availability_id' => $avilablity_id 
+				), $user_where ) );
+				
+				if (empty ( $cart_exists )) {
+
+					/* Add new cart details */
+					//$delivery_charge = $this->get_delivery_charge( $avilablity_id, $delivery_charge ); /* if set delivery charge only delivery products.. */
+					$delivery_charge = 0;
+					$sub_total = $product_price;
+					$grand_total = $sub_total + $delivery_charge;
+				
+					$cart = array (
+						'cart_customer_id' => $customer_id,
+						'cart_session_id' => $reference_id,
+						'cart_total_items' => $product_qty,
+						'cart_delivery_charge' => $delivery_charge,
+						'cart_sub_total' => $product_price,
+						'cart_grand_total' => $grand_total,
+						'cart_created_on' => current_date (),
+						'cart_created_ip' => get_ip () 
+					);
+					
+					$insert_id = $this->Mydb->insert ( 'cart_details', $cart );
+				}
+				
+				$cart_unique_id = (! empty ( $cart_exists )) ? $cart_exists ['cart_id'] : $insert_id;
+				/* insert cart products.. */
+				if ($cart_unique_id != "") {
+					
+						
+					$simple_items = $this->Mydb->get_record ( 'cart_item_id,cart_item_cart_id', 'cart_items', array (
+							'cart_item_cart_id' => $cart_unique_id,
+							'cart_item_type' => 'Simple',
+							'cart_item_product_id' => $product_id,
+							'cart_item_special_notes' =>  (trim($this->post ( 'product_remarks' ))=="" ? "" : trim($this->post ( 'product_remarks' ))) 
+					) );
+					
+					if (empty ( $simple_items )  ) {
+						$result = $this->insert_cart_items ( $cart_unique_id, $_POST); /* insert cart items */
+					} else {
+						$result = $this->update_cart_items ( $simple_items ['cart_item_id'], $_POST, $simple_items ['cart_item_cart_id']);
+					}
+				}
+				else {
+					$result['status']  = "error";
+					$result['message'] = "Something Went Wrong, Try again later";
+				}
+			} else {
+				
+				$result['status']  = "error";
+				$result['message'] = get_label ( 'rest_form_error' );
+				$result['form_error'] = validation_errors ( );
+			}	
+		}
+		else
+		{
+			$result['status'] = "failed";
+			$result['redirect_url'] = base_url();
+		}
+		echo json_encode($result);
+	}
+	
+	
+	/* this method used to insert cart items */
+	private function insert_cart_items($cart_unique_id, $post_arary) {
+		$_POST = $post_arary;
+		$cart_unique_id = $cart_unique_id;
+		$reference_id = $this->post ( 'reference_id' ); /* mobile device id or browser session id */
+		$customer_id = $this->post ( 'customer_id' );
+		$product_id = $this->post ( 'product_id' );
+		$product_price = $this->post ( 'product_total_price' );
+		$product_qty = $this->post ( 'product_qty' );
+		$product_remarks = ($this->post ( 'product_remarks' )!="")?$this->post('product_remarks'):"";
+		
+		$cart_items = array (
+				'cart_item_customer_id' => $customer_id,
+				'cart_item_session_id' => $reference_id,
+				'cart_item_cart_id' => $cart_unique_id,
+				'cart_item_product_id' => $product_id,
+				'cart_item_product_name' => addslashes ( $this->post ( 'product_name' ) ),
+				'cart_item_product_sku' => addslashes ( $this->post ( 'product_sku' ) ),
+				'cart_item_product_image' => addslashes ( $this->post ( 'product_image' ) ),
+				'cart_item_qty' => $product_qty,
+				'cart_item_unit_price' => $this->post ( 'product_unit_price' ),
+				'cart_item_total_price' => $this->post ( 'product_total_price' ),
+				'cart_item_created_on' => current_date (),
+				'cart_item_special_notes' => $product_remarks,  
+		);
+		
+		$cart_item_id = $this->Mydb->insert ( 'cart_items', $cart_items );
+		
+		
+		
+		/* get catr details */
+		$contents = $this->contents_get ( $reference_id, $customer_id, 'callback' );
+		
+		return $return_array = array (
+				'status' => "ok",
+				'contents' => $contents,
+				'cart_item_id' => $cart_item_id,
+				'message' => get_label ( 'rest_product_added' ) 
+		);
+	}
+
+	/* this method used to update cart items */
+	private function update_cart_items($eqaul_cart_id, $post_arary, $cart_id, $time) {
+
+		$_POST = $post_arary;
+		$reference_id = $this->post ( 'reference_id' ); /* mobile device id or browser session id */
+		$customer_id = $this->post ( 'customer_id' );
+		$product_qty = $this->post ( 'product_qty' );
+		$item_details = $this->Mydb->get_record ( array (
+				'cart_item_qty',
+				'cart_item_total_price',
+				'cart_item_id',
+				'cart_item_unit_price' 
+		), 'cart_items', array (
+				'cart_item_id' => $eqaul_cart_id 
+		) );
+
+		
+		if (! empty ( $item_details )) {
+			$new_qty = $product_qty + $item_details ['cart_item_qty'];
+			$new_total_amount = $new_qty * $item_details ['cart_item_unit_price'];
+			$this->Mydb->update ( 'cart_items', array (
+					'cart_item_id' => $eqaul_cart_id 
+			), array (
+					'cart_item_qty' => $new_qty,
+					'cart_item_total_price' => $new_total_amount 
+			) );
+			
+			
+			$contents = $this->contents_get ( $reference_id, $customer_id, 'callback' );
+			
+			return $return_array = array (
+					'status' => "ok",
+					'contents' => $contents,
+					'cart_item_id' => $eqaul_cart_id,
+					'message' => get_label ( 'rest_product_added' ) 
+			);
+		}
+	}
+	
+	/* this function used to get cart details */
+	public function contents_get($reference_id = null, $customer_id = null, $returndata = "") {
+		$productlead=array();	
+		$maxs=0;
+
+		$reference_id = ($reference_id == "" ? $this->get ( 'reference_id' ) : $reference_id); /* mobile device id or browser session id */
+
+		$customer_id = ($customer_id != "" ? $customer_id : $this->get ( 'customer_id' ));
+
+		/* validate customer id */
+		$customer_array = ($reference_id == "" ? array (
+				'cart_customer_id' => $customer_id 
+		) : array (
+				'cart_session_id' => $reference_id 
+		));
+
+		$cart_details = $this->Mydb->get_record ( '*', 'cart_details', $customer_array, array (
+				'cart_id' => 'DESc' 
+		) );
+
+		if (! empty ( $cart_details )) {
+
+			$select = array (
+					'cart_item_id',
+					'cart_item_product_id',
+					'cart_item_product_name',
+					'cart_item_product_sku',
+					'cart_item_product_image',
+					'cart_item_qty',
+					'cart_item_unit_price',
+					'cart_item_total_price',
+					'cart_item_type',
+					'cart_item_added_condiment',
+					'cart_item_special_notes', 
+			);
+			$all_items = $this->Mydb->get_all_records ( $select, 'cart_items', array (
+					'cart_item_cart_id' => $cart_details ['cart_id'] 
+			) );
+			$fianl = array ();
+			if (! empty ( $all_items )) {
+
+				$response ['cart_details'] = $cart_details;
+				$response ['cart_items'] = $all_items;
+				if ($returndata == "callback") {
+					return $response;
+				} else {
+					return array (
+						'status' => "ok",
+						'result_set' => $response 
+					);
+				}
+			}
+		} else {
+			return array (
+					'status' => "ok",
+					'message' => get_label ( 'rest_cart_empty' ) 
+			);
+		}
 	}
 	
 	/* this method used to common module labels */
