@@ -112,7 +112,7 @@ class Home extends CI_Controller {
 			
 		}
 		
-		$join = "";
+		$join = array();
 		$join [0] ['select'] = "blog_cat_id,blog_cat_name";
 		$join [0] ['table'] = $this->blog_categorytable;
 		$join [0] ['condition'] = "post_category = blog_cat_id";
@@ -512,7 +512,31 @@ class Home extends CI_Controller {
 			$this->layout->display_site ( $this->folder . $this->module . "-404", $data );
 		}
 	}
-
+	public function ajax_autocomplete()
+	{
+		$select_array = array ('pos_posts.*');
+		$where=$offset=$limit=$order_by=$like=$groupby=$join=array();
+		$records = $this->Mydb->get_all_records ( '*', $this->table, $where, $limit, $offset, $order_by, $like, $groupby, $join );
+		if(!empty($records))
+		{
+			foreach($records as $key=>$record)
+			{
+				$result ['redirecturl'] = $record['post_slug'];
+				$result ['label'] = $record['post_slug'];//post_slug
+				$result ['value'] = $record['post_title'];
+				$result ['status'] = 'success';
+				$result ['message'] = 'success';				
+			}
+		}
+		else
+		{
+			$result ['status'] = 'error';
+			$result ['message'] = '';
+		}
+		
+		echo json_encode ( $result );
+		exit ();
+	}
 	
 	/* this method used to common module labels */
 	private function load_module_info() {
