@@ -1,0 +1,16 @@
+/* highlight results */
+.ui-autocomplete span.highlight_search_text {
+    background-color: #ffff66;
+}
+.ui-autocomplete-loading {
+    background: white url('lib/autocomplete/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+.ui-autocomplete {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
+.ui-autocomplete li {
+    font-size: 16px;
+}

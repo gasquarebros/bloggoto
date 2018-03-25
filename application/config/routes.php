@@ -73,6 +73,7 @@ $route['home/draftpost'] = 'home/draftpost';
 $route['home/addpost'] = 'home/addpost';
 $route['home/savedraftpost'] = 'home/savedraftpost';
 $route['home/ajax_pagination'] = 'home/ajax_pagination';
+$route['home/ajax_autocomplete'] = 'home/ajax_autocomplete';
 $route['home/view/(.*)'] = 'home/view/$1';
 $route['home/(.*)'] = 'home/index/$1';
 $route['home'] = 'home/index';

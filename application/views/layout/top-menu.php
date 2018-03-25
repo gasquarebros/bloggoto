@@ -1,4 +1,5 @@
 <?php $load_message = message(); $post_notify_count = post_notify_count(); ?>
+
 <header>
 	<div class="header_top">
 		<div class="container">
@@ -33,7 +34,7 @@
 				<?php } ?>
 				<form class="header_form">
 					<div class="search_box">
-						<input type="text" class="text_search" placeholder="Search topics & blogger" />
+						<input type="text" id="topic_title" class="ui-autocomplete-input text_search" placeholder="Search topics & blogger" />
 						<input type="submit" class="btn_search" value="" />
 					</div>
 				</form>

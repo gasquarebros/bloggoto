@@ -108,4 +108,5 @@ $lang['order_confirmation_admin_template'] = 6;
 $lang['order_cancel_template'] = 7;
 $lang['order_cancel_admin_template'] = 8;
 $lang['company_notification_template'] = 14;
+$lang['search_result_limit'] = 10;
 

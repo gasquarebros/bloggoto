@@ -418,7 +418,7 @@ class Home extends CI_Controller {
 			$order_by = array (
 					$this->primary_key => 'DESC' 
 			);
-			$join = "";
+			$join = array();
 			$join [0] ['select'] = "blog_cat_id,blog_cat_name";
 			$join [0] ['table'] = $this->blog_categorytable;
 			$join [0] ['condition'] = "post_category = blog_cat_id";
@@ -467,7 +467,7 @@ class Home extends CI_Controller {
 		$order_by = array (
 				$this->primary_key => 'DESC' 
 		);
-		$join = "";
+		$join = array();
 		$join [0] ['select'] = "blog_cat_id,blog_cat_name";
 		$join [0] ['table'] = $this->blog_categorytable;
 		$join [0] ['condition'] = "post_category = blog_cat_id";
@@ -514,26 +514,53 @@ class Home extends CI_Controller {
 	}
 	public function ajax_autocomplete()
 	{
+		$search_text=$this->input->get ( 'term' );		
 		$select_array = array ('pos_posts.*');
-		$where=$offset=$limit=$order_by=$like=$groupby=$join=array();
-		$records = $this->Mydb->get_all_records ( '*', $this->table, $where, $limit, $offset, $order_by, $like, $groupby, $join );
-		if(!empty($records))
+		$where=$offset=$limit=$order_by=$order_by_array=$like=$like_array=$groupby=$join=array();
+		$join = array();
+
+		$where_array = array('post_status'=>'A');
+		$order_by_array = array('post_title'=>'ASC');
+		$like_array = array('post_title'=>$search_text);
+		$limit = get_label('search_result_limit');
+		$post_records = $this->Mydb->get_all_records ( "post_slug topic_label,post_title topic_value,CASE post_status WHEN 'A' THEN 'Post' END  'topic_type'", $this->table, $where_array, $limit, $offset, $order_by, $like_array, $groupby, $join );	
+			
+		$where = array('customer_status'=>'A',"(customer_first_name like '%$search_text%' OR customer_last_name like '%$search_text%')"=>NULL);
+		$order_by = array('customer_first_name'=>'ASC');
+		$records = $this->Mydb->get_all_records ( "customer_id topic_label,concat(customer_first_name,' ',customer_last_name) topic_value,CASE customer_type WHEN 0 THEN 'Writter' WHEN 1 THEN 'Business' END  'topic_type'", $this->customers, $where, $limit, $offset, $order_by, $like, $groupby, $join );
+
+		if(!empty($post_records))
 		{
-			foreach($records as $key=>$record)
+			$i=0;
+			if(!empty($records))
+				$post_records=array_merge($post_records,$records);
+
+			foreach($post_records as $key=>$record)
 			{
-				$result ['redirecturl'] = $record['post_slug'];
-				$result ['label'] = $record['post_slug'];//post_slug
-				$result ['value'] = $record['post_title'];
-				$result ['status'] = 'success';
-				$result ['message'] = 'success';				
+				if($record['topic_label'] != '')
+				{ 
+					$_search_text=str_ireplace($search_text, '<span class="highlight_search_text">'.substr($record['topic_value'],0,strlen($search_text)).'</span>', $record['topic_value']);
+					if($record['topic_type'] == "Post")
+					{
+						$result [$i]['id'] = "home/view/".$record['topic_label'];
+						$result [$i]['label'] = $record['topic_type']." : ".$_search_text ;
+					}
+					else
+					{
+						$result [$i]['id'] = "myprofile/".encode_value($record['topic_label']);
+						$result [$i]['label'] = $record['topic_type']." : ".$_search_text ;
+					}
+					$result [$i]['value'] = $record['topic_value'];
+					$i++;
+				}
 			}
 		}
 		else
 		{
-			$result ['status'] = 'error';
-			$result ['message'] = '';
+			$result = array();
 		}
-		
+// print_r($result);		
+// 	exit;		
 		echo json_encode ( $result );
 		exit ();
 	}
