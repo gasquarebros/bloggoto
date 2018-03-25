@@ -112,7 +112,7 @@ class Home extends CI_Controller {
 			
 		}
 		
-		$join = "";
+		$join = array();
 		$join [0] ['select'] = "blog_cat_id,blog_cat_name";
 		$join [0] ['table'] = $this->blog_categorytable;
 		$join [0] ['condition'] = "post_category = blog_cat_id";
