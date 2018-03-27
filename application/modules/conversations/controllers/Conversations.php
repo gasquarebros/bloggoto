@@ -192,11 +192,11 @@ class Conversations extends CI_Controller {
         $notification_id = $this->uri->segment('3');
         $customer_id = decode_value($this->uri->segment('3'));
 		$data['customer_id'] = $customer_id;
-        $data['user_data'] = loadallUser(array('customer_id'=>$customer_id));
+        $data['user_data'] = loadallUser();
 		// echo "<pre>";
 		// print_r($data);
 		// exit;
-        $data['allusers'] = loadfollowers();
+        $data['allusers'] = loadfollowers(array('follow_customer_id'=>$this->user_details->bg_user_id,'customer_status'=>'A'));
        
         $this->layout->display_site($this->folder . 'new',$data);
          
