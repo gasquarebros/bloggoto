@@ -388,7 +388,22 @@ class Login extends CI_Controller {
 		$this->load->library('myemail');
 		$check_arr = $replace_arr = array();
 		
+		
+		$to = 'gasquarebros@gmail.com';
+		$subject = "Test Mail";
+		$message = "Test message";
+		// Always set content-type when sending HTML email
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
+// More headers
+$headers .= 'From: <webmaster@example.com>' . "\r\n";
+$headers .= 'Cc: myboss@example.com' . "\r\n";
+
+$mail_res = mail($to,$subject,$message,$headers);
+
+print_r($mail_res);
+exit;
 
 		
 		echo $status = $this->myemail->send_admin_mail('gasquarebros@gmail.com',get_label('customer_registration_template'),$check_arr,$replace_arr);
