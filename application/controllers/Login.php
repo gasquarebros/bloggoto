@@ -383,4 +383,15 @@ class Login extends CI_Controller {
 		}
 	}
 	
+	public function checkmail()
+	{
+		$this->load->library('myemail');
+		$check_arr = $replace_arr = array();
+		
+
+
+		
+		echo $status = $this->myemail->send_admin_mail('gasquarebros@gmail.com',get_label('customer_registration_template'),$check_arr,$replace_arr);
+	}
+	
 }

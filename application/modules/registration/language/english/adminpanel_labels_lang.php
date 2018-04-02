@@ -20,4 +20,4 @@ $lang['customer_password_minlength'] = 6 ;
 $lang['customer_username_minlength'] = 6 ;
 $lang['customer_email_exist'] = "This email address already exists";
 $lang['registration_success_message_add'] = "Thankyou, You have registered successfully, once your account is activated you can able to login using your credentials";
-$lang['success_message'] = "Thank you for registering your Account with BlogGotoWeb. You will receive an Activation Email.";
+$lang['success_message'] = "Thank you for registering your Account with BlogGoto. You will receive an Activation Email.";

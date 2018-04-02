@@ -50,7 +50,7 @@ public function __construct()
  		//echo $message; exit;
  	
  		/* mail part */
- 		 
+ 		 /*
  		if($result['settings_mail_from_smtp']==1)
  		{
  			$config['smtp_host']	= $result['settings_smtp_host'];
@@ -63,11 +63,10 @@ public function __construct()
  		}
  		else
  		{
- 			//$config['protocol'] 	= 'sendmail';
- 		}
- 	
- 	
- 		$config['charset'] 		= 'iso-8859-1';
+ 			$config['protocol'] 	= 'sendmail';
+ 		} */
+ //	$config['protocol'] 	= 'sendmail';
+ 	/*
  		$config['wordwrap'] 	= TRUE;
  		$config['charset'] 		= "utf-8";
  		$config['mailtype'] 	= "html";
@@ -78,6 +77,17 @@ public function __construct()
  		$this->ci->email->subject($subject);
  		$this->ci->email->message($message);
  		$email_status = $this->ci->email->send();
+		*/
+
+		// Always set content-type when sending HTML email
+		$headers = "MIME-Version: 1.0" . "\r\n";
+		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+		// More headers
+		$headers .= 'From: <'.$from_email.'>' . "\r\n";
+
+		$email_status = mail($to_email,$subject,$message,$headers);
+
  	
  		if($email_status)
  		{
