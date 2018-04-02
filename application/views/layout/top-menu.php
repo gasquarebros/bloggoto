@@ -88,7 +88,7 @@
 					<li><a data-section="Life-style" href="<?php echo base_url()."home/life-style"; ?>" <?php if($activesegment=='life-style') { ?> class="active" <?php } ?>>Lifestyle</a></li>
 					<li><a data-section="Paparazzi" href="<?php echo base_url()."home/paparazzi"; ?>" <?php if($activesegment=='paparazzi') { ?> class="active" <?php } ?>>Paparazzi</a></li>
 					<li><a data-section="Others" href="<?php echo base_url()."home/others"; ?>" <?php if($activesegment =='others') { ?> class="active" <?php } ?>>Others</a></li>
-					<li><a href="javascript:void(0)">Shop <span style="font-size:9px;">(comming soon)</span></a></li>
+					<li><a href="javascript:void(0)">Shop <span style="font-size:9px;">(coming soon)</span></a></li>
 				</ul>
 			</div>
 		</div>
