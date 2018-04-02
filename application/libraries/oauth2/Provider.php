@@ -174,9 +174,8 @@ abstract class OAuth2_Provider
 				// Need to switch to Request library, but need to test it on one that works
 				$url .= '?'.http_build_query($params);
 				$response = file_get_contents($url);
-
 				parse_str($response, $return);
-
+				$return = json_decode($response, true);
 			break;
 
 			case 'POST':
@@ -216,9 +215,8 @@ abstract class OAuth2_Provider
 		{
 			throw new OAuth2_Exception($return);
 		}
-		
 		switch ($params['grant_type'])
-		{
+		{	
 			case 'authorization_code':
 				return OAuth2_Token::factory('access', $return);
 			break;

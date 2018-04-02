@@ -5,8 +5,12 @@
 | Facebook API
 |--------------------------------------------------------------------------
 */
+/*
 $config['facebook_id'] = '508943389164156';
 $config['facebook_secret'] = 'f64b2d5281d88138104d49503173a3c4';
+*/
+$config['facebook_id'] = '187087755349493';
+$config['facebook_secret'] = '382f10c1c0e871805654d38945fc3d85';
 
 
 /*

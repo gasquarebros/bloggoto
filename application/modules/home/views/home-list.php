@@ -2,8 +2,8 @@
 var module_action="addpost";
 </script>
 <section>
-    <div class="container">
-        <h2 class="main_heading">Magazines</h2>
+    <div class="container homelisting">
+        <h2 class="main_heading">Hall of Fame</h2>
         <div class="section_menu">
             <ul class="category_menu blog_category">
                 <li><a data-type="blog" href="javascript:void(0)" class="active">Blogs</a></li>
@@ -33,7 +33,7 @@ var module_action="addpost";
                         <input type="text" id="blog_post_title" placeholder="Click here to write a blog , story, book or Upload Picture, Videos or To Ask a Question">
                     </div>
                     <div class="action_field">
-                        <a class="popup-modal" <?php if(get_user_id() == '') { ?>href="<?php echo base_url(); ?>" <?php } else { ?>href="#test-modal" <?php } ?> value="">LET'S GO</a>
+                        <a  <?php if(get_user_id() == '') { ?> class="popup-modals" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal" href="#test-modal" <?php } ?> value="">LET'S GO</a>
                     </div>
                 </form>
             </div>
@@ -81,10 +81,10 @@ var module_action="addpost";
 					<li><a data-section="Travel" href="javascript:void(0)" >Travel</a></li>
 					<li><a data-section="Food" href="javascript:void(0)" >Food</a></li>
 					<li><a data-section="Tech" href="javascript:void(0)" >Tech</a></li>
-					<li><a data-section="News" href="javascript:void(0)" >News</a></li>
+					<li><a data-section="Business" href="javascript:void(0)" >Business</a></li>
 					<li><a data-section="health" href="javascript:void(0)" >Health</a></li>
 					<li><a data-section="Life-style" href="javascript:void(0)" >Lifestyle</a></li>
-					<li><a data-section="Celebrates" href="javascript:void(0)" >Celeb</a></li>
+					<li><a data-section="Paparazzi" href="javascript:void(0)" >Paparazzi</a></li>
 					<li><a data-section="Others" href="javascript:void(0)" >Others</a></li>
 					
 				</ul>

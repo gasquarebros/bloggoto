@@ -35,7 +35,14 @@ class Auth_oa2 extends CI_Controller
         if ( ! $this->input->get('code'))
         {
             // By sending no options it'll come back here
-            $provider->authorize();
+			/*if($provider_name == 'facebook')
+			{
+				$redirect_uri =base_url().'index.php/auth_oa2/session/facebook';
+				$provider->authorize(array('redirect_uri'=>$redirect_uri)); 
+			}
+			else {*/
+				$provider->authorize();
+			//}
         }
         else
         {
@@ -44,9 +51,7 @@ class Auth_oa2 extends CI_Controller
             {
                 //$token = $provider->access($_GET['code']);
                 $token = $provider->access($this->input->get('code'));
-
                 $user = $provider->get_user_info($token);
-
 				if(!empty($user))
 				{
 					$uid = $user['uid'];

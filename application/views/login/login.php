@@ -33,6 +33,7 @@
 							<div class="form_field">
 								<?php echo form_submit('submit','Login',' class="btn green uppercase" id="log_submit" ' )?>
 								<a class="forget-password" id="forgot_password" title="Forgot password?"><?php echo get_label('forgot_pass'); ?></a>
+								<a class="skip_login fr" href="<?php echo base_url().'home'; ?>" id="skip_login" title="Skip Login">Skip login</a>
 							</div>
 							<div class="create-account">
 								<p>

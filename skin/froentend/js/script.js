@@ -125,9 +125,11 @@ window.setInterval(function() {
 			data : {secure_key:secure_key},	
 			dataType:"json",
 			success:function(data){ 
+				console.log(data.status);
 				if(data.status=="success")
 				{ 
 					notify_html='<i class="fa fa-bell-o" aria-hidden="true"></i><span class="badge notification_circle">'+data.count+'</span>'
+					//$(".notify").html(notify_html);"#results span:first"
 					$( ".notify" ).html(notify_html)
 					$('.notify').addClass('active');
 				} 

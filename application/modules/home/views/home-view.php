@@ -43,7 +43,7 @@
 							
 						</div>
 						<div class="feed_body_text">
-							<h4><a href="<?php echo base_url().'myprofile/view/'.$record['post_slug']; ?>"><?php echo $record['post_title']; ?></a></h4>
+							<h4><a href="<?php echo $url; ?>"><?php echo $record['post_title']; ?></a></h4>
 							<?php 
 								if(!empty($record['post_tag_names'])) { 
 									echo  "<div class='tags'>";

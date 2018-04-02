@@ -1,5 +1,4 @@
 <?php $load_message = message(); $post_notify_count = post_notify_count(); ?>
-
 <header>
 	<div class="header_top">
 		<div class="container">
@@ -22,8 +21,8 @@
 					<div class="signup_wrap">
 						<h3>Signup :</h3>
 						<ul>
-							<li><a href="<?php echo base_url(); ?>">I'M Brand</a></li>
-							<li><a href="<?php echo base_url(); ?>">I'M Writer</a></li>
+							<li><a href="<?php echo base_url(); ?>">I'M Business</a></li>
+							<li><a href="<?php echo base_url(); ?>">I'M Person</a></li>
 						</ul>
 					</div>
 					<?php } ?>
@@ -34,7 +33,7 @@
 				<?php } ?>
 				<form class="header_form">
 					<div class="search_box">
-						<input type="text" id="topic_title" class="ui-autocomplete-input text_search" placeholder="Search topics & blogger" />
+						<input type="text" class="text_search" placeholder="Search topics & blogger" />
 						<input type="submit" class="btn_search" value="" />
 					</div>
 				</form>
@@ -50,15 +49,16 @@
 				<li><a data-section="Travel" href="<?php echo base_url()."home/travel"; ?>" <?php if($activesegment=='travel') { ?> class="active" <?php } ?>>Travel</a></li>
 				<li><a data-section="Food" href="<?php echo base_url()."home/food"; ?>" <?php if($activesegment=='food') { ?> class="active" <?php } ?>>Food</a></li>
 				<li><a data-section="Tech" href="<?php echo base_url()."home/tech"; ?>" <?php if($activesegment=='tech') { ?> class="active" <?php } ?>>Tech</a></li>
-				<li><a data-section="News" href="<?php echo base_url()."home/news"; ?>" <?php if($activesegment=='news') { ?> class="active" <?php } ?>>News</a></li>
+				<li><a data-section="Business" href="<?php echo base_url()."home/business"; ?>" <?php if($activesegment=='business') { ?> class="active" <?php } ?>>Business</a></li>
 				<li><a data-section="health" href="<?php echo base_url()."home/health"; ?>" <?php if($activesegment=='health') { ?> class="active" <?php } ?>>Health</a></li>
 				<li><a data-section="Life-style" href="<?php echo base_url()."home/life-style"; ?>" <?php if($activesegment=='life-style') { ?> class="active" <?php } ?>>Lifestyle</a></li>
-				<li><a data-section="Celebrates" href="<?php echo base_url()."home/celebrates"; ?>" <?php if($activesegment=='celebrates') { ?> class="active" <?php } ?>>Celeb</a></li>
+				<li><a data-section="Paparazzi" href="<?php echo base_url()."home/paparazzi"; ?>" <?php if($activesegment=='paparazzi') { ?> class="active" <?php } ?>>Paparazzi</a></li>
 				<li><a data-section="Others" href="<?php echo base_url()."home/others"; ?>" <?php if($activesegment =='others') { ?> class="active" <?php } ?>>Others</a></li>
 			</ul>
 			<ul class="main_menu">
-				<li><a href="javascript:void(0)">Ecommerce</a></li>
+				<li><a href="javascript:void(0)">Shop <span style="font-size:9px;">(comming soon)</span></a></li>
 			</ul>
+			<?php if(get_user_id() != '') { ?>
 			<ul class="main_menu">
 				<li><a href="javascript:void(0)" class="active">My Account</a>
 					<ul class="submenu">
@@ -67,6 +67,7 @@
 					</ul>
 				</li>
 			</ul>
+			<?php } ?>
 			<?php /*
 			<ul class="profile_rgt">
 				<li><a href="<?php echo base_url().'myprofile'; ?>">MY Profile</a></li>
@@ -82,12 +83,12 @@
 					<li><a data-section="Travel" href="<?php echo base_url()."home/travel"; ?>" <?php if($activesegment=='travel') { ?> class="active" <?php } ?>>Travel</a></li>
 					<li><a data-section="Food" href="<?php echo base_url()."home/food"; ?>" <?php if($activesegment=='food') { ?> class="active" <?php } ?>>Food</a></li>
 					<li><a data-section="Tech" href="<?php echo base_url()."home/tech"; ?>" <?php if($activesegment=='tech') { ?> class="active" <?php } ?>>Tech</a></li>
-					<li><a data-section="News" href="<?php echo base_url()."home/news"; ?>" <?php if($activesegment=='news') { ?> class="active" <?php } ?>>News</a></li>
+					<li><a data-section="Business" href="<?php echo base_url()."home/business"; ?>" <?php if($activesegment=='business') { ?> class="active" <?php } ?>>Business</a></li>
 					<li><a data-section="health" href="<?php echo base_url()."home/health"; ?>" <?php if($activesegment=='health') { ?> class="active" <?php } ?>>Health</a></li>
 					<li><a data-section="Life-style" href="<?php echo base_url()."home/life-style"; ?>" <?php if($activesegment=='life-style') { ?> class="active" <?php } ?>>Lifestyle</a></li>
-					<li><a data-section="Celebrates" href="<?php echo base_url()."home/celebrates"; ?>" <?php if($activesegment=='celebrates') { ?> class="active" <?php } ?>>Celeb</a></li>
+					<li><a data-section="Paparazzi" href="<?php echo base_url()."home/paparazzi"; ?>" <?php if($activesegment=='paparazzi') { ?> class="active" <?php } ?>>Paparazzi</a></li>
 					<li><a data-section="Others" href="<?php echo base_url()."home/others"; ?>" <?php if($activesegment =='others') { ?> class="active" <?php } ?>>Others</a></li>
-					<li><a href="javascript:void(0)">Ecommerce</a></li>
+					<li><a href="javascript:void(0)">Shop <span style="font-size:9px;">(comming soon)</span></a></li>
 				</ul>
 			</div>
 		</div>

@@ -85,14 +85,15 @@ var module_action="addpost";
 		
 		<div class="newsfeed_wrap">
 			<ul class="newsfeed_menu">
+				
+				<li><a data-section="blogs" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class=" profile_section">BLOGS / STORIES</a></li>
+				<li><a data-section="pictures" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="profile_section">PICTURES /  VIDEOS</a></li>
+				<li><a data-section="tags" href="<?php echo base_url()."myprofile/viewtags/".encode_value($info['customer_id']); ?>" class="profile_section">TAGS</a></li>
 				<?php if($info['customer_id'] == get_user_id()) { ?>
 					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio"; ?>" class="active profile_section">BIO-DATA</a></li>
 				<?php } else { ?> 
 					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio/".encode_value($info['customer_id']); ?>" class="active profile_section">BIO-DATA</a></li>
 				<?php } ?>
-				<li><a data-section="blogs" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class=" profile_section">BLOGS / STORIES</a></li>
-				<li><a data-section="pictures" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="profile_section">PICTURES /  VIDEOS</a></li>
-				<li><a data-section="tags" href="<?php echo base_url()."myprofile/viewtags/".encode_value($info['customer_id']); ?>" class="profile_section">TAGS</a></li>
 			</ul>
 			<div class="boi_data">
 			
@@ -117,12 +118,11 @@ var module_action="addpost";
 					<li><a data-section="Travel" href="javascript:void(0)" >Travel</a></li>
 					<li><a data-section="Food" href="javascript:void(0)" >Food</a></li>
 					<li><a data-section="Tech" href="javascript:void(0)" >Tech</a></li>
-					<li><a data-section="News" href="javascript:void(0)" >News</a></li>
+					<li><a data-section="Business" href="javascript:void(0)" >Business</a></li>
 					<li><a data-section="health" href="javascript:void(0)" >Health</a></li>
 					<li><a data-section="Life-style" href="javascript:void(0)" >Lifestyle</a></li>
-					<li><a data-section="Celebrates" href="javascript:void(0)" >Celeb</a></li>
+					<li><a data-section="Paparazzi" href="javascript:void(0)" >Paparazzi</a></li>
 					<li><a data-section="Others" href="javascript:void(0)" >Others</a></li>
-					
 				</ul>
 			</div>
 			<div class="cat_list">

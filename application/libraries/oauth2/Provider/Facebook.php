@@ -11,7 +11,7 @@
 
 class OAuth2_Provider_Facebook extends OAuth2_Provider
 {
-	protected $scope = array('offline_access', 'email', 'read_stream');
+	protected $scope = array( 'email');
 
 	public function url_authorize()
 	{
@@ -35,9 +35,9 @@ class OAuth2_Provider_Facebook extends OAuth2_Provider
 		return array(
 			'uid' => $user->id,
 			'nickname' => isset($user->username) ? $user->username : null,
-			'name' => $user->name,
-			'first_name' => $user->first_name,
-			'last_name' => $user->last_name,
+			'name' => isset($user->name)?$user->name:null,
+			'first_name' => isset($user->first_name)?$user->first_name:null,
+			'last_name' => isset($user->last_name)?$user->last_name:null,
 			'email' => isset($user->email) ? $user->email : null,
 			'location' => isset($user->hometown->name) ? $user->hometown->name : null,
 			'description' => isset($user->bio) ? $user->bio : null,

@@ -7,8 +7,8 @@ Description		: Page contains common label  for adminpanel and client panel
 ***************************/
 
 /* ##### COMMON LABELS  ###### */
-$lang ['site_title'] = "Bloggotoweb";
-$lang ['admin_title'] = "Welcome To Bloggotoweb | Adminpanel";
+$lang ['site_title'] = "Bloggoto";
+$lang ['admin_title'] = "Welcome To Bloggoto | Adminpanel";
 $lang ['username'] = "Username";
 $lang ['password'] = "Password";
 $lang ['confirm_password'] = "Confirm Password";
@@ -62,8 +62,8 @@ $lang ['select_currency'] = "select currency";
 $lang ['select_language'] = "select language";
 $lang ['select_date_format'] = "select date format";
 $lang ['select_time_format'] = "select time format";
-$lang ['customer_writer_type'] = "I'm Writer";
-$lang ['customer_brand_type'] = "I'm Brand";
+$lang ['customer_writer_type'] = "I'm Person";
+$lang ['customer_brand_type'] = "I'm Business";
 $lang ['postal_code_max_length'] = 8;
 $lang ['phone_max_length'] = 12;
 
@@ -108,5 +108,4 @@ $lang['order_confirmation_admin_template'] = 6;
 $lang['order_cancel_template'] = 7;
 $lang['order_cancel_admin_template'] = 8;
 $lang['company_notification_template'] = 14;
-$lang['search_result_limit'] = 10;
 
