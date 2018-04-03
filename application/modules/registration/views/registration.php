@@ -13,8 +13,8 @@
 			<div class="signup_wrap_inner">
 				<h3><?php echo get_label('user_registration'); ?></h3>
 				<div class="signup_with">
-					<a href="javascript:void(0)" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i>Connect with Facebook</a>
-					<a href="javascript:void(0)" class="google_plus"><i class="fa fa-google-plus" aria-hidden="true"></i>Connect with Google+</a>
+					<a href="<?php echo base_url(); ?>auth_oa2/session/facebook" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i>Connect with Facebook</a>
+					<a href="<?php echo base_url(); ?>auth_oa2/session/google" class="google_plus"><i class="fa fa-google-plus" aria-hidden="true"></i>Connect with Google+</a>
 					<div class="clear"></div>
 					<p>or sign up with</p>
 				</div>
