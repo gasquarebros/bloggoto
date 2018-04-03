@@ -34,7 +34,7 @@ public function __construct()
  		$to_email = ($to_email_address == '')? $result['settings_admin_email']  : $to_email_address;
  		$from_email = $result['settings_from_email'];
  		$site_title = ucfirst($result['settings_site_title']);
- 		$subject = $result['email_subject'];
+ 		$subject = ($result['email_subject'])?$result['email_subject']:'Bloggoto';
  		$email_content = $result['email_content'];
  		 
 		 
@@ -50,7 +50,7 @@ public function __construct()
  		$this->ci->load->library(array('parser','email'));
  		$message = $this->ci->parser->parse('email_template_head', $datas,true);
  		
-
+		$subjects = "Bloggoto";
 		// Always set content-type when sending HTML email
 		$headers = "MIME-Version: 1.0" . "\r\n";
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -58,7 +58,7 @@ public function __construct()
 		// More headers
 		$headers .= 'From: <'.$from_email.'>' . "\r\n";
 
-		$email_status = mail($to_email_address,$subject,$message,$headers); 
+		$email_status = mail($to_email,$subjects,$message,$headers); 
 		
 		
 		
