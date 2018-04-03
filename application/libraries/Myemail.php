@@ -58,7 +58,7 @@ public function __construct()
 		// More headers
 		$headers .= 'From: <'.$from_email.'>' . "\r\n";
 
-		echo $email_status = mail($to_email_address,'Test from lib',$message,$headers); 
+		$email_status = mail($to_email_address,$subject,$message,$headers); 
 		
 		
 		

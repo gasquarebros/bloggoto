@@ -67,9 +67,13 @@ class Registration extends CI_Controller {
 				
 				if($insert_id)
 				{
+					
+					$password_key=get_random_key('30',$this->table,'customer_password_key');
+					$reset_link=base_url()."reset_password/".encode_value($insert_id)."-".$password_key;
+					
 				 	$this->load->library('myemail');
-				 	$check_arr = array('[NAME]','[EMAIL]','[PASSWORD]');
-				 	$replace_arr = array($this->input->post('customer_first_name')." ".$this->input->post('customer_last_name'),$this->input->post('customer_email'),$this->input->post('customer_password'));
+				 	$check_arr = array('[NAME]','[EMAIL]','[RESETLINK]','[PASSWORD]');
+				 	$replace_arr = array($this->input->post('customer_first_name')." ".$this->input->post('customer_last_name'),$this->input->post('customer_email'),$reset_link,$this->input->post('customer_password'));
 				 	$this->myemail->send_admin_mail($this->input->post('customer_email'),get_label('customer_registration_template'),$check_arr,$replace_arr);
 
 				 	$result ['status'] = 'success';
