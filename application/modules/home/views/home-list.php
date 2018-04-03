@@ -2,8 +2,8 @@
 var module_action="addpost";
 </script>
 <section>
-    <div class="container homelisting">
-        <h2 class="main_heading">Hall of Fame</h2>
+    <div class="container">
+        <h2 class="main_heading">Magazines</h2>
         <div class="section_menu">
             <ul class="category_menu blog_category">
                 <li><a data-type="blog" href="javascript:void(0)" class="active">Blogs</a></li>
@@ -33,7 +33,7 @@ var module_action="addpost";
                         <input type="text" id="blog_post_title" placeholder="Click here to write a blog , story, book or Upload Picture, Videos or To Ask a Question">
                     </div>
                     <div class="action_field">
-                        <a  <?php if(get_user_id() == '') { ?> class="popup-modals" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal" href="#test-modal" <?php } ?> value="">LET'S GO</a>
+                        <a  <?php if(get_user_id() == '') { ?> class="" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal" href="#test-modal" <?php } ?> value="">LET'S GO</a>
                     </div>
                 </form>
             </div>
@@ -113,7 +113,7 @@ var module_action="addpost";
 					</div>
 					<div class="form_field tagging_section">
 						<?php 
-							/*$followers = array(''=>'Select Users');*/
+							$followers = array(''=>'Select Users');
 							$followers_lst = get_followers_list(); 
 							if(!empty($followers_lst)) {
 								foreach($followers_lst as $foll_list)

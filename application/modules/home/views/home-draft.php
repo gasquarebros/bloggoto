@@ -122,7 +122,7 @@ var custom_redirect_url="home/draftpost";
 							</div>
 							<div class="form_field tagging_section">
 								<?php 
-									/*$followers = array(''=>'Select Users');*/
+									$followers = array();
 									$followers_lst = get_followers_list(); 
 									if(!empty($followers_lst)) {
 										foreach($followers_lst as $foll_list)

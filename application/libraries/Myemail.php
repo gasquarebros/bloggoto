@@ -18,16 +18,16 @@ public function __construct()
  
  function send_admin_mail($to_email_address,$template_id,$chk_arr,$rep_arr)
  {
- 
- 	$this->ci =  & get_instance();
+    $site_title = 'Bloggoto';
+   	$this->ci =  & get_instance();
  	$template_table = "pos_admin_email_templates";
  	$setting_table = "pos_master_admin_settings";
  		
- 	$query = " SELECT e.email_subject,e.email_content,s.settings_from_email,s.settings_admin_email,s.settings_site_title,s.settings_mail_from_smtp,
- 	s.settings_smtp_host,s.settings_smtp_user,s.settings_smtp_pass,s.settings_smtp_port,s.settings_mailpath,s.settings_email_footer FROM  $template_table as e
- 	LEFT JOIN $setting_table as s ON  s.settings_id =1  WHERE  e.email_id = '".$template_id."'  ";
- 	$result = $this->ci->Mydb->custom_query_single($query);
-
+ 	$query = "SELECT e.email_subject,e.email_content,s.settings_from_email,s.settings_admin_email,s.settings_site_title,s.settings_mail_from_smtp,s.settings_smtp_host,s.settings_smtp_user,s.settings_smtp_pass,s.settings_smtp_port,s.settings_mailpath,s.settings_email_footer FROM  $template_table as e LEFT JOIN $setting_table as s ON  s.settings_id =1  WHERE  e.email_id = '".$template_id."'  ";
+ 	
+	$result = $this->ci->Mydb->custom_query_single($query);
+		
+		
  	if(!empty($result))
  	{
  		/* get basic mail config values */
@@ -37,6 +37,9 @@ public function __construct()
  		$subject = $result['email_subject'];
  		$email_content = $result['email_content'];
  		 
+		 
+		
+		 
  		/* merge contents */
  		$chk_arr1 = array('[LOGOURL]','[BASEURL]','[COPY-CONTENT]','[ADMIN-EMAIL]','[SITE-TITLE]');
  		$rep_array2 = array(load_lib()."theme/images/email_logo.png",base_url(),$result['settings_email_footer'],$result['settings_admin_email'],$site_title);
@@ -47,37 +50,6 @@ public function __construct()
  		$this->ci->load->library(array('parser','email'));
  		$message = $this->ci->parser->parse('email_template_head', $datas,true);
  		
- 		//echo $message; exit;
- 	
- 		/* mail part */
- 		 /*
- 		if($result['settings_mail_from_smtp']==1)
- 		{
- 			$config['smtp_host']	= $result['settings_smtp_host'];
- 			$config['smtp_user']	= $result['settings_smtp_user'];
- 			$config['smtp_pass']	= $result['settings_smtp_pass'];
- 			$config['smtp_port']	= $result['settings_smtp_port'];
- 			$config['mailpath'] 	= $result['settings_mailpath'];
- 			$config['protocol'] 	= 'smtp';
- 			$config['smtp_crypto']  = 'tls';
- 		}
- 		else
- 		{
- 			$config['protocol'] 	= 'sendmail';
- 		} */
- //	$config['protocol'] 	= 'sendmail';
- 	/*
- 		$config['wordwrap'] 	= TRUE;
- 		$config['charset'] 		= "utf-8";
- 		$config['mailtype'] 	= "html";
- 		$config['newline'] 		= "\r\n";
- 		$this->ci->email->initialize($config);
- 		$this->ci->email->from($from_email,$site_title);
- 		$this->ci->email->to($to_email);
- 		$this->ci->email->subject($subject);
- 		$this->ci->email->message($message);
- 		$email_status = $this->ci->email->send();
-		*/
 
 		// Always set content-type when sending HTML email
 		$headers = "MIME-Version: 1.0" . "\r\n";
@@ -86,9 +58,45 @@ public function __construct()
 		// More headers
 		$headers .= 'From: <'.$from_email.'>' . "\r\n";
 
-		$email_status = mail($to_email,$subject,$message,$headers);
-
+		echo $email_status = mail($to_email_address,'Test from lib',$message,$headers); 
+		
+		
+		
  	
+ 		/* mail part */
+ 		/*
+			if($result['settings_mail_from_smtp']==1)
+			{
+				$config['smtp_host']	= $result['settings_smtp_host'];
+				$config['smtp_user']	= $result['settings_smtp_user'];
+				$config['smtp_pass']	= $result['settings_smtp_pass'];
+				$config['smtp_port']	= $result['settings_smtp_port'];
+				$config['mailpath'] 	= $result['settings_mailpath'];
+				$config['protocol'] 	= 'smtp';
+				$config['smtp_crypto']  = 'tls';
+			}
+			else
+			{
+				$config['protocol'] = 'sendmail';
+			} 
+			$config['protocol'] = 'sendmail';
+
+			
+			$config['wordwrap'] 	= TRUE;
+			$config['charset'] 		= "utf-8";
+			$config['mailtype'] 	= "html";
+			$config['newline'] 		= "\r\n";
+			$this->ci->email->initialize($config);
+			$this->ci->email->from($from_email,$site_title);
+			$this->ci->email->to($to_email);
+			$this->ci->email->subject($subject);
+			$this->ci->email->message($message);
+			echo $email_status = $this->ci->email->send();
+			echo "<pre>";
+			print_r($this->ci->email->print_debugger());
+			echo "file inn";
+			exit;
+		*/
  		if($email_status)
  		{
  			return 1;
@@ -410,6 +418,3 @@ public function __construct()
  
 
 }
- 
-/* End of file Myemail.php */
-/* Location: ./application/libraries/Myemail.php */

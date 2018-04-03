@@ -18,20 +18,6 @@ if (! function_exists ( 'loadallUser' )){
 		return $user;
 	}
 }
-if (! function_exists ( 'loadfollowers' )){
-	function loadfollowers($where)
-	{
-		$CI=& get_instance();
-		$join[0]['select'] = 'customers.*';
-		$join[0]['table'] = 'customers';
-		$join[0]['condition'] = "customers_followers.follow_user_id = customers.customer_id";
-		$join[0]['type'] = 'INNER';
-		$user = $CI->Mydb->get_all_records('customers_followers.*','customers_followers',$where,$limit='', $offset='', $order_by='', $like='', $groupby=array(), $join );
-		
-		//$user = $CI->session->all_userdata();
-		return $user;
-	}
-}
 
 
 //Not Open Notifications
@@ -153,6 +139,7 @@ if (! function_exists ( 'message_change' )){
 //New Notification
 if (! function_exists ( 'post_notify' )){
 	function post_notify($notify_array) {
+		$notification_id = '';
 		$CI=& get_instance();
 			if($notify_array['notification_type'] == 'post')
 			{

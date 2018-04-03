@@ -48,6 +48,10 @@ class Myprofile extends CI_Controller {
 		//echo "inn"; exit;
 		$data = $this->load_module_info ();	
 		$info = $this->Mydb->get_record('*',$this->customers,array('customer_id'=>$userid));
+
+		if(empty($info)) {
+			redirect(base_url());
+		}
 		$post_infos = $this->Mydb->get_all_records('COUNT(post_id) as postcount, post_type',$this->table,array('post_created_by'=>$userid,'post_status'=>'A'),$limit = '', $offset = '', $order = '', $like = '', $groupby = array('post_type'));
 		
 		
