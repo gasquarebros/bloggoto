@@ -264,7 +264,6 @@ class Login extends CI_Controller {
 			{
 				$user_id=decode_value($pass_key[0]);
 				$passwordkey=$pass_key[1];
-				
 				$check_details = $this->Mydb->get_record ('customer_id', $this->table, array ('customer_id' => $user_id,'customer_password_key'=>$passwordkey,'customer_status'=>'A') );
 				if ($check_details)
 				{
@@ -288,6 +287,34 @@ class Login extends CI_Controller {
 			redirect(base_url());
 		}
 		
+	}
+	
+	public function activation()
+	{
+		$activation_key=($this->uri->segment(2))?$this->uri->segment(2):'';
+		if($activation_key !='')
+		{
+			$get_customer_data = $this->Mydb->get_record(array('customer_id','customer_status'),$this->table,array('customer_activation_key'=>$activation_key));
+			/*check valid key*/
+			if(!empty($get_customer_data))
+			{
+				/*activate the user*/
+				$this->Mydb->update($this->table,array('customer_id'=>$get_customer_data['customer_id']),array('customer_status'=>'A','customer_activation_key'=>''));
+				$this->session->set_flashdata ( 'success', 'Account Activated Successfully' );
+				redirect(base_url());
+			}
+			else
+			{
+				/*invalid key message*/
+				$this->session->set_flashdata ( 'error', 'Invalid Activation Link' );
+				redirect(base_url());
+			}
+		}
+		else
+		{
+			$this->session->set_flashdata ( 'error', 'Invalid Activation Link' );
+			redirect(base_url());
+		}
 	}
 
 	public function changepassword()

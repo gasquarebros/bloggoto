@@ -48,6 +48,9 @@ class Registration extends CI_Controller {
 				if (isset ( $_FILES ['customer_photo'] ['name'] ) && $_FILES ['customer_photo'] ['name'] != "") {
 					$customer_photo = $this->common->upload_image ( 'customer_photo', $this->lang->line('customer_image_folder_name') );
 				}
+				$activation_key = get_guid ( $this->table, 'customer_activation_key' );
+				/*generate access token*/
+				$access_token = get_guid ( $this->table, 'customer_access_token' );
 
 				$insert_array = array (
 						'customer_first_name' => post_value ( 'customer_first_name' ),
@@ -57,6 +60,8 @@ class Registration extends CI_Controller {
 						'customer_type'=>post_value ( 'customer_type' ),
 						'customer_password' => $password,
 						'customer_photo' => $customer_photo,
+						'customer_activation_key' => $activation_key,
+						'customer_access_token' => $access_token,
 						'customer_status' => 'I',
 						'customer_created_on' => current_date (),
 						'customer_created_ip' => get_ip () 
@@ -68,12 +73,11 @@ class Registration extends CI_Controller {
 				if($insert_id)
 				{
 					
-					$password_key=get_random_key('30',$this->table,'customer_password_key');
-					$reset_link=base_url()."reset_password/".encode_value($insert_id)."-".$password_key;
+					$activate_link=base_url()."activation/".$activation_key;
 					
 				 	$this->load->library('myemail');
-				 	$check_arr = array('[NAME]','[EMAIL]','[RESETLINK]','[PASSWORD]');
-				 	$replace_arr = array($this->input->post('customer_first_name')." ".$this->input->post('customer_last_name'),$this->input->post('customer_email'),$reset_link,$this->input->post('customer_password'));
+				 	$check_arr = array('[NAME]','[EMAIL]','[ACTIVATELINK]','[PASSWORD]');
+				 	$replace_arr = array($this->input->post('customer_first_name')." ".$this->input->post('customer_last_name'),$this->input->post('customer_email'),$activate_link,$this->input->post('customer_password'));
 				 	$this->myemail->send_admin_mail($this->input->post('customer_email'),get_label('customer_registration_template'),$check_arr,$replace_arr);
 
 				 	$result ['status'] = 'success';
