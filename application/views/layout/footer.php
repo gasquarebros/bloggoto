@@ -11,34 +11,24 @@
 				<div class="policy">
 					<h4>POLICY INFO</h4>
 					<ul>
-						<li><a href="javascript:void(0)">Privacy Policy</a></li>
-						<li><a href="javascript:void(0)">Terms of Sale</a></li>
-						<li><a href="javascript:void(0)">Terms of Use</a></li>
-						<li><a href="javascript:void(0)">Report Abuse & Takedown Policy</a></li>
-						<li><a href="javascript:void(0)">CSR Policy</a></li>
+						<li><a href="<?php echo base_url()."page/privacy-policy"; ?>">Privacy Policy</a></li>
+						<li><a href="<?php echo base_url()."page/user-agreement"; ?>">User Agreement</a></li>
+						<li><a href="<?php echo base_url()."page/terms-of-use"; ?>">Terms of Use</a></li>
+						<li><a href="<?php echo base_url()."page/report-abuse-takedown-policy"; ?>">Report Abuse & Takedown Policy</a></li>
 					</ul>
 				</div>
 				<div class="comp_info">
 					<h4>COMPANY</h4>
 					<ul>
-						<li><a href="javascript:void(0)">About Us</a></li>
+						<li><a href="<?php echo base_url()."page/about-us"; ?>">About Us</a></li>
 						<li><a href="javascript:void(0)">Blog</a></li>
-						<li><a href="javascript:void(0)">Sitemap</a></li>
 						<li><a href="javascript:void(0)">FAQ</a></li>
 						<li><a href="javascript:void(0)">Contact Us</a></li>
 					</ul>
 				</div>
 				<div class="foot_rgt">
-					<h4>SUBSCRIBE</h4>
-					<form>
-						<div class="form_field">
-							<input type="text" placeholder="Your email Address">
-						</div>
-						<div class="form_field">
-							<input type="submit" value="Submit">
-						</div>
-						<div class="clear"></div>
-					</form>
+					<h4>Reach us</h4>
+					
 					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 				</div>
 			</div>

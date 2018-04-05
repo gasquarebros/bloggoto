@@ -33,7 +33,7 @@ var module_action="addpost";
                         <input type="text" id="blog_post_title" placeholder="Click here to write a blog , story, book or Upload Picture, Videos or To Ask a Question">
                     </div>
                     <div class="action_field">
-                        <a  <?php if(get_user_id() == '') { ?> class="" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal" href="#test-modal" <?php } ?> value="">LET'S GO</a>
+                        <a  <?php if(get_user_id() == '') { ?> class="popup-modals" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal" href="#test-modal" <?php } ?> value="">LET'S GO</a>
                     </div>
                 </form>
             </div>

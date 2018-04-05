@@ -56,7 +56,7 @@
 				<li><a data-section="Others" href="<?php echo base_url()."home/others"; ?>" <?php if($activesegment =='others') { ?> class="active" <?php } ?>>Others</a></li>
 			</ul>
 			<ul class="main_menu">
-				<li><a href="javascript:void(0)">Shop <span style="font-size:9px;">(comming soon)</span></a></li>
+				<li><a href="javascript:void(0)">Shop <span style="font-size:9px;">(coming soon)</span></a></li>
 			</ul>
 			<?php if(get_user_id() != '') { ?>
 			<ul class="main_menu">
