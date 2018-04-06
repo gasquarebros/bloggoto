@@ -130,7 +130,7 @@
 							</div>
 							<div class="comment_box_wrap">
 								<input type="hidden" name="post_record" value="<?php echo encode_value($record['post_id']); ?>" />
-								<input type="text" name="comments" id="comments" placeholder="Write a comment..." />
+								<input type="text" name="comments" placeholder="Write a comment..." />
 							</div>
 							<div class="clear"></div>
 							<div class="alert_msg"></div>

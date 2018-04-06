@@ -52,7 +52,6 @@ $(document).ready(function(){
 							window.location.href= admin_url;
 							return false;
 						}
-    					current.find(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
 						current.find('.comment').val('');
 						current.parent().parent().find(".comments_display").html(data.html);
 						current.parent().parent().find('.comments').trigger('click');
@@ -118,7 +117,6 @@ $(document).ready(function(){
 						window.location.href= admin_url;
 						return false;
 					}
-					current.find('.comment').val('');
 					console.log(current);
 					/*if(page > 0)
 					{

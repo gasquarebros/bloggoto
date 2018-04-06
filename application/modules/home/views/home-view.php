@@ -73,7 +73,7 @@
 								</video>
 							<?php } ?>
 						</div>
-<!-- 						<div class="feed_like_share">
+						<div class="feed_like_share">
 							<?php $likes_user_ids = array_values(array_filter(array_unique(explode(',',$record['lkesuser'])))); ?>
 							<ul>
 								<li><a class="thumbsup <?php if(get_user_id() !='' && in_array(get_user_id(),$likes_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php echo base_url().'myprofile/post_likes/'.$record['post_slug']; ?>"><i class=" fa fa-thumbs-o-up" aria-hidden="true"></i> <span class="likes_display"><?php echo thousandsCurrencyFormat($record['postcount']); ?></span></a></li>
@@ -82,23 +82,7 @@
 							</ul>
 							<div class="comments_list">
 							</div>	
-						</div> -->
-						<div class="feed_like_share">
-							<?php $likes_user_ids = array_values(array_filter(array_unique(explode(',',$record['lkesuser'])))); ?>
-							<ul>
-								<li><a class="thumbsup <?php if(get_user_id() !='' && in_array(get_user_id(),$likes_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php echo base_url().'myprofile/post_likes/'.$record['post_slug']; ?>"><i class=" fa fa-thumbs-o-up" aria-hidden="true"></i> <span class="likes_display"><?php echo thousandsCurrencyFormat($record['postcount']); ?></span></a></li>
-								<li><a data-id ="<?php echo encode_value($record['post_id']); ?>" class="comments" href="<?php if(get_user_id() !=''){ echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); } ?>"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="comments_display"><?php echo $record['commentcount']; ?></span></a></li>
-								<li><a href="javascript:void(0)" class="share_social"><i class="fa fa-share" aria-hidden="true"></i> Share</a>
-									<div class="social_sharing_sections" style="display:none">
-										<a href="http://www.facebook.com/sharer.php?u=<?php echo base_url().'home/view/'.$record['post_slug']; ?>&title=<?php echo urlencode($record['post_title']); ?>" target="_blank" title="Click to share">Share on Facebook</a>
-										<a href="http://twitter.com/share?text=<?php echo urlencode($record['post_title']); ?>&url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" title="Click to post to Twitter">Tweet this</a>
-										<a href="https://plus.google.com/share?url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" title="Click to share">Share on Google+</a>
-									</div>
-								</li>
-							</ul>
-							<div class="comments_list">
-							</div>	
-						</div>						
+						</div>
 						</div>
 					 </div>
 					<div class="feed_comment toggle_content">
