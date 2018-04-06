@@ -17,7 +17,11 @@
 <script type="text/javascript" src="<?php echo load_lib()?>jquery/jquery-2.2.2.min.js"></script>
 <script type="text/javascript" src="<?php echo load_lib()?>jquery/jquery-ui.js"></script>
 
-
+<link rel="stylesheet" type="text/css" href="<?php echo load_lib(); ?>autocomplete/jquery.auto-complete.css">		
+<script type="text/javascript" src="<?php echo load_lib(); ?>autocomplete/jquery.auto-complete.js"></script>		
+<script type="text/javascript" src="<?php echo load_lib(); ?>autocomplete/jquery.ui.autocomplete.html.js"></script>		
+<link rel="stylesheet" type="text/css" href="<?php echo skin_url(); ?>css/search.css">		
+<script type="text/javascript" src="<?php echo skin_url(); ?>js/search.js"></script>
 
 <?php /* common javascript varibles ...*/ ?>
 <script>

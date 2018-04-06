@@ -33,8 +33,8 @@
 				<?php } ?>
 				<form class="header_form">
 					<div class="search_box">
-						<input type="text" class="text_search" placeholder="Search topics & blogger" />
-						<input type="submit" class="btn_search" value="" />
+                        <input type="text" id="topic_title" class="ui-autocomplete-input text_search" placeholder="Search topics & blogger" />
+                        <input type="submit" class="btn_search" value="" />
 					</div>
 				</form>
 			<div class="clear"></div>
