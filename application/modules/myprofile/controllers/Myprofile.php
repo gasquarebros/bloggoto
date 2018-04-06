@@ -29,6 +29,18 @@ class Myprofile extends CI_Controller {
 		$this->load->helper('security');
 	}
 	
+	/* this method used to to check validate image file */
+	public function validate_image() {
+		if (isset ( $_FILES ['customer_photo'] ['name'] ) && $_FILES ['customer_photo'] ['name'] != "") {
+			if ($this->common->valid_image ( $_FILES ['customer_photo'] ) == "No") {
+				$this->form_validation->set_message ( 'validate_image', get_label ( 'upload_valid_image' ) );
+				return false;
+			}
+		}
+	
+		return true;
+	}
+	
 	/* this method used to check login */
 	public function index($userid=null) {
 
@@ -70,7 +82,8 @@ class Myprofile extends CI_Controller {
 		
 		$follow_count = count($follow_list);
 		
-		if ($this->input->post ( 'action' ) == "edit") {	
+		if ($this->input->post ( 'action' ) == "edit") {
+
 			//check_site_ajax_request();
 			$this->form_validation->set_rules ( 'customer_country', 'lang:customer_country', 'required' );
 			$this->form_validation->set_rules ( 'customer_first_name', 'lang:customer_first_name', 'required' );
@@ -79,13 +92,21 @@ class Myprofile extends CI_Controller {
 			//$this->form_validation->set_rules ( 'customer_postal_code', 'lang:customer_postal_code', 'required|max_length[' . get_label ( 'postal_code_max_length' ) . ']' );
 			$this->form_validation->set_rules ( 'customer_phone', 'lang:customer_phone', 'required|max_length[' . get_label ( 'phone_max_length' ) . ']' );
 			//$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
-			//$this->form_validation->set_rules ( 'customer_photo', 'lang:customer_photo', 'callback_validate_image' );
+			$this->form_validation->set_rules ( 'customer_photo', 'lang:customer_photo', 'callback_validate_image' );
 			if ($this->form_validation->run () == TRUE) {
+				
+				/* upload image */
+				$customer_photo = $info['customer_photo'];
+				if (isset ( $_FILES ['customer_photo'] ['name'] ) && $_FILES ['customer_photo'] ['name'] != "") 
+				{
+					$customer_photo = $this->common->upload_image ( 'customer_photo', $this->lang->line('customer_image_folder_name') );
+				}
+				$profession = $this->input->post( 'customer_prof_profession' );
 				$update_array = array (
 					'customer_first_name' => post_value ( 'customer_first_name' ),
 					'customer_last_name' => post_value ( 'customer_last_name' ),
 					'customer_phone'=>post_value ( 'customer_phone' ),
-					'customer_birthdate'=>date('Y-m-d',strtotime(post_value ( 'customer_birthdate' ))),
+					'customer_birthdate'=>(post_value('customer_birthdate') !='' && post_value('customer_birthdate') !='0000-00-00' && post_value('customer_birthdate') != '1970-01-01')?date('Y-m-d',strtotime(post_value ( 'customer_birthdate' ))):'',
 					'customer_city'=>post_value ( 'customer_city' ),
 					'customer_state'=>post_value ( 'customer_state' ),
 					'customer_country'=>post_value ( 'customer_country' ),
@@ -110,7 +131,9 @@ class Myprofile extends CI_Controller {
 					'customer_fav_drink'=>post_value ( 'customer_fav_drink' ),
 					'customer_fav_things'=>post_value ( 'customer_fav_things' ),
 					'customer_private'=>post_value ( 'customer_private' ),
-					'customer_prof_profession'=>implode(',',$this->input->post( 'customer_prof_profession' )),
+					'customer_notes'=>post_value ( 'customer_notes' ),
+					'customer_prof_profession'=>(!empty($profession))?implode(',',$this->input->post( 'customer_prof_profession' )):'',
+					'customer_photo'=>$customer_photo,
 					//'customer_prof_school'=>post_value ( 'customer_prof_school' ),
 					//'customer_prof_college'=>post_value ( 'customer_prof_college' ),
 					//'customer_prof_work'=>post_value ( 'customer_prof_work' ),
@@ -128,11 +151,15 @@ class Myprofile extends CI_Controller {
 				);
 
 				$res=$this->Mydb->update ( $this->customers, array ('customer_id' => get_user_id() ), $update_array );
-	
+				
+				$this->session->set_userdata(array('bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$customer_photo ));
+
+				
 				
 				$result ['status'] = 'success';
 			} else {
 				$result ['status'] = 'error';
+				$this->session->set_flashdata('admin_error',validation_errors ());
 				$result ['message'] = validation_errors ();
 			}
 			//echo json_encode ( $result );
@@ -795,6 +822,30 @@ class Myprofile extends CI_Controller {
 				$result ['count'] = '';
 			}
 		
+		echo json_encode ( $result );
+		exit ();
+	}
+	
+	public function getstates()
+	{
+		$result=array();
+		check_site_ajax_request();
+		if($this->input->post('country') !='')
+		{
+			$result['message'] = get_all_states(array('intCountryId'=>$this->input->post('country')),'','class="form-control" id="customer_state" onchange="get_city()"');
+		}
+		echo json_encode ( $result );
+		exit ();
+	}
+	
+	public function getcities()
+	{
+		$result=array();
+		check_site_ajax_request();
+		if($this->input->post('state') !='')
+		{
+			$result['message'] = get_all_cities(array('city_state'=>$this->input->post('state')),'','class="form-control" id="customer_city"');
+		}
 		echo json_encode ( $result );
 		exit ();
 	}

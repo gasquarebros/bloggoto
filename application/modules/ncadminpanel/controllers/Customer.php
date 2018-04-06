@@ -359,7 +359,7 @@ class Customer extends CI_Controller {
 			
 			if ($this->form_validation->run () == TRUE) {
 				/* upload image */
-					$customer_photo = "";
+				$customer_photo = "";
 				if (isset ( $_FILES ['customer_photo'] ['name'] ) && $_FILES ['customer_photo'] ['name'] != "") 
 				{
 					$customer_photo = $this->common->upload_image ( 'customer_photo', get_company_folder() . "/".$this->lang->line('customer_image_folder_name') );

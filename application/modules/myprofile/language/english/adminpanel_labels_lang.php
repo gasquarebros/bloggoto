@@ -16,5 +16,6 @@ $lang['video'] = 'Video';
 $lang['story'] = 'Story';
 $lang['book'] = 'Book';
 $lang['qa'] = 'Q&A';
-
+$lang['customer_photo'] = "photo";
+$lang['customer_notes'] = "notes";
 

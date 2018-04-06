@@ -49,3 +49,10 @@ elseif($this->session->flashdata('admin_success')) { */ ?>
 
 
     
+<script>
+	$(document).ready(function() {
+		$(document).on('click','.close',function () {
+			$(this).parent('div').remove();
+		});
+	});
+</script>

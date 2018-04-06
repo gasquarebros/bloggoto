@@ -145,6 +145,45 @@ $(document).ready(function(){
 	});
 });
 
+function get_state() {
+	var country = $('#customer_country').val();
+	var url = SITE_URL+'myprofile/getstates';
+	if(country !='')
+	{
+		$.ajax({
+			url : url,
+			data : "secure_key="+secure_key+"&country="+country,
+			type : 'POST',
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				$('.state_field').html(data.message);
+				trigger_chosen();
+			}
+		});
+	}
+	return false;
+}
+function get_city() {
+	var state = $('#customer_state').val();
+	var url = SITE_URL+'myprofile/getcities';
+	if(state !='')
+	{
+		$.ajax({
+			url : url,
+			data : "secure_key="+secure_key+"&state="+state,
+			type : 'POST',
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				$('.city_field').html(data.message);
+				trigger_chosen();
+			}
+		});
+	}
+	return false;
+}
+
 function get_profile_section()
 {
 	var url = $('.newsfeed_menu .active').attr('href');

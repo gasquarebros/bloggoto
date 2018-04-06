@@ -1,5 +1,6 @@
 <?php if($info['customer_id'] == get_user_id()) { if($info['customer_type'] == 0) {  ?>
 				<?php echo form_open_multipart(base_url().'myprofile',' class="form-horizontal" id="common_form" ' );?>
+					<h3>General</h3>
 					<div class="form_field">
 						<label>First Name</label>
 						<div class="input_field">
@@ -25,9 +26,9 @@
 					</div>
 				
 					<div class="form_field">
-						<label>Birthday</label>
+						<label>Birthday </label>
 						<div class="input_field">
-							<?php  echo form_input('customer_birthdate',date('d-m-Y',strtotime($info['customer_birthdate'])),' class="form-control birthday datepicker"');?>
+							<?php  echo form_input('customer_birthdate',($info['customer_birthdate'] !='' && $info['customer_birthdate'] !='0000-00-00' && $info['customer_birthdate'] != '1970-01-01')?date('d-m-Y',strtotime($info['customer_birthdate'])):'',' class="form-control birthday datepicker"');?>
 						</div>
 						<div class="clear"></div>
 					</div>
@@ -35,21 +36,21 @@
 					<div class="form_field">
 						<label>Place Of Country </label>
 						<div class="input_field">
-							<?php  echo get_all_countries('',$info['customer_country']); ?>
+							<?php  echo get_all_countries('',$info['customer_country'],'class="form-control" id="customer_country" required="required" onchange="get_state()" '); ?>
 						</div>
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
 						<label>Place Of Living</label>
-						<div class="input_field">
-							<?php  echo get_all_states(array('intCountryId'=>$info['customer_state']),$info['customer_state']); ?>
+						<div class="input_field state_field">
+							<?php  echo get_all_states(array('intCountryId'=>$info['customer_country']),$info['customer_state'],'class="form-control" id="customer_state" onchange="get_city()"'); ?>
 						</div>
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
 						<label>Place Of Hometown</label>
-						<div class="input_field">
-							<?php  echo get_all_cities(array('city_state'=>$info['customer_city']),$info['customer_city']); ?>
+						<div class="input_field city_field">
+							<?php  echo get_all_cities(array('city_state'=>$info['customer_state']),$info['customer_city'],'class="form-control" id="customer_city"'); ?>
 						</div>
 						<div class="clear"></div>
 					</div>
@@ -93,7 +94,28 @@
 						</div>
 						<div class="clear"></div>
 					</div>
+					<div class="form_field">
+						<label for="customer_notes"><?php echo get_label('customer_notes');?></label>
+						<div class="input_field"><?php  echo form_textarea('customer_notes',$info['customer_notes'],' class="form-control"  ');?></div>
+						<div class="clear"></div>
+					</div>
 					
+					<div class="form_field">
+						<label for="customer_photo"><?php echo get_label('customer_photo');?></label>
+						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> <span class="result_browsefile"><span class="brows"></span>+ <?php echo get_label('upload_image');?></span> </div> </div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="form_field">
+						<?php if($info['customer_photo']){ ?>
+						<label></label>
+						<div class="input_field show_image_box">
+							<img class="img-responsive common_delete_image" style="width: 100px; height:100px;"  src="<?php echo media_url(). $this->lang->line('customer_image_folder_name')."/".$info['customer_photo'];?>">
+						</div><?php } ?>
+						<div class="clear"></div>
+					</div>
+					
+					<h3>Social Media</h3>
 					<div class="form_field">
 						<label>Facebook Link</label>
 						<div class="input_field">
@@ -125,7 +147,7 @@
 						</div>
 						<div class="clear"></div>
 					</div>
-					
+					<h3>Interest</h3>
 					<div class="form_field">
 						<label>Hobbies</label>
 						<div class="input_field">
@@ -283,21 +305,21 @@
 					<div class="form_field">
 						<label>Business Place Of Country </label>
 						<div class="input_field">
-							<?php  echo get_all_countries('',$info['customer_country']); ?>
+							<?php  echo get_all_countries('',$info['customer_country'],'class="form-control" id="customer_country" required="required" onchange="get_state()" '); ?>
 						</div>
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
 						<label>Business Place Of Living</label>
-						<div class="input_field">
-							<?php  echo get_all_states(array('intCountryId'=>$info['customer_state']),$info['customer_state']); ?>
+						<div class="input_field state_field">
+							<?php  echo get_all_states(array('intCountryId'=>$info['customer_country']),$info['customer_state'],'class="form-control" id="customer_state" onchange="get_city()"'); ?>
 						</div>
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
 						<label>Business Place of City</label>
-						<div class="input_field">
-							<?php  echo get_all_cities(array('city_state'=>$info['customer_city']),$info['customer_city']); ?>
+						<div class="input_field city_field">
+							<?php  echo get_all_cities(array('city_state'=>$info['customer_state']),$info['customer_city'],'class="form-control" id="customer_city"'); ?>
 						</div>
 						<div class="clear"></div>
 					</div>
@@ -339,6 +361,26 @@
 						<div class="input_field">
 							<?php  echo form_dropdown('is_adult_only',array('0'=>'No','1'=>'Yes'),stripslashes($info['is_adult_only']),' class="form-control"');?>
 						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="form_field">
+						<label for="customer_notes"><?php echo get_label('customer_notes');?></label>
+						<div class="input_field"><?php  echo form_textarea('customer_notes',set_value('customer_notes'),' class="form-control"  ');?></div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="form_field">
+						<label for="customer_photo"><?php echo get_label('customer_photo');?></label>
+						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> <span class="result_browsefile"><span class="brows"></span>+ <?php echo get_label('upload_image');?></span> </div> </div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field">
+						<?php if($info['customer_photo']){ ?>
+						<label></label>
+						<div class="input_field show_image_box">
+							<img class="img-responsive common_delete_image" style="width: 100px; height:100px;"  src="<?php echo media_url(). $this->lang->line('customer_image_folder_name')."/".$info['customer_photo'];?>">
+						</div><?php } ?>
 						<div class="clear"></div>
 					</div>
 					
@@ -874,5 +916,5 @@
 <?php } ?>
 
 <script>
-	$('.datepicker').datepicker({dateFormat: 'dd-mm-yy'});
+	$('.datepicker').datepicker({changeMonth: true,changeYear: true,dateFormat: 'dd-mm-yy'});
 </script>
