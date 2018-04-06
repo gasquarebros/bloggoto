@@ -102,7 +102,7 @@
 					
 					<div class="form_field">
 						<label for="customer_photo"><?php echo get_label('customer_photo');?></label>
-						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> <span class="result_browsefile"><span class="brows"></span>+ <?php echo get_label('upload_image');?></span> </div> </div>
+						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> </div> </div>
 						<div class="clear"></div>
 					</div>
 					
@@ -372,7 +372,7 @@
 					
 					<div class="form_field">
 						<label for="customer_photo"><?php echo get_label('customer_photo');?></label>
-						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> <span class="result_browsefile"><span class="brows"></span>+ <?php echo get_label('upload_image');?></span> </div> </div>
+						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> </div> </div>
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
