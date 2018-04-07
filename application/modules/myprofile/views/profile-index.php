@@ -201,4 +201,24 @@ $('.draft_post').click(function() {
 	$('#status').val('D');
 	$('#common_form').submit();
 });
+
+
+$('.post_category_selection li a').click(function(){
+	
+	$('.post_category_selection li a').removeClass('active');
+	$(this).addClass('active');
+	var current_val = $(this).data('section');
+	$('#post_category').val(current_val);
+});
+$('.post_type_selection li a').click(function(){
+	var current_val = $(this).data('type');
+	$('.post_type_selection li a').removeClass('active');
+	$(this).addClass('active');
+	$('#post_type').val(current_val);
+	$('.video_section').hide();
+	if(current_val == 'video')
+	{
+		$('.video_section').show();
+	}
+});
 </script>

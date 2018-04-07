@@ -58,28 +58,27 @@ public function __construct()
 		// More headers
 		$headers .= 'From: <'.$from_email.'>' . "\r\n";
 
-		$email_status = mail($to_email,$subjects,$message,$headers); 
+		//$email_status = mail($to_email,$subjects,$message,$headers); 
 		
+
 		
-		
- 	
  		/* mail part */
  		/*
 			if($result['settings_mail_from_smtp']==1)
 			{
-				$config['smtp_host']	= $result['settings_smtp_host'];
-				$config['smtp_user']	= $result['settings_smtp_user'];
-				$config['smtp_pass']	= $result['settings_smtp_pass'];
-				$config['smtp_port']	= $result['settings_smtp_port'];
-				$config['mailpath'] 	= $result['settings_mailpath'];
-				$config['protocol'] 	= 'smtp';
-				$config['smtp_crypto']  = 'tls';
+				$config['smtp_host']	= 'localhost';
+				$config['smtp_user']	= 'info@bloggoto.com';
+				$config['smtp_pass']	= 'info-master#3';
+				$config['smtp_port']	= 25;
+				$config['mailpath'] 	= '/usr/sbin/sendmail';
+				$config['protocol'] 	= 'mail';
+				//$config['smtp_crypto']  = 'tls';
 			}
 			else
 			{
 				$config['protocol'] = 'sendmail';
 			} 
-			$config['protocol'] = 'sendmail';
+			//$config['smtp_crypto'] = 'tls'
 
 			
 			$config['wordwrap'] 	= TRUE;
@@ -91,12 +90,35 @@ public function __construct()
 			$this->ci->email->to($to_email);
 			$this->ci->email->subject($subject);
 			$this->ci->email->message($message);
-			echo $email_status = $this->ci->email->send();
-			echo "<pre>";
-			print_r($this->ci->email->print_debugger());
-			echo "file inn";
-			exit;
-		*/
+			
+			*/
+			
+			$config['smtp_host']	= 'sg2plcpnl0017.prod.sin2.secureserver.net';
+			$config['smtp_user']	= 'info@bloggoto.com';
+			$config['smtp_pass']	= 'info-master#3';
+			$config['smtp_port']	= 25;
+			$config['mailpath'] 	= '/usr/sbin/sendmail';
+			$config['protocol'] 	= 'sendmail';
+			
+			//$config['protocol'] = 'sendmail';
+			//$config['mailpath'] = '/usr/sbin/sendmail';
+			$config['charset'] = 'iso-8859-1';
+			$config['wordwrap'] = TRUE;
+			$config['mailtype'] = "html";
+			$this->ci->email->initialize($config);
+			$this->ci->email->from('info@bloggoto.com', 'Bloggoto');
+			$this->ci->email->to($to_email);
+			$this->ci->email->bcc('gasquarebros@gmail.com');
+			$this->ci->email->subject($subjects);
+			$this->ci->email->message($message);
+			
+			
+			$email_status = $this->ci->email->send();
+			// echo "<pre>";
+			// print_r($this->ci->email->print_debugger());
+			// echo "file inn";
+			// exit;
+		
  		if($email_status)
  		{
  			return 1;
