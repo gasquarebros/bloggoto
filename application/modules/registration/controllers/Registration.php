@@ -20,6 +20,26 @@ class Registration extends CI_Controller {
 
 	}
 	
+	/* this method used check user name or alredy exists or not */
+	public function validate_companyname() {
+		$email = $this->input->post ( 'company_name' );
+		$edit_id = '';
+		
+		$where = array (
+				'company_name' => trim ( $email ),
+		);
+
+		
+		$result = $this->Mydb->get_record ( 'company_name', $this->table, $where );
+		
+		if (! empty ( $result ) ) {
+			$this->form_validation->set_message ( 'validate_companyname', 'Business Name Already Exist' );
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	/* this method used to check login */
 	public function index() {
 		$data = array ();
@@ -38,7 +58,10 @@ class Registration extends CI_Controller {
 			//$this->form_validation->set_rules('company_industry','lang:company_industry','required'); 
 			//$this->form_validation->set_rules('currency','lang:company_currency','required'); 
 			//$this->form_validation->set_rules('date_format','lang:company_date_format','required'); 
-			//$this->form_validation->set_rules('time_format','lang:company_time_format','required');  
+			if($this->input->post('customer_type') == 1)
+			{
+				$this->form_validation->set_rules('company_name','lang:company_name','required|callback_validate_companyname');
+			}				
 			if ($this->form_validation->run () == TRUE) {
 				
 				$password = do_bcrypt($this->input->post('customer_password'));  
@@ -58,6 +81,7 @@ class Registration extends CI_Controller {
 						'customer_email'=>post_value ( 'customer_email' ),
 						'customer_phone'=>post_value ( 'customer_phone' ),
 						'customer_type'=>post_value ( 'customer_type' ),
+						'company_name'=>(post_value ( 'customer_type' ) == 1)?post_value ( 'company_name' ):'',
 						'customer_password' => $password,
 						'customer_photo' => $customer_photo,
 						'customer_activation_key' => $activation_key,

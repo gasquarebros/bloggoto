@@ -41,6 +41,10 @@
 							
 							<?php  echo form_password('customer_cpassword',set_value('customer_cpassword'),' class="form-control placeholder-no-fix required " equalto="#customer_password" minlength="'.get_label('company_password_minlength').'" placeholder="'.get_label('customer_cpassword').'"  ');?>
 						</div>
+						<div class="form_field business_field" style="display:none;">
+							
+							<?php  echo form_input('company_name',set_value('company_name'),' class="form-control placeholder-no-fix " placeholder="'.get_label('company_name').'"  ');?>
+						</div>
 						<div class="form_field double_input">
 							<div class="form_field_inner fr">
 								<div class="switch-field">

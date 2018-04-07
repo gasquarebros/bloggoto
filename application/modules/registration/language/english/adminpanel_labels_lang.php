@@ -16,6 +16,7 @@ $lang['customer_phone'] = "Phone Number*";
 $lang['customer_email'] = "Email Address*";
 $lang['customer_password'] = "Password*";
 $lang['customer_cpassword'] = "Confirm Password*";
+$lang['company_name'] = "Business Name*";
 $lang['customer_password_minlength'] = 6 ;
 $lang['customer_username_minlength'] = 6 ;
 $lang['customer_email_exist'] = "This email address already exists";

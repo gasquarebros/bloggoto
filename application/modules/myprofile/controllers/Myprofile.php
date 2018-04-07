@@ -41,6 +41,33 @@ class Myprofile extends CI_Controller {
 		return true;
 	}
 	
+	
+	/* this method used check user name or alredy exists or not */
+	public function validate_companyname() {
+		$email = $this->input->post ( 'company_name' );
+		$edit_id = get_user_id();
+		
+		$where = array (
+				'company_name' => trim ( $email ),
+		);
+		if ($edit_id != "") {
+			$where = array_merge ( $where, array (
+					"customer_id !=" => $edit_id 
+			) );
+			
+		}
+		
+		$result = $this->Mydb->get_record ( 'company_name', $this->customers, $where );
+		
+		if (! empty ( $result ) ) {
+			$this->form_validation->set_message ( 'validate_companyname', 'Business Name Already Exist' );
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	
 	/* this method used to check login */
 	public function index($userid=null) {
 
@@ -93,6 +120,11 @@ class Myprofile extends CI_Controller {
 			$this->form_validation->set_rules ( 'customer_phone', 'lang:customer_phone', 'required|max_length[' . get_label ( 'phone_max_length' ) . ']' );
 			//$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			$this->form_validation->set_rules ( 'customer_photo', 'lang:customer_photo', 'callback_validate_image' );
+			if($info['customer_type'] == 1)
+			{
+				$this->form_validation->set_rules ( 'company_name', 'lang:company_name', 'required|callback_validate_companyname' );
+			}
+
 			if ($this->form_validation->run () == TRUE) {
 				
 				/* upload image */
@@ -102,6 +134,7 @@ class Myprofile extends CI_Controller {
 					$customer_photo = $this->common->upload_image ( 'customer_photo', $this->lang->line('customer_image_folder_name') );
 				}
 				$profession = $this->input->post( 'customer_prof_profession' );
+				$business_sector = $this->input->post( 'business_sector' );
 				$update_array = array (
 					'customer_first_name' => post_value ( 'customer_first_name' ),
 					'customer_last_name' => post_value ( 'customer_last_name' ),
@@ -131,18 +164,26 @@ class Myprofile extends CI_Controller {
 					'customer_fav_drink'=>post_value ( 'customer_fav_drink' ),
 					'customer_fav_things'=>post_value ( 'customer_fav_things' ),
 					'customer_private'=>post_value ( 'customer_private' ),
+					'branches'=>post_value ( 'branches' ),
+					'is_adult_only'=>post_value ( 'is_adult_only' ),
+					'business_establishment'=>post_value ( 'business_establishment' ),
 					'customer_notes'=>post_value ( 'customer_notes' ),
+					'address'=>post_value ( 'address' ),
+					'fax'=>post_value ( 'fax' ),
+					'business_model'=>post_value ( 'business_model' ),
 					'customer_prof_profession'=>(!empty($profession))?implode(',',$this->input->post( 'customer_prof_profession' )):'',
+					'business_sector'=>(!empty($business_sector))?$business_sector:'',
 					'customer_photo'=>$customer_photo,
-					//'customer_prof_school'=>post_value ( 'customer_prof_school' ),
-					//'customer_prof_college'=>post_value ( 'customer_prof_college' ),
-					//'customer_prof_work'=>post_value ( 'customer_prof_work' ),
-					//'customer_prof_official_website'=>post_value ( 'customer_prof_official_website' ),
-					//'customer_prof_official_email'=>post_value ( 'customer_prof_official_email' ),
-					//'customer_prof_official_phone'=>post_value ( 'customer_prof_official_phone' ),
-					//'customer_prof_specialized'=>post_value ( 'customer_prof_specialized' ),
-					//'customer_prof_types'=>post_value ( 'customer_prof_types' ),
-					//'customer_prof_rewards'=>post_value ( 'customer_prof_rewards' ),
+					'customer_prof_school'=>post_value ( 'customer_prof_school' ),
+					'customer_prof_college'=>post_value ( 'customer_prof_college' ),
+					'customer_prof_work'=>post_value ( 'customer_prof_work' ),
+					'customer_prof_official_website'=>post_value ( 'customer_prof_official_website' ),
+					'customer_prof_official_email'=>post_value ( 'customer_prof_official_email' ),
+					'customer_prof_official_phone'=>post_value ( 'customer_prof_official_phone' ),
+					'customer_prof_specialized'=>post_value ( 'customer_prof_specialized' ),
+					'customer_prof_types'=>post_value ( 'customer_prof_types' ),
+					'customer_prof_rewards'=>post_value ( 'customer_prof_rewards' ),
+					'company_name'=>post_value ( 'company_name' ),
 					//'customer_type'=>post_value ( 'customer_type' ),
 					//'customer_status' => ($this->input->post ( 'status' ) == "A" ? 'A' : 'I'),
 					//'customer_created_on' => current_date (),
@@ -162,8 +203,7 @@ class Myprofile extends CI_Controller {
 				$this->session->set_flashdata('admin_error',validation_errors ());
 				$result ['message'] = validation_errors ();
 			}
-			//echo json_encode ( $result );
-			//exit ();
+
 		}
 
 		$data['info'] = $info;

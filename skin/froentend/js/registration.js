@@ -68,7 +68,17 @@ $(document).ready(function() {
 		}
 	});
 
-	
+	$(document).on('change',"input[name = 'customer_type']",function() {
+		var customer_type = $(this).val();
+		if(customer_type == 1)
+		{
+			$('.business_field').show();
+		}
+		else
+		{
+			$('.business_field').hide();
+		}
+	});
 
 }); /* end of document ready*/
 
