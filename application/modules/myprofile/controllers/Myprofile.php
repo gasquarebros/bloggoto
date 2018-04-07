@@ -86,7 +86,7 @@ class Myprofile extends CI_Controller {
 		}
 		//echo "inn"; exit;
 		$data = $this->load_module_info ();	
-		$info = $this->Mydb->get_record('*',$this->customers,array('customer_id'=>$userid));
+		$info = $this->Mydb->get_record('customer_type,customer_photo',$this->customers,array('customer_id'=>$userid));
 
 		if(empty($info)) {
 			redirect(base_url());
@@ -205,6 +205,7 @@ class Myprofile extends CI_Controller {
 			}
 
 		}
+		$info = $this->Mydb->get_record('*',$this->customers,array('customer_id'=>$userid));
 
 		$data['info'] = $info;
 		$data['post_infos'] = $post_infos;
