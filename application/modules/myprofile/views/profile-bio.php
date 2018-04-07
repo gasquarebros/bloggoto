@@ -48,7 +48,7 @@
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
-						<label>Place Of Hometown</label>
+						<label>Place Of City</label>
 						<div class="input_field city_field">
 							<?php  echo get_all_cities(array('city_state'=>$info['customer_state']),$info['customer_city'],'class="form-control" id="customer_city"'); ?>
 						</div>
@@ -548,7 +548,7 @@
 		<div class="clear"></div>
 	</div>
 	<div class="form_field">
-		<label>Place Of Hometown</label>
+		<label>Place Of City</label>
 		<div class="input_field">
 			<?php echo "<label class='display_info'>"; ?>
 				<?php  echo get_city_name($info['customer_city']); ?>

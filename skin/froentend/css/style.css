@@ -643,7 +643,7 @@ list-group.bg-trans .list-group-item:not(.active):not(.disabled) {
 .signup_wrap_inner .form_field { text-align: left; }
 #common_form .chosen-container-single .chosen-single { background: #f7faff; border: 1px solid #f0f0f0; }
 #common_form .chosen-container-single .chosen-single span { color: #222222; }
-#common_form .chosen-container { margin-bottom: 15px; }
+#common_form .chosen-container { margin-top: 10px; }
 .lft_feed_img img { height: 60px; width: 60px; }
 .mail-time > span { display: inline-block; vertical-align: middle; }
 .mail-time .trash:after { content: "\f1f8"; display: block; width: 15px; height: 25px; clear: both; font-size: 16px; font-family: 'fontawesome'; color: #f00; }

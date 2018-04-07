@@ -90,9 +90,9 @@ var module_action="addpost";
 				<li><a data-section="pictures" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="profile_section">PICTURES /  VIDEOS</a></li>
 				<li><a data-section="tags" href="<?php echo base_url()."myprofile/viewtags/".encode_value($info['customer_id']); ?>" class="profile_section">TAGS</a></li>
 				<?php if($info['customer_id'] == get_user_id()) { ?>
-					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio"; ?>" class="active profile_section">BIO-DATA</a></li>
+					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio"; ?>" class="active profile_section">Profile</a></li>
 				<?php } else { ?> 
-					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio/".encode_value($info['customer_id']); ?>" class="active profile_section">BIO-DATA</a></li>
+					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio/".encode_value($info['customer_id']); ?>" class="active profile_section">Profile</a></li>
 				<?php } ?>
 			</ul>
 			<div class="boi_data">

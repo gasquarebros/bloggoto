@@ -676,7 +676,7 @@ class Myprofile extends CI_Controller {
 							'follow_created_ip' => get_ip () 
 					);
 					$insert_id = $this->Mydb->insert ( $this->customer_followers, $insert_array );
-					$counting = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_user_id'=>$userid));
+					$counting = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$customer_id));
 					$result ['status'] = 'success';
 					$result ['msg'] = 'Unfollow';
 					$result ['html'] = $counting;
@@ -686,7 +686,7 @@ class Myprofile extends CI_Controller {
 					$ids = array($follow_records['follow_id']);
 					$search_array = array('follow_customer_id' => $customer_id,'follow_user_id' => $userid);
 					$this->Mydb->delete_where_in ( $this->customer_followers, 'follow_id', $ids, $search_array );
-					$counting = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_user_id'=>$userid));
+					$counting = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$customer_id));
 					$result ['status'] = 'success';
 					$result ['msg'] = 'Follow';
 					$result ['html'] = $counting;

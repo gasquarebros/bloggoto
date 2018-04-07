@@ -75,8 +75,8 @@ class Conversations extends CI_Controller {
 		$data =$this->load_module_info();
         $data['content'] = '';
         $notification_id = decode_value($this->uri->segment('3'));
-        //$allusers = loadallUser();
-        $allusers = loadfollowers();
+        $allusers = loadallUser();
+        //$allusers = loadfollowers(array('follow_customer_id'=>$this->user_details->bg_user_id));
 		$users = array();
 		if(!empty($allusers))
 		{
