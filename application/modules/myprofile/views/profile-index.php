@@ -119,8 +119,8 @@ var module_action="addpost";
 					<li><a data-section="Food" href="javascript:void(0)" >Food</a></li>
 					<li><a data-section="Tech" href="javascript:void(0)" >Tech</a></li>
 					<li><a data-section="Business" href="javascript:void(0)" >Business</a></li>
-					<li><a data-section="health" href="javascript:void(0)" >Health</a></li>
-					<li><a data-section="Life-style" href="javascript:void(0)" >Lifestyle</a></li>
+					<li><a data-section="Health" href="javascript:void(0)" >Health</a></li>
+					<li><a data-section="life style" href="javascript:void(0)" >Lifestyle</a></li>
 					<li><a data-section="Paparazzi" href="javascript:void(0)" >Paparazzi</a></li>
 					<li><a data-section="Others" href="javascript:void(0)" >Others</a></li>
 				</ul>
@@ -145,7 +145,7 @@ var module_action="addpost";
 						<?php  echo form_input('post_title',set_value('post_title'),' class="form-control required"  placeholder="Title" id="post_title" ');?>
 					</div>
 					<div class="form_field">
-						<textarea name="post_description" placeholder="Lorum ipsum lorum ipsum lorum ipsum"></textarea>
+						<textarea name="post_description" placeholder="Enter Your Description"></textarea>
 					</div>
 					<div class="form_field tagging_section">
 						<?php 

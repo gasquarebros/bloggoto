@@ -199,8 +199,16 @@ $notify_logo = skin_url('images/db-logo2.png');
 							<div class="panel-body">
 								<small class="block text-info text-semibold">
 									<?php
-									$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['customer_first_name']:'Bloggotoweb';
-									$from_name = (!empty($allusers[$notification[0]['assigned_from']]) && $notification[0]['assigned_from']!='')?$allusers[$notification[0]['assigned_from']]['customer_first_name']:'';
+									if($allusers[$notification[0]['assigned_to']]['customer_type'] == 1) {
+										$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['company_name']:'Bloggotoweb';	
+									} else {
+										$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['customer_first_name']:'Bloggotoweb';
+									}
+									if($allusers[$notification[0]['assigned_from']]['customer_type'] == 1) {
+										$from_name = (!empty($allusers[$notification[0]['assigned_from']]) && $notification[0]['assigned_from']!='')?$allusers[$notification[0]['assigned_from']]['company_name']:'';
+									} else {
+										$from_name = (!empty($allusers[$notification[0]['assigned_from']]) && $notification[0]['assigned_from']!='')?$allusers[$notification[0]['assigned_from']]['customer_first_name']:'';
+									}
 									echo '<em>Conversation between </em>'.$name.' , '.$from_name;
 									?>
 								</small>
@@ -264,10 +272,10 @@ $notify_logo = skin_url('images/db-logo2.png');
 								
 								
 								if(file_exists(media_url().$this->lang->line('customer_image_folder_name')."/".$allusers[$user_id1]['customer_photo']) && !empty($allusers[$user_id1]['customer_photo']) && @is_array(getimagesize(media_url().$this->lang->line('customer_image_folder_name')."/".$allusers[$user_id1]['customer_photo'])))
-									{
-										$notify_logo = media_url().$this->lang->line('customer_image_folder_name')."/".$allusers[$user_id1]['customer_photo'];
-									   
-									}	
+								{
+									$notify_logo = media_url().$this->lang->line('customer_image_folder_name')."/".$allusers[$user_id1]['customer_photo'];
+								   
+								}
 							}
 							?>
 							<small ><img class="circle-md" src="<?=$notify_logo?>" alt="Bloggotoweb"></small>

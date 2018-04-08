@@ -25,7 +25,12 @@
 									echo "Admin"; 
 								} 
 								else { 
-									echo "<a href='".$url."'>".$record['customer_first_name']." ".$record['customer_last_name']."</a>"; 
+									if($record['customer_type'] == 1)
+									{
+										echo "<a href='".$url."'>".$record['company_name']."</a>"; 
+									} else {
+										echo "<a href='".$url."'>".$record['customer_first_name']." ".$record['customer_last_name']."</a>"; 
+									}
 									
 								} ?></h4>
 								<p><?php echo datepostformat($record['post_created_on']); ?></p>
@@ -47,8 +52,11 @@
 							<?php 
 								if(!empty($record['post_tag_names'])) { 
 									echo  "<div class='tags'>";
-									$tags = explode(',',$record['post_tag_names']); 
-									$tag_user_id = explode(',',$record['post_tag_ids']); 
+									//$tags = explode(',',$record['post_tag_names']); 
+									//$tag_user_id = explode(',',$record['post_tag_ids']); 
+									$tags =  array_values(array_filter(array_unique(explode(',',$record['post_tag_names']))));
+									$tag_user_id =  array_values(array_filter(array_unique(explode(',',$record['post_tag_ids']))));
+									
 									foreach($tags as $tkey=>$tag)
 									{
 										if(!empty($tag)) {
@@ -76,8 +84,12 @@
 						<div class="feed_like_share">
 							<?php $likes_user_ids = array_values(array_filter(array_unique(explode(',',$record['lkesuser'])))); ?>
 							<ul>
-								<li><a class="thumbsup <?php if(get_user_id() !='' && in_array(get_user_id(),$likes_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php echo base_url().'myprofile/post_likes/'.$record['post_slug']; ?>"><i class=" fa fa-thumbs-o-up" aria-hidden="true"></i> <span class="likes_display"><?php echo thousandsCurrencyFormat($record['postcount']); ?></span></a></li>
-								<li><a data-id ="<?php echo encode_value($record['post_id']); ?>" class="comments" href="<?php if(get_user_id() !=''){ echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); } ?>"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="comments_display"><?php echo $record['commentcount']; ?></span></a></li>
+								<li>
+									<a class="thumbsup <?php if(get_user_id() !='' && in_array(get_user_id(),$likes_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php echo base_url().'myprofile/post_likes/'.$record['post_slug']; ?>"><i class=" fa fa-thumbs-o-up" aria-hidden="true"></i> <span class="likes_display"><?php echo thousandsCurrencyFormat($record['postcount']); ?></span></a>
+								</li>
+								<li>
+									<a data-id ="<?php echo encode_value($record['post_id']); ?>" class="comments" href="<?php if(get_user_id() !=''){ echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); } ?>"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="comments_display"><?php echo $record['commentcount']; ?></span></a>
+								</li>
 								<li><a href="javascript:void(0)" class="share_social"><i class="fa fa-share" aria-hidden="true"></i> Share</a>
 									<div class="social_sharing_sections" style="display:none">
 										<a href="http://www.facebook.com/sharer.php?u=<?php echo base_url().'home/view/'.$record['post_slug']; ?>&title=<?php echo urlencode($record['post_title']); ?>" target="_blank" title="Click to share">Share on Facebook</a>

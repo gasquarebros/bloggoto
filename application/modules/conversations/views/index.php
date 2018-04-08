@@ -50,7 +50,11 @@ if(!empty($_GET['filter']) && $_GET['filter']=='trash') {
 											<li class="mailboxer_conversation" <?php if($nval['open_status']>0){ ?> style="font-weight: bold !important;"<?php } ?>>
 												<div class="mail-control"></div>
 												<div class="mail-from">
-													<a href="<?=base_url('conversations/view/'.encode_value($nval['notification_id']).$trashs)?>"></a><a href="<?=base_url('conversations/view/'.encode_value($nval['notification_id']).$trashs)?>"><?=($nval['message_type']=='N')?'Bloggotoweb':$allusers[$user_id]['customer_first_name']?></a>
+													<?php if($allusers[$user_id]['customer_type'] == 1) { ?>
+														<a href="<?=base_url('conversations/view/'.encode_value($nval['notification_id']).$trashs)?>"><?=($nval['message_type']=='N')?'Bloggotoweb':$allusers[$user_id]['company_name']?></a>
+													<?php } else { ?>
+														<a href="<?=base_url('conversations/view/'.encode_value($nval['notification_id']).$trashs)?>"><?=($nval['message_type']=='N')?'Bloggotoweb':$allusers[$user_id]['customer_first_name']?></a>
+													<?php } ?>
 												</div>
 												<div class="mail-time">
 													<span><?=date('d F Y',strtotime($nval['created_on']))?></span>

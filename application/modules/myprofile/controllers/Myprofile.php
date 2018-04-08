@@ -839,9 +839,6 @@ class Myprofile extends CI_Controller {
 		$join [0] ['condition'] = "p.post_id = notification_post_id";
 		$join [0] ['type'] = "LEFT";
 		$data ['notification'] = $this->Mydb->get_all_records ( $select_array, 'post_notification', $where, $limit, $offset, $order_by, $like, $groupby, $join );
-	
-
-
         $this->layout->display_site($this->folder . 'index',$data);
 	}	
 	public function pull_post_log()
