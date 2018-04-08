@@ -91,7 +91,7 @@
 						
 						<div class="form-group">
 							<label for="customer_postal_code" class="col-sm-2 control-label"><?php echo get_label('customer_postal_code').get_required();?></label>
-							<div class="col-sm-<?php echo get_form_size();?>"><div class="input_box"><?php  echo form_input('customer_postal_code',set_value('customer_postal_code'),' class="form-control required number" maxlength="'.get_label('postal_code_max_length').'"  ');?></div></div>
+							<div class="col-sm-<?php echo get_form_size();?>"><div class="input_box"><?php  echo form_input('customer_postal_code',set_value('customer_postal_code'),' class="form-control number" maxlength="'.get_label('postal_code_max_length').'"  ');?></div></div>
 						</div>
 						<?php /*
 						<div class="form-group">

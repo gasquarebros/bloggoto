@@ -198,7 +198,7 @@ class Customer extends CI_Controller {
 			$this->form_validation->set_rules ( 'customer_first_name', 'lang:customer_first_name', 'required' );
 			$this->form_validation->set_rules ( 'customer_password', 'lang:customer_password', 'required|min_length[6]' );
 			$this->form_validation->set_rules ( 'customer_email', 'lang:customer_email', 'required|callback_customeremail_exists' );
-			$this->form_validation->set_rules ( 'customer_postal_code', 'lang:customer_postal_code', 'required|max_length[' . get_label ( 'postal_code_max_length' ) . ']' );
+			//$this->form_validation->set_rules ( 'customer_postal_code', 'lang:customer_postal_code', 'required|max_length[' . get_label ( 'postal_code_max_length' ) . ']' );
 			$this->form_validation->set_rules ( 'customer_phone', 'lang:customer_phone', 'required|max_length[' . get_label ( 'phone_max_length' ) . ']' );
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			$this->form_validation->set_rules ( 'customer_photo', 'lang:customer_photo', 'callback_validate_image' );
@@ -316,7 +316,7 @@ class Customer extends CI_Controller {
 				$this->form_validation->set_rules ( 'customer_password', 'lang:customer_password', 'required|min_length[6]' );
 			}
 			$this->form_validation->set_rules ( 'customer_email', 'lang:customer_email', 'required|callback_customeremail_exists' );
-			$this->form_validation->set_rules ( 'customer_postal_code', 'lang:customer_postal_code', 'required|max_length[' . get_label ( 'postal_code_max_length' ) . ']' );
+			//$this->form_validation->set_rules ( 'customer_postal_code', 'lang:customer_postal_code', 'required|max_length[' . get_label ( 'postal_code_max_length' ) . ']' );
 			$this->form_validation->set_rules ( 'customer_phone', 'lang:customer_phone', 'required|max_length[' . get_label ( 'phone_max_length' ) . ']' );
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			$this->form_validation->set_rules ( 'customer_photo', 'lang:customer_photo', 'callback_validate_image' );
