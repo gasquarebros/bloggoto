@@ -1,4 +1,4 @@
-<?php load_meta_tags(array('metatitle'=>(isset($meta_title))?$meta_title:get_label('site_title'),'metacontent'=>(isset($meta_description)? $meta_description : ''),'metakeyword'=>(isset($meta_keyword)? $meta_keyword : '')));?>
+<?php load_meta_tags(array('metatitle'=>(isset($meta_title))?$meta_title:get_label('site_title'),'metacontent'=>(isset($meta_description)? $meta_description : 'Now Read, Write, Comment, Review, Share, Sell, Buy, Advertise and Much More. Its all Yours!! Free Signup and always will be.'),'metakeyword'=>(isset($meta_keyword)? $meta_keyword : 'Social Media Made More Easy, Fast and Relevant')));?>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1" name="viewport" />
     

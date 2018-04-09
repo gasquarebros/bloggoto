@@ -6,7 +6,7 @@
 					<a href="<?php echo base_url();?>" class="logo">
 						<img src="<?php echo skin_url();?>images/logo.png" alt="logo" />
 					</a>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+					<p>Social Media Made More Easy, Fast and Relevant. </p>
 				</div>
 				<div class="policy">
 					<h4>POLICY INFO</h4>
@@ -27,9 +27,10 @@
 					</ul>
 				</div>
 				<div class="foot_rgt">
-					<h4>Reach us</h4>
+					<h4>Yayy! We have been waiting for you!</h4>
 					
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+					<p>Now Read, Write, Comment, Review, Share, Sell, Buy, Advertise and Much More. Its all Yours!!<br>
+Free Signup and always will be.</p>
 				</div>
 			</div>
 			
@@ -37,7 +38,7 @@
 	</div>
 	<div class="footer_bottom">
 		<div class="container">
-			<p>Copyright 2017, All Rights Reserved</p>
+			<p>Copyright <?php echo date('Y');?>, All Rights Reserved</p>
 		</div>
 	</div>
 </footer> 

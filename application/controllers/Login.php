@@ -226,9 +226,9 @@ class Login extends CI_Controller {
 			echo json_encode ( $response ); exit;
 		}
 		//$data['settings'] = $this->Mydb->get_record('*','site_settings');
-		$data['meta_title'] = "Login Your Account | BlogGotoweb ";
-		$data['meta_keyword'] = "login your account, blogging";
-		$data['meta_description'] = "Blogging.";
+		$data['meta_title'] = "Login Your Account | Bloggoto ";
+		$data['meta_keyword'] = "login your account, Social Media Made More Easy, Fast and Relevant. ";
+		$data['meta_description'] = "Now Read, Write, Comment, Review, Share, Sell, Buy, Advertise and Much More. Its all Yours!! Free Signup and always will be.";
 		$this->load->view ( $this->folder . '/login',$data );
 	}
 	
