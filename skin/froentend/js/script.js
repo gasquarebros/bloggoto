@@ -143,7 +143,6 @@ window.setInterval(function() {
 			}
 		});
 }, 5000);
-<<<<<<< HEAD
 	$(document).on('click', '.post_report', function(e) {		
 		var dataid = $(this).attr('data-id');
 		var action = $(this).attr('title');
@@ -193,7 +192,6 @@ window.setInterval(function() {
 			}
 		});
 	});		
-=======
 
 $('.reload-captcha').click(function(event){
 	event.preventDefault();
@@ -204,4 +202,3 @@ $('.reload-captcha').click(function(event){
 	   }
 	});            
 });
->>>>>>> fca8e84968d661af791e202c5376a4c5e9eaef72
