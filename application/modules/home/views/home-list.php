@@ -65,7 +65,6 @@ var module_action="addpost";
 
 
 
-
 <div id="test-modal" class="white-popup-block mfp-hide">
 	<div class="popup_header">
         <h4>Write your post</h4>

@@ -157,16 +157,20 @@ if (! function_exists ( 'post_notify' )){
 		$CI=& get_instance();
 			if($notify_array['notification_type'] == 'post')
 			{
-					$follow_records = get_followers_list();
+					$following_records = get_following_list();
 					$follow_list = array();
-					if(!empty($follow_records))
+					if(!empty($following_records))
 					{
-						foreach($follow_records as $follows) {
-							$notify_array['assigned_to'] = $follows['follow_user_id'];
+						foreach($following_records as $following) {
+							$notify_array['assigned_to'] = $following['follow_user_id'];
 							$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
 						}
 					}		
 			}
+			else if($notify_array['notification_type'] == 'post_tag')
+			{
+				$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
+			}			
 			else if($notify_array['notification_type'] == 'like')
 			{
 				$post_records = $CI->Mydb->get_record('post_created_by','pos_posts',array('post_id'=>$notify_array['notification_post_id'],'post_status'=>'A'));
@@ -181,8 +185,6 @@ if (! function_exists ( 'post_notify' )){
 			}
 			else
 			{
-/*				$post_records = $this->Mydb->get_record('post_created_by','pos_posts',array('post_id'=>$notify_array['notification_post_id'],'post_status'=>'A'));
-				$notify_array['assigned_to'] = $post_records['post_created_by'];*/
 			}
 
 		return $notification_id;

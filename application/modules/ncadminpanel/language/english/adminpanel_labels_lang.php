@@ -230,3 +230,11 @@ $lang['prof_title'] = "Title";
 $lang['prof_type'] = "Type";
 $lang['prof_sequence'] = "Sequence";
 $lang['profession_exist'] = "This Title already exists";
+
+/* Report post module */
+$lang['report_manage_label'] = "Report Post";
+$lang['report_manage_labels'] = "Report Posts";
+$lang['report_post_title'] = "Post Title";
+$lang['report_customer_name'] = "Report Customer Name";
+$lang['post_customer_name'] = "Post Customer Name";
+$lang['report_created_on'] = "Created on";

@@ -27,6 +27,7 @@ $lang['confirm_approve'] = "Are you sure you want to approve this %s?";
 $lang['confirm_reject'] = "Are you sure you want to reject this %s?";
 $lang['confirm_pending'] = "Are you sure you want to pending this %s?";
 $lang['confirm_sequence'] = "Are you sure you want to update Sort Order this %s?";
+$lang['success_message_report'] = "The Selected %s has been reported successfully.";
 $lang['success_message_delete'] = "The Selected %s has been deleted successfully.";
 $lang['success_message_edit'] = "%s has been updated successfully.";
 $lang['success_message_order_status'] = "%s status has been updated successfully.";

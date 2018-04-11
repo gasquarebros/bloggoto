@@ -14,6 +14,8 @@ class Home extends CI_Controller {
 		$this->module = "home";
 		$this->module_label = get_label('home_module_label');
 		$this->module_labels = get_label('home_module_label');
+		$this->post_module_label = get_label('post_module_label');
+		$this->post_module_labels = get_label('post_module_label');		
 		$this->folder = "home/";
 		$this->table = "posts";
 		$this->page_table = "cmspage";
@@ -257,6 +259,11 @@ class Home extends CI_Controller {
 										'post_tag_created_on'=>current_date (),
 										'post_created_by'=>get_user_id ()
 									);
+									$record['subject'] = "post tag";
+									$record['message'] = "post tag";
+									$record['notification_type'] = "post_tag";
+									$record['assigned_to'] = decode_value($exploded[0]);
+									post_notify($record);#insert post tags user
 								}
 							}
 							if(!empty($batch_insert)) {
@@ -264,7 +271,7 @@ class Home extends CI_Controller {
 							}
 						}
 					}
-					$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_add' ), $this->module_label ) );
+					$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_add' ), $this->post_module_label ) );
 					$result ['status'] = 'success';
 				}
 				
@@ -559,12 +566,242 @@ class Home extends CI_Controller {
 		{
 			$result = array();
 		}
-// print_r($result);		
-// 	exit;		
 		echo json_encode ( $result );
 		exit ();
 	}
-	
+	public function editpost($slug=null)
+	{	
+		$data = $this->load_module_info ();
+		if($slug !='')
+		{
+		$select_array=array("post_id,post_slug,post_category,post_type,post_title,post_description,post_photo,post_video,post_tags");
+				$where=array('post_slug'=>$slug,'post_created_by'=>get_user_id());
+				$result = $this->Mydb->get_record('*',$this->table,$where);
+				$post_category = $this->Mydb->get_record('blog_cat_name','blog_category',array('blog_cat_id'=>$result['post_category']));
+				$data['postslug']=$slug;
+				$data['result']=$result;
+				$data['result']['blog_cat_name']=$post_category['blog_cat_name'];
+        	$this->layout->display_site($this->folder . '/' . $this->module . '-edit-post', $data);
+		}
+
+	}		
+	public function updatepost()
+	{
+		$result=array();
+			//check_site_ajax_request();
+		if ($this->input->post ( 'action' ) == "Update") 
+		{
+			$this->form_validation->set_rules('postslug','lang:post_slug','required|trim');			
+			$this->form_validation->set_rules('post_title','lang:post_title','required|trim|strip_tags');			
+			$this->form_validation->set_rules('post_description','lang:post_description','required');
+			$this->form_validation->set_rules('post_category','lang:post_category','required');
+			$this->form_validation->set_rules('post_type','lang:post_type','required');
+			
+			if ($this->form_validation->run () == TRUE) 
+			{
+				$editid=decode_value(post_value('editid'));
+				/* upload image */
+				$post_photo = "";
+				if (isset ( $_FILES ['post_photo'] ['name'] ) && $_FILES ['post_photo'] ['name'] != "") 
+				{
+	 				$post_image_path = FCPATH . 'media/' .  $this->lang->line('post_photo_folder_name'). post_value('existpostphoto');
+					if (file_exists ( $post_image_path )) 
+					{
+						@unlink ( $post_image_path );
+					}
+					$post_photo = $this->common->upload_image ( 'post_photo', $this->lang->line('post_photo_folder_name') );
+				}
+				/* upload video */
+				$post_video = "";
+				$res = 0;
+				if (isset ( $_FILES ['post_video'] ['name'] ) && $_FILES ['post_video'] ['name'] != "" && post_value ( 'post_type' ) == 'video') 
+				{
+    				$post_video_path = FCPATH . 'media/' . $this->lang->line('post_video_folder_name') . post_value('existpostvideo');
+					if (file_exists ( $post_video_path )) 
+					{
+						@unlink ( $post_video_path );
+					}
+
+					$post_video = $this->common->upload_video ( 'post_video',$this->lang->line('post_video_folder_name') );
+					
+					if($post_video['status'] == 'success')
+					{
+						$post_video = $post_video['message'];
+					}
+					else
+					{
+						$res = 1;
+						$result ['status'] = 'error';
+						$result ['message'] = $post_video['message'];
+					}
+				}
+				if($res == 0)
+				{
+					$category = array();
+					$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'));
+					if(!empty($post_category))
+					{
+						foreach($post_category as $blogcat)
+						{
+							$category[$blogcat['blog_cat_name']] = $blogcat['blog_cat_id'];
+						}
+					}
+
+					$update_array = array (
+							'post_category' => $category[post_value ( 'post_category' )],
+							'post_type' => post_value ( 'post_type' ),
+							'post_title' => post_value ( 'post_title' ),
+							'post_description' => post_value ( 'post_description' ),
+							'post_photo' => $post_photo,
+							'post_video' => $post_video,
+							'post_status' => (post_value('status'))?post_value('status'):'A',
+							'post_created_on' => current_date (),
+							'post_by' => 'customer',
+							'post_created_by' => get_user_id (),
+							'post_created_ip' => get_ip () 
+					);
+					$title=post_value('post_title');
+					$update_array['post_slug']=make_slug($title,$this->table,'post_slug');
+
+					$where_array=array('post_id'=>$editid);
+					$insert_id = $this->Mydb->update ( $this->table,$where_array, $update_array );
+
+					if($insert_id)
+					{
+						$this->Mydb->delete('post_tags',array('post_tag_post_id'=>$editid));
+
+						if(!empty($this->input->post('post_tags')))
+						{
+							$message='Add post';
+							#insert post notification
+								$record = array(
+									'notification_post_id'=>$insert_id,
+									'created_type'=>'E',
+									'message_type'=>'N',
+									'private'=>0,
+									'created_by'=>get_user_id(),
+									'created_on'=>current_date(),				
+									'ip_address'=>get_ip(),
+									);
+							#insert post notification						
+							$post_tags = $this->input->post('post_tags');
+
+							$batch_insert = array();
+							foreach($post_tags as $post_tag)
+							{
+								if(!empty($post_tag)) {
+									$exploded = explode('__',$post_tag);
+									$batch_insert[] = array(
+										'post_tag_post_id'=>$insert_id,
+										'post_tag_user_id'=>decode_value($exploded[0]),
+										'post_tag_user_name'=>$exploded[1],
+										'post_tag_created_on'=>current_date (),
+										'post_created_by'=>get_user_id ()
+									);
+									$record['subject'] = "post tag";
+									$record['message'] = "post tag";
+									$record['notification_type'] = "post_tag";
+									$record['assigned_to'] = decode_value($exploded[0]);
+									post_notify($record);#insert post tags user									
+								}
+							}
+							if(!empty($batch_insert)) {
+								$this->db->insert_batch('post_tags',$batch_insert);
+							}
+						}
+					}
+					$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_update' ), $this->post_module_label ) );
+					$result ['status'] = 'success';
+				}
+				
+				
+			}
+			else 
+			{
+				$result ['status'] = 'error';
+				$result ['message'] = validation_errors ();
+			}
+			
+		}
+		else
+		{
+				$result ['status'] = 'error';
+				$result ['message'] = 'error';			
+		}
+			echo json_encode ( $result );
+			exit ();
+	}
+	public function reportpost()
+	{
+		$result=array();
+		check_site_ajax_request();
+		$this->authentication->user_authentication();
+		$data = $this->load_module_info ();
+		if ($this->input->post ( 'action' ) == "Report") 
+		{
+			$this->form_validation->set_rules('dataid','lang:post_id','required|trim');			
+			if ($this->form_validation->run () == TRUE) 
+			{
+				$postid = decode_value(post_value ( 'dataid' ));
+					$insert_array = array (
+							'report_post_id' => $postid,
+							'report_created_on' => current_date (),
+							'report_created_by' => get_user_id (),
+							'report_created_ip' => get_ip () 
+					);
+					$insert_id = $this->Mydb->insert ('post_reports', $insert_array );
+
+				$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_report' ), $this->post_module_label ) );
+
+				$result ['status'] = 'ok';
+				$result ['message'] = sprintf ( $this->lang->line ( 'success_message_report' ), $this->post_module_label );
+			}
+			else 
+			{
+				$result ['status'] = 'error';
+				$result ['message'] = validation_errors ();
+			}
+		}
+		else
+		{
+			$result ['status'] = 'error';
+			$result ['message'] = 'error';			
+		}
+		echo json_encode ( $result );
+		exit ();
+	}		
+	public function deletepost()
+	{
+		$result=array();
+		check_site_ajax_request();
+		$this->authentication->user_authentication();
+		$data = $this->load_module_info ();
+		if ($this->input->post ( 'action' ) == "Delete") 
+		{
+			$this->form_validation->set_rules('dataid','lang:post_id','required|trim');			
+			if ($this->form_validation->run () == TRUE) 
+			{
+				$postid = decode_value(post_value ( 'dataid' ));
+				$delete_query=delete_post($postid);#pass post id to delete the post related 
+				$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_delete' ), $this->post_module_label ) );
+				$result ['status'] = 'ok';
+				$result ['message'] = sprintf ( $this->lang->line ( 'success_message_delete' ), $this->post_module_label );
+
+			}
+			else 
+			{
+				$result ['status'] = 'error';
+				$result ['message'] = validation_errors ();
+			}
+		}
+		else
+		{
+			$result ['status'] = 'error';
+			$result ['message'] = '';			
+		}
+		echo json_encode ( $result );
+		exit ();
+	}	
 	/* this method used to common module labels */
 	private function load_module_info() {
 		$data = array ();

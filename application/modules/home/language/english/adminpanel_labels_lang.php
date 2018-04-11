@@ -11,3 +11,6 @@ Description		: Page contains common label for adminpanel
 $lang['home_module_label'] = 'Home';
 $lang['home_module_labels'] = 'Home';
 
+$lang['post_module_label'] = 'Post';
+$lang['post_module_labels'] = 'Post';
+

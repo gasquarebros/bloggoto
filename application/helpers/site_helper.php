@@ -141,7 +141,26 @@ if (! function_exists ( 'get_followers_list' )) {
 		return $follow_records;
 	}
 }
+/* get get_followers_list */
+if (! function_exists ( 'get_following_list' )) {
+	function get_following_list() {
+		$CI = &get_instance();
+		$following_records = array();
+		$userid = get_user_id();
+		if($userid !='')
+		{
+			$join = '';
+			$order_by = array('customer_first_name'=>'ASC');
+			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email";
+			$join [0] ['table'] = 'customers';
+			$join [0] ['condition'] = "follow_user_id = customer_id";
+			$join [0] ['type'] = "INNER";
+			$following_records = $CI->Mydb->get_all_records('customers_followers.*','customers_followers',array('follow_user_id'=>$userid,'customer_status'=>'A'),$limit='', $offset='', $order_by, $like='', $groupby=array(), $join );
+		}
 
+		return $following_records;
+	}
+}
 
 if(!function_exists('substr_close_tags'))
 {
@@ -230,5 +249,26 @@ if (! function_exists ( 'post_notify_count' )){
 				$notification_counting=0;
 
 		return $notification_counting;		
+	}
+}
+if (! function_exists ( 'delete_post' )){
+	function delete_post($postid) {
+		$CI=& get_instance();
+				$post_info = $CI->Mydb->get_record('post_photo,post_video','posts',array('post_id'=>$postid,'post_created_by'=>get_user_id()));
+				$post_image_path = FCPATH . 'media/' .  $CI->lang->line('post_photo_folder_name'). $post_info['post_photo'];
+				$post_video_path = FCPATH . 'media/' .  $CI->lang->line('post_video_folder_name') . $post_info['post_video'];
+				
+				if (file_exists ( $post_image_path )) {
+					@unlink ( $post_image_path );
+				}
+				if (file_exists ( $post_video_path )) {
+					@unlink ( $post_video_path );
+				}								
+				$CI->Mydb->delete_where_in('posts','post_id',$postid,array('post_created_by'=>get_user_id()));
+				$CI->Mydb->delete_where_in('post_comments','post_comment_post_id',$postid,array());
+				$CI->Mydb->delete_where_in('post_likes','post_like_post_id',$postid,array());
+				$CI->Mydb->delete_where_in('post_notification','notification_post_id',$postid,array());
+				$CI->Mydb->delete_where_in('post_tags','post_tag_post_id',$postid,array());
+			return $CI->db->affected_rows();
 	}
 }
