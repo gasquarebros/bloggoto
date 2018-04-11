@@ -61,6 +61,9 @@ class Login extends CI_Controller {
 						{
 							$session_datas = array();
 							$redirect= "";
+							
+							
+							
 							/* storing the values in session */
 							
 							$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'bg_user_profile_picture'=>($check_details['customer_photo'])?media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo']:'' );
@@ -74,6 +77,19 @@ class Login extends CI_Controller {
 							
 							if(!empty($session_datas))
 							{
+							
+								/*Checking for remember me*/
+								if($this->input->post('remember')==1)
+								{
+									$cookie = array(
+									'name'   => 'login_remeber_me',
+									'value'  => $session_datas['bg_user_id'],
+									'expire' => time()+(30*60*60*24)
+									);
+									setcookie('login_remeber_me', $session_datas['bg_user_id'],  time()+(2*60*60*24), "/"); // 86400 = 1 day
+									$this->input->set_cookie($cookie); 
+								}
+							
 								$this->session->set_userdata($session_datas);
 								/* store last login details...*/
 								$this->Mydb->insert($this->customer_login_history,array('login_time'=>current_date(),'login_ip'=>get_ip(),'login_customer_id'=>$check_details['customer_id']));

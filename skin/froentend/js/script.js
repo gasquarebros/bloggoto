@@ -144,3 +144,13 @@ window.setInterval(function() {
 			}
 		});
 }, 5000);
+
+$('.reload-captcha').click(function(event){
+	event.preventDefault();
+	$.ajax({
+	   url:SITE_URL+'contact/create_captcha',
+	   success:function(data){
+		  $('.captcha-img').html(data);
+	   }
+	});            
+});
