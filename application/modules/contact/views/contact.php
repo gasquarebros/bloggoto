@@ -6,7 +6,7 @@ var module_action="contact";
 	<div class="contact-form-left">
 		<div class="contact-form-left-inner">
             <h3 class="ct-title">Send us a Message</h3>
-			<?php if($this->session->flashdata('success') !='') {echo '<div class="success_message">'.$this->session->flashdata('success').'</div>'; } ?>
+			<?php if($this->session->flashdata('success') !='') { echo '<div class="success_message">'.$this->session->flashdata('success').'</div>'; } ?>
 			<?php if($form_response_error !='') { ?>
 			<div class="success_error"><?php echo $form_response_error; ?></div>
 			<?php } ?>
