@@ -20,7 +20,6 @@ $(document).on('click', '.toggle_feed',function(){
     $(this).parent().parent().parent('.single_feed').children('.toggle_content').slideToggle();
     $(this).parent().parent('.feed_wrapper').children('.toggle_content').slideToggle();
 });
-
 /* Custom Browse */    
     $(window).load(function(e) {
     var fileinput=$('input[type=file]');
@@ -144,3 +143,52 @@ window.setInterval(function() {
 			}
 		});
 }, 5000);
+	$(document).on('click', '.post_report', function(e) {		
+		var dataid = $(this).attr('data-id');
+		var action = $(this).attr('title');
+		show_content_loading(); 
+		$('.load_more').hide();
+		$.ajax({
+			url  : SITE_URL+'home/reportpost',
+			data : {secure_key:secure_key,dataid:dataid,action:action},
+			type : 'POST',
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				hide_content_loading();
+				if (data.status == "ok") 
+				{
+					$('.alert-warning').find("label").text(data.message);
+					$('.alert-warning').show();
+				}
+				if (data.status == "error") 
+				{
+					 // alert('');
+				}
+			}
+		});
+	});
+	$(document).on('click', '.post_delete', function(e) {		
+		var dataid = $(this).attr('data-id');
+		var action = $(this).attr('title');
+		show_content_loading(); 
+		$('.load_more').hide();
+		$.ajax({
+			url  : SITE_URL+'home/deletepost',
+			data : {secure_key:secure_key,dataid:dataid,action:action},
+			type : 'POST',
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				hide_content_loading();
+				if (data.status == "ok") 
+				{
+					location.reload();
+				}
+				if (data.status == "error") 
+				{
+					 // alert('');
+				}
+			}
+		});
+	});		
