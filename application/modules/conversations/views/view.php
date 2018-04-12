@@ -200,9 +200,9 @@ $notify_logo = skin_url('images/db-logo2.png');
 								<small class="block text-info text-semibold">
 									<?php
 									if($allusers[$notification[0]['assigned_to']]['customer_type'] == 1) {
-										$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['company_name']:'Bloggotoweb';	
+										$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['company_name']:'Bloggoto';	
 									} else {
-										$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['customer_first_name']:'Bloggotoweb';
+										$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['customer_first_name']:'Bloggoto';
 									}
 									if($allusers[$notification[0]['assigned_from']]['customer_type'] == 1) {
 										$from_name = (!empty($allusers[$notification[0]['assigned_from']]) && $notification[0]['assigned_from']!='')?$allusers[$notification[0]['assigned_from']]['company_name']:'';
@@ -265,24 +265,25 @@ $notify_logo = skin_url('images/db-logo2.png');
 						<div class="timeline-entry margin-top-15">
 							<div class="timeline-stat margin-top-20" >
 							<?php
+
 							if($val['message_type']=='N' || $val['msg_type']='R') {
 								$notify_logo = skin_url('images/man.png');
 								$user_id1 = $val['assigned_from'];
+
 								
-								
-								
-								if(file_exists(media_url().$this->lang->line('customer_image_folder_name')."/".$allusers[$user_id1]['customer_photo']) && !empty($allusers[$user_id1]['customer_photo']) && @is_array(getimagesize(media_url().$this->lang->line('customer_image_folder_name')."/".$allusers[$user_id1]['customer_photo'])))
+								if(!empty($allusers[$user_id1]['customer_photo']) && file_exists(FCPATH.'media/'.$this->lang->line('customer_image_folder_name')."/".$allusers[$user_id1]['customer_photo']))
 								{
 									$notify_logo = media_url().$this->lang->line('customer_image_folder_name')."/".$allusers[$user_id1]['customer_photo'];
 								   
 								}
+								$username=($allusers[$user_id1]['customer_type']==1)?$allusers[$user_id1]['company_name']:$allusers[$user_id1]['customer_first_name'];
 							}
 							?>
 							<small ><img class="circle-md" src="<?=$notify_logo?>" alt="Bloggotoweb"></small>
 							</div>
 							<div class="panel timeline-label">
 								<div class="panel-heading">
-									<h3 class="panel-title panel-title-small">Bloggotoweb</h3>
+									<h3 class="panel-title panel-title-small"><?php echo ($username)?$username:'Bloggoto';?></h3>
 								</div>
 								<div class="panel-body">
 									<div class="row">

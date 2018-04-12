@@ -64,7 +64,9 @@ if(!empty($_GET['email'])) {
 														foreach ($allusers as $ukey => $uval) { 
 															if($uval['customer_id'] !=$this->user_details->bg_user_id) {
 																?>
-																<option value="<?=$uval['customer_id']; ?>" <?php if($customer_id==$uval['customer_id']) echo 'selected'; ?>><?=$uval['customer_first_name']." ".$uval['customer_last_name'];?></option>
+																<option value="<?=$uval['customer_id']; ?>" <?php if($customer_id==$uval['customer_id']) echo 'selected'; ?>>
+																<?php echo ($uval['customer_type']==0)?$uval['customer_first_name']." ".$uval['customer_last_name']:$uval['company_name'];?>
+																</option>
 																<?php
 															}
 														}

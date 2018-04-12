@@ -8,14 +8,14 @@ if(!empty($_GET['filter']) && $_GET['filter']=='trash') {
 <section>
 	<div class="container">
 		<div class="page_content">
-			<div class="col-md-3">
+			<div class="col-md-1">
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<div id="page-title">
 					<h1 class="page-header text-overflow">Notifications
 					</h1>
 				</div>
-				<div class="inbx_right performance_height">
+				<div class="inbx_rights performance_height">
 					<div id="page-content">
 						<div class="panel panel-default panel-left">
 							<div class="panel-body" id="demo-email-list">
@@ -55,6 +55,8 @@ if(!empty($_GET['filter']) && $_GET['filter']=='trash') {
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="col-md-1">
 			</div>
 		</div>
 	</div>

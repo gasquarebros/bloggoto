@@ -2,7 +2,7 @@
     .container { width: 1100px; }
     .header_menuwrap ul li a { padding: 12px 13px; }
     .list_col { width: 530px; }
-    .list_img { background: #222222; }
+    .list_img { background: #FFFFFF; }
     .profile_active_details { width: 825px; }
 }
 
@@ -27,6 +27,7 @@
     .profile_active_details { width: 70%; }
     .fllow_bns { position: relative; margin-bottom: 15px; top: auto; right: auto; }
     .followers ul { margin-bottom: 15px; }
+	.list_row { width: 48%; }
 }
 
 @media screen and (max-width: 920px) {
@@ -43,6 +44,7 @@
     .nav_triger{ display: block; }
     .profile_active_details { width: 65%; }
     .newsfeed_inner { width: 700px; }
+	.list_row { width: 48%; }
 }
 
 @media screen and (max-width: 768px) {
@@ -72,21 +74,28 @@
     .comment_img > img, .comment_img { width: 45px; height: 45px; }
     .comment_box_wrap { width: 88%; }
     .follow_request ul li { width: 45%; margin: 12px 2%; }
+	.list_row { width: 48%; }
 }
 
 @media screen and (max-width: 600px) {
     .write_post .form_field { width: 100%; display: block; }
     .write_text input[type="text"], .write_text input[type="email"], .write_text input[type="password"], .write_text textarea, .write_text select { margin-bottom: 15px; }
     .newsfeed_menu li { width: 50%; }
+	.list_row { width: 565px; }
 }
 
 @media screen and (max-width: 500px) {
     .double_input .form_field_inner, .double_input .form_field_inner:last-child { width: 100%; float: none; text-align: left; }
     .signup_form_section .switch-field { float: none; }
     .follow_request .lft_img_fllw, .follow_request .rgt_txt_fllw { width: 100%; }
+	.list_row { width: 469px; }
 }
 
 @media screen and (max-width: 480px) {
+	.list_row {
+		margin: 0;
+		width: 450px;
+	}
     .signup_wrap { margin: 0; padding-top: 12px; text-align: right; width: 70%; }
     .signup_wrap ul li a { padding: 0 0 0 5px; }
     .facebook, .google_plus { float: none; width: 100%; margin: 0 0 8px; }
@@ -94,6 +103,20 @@
     .fllow_bns a.btn { width: 100%; display: block; margin: 8px 0; }
     .form_field .input_field { width: 100%; }
 }
+
+@media screen and (max-width: 320px) {
+	.list_row {
+		margin: 0;
+		width: 280px;
+	}	
+}
+@media screen and (max-width: 360px) {
+	.list_row {
+		margin: 0;
+		width: 320px;
+	}	
+}
+
 
 
 
