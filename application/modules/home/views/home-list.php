@@ -117,7 +117,14 @@ var module_action="addpost";
 							if(!empty($followers_lst)) {
 								foreach($followers_lst as $foll_list)
 								{
-									$followers[encode_value($foll_list['follow_user_id'])."__".$foll_list['customer_first_name']." ".$foll_list['customer_last_name']] = $foll_list['customer_first_name']." ".$foll_list['customer_last_name']; 	
+									if($foll_list['customer_type'] == 0)
+									{
+										$followers[encode_value($foll_list['follow_user_id'])."__".$foll_list['customer_first_name']." ".$foll_list['customer_last_name']] = $foll_list['customer_first_name']." ".$foll_list['customer_last_name']; 	
+									}
+									else
+									{
+										$followers[encode_value($foll_list['follow_user_id'])."__".$foll_list['company_name']] = $foll_list['company_name']; 
+									}
 								}
 							}
 						?>

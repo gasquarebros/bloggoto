@@ -372,7 +372,7 @@ class Myprofile extends CI_Controller {
 			$join [0] ['condition'] = "post_category = blog_cat_id";
 			$join [0] ['type'] = "LEFT";
 			
-			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo";
+			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name";
 			$join [1] ['table'] = $this->customers;
 			$join [1] ['condition'] = "post_created_by = customer_id and post_by !='admin'";
 			$join [1] ['type'] = "LEFT";
@@ -712,7 +712,7 @@ class Myprofile extends CI_Controller {
 			
  
 			$join = "";		
-			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo";
+			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name";
 			$join [0] ['table'] = $this->customers;
 			$join [0] ['condition'] = "post_comment_user_id = customer_id";
 			$join [0] ['type'] = "LEFT";

@@ -497,6 +497,7 @@
 <?php } } else if($info['customer_type'] == 0) { ?> 
 
 	<h3>General</h3>
+	<?php if($info['customer_first_name']) {?>
 	<div class="form_field">
 		<label>First Name</label>
 		<div class="input_field">
@@ -504,7 +505,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-
+	<?php } ?>
+	<?php if($info['customer_last_name']) {?>
 	<div class="form_field">
 		<label>Last Name</label>
 		<div class="input_field">
@@ -512,7 +514,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-
+	<?php } ?>
+	<?php if($info['customer_phone']) {?>
 	<div class="form_field">
 		<label>Phone</label>
 		<div class="input_field">
@@ -520,7 +523,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-
+	<?php } ?>
+	<?php if($info['customer_birthdate']) {?>
 	<div class="form_field">
 		<label>Birthday</label>
 		<div class="input_field">
@@ -528,7 +532,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-
+	<?php } ?>
+	<?php if($info['customer_country']) {?>
 	<div class="form_field">
 		<label>Place Of Country </label>
 		<div class="input_field">
@@ -538,6 +543,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_state']) {?>
 	<div class="form_field">
 		<label>Place Of Living</label>
 		<div class="input_field">
@@ -547,6 +554,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_city']) {?>
 	<div class="form_field">
 		<label>Place Of City</label>
 		<div class="input_field">
@@ -556,6 +565,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_postal_code']) {?>
 	<div class="form_field">
 		<label>Postal Code</label>
 		<div class="input_field">
@@ -563,6 +574,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_prof_profession']) {?>
 	<div class="form_field">
 		<label>Profession</label>
 		<div class="input_field">
@@ -578,6 +591,8 @@
 		</div>
 		<div class="clear"></div>
 	</div> */ ?>
+	<?php } ?>
+	<?php if($info['customer_gender']) {?>
 	<div class="form_field">
 		<label>Gender</label>
 		<div class="input_field">
@@ -586,6 +601,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_maritial_status']) {?>
 	<div class="form_field">
 		<label>Status</label>
 		<div class="input_field">
@@ -593,40 +610,46 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
 	<h3>Social Media</h3>
+	<?php if($info['customer_facebook_link']) {?>
 	<div class="form_field">
 		<label>Facebook Link</label>
 		<div class="input_field">
-			<?php if($info['customer_facebook_link'] !='') { echo "<a class='display_info' href='".$info['customer_facebook_link']."'>".stripslashes($info['customer_facebook_link'])."</a>"; } else { echo "<label class='display_info'></label>";} ?>
+			<?php if($info['customer_facebook_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_facebook_link'])."'>".stripslashes($info['customer_facebook_link'])."</a>"; } else { echo "<label class='display_info'></label>";} ?>
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_instagram_link']) {?>
 	<div class="form_field">
 		<label>Instagram Link</label>
 		<div class="input_field">
-			<?php if($info['customer_instagram_link'] !='') { echo "<a class='display_info' href='".$info['customer_instagram_link']."'>".stripslashes($info['customer_instagram_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_instagram_link'])."</label>"; } ?>
+			<?php if($info['customer_instagram_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_instagram_link'])."'>".stripslashes($info['customer_instagram_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_instagram_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_twitter_link']) {?>
 	<div class="form_field">
 		<label>Twitter Link</label>
 		<div class="input_field">
-			<?php if($info['customer_twitter_link'] !='') { echo "<a class='display_info' href='".$info['customer_twitter_link']."'>".stripslashes($info['customer_twitter_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_twitter_link'])."</label>"; } ?>
+			<?php if($info['customer_twitter_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_twitter_link'])."'>".stripslashes($info['customer_twitter_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_twitter_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_youtube_link']) {?>
 	<div class="form_field">
 		<label>Youtube Link</label>
 		<div class="input_field">
-			<?php if($info['customer_youtube_link'] !='') { echo "<a class='display_info' href='".$info['customer_youtube_link']."'>".stripslashes($info['customer_youtube_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_youtube_link'])."</label>"; } ?>
+			<?php if($info['customer_youtube_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_youtube_link'])."'>".stripslashes($info['customer_youtube_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_youtube_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
 	<h3>Interest</h3>
+	<?php if($info['customer_hobbies']) {?>
 	<div class="form_field">
 		<label>Hobbies</label>
 		<div class="input_field">
@@ -634,6 +657,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_fav_color']) {?>
 	<div class="form_field">
 		<label>Favourite Color</label>
 		<div class="input_field">
@@ -641,6 +666,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_fav_place']) {?>
 	<div class="form_field">
 		<label>Favourite Place</label>
 		<div class="input_field">
@@ -648,6 +675,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_fav_food']) {?>
 	<div class="form_field">
 		<label>Favourite Dish</label>
 		<div class="input_field">
@@ -655,6 +684,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_fav_brand']) {?>
 	<div class="form_field">
 		<label>Favourite Brand</label>
 		<div class="input_field">
@@ -662,6 +693,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_fav_music']) {?>
 	<div class="form_field">
 		<label>Favourite Music</label>
 		<div class="input_field">
@@ -669,7 +702,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_fav_book']) {?>
 	<div class="form_field">
 		<label>Favourite Book</label>
 		<div class="input_field">
@@ -677,7 +711,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_fav_author']) {?>
 	<div class="form_field">
 		<label>Favourite Author</label>
 		<div class="input_field">
@@ -685,7 +720,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_fav_drink']) {?>
 	<div class="form_field">
 		<label>Favourite Drink</label>
 		<div class="input_field">
@@ -693,7 +729,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_fav_things']) {?>
 	<div class="form_field">
 		<label>Favourite Thing</label>
 		<div class="input_field">
@@ -701,7 +738,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_fav_sports']) {?>
 	<div class="form_field">
 		<label>Favourite Game</label>
 		<div class="input_field">
@@ -709,7 +747,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_fav_celebrates']) {?>
 	<div class="form_field">
 		<label>Favourite Celebrity</label>
 		<div class="input_field">
@@ -717,6 +756,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_fav_movie']) {?>
 	<div class="form_field">
 		<label>Favourite Movie</label>
 		<div class="input_field">
@@ -724,10 +765,11 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-
+	<?php } ?>
 <?php } else if($info['customer_type'] == 1) { ?> 
 
 	<h3>General</h3>
+	<?php if($info['business_model']) {?>
 	<div class="form_field">
 		<label>Business Model</label>
 		<div class="input_field">
@@ -738,7 +780,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_prof_profession']) {?>
 	<div class="form_field">
 		<label>Nature of Business</label>
 		<div class="input_field">
@@ -747,7 +790,8 @@
 		<div class="clear"></div>
 	</div>
 	
-	
+	<?php } ?>
+	<?php if($info['customer_first_name']) {?>
 	<div class="form_field">
 		<label>Lead Person of Business</label>
 		<div class="input_field">
@@ -756,6 +800,8 @@
 		<div class="clear"></div>
 	</div>
 
+	<?php } ?>
+	<?php if($info['customer_last_name']) {?>
 	<div class="form_field">
 		<label>Point of Contact</label>
 		<div class="input_field">
@@ -763,7 +809,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_country']) {?>
 	<div class="form_field">
 		<label>Business Place Of Country </label>
 		<div class="input_field">
@@ -773,6 +820,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_state']) {?>
 	<div class="form_field">
 		<label>Business Place Of Living</label>
 		<div class="input_field">
@@ -782,6 +831,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
+	<?php if($info['customer_city']) {?>
 	<div class="form_field">
 		<label>Business Place of City</label>
 		<div class="input_field">
@@ -791,7 +842,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['business_sector']) {?>
 	<div class="form_field">
 		<label>Business Sector</label>
 		<div class="input_field">
@@ -801,7 +853,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['branches']) {?>
 	<div class="form_field">
 		<label>Branches</label>
 		<div class="input_field">
@@ -811,7 +864,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['business_establishment']) {?>
 	<div class="form_field">
 		<label>Business Establishment</label>
 		<div class="input_field">
@@ -819,7 +873,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_prof_specialized']) {?>
 	<div class="form_field">
 		<label>Business Customer Target</label>
 		<div class="input_field">
@@ -827,7 +882,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['is_adult_only']) {?>
 	<div class="form_field">
 		<label>18+?</label>
 		<div class="input_field">
@@ -835,43 +891,48 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	<?php } ?>
 	
 	<h3>Social Media</h3>
+	<?php if($info['customer_facebook_link']) {?>
 	<div class="form_field">
 		<label>Facebook Link</label>
 		<div class="input_field">
-			<?php if($info['customer_facebook_link'] !='') { echo "<a class='display_info' href='".$info['customer_facebook_link']."'>".stripslashes($info['customer_facebook_link'])."</a>"; } else {  echo "<label class='display_info'>".stripslashes($info['customer_facebook_link'])."</label>"; } ?>
+			<?php if($info['customer_facebook_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_facebook_link'])."'>".stripslashes($info['customer_facebook_link'])."</a>"; } else {  echo "<label class='display_info'>".stripslashes($info['customer_facebook_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_instagram_link']) {?>
 	<div class="form_field">
 		<label>Instagram Link</label>
 		<div class="input_field">
-			<?php if($info['customer_instagram_link'] !='') { echo "<a class='display_info' href='".$info['customer_instagram_link']."'>".stripslashes($info['customer_instagram_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_instagram_link'])."</label>"; } ?>
+			<?php if($info['customer_instagram_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_instagram_link'])."'>".stripslashes($info['customer_instagram_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_instagram_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_twitter_link']) {?>
 	<div class="form_field">
 		<label>Twitter Link</label>
 		<div class="input_field">
-			<?php if($info['customer_twitter_link'] !='') { echo "<a class='display_info' href='".$info['customer_twitter_link']."'>".stripslashes($info['customer_twitter_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_twitter_link'])."</label>"; } ?>
+			<?php if($info['customer_twitter_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_twitter_link'])."'>".stripslashes($info['customer_twitter_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_twitter_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_youtube_link']) {?>
 	<div class="form_field">
 		<label>Youtube Link</label>
 		<div class="input_field">
-			<?php if($info['customer_youtube_link'] !='') { echo "<a class='display_info' href='".$info['customer_youtube_link']."'>".stripslashes($info['customer_youtube_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_youtube_link'])."</label>"; } ?>
+			<?php if($info['customer_youtube_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_youtube_link'])."'>".stripslashes($info['customer_youtube_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_youtube_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
 	<h3>Contact</h3>
 	
-	
+	<?php if($info['customer_phone']) {?>
 	<div class="form_field">
 		<label>Mobile</label>
 		<div class="input_field">
@@ -879,7 +940,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_prof_official_phone']) {?>
 	<div class="form_field">
 		<label>Office</label>
 		<div class="input_field">
@@ -887,7 +949,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_prof_official_email']) {?>
 	<div class="form_field">
 		<label>Email</label>
 		<div class="input_field">
@@ -895,7 +958,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['customer_prof_official_website']) {?>
 	<div class="form_field">
 		<label>Website</label>
 		<div class="input_field">
@@ -903,7 +967,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+	<?php } ?>
+	<?php if($info['fax']) {?>
 	<div class="form_field">
 		<label>Fax</label>
 		<div class="input_field">
@@ -911,7 +976,8 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-
+	<?php } ?>
+	<?php if($info['address']) {?>
 	<h3>Location</h3>
 	<div class="form_field">
 		<label>Google Map Location</label>
@@ -923,7 +989,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-
+	<?php } ?>
 <?php } ?>
 
 <script>

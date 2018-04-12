@@ -120,7 +120,7 @@ class Home extends CI_Controller {
 		$join [0] ['condition'] = "post_category = blog_cat_id";
 		$join [0] ['type'] = "LEFT";
 		
-		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email";
+		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_type,company_name";
 		$join [1] ['table'] = $this->customers;
 		$join [1] ['condition'] = "post_created_by = customer_id and post_by !='admin'";
 		$join [1] ['type'] = "LEFT";
@@ -532,21 +532,31 @@ class Home extends CI_Controller {
 		$limit = get_label('search_result_limit');
 		$post_records = $this->Mydb->get_all_records ( "post_slug topic_label,post_title topic_value,CASE post_status WHEN 'A' THEN 'Post' END  'topic_type'", $this->table, $where_array, $limit, $offset, $order_by, $like_array, $groupby, $join );	
 			
-		$where = array('customer_status'=>'A',"(customer_first_name like '%$search_text%' OR customer_last_name like '%$search_text%')"=>NULL);
+		$where = array('customer_status'=>'A',"(customer_first_name like '%$search_text%' OR customer_last_name like '%$search_text%' OR company_name like '%$search_text%')"=>NULL);
 		$order_by = array('customer_first_name'=>'ASC');
-		$records = $this->Mydb->get_all_records ( "customer_id topic_label,concat(customer_first_name,' ',customer_last_name) topic_value,CASE customer_type WHEN 0 THEN 'Person' WHEN 1 THEN 'Business' END  'topic_type'", $this->customers, $where, $limit, $offset, $order_by, $like, $groupby, $join );
+		
+		$records = $this->Mydb->get_all_records ( "customer_type,customer_id topic_label,concat(customer_first_name,' ',customer_last_name) topic_value,company_name,CASE customer_type WHEN 0 THEN 'Person' WHEN 1 THEN 'Business' END  'topic_type'", $this->customers, $where, $limit, $offset, $order_by, $like, $groupby, $join );
 
-		if(!empty($post_records))
+		if(!empty($post_records) || !empty($records))
 		{
 			$i=0;
+			
 			if(!empty($records))
 				$post_records=array_merge($post_records,$records);
 
 			foreach($post_records as $key=>$record)
 			{
 				if($record['topic_label'] != '')
-				{ 
-					$_search_text=str_ireplace($search_text, '<span class="highlight_search_text">'.substr($record['topic_value'],0,strlen($search_text)).'</span>', $record['topic_value']);
+				{
+					if($record['customer_type'] == 0)
+					{
+						$_search_text=str_ireplace($search_text, '<span class="highlight_search_text">'.substr($record['topic_value'],0,strlen($search_text)).'</span>', $record['topic_value']);
+						$result [$i]['value'] = $record['topic_value'];
+					}else{
+						$_search_text=str_ireplace($search_text, '<span class="highlight_search_text">'.substr($record['company_name'],0,strlen($search_text)).'</span>', $record['company_name']);
+						$result [$i]['value'] = $record['company_name'];
+					}						
+					
 					if($record['topic_type'] == "Post")
 					{
 						$result [$i]['id'] = "home/view/".$record['topic_label'];
@@ -557,7 +567,7 @@ class Home extends CI_Controller {
 						$result [$i]['id'] = "myprofile/".encode_value($record['topic_label']);
 						$result [$i]['label'] = $record['topic_type']." : ".$_search_text ;
 					}
-					$result [$i]['value'] = $record['topic_value'];
+					
 					$i++;
 				}
 			}

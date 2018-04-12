@@ -64,7 +64,12 @@
 									echo "Admin"; 
 								} 
 								else { 
-									echo "<a href='".$url."'>".$record['customer_first_name']." ".$record['customer_last_name']."</a>"; 
+									if($record['customer_type'] == 0) {
+										echo "<a href='".$url."'>".$record['customer_first_name']." ".$record['customer_last_name']."</a>"; 
+									}else { 
+										echo "<a href='".$url."'>".$record['company_name']."</a>";
+									}
+									
 									
 								} ?></h4>
 								<p>

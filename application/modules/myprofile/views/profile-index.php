@@ -16,7 +16,7 @@ var module_action="addpost";
 					<?php } ?>
                 </div>
                 <div class="prof_dest">
-                    <h4><?php echo $info['customer_first_name']." ".$info['customer_last_name']; ?></h4>
+                    <h4><?php echo ($info['customer_type'] == '0')?$info['customer_first_name']." ".$info['customer_last_name']:$info['company_name']; ?></h4>
 					<?php if($info['customer_prof_profession'] !='') { $prof = explode(',',$info['customer_prof_profession']);   ?>
 						<ul>
 							<?php foreach($prof as $profs) { ?>
@@ -154,7 +154,14 @@ var module_action="addpost";
 							if(!empty($followers_lst)) {
 								foreach($followers_lst as $foll_list)
 								{
-									$followers[encode_value($foll_list['follow_user_id'])."__".$foll_list['customer_first_name']." ".$foll_list['customer_last_name']] = $foll_list['customer_first_name']." ".$foll_list['customer_last_name']; 	
+									if($foll_list['customer_type'] == 0)
+									{
+										$followers[encode_value($foll_list['follow_user_id'])."__".$foll_list['customer_first_name']." ".$foll_list['customer_last_name']] = $foll_list['customer_first_name']." ".$foll_list['customer_last_name']; 	
+									}
+									else
+									{
+										$followers[encode_value($foll_list['follow_user_id'])."__".$foll_list['company_name']] = $foll_list['company_name']; 
+									}	
 								}
 							}
 						?>

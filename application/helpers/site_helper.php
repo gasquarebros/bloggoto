@@ -131,7 +131,7 @@ if (! function_exists ( 'get_followers_list' )) {
 		{
 			$join = '';
 			$order_by = array('customer_first_name'=>'ASC');
-			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email";
+			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_type,company_name";
 			$join [0] ['table'] = 'customers';
 			$join [0] ['condition'] = "follow_user_id = customer_id";
 			$join [0] ['type'] = "INNER";
@@ -151,7 +151,7 @@ if (! function_exists ( 'get_following_list' )) {
 		{
 			$join = '';
 			$order_by = array('customer_first_name'=>'ASC');
-			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email";
+			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_type,company_name";
 			$join [0] ['table'] = 'customers';
 			$join [0] ['condition'] = "follow_user_id = customer_id";
 			$join [0] ['type'] = "INNER";
@@ -270,5 +270,14 @@ if (! function_exists ( 'delete_post' )){
 				$CI->Mydb->delete_where_in('post_notification','notification_post_id',$postid,array());
 				$CI->Mydb->delete_where_in('post_tags','post_tag_post_id',$postid,array());
 			return $CI->db->affected_rows();
+	}
+}
+
+if (! function_exists ( 'addhttp' )){
+	function addhttp($url) {
+		if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+			$url = "http://" . $url;
+		}
+		return $url;
 	}
 }

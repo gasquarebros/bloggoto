@@ -45,7 +45,7 @@
 				<span></span>
 				<?php echo substr_close_tags($record['post_description']); ?>
 				<div class="post_by">
-					<p><span class="post_title">Posted by</span> <?php if($record['post_by'] == 'admin') { echo "Admin"; } else { echo $record['customer_first_name']; } ?></p>
+					<p><span class="post_title">Posted by</span> <?php if($record['post_by'] == 'admin') { echo "Admin"; } else { echo ($record['customer_type']==0)?$record['customer_first_name']:$record['company_name']; } ?></p>
 					<a href="<?php echo base_url().$module.'/view/'.$record['post_slug']; ?>" class="read">Read More</a>
 				</div>
 			</div>
