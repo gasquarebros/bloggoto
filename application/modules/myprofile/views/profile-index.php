@@ -19,9 +19,9 @@ var module_action="addpost";
                     <h4><?php echo ($info['customer_type'] == '0')?$info['customer_first_name']." ".$info['customer_last_name']:$info['company_name']; ?></h4>
 					<?php if($info['customer_prof_profession'] !='') { $prof = explode(',',$info['customer_prof_profession']);   ?>
 						<ul>
-							<?php foreach($prof as $profs) { ?>
+							<?php foreach($prof as $profs) { if(trim($profs) !='') { ?>
 								<li><a href="javascript:void(0)"><?php echo ucfirst($profs); ?></a></li>
-							<?php } ?>
+							<?php } } ?>
 						</ul>
 					<?php } ?>
                 </div>
@@ -86,13 +86,13 @@ var module_action="addpost";
 		<div class="newsfeed_wrap">
 			<ul class="newsfeed_menu">
 				
-				<li><a data-section="blogs" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class=" profile_section">BLOGS / STORIES</a></li>
+				<li><a data-section="blogs" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="active profile_section">BLOGS / STORIES</a></li>
 				<li><a data-section="pictures" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="profile_section">PICTURES /  VIDEOS</a></li>
 				<li><a data-section="tags" href="<?php echo base_url()."myprofile/viewtags/".encode_value($info['customer_id']); ?>" class="profile_section">TAGS</a></li>
 				<?php if($info['customer_id'] == get_user_id()) { ?>
-					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio"; ?>" class="active profile_section">Profile</a></li>
+					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio"; ?>" class="profile_section">Profile</a></li>
 				<?php } else { ?> 
-					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio/".encode_value($info['customer_id']); ?>" class="active profile_section">Profile</a></li>
+					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio/".encode_value($info['customer_id']); ?>" class=" profile_section">Profile</a></li>
 				<?php } ?>
 			</ul>
 			<div class="boi_data">

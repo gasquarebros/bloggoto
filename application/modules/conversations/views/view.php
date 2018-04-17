@@ -200,9 +200,9 @@ $notify_logo = skin_url('images/db-logo2.png');
 								<small class="block text-info text-semibold">
 									<?php
 									if($allusers[$notification[0]['assigned_to']]['customer_type'] == 1) {
-										$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['company_name']:'Bloggoto';	
+										$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['company_name']:'Anonymous';	
 									} else {
-										$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['customer_first_name']:'Bloggoto';
+										$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['customer_first_name']:'Anonymous';
 									}
 									if($allusers[$notification[0]['assigned_from']]['customer_type'] == 1) {
 										$from_name = (!empty($allusers[$notification[0]['assigned_from']]) && $notification[0]['assigned_from']!='')?$allusers[$notification[0]['assigned_from']]['company_name']:'';
@@ -283,7 +283,7 @@ $notify_logo = skin_url('images/db-logo2.png');
 							</div>
 							<div class="panel timeline-label">
 								<div class="panel-heading">
-									<h3 class="panel-title panel-title-small"><?php echo ($username)?$username:'Bloggoto';?></h3>
+									<h3 class="panel-title panel-title-small"><?php echo ($username)?$username:'Anonymous';?></h3>
 								</div>
 								<div class="panel-body">
 									<div class="row">

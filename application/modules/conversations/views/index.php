@@ -51,9 +51,9 @@ if(!empty($_GET['filter']) && $_GET['filter']=='trash') {
 												<div class="mail-control"></div>
 												<div class="mail-from">
 													<?php if($allusers[$user_id]['customer_type'] == 1) { ?>
-														<a href="<?=base_url('conversations/view/'.encode_value($nval['notification_id']).$trashs)?>"><?=($nval['message_type']=='N')?'Bloggoto':$allusers[$user_id]['company_name']?></a>
+														<a href="<?=base_url('conversations/view/'.encode_value($nval['notification_id']).$trashs)?>"><?=($nval['message_type']=='N')?'Anonymous':$allusers[$user_id]['company_name']?></a>
 													<?php } else { ?>
-														<a href="<?=base_url('conversations/view/'.encode_value($nval['notification_id']).$trashs)?>"><?=($nval['message_type']=='N')?'Bloggoto':$allusers[$user_id]['customer_first_name']?></a>
+														<a href="<?=base_url('conversations/view/'.encode_value($nval['notification_id']).$trashs)?>"><?=($nval['message_type']=='N')?'Anonymous':$allusers[$user_id]['customer_first_name']?></a>
 													<?php } ?>
 												</div>
 												<div class="mail-time">

@@ -616,7 +616,7 @@
 	<div class="form_field">
 		<label>Facebook Link</label>
 		<div class="input_field">
-			<?php if($info['customer_facebook_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_facebook_link'])."'>".stripslashes($info['customer_facebook_link'])."</a>"; } else { echo "<label class='display_info'></label>";} ?>
+			<?php if($info['customer_facebook_link'] !='') { echo "<a class='display_info' target='_blank' href='".addhttp($info['customer_facebook_link'])."'>".stripslashes($info['customer_facebook_link'])."</a>"; } else { echo "<label class='display_info'></label>";} ?>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -625,7 +625,7 @@
 	<div class="form_field">
 		<label>Instagram Link</label>
 		<div class="input_field">
-			<?php if($info['customer_instagram_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_instagram_link'])."'>".stripslashes($info['customer_instagram_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_instagram_link'])."</label>"; } ?>
+			<?php if($info['customer_instagram_link'] !='') { echo "<a class='display_info' target='_blank' href='".addhttp($info['customer_instagram_link'])."'>".stripslashes($info['customer_instagram_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_instagram_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -634,7 +634,7 @@
 	<div class="form_field">
 		<label>Twitter Link</label>
 		<div class="input_field">
-			<?php if($info['customer_twitter_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_twitter_link'])."'>".stripslashes($info['customer_twitter_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_twitter_link'])."</label>"; } ?>
+			<?php if($info['customer_twitter_link'] !='') { echo "<a class='display_info' target='_blank' href='".addhttp($info['customer_twitter_link'])."'>".stripslashes($info['customer_twitter_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_twitter_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -643,7 +643,7 @@
 	<div class="form_field">
 		<label>Youtube Link</label>
 		<div class="input_field">
-			<?php if($info['customer_youtube_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_youtube_link'])."'>".stripslashes($info['customer_youtube_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_youtube_link'])."</label>"; } ?>
+			<?php if($info['customer_youtube_link'] !='') { echo "<a class='display_info' target='_blank' href='".addhttp($info['customer_youtube_link'])."'>".stripslashes($info['customer_youtube_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_youtube_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -898,7 +898,7 @@
 	<div class="form_field">
 		<label>Facebook Link</label>
 		<div class="input_field">
-			<?php if($info['customer_facebook_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_facebook_link'])."'>".stripslashes($info['customer_facebook_link'])."</a>"; } else {  echo "<label class='display_info'>".stripslashes($info['customer_facebook_link'])."</label>"; } ?>
+			<?php if($info['customer_facebook_link'] !='') { echo "<a class='display_info' target='_blank' href='".addhttp($info['customer_facebook_link'])."'>".stripslashes($info['customer_facebook_link'])."</a>"; } else {  echo "<label class='display_info'>".stripslashes($info['customer_facebook_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -907,7 +907,7 @@
 	<div class="form_field">
 		<label>Instagram Link</label>
 		<div class="input_field">
-			<?php if($info['customer_instagram_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_instagram_link'])."'>".stripslashes($info['customer_instagram_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_instagram_link'])."</label>"; } ?>
+			<?php if($info['customer_instagram_link'] !='') { echo "<a class='display_info' target='_blank' href='".addhttp($info['customer_instagram_link'])."'>".stripslashes($info['customer_instagram_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_instagram_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -916,7 +916,7 @@
 	<div class="form_field">
 		<label>Twitter Link</label>
 		<div class="input_field">
-			<?php if($info['customer_twitter_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_twitter_link'])."'>".stripslashes($info['customer_twitter_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_twitter_link'])."</label>"; } ?>
+			<?php if($info['customer_twitter_link'] !='') { echo "<a class='display_info' target='_blank' href='".addhttp($info['customer_twitter_link'])."'>".stripslashes($info['customer_twitter_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_twitter_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -925,7 +925,7 @@
 	<div class="form_field">
 		<label>Youtube Link</label>
 		<div class="input_field">
-			<?php if($info['customer_youtube_link'] !='') { echo "<a class='display_info' href='".addhttp($info['customer_youtube_link'])."'>".stripslashes($info['customer_youtube_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_youtube_link'])."</label>"; } ?>
+			<?php if($info['customer_youtube_link'] !='') { echo "<a class='display_info' target='_blank' href='".addhttp($info['customer_youtube_link'])."'>".stripslashes($info['customer_youtube_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_youtube_link'])."</label>"; } ?>
 		</div>
 		<div class="clear"></div>
 	</div>

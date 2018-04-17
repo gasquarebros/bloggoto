@@ -74,7 +74,53 @@
     .comment_img > img, .comment_img { width: 45px; height: 45px; }
     .comment_box_wrap { width: 88%; }
     .follow_request ul li { width: 45%; margin: 12px 2%; }
-	.list_row { width: 48%; }
+	/*.list_row { width: 48%; }*/
+	
+	.inbx_left{
+        width: 100%;
+        margin-right: 0;
+    }
+    .inbx_right{
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+
+    .panel-control{
+        float: none;
+        padding-left: 0;
+    }
+    .staff_directory .pull-right{
+        float: none !important;
+    }
+    .margin-top-20{
+        margin-top: 10px;
+    }
+    .spacing_Responsive{
+        padding: 10px 0;
+    }
+    .panel-control small{
+        padding-bottom: 0;
+    }
+    
+    #page-title{
+        margin-bottom: 0;
+        padding-bottom: 10px;
+    }
+    .breadcrumb{
+        margin-bottom: 0;
+    }
+    .mail-list>li{
+        display: block;
+    }
+    .mail-time{
+        top: 15px;
+    }
+    .mail-from{
+        float: none;
+    }
+	
+	.show_post_options_detail { margin-right: 0px;}
+	
 }
 
 @media screen and (max-width: 600px) {
@@ -82,6 +128,22 @@
     .write_text input[type="text"], .write_text input[type="email"], .write_text input[type="password"], .write_text textarea, .write_text select { margin-bottom: 15px; }
     .newsfeed_menu li { width: 50%; }
 	.list_row { width: 565px; }
+	
+	.mail-time{
+        position: static;
+    right: inherit;
+    text-align: left;
+    left: 0;
+    }
+    .mail-time .margin-left-10{
+        margin-left: 0;
+    }
+    .mail-from{ 
+        width: 100%;
+    }
+    .mail-subject{
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 500px) {
@@ -113,8 +175,9 @@
 @media screen and (max-width: 360px) {
 	.list_row {
 		margin: 0;
-		width: 320px;
+		width: 280px;
 	}	
+	.show_post_options { margin-top:0px; }
 }
 
 

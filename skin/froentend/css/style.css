@@ -187,7 +187,13 @@ a.btn:hover { background: #06678e; color: #fff; border: 1px solid #06678e; }
 .header_menuwrap ul li a:hover, .header_menuwrap ul li a.active { background: #045575; }
 ul.main_menu { float: left; }
 ul.profile_rgt { float: right; }
-
+.notification_circle
+{	line-height: 4px;
+    font-size: 16px;
+    padding-left: 3px;
+    vertical-align: super;
+    color: red;
+}
 
 /* Main Section Style */
 .main_heading { background: #5f6d7d; padding: 12px; text-align: center; font-family: 'proxima_novaregular'; font-size: 33px; color: #ffffff; margin: 12px 0; }
@@ -227,6 +233,11 @@ ul.profile_rgt { float: right; }
 .post_by a.read { float: right; font-size: 16px; color: #f01847; }
 .post_by a.read:hover { color: #06678e; }
 
+.post_more.x_login_popup.post_options_action { float: right; }
+.show_post_options { float: right; margin-top: -19px; margin-bottom: 0px; margin-left: 0px;margin-right: 0px; padding: 0px; }
+.show_post_options li, .show_post_options_detail li { list-style: none; }
+.show_post_options_detail {  float: right; margin-top: -51px; margin-bottom: 0px; margin-left: 0px;margin-right: 3%; padding: 0px; }
+
 /* Footer Style */
 .footer_top { background: #fff; padding: 35px 0; }
 .foot_rgt { width: 300px; float: right; }
@@ -245,7 +256,7 @@ footer p { margin: 0; line-height: 18px; }
 .foot_rgt input[type="submit"]:hover { background: #06678e; }
 
 /*** Responsive menu ***/
-.nav_triger{ width: 48px;height: 45px;background: transparent; left: 0px;top: 4px; position: absolute;	cursor: pointer;-webkit-user-select: none; user-select: none;-moz-user-select: none;display: none; }
+.nav_triger{ width: 48px;height: 45px;background: transparent; left: 0px;top: 4px; position: relative;	cursor: pointer;-webkit-user-select: none; user-select: none;-moz-user-select: none;display: none; }
 .nav_triger span.icon-bar { background: none repeat scroll 0 0 #fff; height: 4px; right: 5px; position: absolute; top: 0;  -webkit-transform: translate(0px, 0) rotate(0deg) scale(1);  transform: translate(0px, 0) rotate(0deg) scale(1);  -webkit-transition: all 400ms ease-in-out 0s !important; transition: all 400ms ease-in-out 0s !important;  width: 30px;  margin: 0 !important;}
 .nav_triger span.icon-bar:nth-child(1) {  top: 8px; }
 .nav_triger span.icon-bar:nth-child(2) {  top: 17px;}
@@ -292,7 +303,7 @@ ul.device_nav li.active > .s_arrow{	background: url(../images/s_arrow_open.png) 
 /* custom browse css */
 .brows { background: #ecf0f1; border: 1px solid #c8c6c6;border-radius: 5px;color: #3d3f40;font-size: 14px;margin: 0 5px 0 0;padding: 7px 15px;
 text-transform: uppercase; height: 38px; line-height: 26px; display: block;}
-input[type="file"] { opacity: 0; position: absolute;  height: 38px;}
+input[type="file"] { opacity: 0; position: absolute;  height: 38px;width:150px;}
 
 /* SignUp Page */
 .signup_wrap { text-align: center; }
@@ -381,9 +392,21 @@ input[type="file"] { opacity: 0; position: absolute;  height: 38px;}
 .write_img img { width: 50px; height: 44px; border-radius: 50%; }
 .comment_img img { width: 50px; height: 48px; }
 .comments_list { margin-top: 15px; }
-.write_text, .comment_box_wrap, .parent_comments { width: 93%; float: right; }
+.write_text, .comment_box_wrap { width: 93%; float: right; }
+/*.parent_comments { width: 93%; float: right; }*/
+.parent_comments .body { display:block; }
 .write_post .form_field { width: 78%; display: inline-block; vertical-align: bottom; }
 .write_post .btn_wrap, .write_post .action_field { width: 20%; display: inline-block; vertical-align: bottom; text-align: right; }
+.comments_records { padding-bottom:10px; }
+.comments_records > a {
+    width: 20%;
+    max-width: 100px;
+}
+.parent_comments {
+    float: left;
+    margin-left: 10px;
+    width: 80%;
+}
 .write_post .action_field a { margin-bottom: 0; }
 .write_text input[type="text"], .write_text input[type="email"], .write_text input[type="password"], .write_text textarea, .write_text select, .write_text input[type="reset"], .write_text input[type="button"], .write_text input[type="submit"], .write_text button { margin: 0; }
 .write_text input[type="text"], .write_text input[type="email"], .write_text input[type="password"], .write_text textarea, .write_text select { border-width: 0 0 1px 0; padding: 0; background: #fff; }

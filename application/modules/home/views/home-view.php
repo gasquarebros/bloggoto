@@ -35,10 +35,29 @@
 								} ?></h4>
 								<p><?php echo datepostformat($record['post_created_on']); ?></p>
 							</div>
+							
 							<a href="javascript:void(0)" class="toggle_feed"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+							
 							<div class="clear"></div>
 						</div>
-						<div class="toggle_content">
+						<?php if(get_user_id() != '') { ?>				
+						
+							<ul style="display:none;" class="toggle_content show_post_options_detail">
+								<li>
+									<a href="javascript:;" class="post_report x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Report"><i class="fa fa-flag-o"></i></a>
+								</li>
+
+								<?php if(get_user_id() == $record['post_created_by']) { ?>				
+								<li>
+									<a href="<?php echo base_url().'home/editpost/'.$record['post_slug']; ?>" class="post_edit x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Edit"><i class="fa fa-edit"></i></a>
+								</li>
+								<li>		
+									<a href="javascript:;" class="post_delete x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Delete"><i class="fa fa-trash-o"></i></a>
+								</li>		
+								<?php } ?>
+							</ul>
+							<?php } ?>
+						<div class="toggle_contents">
 						<div class="feed_image">
 							<?php if($record['post_photo'] !=''){ $photo=media_url().$this->lang->line('post_photo_folder_name').$record['post_photo']; } else { /*$photo=media_url().$this->lang->line('post_photo_folder_name')."default.png"; */ $photo=''; } ?>
 							
@@ -103,7 +122,7 @@
 						</div>
 						</div>
 					 </div>
-					<div class="feed_comment toggle_content">
+					<div class="feed_comment toggle_contents">
 						<?php echo form_open_multipart(base_url().'myprofile/addcomments',' class="comment_form" autocomplete="'.form_autocomplte().'" ' );?>
 							<div class="comment_img">
 								<?php if($this->session->userdata('bg_user_profile_picture')) { ?>

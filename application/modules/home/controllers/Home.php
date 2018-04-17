@@ -548,17 +548,22 @@ class Home extends CI_Controller {
 			{
 				if($record['topic_label'] != '')
 				{
-					if($record['customer_type'] == 0)
-					{
-						$_search_text=str_ireplace($search_text, '<span class="highlight_search_text">'.substr($record['topic_value'],0,strlen($search_text)).'</span>', $record['topic_value']);
-						$result [$i]['value'] = $record['topic_value'];
-					}else{
-						$_search_text=str_ireplace($search_text, '<span class="highlight_search_text">'.substr($record['company_name'],0,strlen($search_text)).'</span>', $record['company_name']);
-						$result [$i]['value'] = $record['company_name'];
-					}						
+					$_search_text=str_ireplace($search_text, '<span class="highlight_search_text">'.substr($record['topic_value'],0,strlen($search_text)).'</span>', $record['topic_value']);
+					
+					if($record['topic_type'] != 'Post') {
+						if($record['customer_type'] == 0)
+						{
+							$_search_text=str_ireplace($search_text, '<span class="highlight_search_text">'.substr($record['topic_value'],0,strlen($search_text)).'</span>', $record['topic_value']);
+							$result [$i]['value'] = $record['topic_value'];
+						}else{
+							$_search_text=str_ireplace($search_text, '<span class="highlight_search_text">'.substr($record['company_name'],0,strlen($search_text)).'</span>', $record['company_name']);
+							$result [$i]['value'] = $record['company_name'];
+						}						
+					}
 					
 					if($record['topic_type'] == "Post")
 					{
+						
 						$result [$i]['id'] = "home/view/".$record['topic_label'];
 						$result [$i]['label'] = $record['topic_type']." : ".$_search_text ;
 					}

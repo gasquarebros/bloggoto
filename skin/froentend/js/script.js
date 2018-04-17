@@ -202,3 +202,11 @@ $('.reload-captcha').click(function(event){
 	   }
 	});            
 });
+
+$(document).on('click','.post_options_action',function() { 
+	$('.post_options_action').not(this).each(function() {
+		$(this).parent().next('.show_post_options').hide();
+	});
+	$(this).parent().next('.show_post_options').slideToggle();
+	
+});

@@ -193,7 +193,8 @@ class Myprofile extends CI_Controller {
 
 				$res=$this->Mydb->update ( $this->customers, array ('customer_id' => get_user_id() ), $update_array );
 				
-				$this->session->set_userdata(array('bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$customer_photo ));
+				
+				$this->session->set_userdata(array('bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$customer_photo ,'company_name'=>post_value ( 'company_name' )));
 
 				
 				

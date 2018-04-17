@@ -87,7 +87,31 @@
 							
 						</div>
 						<div class="feed_body_text">
-							<h4><a href="<?php echo base_url().'home/view/'.$record['post_slug']; ?>"><?php echo $record['post_title']; ?></a></h4>
+							<h4>
+								<a href="<?php echo base_url().'home/view/'.$record['post_slug']; ?>"><?php echo $record['post_title']; ?></a>
+								<?php if(get_user_id() != '') { ?>		
+									<a href="javascript:;" class="post_more x_login_popup post_options_action" title="More"><i class="fa fa-ellipsis-v"></i></a>
+								<?php } ?>
+							</h4>
+														
+							<?php if(get_user_id() != '') { ?>				
+						
+							<ul style="display:none;" class="show_post_options">
+								<li>
+									<a href="javascript:;" class="post_report x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Report"><i class="fa fa-flag-o"></i></a>
+								</li>
+
+								<?php if(get_user_id() == $record['post_created_by']) { ?>				
+								<li>
+									<a href="<?php echo base_url().'home/editpost/'.$record['post_slug']; ?>" class="post_edit x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Edit"><i class="fa fa-edit"></i></a>
+								</li>
+								<li>		
+									<a href="javascript:;" class="post_delete x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Delete"><i class="fa fa-trash-o"></i></a>
+								</li>		
+								<?php } ?>
+							</ul>
+							<?php } ?>
+							
 							<?php 
 								if(!empty($record['post_tag_names'])) { 
 									echo  "<div class='tags'>";

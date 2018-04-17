@@ -26,7 +26,11 @@ if (! function_exists ( 'get_user_type' )) {
 if (! function_exists ( 'get_user_name' )) {
 	function get_user_name() {
 		$CI = & get_instance ();
-		return  ucwords($CI->session->userdata('bg_first_name')." ".$CI->session->userdata('bg_last_name'));
+		if($CI->session->userdata('bg_user_type') == 1) {
+			return  ucwords($CI->session->userdata('company_name'));
+		}else {
+			return  ucwords($CI->session->userdata('bg_first_name')." ".$CI->session->userdata('bg_last_name'));
+		}
 	}
 }
 
