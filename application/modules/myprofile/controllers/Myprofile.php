@@ -730,7 +730,7 @@ class Myprofile extends CI_Controller {
 			$totla_rows = $this->Mydb->get_num_join_rows ( 'post_comment_id', $this->post_comments, $where, null, null, null, $like, $groupby, $join  );
 			
 			
-			$limit = 1;
+			$limit = 10;
 			$page = (post_value ( 'page' )>0)?post_value ( 'page' ):1;
 			$offset = (post_value ( 'page' ) >0)?((post_value ( 'page' )-1) * $limit):0;
 			$offset = post_value ( 'offset' )?post_value ( 'offset' ):$offset;

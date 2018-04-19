@@ -16,13 +16,16 @@
 					
 					<a href="<?php echo base_url().'myprofile/'.encode_value($record['customer_id']); ?>" class="name"> <?php echo ($record['customer_type'] == 0)?$record['customer_first_name']." ".$record['customer_last_name']:$record['company_name']; ?> 
 					</a> <span class="datetime"> at <?php echo date('Y-m-d H:i:s',strtotime($record['post_comment_created_on'])); ?> </span> <span class="body"> <?php echo $record['post_comment_message']; ?> </span> </div>
-					<div class="load_more" <?php if($next_set !='') { echo 'style="display:block;"'; } else { echo "style='display:none;'"; } ?>>
-						<button class="more_posts_comments">Load More</button>
-					</div>
+					
 				</div>
 			</div>
 	<?php
 		}
+	?>
+		<div class="load_more" <?php if($next_set !='') { echo 'style="display:block;"'; } else { echo "style='display:none;'"; } ?>>
+			<button class="more_posts_comments">Load More</button>
+		</div>
+	<?php
 	} else if($offset == 0)
 	{
 		echo "<p class='no-records'>No Comments Found</p>";
