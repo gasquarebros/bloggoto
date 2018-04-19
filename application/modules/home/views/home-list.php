@@ -25,7 +25,7 @@ var module_action="addpost";
                     <img src="<?php echo skin_url(); ?>images/man.png" alt="man" />
 				<?php } ?>	
                 </a>
-                <h4><?php if(get_user_id() == '') { echo "Guest"; } else { echo get_user_name(); } ?></h4>
+                <h4><?php if(get_user_id() == '') { echo "Hi Guest"; } else { echo "Hi ".get_user_name().","; } ?></h4>
             </div>
             <div class="cmt_form">
                 <form>
@@ -108,7 +108,7 @@ var module_action="addpost";
 						<?php  echo form_input('post_title',set_value('post_title'),' class="form-control required"  placeholder="Title" id="post_title" ');?>
 					</div>
 					<div class="form_field">
-						<textarea name="post_description" placeholder="Enter Your Description"></textarea>
+						<textarea name="post_description" placeholder="Description"></textarea>
 					</div>
 					<div class="form_field tagging_section">
 						<?php 
@@ -128,7 +128,7 @@ var module_action="addpost";
 								}
 							}
 						?>
-						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Title" id="post_tags" style="width:400px" multiple="multiple"');?>
+						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag People/Business" title="Tag People/Business" id="post_tags" style="width:400px" multiple="multiple"');?>
 					</div>
 					<div class="form_field video_section" style="display:none;">
 						<div class="left_fm_field">

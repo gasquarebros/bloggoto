@@ -336,6 +336,7 @@ input[type="file"] { opacity: 0; position: absolute;  height: 38px;width:150px;}
     border-bottom: 1px solid #000000;
     padding: 15px 0 20px 0;
 }
+.input_field.social_section { margin: 12px 0px;}
 .form_field .input_field { width: 400px; float: left; }
 .boi_data input[type="text"], .boi_data input[type="email"], .boi_data input[type="password"], .boi_data textarea, .boi_data select { border: 1px solid #f0f0f0; background: #f7faff; height: 42px; }
 
@@ -386,6 +387,8 @@ input[type="file"] { opacity: 0; position: absolute;  height: 38px;width:150px;}
 .newsfeed_menu li { float: left;text-align: center;width: 25%;list-style-type: none;}
 .newsfeed_menu li a { padding: 15px 15px;display: block; border-bottom: 1px solid #fff; color: #000000; font-family: 'proxima_novaregular'; font-size: 16px; text-transform: uppercase; }
 .newsfeed_menu li a:hover, .newsfeed_menu li a.active { color: #089aaa; background: #fafbff; border-bottom-color: #089aaa; }
+.newsfeed_wrap .form_field  label { font-weight:normal;}
+.newsfeed_wrap .form_field  .input_field label { font-weight:bold;}
 .newsfeed_inner { width: 790px; margin: 0 auto; }
 .write_post { padding: 25px 20px; border: 1px solid #d9d9d9; border-radius: 2px; margin-bottom: 15px; }
 .write_img, .comment_img, .comments_records img { width: 6%; float: left; }
@@ -413,7 +416,9 @@ input[type="file"] { opacity: 0; position: absolute;  height: 38px;width:150px;}
 .single_feed { margin-bottom: 30px; }
 .feed_wrapper { padding: 22px 18px 12px; border:1px solid #d9d9d9; border-top-left-radius: 5px; border-top-right-radius: 5px;  }
 .feed_header, .feed_image { margin-bottom: 25px; }
-.lft_feed_img { width: 8%; float: left; margin-right: 20px; }
+.lft_feed_img { /*width: 8%;*/ float: left; margin-right: 20px; }
+
+.social_sharing_sections a { clear: both; float: left; }
 .feed_name { width: 85%; float: left; }
 .feed_name h4, .feed_body_text h4 { font-size: 25px; color: #444444; font-family: 'proxima_novaregular'; margin-bottom: 8px; }
 .feed_name p { font-size: 12px; color: #afafaf; font-family: 'proxima_novasemibold'; margin-bottom: 0; }

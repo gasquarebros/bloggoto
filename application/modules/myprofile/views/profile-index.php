@@ -87,7 +87,7 @@ var module_action="addpost";
 			<ul class="newsfeed_menu">
 				
 				<li><a data-section="blogs" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="active profile_section">BLOGS / STORIES</a></li>
-				<li><a data-section="pictures" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="profile_section">PICTURES /  VIDEOS</a></li>
+				<li><a data-section="pictures" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="profile_section">Gallery</a></li>
 				<li><a data-section="tags" href="<?php echo base_url()."myprofile/viewtags/".encode_value($info['customer_id']); ?>" class="profile_section">TAGS</a></li>
 				<?php if($info['customer_id'] == get_user_id()) { ?>
 					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio"; ?>" class="profile_section">Profile</a></li>
@@ -145,7 +145,7 @@ var module_action="addpost";
 						<?php  echo form_input('post_title',set_value('post_title'),' class="form-control required"  placeholder="Title" id="post_title" ');?>
 					</div>
 					<div class="form_field">
-						<textarea name="post_description" placeholder="Enter Your Description"></textarea>
+						<textarea name="post_description" placeholder="Description"></textarea>
 					</div>
 					<div class="form_field tagging_section">
 						<?php 
@@ -165,7 +165,7 @@ var module_action="addpost";
 								}
 							}
 						?>
-						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Title" id="post_tags" style="width:400px"');?>
+						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag People/Business" title="Tag People/Business" id="post_tags" style="width:400px"');?>
 					</div>
 					<div class="form_field video_section" style="display:none;">
 						<div class="left_fm_field">
