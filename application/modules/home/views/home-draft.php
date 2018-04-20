@@ -48,7 +48,7 @@ var custom_redirect_url="home/draftpost";
 						<span></span>
 						<?php echo substr_close_tags($record['post_description']); ?>
 						<div class="post_by">
-							<p><span class="post_title">Posted by</span> <?php if($record['post_by'] == 'admin') { echo "Admin"; } else { echo $record['customer_first_name']; } ?></p>
+							<p><span class="post_title"></span> <?php if($record['post_by'] == 'admin') { echo "Admin"; } else { echo $record['customer_first_name']; } ?></p>
 							<input type="hidden" class="post_info_title" value="<?php echo $record['post_title']; ?>" />
 							<input type="hidden" class="post_info_description" value="<?php echo $record['post_description']; ?>" />
 							<input type="hidden" class="post_info_image" value="<?php if($record['post_photo'] !=''){ echo $photo; }; ?>" />

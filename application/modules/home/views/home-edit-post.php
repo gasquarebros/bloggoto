@@ -93,7 +93,12 @@ var module_action="updatepost";
 						<?php if($result['post_video']){ ?>
 						<label></label>
 						<div class="input_field show_image_box">
-							<img class="img-responsive common_delete_image" style="width: 100px; height:100px;"  src="<?php echo media_url(). $this->lang->line('post_video_folder_name')."/".$result['post_video'];?>">
+							<video poster="PreviewImage.jpeg"  controls="controls">
+								<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$result['post_video']; ?>" type="video/webm" />
+								<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$result['post_video']; ?>" type="video/mp4" />
+								<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$result['post_video']; ?>" type="video/ogg" />
+								your  browser does not support the video tag.
+							</video>
 						</div><?php } ?>
 						<div class="clear"></div>
 					</div>										

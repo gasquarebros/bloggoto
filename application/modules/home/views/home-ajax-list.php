@@ -1,9 +1,9 @@
 <?php if(!empty($records)) { ?>
 <?php $i=0; foreach($records as $record) {  ?>
 <?php 
-/*if($i%2 == 0){ ?>
-<div class="list_row">
-<?php } */ ?>
+if($i%2 == 0){ ?>
+<div class="list_row_section">
+<?php }  ?>
 <div class="list_row">
 	<div class="list_col">
 		<div class="list_col_inner">
@@ -60,11 +60,10 @@
 		</div>
 	</div>
 <?php $i++; 
-/*
-if($i %2 == 0 || count($records) < $i){ 
+if($i%2 == 0 || count($records) < $i){ 
 ?>	
 </div>
-<?php }*/ ?>
+<?php } ?>
 </div>
 <?php } } else if($offset == 0) { ?>
 	<div class="list_row">

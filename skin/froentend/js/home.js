@@ -27,6 +27,7 @@ function get_content()
 				{
 					$('.load_more').show();
 				}
+				equalheight();
 			}
 			
 			if (data.status == "error") {

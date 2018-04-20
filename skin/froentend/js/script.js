@@ -22,31 +22,54 @@ $(document).on('click', '.toggle_feed',function(){
 });
 /* Custom Browse */    
     $(window).load(function(e) {
-    var fileinput=$('input[type=file]');
-    fileinput.each(function() {
-    $(this).wrap('<div class="custom_file"></div>');
-    $(this).parent('.custom_file').append('<span class="result"><span class="brows"></span></span>');
-    var inputval=$(this).val();
-    var placeholder=$(this).attr('placeholder');
-    if(inputval)
-    {
-		$(this).next('.result').html('<span class="brows">Browse </span>'+inputval);
-    }
-    else if(placeholder)
+		var fileinput=$('input[type=file]');
+		fileinput.each(function() {
+		$(this).wrap('<div class="custom_file"></div>');
+		$(this).parent('.custom_file').append('<span class="result"><span class="brows"></span></span>');
+		var inputval=$(this).val();
+		var placeholder=$(this).attr('placeholder');
+		if(inputval)
+		{
+			$(this).next('.result').html('<span class="brows">Browse </span>'+inputval);
+		}
+		else if(placeholder)
+		{
+			$(this).next('.result').html('<span class="brows">Browse '+placeholder+' </span>');
+		}
+		else
+		{
+		$(this).next('.result').html('<span class="brows">Browse </span>');
+		}
+		});
+		fileinput.change(function(e) {
+		$(this).next('.result').html('<span class="brows">Browse </span>'+$(this).val());
+		});
+	
+		equalheight();
+	
+    });
+	
+	$(window).resize(function(){
+		equalheight();
+	});
+
+function equalheight()
+{
+	if($('.list_row_section').length)
 	{
-		$(this).next('.result').html('<span class="brows">Browse '+placeholder+' </span>');
+		$('.list_row_section').each(function(){
+			var rowheight = 0;
+			
+			$(this).children('.list_row').each(function() {
+				if($(this).outerHeight() >= rowheight)
+				{
+					rowheight = $(this).outerHeight();
+				}
+			});
+			$(this).children('.list_row').outerHeight(rowheight);
+		});
 	}
-	else
-    {
-    $(this).next('.result').html('<span class="brows">Browse </span>');
-    }
-    });
-    fileinput.change(function(e) {
-    $(this).next('.result').html('<span class="brows">Browse </span>'+$(this).val());
-    });
-    });
-
-
+}
 /* Common show lodong content image */
 function show_content_loading() {
 	$(".cntloading_wrapper").addClass('active');

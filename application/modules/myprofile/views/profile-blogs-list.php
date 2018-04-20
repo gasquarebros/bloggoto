@@ -9,7 +9,7 @@
 			<div class="write_text">
 				<form>
                     <div class="form_field">
-                        <input type="text" id="blog_post_title" placeholder="Click here to write a blog , story, book or Upload Picture, Videos or To Ask a Question">
+                        <input type="text" id="blog_post_title" placeholder="Click here and enter title to write a blog , story, book or Upload Picture, Videos or To Ask a Question">
                     </div>
                     <div class="action_field">
                         <a class="popup-modal" <?php if(get_user_id() == '') { ?>href="<?php echo base_url(); ?>" <?php } else { ?>href="#test-modal" <?php } ?> value="">LET'S GO</a>
@@ -59,7 +59,7 @@
 								<?php if($url !='') { ?></a><?php } ?>
 							</div>
 							<div class="feed_name">
-								<h4><span class="post_title">Posted by</span> <?php 
+								<h4><span class="post_title"></span> <?php 
 								if($record['post_by'] == 'admin'){								
 									echo "Admin"; 
 								} 
@@ -134,7 +134,7 @@
 							<?php $likes_user_ids = array_values(array_filter(array_unique(explode(',',$record['lkesuser'])))); ?>
 							<ul>
 								<li><a class="thumbsup <?php if(get_user_id() !='' && in_array(get_user_id(),$likes_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php echo base_url().'myprofile/post_likes/'.$record['post_slug']; ?>"><i class=" fa fa-thumbs-o-up" aria-hidden="true"></i> <span class="likes_display"><?php echo thousandsCurrencyFormat($record['postcount']); ?></span></a></li>
-								<li><a data-id ="<?php echo encode_value($record['post_id']); ?>" class="comments" href="<?php if(get_user_id() !=''){ echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); } ?>"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="comments_display"><?php echo $record['commentcount']; ?></span></a></li>
+								<li><a data-id ="<?php echo encode_value($record['post_id']); ?>" class="comments" href="<?php /*if(get_user_id() !=''){ echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); }*/ echo base_url().'myprofile/comments/'.$record['post_slug']; ?>"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="comments_display"><?php echo $record['commentcount']; ?></span></a></li>
 								<li><a href="javascript:void(0)" class="share_social"><i class="fa fa-share" aria-hidden="true"></i> Share</a>
 									<div class="social_sharing_sections" style="display:none">
 										<a href="http://www.facebook.com/sharer.php?u=<?php echo base_url().'home/view/'.$record['post_slug']; ?>&title=<?php echo urlencode($record['post_title']); ?>" target="_blank" title="Click to share">Share on Facebook</a>
