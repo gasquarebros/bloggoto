@@ -59,7 +59,9 @@
 							<?php } ?>
 						<div class="toggle_contents">
 						<div class="feed_image">
-							<?php if($record['post_photo'] !=''){ $photo=media_url().$this->lang->line('post_photo_folder_name').$record['post_photo']; } else { /*$photo=media_url().$this->lang->line('post_photo_folder_name')."default.png"; */ $photo=''; } ?>
+							<?php 
+							$photo = '';
+							if($record['post_photo'] !=''){ $photo=media_url().$this->lang->line('post_photo_folder_name').$record['post_photo']; } else { /*$photo=media_url().$this->lang->line('post_photo_folder_name')."default.png"; */ $photo=''; } ?>
 							
 								<?php if($photo !='') { ?>
 								<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
@@ -92,7 +94,7 @@
 							<?php 
 							
 							if($record['post_type'] == 'video' && $record['post_video'] !='') { ?>
-								<video poster="PreviewImage.jpeg"  controls="controls">
+								<video poster="PreviewImage.jpeg"  width="250"  controls="controls">
 									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/webm" />
 									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/mp4" />
 									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/ogg" />
@@ -111,6 +113,9 @@
 								</li>
 								<li><a href="javascript:void(0)" class="share_social"><i class="fa fa-share" aria-hidden="true"></i> Share</a>
 									<div class="social_sharing_sections" style="display:none">
+										
+
+										
 										<a href="http://www.facebook.com/sharer.php?u=<?php echo base_url().'home/view/'.$record['post_slug']; ?>&title=<?php echo urlencode($record['post_title']); ?>" target="_blank" title="Click to share">Share on Facebook</a>
 										<a href="http://twitter.com/share?text=<?php echo urlencode($record['post_title']); ?>&url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" title="Click to post to Twitter">Tweet this</a>
 										<a href="https://plus.google.com/share?url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" title="Click to share">Share on Google+</a>

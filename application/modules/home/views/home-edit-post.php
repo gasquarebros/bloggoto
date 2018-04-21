@@ -63,7 +63,7 @@ var module_action="updatepost";
 								}
 							}
 						?>
-						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Title" id="post_tags" style="width:400px" multiple="multiple"');?>
+						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Title" id="post_tags" style="width:100%" multiple="multiple"');?>
 					</div>
 					<div class="form_field video_section" style="display:none;">
 						<div class="left_fm_field">

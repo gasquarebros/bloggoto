@@ -39,7 +39,7 @@
     .list_img { text-align: center; }
     .list_img img { margin: 0 auto; }
     .header_form { width: 255px; }
-    .icons_wrap { width: 115px; }
+    .icons_wrap { width: 150px; }
     .main_menu { display: none; }
     .nav_triger{ display: block; }
     .profile_active_details { width: 65%; }
@@ -156,8 +156,10 @@
 @media screen and (max-width: 480px) {
 	.list_row {
 		margin: 0;
-		width: 450px;
+		width: 100%;
+		margin-bottom: 10px;
 	}
+	.sort_by form .form_field { width: 100%; margin-bottom:20px; }
     .signup_wrap { margin: 0; padding-top: 12px; text-align: right; width: 70%; }
     .signup_wrap ul li a { padding: 0 0 0 5px; }
     .facebook, .google_plus { float: none; width: 100%; margin: 0 0 8px; }
@@ -169,14 +171,19 @@
 @media screen and (max-width: 320px) {
 	.list_row {
 		margin: 0;
-		width: 280px;
+		width: 100%;
+		margin-bottom: 10px;
 	}	
+	.sort_by form .form_field { width: 100%; margin-bottom:20px; }
+	.sort_by form .form_field { width: 100%; }
 }
 @media screen and (max-width: 360px) {
 	.list_row {
 		margin: 0;
-		width: 280px;
+		width: 100%;
+		margin-bottom: 10px;
 	}	
+	.sort_by form .form_field { width: 100%; margin-bottom:20px; }
 	.show_post_options { margin-top:0px; }
 }
 

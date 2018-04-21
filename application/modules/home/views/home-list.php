@@ -4,6 +4,7 @@ var module_action="addpost";
 <section>
     <div class="container">
         <h2 class="main_heading">Magazines</h2>
+
         <div class="section_menu">
             <ul class="category_menu blog_category">
                 <li><a data-type="blog" href="javascript:void(0)" class="active">Blogs</a></li>
@@ -42,12 +43,12 @@ var module_action="addpost";
             <?php echo form_open('',' id="common_search" class="form-inline"');?>
                 <div class="form_field">
 					<?php 
-					echo form_dropdown('search_field',$post_category,'','style="width:200px" id="search_category"'); ?>
+					echo form_dropdown('search_field',$post_category,'','style="width:100%" id="search_category"'); ?>
                 </div>
                 <div class="form_field">
                 <?php 
 				$sort_method = array(''=>'All','top_blog'=>'Top Blog','followers'=>'Followers Only');
-					echo form_dropdown('order_field',$sort_method,'','style="width:200px" id="order_field"'); ?>
+					echo form_dropdown('order_field',$sort_method,'','style="width:100%" id="order_field"'); ?>
                 </div>
 				<input type="hidden" name="page_id" id="page_id" value="" />	
 				<input type="hidden" name="offset" id="load_offset" value="" />	
@@ -128,7 +129,7 @@ var module_action="addpost";
 								}
 							}
 						?>
-						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag People/Business" title="Tag People/Business" id="post_tags" style="width:400px" multiple="multiple"');?>
+						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag People/Business" title="Tag People/Business" id="post_tags" style="width:100%" multiple="multiple"');?>
 					</div>
 					<div class="form_field video_section" style="display:none;">
 						<div class="left_fm_field">

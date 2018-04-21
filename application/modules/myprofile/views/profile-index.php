@@ -165,7 +165,7 @@ var module_action="addpost";
 								}
 							}
 						?>
-						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag People/Business" title="Tag People/Business" id="post_tags" style="width:400px"');?>
+						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag People/Business" title="Tag People/Business" id="post_tags" style="width:100%"');?>
 					</div>
 					<div class="form_field video_section" style="display:none;">
 						<div class="left_fm_field">

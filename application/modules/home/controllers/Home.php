@@ -456,6 +456,12 @@ class Home extends CI_Controller {
 			$select_array = array ('pos_posts.*');
 			$records = $this->Mydb->get_all_records ( $select_array, $this->table, $where, '', '', $order_by, $like, $groupby, $join );
 			$data ['records'] = $records;
+			if(!empty($records))
+			{
+				$data['meta_title'] = $records[0]['post_title'];
+				$data['meta_description'] = $records[0]['post_description'];
+				$data['meta_keyword'] = $records[0]['post_title'];
+			}
 			$this->layout->display_site ( $this->folder . $this->module . "-view", $data );
 		}
 		else

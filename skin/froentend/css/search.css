@@ -1,6 +1,6 @@
 /* highlight results */
 .ui-autocomplete span.highlight_search_text {
-    background-color: #ffff66;
+    font-weight:bold;
 }
 .ui-autocomplete-loading {
     background: white url('../../../lib/autocomplete/ui-anim_basic_16x16.gif') right center no-repeat;
@@ -13,4 +13,10 @@
 }
 .ui-autocomplete li {
     font-size: 16px;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+	border: #045575;
+	background-color: #045575;
+	color: #ffffff;
 }
