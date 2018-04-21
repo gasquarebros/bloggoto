@@ -44,6 +44,7 @@ $(document).ready(function(){
 				dataType : "json",
 				async:false,
 				success : function(data) {
+					
 					hide_content_loading();
 					if (data.status == "success") {
 						/* reload page if delete the pagination record is empty... */

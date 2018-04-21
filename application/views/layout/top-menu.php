@@ -60,7 +60,7 @@
 			</ul>
 			<?php if(get_user_id() != '') { ?>
 			<ul class="main_menu">
-				<li><a href="javascript:void(0)" class="active">My Account</a>
+				<li><a href="javascript:void(0)" class="<?php if($this->uri->segment(1)== 'myprofile' || $this->uri->segment(2) == 'draftpost') { echo "active"; } ?>">My Account</a>
 					<ul class="submenu">
 						<li><a href="<?php echo base_url().'myprofile'; ?>">My Profile</a></li>
 						<li><a href="<?php echo base_url().'home/draftpost'; ?>">Draft Post</a></li>

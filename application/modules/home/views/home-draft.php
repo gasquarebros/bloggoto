@@ -144,7 +144,7 @@ var custom_redirect_url="home/draftpost";
 									<img src="" id="image_post" style="display:none; width:100px; height:100px;" name="image_post" >
 									<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
 								</div>
-								<div class="rgt_fm_field">
+								<div class="rgt_fm_field btn_submit_div">
 									<input type="hidden" name="status" id="status" value="" />
 									<input type="hidden" name="record_id" id="record_id" value="" />
 									<input type="button" value="Sava as draft" class="grey_btn draft_post">

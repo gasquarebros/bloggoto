@@ -1310,12 +1310,37 @@ if(!function_exists('datepostformat'))
 		$date1 = new DateTime($date);
 		$date2 = $date1->diff(new DateTime());
 		$result_display = "";
-		$result_display.= ($date2->y)?$date2->y.' years ':'';
-		$result_display.= ($date2->m)?$date2->m.' months ':'';
-		$result_display.= ($date2->d)?$date2->d.' days ':'';
-		$result_display.= ($date2->h)?$date2->h.' hours ':'';
-		$result_display.= ($date2->i)?$date2->i.' minutes ':'';
-		$result_display.= ($date2->s)?$date2->s.' seconds ':'';
-		return "Posted about ".$result_display." ago";
+		
+		if($date2->y > 1)
+		{
+			$result_display.= ($date2->y)?$date2->y.' years':'';
+		}
+		else if($date2->m > 1)
+		{
+			$result_display.= ($date2->m)?$date2->m.' months':'';
+		}
+		else if($date2->d > 1)
+		{
+			$result_display.= ($date2->d)?$date2->d.' days':'';
+		}
+		else if($date2->h > 1)
+		{
+			$result_display.= ($date2->h)?$date2->h.' hours':'';
+		}
+		else if($date2->i > 1)
+		{
+			if($date2->i >= 1 && $date2->i <= 5)
+			{
+				$result_display.= 'few minutes';
+			}
+			else {
+				$result_display.= ($date2->i)?$date2->i.' minutes':'';
+			}
+		}
+		else {
+			/*$result_display.= ($date2->s)?$date2->s.' seconds':'';*/
+			return $result_display.= 'just now';
+		}
+		return $result_display." ago";
 	}
 }

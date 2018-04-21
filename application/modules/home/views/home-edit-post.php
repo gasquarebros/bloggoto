@@ -70,17 +70,7 @@ var module_action="updatepost";
 							<input type="file" name="post_video" placeholder="Video"  id="post_video" class=""  />
 						</div>
 					</div>
-					<div class="form_field">
-						<div class="left_fm_field">
-							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
-						</div>
-						<div class="rgt_fm_field">
-							<input type="hidden" name="status" id="status" value="" />
-							<input type="hidden" value="Sava as draft" class="grey_btn draft_post">
-							<input type="submit" value="Publish">
-						</div>
-						<div class="clear"></div>
-					</div>
+					
 					<div class="form_field">
 						<?php if($result['post_photo']){ ?>
 						<label></label>
@@ -101,7 +91,18 @@ var module_action="updatepost";
 							</video>
 						</div><?php } ?>
 						<div class="clear"></div>
-					</div>										
+					</div>	
+					<div class="form_field ">
+						<div class="left_fm_field">
+							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
+						</div>
+						<div class="rgt_fm_field btn_submit_div">
+							<input type="hidden" name="status" id="status" value="" />
+							<input type="hidden" value="Sava as draft" class="grey_btn draft_post">
+							<input type="submit" value="Publish">
+						</div>
+						<div class="clear"></div>
+					</div>					
 				
 			</div>
 		<?php

@@ -39,4 +39,5 @@
 			<p>Copyright <?php echo date('Y');?>, All Rights Reserved</p>
 		</div>
 	</div>
-</footer> 
+</footer>
+<div class="scrolltop" id="back-to-top"></div> 

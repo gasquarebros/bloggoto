@@ -14,6 +14,18 @@ $('.more_items').click(function(){
 	$('.section_menu').toggleClass('more_menu');
 });
 
+$(window).scroll(function(){
+	if($(this).scrollTop() !=0){
+		$('#back-to-top').fadeIn();
+	}
+	else{
+		$('#back-to-top').fadeOut();
+	}
+});
+$('#back-to-top').click(function(){
+	$('body,html').animate({scrollTop:0}, 800);
+});
+
 /* Toggle the news feed */
 $(document).on('click', '.toggle_feed',function(){
     $(this).toggleClass('active');

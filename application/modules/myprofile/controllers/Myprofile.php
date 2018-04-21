@@ -95,6 +95,7 @@ class Myprofile extends CI_Controller {
 		
 		
 		$follow_records = get_followers_list();
+		$following_records = get_following_list();
 		/*
 		$follow_records = $this->Mydb->get_all_records('*',$this->customer_followers,array('follow_customer_id'=>$userid));
 		$follow_count = count($follow_records);
@@ -108,6 +109,7 @@ class Myprofile extends CI_Controller {
 		} 
 		
 		$follow_count = count($follow_list);
+		$following_count = count($following_records);
 		
 		if ($this->input->post ( 'action' ) == "edit") {
 
@@ -212,6 +214,7 @@ class Myprofile extends CI_Controller {
 		$data['post_infos'] = $post_infos;
 		$data['follow_count'] = $follow_count;
 		$data['follow_list'] = $follow_list;
+		$data['following_count'] = $following_count;
 		$where = array('customer_id !='=>get_user_id(),'customer_status'=>'A','customer_private'=>0);
 		if($info['customer_prof_profession'] !='')
 		{
@@ -642,7 +645,7 @@ class Myprofile extends CI_Controller {
 				$counting = $this->Mydb->get_num_rows('*',$this->post_likes,array('post_like_post_id'=>$postid));
 				
 				$update_array = array(
-					'post_likes' => $counting
+					'post_likes' => thousandsCurrencyFormat($counting)
 				);
 				$this->Mydb->update ( $this->table, array ($this->primary_key => $postid ), $update_array );
 			}
@@ -681,7 +684,7 @@ class Myprofile extends CI_Controller {
 					$counting = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$customer_id));
 					$result ['status'] = 'success';
 					$result ['msg'] = 'Unfollow';
-					$result ['html'] = $counting;
+					$result ['html'] = thousandsCurrencyFormat($counting);
 				}
 				else
 				{
@@ -691,7 +694,7 @@ class Myprofile extends CI_Controller {
 					$counting = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$customer_id));
 					$result ['status'] = 'success';
 					$result ['msg'] = 'Follow';
-					$result ['html'] = $counting;
+					$result ['html'] = thousandsCurrencyFormat($counting);
 				}
 			}
 		}
@@ -804,7 +807,7 @@ class Myprofile extends CI_Controller {
 					$counting = $this->Mydb->get_num_rows('*',$this->post_comments,array('post_comment_post_id'=>$postid));
 					$result ['status'] = 'success';
 					$result ['message'] = 'Success';
-					$result ['html'] = $counting;
+					$result ['html'] = thousandsCurrencyFormat($counting);
 				}
 				else {
 					$result ['status'] = 'error';

@@ -30,12 +30,15 @@ var module_action="addpost";
                 <div class="followers">
                     <ul>
                         <li>
-                            <span class="follow_count"><?php echo $follow_count; ?></span><span>Followers</span>
+                            <span class="follow_count"><?php echo thousandsCurrencyFormat($follow_count); ?></span><span>Followers</span>
+                        </li>
+						<li>
+                            <span class="following_count"><?php echo thousandsCurrencyFormat($following_count); ?></span><span>Following</span>
                         </li>
 						<?php if(!empty($post_infos)) { 
 							foreach($post_infos as $postinfo){ ?> 
 								<li>
-									<?php echo $postinfo['postcount']; ?><span><?php echo ucfirst((get_label($postinfo['post_type']))?get_label($postinfo['post_type']):$postinfo['post_type']); ?></span>
+									<?php echo thousandsCurrencyFormat($postinfo['postcount']); ?><span><?php echo ucfirst((get_label($postinfo['post_type']))?get_label($postinfo['post_type']):$postinfo['post_type']); ?></span>
 								</li>
 						<?php }
 						} ?> 
@@ -176,7 +179,7 @@ var module_action="addpost";
 						<div class="left_fm_field">
 							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
 						</div>
-						<div class="rgt_fm_field">
+						<div class="rgt_fm_field btn_submit_div">
 							<input type="hidden" name="status" id="status" value="" />
 							<input type="button" value="Sava as draft" class="grey_btn draft_post">
 							<input type="submit" value="Publish">

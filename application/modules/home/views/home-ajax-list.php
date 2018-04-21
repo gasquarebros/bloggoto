@@ -1,5 +1,5 @@
 <?php if(!empty($records)) { ?>
-<?php $i=0; foreach($records as $record) {  ?>
+<?php $i=0; foreach($records as $record) { ?>
 <?php 
 if($i%2 == 0){ ?>
 <div class="list_row_section">
@@ -8,7 +8,8 @@ if($i%2 == 0){ ?>
 	<div class="list_col">
 		<div class="list_col_inner">
 			<div class="list_img">
-				<?php if($record['post_photo'] !=''){ $photo=media_url().$this->lang->line('post_photo_folder_name').$record['post_photo']; } else { $photo=media_url().$this->lang->line('post_photo_folder_name')."default.png"; } ?>
+
+				<?php if($record['post_photo'] !='' && file_exists(FCPATH."media/".$this->lang->line('post_photo_folder_name').$record['post_photo'])){ $photo=media_url().$this->lang->line('post_photo_folder_name').$record['post_photo']; } else if($record['customer_photo'] !=''&& file_exists(FCPATH."media/".$this->lang->line('customer_image_folder_name').$record['customer_photo'])) { $photo = media_url().$this->lang->line('customer_image_folder_name')."/".$record['customer_photo'];  } else { $photo=media_url().$this->lang->line('post_photo_folder_name')."default.png"; } ?>
 				<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
 			</div>
 			<div class="list_decp">

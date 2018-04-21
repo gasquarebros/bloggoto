@@ -15,7 +15,7 @@
 					<div class="message"> <span class="arrow"> </span> 
 					
 					<a href="<?php echo base_url().'myprofile/'.encode_value($record['customer_id']); ?>" class="name"> <?php echo ($record['customer_type'] == 0)?$record['customer_first_name']." ".$record['customer_last_name']:$record['company_name']; ?> 
-					</a> <span class="datetime"> at <?php echo date('Y-m-d H:i:s',strtotime($record['post_comment_created_on'])); ?> </span> <span class="body"> <?php echo $record['post_comment_message']; ?> </span> </div>
+					</a> <span class="datetime"> at <?php echo datepostformat(date('Y-m-d H:i:s',strtotime($record['post_comment_created_on']))); ?> </span> <span class="body"> <?php echo $record['post_comment_message']; ?> </span> </div>
 					
 				</div>
 			</div>

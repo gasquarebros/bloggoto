@@ -80,6 +80,8 @@
 						</div>
 						<div class="toggle_content">
 						<div class="feed_image">
+							
+							
 							<?php if($record['post_photo'] !=''){ $photo=media_url().$this->lang->line('post_photo_folder_name').$record['post_photo']; } else { /*$photo=media_url().$this->lang->line('post_photo_folder_name')."default.png";*/ $photo =''; } ?>
 								<?php if($photo !='') { ?>
 								<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
@@ -134,14 +136,27 @@
 							<?php $likes_user_ids = array_values(array_filter(array_unique(explode(',',$record['lkesuser'])))); ?>
 							<ul>
 								<li><a class="thumbsup <?php if(get_user_id() !='' && in_array(get_user_id(),$likes_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php echo base_url().'myprofile/post_likes/'.$record['post_slug']; ?>"><i class=" fa fa-thumbs-o-up" aria-hidden="true"></i> <span class="likes_display"><?php echo thousandsCurrencyFormat($record['postcount']); ?></span></a></li>
-								<li><a data-id ="<?php echo encode_value($record['post_id']); ?>" class="comments" href="<?php /*if(get_user_id() !=''){ echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); }*/ echo base_url().'myprofile/comments/'.$record['post_slug']; ?>"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="comments_display"><?php echo $record['commentcount']; ?></span></a></li>
-								<li><a href="javascript:void(0)" class="share_social"><i class="fa fa-share" aria-hidden="true"></i> Share</a>
-									<div class="social_sharing_sections" style="display:none">
-										<a href="http://www.facebook.com/sharer.php?u=<?php echo base_url().'home/view/'.$record['post_slug']; ?>&title=<?php echo urlencode($record['post_title']); ?>" target="_blank" title="Click to share">Share on Facebook</a>
-										<a href="http://twitter.com/share?text=<?php echo urlencode($record['post_title']); ?>&url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" title="Click to post to Twitter">Tweet this</a>
-										<a href="https://plus.google.com/share?url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" title="Click to share">Share on Google+</a>
+								<li><a data-id ="<?php echo encode_value($record['post_id']); ?>" class="comments" href="<?php /*if(get_user_id() !=''){ echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); }*/ echo base_url().'myprofile/comments/'.$record['post_slug']; ?>"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="comments_display"><?php echo thousandsCurrencyFormat($record['commentcount']); ?></span></a></li>
+								<li class="shear-btn">
+									<a href="javascript:;">
+										&nbsp;Share
+									</a>
+									<div class="social-share"> 
+											<a class="" href="http://www.facebook.com/sharer.php?u=<?php echo base_url().'home/view/'.$record['post_slug']; ?>&title=<?php echo urlencode($record['post_title']); ?>" target="_blank" ><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+											<a class="" href="http://twitter.com/share?text=<?php echo urlencode($record['post_title']); ?>&url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" ><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+											<a class="" href="https://plus.google.com/share?url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" ><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
+											
 									</div>
 								</li>
+								<?php /*
+								
+								<li class="share-section"><a href="javascript:void(0)" class="share_social"><i class="fa fa-share" aria-hidden="true"></i> Share</a>
+									<div class="social_sharing_sections" style="display:none">
+										<a class="fa fa-facebook-square" href="http://www.facebook.com/sharer.php?u=<?php echo base_url().'home/view/'.$record['post_slug']; ?>&title=<?php echo urlencode($record['post_title']); ?>" target="_blank" title="Click to share"></a>
+										<a class="fa fa-twitter" href="http://twitter.com/share?text=<?php echo urlencode($record['post_title']); ?>&url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" title="Click to post to Twitter"></a>
+										<a class="fa fa-google-plus-square" href="https://plus.google.com/share?url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" title="Click to share"></a>
+									</div>
+								</li>*/ ?>
 							</ul>
 							<div class="comments_list">
 							</div>	
@@ -159,7 +174,7 @@
 							</div>
 							<div class="comment_box_wrap">
 								<input type="hidden" name="post_record" value="<?php echo encode_value($record['post_id']); ?>" />
-								<input type="text" name="comments" placeholder="Write a comment..." />
+								<input type="text" class="comment" name="comments" placeholder="Write a comment..." />
 							</div>
 							<div class="clear"></div>
 							<div class="alert_msg"></div>
