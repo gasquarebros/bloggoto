@@ -190,7 +190,7 @@ $notify_logo = skin_url('images/db-logo2.png');
 										</a>
 									</span>
 								</div>
-								<h3 class="panel-title panel-title-small">
+								<h3 class="panel-title panel-title-small"><label>Subject :</label>
 									<?=$notification[0]['subject']?>
 								</h3>
 							</div>

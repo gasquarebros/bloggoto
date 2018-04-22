@@ -541,7 +541,7 @@ class Home extends CI_Controller {
 		$where = array('customer_status'=>'A',"(customer_first_name like '%$search_text%' OR customer_last_name like '%$search_text%' OR company_name like '%$search_text%')"=>NULL);
 		$order_by = array('customer_first_name'=>'ASC');
 		
-		$records = $this->Mydb->get_all_records ( "customer_type,customer_id topic_label,concat(customer_first_name,' ',customer_last_name) topic_value,company_name,CASE customer_type WHEN 0 THEN 'Person' WHEN 1 THEN 'Business' END  'topic_type'", $this->customers, $where, $limit, $offset, $order_by, $like, $groupby, $join );
+		$records = $this->Mydb->get_all_records ( "customer_type,customer_id topic_label,CONCAT(COALESCE(customer_first_name,''),' ',COALESCE(customer_last_name,'')) topic_value,company_name,CASE customer_type WHEN 0 THEN 'Person' WHEN 1 THEN 'Business' END  'topic_type'", $this->customers, $where, $limit, $offset, $order_by, $like, $groupby, $join );
 
 		if(!empty($post_records) || !empty($records))
 		{
