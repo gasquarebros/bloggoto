@@ -30,10 +30,10 @@ var module_action="addpost";
                 <div class="followers">
                     <ul>
                         <li>
-                            <span class="follow_count"><?php echo thousandsCurrencyFormat($follow_count); ?></span><span>Followers</span>
+                            <span class="following_count"><?php echo thousandsCurrencyFormat($follow_count); ?></span><span>Followers</span>
                         </li>
 						<li>
-                            <span class="following_count"><?php echo thousandsCurrencyFormat($following_count); ?></span><span>Following</span>
+                            <span class="follow_count"><?php echo thousandsCurrencyFormat($following_count); ?></span><span>Following</span>
                         </li>
 						<?php if(!empty($post_infos)) { 
 							foreach($post_infos as $postinfo){ ?> 

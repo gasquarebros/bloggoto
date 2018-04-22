@@ -12,7 +12,7 @@ if (! function_exists ( 'loadallUser' )){
 	function loadallUser()
 	{
 		$CI=& get_instance();
-		$user = $CI->Mydb->get_all_records('*','customers',array('customer_status'=>'A'),$limit='', $offset='', $order_by='', $like='', $groupby=array(), $join='' );
+		$user = $CI->Mydb->get_all_records('*','customers','',$limit='', $offset='', $order_by='', $like='', $groupby=array(), $join='' );
 		
 		//$user = $CI->session->all_userdata();
 		return $user;
@@ -159,10 +159,11 @@ if (! function_exists ( 'post_notify' )){
 			{
 					$following_records = get_following_list();
 					$follow_list = array();
+					
 					if(!empty($following_records))
 					{
 						foreach($following_records as $following) {
-							$notify_array['assigned_to'] = $following['follow_user_id'];
+							$notify_array['assigned_to'] = $following['follow_customer_id'];
 							$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
 						}
 					}		
@@ -179,8 +180,8 @@ if (! function_exists ( 'post_notify' )){
 			}
 			else if($notify_array['notification_type'] == 'comment' || $notify_array['notification_type'] == 'reply' )
 			{
-				$post_comment_records = $CI->Mydb->get_record('post_comment_user_id','post_comments',array('post_comment_post_id'=>$notify_array['notification_post_id']));
-				$notify_array['assigned_to'] = $post_comment_records['post_comment_user_id'];
+				$post_record = $CI->Mydb->get_record('post_created_by','pos_posts',array('post_id'=>$notify_array['notification_post_id']));
+				$notify_array['assigned_to'] = $post_record['post_created_by'];
 				$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
 			}
 			else

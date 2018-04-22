@@ -57,6 +57,7 @@ $(document).on('click', '.toggle_feed',function(){
 		$(this).next('.result').html('<span class="brows">Browse </span>'+$(this).val());
 		});
 		setTimeout(equalheight(), 2000);
+		setTimeout(function(){ $('.close').trigger('click') } , 4000);
 
 	
     });
@@ -125,6 +126,7 @@ function triger_ajax_popup()
 	   fixedBgPos: true, 
 	});
 } 
+/*
 $(document).on('click', '.toggle_feed',function(){
 $.ajax({
 			type :'POST', 
@@ -136,14 +138,17 @@ $.ajax({
 				if(data.status=="success")
 				{ 
 					notify_html='<i class="fa fa-bell-o" aria-hidden="true"></i><span class="badge notification_circle">'+data.count+'</span>'
+					msg_notify_html='<i class="fa fa-envelope-o" aria-hidden="true"></i><span class="badge notification_circle">'+data.msg_count+'</span>'
 					//$(".notify").html(notify_html);"#results span:first"
-					$( ".notify" ).html(notify_html)
-					$('.notify').addClass('active');
+					$( ".icons_wrap .notify" ).html(notify_html)
+					$('.icons_wrap .notify').addClass('active');
+					$( ".icons_wrap .message" ).html(msg_notify_html)
+					$('.icons_wrap .message').addClass('active');
 				} 
 				else 
 				{
-					$('.notify').removeClass('active');
-					$(".notify-count-div").html('');
+					$('.icons_wrap .notify').removeClass('active');
+					$(".icons_wrap .notify-count-div").html('');
 				}
  
 			},
@@ -152,7 +157,7 @@ $.ajax({
   				console.log(textStatus, errorThrown);
 			}
 		})
-});
+}); */
 window.setInterval(function() {  
 		$.ajax({
 			type :'POST', 
@@ -163,13 +168,17 @@ window.setInterval(function() {
 				if(data.status=="success")
 				{ 
 					notify_html='<i class="fa fa-bell-o" aria-hidden="true"></i><span class="badge notification_circle">'+data.count+'</span>'
-					$( ".notify" ).html(notify_html)
-					$('.notify').addClass('active');
+					msg_notify_html='<i class="fa fa-envelope-o" aria-hidden="true"></i><span class="badge notification_circle">'+data.msg_count+'</span>'
+					//$(".notify").html(notify_html);"#results span:first"
+					$( ".icons_wrap .notify" ).html(notify_html)
+					$('.icons_wrap .notify').addClass('active');
+					$( ".icons_wrap .message" ).html(msg_notify_html)
+					$('.icons_wrap .message').addClass('active');
 				} 
 				else 
 				{
-					$('.notify').removeClass('active');
-					$(".notify-count-div").html('');
+					$('.icons_wrap .notify').removeClass('active');
+					$(".icons_wrap .notify-count-div").html('');
 				}
  
 			},

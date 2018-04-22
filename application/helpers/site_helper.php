@@ -157,7 +157,7 @@ if (! function_exists ( 'get_following_list' )) {
 			$order_by = array('customer_first_name'=>'ASC');
 			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_type,company_name";
 			$join [0] ['table'] = 'customers';
-			$join [0] ['condition'] = "follow_user_id = customer_id";
+			$join [0] ['condition'] = "follow_customer_id = customer_id";
 			$join [0] ['type'] = "INNER";
 			$following_records = $CI->Mydb->get_all_records('customers_followers.*','customers_followers',array('follow_user_id'=>$userid,'customer_status'=>'A'),$limit='', $offset='', $order_by, $like='', $groupby=array(), $join );
 		}
@@ -247,14 +247,41 @@ if (! function_exists ( 'post_notify_count' )){
 
 			$notification = $CI->Mydb->get_num_rows('post_notification_id','post_notification',array('assigned_to'=>$customer_id,'message_type'=>'N','open_status'=>'N','assigned_to !='=>''));	
 
-		if($notification>0)
+			if($notification>0)
+			{
 				$notification_counting=$notification;
+			}
 			else
+			{
 				$notification_counting=0;
+			}
 
 		return $notification_counting;		
 	}
 }
+//Not Open Message
+if (! function_exists ( 'message_notify_count' )){
+	function message_notify_count() {
+		$CI=& get_instance();
+		$customer_id = ($CI->session->userdata('bg_user_id'))?$CI->session->userdata('bg_user_id'):'';
+		$where=array();
+
+			$where =array("((`assigned_from`='".$customer_id."' AND `open_status`='N' AND `from_delete`='N') OR (`assigned_to`='".$customer_id."'  AND `open_status`='N' AND `to_delete`='N'))"=>NULL);
+			$msg_notification = $CI->Mydb->get_num_rows('notification_id','notification_message',$where);	
+
+			if($msg_notification>0)
+			{
+				$msg_notification_counting=$msg_notification;
+			}
+			else
+			{
+				$msg_notification_counting=0;
+			}
+
+		return $msg_notification_counting;		
+	}
+}
+
 if (! function_exists ( 'delete_post' )){
 	function delete_post($postid) {
 		$CI=& get_instance();

@@ -58,48 +58,77 @@ class Auth_oa2 extends CI_Controller
 					$email = $user['email'];
 					$first_name = ($user['first_name'])?$user['first_name']:(($user['name'])?$user['name']:$user['nickname']);
 					$last_name = $user['last_name'];
-					
 					$where = array (
 						'customer_email' => trim ( $email ),
 						'customer_status !='=>'D',	
 					);
-					
+					$check_details = array();
 					if($provider_name == 'google')
 					{
 						$social_where = array (
 							'customer_google_id' => trim ( $uid ),
 							'customer_status !='=>'D',	
 						);
-						$check_details_social = $this->Mydb->get_record ( 'customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo', $this->table, $where );
+						$check_details = $this->Mydb->get_record ( 'customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo', $this->table, $social_where );
 					}
-					
-					$check_details = $this->Mydb->get_record ( 'customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo', $this->table, $where );
+					if($provider_name == 'facebook')
+					{
+						$social_where = array (
+							'customer_fb_id' => trim ( $uid ),
+							'customer_status !='=>'D',	
+						);
+						$check_details = $this->Mydb->get_record ( 'customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo', $this->table, $social_where );
+
+					}
+					//$check_details = $this->Mydb->get_record ( 'customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo', $this->table, $where );
 					if (! empty ( $check_details )) {
-						$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'] );
-							
-						if(!empty($session_datas))
+
+						if($check_details['customer_status'] == 'A')
 						{
-							$this->session->set_userdata($session_datas);
-							/* store last login details...*/
-							$this->Mydb->insert($this->customer_login_history,array('login_time'=>current_date(),'login_ip'=>get_ip(),'login_customer_id'=>$check_details['customer_id']));
+
+							$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'] );
+								
+							if(!empty($session_datas))
+							{
+								$this->session->set_userdata($session_datas);
+								/* store last login details...*/
+								$this->Mydb->insert($this->customer_login_history,array('login_time'=>current_date(),'login_ip'=>get_ip(),'login_customer_id'=>$check_details['customer_id']));
+								
+								redirect('');
+							}
+							// User Alredy Exist;
+						}
+						else
+						{
+							$this->session->set_flashdata ( 'admin_error', get_label('account_disabled') );
 							
 							redirect('');
 						}
-						// User Alredy Exist;
 					}
-					else if(!empty($check_details_social)) {
-						// User Alredy Exist with Google Account
-						$check_details = $check_details_social;
-						$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'] );
-							
-						if(!empty($session_datas))
+					/*else if(!empty($check_details_social)) {
+						if($check_details_social['customer_status'] == 'A')
 						{
-							$this->session->set_userdata($session_datas);
-							/* store last login details...*/
-							$this->Mydb->insert($this->customer_login_history,array('login_time'=>current_date(),'login_ip'=>get_ip(),'login_customer_id'=>$check_details['customer_id']));
-							redirect('');
+
+							// User Alredy Exist with Google Account
+							$check_details = $check_details_social;
+							$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'] );
+								
+							if(!empty($session_datas))
+							{
+								$this->session->set_userdata($session_datas);
+								
+								$this->Mydb->insert($this->customer_login_history,array('login_time'=>current_date(),'login_ip'=>get_ip(),'login_customer_id'=>$check_details['customer_id']));
+								redirect('');
+							}
 						}
-					}
+						else
+						{
+							$this->session->set_flashdata ( 'admin_error',  get_label('account_disabled') );
+							
+								redirect('');
+						}
+
+					}*/
 					else
 					{
 						
@@ -132,11 +161,15 @@ class Auth_oa2 extends CI_Controller
 						{
 							$insert_array['customer_google_id'] = $user['uid'];
 						}
+						else
+						{
+							$insert_array['customer_fb_id'] = $user['uid'];
+						}						
 						
 						$insert_id = $this->Mydb->insert ( $this->table, $insert_array );
 						
 						$session_datas = array('bg_user_id' => $insert_id,'bg_first_name' => $first_name,'bg_last_name' => $last_name,'bg_user_group' => 'writer','bg_user_type'=>0,'bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$photo );
-						
+
 						$this->session->set_userdata($session_datas);
 							/* store last login details...*/
 						$this->Mydb->insert($this->customer_login_history,array('login_time'=>current_date(),'login_ip'=>get_ip(),'login_customer_id'=>$insert_id));

@@ -132,7 +132,7 @@ class Conversations extends CI_Controller {
 
 
 		$user_id = $this->user_details->bg_user_id;
-		$profile_pic = skin_url('images/placeholder.png');
+		$profile_pic = skin_url('images/man.png');
 		$name = ucwords($this->user_details->bg_first_name.' '.$this->user_details->bg_last_name);
 		
 		if(file_exists($this->user_details->bg_user_profile_picture) && !empty($this->user_details->profile_image) && @is_array(getimagesize($this->user_details->profile_image)))

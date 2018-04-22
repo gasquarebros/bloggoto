@@ -90,7 +90,7 @@
 					<div class="form_field">
 						<label>Relationship Status</label>
 						<div class="input_field">
-							<?php  echo form_dropdown('customer_maritial_status',array(''=>'Select Martial Status','single'=>'Single','married'=>'Married','divorced'=>'Divorced','widowed'=>'Widowed'),stripslashes($info['customer_maritial_status']),'class="form-control" id="customer_maritial_status"' );?>
+							<?php  echo form_dropdown('customer_maritial_status',array(''=>'Select Martial Status','single'=>'Single','married'=>'Married','divorced'=>'Divorced','Open Relationship'=>'Open Relationship','In Relationship'=>'In Relationship'),stripslashes($info['customer_maritial_status']),'class="form-control" id="customer_maritial_status"' );?>
 						</div>
 						<div class="clear"></div>
 					</div>
@@ -515,7 +515,7 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
-	<?php if($info['customer_phone']) {?>
+	<?php /*if($info['customer_phone']) {?>
 	<div class="form_field">
 		<label>Phone</label>
 		<div class="input_field">
@@ -523,12 +523,12 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<?php } ?>
-	<?php if($info['customer_birthdate']) {?>
+	<?php } */ ?>
+	<?php if($info['customer_birthdate'] !='' && $info['customer_birthdate'] !='0000-00-00' && $info['customer_birthdate'] != '1970-01-01') {?>
 	<div class="form_field">
 		<label>Birthday</label>
 		<div class="input_field">
-			<?php echo "<label class='display_info'>".date('d-m-Y',strtotime($info['customer_birthdate']))."</label>"; ?>
+			<label class='display_info'><?php echo date('d-m-Y',strtotime($info['customer_birthdate'])); ?></label>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -606,7 +606,7 @@
 	<div class="form_field">
 		<label>Relationship Status</label>
 		<div class="input_field">
-			<?php $status = array(''=>'','single'=>'Single','married'=>'Married','divorced'=>'Divorced','widowed'=>'Widowed'); echo "<label class='display_info'>".$status[$info['customer_maritial_status']]."</label>"; ?>
+			<?php $status = array(''=>'','single'=>'Single','married'=>'Married','divorced'=>'Divorced','Open Relationship'=>'Open Relationship','In Relationship'=>'In Relationship'); echo "<label class='display_info'>".$status[$info['customer_maritial_status']]."</label>"; ?>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -932,7 +932,7 @@
 	<?php } ?>
 	<h3>Contact</h3>
 	
-	<?php if($info['customer_phone']) {?>
+	<?php /*if($info['customer_phone']) {?>
 	<div class="form_field">
 		<label>Mobile</label>
 		<div class="input_field">
@@ -940,7 +940,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<?php } ?>
+	<?php } */ ?>
 	<?php if($info['customer_prof_official_phone']) {?>
 	<div class="form_field">
 		<label>Office</label>

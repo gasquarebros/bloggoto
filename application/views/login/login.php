@@ -15,7 +15,7 @@
 				
 				<div class="login-form" id="login_frm" >
 					<h3>Login</h3>
-					<div class="signup_with">
+					<div class="signup_with" style="display: none">
 						<a href="<?php echo base_url(); ?>auth_oa2/session/facebook" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i>Connect with Facebook</a>
 						<a href="<?php echo base_url(); ?>auth_oa2/session/google" class="google_plus"><i class="fa fa-google-plus" aria-hidden="true"></i>Connect with Google+</a>
 						<div class="clear"></div>

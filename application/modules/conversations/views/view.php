@@ -163,7 +163,7 @@ $notify_logo = skin_url('images/db-logo2.png');
 			</div>
 			<div class="col-md-9">
 				<div id="page-title" class="fully_covered">
-					<h1 class="page-header text-overflow"><?=$notification[0]['subject']?></h1>
+					<h1 class="page-header text-overflow"></h1>
 				</div>
 				<div class="inbx_right performance_height conversation_view">
 					<div id="page-content">
@@ -172,7 +172,6 @@ $notify_logo = skin_url('images/db-logo2.png');
 								<div class="panel-control">
 									<span class="margin-top-5 margin-left-10">
 									<?php
-									/*echo "<pre>"; print_r($notification); exit;*/
 									if($notification[0]['to_delete']=='Y') {
 										?>
 										<span><a class="trash" data-method="post" href="javascript:"  data-confirm="<?=get_label('trash_conf')?>" data-ids="<?=$notification[0]['notification_id']?>" data-types="3"><span class="margin-left-10 small" ><?=get_label('c_restore_message')?></span></a></span>
@@ -204,6 +203,7 @@ $notify_logo = skin_url('images/db-logo2.png');
 									} else {
 										$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['customer_first_name']:'Anonymous';
 									}
+
 									if($allusers[$notification[0]['assigned_from']]['customer_type'] == 1) {
 										$from_name = (!empty($allusers[$notification[0]['assigned_from']]) && $notification[0]['assigned_from']!='')?$allusers[$notification[0]['assigned_from']]['company_name']:'';
 									} else {

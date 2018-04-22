@@ -108,8 +108,8 @@ class Myprofile extends CI_Controller {
 			}
 		} 
 		
-		$follow_count = count($follow_list);
-		$following_count = count($following_records);
+		$following_count = count($follow_list);
+		$follow_count = count($following_records);
 		
 		if ($this->input->post ( 'action' ) == "edit") {
 
@@ -119,7 +119,7 @@ class Myprofile extends CI_Controller {
 			//$this->form_validation->set_rules ( 'customer_password', 'lang:customer_password', 'required|min_length[6]' );
 			//$this->form_validation->set_rules ( 'customer_email', 'lang:customer_email', 'required|callback_customeremail_exists' );
 			//$this->form_validation->set_rules ( 'customer_postal_code', 'lang:customer_postal_code', 'required|max_length[' . get_label ( 'postal_code_max_length' ) . ']' );
-			$this->form_validation->set_rules ( 'customer_phone', 'lang:customer_phone', 'required|max_length[' . get_label ( 'phone_max_length' ) . ']' );
+			$this->form_validation->set_rules ( 'customer_phone', 'lang:customer_phone', 'trim|max_length[' . get_label ( 'phone_max_length' ) . ']' );
 			//$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			$this->form_validation->set_rules ( 'customer_photo', 'lang:customer_photo', 'callback_validate_image' );
 			if($info['customer_type'] == 1)
@@ -142,6 +142,7 @@ class Myprofile extends CI_Controller {
 					'customer_last_name' => post_value ( 'customer_last_name' ),
 					'customer_phone'=>post_value ( 'customer_phone' ),
 					'customer_birthdate'=>(post_value('customer_birthdate') !='' && post_value('customer_birthdate') !='0000-00-00' && post_value('customer_birthdate') != '1970-01-01')?date('Y-m-d',strtotime(post_value ( 'customer_birthdate' ))):'',
+					'customer_gender'=>post_value ( 'customer_gender' ),
 					'customer_city'=>post_value ( 'customer_city' ),
 					'customer_state'=>post_value ( 'customer_state' ),
 					'customer_country'=>post_value ( 'customer_country' ),
@@ -853,15 +854,18 @@ class Myprofile extends CI_Controller {
 		check_site_ajax_request();
 
 			$counting = post_notify_count();
+			$msg_counting = message_notify_count();
 			if($counting >0)
 			{
-				$result ['status'] = 'success';
-				$result ['count'] = $counting;
+						$result ['status'] = 'success';
+						$result ['count'] = ($counting >0) ? $counting : '';
+						$result ['msg_count'] = ($msg_counting >0) ? $msg_counting : '';
 			}
 			else
 			{
-				$result ['status'] = 'error';
-				$result ['count'] = '';
+						$result ['status'] = 'error';
+						$result ['count'] =  '';
+						$result ['msg_count'] =  '';	
 			}
 		
 		echo json_encode ( $result );
