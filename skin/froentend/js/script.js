@@ -126,38 +126,6 @@ function triger_ajax_popup()
 	   fixedBgPos: true, 
 	});
 } 
-/*
-$(document).on('click', '.toggle_feed',function(){
-$.ajax({
-			type :'POST', 
-			url  : SITE_URL+'myprofile/pull_post_log',
-			data : {secure_key:secure_key},	
-			dataType:"json",
-			success:function(data){ 
-				console.log(data.status);
-				if(data.status=="success")
-				{ 
-					notify_html='<i class="fa fa-bell-o" aria-hidden="true"></i><span class="badge notification_circle">'+data.count+'</span>'
-					msg_notify_html='<i class="fa fa-envelope-o" aria-hidden="true"></i><span class="badge notification_circle">'+data.msg_count+'</span>'
-					//$(".notify").html(notify_html);"#results span:first"
-					$( ".icons_wrap .notify" ).html(notify_html)
-					$('.icons_wrap .notify').addClass('active');
-					$( ".icons_wrap .message" ).html(msg_notify_html)
-					$('.icons_wrap .message').addClass('active');
-				} 
-				else 
-				{
-					$('.icons_wrap .notify').removeClass('active');
-					$(".icons_wrap .notify-count-div").html('');
-				}
- 
-			},
-			error: function(jqXHR, textStatus, errorThrown) 
-			{
-  				console.log(textStatus, errorThrown);
-			}
-		})
-}); */
 window.setInterval(function() {  
 		$.ajax({
 			type :'POST', 
