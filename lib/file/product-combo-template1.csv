@@ -1,0 +1,4 @@
+Product Name, Brand,Category,Sub Category,SKU,Cost,Price,Short Description,Description,Availability,Tags,Thumbnail Image,Gallery Images,Meta Title,Meta Keywords,Meta Description,Product alias,Product Outlet,Combo name,Combo product(product separate using Tilde(~)symbol),Combo default product,Combo group
+combo product checking,Prada,combo cat,combo cat,Prada-Infon-D'iris-Edp,100.75,154,Prada infus d'iris edp,Prada infus d'iris edp,"Delivery,Pickup","Romantic,Woody",,,,,,product alias checking,79,cheking,Prada~Prada veg pastha,Prada,"checking,new"
+combo product checking,,,,,,,,,,,,,,,,product alias checking1,79,cheking1,Prada~Prada veg pastha,Prada veg pastha,new
+combo product new,Prada,combo cat,combo cat,Prada-Infon-D'iris-Edp,102.75,154,Prada infus d'iris edp,Prada infus d'iris edp,"Delivery,Pickup","Romantic,Woody",,,,,,,79,cheking,Prada veg pastha,Prada veg pastha,"checking,new"

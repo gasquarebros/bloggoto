@@ -1,0 +1,2 @@
+[17-Aug-2017 05:48:46 UTC] PHP Warning:  include(/newhome/ninjaos/public_html/team1/ninja/lib/ckfinder/set_login_appid.php): failed to open stream: No such file or directory in /newhome/ninjaos/public_html/lib/ckfinder/config.php on line 2
+[17-Aug-2017 05:48:46 UTC] PHP Warning:  include(): Failed opening '/newhome/ninjaos/public_html/team1/ninja/lib/ckfinder/set_login_appid.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /newhome/ninjaos/public_html/lib/ckfinder/config.php on line 2
