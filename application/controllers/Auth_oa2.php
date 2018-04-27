@@ -69,7 +69,7 @@ class Auth_oa2 extends CI_Controller
 							'customer_google_id' => trim ( $uid ),
 							'customer_status !='=>'D',	
 						);
-						$check_details = $this->Mydb->get_record ( 'customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo', $this->table, $social_where );
+						$check_details = $this->Mydb->get_record ( 'customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_password,customer_status,customer_type,customer_photo', $this->table, $social_where );
 					}
 					if($provider_name == 'facebook')
 					{
@@ -77,7 +77,7 @@ class Auth_oa2 extends CI_Controller
 							'customer_fb_id' => trim ( $uid ),
 							'customer_status !='=>'D',	
 						);
-						$check_details = $this->Mydb->get_record ( 'customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo', $this->table, $social_where );
+						$check_details = $this->Mydb->get_record ( 'customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_password,customer_status,customer_type,customer_photo', $this->table, $social_where );
 
 					}
 					//$check_details = $this->Mydb->get_record ( 'customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo', $this->table, $where );
@@ -86,7 +86,7 @@ class Auth_oa2 extends CI_Controller
 						if($check_details['customer_status'] == 'A')
 						{
 
-							$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'] );
+							$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'customer_username' => $check_details['customer_username'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'] );
 								
 							if(!empty($session_datas))
 							{
@@ -168,7 +168,7 @@ class Auth_oa2 extends CI_Controller
 						
 						$insert_id = $this->Mydb->insert ( $this->table, $insert_array );
 						
-						$session_datas = array('bg_user_id' => $insert_id,'bg_first_name' => $first_name,'bg_last_name' => $last_name,'bg_user_group' => 'writer','bg_user_type'=>0,'bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$photo );
+						$session_datas = array('bg_user_id' => $insert_id,'customer_username' => '','bg_first_name' => $first_name,'bg_last_name' => $last_name,'bg_user_group' => 'writer','bg_user_type'=>0,'bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$photo );
 
 						$this->session->set_userdata($session_datas);
 							/* store last login details...*/

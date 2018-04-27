@@ -73,11 +73,13 @@ class Myprofile extends CI_Controller {
 
 		if($userid == null)
 		{
-			$userid = get_user_id();
+			//$userid = get_user_id();
+			$userid = get_user_username();
 		}
 		else
 		{
-			$userid = decode_value($userid);
+			//$userid = decode_value($userid);
+			$userid = urldecode($userid);
 		}
 		
 		if($userid == null)
@@ -86,12 +88,13 @@ class Myprofile extends CI_Controller {
 		}
 		//echo "inn"; exit;
 		$data = $this->load_module_info ();	
-		$info = $this->Mydb->get_record('customer_type,customer_photo',$this->customers,array('customer_id'=>$userid));
+		//$info = $this->Mydb->get_record('customer_type,customer_photo',$this->customers,array('customer_id'=>$userid));
+		$info = $this->Mydb->get_record('customer_type,customer_photo',$this->customers,array('customer_username'=>$userid));
 
 		if(empty($info)) {
 			redirect(base_url());
 		}
-		$post_infos = $this->Mydb->get_all_records('COUNT(post_id) as postcount, post_type',$this->table,array('post_created_by'=>$userid,'post_status'=>'A'),$limit = '', $offset = '', $order = '', $like = '', $groupby = array('post_type'));
+		$post_infos = $this->Mydb->get_all_records('COUNT(post_id) as postcount, post_type',$this->table,array('post_created_by'=>$info['customer_id'],'post_status'=>'A'),$limit = '', $offset = '', $order = '', $like = '', $groupby = array('post_type'));
 		
 		
 		$follow_records = get_followers_list();
