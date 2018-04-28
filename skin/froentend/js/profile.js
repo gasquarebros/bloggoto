@@ -72,6 +72,7 @@ $(document).ready(function(){
 	$(document).on('click', '.thumbsup', function(e) {		
 		var dataid = $(this).data('id'); 
 		var url = $(this).attr('href');
+		var current = $(this);
 		show_content_loading(); 
 		$.ajax({
 			url : url,
@@ -87,6 +88,14 @@ $(document).ready(function(){
 					{
 						window.location.href= admin_url;
 						return false;
+					}
+					if(current.hasClass('active'))
+					{
+						current.removeClass('active');
+					}
+					else
+					{
+						current.addClass('active');
 					}
 					$(".likes_display").html(data.html);
 				}
@@ -286,6 +295,7 @@ $(document).ready(function(){
 		current.parent().parent().parent().find('.comment_page').remove();
 		show_content_loading(); 
 		$(this).parent().remove();
+		$('.recent').removeClass('recent');
 		$.ajax({
 			url : url,
 			data : "secure_key="+secure_key+"&action=comments&dataid="+dataid+"&offset="+page,
@@ -301,7 +311,8 @@ $(document).ready(function(){
 						window.location.href= admin_url;
 						return false;
 					}
-					console.log(current);
+					
+
 					if(page > 0)
 					{
 						current.parent('li').parent('ul').next(".comments_list").append(data.html);
@@ -309,6 +320,11 @@ $(document).ready(function(){
 					else{
 						current.parent('li').parent('ul').next(".comments_list").html(data.html);
 					}
+					$(".recent").each(function() {
+						console.log($(this).html());
+						var myObj = JSON.parse($(this).html());
+						$(this).html(myObj);
+					});
 				}
 			}
 		});
