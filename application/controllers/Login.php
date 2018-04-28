@@ -49,7 +49,7 @@ class Login extends CI_Controller {
 				$password = $this->mysqli->real_escape_string ( trim ( $this->input->post ( 'password' ) ) );
 				$username = $this->mysqli->real_escape_string ( trim ( $this->input->post ( 'username' ) ) );
 
-				$check_details = $this->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo,company_name', $this->table, array ('customer_email' => $username,'customer_status !='=>'D') );
+				$check_details = $this->Mydb->get_record ('customer_id,customer_first_name,customer_username,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo,company_name', $this->table, array ('customer_email' => $username,'customer_status !='=>'D') );
 				
 				if ($check_details)
 				{
@@ -66,7 +66,7 @@ class Login extends CI_Controller {
 							
 							/* storing the values in session */
 							
-							$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'company_name'=>$check_details['company_name']);
+							$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'company_name'=>$check_details['company_name'],'customer_username'=>$check_details['customer_username']);
 
 							if($check_details['customer_photo'] !='' && file_exists(FCPATH."media/".$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'])) {
 								$session_datas['bg_user_profile_picture'] = media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'];
@@ -136,7 +136,7 @@ class Login extends CI_Controller {
 			$this->form_validation->set_rules ( 'email_address', 'Email Address', 'required|trim|valid_email' );
 			if ($this->form_validation->run ( $this ) == TRUE) {
 				
-				$check_details = $this->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type', $this->table, array ('customer_email' => post_value('email_address'),'customer_status !='=>'D') );
+				$check_details = $this->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_password,customer_status,customer_type', $this->table, array ('customer_email' => post_value('email_address'),'customer_status !='=>'D') );
 				if ($check_details)
 				{
 					

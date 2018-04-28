@@ -34,6 +34,14 @@ if (! function_exists ( 'get_user_name' )) {
 	}
 }
 
+/* get current user type */
+if (! function_exists ( 'get_user_username' )) {
+	function get_user_username() {
+		$CI = & get_instance ();
+		return  $CI->session->userdata('customer_username');
+	}
+}
+
 
 /* Check  GUID exists  */
 if(!function_exists('get_guid'))

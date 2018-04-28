@@ -53,6 +53,7 @@ class Registration extends CI_Controller {
 			$this->form_validation->set_rules ( 'customer_password', 'lang:customer_password', 'required|min_length[' . get_label ( 'customer_password_minlength' ) . ']' );
 			$this->form_validation->set_rules ( 'customer_cpassword', 'lang:customer_cpassword', 'required|matches[customer_password]|min_length[' . get_label ( 'customer_password_minlength' ) . ']' );
 			$this->form_validation->set_rules ( 'customer_email', 'lang:customer_email', 'required|valid_email|valid_email|callback_email_exists' );
+			$this->form_validation->set_rules ( 'customer_username', 'lang:customer_username', 'required|callback_username_exists' );
 			//$this->form_validation->set_rules ( 'company_logo', 'lang:company_logo', 'callback_validate_image' );
 			//$this->form_validation->set_rules('country','lang:company_country','required'); 
 			//$this->form_validation->set_rules('company_industry','lang:company_industry','required'); 
@@ -78,6 +79,7 @@ class Registration extends CI_Controller {
 				$insert_array = array (
 						'customer_first_name' => post_value ( 'customer_first_name' ),
 						'customer_last_name' => post_value ( 'customer_last_name' ),
+						'customer_username'=>post_value ( 'customer_username' ),
 						'customer_email'=>post_value ( 'customer_email' ),
 						'customer_phone'=>post_value ( 'customer_phone' ),
 						'customer_type'=>post_value ( 'customer_type' ),
@@ -160,34 +162,16 @@ class Registration extends CI_Controller {
 	
 	/* this method used check user name or alredy exists or not */
 	public function username_exists() {
-		$email = $this->input->post ( 'company_username' );
-		$edit_id = $this->input->post ( 'edit_id' );
-		/*
+		$email = $this->input->post ( 'customer_username' );
+		
 		$where = array (
-				'company_username' => trim ( $email ),
-				'company_status !='=>'D'
+			'customer_username' => trim ( $email ),
 		);
-		if ($edit_id != "") {
-			$where = array_merge ( $where, array (
-					"company_id !=" => $edit_id 
-			) );
-			
-		}
 		
-		$result = $this->Mydb->get_record ( 'company_id', $this->table, $where );
-		
-		
-		if ($edit_id != "") {
-			$where = array_merge ( $where, array (
-					"company_id !=" => $edit_id
-			) );
-			
-		} 
-		
-		$result = $this->Mydb->get_record ( 'company_id', $this->table, $where ); */
+		$result = $this->Mydb->get_record ( 'customer_id', $this->table, $where );
 		
 		if (! empty ( $result ) ) {
-			$this->form_validation->set_message ( 'username_exists', get_label ( 'company_username_exist' ) );
+			$this->form_validation->set_message ( 'username_exists', get_label ( 'customer_username_exist' ) );
 			return false;
 		} else {
 			return true;
