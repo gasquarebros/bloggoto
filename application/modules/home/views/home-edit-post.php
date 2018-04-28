@@ -50,7 +50,7 @@ var module_action="updatepost";
 						<?php  echo form_input('post_title',$result['post_title'],' class="form-control required"  placeholder="Title" id="post_title" ');?>
 					</div>
 					<div class="form_field">
-						<textarea name="post_description" placeholder="Enter Your Description"><?php echo utf8_decode($result['post_description']); ?></textarea>
+						<textarea name="post_description" placeholder="Enter Your Description"><?php echo json_decode($result['post_description']); ?></textarea>
 					</div>
 					<div class="form_field tagging_section">
 						<?php 

@@ -46,7 +46,7 @@ var custom_redirect_url="home/draftpost";
 							}	
 						?>
 						<span></span>
-						<?php echo substr_close_tags(utf8_decode($record['post_description'])); ?>
+						<?php echo substr_close_tags(json_decode($record['post_description'])); ?>
 						<div class="post_by">
 							<p><span class="post_title"></span> <?php if($record['post_by'] == 'admin') { echo "Admin"; } else { echo $record['customer_first_name']; } ?></p>
 							<input type="hidden" class="post_info_title" value="<?php echo $record['post_title']; ?>" />

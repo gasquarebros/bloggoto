@@ -56,14 +56,18 @@ $(document).on('click', '.toggle_feed',function(){
 		fileinput.change(function(e) {
 		$(this).next('.result').html('<span class="brows">Browse </span>'+$(this).val());
 		});
-		setTimeout(equalheight(), 2000);
+		$('img').one('load',function() {
+			setTimeout(equalheight(), 2000);
+		});
 		setTimeout(function(){ $('.close').trigger('click') } , 4000);
 
 	
     });
 	
 	$(window).resize(function(){
-		equalheight();
+		
+		setTimeout(equalheight(), 2000);
+		//equalheight();
 	});
 
 function equalheight()
@@ -79,7 +83,22 @@ function equalheight()
 				{
 					rowheight = $(this).children('.list_col').outerHeight();
 				}
+				var img_hgt = $(this).children('.list_img').outerHeight();
+				var list_decp = $(this).children('.list_decp').outerHeight();
+				
+				if(img_hgt >= list_decp && img_hgt >= rowheight)
+				{
+					rowheight = img_hgt;
+				}
+				else if(list_decp >= rowheight)
+				{
+					rowheight = list_decp;
+				}
+				else {
+					rowheight = rowheight;
+				}
 			});
+			
 			$(this).children('.list_row').outerHeight(rowheight);
 		});
 	}

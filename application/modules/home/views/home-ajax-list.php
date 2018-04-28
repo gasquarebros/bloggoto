@@ -42,9 +42,10 @@ if($i%2 == 0){ ?>
 						$tag_user_id = explode(',',$record['post_tag_ids']); 
 						foreach($tags as $tkey=>$tag)
 						{
-							if(!empty($tag)) {
+							$username = get_tag_username($tag_user_id[$tkey]);
+							if(!empty($tag) && $username !='') {
 				?>
-								<span><a target="_blank" href="<?php echo base_url().'myprofile/'.encode_value($tag_user_id[$tkey]); ?>"><?php echo "#".$tag; ?></a></span>
+								<span><a target="_blank" href="<?php echo base_url().'myprofile/'.urlencode($username); ?>"><?php echo "#".$tag; ?></a></span>
 				<?php
 							} 
 						}
@@ -52,7 +53,7 @@ if($i%2 == 0){ ?>
 					} 
 				?>
 				<span></span>
-				<?php echo substr_close_tags(utf8_decode($record['post_description'])); ?>
+				<?php echo substr_close_tags(json_decode($record['post_description'])); ?>
 				<div class="post_by">
 					<p><span class="post_title">Posted by</span> <?php if($record['post_by'] == 'admin') { echo "Admin"; } else { echo ($record['customer_type']==0)?$record['customer_first_name']:$record['company_name']; } ?></p>
 					<a href="<?php echo base_url().$module.'/view/'.$record['post_slug']; ?>" class="read">Read More</a>

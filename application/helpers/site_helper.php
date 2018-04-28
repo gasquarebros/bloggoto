@@ -320,3 +320,18 @@ if (! function_exists ( 'addhttp' )){
 		return $url;
 	}
 }
+
+
+if (! function_exists ( 'get_tag_username' )){
+	function get_tag_username($userid) {
+		$username= '';
+		$CI=& get_instance();
+		$user_info = $CI->Mydb->get_record('customer_username','customers',array('customer_id'=>$userid,'customer_username !='=>'','customer_status'=>'A'));
+		if(!empty($user_info))
+		{
+			$username = $user_info['customer_username'];
+		}
+		
+		return $username;
+	}
+}

@@ -211,7 +211,7 @@ class Home extends CI_Controller {
 							'post_category' => $category[post_value ( 'post_category' )],
 							'post_type' => post_value ( 'post_type' ),
 							'post_title' => post_value ( 'post_title' ),
-							'post_description' => utf8_encode($this->input->post( 'post_description' )),
+							'post_description' => json_encode($this->input->post( 'post_description' )),
 							'post_photo' => $post_photo,
 							'post_video' => $post_video,
 							//'post_tags' => post_value ( 'post_tags' ),
@@ -351,7 +351,7 @@ class Home extends CI_Controller {
 							//'post_category' => $category[post_value ( 'post_category' )],
 							//'post_type' => post_value ( 'post_type' ),
 							'post_title' => post_value ( 'post_title' ),
-							'post_description' => utf8_encode($this->input->post ( 'post_description' )),
+							'post_description' => json_encode($this->input->post ( 'post_description' )),
 							'post_photo' => $post_photo,
 							'post_video' => $post_video,
 							//'post_tags' => post_value ( 'post_tags' ),
@@ -538,10 +538,10 @@ class Home extends CI_Controller {
 		$limit = get_label('search_result_limit');
 		$post_records = $this->Mydb->get_all_records ( "post_slug topic_label,post_title topic_value,CASE post_status WHEN 'A' THEN 'Post' END  'topic_type'", $this->table, $where_array, $limit, $offset, $order_by, $like_array, $groupby, $join );	
 			
-		$where = array('customer_status'=>'A',"(customer_first_name like '%$search_text%' OR customer_last_name like '%$search_text%' OR company_name like '%$search_text%')"=>NULL);
+		$where = array('customer_status'=>'A',"(customer_first_name like '%$search_text%' OR customer_last_name like '%$search_text%' OR company_name like '%$search_text%')"=>NULL,'customer_username !='=>'');
 		$order_by = array('customer_first_name'=>'ASC');
 		
-		$records = $this->Mydb->get_all_records ( "customer_type,customer_id topic_label,CONCAT(COALESCE(customer_first_name,''),' ',COALESCE(customer_last_name,'')) topic_value,company_name,CASE customer_type WHEN 0 THEN 'Person' WHEN 1 THEN 'Business' END  'topic_type'", $this->customers, $where, $limit, $offset, $order_by, $like, $groupby, $join );
+		$records = $this->Mydb->get_all_records ( "customer_type,customer_id topic_label,CONCAT(COALESCE(customer_first_name,''),' ',COALESCE(customer_last_name,'')) topic_value,company_name,customer_username,CASE customer_type WHEN 0 THEN 'Person' WHEN 1 THEN 'Business' END  'topic_type'", $this->customers, $where, $limit, $offset, $order_by, $like, $groupby, $join );
 
 		if(!empty($post_records) || !empty($records))
 		{
@@ -575,7 +575,7 @@ class Home extends CI_Controller {
 					}
 					else
 					{
-						$result [$i]['id'] = "myprofile/".encode_value($record['topic_label']);
+						$result [$i]['id'] = "myprofile/".urlencode($record['customer_username']);
 						$result [$i]['label'] = $record['topic_type']." : ".$_search_text ;
 					}
 					
@@ -672,7 +672,7 @@ class Home extends CI_Controller {
 							'post_category' => $category[post_value ( 'post_category' )],
 							'post_type' => post_value ( 'post_type' ),
 							'post_title' => post_value ( 'post_title' ),
-							'post_description' => post_value ( 'post_description' ),
+							'post_description' => json_encode(post_value ( 'post_description' )),
 							'post_photo' => $post_photo,
 							'post_video' => $post_video,
 							'post_status' => (post_value('status'))?post_value('status'):'A',

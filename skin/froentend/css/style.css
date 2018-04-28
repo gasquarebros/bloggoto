@@ -446,7 +446,7 @@ input[type="file"] { opacity: 0; position: absolute;  height: 38px;width:150px;}
 .follow_request .rgt_txt_fllw p { font-size: 14px; color: #444; font-family: 'proxima_novaregular'; }
 .follow { border-radius: 3px; font-size: 14px; color: #4080ff; font-family: 'proxima_novaregular'; padding: 3px 15px;border: 1px solid #4080ff }
 .follow:hover { border-color: #045575; color: #045575; }
-.fllow_bns { position: absolute; top: 55px; right: 25px; width: 300px; }
+.fllow_bns { position: absolute; top: 55px; right: 25px; width: 316px; }
 .fllow_bns a.btn { padding: 10px 41px; font-size: 17px; }
 .fllow_bns a.btn.bt_gray { background: transparent; border: 1px solid #444444; color: #444444; display: block; margin: 12px 0; text-align: center; }
 .fllow_bns a.btn.bt_gray:before { background: transparent; }

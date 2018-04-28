@@ -7,8 +7,9 @@ Description		: Page contains common label for adminpanel
 ***************************/
 
 /* User registration */
-/*$lang['user_registration'] = 'Sign up';*/
+$lang['user_registration'] = 'Sign up';
 $lang['registration_module_label'] = 'Registration';
+
 
 $lang['customer_first_name'] = "First Name*";
 $lang['customer_last_name'] = "Last Name";

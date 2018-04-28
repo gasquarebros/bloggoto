@@ -1,5 +1,5 @@
 <?php if($info['customer_id'] == get_user_id()) { if($info['customer_type'] == 0) {  ?>
-				<?php echo form_open_multipart(base_url().'myprofile',' class="form-horizontal" id="common_form" ' );?>
+				<?php echo form_open_multipart(base_url().'myprofile',' class="form-horizontal" id="profile_form" ' );?>
 					<h3>General</h3>
 					<div class="form_field">
 						<label>First Name</label>
@@ -266,7 +266,7 @@
 				?>	
 			
 <?php } if($info['customer_type'] == 1) { ?> 
-				<?php echo form_open_multipart(base_url().'myprofile',' class="form-horizontal" id="common_form" ' );?>
+				<?php echo form_open_multipart(base_url().'myprofile',' class="form-horizontal" id="profile_bus_form" ' );?>
 					<h3>General</h3>
 					<div class="form_field">
 						<label>Business Name</label>
@@ -994,4 +994,120 @@
 
 <script>
 	$('.datepicker').datepicker({changeMonth: true,changeYear: true,dateFormat: 'dd-mm-yy'});
+	
+$("#profile_form").validate(
+{    	
+		errorContainer: container,
+		errorLabelContainer: $("ul", container),
+		wrapper: wrapper_val,
+		errorElement: error_val,
+	   ignore : "",
+	   submitHandler : function() {
+		$(".alert_msg").hide();
+		$(".btn_submit_div").hide();
+		$(".btn_submit_div").before(loading_icon);
+		if( typeof(CKEDITOR) !== "undefined" )
+		{
+			for ( instance in CKEDITOR.instances )
+			{
+				CKEDITOR.instances[instance].updateElement();
+			}
+		}
+		if($('select.choosenclass').length)
+		{
+			$('select.choosenclass').each(function() {
+				var selection = $(this).getSelectionOrder();
+				$(this).parent().parent().children('.selectval').val(selection);
+				console.log(selection);
+				/*$(this).val(selection);*/
+			});
+		}
+		var url = $('#profile_form').attr('href');
+		$("#profile_form").ajaxSubmit({
+			type : "POST",
+			dataType : "json",
+			url :  url,
+			data : $("#profile_form").serialize(),
+			cache : false,
+			success : function(data) {
+				response = data;
+				$(".btn_submit_div").show();
+				$(".form_submit").remove();
+
+				if (response.status == "success") {
+					 var redirect =  (typeof(response.redirect_url) !="undefined" && response.redirect_url !="" )?  response.redirect_url :  module;
+					
+					window.location.href = admin_url + redirect;
+					
+				} else if (response.status == "error") {
+					$(".alert_msg,.container_div").show();
+					$(".alert_msg").html(data.message);
+					$('.side-body').scrollView();
+					
+				}
+
+			}
+		});
+
+	}
+});
+
+$("#profile_bus_form").validate(
+{    	
+		errorContainer: container,
+		errorLabelContainer: $("ul", container),
+		wrapper: wrapper_val,
+		errorElement: error_val,
+	   ignore : "",
+	   submitHandler : function() {
+		$(".alert_msg").hide();
+		$(".btn_submit_div").hide();
+		$(".btn_submit_div").before(loading_icon);
+		if( typeof(CKEDITOR) !== "undefined" )
+		{
+			for ( instance in CKEDITOR.instances )
+			{
+				CKEDITOR.instances[instance].updateElement();
+			}
+		}
+		if($('select.choosenclass').length)
+		{
+			$('select.choosenclass').each(function() {
+				var selection = $(this).getSelectionOrder();
+				$(this).parent().parent().children('.selectval').val(selection);
+				console.log(selection);
+				/*$(this).val(selection);*/
+			});
+		}
+		var url = $('#profile_bus_form').attr('href');
+		$("#profile_bus_form").ajaxSubmit({
+			type : "POST",
+			dataType : "json",
+			url :  url,
+			data : $("#profile_bus_form").serialize(),
+			cache : false,
+			success : function(data) {
+				response = data;
+				$(".btn_submit_div").show();
+				$(".form_submit").remove();
+
+				if (response.status == "success") {
+					var redirect =  (typeof(response.redirect_url) !="undefined" && response.redirect_url !="" )?  response.redirect_url :  module;
+					
+					window.location.href = admin_url + redirect;
+					
+				} else if (response.status == "error") {
+					$(".alert_msg,.container_div").show();
+					$(".alert_msg").html(data.message);
+					$('.side-body').scrollView();
+					
+				}
+
+			}
+		});
+
+	}
+});
+	
+	
 </script>

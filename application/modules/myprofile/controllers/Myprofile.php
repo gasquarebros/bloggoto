@@ -10,7 +10,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Myprofile extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
-		
+		//$this->authentication->user_authentication();
 		$this->module = "profile";
 		$this->module_label = get_label('profile_module_label');
 		$this->module_labels = get_label('profile_module_label');
@@ -89,7 +89,7 @@ class Myprofile extends CI_Controller {
 		//echo "inn"; exit;
 		$data = $this->load_module_info ();	
 		//$info = $this->Mydb->get_record('customer_type,customer_photo',$this->customers,array('customer_id'=>$userid));
-		$info = $this->Mydb->get_record('customer_type,customer_photo',$this->customers,array('customer_username'=>$userid));
+		$info = $this->Mydb->get_record('customer_id,customer_type,customer_photo',$this->customers,array('customer_username'=>$userid));
 
 		if(empty($info)) {
 			redirect(base_url());
@@ -201,25 +201,29 @@ class Myprofile extends CI_Controller {
 				
 				
 				$this->session->set_userdata(array('bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$customer_photo ,'company_name'=>post_value ( 'company_name' )));
-
 				
+				$this->session->set_flashdata ( 'admin_success', 'Profile updated successfully' );
 				
 				$result ['status'] = 'success';
+				$redirect = "myprofile";
+				echo json_encode ( array('status'=>'success','redirect_url'=>$redirect) ); exit;
+				
 			} else {
 				$result ['status'] = 'error';
 				$this->session->set_flashdata('admin_error',validation_errors ());
 				$result ['message'] = validation_errors ();
+				echo json_encode ( $result ); exit;
 			}
 
 		}
-		$info = $this->Mydb->get_record('*',$this->customers,array('customer_id'=>$userid));
+		$info = $this->Mydb->get_record('*',$this->customers,array('customer_username'=>$userid));
 
 		$data['info'] = $info;
 		$data['post_infos'] = $post_infos;
 		$data['follow_count'] = $follow_count;
 		$data['follow_list'] = $follow_list;
 		$data['following_count'] = $following_count;
-		$where = array('customer_id !='=>get_user_id(),'customer_status'=>'A','customer_private'=>0);
+		$where = array('customer_id !='=>get_user_id(),'customer_status'=>'A','customer_private'=>0,'customer_username !='=>'');
 		if($info['customer_prof_profession'] !='')
 		{
 			$sel_prof = explode(',',$info['customer_prof_profession']);
@@ -242,6 +246,7 @@ class Myprofile extends CI_Controller {
 		{
 			$suggestions = $this->Mydb->get_all_records('*',$this->customers,$where ,$limit = 4,$offset = '', array('random'));
 		}
+
 		$data['suggestions'] = $suggestions;
 
 		$this->layout->display_site ( $this->folder . $this->module . "-index", $data );
@@ -709,7 +714,8 @@ class Myprofile extends CI_Controller {
 	
 	public function comments($postslug = null)
 	{
-		check_site_ajax_request();
+		
+		//check_site_ajax_request();
 		
 		if($postslug == null)
 		{
@@ -754,6 +760,7 @@ class Myprofile extends CI_Controller {
 
 			$data['show'] = post_value('show');
 			$html = get_template ( $this->folder . '/' . $this->module . '-blogs-commentlist', $data );
+
 			echo json_encode ( array (
 					'status' => 'success',
 					'html' => $html,
@@ -785,7 +792,7 @@ class Myprofile extends CI_Controller {
 					$insert_array = array (
 							'post_comment_user_id' => $customer_id,
 							'post_comment_post_id' => $postid,
-							'post_comment_message' => utf8_encode($this->input->post('comments')),
+							'post_comment_message' => json_encode($this->input->post('comments')),
 							'post_comment_parent' => 0,
 							'post_comment_created_on' => current_date (),
 							'post_comment_created_by' => get_user_id (),

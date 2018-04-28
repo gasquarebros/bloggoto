@@ -110,6 +110,7 @@ $(document).ready(function(){
 			dataType : "json",
 			async:false,
 			success : function(data) {
+				
 				hide_content_loading();
 				if (data.status == "success") {
 					/* reload page if delete the pagination record is empty... */
@@ -118,14 +119,20 @@ $(document).ready(function(){
 						window.location.href= admin_url;
 						return false;
 					}
-					console.log(current);
+					
 					/*if(page > 0)
 					{
 						current.parent('li').parent('ul').next(".comments_list").append(data.html);
 					}
 					else{*/
+					
 						current.parent('li').parent('ul').next(".comments_list").html(data.html);
 					//}
+					
+					$(".body").each(function() {
+						var myObj = JSON.parse($(this).html());
+						$(this).html(myObj);
+					});
 				}
 			}
 		});

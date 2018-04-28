@@ -67,7 +67,7 @@ var module_action="addpost";
 							<?php foreach($suggestions as $suggestion) { //echo "<pre>"; print_r($suggestion); exit; ?>
 								<li>
 									<div class="lft_img_fllw">
-									<a href="<?php echo base_url()."myprofile/".encode_value($suggestion['customer_id']); ?>" target="_blank" >
+									<a href="<?php echo base_url()."myprofile/".urlencode($suggestion['customer_username']); ?>" target="_blank" >
 										<?php if($suggestion['customer_photo'] !='') { ?>
 											<img src="<?php echo media_url(). $this->lang->line('customer_image_folder_name').$suggestion['customer_photo'];?>" alt="profile" />
 										<?php } else { ?> 
@@ -76,7 +76,7 @@ var module_action="addpost";
 									</a>	
 									</div>
 									<div class="rgt_txt_fllw">
-										<p><a href="<?php echo base_url()."myprofile/".encode_value($suggestion['customer_id']); ?>" target="_blank" ><?php echo $suggestion['customer_first_name']." ".$suggestion['customer_last_name']; ?></a></p>
+										<p><a href="<?php echo base_url()."myprofile/".urlencode($suggestion['customer_username']); ?>" target="_blank" ><?php echo $suggestion['customer_first_name']." ".$suggestion['customer_last_name']; ?></a></p>
 										<a href="<?php echo base_url()."myprofile/add_followers/".encode_value($suggestion['customer_id']); ?>" class="follow follow_users follow_users_suggestions">Follow</a>
 									</div>
 								</li>
@@ -86,7 +86,7 @@ var module_action="addpost";
                 </div>
             </div>
         </div>
-		
+
 		<div class="newsfeed_wrap">
 			<ul class="newsfeed_menu">
 				

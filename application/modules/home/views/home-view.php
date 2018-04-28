@@ -89,7 +89,7 @@
 									echo "</div>";
 								} 
 							?>
-							<p><?php echo substr_close_tags(utf8_decode($record['post_description'])); ?> </p>
+							<p><?php echo substr_close_tags(json_decode($record['post_description'])); ?> </p>
 							
 							<?php 
 							

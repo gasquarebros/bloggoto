@@ -27,7 +27,9 @@ function get_content()
 				{
 					$('.load_more').show();
 				}
-				equalheight();
+				$('img').one('load',function() {
+					setTimeout(equalheight(), 2000);
+				});
 			}
 			
 			if (data.status == "error") {

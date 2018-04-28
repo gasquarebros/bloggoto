@@ -12,7 +12,7 @@
                         <input type="text" id="blog_post_title" placeholder="Click here and enter title to write a blog , story, book or Upload Picture, Videos or To Ask a Question">
                     </div>
                     <div class="action_field">
-                        <a class="popup-modal" <?php if(get_user_id() == '') { ?>href="<?php echo base_url(); ?>" <?php } else { ?>href="#test-modal" <?php } ?> value="">LET'S GO</a>
+                        <a class="popup-modal" <?php if(get_user_id() == '') { ?>href="<?php echo base_url(); ?>" <?php } else { ?>href="#test-modal" <?php } ?> value="">Let's Go</a>
                     </div>
                 </form>
 			</div>
@@ -124,16 +124,17 @@
 									$tag_user_id = explode(',',$record['post_tag_ids']); 
 									foreach($tags as $tkey=>$tag)
 									{
+										$username = get_tag_username($tag_user_id[$tkey]);
 										if(!empty($tag)) {
 							?>
-											<span><a target="_blank" href="<?php echo base_url().'myprofile/'.encode_value($tag_user_id[$tkey]); ?>"><?php echo "#".$tag; ?></a></span>
+											<span><a target="_blank" href="<?php echo base_url().'myprofile/'.urlencode($username); ?>"><?php echo "#".$tag; ?></a></span>
 							<?php
 										} 
 									}
 									echo "</div>";
 								} 
 							?>
-							<p><?php echo substr_close_tags(utf8_decode($record['post_description'])); ?> </p>
+							<p><?php echo substr_close_tags(json_decode($record['post_description'])); ?> </p>
 						</div>
 						<div class="feed_like_share">
 							<?php $likes_user_ids = array_values(array_filter(array_unique(explode(',',$record['lkesuser'])))); ?>
