@@ -31,9 +31,9 @@
 						<a href="<?php echo base_url().'myprofile'; ?>" class=""><span class="loggedin_text"><?php echo get_user_name(); ?></span></a> | <a href="<?php echo base_url().'logout'; ?>" class="">Logout</a>
 					</div>
 				<?php } ?>
-				<form class="header_form">
+				<form class="header_form" action="<?php echo base_url().'search'; ?>">
 					<div class="search_box">
-                        <input type="text" id="topic_title" class="ui-autocomplete-input text_search" placeholder="Search topics & blogger" />
+                        <input type="text" id="topic_title" name="term" class="ui-autocomplete-input text_search" placeholder="Search topics & blogger" />
                         <input type="submit" class="btn_search" value="" />
 					</div>
 				</form>

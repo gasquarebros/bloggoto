@@ -86,6 +86,7 @@ $route['home/view/(.*)'] = 'home/view/$1';
 $route['home/(.*)'] = 'home/index/$1';
 $route['home'] = 'home/index';
 $route['registration'] = 'registration/index';
+$route['search'] = 'search/index';
 $route['page/(.*)'] = 'home/page/$1';
 $route['(.*)'] = 'myprofile/index/$1';
 $route['products/ajax_pagination'] = 'products/ajax_pagination';

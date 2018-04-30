@@ -20,3 +20,22 @@
 	background-color: #045575;
 	color: #ffffff;
 }
+
+.search_feed {
+    width: 100%;
+    clear: both;
+    float: left;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 10px;
+	background:#fff;
+}
+.search_image {
+    width: 50px;
+    float: left;
+}
+.search_text {
+    width: 80%;
+    float: left;
+    padding-left: 10px;
+}
+.search_list { margin:10px; width: 100%; float: left; }
