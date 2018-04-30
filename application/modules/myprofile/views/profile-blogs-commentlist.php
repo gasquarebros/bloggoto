@@ -2,6 +2,12 @@
 <?php 
 
 	if(!empty($records)) {
+	?>
+		<div class="load_more" <?php if($next_set !='') { echo 'style="display:block;"'; } else { echo "style='display:none;'"; } ?>>
+			<button class="more_posts_comments">Load More</button>
+		</div>
+	<?php	
+	$records = array_reverse($records);
 		foreach($records as $record)
 		{
 	?>		
@@ -26,11 +32,7 @@
 			</div>
 	<?php
 		}
-	?>
-		<div class="load_more" <?php if($next_set !='') { echo 'style="display:block;"'; } else { echo "style='display:none;'"; } ?>>
-			<button class="more_posts_comments">Load More</button>
-		</div>
-	<?php
+
 	} else if($offset == 0)
 	{
 		echo "<p class='no-records'>No Comments Found</p>";

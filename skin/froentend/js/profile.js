@@ -315,7 +315,8 @@ $(document).ready(function(){
 
 					if(page > 0)
 					{
-						current.parent('li').parent('ul').next(".comments_list").append(data.html);
+						//current.parent('li').parent('ul').next(".comments_list").append(data.html);
+						current.parent('li').parent('ul').next(".comments_list").prepend(data.html);
 					}
 					else{
 						current.parent('li').parent('ul').next(".comments_list").html(data.html);
