@@ -157,10 +157,16 @@ window.setInterval(function() {
 					notify_html='<i class="fa fa-bell-o" aria-hidden="true"></i><span class="badge notification_circle">'+data.count+'</span>'
 					msg_notify_html='<i class="fa fa-envelope-o" aria-hidden="true"></i><span class="badge notification_circle">'+data.msg_count+'</span>'
 					//$(".notify").html(notify_html);"#results span:first"
-					$( ".icons_wrap .notify" ).html(notify_html)
-					$('.icons_wrap .notify').addClass('active');
-					$( ".icons_wrap .message" ).html(msg_notify_html)
-					$('.icons_wrap .message').addClass('active');
+					if(data.count >0)
+					{
+						$( ".icons_wrap .notify" ).html(notify_html)
+						$('.icons_wrap .notify').addClass('active');
+					}
+					if(data.msg_count > 0)
+					{
+						$( ".icons_wrap .message" ).html(msg_notify_html)
+						$('.icons_wrap .message').addClass('active');
+					}
 				} 
 				else 
 				{

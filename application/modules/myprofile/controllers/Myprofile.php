@@ -865,7 +865,7 @@ class Myprofile extends CI_Controller {
 
 			$counting = post_notify_count();
 			$msg_counting = message_notify_count();
-			if($counting >0)
+			if($counting >0 || $msg_counting >0 )
 			{
 						$result ['status'] = 'success';
 						$result ['count'] = ($counting >0) ? $counting : '';
