@@ -193,6 +193,8 @@ class Myprofile extends CI_Controller {
 					'customer_prof_types'=>post_value ( 'customer_prof_types' ),
 					'customer_prof_rewards'=>post_value ( 'customer_prof_rewards' ),
 					'company_name'=>post_value ( 'company_name' ),
+					'customer_business_source'=>post_value ( 'business_source' ),
+					'customer_business_website'=>post_value ( 'business_website' ),
 					//'customer_type'=>post_value ( 'customer_type' ),
 					//'customer_status' => ($this->input->post ( 'status' ) == "A" ? 'A' : 'I'),
 					//'customer_created_on' => current_date (),
