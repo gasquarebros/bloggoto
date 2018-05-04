@@ -102,7 +102,7 @@
 					
 					<div class="form_field">
 						<label for="customer_photo"><?php echo get_label('customer_photo');?></label>
-						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> </div> </div>
+						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> <span class="result_browsefile"><span class="browss"></span>+ Upload Image</span></div> </div>
 						<div class="clear"></div>
 					</div>
 					
@@ -380,7 +380,7 @@
 					
 					<div class="form_field">
 						<label for="customer_photo"><?php echo get_label('customer_photo');?></label>
-						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> </div> </div>
+						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> <span class="result_browsefile"><span class="browss"></span>+ Upload Image</span></div> </div>
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
@@ -515,7 +515,7 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
-	<?php /*if($info['customer_phone']) {?>
+	<?php if($info['customer_phone']) {?>
 	<div class="form_field">
 		<label>Phone</label>
 		<div class="input_field">
@@ -523,7 +523,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<?php } */ ?>
+	<?php }  ?>
 	<?php if($info['customer_birthdate'] !='' && $info['customer_birthdate'] !='0000-00-00' && $info['customer_birthdate'] != '1970-01-01') {?>
 	<div class="form_field">
 		<label>Birthday</label>
@@ -932,7 +932,7 @@
 	<?php } ?>
 	<h3>Contact</h3>
 	
-	<?php /*if($info['customer_phone']) {?>
+	<?php if($info['customer_phone']) {?>
 	<div class="form_field">
 		<label>Mobile</label>
 		<div class="input_field">
@@ -940,7 +940,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<?php } */ ?>
+	<?php }  ?>
 	<?php if($info['customer_prof_official_phone']) {?>
 	<div class="form_field">
 		<label>Office</label>

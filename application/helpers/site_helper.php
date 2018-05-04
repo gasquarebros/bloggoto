@@ -135,10 +135,10 @@ if (! function_exists ( 'get_site_title' )) {
 
 /* get get_followers_list */
 if (! function_exists ( 'get_followers_list' )) {
-	function get_followers_list() {
+	function get_followers_list($userid='') {
 		$CI = &get_instance();
 		$follow_records = array();
-		$userid = get_user_id();
+		$userid = ($userid)?$userid:get_user_id();
 		if($userid !='')
 		{
 			$join = '';
@@ -155,10 +155,10 @@ if (! function_exists ( 'get_followers_list' )) {
 }
 /* get get_followers_list */
 if (! function_exists ( 'get_following_list' )) {
-	function get_following_list() {
+	function get_following_list($userid='') {
 		$CI = &get_instance();
 		$following_records = array();
-		$userid = get_user_id();
+		$userid = ($userid)?$userid:get_user_id();
 		if($userid !='')
 		{
 			$join = '';
@@ -168,6 +168,7 @@ if (! function_exists ( 'get_following_list' )) {
 			$join [0] ['condition'] = "follow_customer_id = customer_id";
 			$join [0] ['type'] = "INNER";
 			$following_records = $CI->Mydb->get_all_records('customers_followers.*','customers_followers',array('follow_user_id'=>$userid,'customer_status'=>'A'),$limit='', $offset='', $order_by, $like='', $groupby=array(), $join );
+
 		}
 
 		return $following_records;

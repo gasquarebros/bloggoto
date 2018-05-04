@@ -98,11 +98,6 @@ class Myprofile extends CI_Controller {
 		
 		
 		$follow_records = get_followers_list();
-		$following_records = get_following_list();
-		/*
-		$follow_records = $this->Mydb->get_all_records('*',$this->customer_followers,array('follow_customer_id'=>$userid));
-		$follow_count = count($follow_records);
-		*/
 		$follow_list = array();
 		if(!empty($follow_records))
 		{
@@ -111,7 +106,15 @@ class Myprofile extends CI_Controller {
 			}
 		} 
 		
-		$following_count = count($follow_list);
+		$follow_records = get_followers_list($info['customer_id']);
+		$following_records = get_following_list($info['customer_id']);
+		/*
+		$follow_records = $this->Mydb->get_all_records('*',$this->customer_followers,array('follow_customer_id'=>$userid));
+		$follow_count = count($follow_records);
+		*/
+		
+		
+		$following_count = count($follow_records);
 		$follow_count = count($following_records);
 		
 		if ($this->input->post ( 'action' ) == "edit") {
@@ -690,20 +693,40 @@ class Myprofile extends CI_Controller {
 							'follow_created_ip' => get_ip () 
 					);
 					$insert_id = $this->Mydb->insert ( $this->customer_followers, $insert_array );
-					$counting = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$customer_id));
+					//$counting = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$customer_id));
+                   // $counting_profile = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$userid));
+					
+					$counting = count(get_followers_list($customer_id));
+					$counting_following = count(get_following_list($customer_id));
+					$counting_profile = count(get_followers_list($userid));
+					$counting_profile_following = count(get_following_list($userid));
+					
 					$result ['status'] = 'success';
 					$result ['msg'] = 'Unfollow';
 					$result ['html'] = thousandsCurrencyFormat($counting);
+					$result ['following_html'] = thousandsCurrencyFormat($counting_following);
+                    $result ['profile_html'] = thousandsCurrencyFormat($counting_profile );
+                    $result ['profile_following_html'] = thousandsCurrencyFormat($counting_profile_following );
 				}
 				else
 				{
 					$ids = array($follow_records['follow_id']);
 					$search_array = array('follow_customer_id' => $customer_id,'follow_user_id' => $userid);
 					$this->Mydb->delete_where_in ( $this->customer_followers, 'follow_id', $ids, $search_array );
-					$counting = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$customer_id));
+					//$counting = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$customer_id));
+                   // $counting_profile = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$userid));
+					
+					$counting = count(get_followers_list($customer_id));
+					$counting_following = count(get_following_list($customer_id));
+					$counting_profile = count(get_followers_list($userid));
+					$counting_profile_following = count(get_following_list($userid));
+					
 					$result ['status'] = 'success';
 					$result ['msg'] = 'Follow';
 					$result ['html'] = thousandsCurrencyFormat($counting);
+					$result ['following_html'] = thousandsCurrencyFormat($counting_following);
+                    $result ['profile_html'] = thousandsCurrencyFormat($counting_profile );
+                    $result ['profile_following_html'] = thousandsCurrencyFormat($counting_profile_following );
 				}
 			}
 		}

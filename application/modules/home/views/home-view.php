@@ -13,7 +13,11 @@
 									$url ="";									
 								} 
 								else { 
-									$url =base_url()."myprofile/".encode_value($record['customer_id']);
+									$username = get_tag_username($record['customer_id']);
+									$url="";
+									if($username !='') {
+										$url =base_url()."myprofile/".urlencode($username);
+									}
 								}
 								if($url !='') { ?> <a href="<?php echo $url; ?>"> <?php } ?>
 								<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
@@ -35,28 +39,32 @@
 								} ?></h4>
 								<p><?php echo datepostformat($record['post_created_on']); ?></p>
 							</div>
-							
+							<?php /*
 							<a href="javascript:void(0)" class="toggle_feed"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+							*/ ?>
+							<?php if(get_user_id() != '') { ?>				
+							<span href="javascript:;" class="post_more x_login_popup post_options_action" title="More"><i class="fa fa-ellipsis-v"></i>
+								<ul style="display:none;" class="show_post_options test">
+									<li>
+										<a href="javascript:;" class="post_report x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Report"><i class="fa fa-flag-o"></i></a>
+									</li>
+
+									<?php if(get_user_id() == $record['post_created_by']) { ?>				
+									<li>
+										<a href="<?php echo base_url().'home/editpost/'.$record['post_slug']; ?>" class="post_edit x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Edit"><i class="fa fa-edit"></i></a>
+									</li>
+									<li>		
+										<a href="javascript:;" class="post_delete x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Delete"><i class="fa fa-trash-o"></i></a>
+									</li>		
+									<?php } ?>
+								</ul>
+							</span>
+							<?php } ?>
+							
 							
 							<div class="clear"></div>
 						</div>
-						<?php if(get_user_id() != '') { ?>				
 						
-							<ul style="display:none;" class="toggle_content show_post_options_detail">
-								<li>
-									<a href="javascript:;" class="post_report x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Report"><i class="fa fa-flag-o"></i></a>
-								</li>
-
-								<?php if(get_user_id() == $record['post_created_by']) { ?>				
-								<li>
-									<a href="<?php echo base_url().'home/editpost/'.$record['post_slug']; ?>" class="post_edit x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Edit"><i class="fa fa-edit"></i></a>
-								</li>
-								<li>		
-									<a href="javascript:;" class="post_delete x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Delete"><i class="fa fa-trash-o"></i></a>
-								</li>		
-								<?php } ?>
-							</ul>
-							<?php } ?>
 						<div class="toggle_contents">
 						<div class="feed_image">
 							<?php 
@@ -81,9 +89,13 @@
 									foreach($tags as $tkey=>$tag)
 									{
 										if(!empty($tag)) {
+											
+											$username = get_tag_username($tag_user_id[$tkey]);
+											if(!empty($tag) && $username !='') {
 							?>
-											<span><a target="_blank" href="<?php echo base_url().'myprofile/'.encode_value($tag_user_id[$tkey]); ?>"><?php echo $tag; ?></a></span>
+												<span><a target="_blank" href="<?php echo base_url().'myprofile/'.urlencode($username); ?>"><?php echo $tag; ?></a></span>
 							<?php
+											}
 										} 
 									}
 									echo "</div>";
@@ -94,7 +106,7 @@
 							<?php 
 							
 							if($record['post_type'] == 'video' && $record['post_video'] !='') { ?>
-								<video autoplay poster="PreviewImage.jpeg"  width="250"  controls="controls">
+								<video autoplay poster="PreviewImage.jpeg"  width="250"  controls="controls" muted>
 									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/webm" />
 									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/mp4" />
 									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/ogg" />
