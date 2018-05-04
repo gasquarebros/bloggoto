@@ -53,7 +53,7 @@ if(!empty($_GET['filter']) && $_GET['filter']=='trash') {
 													<?php 
 													if(!empty($allusers[$user_id]) && $allusers[$user_id]['customer_type'] == 1) { ?>
 														<a href="<?=base_url('conversations/view/'.encode_value($nval['notification_id']).$trashs)?>"><?=($nval['message_type']=='N')?'Anonymous':$allusers[$user_id]['company_name']?></a>
-													<?php } else { ?>
+													<?php } else {  ?>
 														<a href="<?=base_url('conversations/view/'.encode_value($nval['notification_id']).$trashs)?>"><?=($nval['message_type']=='N')?'Anonymous':$allusers[$user_id]['customer_first_name']?></a>
 													<?php } ?>
 												</div>
