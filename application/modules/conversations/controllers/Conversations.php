@@ -100,7 +100,7 @@ class Conversations extends CI_Controller {
     			$record = array(
 				'open_status'=>'Y'
 				);
-				$this->Mydb->update($this->notification_message,array('message_id'=>$notification_id, 'open_status'=>'N'),$record);
+				$this->Mydb->update($this->notification_message,array('message_id'=>$notification_id, 'open_status'=>'N','assigned_to'=>get_user_id()),$record);
     		}
     		
     		$data['notification'] = $notification;

@@ -13,7 +13,11 @@
 									$url ="";									
 								} 
 								else { 
-									$url =base_url()."myprofile/".encode_value($record['customer_id']);
+									$username = get_tag_username($record['customer_id']);
+									$url="";
+									if($username !='') {
+										$url =base_url()."myprofile/".urlencode($username);
+									}
 								}
 								if($url !='') { ?> <a href="<?php echo $url; ?>"> <?php } ?>
 								<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
@@ -102,7 +106,7 @@
 							<?php 
 							
 							if($record['post_type'] == 'video' && $record['post_video'] !='') { ?>
-								<video autoplay poster="PreviewImage.jpeg"  width="250"  controls="controls">
+								<video autoplay poster="PreviewImage.jpeg"  width="250"  controls="controls" muted>
 									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/webm" />
 									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/mp4" />
 									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/ogg" />

@@ -2,7 +2,7 @@ $(function() {
      $("#topic_title").autocomplete({
 		source: SITE_URL+"home/ajax_autocomplete",    
         minLength: 2,
-        autoFocus: true,
+        autoFocus: false,
         select: function(event, ui) {
             var url = ui.item.id;
             if(url != '#') {

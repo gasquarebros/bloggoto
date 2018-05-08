@@ -47,12 +47,13 @@ if(!empty($_GET['filter']) && $_GET['filter']=='trash') {
 											if($from_tow>0) {
 											$user_id = $nval['assigned_to'];
 											?>
-											<li class="mailboxer_conversation" <?php if($nval['open_status']>0){ ?> style="font-weight: bold !important;"<?php } ?>>
+											<li class="mailboxer_conversation" <?php if($nval['open_status']>0 && $nval['assigned_to'] == get_user_id()){ ?> style="font-weight: bold !important;"<?php } ?>>
 												<div class="mail-control"></div>
 												<div class="mail-from">
-													<?php if($allusers[$user_id]['customer_type'] == 1) { ?>
+													<?php 
+													if(!empty($allusers[$user_id]) && $allusers[$user_id]['customer_type'] == 1) { ?>
 														<a href="<?=base_url('conversations/view/'.encode_value($nval['notification_id']).$trashs)?>"><?=($nval['message_type']=='N')?'Anonymous':$allusers[$user_id]['company_name']?></a>
-													<?php } else { ?>
+													<?php } else {  ?>
 														<a href="<?=base_url('conversations/view/'.encode_value($nval['notification_id']).$trashs)?>"><?=($nval['message_type']=='N')?'Anonymous':$allusers[$user_id]['customer_first_name']?></a>
 													<?php } ?>
 												</div>

@@ -32,11 +32,11 @@
 						<div class="form_field">
 							<?php  echo form_input('customer_username',set_value('customer_username'),' class="form-control placeholder-no-fix required"  placeholder="'.get_label('customer_username').'" ');?>
 						</div>
-						
+						<?php /*
 						<div class="form_field">
 							<?php  echo form_input('customer_phone',set_value('customer_phone'),' class="form-control placeholder-no-fix required"  placeholder="'.get_label('customer_phone').'" ');?>
 						</div>
-						
+						*/ ?>
 						<div class="form_field">
 							<?php  echo form_input('customer_email',set_value('customer_email'),' class="form-control placeholder-no-fix required email"  placeholder="'.get_label('customer_email').'" ');?>
 						</div>

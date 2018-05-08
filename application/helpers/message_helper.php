@@ -58,10 +58,12 @@ if (! function_exists ( 'message' )){
 		$notification = array();
 		$employee_id = ($CI->session->userdata('bg_user_id'))?$CI->session->userdata('bg_user_id'):'';
 		if($employee_id) {
-			$where = "((nm.`assigned_from`='".$employee_id."' AND nm.`open_status`='N' AND nm.`from_delete`='N') OR (nm.`assigned_to`='".$employee_id."'  AND nm.`open_status`='N' AND nm.`to_delete`='N'))";
+			$where = "((nm.`assigned_to`='".$employee_id."'  AND nm.`open_status`='N' AND nm.`to_delete`='N'))";
 
-			$CI->db->select('n.notification_id, n.subject, nm.assigned_from, nm.created_on')->from('notification AS n')->join('notification_message AS nm', 'n.notification_id=message_id', 'INNER')->where('n.message_type', 'M')->where($where);;
+			$CI->db->select('n.notification_id, n.subject, nm.assigned_from, nm.created_on')->from('notification AS n')->join('notification_message AS nm', 'n.notification_id=message_id', 'INNER')->where('n.message_type', 'M')->where($where);
 			$notification = $CI->db->order_by('nm.created_on DESC')->get()->result_array();
+			//echo $CI->db->last_query();
+			//exit;
 		}
 		return $notification;		
 	}

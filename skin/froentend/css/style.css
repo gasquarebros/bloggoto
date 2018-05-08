@@ -866,7 +866,11 @@ ul.profile_rgt {
 .comp_info {
     width: 200px;
     float: left;
+<<<<<<< HEAD
     margin-right: 100px;
+=======
+    margin-right: 35px;
+>>>>>>> dc99157c1998af7f14b1922471e6796396728a3d
 }
 
 .comp_info {
@@ -1414,7 +1418,11 @@ input[type="file"] {
 }
 
 .double_input .form_field_inner:first-child {
+<<<<<<< HEAD
     margin-right: 9px;
+=======
+    margin-right: 12px;
+>>>>>>> dc99157c1998af7f14b1922471e6796396728a3d
 }
 
 .double_input .form_field_inner:last-child {
@@ -1523,10 +1531,17 @@ input[type="file"] {
 
 .switch-field label {
     display: inline-block;
+<<<<<<< HEAD
     width: 110px;
     background-color: #ffffff;
     color: #aaaaaa;
     font-size: 12px;
+=======
+    width: 120px;
+    background-color: #ffffff;
+    color: #aaaaaa;
+    font-size: 14px;
+>>>>>>> dc99157c1998af7f14b1922471e6796396728a3d
     font-weight: normal;
     text-align: center;
     text-shadow: none;

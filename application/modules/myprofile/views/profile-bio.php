@@ -102,7 +102,7 @@
 					
 					<div class="form_field">
 						<label for="customer_photo"><?php echo get_label('customer_photo');?></label>
-						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> </div> </div>
+						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> <span class="result_browsefile"><span class="browss"></span>+ Upload Image</span></div> </div>
 						<div class="clear"></div>
 					</div>
 					
@@ -277,6 +277,22 @@
 					</div>
 					
 					<div class="form_field">
+						<label>Business Source</label>
+						<div class="input_field">
+							<?php  echo form_dropdown('business_source',array('online'=>'Online Business','offline'=>'Offline Business','both'=>'Both Online/Offline'),stripslashes($info['customer_business_source']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="form_field">
+						<label>Business Website</label>
+						<div class="input_field">
+							<?php  echo form_input('business_website',stripslashes($info['customer_business_website']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="form_field">
 						<label>Business Sector</label>
 						<div class="input_field">
 							<?php  echo form_dropdown('business_model',array('sales'=>'Sales','service'=>'Service','sale-service'=>'Sales/Services'),stripslashes($info['business_model']),' class="form-control"');?>
@@ -380,7 +396,7 @@
 					
 					<div class="form_field">
 						<label for="customer_photo"><?php echo get_label('customer_photo');?></label>
-						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> </div> </div>
+						<div class="input_field"> <div class="custom_browsefile"> <?php echo form_upload('customer_photo');?> <span class="result_browsefile"><span class="browss"></span>+ Upload Image</span></div> </div>
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
@@ -515,7 +531,7 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
-	<?php /*if($info['customer_phone']) {?>
+	<?php if($info['customer_phone']) {?>
 	<div class="form_field">
 		<label>Phone</label>
 		<div class="input_field">
@@ -523,7 +539,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<?php } */ ?>
+	<?php }  ?>
 	<?php if($info['customer_birthdate'] !='' && $info['customer_birthdate'] !='0000-00-00' && $info['customer_birthdate'] != '1970-01-01') {?>
 	<div class="form_field">
 		<label>Birthday</label>
@@ -781,6 +797,32 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
+	
+	<?php if($info['customer_business_source']) {?>
+	<div class="form_field">
+		<label>Business Sector</label>
+		<div class="input_field">
+			<?php  
+			$business_source = array(''=>'','online'=>'Online Business','offline'=>'Offline Business','both'=>'Both Online/Offline');
+			echo "<label class='display_info'>".$business_source[$info['customer_business_source']]."</label>";
+			?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	
+	<?php if($info['customer_business_website']) {?>
+	<div class="form_field">
+		<label>Business Website</label>
+		<div class="input_field social_section">
+			<?php if($info['customer_business_website'] !='') { echo "<a class='display_info' target='_blank' href='".addhttp($info['customer_business_website'])."'>".stripslashes($info['customer_business_website'])."</a>"; } else {  echo "<label class='display_info'>".stripslashes($info['customer_business_website'])."</label>"; } ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	<?php } ?>
+	
+	
 	<?php if($info['customer_prof_profession']) {?>
 	<div class="form_field">
 		<label>Nature of Business</label>
@@ -932,7 +974,7 @@
 	<?php } ?>
 	<h3>Contact</h3>
 	
-	<?php /*if($info['customer_phone']) {?>
+	<?php if($info['customer_phone']) {?>
 	<div class="form_field">
 		<label>Mobile</label>
 		<div class="input_field">
@@ -940,7 +982,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<?php } */ ?>
+	<?php }  ?>
 	<?php if($info['customer_prof_official_phone']) {?>
 	<div class="form_field">
 		<label>Office</label>
