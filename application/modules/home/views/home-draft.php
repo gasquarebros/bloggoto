@@ -21,7 +21,26 @@ var custom_redirect_url="home/draftpost";
 						<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
 					</div>
 					<div class="list_decp">
-						<h3><a href="<?php echo base_url().$module.'/view/'.$record['post_slug']; ?>"><?php echo $record['post_title']; ?></a></h3>
+						<h3>
+						
+							<a href="<?php echo base_url().$module.'/view/'.$record['post_slug']; ?>"><?php echo $record['post_title']; ?></a>
+							<?php if(get_user_id() != '') { ?>		
+								<span href="javascript:;" class="post_more x_login_popup post_options_action" title="More"><i class="fa fa-ellipsis-v"></i>
+								
+												
+						
+									<ul style="display:none;" class="show_post_options test">
+
+										<?php if(get_user_id() == $record['post_created_by']) { ?>
+										<li>		
+											<a href="javascript:;" class="post_delete x_login_popup" data-id="<?php echo encode_value($record['post_id']);?>" title="Delete"><i class="fa fa-trash-o"></i></a>
+										</li>		
+										<?php } ?>
+									</ul>
+							
+								</span>
+							<?php } ?>	
+						</h3>
 						<?php 
 						$post_video = '';
 						if($record['post_video'] !='' ){ 

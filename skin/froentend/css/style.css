@@ -384,7 +384,7 @@ a.btn:hover {
 
 .fllow_bns a.btn.btn_blue {
     background: #4080ff;
-    margin-right: 10px;
+    margin-right: 2px;
 }
 
 .fllow_bns a.btn.bt_green {
@@ -866,11 +866,7 @@ ul.profile_rgt {
 .comp_info {
     width: 200px;
     float: left;
-<<<<<<< HEAD
     margin-right: 100px;
-=======
-    margin-right: 35px;
->>>>>>> dc99157c1998af7f14b1922471e6796396728a3d
 }
 
 .comp_info {
@@ -1602,6 +1598,7 @@ input[type="file"] {
     font-size: 25px;
     text-align: left;
     margin: 0;
+	text-align: center;
 }
 
 .prof_dest ul {

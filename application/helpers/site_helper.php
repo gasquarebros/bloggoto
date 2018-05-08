@@ -275,7 +275,7 @@ if (! function_exists ( 'message_notify_count' )){
 		$customer_id = ($CI->session->userdata('bg_user_id'))?$CI->session->userdata('bg_user_id'):'';
 		$where=array();
 
-			$where =array("((`assigned_from`='".$customer_id."' AND `open_status`='N' AND `from_delete`='N') OR (`assigned_to`='".$customer_id."'  AND `open_status`='N' AND `to_delete`='N'))"=>NULL);
+			$where =array("( (`assigned_to`='".$customer_id."'  AND `open_status`='N' AND `to_delete`='N'))"=>NULL);
 			$msg_notification = $CI->Mydb->get_num_rows('notification_id','notification_message',$where);	
 
 			if($msg_notification>0)

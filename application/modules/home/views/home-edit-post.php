@@ -3,7 +3,7 @@ var module_action="updatepost";
 </script>
 <section>
 	<div class="container">
-		<div class="comment_section page_content">
+		<div style="margin-bottom:15px;" class=" page_content">
 			<div class="col-md-3">
 			</div>
 			<div class="col-md-9">
