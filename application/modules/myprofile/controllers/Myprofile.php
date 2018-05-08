@@ -10,7 +10,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Myprofile extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
-		//$this->authentication->user_authentication();
+		$this->authentication->user_authentication();
 		$this->module = "profile";
 		$this->module_label = get_label('profile_module_label');
 		$this->module_labels = get_label('profile_module_label');
