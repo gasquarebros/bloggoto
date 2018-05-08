@@ -186,8 +186,9 @@ if (! function_exists ( 'post_notify' )){
 				$notify_array['assigned_to'] = $post_record['post_created_by'];
 				$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
 			}
-			else
+			else if($notify_array['notification_type'] == 'follow')
 			{
+				$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
 			}
 
 		return $notification_id;

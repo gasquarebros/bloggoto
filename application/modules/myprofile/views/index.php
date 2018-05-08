@@ -28,6 +28,16 @@ if(!empty($_GET['filter']) && $_GET['filter']=='trash') {
 											<li class="mailboxer_conversation" <?php if($notify['open_status']=='N'){ ?> style="font-weight: bold !important;"<?php } ?>>
 												<div class="mail-control"></div>
 												<div class="mail-from">
+													<?php 
+													if($notify['notification_type'] == 'follow')
+													{
+															$href_url=base_url('myprofile/'.$notify['customer_username']."/".encode_value($notify['post_notification_id'])."/".encode_value($notify['open_status']));
+													}
+													else
+													{
+															$href_url=base_url('home/view/'.$notify['post_slug']."/".encode_value($notify['post_notification_id'])."/".encode_value($notify['open_status']));
+													}
+													?>
 													<a class="notify_class" href="<?=base_url('home/view/'.$notify['post_slug']."/".encode_value($notify['post_notification_id'])."/".encode_value($notify['open_status']))?>" data-id="<?=encode_value($notify['post_notification_id'])?>" ><?=$notify['post_title']; ?></a>
 
 												</div>

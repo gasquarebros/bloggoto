@@ -69,8 +69,14 @@ class Myprofile extends CI_Controller {
 	
 	
 	/* this method used to check login */
-	public function index($userid=null) {
-
+	public function index($userid=null,$notify_id=null,$notify_status=null) 
+	{
+		if($notify_id != '' && decode_value($notify_status)=='N')
+		{
+	        $notification_id = decode_value($notify_id);
+			$where = array('open_status'=>'Y');
+			$this->Mydb->update('post_notification',array('post_notification_id'=>$notification_id, 'open_status'=>'N'),$where);
+		}
 		if($userid == null)
 		{
 			//$userid = get_user_id();
@@ -699,13 +705,23 @@ class Myprofile extends CI_Controller {
                    // $counting_profile = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$userid));
 					if($insert_id>0)
 					{
+						 $follow_notify_record=array();
 						$select_array=array('customer_first_name as customer_name');
- 					$follow_user = $this->Mydb->get_record ( $select_array, $this->customers, array('customer_id'=>$customer_id) );
-						$record['subject'] = "follow you ".$follow_user['customer_name'];
-						$record['message'] = "follow you ".$follow_user['customer_name'];
-						$record['notification_type'] = "follow";
-						$record['assigned_to'] = $userid;
-						post_notify($record);#insert follow user						
+ 						$follow_user = $this->Mydb->get_record($select_array, $this->customers, array('customer_id'=>$customer_id) );
+						$message = "follow you ".$follow_user['customer_name'];
+							$follow_notify_record = array(
+								'assigned_to'=>$userid,
+								'notification_type'=>'follow',
+								'created_type'=>'E',
+								'message_type'=>'N',
+								'subject'=>$message,
+								'message'=>$message,
+								'private'=>0,
+								'created_by'=>get_user_id(),
+								'created_on'=>current_date(),				
+								'ip_address'=>get_ip(),
+								); 					
+						post_notify($follow_notify_record);#insert follow user						
 					}
 					$counting = count(get_followers_list($customer_id));
 					$counting_following = count(get_following_list($customer_id));
@@ -884,10 +900,14 @@ class Myprofile extends CI_Controller {
 		$select_array=array('post_notification.*');
 		$where=array('assigned_to'=>$customer_id);
 		$order_by=array('created_on'=>'desc','open_status'=>'desc');
-		$join [0] ['select'] = "p.post_slug,p.post_title";
+		$join [0] ['select'] = "p.post_id,p.post_slug,p.post_title";
 		$join [0] ['table'] = "posts as  p";
 		$join [0] ['condition'] = "p.post_id = notification_post_id";
 		$join [0] ['type'] = "LEFT";
+		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_type,company_name";
+		$join [1] ['table'] = $this->customers;
+		$join [1] ['condition'] = "assigned_to = customer_id and post_by !='admin'";
+		$join [1] ['type'] = "LEFT";		
 		$data ['notification'] = $this->Mydb->get_all_records ( $select_array, 'post_notification', $where, $limit, $offset, $order_by, $like, $groupby, $join );
         $this->layout->display_site($this->folder . 'index',$data);
 	}	
