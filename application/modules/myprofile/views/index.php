@@ -31,21 +31,28 @@ if(!empty($_GET['filter']) && $_GET['filter']=='trash') {
 													<?php 
 													if($notify['notification_type'] == 'follow')
 													{
+														if($notify['customer_username'] != '')
+														{
 															$href_url=base_url('myprofile/'.$notify['customer_username']."/".encode_value($notify['post_notification_id'])."/".encode_value($notify['open_status']));
+														}
+														else
+														{
+															$href_url='#';
+														}
 													}
 													else
 													{
 															$href_url=base_url('home/view/'.$notify['post_slug']."/".encode_value($notify['post_notification_id'])."/".encode_value($notify['open_status']));
 													}
 													?>
-													<a class="notify_class" href="<?=base_url('home/view/'.$notify['post_slug']."/".encode_value($notify['post_notification_id'])."/".encode_value($notify['open_status']))?>" data-id="<?=encode_value($notify['post_notification_id'])?>" ><?=$notify['post_title']; ?></a>
+													<a class="notify_class" href="<?=$href_url?>" data-id="<?=encode_value($notify['post_notification_id'])?>" ><?=$notify['post_title']; ?></a>
 
 												</div>
 												<div class="mail-time">
 													<span><?=date('d F Y',strtotime($notify['created_on']))?></span>
 												</div>
 												<div class="mail-subject">
-													<a  class="notify_class" href="<?=base_url('home/view/'.$notify['post_slug']."/".encode_value($notify['post_notification_id'])."/".encode_value($notify['open_status']))?>" data-id="<?=encode_value($notify['post_notification_id'])?>" ><?=$notify['message']?></a>
+													<a  class="notify_class" href="<?=$href_url?>" data-id="<?=encode_value($notify['post_notification_id'])?>" ><?=$notify['message']?></a>
 												</div>
 											</li>
 											<?php
