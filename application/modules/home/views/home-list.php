@@ -146,6 +146,7 @@ var module_action="addpost";
 							<input type="submit" value="Publish">
 						</div>
 						<div class="clear"></div>
+						<div class="alert_msg"></div>
 					</div>
 				
 			</div>
