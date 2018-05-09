@@ -77,7 +77,7 @@ class Common {
 			$file_name = $files;
 			$config ['upload_path'] = FCPATH . 'media/' . $image_path;
 			$config ['allowed_types'] = 'webm|mp4|mp3|ogg|ogv';
-			$config ['max_size'] = '102400';
+			$config ['max_size'] = '1024000';
 			//$config ['file_name'] = random_string ( 'alnum', 50 );
 			$config['encrypt_name']=true;
 			$config['remove_spaces']=true;
