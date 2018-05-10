@@ -900,15 +900,19 @@ class Myprofile extends CI_Controller {
 		$select_array=array('post_notification.*');
 		$where=array('assigned_to'=>$customer_id);
 		$order_by=array('created_on'=>'desc','open_status'=>'desc');
-		$join [0] ['select'] = "p.post_id,p.post_slug,p.post_title";
-		$join [0] ['table'] = "posts as  p";
-		$join [0] ['condition'] = "p.post_id = notification_post_id";
-		$join [0] ['type'] = "LEFT";
-		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_type,company_name";
-		$join [1] ['table'] = $this->customers;
-		$join [1] ['condition'] = "assigned_to = customer_id and post_by !='admin'";
-		$join [1] ['type'] = "LEFT";		
+		$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_type,company_name";
+		$join [0] ['table'] = $this->customers;
+		$join [0] ['condition'] = "created_by = customer_id";
+		$join [0] ['type'] = "LEFT";		
+		$join [1] ['select'] = "p.post_id,p.post_slug,p.post_title";
+		$join [1] ['table'] = "posts as  p";
+		$join [1] ['condition'] = "p.post_id = notification_post_id";
+		$join [1] ['type'] = "LEFT";
 		$data ['notification'] = $this->Mydb->get_all_records ( $select_array, 'post_notification', $where, $limit, $offset, $order_by, $like, $groupby, $join );
+		//echo $this->db->last_query();
+		
+		//echo "<pre>";
+		//print_r($data);		
         $this->layout->display_site($this->folder . 'index',$data);
 	}	
 	public function pull_post_log()
