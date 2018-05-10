@@ -59,7 +59,7 @@
 				<li><a href="javascript:void(0)">Shop <span style="font-size:9px;">(coming soon)</span></a></li>
 			</ul>
 			<?php if(get_user_id() != '') { ?>
-			<ul class="main_menu">
+			<ul class="main_menu profile_menu">
 				<li><a href="javascript:void(0)" class="<?php if($this->uri->segment(1)== 'myprofile' || $this->uri->segment(2) == 'draftpost') { echo "active"; } ?>">My Account</a>
 					<ul class="submenu">
 						<li><a href="<?php echo base_url().'myprofile'; ?>">My Profile</a></li>

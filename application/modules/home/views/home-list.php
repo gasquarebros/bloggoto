@@ -13,7 +13,7 @@ var module_action="addpost";
                 <li><a data-type="story" href="javascript:void(0)">Stories</a></li>
                 <li><a data-type="book" href="javascript:void(0)">Books</a></li>
                 <li><a data-type="qa" href="javascript:void(0)">Q & A</a></li>
-                <li><a data-type="must_see" href="javascript:void(0)">Must See</a></li>
+                <?php /*<li><a data-type="must_see" href="javascript:void(0)">Must See</a></li>*/ ?>
             </ul>
             <a href="javascript:void(0)" class="more_items"><i class="fa fa-angle-double-down" aria-hidden="true"></i></a>
         </div>
@@ -99,7 +99,7 @@ var module_action="addpost";
 					<li><a data-type="story" href="javascript:void(0)">Stories</a></li>
 					<li><a data-type="book" href="javascript:void(0)">Books</a></li>
 					<li><a data-type="qa" href="javascript:void(0)">Q & A</a></li>
-					<li><a data-type="must_see" href="javascript:void(0)">Must See</a></li>
+					<?php /*<li><a data-type="must_see" href="javascript:void(0)">Must See</a></li>*/ ?>
 				</ul>
 			</div>
 			</div>

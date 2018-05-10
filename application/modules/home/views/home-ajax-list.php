@@ -55,8 +55,9 @@ if($i%2 == 0){ ?>
 						echo "</div>";
 					} 
 				?>
-				<span></span>
+				<span>
 				<?php echo substr_close_tags(json_decode($record['post_description'])); ?>
+				</span>
 				<div class="post_by">
 					<p><span class="post_title">Posted by</span> <?php if($record['post_by'] == 'admin') { echo "Admin"; } else { echo ($record['customer_type']==0)?$record['customer_first_name']:$record['company_name']; } ?></p>
 					<a href="<?php echo base_url().$module.'/view/'.$record['post_slug']; ?>" class="read">Read More</a>
