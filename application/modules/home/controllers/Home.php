@@ -227,7 +227,8 @@ class Home extends CI_Controller {
 					$insert_id = $this->Mydb->insert ( $this->table, $insert_array );
 					if($insert_id)
 					{
-						$message='Add post';
+						$customer_username=get_tag_username(get_user_id());						
+						$message=$customer_username.' added new post';
 						#insert post notification
 							$record = array(
 								'notification_post_id'=>$insert_id,
@@ -246,7 +247,8 @@ class Home extends CI_Controller {
 						if(!empty($this->input->post('post_tags')))
 						{
 							$post_tags = $this->input->post('post_tags');
-
+							$customer_username=get_tag_username(get_user_id());						
+							$post_tag_message=$customer_username." has tagged you on post";						
 							$batch_insert = array();
 							foreach($post_tags as $post_tag)
 							{
@@ -259,8 +261,8 @@ class Home extends CI_Controller {
 										'post_tag_created_on'=>current_date (),
 										'post_created_by'=>get_user_id ()
 									);
-									$record['subject'] = "post tag";
-									$record['message'] = "post tag";
+									$record['subject'] = $post_tag_message;
+									$record['message'] = $post_tag_message;
 									$record['notification_type'] = "post_tag";
 									$record['assigned_to'] = decode_value($exploded[0]);
 									post_notify($record);#insert post tags user
@@ -706,6 +708,8 @@ class Home extends CI_Controller {
 									);
 							#insert post notification						
 							$post_tags = $this->input->post('post_tags');
+							$customer_username=get_tag_username(get_user_id());						
+							$post_tag_message=$customer_username." has tagged you on post";		
 
 							$batch_insert = array();
 							foreach($post_tags as $post_tag)
@@ -719,8 +723,8 @@ class Home extends CI_Controller {
 										'post_tag_created_on'=>current_date (),
 										'post_created_by'=>get_user_id ()
 									);
-									$record['subject'] = "post tag";
-									$record['message'] = "post tag";
+									$record['subject'] = $post_tag_message;
+									$record['message'] = $post_tag_message;
 									$record['notification_type'] = "post_tag";
 									$record['assigned_to'] = decode_value($exploded[0]);
 									post_notify($record);#insert post tags user									

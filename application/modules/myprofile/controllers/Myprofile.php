@@ -631,7 +631,8 @@ class Myprofile extends CI_Controller {
 					);
 					$insert_id = $this->Mydb->insert ( $this->post_likes, $insert_array );
 					$counting = $this->Mydb->get_num_rows('*',$this->post_likes,array('post_like_post_id'=>$postid));
-					$message='Likes your post';
+							$customer_username=get_tag_username(get_user_id());						
+							$message=$customer_username." likes your post";						
 					#insert post notification
 						$record = array(
 							'notification_post_id'=>$postid,
@@ -705,10 +706,12 @@ class Myprofile extends CI_Controller {
                    // $counting_profile = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$userid));
 					if($insert_id>0)
 					{
-						 $follow_notify_record=array();
+/*						 $follow_notify_record=array();
 						$select_array=array('customer_first_name as customer_name');
  						$follow_user = $this->Mydb->get_record($select_array, $this->customers, array('customer_id'=>$customer_id) );
-						$message = "follow you ".$follow_user['customer_name'];
+						$message = "follow you ".$follow_user['customer_name'];*/
+							$customer_username=get_tag_username(get_user_id());						
+							$message=$customer_username." started following you";						
 							$follow_notify_record = array(
 								'assigned_to'=>$userid,
 								'notification_type'=>'follow',
@@ -850,7 +853,8 @@ class Myprofile extends CI_Controller {
 							'post_comment_created_ip' => get_ip () 
 					);
 					$insert_id = $this->Mydb->insert ( $this->post_comments, $insert_array );
-						$message='Commented on your post';
+							$customer_username=get_tag_username(get_user_id());						
+							$message=$customer_username." commented on your post";					
 						#insert post notification
 							$record = array(
 								'notification_post_id'=>$postid,
@@ -895,8 +899,10 @@ class Myprofile extends CI_Controller {
 	}
 	public function notification($userid =null)
 	{
-		$customer_id = get_user_id();
 		$data=$limit=$offset=$like=$groupby=$join=array();
+		$data = $this->load_module_info ();
+
+		$customer_id = get_user_id();
 		$select_array=array('post_notification.*');
 		$where=array('assigned_to'=>$customer_id);
 		$order_by=array('created_on'=>'desc','open_status'=>'desc');
@@ -965,7 +971,34 @@ class Myprofile extends CI_Controller {
 		exit ();
 	}
 
-	
+	public function notify_mark_read()
+	{
+		$result=array();
+		$customer_id = get_user_id();
+		$mark_read_type=$this->input->post('data_type');
+		if($mark_read_type == "notification" )
+		{
+				$record = array('open_status'=>'Y');
+				$this->Mydb->update('post_notification',array('assigned_to'=>$customer_id, 'open_status'=>'N'),$record);
+				$result ['status'] = 'success';
+				$result ['message'] =  '';	
+		}
+		else if($mark_read_type == "message" )
+		{
+				$record = array('open_status'=>'Y');
+				$this->Mydb->update('notification_message',array('assigned_to'=>$customer_id, 'open_status'=>'N'),$record);			
+				$result ['status'] = 'success';
+				$result ['message'] =  '';	
+		}
+		else
+		{
+					$result ['status'] = 'error';
+					$result ['message'] =  '';	
+		}
+		
+		echo json_encode ( $result );
+		exit ();
+	}	
 	/* this method used to common module labels */
 	private function load_module_info() {
 		$data = array ();
