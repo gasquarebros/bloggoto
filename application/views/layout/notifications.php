@@ -5,7 +5,7 @@
 		
 	<div class="alert alert-danger fade in alert-dismissible" style="display: <?php echo  ($this->session->flashdata('admin_error') !="")? 'block' : 'none'; ?>;">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-		<strong>Danger!</strong> <?php echo $this->session->flashdata('admin_error');?>
+		<strong>Danger!</strong> <label><?php echo $this->session->flashdata('admin_error');?></label>
 	</div>
 
        
@@ -16,7 +16,7 @@ elseif($this->session->flashdata('admin_warning')) {  */?>
 		
 	<div class="alert alert-warning fade in alert-dismissible" style="display: <?php echo  ($this->session->flashdata('admin_warning') !="")? 'block' : 'none'; ?>;">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-		<strong>Warning!</strong> <?php echo $this->session->flashdata('admin_warning');?>
+		<strong>Warning!</strong> <label><?php echo $this->session->flashdata('admin_warning');?></label>
 	</div>	
 
  
@@ -27,7 +27,7 @@ elseif($this->session->flashdata('admin_success')) { */ ?>
 	
 	<div class="alert alert-success fade in alert-dismissible" style="display: <?php echo  ($this->session->flashdata('admin_success') !="")? 'block' : 'none'; ?>;">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-		<strong>Success!</strong> <?php echo $this->session->flashdata('admin_success');?>
+		<strong>Success!</strong> <label><?php echo $this->session->flashdata('admin_success');?></label>
 	</div>
 
 
@@ -48,7 +48,7 @@ elseif($this->session->flashdata('admin_success')) { */ ?>
 <script>
 	$(document).ready(function() {
 		$(document).on('click','.close',function () {
-			$(this).parent('div').remove();
+			$(this).parent('div').hide();
 		});
 	});
 </script>

@@ -40,7 +40,7 @@ var module_action="updatepost";
 					<li><a data-type="story" href="javascript:void(0)" class="<?php echo ($result['post_type'] == 'story') ? 'active': '';?>">Stories</a></li>
 					<li><a data-type="book" href="javascript:void(0)" class="<?php echo ($result['post_type'] == 'book') ? 'active': '';?>">Books</a></li>
 					<li><a data-type="qa" href="javascript:void(0)" class="<?php echo ($result['post_type'] == 'qa') ? 'active': '';?>">Q & A</a></li>
-					<li><a data-type="must_see" href="javascript:void(0)" class="<?php echo ($result['post_type'] == 'must_see') ? 'active': '';?>">Must See</a></li>
+					<?php /*<li><a data-type="must_see" href="javascript:void(0)" class="<?php echo ($result['post_type'] == 'must_see') ? 'active': '';?>">Must See</a></li>*/ ?>
 				</ul>
 			</div>
 			</div>
