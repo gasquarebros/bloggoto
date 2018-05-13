@@ -36,6 +36,7 @@ class Search extends CI_Controller {
 		{		
 			$select_array = array ('pos_posts.*');
 			$where=$offset=$limit=$order_by=$order_by_array=$like=$like_array=$groupby=$join=array();
+			$offset= $limit= 0;  
 			$join = array();
 			
 			
@@ -109,6 +110,7 @@ class Search extends CI_Controller {
 			{
 				$result = array();
 			} */
+			$data['offset'] = $offset;
 			$data['result'] = $post_records;
 			$this->layout->display_site ( $this->folder . $this->module . "-list", $data );
 		}
