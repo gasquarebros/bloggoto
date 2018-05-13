@@ -631,22 +631,26 @@ class Myprofile extends CI_Controller {
 					);
 					$insert_id = $this->Mydb->insert ( $this->post_likes, $insert_array );
 					$counting = $this->Mydb->get_num_rows('*',$this->post_likes,array('post_like_post_id'=>$postid));
+					#insert post notification
+					$post_reuslt=$this->Mydb->get_record('post_id,post_created_by','posts',array('post_id'=>$postid));
+						if($post_reuslt['post_created_by'] != get_user_id())
+						{
 							$customer_username=get_tag_username(get_user_id());						
 							$message=$customer_username." likes your post";						
-					#insert post notification
-						$record = array(
-							'notification_post_id'=>$postid,
-							'notification_type'=>'like',
-							'created_type'=>'E',
-							'message_type'=>'N',
-							'subject'=>$message,
-							'message'=>$message,
-							'private'=>0,
-							'created_by'=>get_user_id(),
-							'created_on'=>current_date(),				
-							'ip_address'=>get_ip(),
-							);
-						$notification_id = post_notify($record);
+							$record = array(
+								'notification_post_id'=>$postid,
+								'notification_type'=>'like',
+								'created_type'=>'E',
+								'message_type'=>'N',
+								'subject'=>$message,
+								'message'=>$message,
+								'private'=>0,
+								'created_by'=>get_user_id(),
+								'created_on'=>current_date(),				
+								'ip_address'=>get_ip(),
+								);
+							$notification_id = post_notify($record);
+						}
 					#insert post notification
 					$result ['status'] = 'success';
 					$result ['msg'] = 'Unfollow';
@@ -853,9 +857,12 @@ class Myprofile extends CI_Controller {
 							'post_comment_created_ip' => get_ip () 
 					);
 					$insert_id = $this->Mydb->insert ( $this->post_comments, $insert_array );
+					$post_reuslt=$this->Mydb->get_record('post_id,post_created_by','posts',array('post_id'=>$postid));
+						if($post_reuslt['post_created_by'] != get_user_id())
+						{					
 							$customer_username=get_tag_username(get_user_id());						
 							$message=$customer_username." commented on your post";					
-						#insert post notification
+							#insert post notification
 							$record = array(
 								'notification_post_id'=>$postid,
 								'notification_type'=>'comment',
@@ -869,7 +876,8 @@ class Myprofile extends CI_Controller {
 								'ip_address'=>get_ip(),
 								);
 							post_notify($record);
-						#insert post notification					
+							#insert post notification	
+						}				
 					$counting = $this->Mydb->get_num_rows('*',$this->post_comments,array('post_comment_post_id'=>$postid));
 					$result ['status'] = 'success';
 					$result ['message'] = 'Success';
