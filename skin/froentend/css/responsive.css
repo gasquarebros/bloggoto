@@ -69,7 +69,7 @@ position: relative; overflow: visible !important; }
     .facebook, .google_plus { font-size: 14px; }
     .profile_active_details, .profile_photo_wrap { width: 100%; display: block; margin: 0; text-align: center; }
     .fllow_bns { width: 100%; text-align: center; }
-    .newsfeed_inner { width: 100%; padding: 0 15px; }
+    .newsfeed_inner { width: 100%; /*padding: 0 15px;*/ }
     .feed_like_share ul li { width: 25%; margin-right: 12px; }
     .feed_like_share ul li a { font-size: 12px; }
     .feed_like_share ul li a i { font-size: 18px; }
@@ -128,6 +128,14 @@ position: relative; overflow: visible !important; }
 	
 	.show_post_options_detail { margin-right: 0px;}
 	
+	.single_feed {
+		margin-top: 0px;
+	}
+	.sort_by form
+	{
+		margin-bottom:0px;
+	}
+	
 }
 
 @media screen and (max-width: 600px) {
@@ -173,6 +181,7 @@ position: relative; overflow: visible !important; }
     .followers ul li { width: 45%; margin: 12px 1%; }
     .fllow_bns a.btn { width: 100%; display: block; margin: 8px 0; }
     .form_field .input_field { width: 100%; }
+	.write_post .btn_wrap, .write_post .action_field { width:66%; }
 }
 
 @media screen and (max-width: 320px) {
@@ -183,6 +192,9 @@ position: relative; overflow: visible !important; }
 	}	
 	.sort_by form .form_field { width: 100%; margin-bottom:20px; }
 	.sort_by form .form_field { width: 100%; }
+	.comment_box_wrap { width:76%; }
+	.icons_wrap ul li { margin-left: 19px; float: left; }
+	.write_post .btn_wrap, .write_post .action_field { width:66%; }
 }
 @media screen and (max-width: 360px) {
 	.list_row {

@@ -153,7 +153,6 @@ var module_action="addpost";
 					</div>
 					<div class="form_field tagging_section">
 						<?php 
-							$followers = array(''=>'Select Users');
 							$followers_lst = get_followers_list(); 
 							if(!empty($followers_lst)) {
 								foreach($followers_lst as $foll_list)
@@ -169,7 +168,7 @@ var module_action="addpost";
 								}
 							}
 						?>
-						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag People/Business" title="Tag People/Business" id="post_tags" style="width:100%"');?>
+						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag Bloggotians" title="Tag Bloggotians" id="post_tags" style="width:100%"');?>
 					</div>
 					<div class="form_field video_section" style="display:none;">
 						<div class="left_fm_field">

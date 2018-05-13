@@ -105,6 +105,7 @@ img {
     padding: 0;
     line-height: 1px;
     max-width: 100%;
+	image-orientation: from-image;
 }
 
 /* Forms */
@@ -504,8 +505,13 @@ a.btn:hover {
 }
 
 .icons_wrap ul li {
-    margin-left: 20px;
+	margin-left: 19px;
+	float: left;
 }
+
+#firstli { margin-left: 0px !important; float: left; }
+
+
 
 .signup_wrap h3 {
     font-family: 'Open Sans';
@@ -752,6 +758,8 @@ ul.profile_rgt {
 
 .list_img img {
     display: inline-block;
+	width: 200px;
+	height: 200px;
 }
 
 * .list_decp {
@@ -819,6 +827,7 @@ ul.profile_rgt {
 .post_more.x_login_popup.post_options_action {
     float: right;
 	position:relative;
+	padding:0 7px;
 }
 
 .show_post_options {
@@ -831,7 +840,7 @@ ul.profile_rgt {
     padding: 0px;
     position: absolute;
     top: 45px;
-    left: -34px;
+    left: 0px;
     padding: 10px;
 }
 
@@ -1459,7 +1468,7 @@ input[type="file"] {
 }
 
 .boi_data {
-    padding: 15px;
+    /*padding: 15px; */
 }
 
 .boi_data .form_field label {
@@ -1873,7 +1882,7 @@ input[type="file"] {
     width: 20%;
     display: inline-block;
     vertical-align: bottom;
-    text-align: right;
+    text-align: center;
 }
 
 .comments_records {

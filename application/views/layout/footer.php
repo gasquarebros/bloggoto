@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="foot_left">
 				<div class="foot_logo">
-					<a href="<?php echo base_url();?>" class="logo">
+					<a href="javascript:;" class="logo">
 						<img src="<?php echo skin_url();?>images/logo.png" alt="logo" />
 					</a>
 					<p>Social Media Made More Easy, Fast and Relevant. </p>
