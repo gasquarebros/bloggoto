@@ -1804,11 +1804,11 @@ input[type="file"] {
 }
 
 .newsfeed_wrap .form_field label {
-    font-weight: normal;
+    font-weight: bold;
 }
 
 .newsfeed_wrap .form_field .input_field label {
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .newsfeed_inner {
