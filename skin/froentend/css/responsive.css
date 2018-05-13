@@ -45,6 +45,10 @@
     .icons_wrap { width: 150px; }
     .main_menu { display: none; }
     .nav_triger{ display: block; }
+	.profile_menu { display: block;
+float: right !important;
+z-index: 9999;
+position: relative; overflow: visible !important; }
     .profile_active_details { width: 65%; }
     .newsfeed_inner { width: 700px; }
 	.list_row { width: 48%; }
