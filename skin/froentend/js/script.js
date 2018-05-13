@@ -185,8 +185,8 @@ window.setInterval(function() {
 	$(document).on('click', '.post_report', function(e) {		
 		var dataid = $(this).attr('data-id');
 		var action = $(this).attr('title');
-		show_content_loading(); 
-		$('.load_more').hide();
+		//show_content_loading(); 
+		//$('.load_more').hide();
 		$.ajax({
 			url  : SITE_URL+'home/reportpost',
 			data : {secure_key:secure_key,dataid:dataid,action:action},
@@ -194,25 +194,27 @@ window.setInterval(function() {
 			dataType : "json",
 			async:false,
 			success : function(data) {
-				hide_content_loading();
+				//hide_content_loading();
 				if (data.status == "ok") 
 				{
 					$('.alert-success').find("label").text(data.message);
 					$('.alert-success').show();
+					$('html, body').animate({
+						'scrollTop' : $(".alert-success").position().top
+					});
 				}
 				if (data.status == "error") 
 				{
 					 // alert('');
 				}
-				 $('html,body').animate({ scrollTop: $('.alert-warning').offset().top }, 1000);
 			}
 		});
 	});
 	$(document).on('click', '.post_delete', function(e) {		
 		var dataid = $(this).attr('data-id');
 		var action = $(this).attr('title');
-		show_content_loading(); 
-		$('.load_more').hide();
+		//show_content_loading(); 
+		//$('.load_more').hide();
 		$.ajax({
 			url  : SITE_URL+'home/deletepost',
 			data : {secure_key:secure_key,dataid:dataid,action:action},
@@ -220,7 +222,7 @@ window.setInterval(function() {
 			dataType : "json",
 			async:false,
 			success : function(data) {
-				hide_content_loading();
+			//	hide_content_loading();
 				if (data.status == "ok") 
 				{
 					location.reload();
@@ -243,11 +245,12 @@ $('.reload-captcha').click(function(event){
 	});            
 });
 
-$(document).on('click','.post_options_action',function() { 
+$(document).on('click','.post_options_action',function(e) { 
+	e.stopPropagation();
 	$('.post_options_action').not(this).each(function() {
 		$(this).children('.show_post_options').hide();
 	});
-	$(this).children('.show_post_options').slideToggle();
+	$(this).children('.show_post_options').not('a').slideToggle();
 	
 });
 	$(document).on('click', '.mark_read', function(e) {	
