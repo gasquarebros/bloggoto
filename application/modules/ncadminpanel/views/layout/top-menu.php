@@ -29,7 +29,8 @@
                 
                     </ul>
 				</li>
-				<li><a href="<?php echo admin_url()."posts"?>"> <?php echo get_label('posts');?></a></li> 
+        <li><a href="<?php echo admin_url()."posts"?>"> <?php echo get_label('posts');?></a></li> 
+				<li><a href="<?php echo admin_url()."reportpost"?>"> <?php echo get_label('report_manage_label');?></a></li> 
 				<li><a href="<?php echo admin_url()."products"?>"> <?php echo get_label('product_labels');?></a></li> 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
