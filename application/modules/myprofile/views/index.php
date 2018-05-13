@@ -14,6 +14,7 @@ if(!empty($_GET['filter']) && $_GET['filter']=='trash') {
 				<div id="page-title">
 					<h1 class="page-header text-overflow">Notifications
 					</h1>
+					<a href="javascript:;" class="mark_read" data-type='notification'><span>Mark all as read</span></a>
 				</div>
 				<div class="inbx_rights performance_height">
 					<div id="page-content">

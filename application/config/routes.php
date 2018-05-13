@@ -72,6 +72,7 @@ $route['myprofile/addcomments'] = 'myprofile/addcomments';
 $route['myprofile/pull_post_log'] = 'myprofile/pull_post_log';		
 $route['myprofile/getstates'] = 'myprofile/getstates';		
 $route['myprofile/getcities'] = 'myprofile/getcities';		
+$route['myprofile/notify_mark_read'] = 'myprofile/notify_mark_read';		
 $route['notification'] = 'myprofile/notification';
 $route['myprofile/(.*)'] = 'myprofile/index/$1';
 $route['myprofile'] = 'myprofile/index';

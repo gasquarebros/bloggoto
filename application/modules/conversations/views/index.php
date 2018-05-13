@@ -24,7 +24,9 @@ if(!empty($_GET['filter']) && $_GET['filter']=='trash') {
 				}
 					?>
 					</h1>
+					
 				</div>
+					<a href="javascript:;" class="mark_read" data-type='message'><span>Mark all as read</span></a>
 				<div class="inbx_right performance_height">
 					<div id="page-content">
 						<div class="panel panel-default panel-left">

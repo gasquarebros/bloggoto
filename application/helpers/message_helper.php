@@ -161,7 +161,6 @@ if (! function_exists ( 'post_notify' )){
 			{
 					$following_records = get_following_list();
 					$follow_list = array();
-					
 					if(!empty($following_records))
 					{
 						foreach($following_records as $following) {

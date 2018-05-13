@@ -250,3 +250,28 @@ $(document).on('click','.post_options_action',function() {
 	$(this).children('.show_post_options').slideToggle();
 	
 });
+	$(document).on('click', '.mark_read', function(e) {	
+		var data_type = $(this).attr('data-type');
+		if($(this).find('.comment').val() !='') {
+			//show_content_loading(); 
+			$.ajax({
+				url : SITE_URL+'myprofile/notify_mark_read',
+				data : {secure_key:secure_key,data_type:data_type},
+				type : 'POST',
+				dataType : "json",
+				async:false,
+				success : function(data) {
+					//hide_content_loading();
+					if (data.status == "success") 
+					{
+						$('.mailboxer_conversation').attr('style','');
+					}
+					else
+					{
+
+					}
+				}
+			});
+		}
+		return false;
+	});
