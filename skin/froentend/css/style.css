@@ -783,7 +783,7 @@ ul.profile_rgt {
 }
 
 .list_decp > span {
-    min-height: 75px;
+    min-height: 100px;
     display: inline-block;
     color: #555;
     text-align: justify;
@@ -1933,8 +1933,8 @@ input[type="file"] {
 }
 
 .single_feed {
-    margin-bottom: 30px;
-    margin-top: 30px;
+    margin-bottom: 3px;
+    margin-top: 10px;
 	background-color: #fff;
 }
 
