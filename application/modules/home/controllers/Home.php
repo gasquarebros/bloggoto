@@ -29,6 +29,22 @@ class Home extends CI_Controller {
 		$this->load->library('common');
 	}
 	
+	public function wall() {
+		//echo "inn"; exit;
+		$data = $this->load_module_info ();	
+		$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'));
+		$category['']='Select Category';
+		if(!empty($post_category))
+		{
+			foreach($post_category as $blogcat)
+			{
+				$category[$blogcat['blog_cat_id']] = $blogcat['blog_cat_name'];
+			}
+		}
+		$data['post_category'] = $category;
+		$this->layout->display_site ( $this->folder . $this->module . "-index", $data );
+	}
+	
 	/* this method used to check login */
 	public function index() {
 		
@@ -158,16 +174,29 @@ class Home extends CI_Controller {
 		exit ();
 	}
 	
+	/* this method used to to check validate image file */
+	public function validate_image() {
+		if (isset ( $_FILES ['post_video'] ['name'] ) && $_FILES ['post_video'] ['name'] != "") {
+			if ($this->common->valid_video ( $_FILES ['post_video'] ) == "No") {
+				$this->form_validation->set_message ( 'validate_image', get_label ( 'upload_valid_image' ) );
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public function addpost()
 	{
 		check_site_ajax_request();
 		$this->authentication->user_authentication();
 		$data = $this->load_module_info ();
 		if ($this->input->post ( 'action' ) == "Add") {
+			
 			$this->form_validation->set_rules('post_title','lang:post_title','required|trim|strip_tags');			
 			$this->form_validation->set_rules('post_description','lang:post_description','required');
 			$this->form_validation->set_rules('post_category','lang:post_category','required');
 			$this->form_validation->set_rules('post_type','lang:post_type','required');
+			$this->form_validation->set_rules ( 'post_video', 'lang:post_video', 'trim|callback_validate_image' );
 			
 			if ($this->form_validation->run () == TRUE) {
 				

@@ -21,7 +21,7 @@
 					<h4>COMPANY</h4>
 					<ul>
 						<li><a href="<?php echo base_url()."page/about"; ?>">About Us</a></li>
-						<li><a href="javascript:void(0)">FAQ</a></li>
+						<li><a href="<?php echo base_url()."page/faq"; ?>">FAQ</a></li>
 						<li><a href="<?php echo base_url()."contact"; ?>">Contact Us</a></li>
 					</ul>
 				</div>

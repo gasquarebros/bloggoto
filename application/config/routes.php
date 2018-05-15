@@ -76,6 +76,7 @@ $route['myprofile/notify_mark_read'] = 'myprofile/notify_mark_read';
 $route['notification'] = 'myprofile/notification';
 $route['myprofile/(.*)'] = 'myprofile/index/$1';
 $route['myprofile'] = 'myprofile/index';
+$route['wall'] = 'home/wall';
 $route['home/draftpost'] = 'home/draftpost';
 $route['home/addpost'] = 'home/addpost';
 $route['home/savedraftpost'] = 'home/savedraftpost';
