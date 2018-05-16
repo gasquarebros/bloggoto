@@ -31,6 +31,13 @@ $(document).ready(function(){
 		return false;
 	});
 	$(document).on('submit', '.comment_form', function(e) {	
+	
+		var userid = $('#userid').val();
+		if(userid == '')
+		{
+			window.location.href= admin_url;
+			return false;
+		}
 		var url = $(this).attr('action');
 		var current = $(this);
 		current.find(".alert_msg").html('');
@@ -69,7 +76,13 @@ $(document).ready(function(){
 	});
 		
 	
-	$(document).on('click', '.thumbsup', function(e) {		
+	$(document).on('click', '.thumbsup', function(e) {
+		var userid = $('#userid').val();
+		if(userid == '')
+		{
+			window.location.href= admin_url;
+			return false;
+		}		
 		var dataid = $(this).data('id'); 
 		var url = $(this).attr('href');
 		var current = $(this);
@@ -201,9 +214,15 @@ function get_city() {
 	return false;
 }
 
-function get_profile_section()
+function get_profile_section(urlsection='')
 {
-	var url = $('.newsfeed_menu .active').attr('href');
+	if(urlsection !='')
+	{
+		var url = admin_url + module + "/"+urlsection+"/";
+	}
+	else {
+		var url = $('.newsfeed_menu .active').attr('href');
+	}
 	var section = $('.newsfeed_menu .active').attr('data-section');
 	show_content_loading(); 
 	$.ajax({

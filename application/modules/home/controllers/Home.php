@@ -31,6 +31,7 @@ class Home extends CI_Controller {
 	
 	public function wall() {
 		//echo "inn"; exit;
+		
 		$data = $this->load_module_info ();	
 		$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'));
 		$category['']='Select Category';
@@ -43,6 +44,164 @@ class Home extends CI_Controller {
 		}
 		$data['post_category'] = $category;
 		$this->layout->display_site ( $this->folder . $this->module . "-index", $data );
+	}
+	
+	
+	public function wall_ajax_pagination(){
+		
+		check_site_ajax_request();
+		
+		$like = array ();
+	
+		$order_by = array (
+				$this->primary_key => 'DESC' 
+		);
+		$where = array('post_status'=>'A','post_by !='=>'admin');
+		$groupby = "post_id";
+		
+		if(post_value('section') !=''&& post_value('section') == 'blogs')
+		{
+			$where = array_merge ( $where, array (
+				"post_type !=" => 'picture', 
+				"post_type !=" => 'video', 
+			));
+		}
+		if(post_value('section') !=''&& post_value('section') == 'pictures')
+		{
+			$where = array_merge ( $where, array (
+				"(post_type = 'picture' || post_type ='video')" => null,
+			));
+		}
+		if (post_value ( 'paging' ) == "") {
+			$search_field = post_value ( 'search_field' );
+			$type = post_value ( 'type' );
+			$order_field = post_value ( 'order_field' );
+		}
+		
+		/*
+		if ($search_field !='') {
+			$like = array (
+					get_session_value ( $this->module . "_search_field" ) => $search_field 
+			);
+		}*/
+		
+		if ($search_field != "") {
+			$where = array_merge ( $where, array (
+					"post_category" => $search_field 
+			));
+		}
+		
+		if ($type != "") {
+			$where = array_merge ( $where, array (
+					"post_type" => $type 
+			));
+		}
+		
+		/* add sort bu option */
+		if ($order_field != "") {
+			if($order_field == 'followers' && get_user_id () !='')
+			{
+				$cwhere = array("follow_customer_id"=>get_user_id ());
+				$followers_customer_ids = $this->Mydb->get_all_records ( 'follow_user_id', $this->customers_followers, $cwhere);
+				
+				$followers = array();
+				if(!empty($followers_customer_ids))
+				{
+					foreach($followers_customer_ids as $followers_customer_id)
+					{
+						$followers[] = $followers_customer_id['follow_user_id'];
+					}
+				}
+				if(!empty($followers)) {
+					$where = array_merge ( $where, array (
+						"pos_posts.post_created_by in (".implode(',',$followers).") and pos_posts.post_by = 'customer'" => NULL 
+					));
+				}
+			}
+			else{
+				$order_by = array (
+					'post_likes' => 'DESC' 
+				);
+			}
+			
+			
+			
+		}
+		
+		$join = "";
+		$join [0] ['select'] = "blog_cat_id,blog_cat_name";
+		$join [0] ['table'] = $this->blog_categorytable;
+		$join [0] ['condition'] = "post_category = blog_cat_id";
+		$join [0] ['type'] = "LEFT";
+		
+		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name";
+		$join [1] ['table'] = $this->customers;
+		$join [1] ['condition'] = "post_created_by = customer_id and post_by !='admin'";
+		$join [1] ['type'] = "LEFT";
+	
+		$join [2] ['select'] = "(select count(post_like_id) as postcount from pos_".$this->post_likes." pplikes where pplikes.post_like_post_id = pos_".$this->table.".post_id) as postcount,group_concat(',',post_like_user_id) as lkesuser";
+		$join [2] ['table'] = $this->post_likes;
+		$join [2] ['condition'] = "post_id = post_like_post_id";
+		$join [2] ['type'] = "LEFT";
+		
+		$join [3] ['select'] = "(select count(post_comment_id) as commentcount from pos_".$this->post_comments." ppcomments where ppcomments.post_comment_post_id = pos_".$this->table.".post_id) as commentcount";
+		$join [3] ['table'] = $this->post_comments;
+		$join [3] ['condition'] = "post_id = post_comment_post_id";
+		$join [3] ['type'] = "LEFT";
+		
+		$join [4] ['select'] = "group_concat(',',post_tag_user_name) as post_tag_names, group_concat(',',post_tag_user_id) as post_tag_ids";
+		$join [4] ['table'] = $this->post_tags;
+		$join [4] ['condition'] = "post_id = post_tag_post_id";
+		$join [4] ['type'] = "LEFT";
+		
+		$totla_rows = $this->Mydb->get_num_join_rows ( $this->primary_key, $this->table, $where, null, null, null, $like, $groupby, $join  );
+
+		
+		$limit = 12;
+		$page = post_value ( 'page' )?$post_value ( 'page' ):1;
+		$offset = post_value ( 'page' )?((post_value ( 'page' )-1) * $limit):0;
+		$offset = post_value ( 'offset' )?post_value ( 'offset' ):$offset;
+		$next_offset = $offset+$limit;
+		$next_set = ($totla_rows > $next_offset)?($offset+$limit):'';
+		
+		
+		
+		$data['offset'] = $offset;
+		$data['next_set'] = $next_set;
+		$select_array = array ('pos_posts.*');
+		$data ['records'] = $this->Mydb->get_all_records ( $select_array, $this->table, $where, $limit, $offset, $order_by, $like, $groupby, $join );
+		$data['page'] = $offset;
+
+		/*
+		if($userid == get_user_id())
+		{
+			$data['post_enable'] = 'Yes';
+		}
+		else
+		{*/
+			$data['post_enable'] = 'Yes';
+		//}
+		
+		
+		$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'));
+		$category[''] = "Select Category"; 
+		if(!empty($post_category))
+		{
+			foreach($post_category as $blogcat)
+			{
+				$category[$blogcat['blog_cat_id']] = $blogcat['blog_cat_name'];
+			}
+		}
+		$data['post_category'] = $category;
+		$data['show'] = post_value('show');
+		$data['section'] = post_value('section');
+		$html = get_template ( $this->folder . '/' . $this->module . '-index-ajax-list', $data );
+		echo json_encode ( array (
+				'status' => 'success',
+				'html' => $html,
+				'next_set' => $next_set,
+		) );
+		exit ();
 	}
 	
 	/* this method used to check login */

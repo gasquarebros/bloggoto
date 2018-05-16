@@ -77,6 +77,7 @@ $route['notification'] = 'myprofile/notification';
 $route['myprofile/(.*)'] = 'myprofile/index/$1';
 $route['myprofile'] = 'myprofile/index';
 $route['wall'] = 'home/wall';
+$route['home/wall_ajax_pagination'] = 'home/wall_ajax_pagination';
 $route['home/draftpost'] = 'home/draftpost';
 $route['home/addpost'] = 'home/addpost';
 $route['home/savedraftpost'] = 'home/savedraftpost';

@@ -4,63 +4,10 @@ var module_action="addpost";
 <section>
     <div class="container">
         <h2 class="main_heading">Magazines</h2>
-<?php /*
-        <div class="section_menu">
-            <ul class="category_menu blog_category">
-                <li><a data-type="blog" href="javascript:void(0)" class="active">Blogs</a></li>
-                <li><a data-type="picture" href="javascript:void(0)">Pictures</a></li>
-                <li><a data-type="video" href="javascript:void(0)">Videos</a></li>
-                <li><a data-type="story" href="javascript:void(0)">Stories</a></li>
-                <li><a data-type="book" href="javascript:void(0)">Books</a></li>
-                <li><a data-type="qa" href="javascript:void(0)">Q & A</a></li>
-                <?php /*<li><a data-type="must_see" href="javascript:void(0)">Must See</a></li>*/ ?>
-           <?php /* </ul>
-            <a href="javascript:void(0)" class="more_items"><i class="fa fa-angle-double-down" aria-hidden="true"></i></a>
-        </div>*/ ?>
-        <div class="comment_section">
-            <div class="cmt_img">
-                <a href="javascript:void(0)" class="img_lft">
-				<?php if($this->session->userdata('bg_user_profile_picture')) { ?>
-					<img style="width:50px" class="img-circle" src="<?php echo $this->session->userdata('bg_user_profile_picture'); ?>" alt="man" />
-				<?php } else {?>
-                    <img src="<?php echo skin_url(); ?>images/man.png" alt="man" />
-				<?php } ?>	
-                </a>
-                <h4><?php if(get_user_id() == '') { echo "Hi Guest"; } else { echo "Hi ".get_user_name().","; } ?></h4>
-            </div>
-            <div class="cmt_form">
-                <form>
-                    <div class="form_field">
-                        <input type="text" id="blog_post_title" placeholder="Click here and enter title to write a blog , story, book or Upload Picture, Videos or To Ask a Question">
-                    </div>
-                    <div class="action_field">
-                        <a  <?php if(get_user_id() == '') { ?> class="popup-modals" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal" href="#test-modal" <?php } ?> value="">Let's Go</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="sort_by">
-            <?php echo form_open('',' id="common_search" class="form-inline"');?>
-                <div class="form_field">
-					<?php 
-					echo form_dropdown('search_field',$post_category,'','style="width:100%" id="search_category"'); ?>
-                </div>
-                <div class="form_field">
-                <?php 
-				$sort_method = array(''=>'All','top_blog'=>'Top Blog','followers'=>'Followers Only');
-					echo form_dropdown('order_field',$sort_method,'','style="width:100%" id="order_field"'); ?>
-                </div>
-				<input type="hidden" name="page_id" id="page_id" value="" />	
-				<input type="hidden" name="offset" id="load_offset" value="" />	
-            <?php echo form_close(); ?>    
-        </div>
         <div class="listing_wrap cntloading_wrapper ">
-			<div class="append_html"></div>
+			<div class="boi_data"></div>
 			<?php echo loading_image('cnt_loading');?>
         </div>
-		<div class="load_more" style="display:none;">
-			<button class="more_posts">Load More</button>
-		</div>
     </div>
 </section>
 
@@ -156,11 +103,12 @@ var module_action="addpost";
     </div>
 	<p><a class="popup-modal-dismiss" href="#">Dismiss</a></p>
 </div>
-<script type="text/javascript" src="<?php echo skin_url(); ?>js/home.js"></script>
+<!--<script type="text/javascript" src="<?php echo skin_url(); ?>js/home.js"></script>-->
+<script type="text/javascript" src="<?php echo skin_url(); ?>js/profile.js"></script>
 <script>
 /*  load initial content.. */
 $(window).load(function(){
-	get_content();
+	get_profile_section('wall_ajax_pagination');
 });
 
 $('.post_category_selection li a').click(function(){

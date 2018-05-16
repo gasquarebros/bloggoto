@@ -1,12 +1,16 @@
-function get_content()
+function get_content(urlsection='')
 {
+	if(urlsection == '')
+	{
+		urlsection = 'ajax_pagination';
+	}
 	var section = $('.blog_section li a.active').data('section');
-	var type = $('.blog_category li a.active').data('type');
+	var type = ($('.blog_category li a.active').length)?$('.blog_category li a.active').data('type'):'';
 	var order_field = $('#order_field').val();
 	show_content_loading(); 
 	$('.load_more').hide();
 	$.ajax({
-		url : admin_url + module + "/ajax_pagination/",
+		url : admin_url + module + "/"+urlsection+"/",
 		data : $('#common_search').serialize() + "&section="+section + "&type="+type+ "&order_field="+order_field,
 		type : 'POST',
 		dataType : "json",
