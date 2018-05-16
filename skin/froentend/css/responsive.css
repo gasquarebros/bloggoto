@@ -88,6 +88,7 @@ position: relative; overflow: visible !important; }
 	.inbx_left{
         width: 100%;
         margin-right: 0;
+		min-height: auto !important;
     }
     .inbx_right{
         width: 100%;

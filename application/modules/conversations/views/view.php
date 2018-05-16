@@ -10,12 +10,25 @@ $notify_logo = skin_url('images/db-logo2.png');
     margin-top: 15px;
 
 }
+.btn.btn-sm.trash {
+
+    margin-bottom: 5px;
+
+}
+.btn.btn-sm.small {
+
+    margin-bottom: 5px;
+
+}
+.inbx_left { min-height: auto !important; }
 .timeline-entry {
 
     margin-bottom: 50px;
-    margin-top: 5px;
+    margin-top: 5px !important;
     position: relative;
     clear: both;
+	width: 100%;
+	float: left;
 
 }
 .margin-top-10 {
@@ -47,7 +60,6 @@ $notify_logo = skin_url('images/db-logo2.png');
 .timeline-label {
     background-color: #ffffff;
     border-radius: 0;
-    margin-left: 90px;
     padding: 10px;
     position: relative;
     min-height: 50px;
@@ -153,6 +165,42 @@ $notify_logo = skin_url('images/db-logo2.png');
 
 .collapse {
     display: none;
+}
+.timeline-stat {
+
+    width: 100% !important;
+    float: left;
+    text-align: center;
+
+}
+.timeline-label {
+
+    background-color: #ffffff;
+    border: 1px solid #e9e9e9;
+    clear: both;
+    float: left;
+    width: 100%;
+}
+.timeline-stat small {
+
+    float: left;
+    width: 50px;
+
+}
+.message-heading {
+
+    width: 80%;
+    float: left;
+    margin-left: 5px;
+
+}
+.timeline-stat .panel-title.panel-title-small {
+
+    float: left;
+    width: 100%;
+    margin-left: 5px;
+    text-align: left;
+
 }
 </style>
 <section>
@@ -263,34 +311,34 @@ $notify_logo = skin_url('images/db-logo2.png');
 						if($new_message==1) { 
 						?>
 						<div class="timeline-entry margin-top-15">
-							<div class="timeline-stat margin-top-20" >
-							<?php
+							
+							<div class="timeline-stat" >
+								<?php
 
-							if($val['message_type']=='N' || $val['msg_type']='R') {
-								$notify_logo = skin_url('images/man.png');
-								$user_id1 = $val['assigned_from'];
+								if($val['message_type']=='N' || $val['msg_type']='R') {
+									$notify_logo = skin_url('images/man.png');
+									$user_id1 = $val['assigned_from'];
 
-								
-								if(!empty($allusers[$user_id1]['customer_photo']) && file_exists(FCPATH.'media/'.$this->lang->line('customer_image_folder_name')."/".$allusers[$user_id1]['customer_photo']))
-								{
-									$notify_logo = media_url().$this->lang->line('customer_image_folder_name')."/".$allusers[$user_id1]['customer_photo'];
-								   
+									
+									if(!empty($allusers[$user_id1]['customer_photo']) && file_exists(FCPATH.'media/'.$this->lang->line('customer_image_folder_name')."/".$allusers[$user_id1]['customer_photo']))
+									{
+										$notify_logo = media_url().$this->lang->line('customer_image_folder_name')."/".$allusers[$user_id1]['customer_photo'];
+									   
+									}
+									$username=($allusers[$user_id1]['customer_type']==1)?$allusers[$user_id1]['company_name']:$allusers[$user_id1]['customer_first_name'];
 								}
-								$username=($allusers[$user_id1]['customer_type']==1)?$allusers[$user_id1]['company_name']:$allusers[$user_id1]['customer_first_name'];
-							}
-							?>
-							<small ><img class="circle-md" src="<?=$notify_logo?>" alt="Bloggotoweb"></small>
+								?>
+								<small ><img class="circle-md" src="<?=$notify_logo?>" alt="Bloggotoweb"></small>
+								<div class="message-heading">
+									<h3 class="panel-title panel-title-small"><?php echo ($username)?$username:'Anonymous';?></h3>
+									<span class="datetime" style="float: left;"><i class="fa fa-clock-o fa-fw margin-right-5"></i><?=date('d F Y',strtotime($val['created_on']));?></span>
+								</div>
 							</div>
 							<div class="panel timeline-label">
-								<div class="panel-heading">
-									<h3 class="panel-title panel-title-small"><?php echo ($username)?$username:'Anonymous';?></h3>
-								</div>
 								<div class="panel-body">
 									<div class="row">
 										<div class="table-responsive">
-										<?=$val['message']?>
-										<br />
-										<i class="fa fa-clock-o fa-fw margin-right-5"></i><?=date('d F Y',strtotime($val['created_on']));?>
+											<?=$val['message']?>
 										</div>
 									</div>
 								</div>

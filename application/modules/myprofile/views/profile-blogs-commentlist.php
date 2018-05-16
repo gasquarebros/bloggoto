@@ -12,20 +12,26 @@
 		{
 	?>		
 			<div class="comments_records">
-				<a href="<?php echo base_url().'myprofile/'.encode_value($record['customer_id']); ?>">
-					<?php if($record['customer_photo'] !='') { ?>
-					<img style="width:100px" src="<?php echo media_url(). $this->lang->line('customer_image_folder_name').$record['customer_photo'];?>" alt="profile" />
-					<?php } else { ?> 
-					<img src="<?php echo skin_url(); ?>images/profile.jpg" alt="profile" />
-					<?php } ?>
-				</a>
+				<div class="comment_left">
+				
+					<a href="<?php echo base_url().'myprofile/'.encode_value($record['customer_id']); ?>">
+						<?php if($record['customer_photo'] !='') { ?>
+						<img style="width:100%" src="<?php echo media_url(). $this->lang->line('customer_image_folder_name').$record['customer_photo'];?>" alt="profile" />
+						<?php } else { ?> 
+						<img style="width:100%" src="<?php echo skin_url(); ?>images/profile.jpg" alt="profile" />
+						<?php } ?>
+					</a>
+				</div>
+				<div class="comment_right">
+					<a href="<?php echo base_url().'myprofile/'.encode_value($record['customer_id']); ?>" class="name"> <?php echo ($record['customer_type'] == 0)?$record['customer_first_name']." ".$record['customer_last_name']:$record['company_name']; ?> 
+					</a> <span class="datetime"> <?php echo datepostformat(date('Y-m-d H:i:s',strtotime($record['post_comment_created_on']))); ?> </span>
+				</div>
 				<div class="parent_comments">
 					<div class="message"> <span class="arrow"> </span> 
-					
-					<a href="<?php echo base_url().'myprofile/'.encode_value($record['customer_id']); ?>" class="name"> <?php echo ($record['customer_type'] == 0)?$record['customer_first_name']." ".$record['customer_last_name']:$record['company_name']; ?> 
-					</a> <span class="datetime"> at <?php echo datepostformat(date('Y-m-d H:i:s',strtotime($record['post_comment_created_on']))); ?> </span> <span class="body recent"> <?php 
-					echo $text = $record['post_comment_message'];
-					?> </span> </div>
+						<span class="body recent"> 
+							<?php echo $text = $record['post_comment_message']; ?> 
+						</span> 
+					</div>
 					
 				</div>
 			</div>

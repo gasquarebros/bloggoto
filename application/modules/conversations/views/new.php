@@ -98,8 +98,7 @@ if(!empty($_GET['email'])) {
 												</div>
 											</div>
 										</div>
-										<div class="col-md-2 margin-top-20">
-											<div class="light-weight">&nbsp;</div>
+										<div class="col-md-2">
 										</div>
 										<div class="col-md-10 margin-top-20">
 											<div class="control-group string conversation_subject">
@@ -128,3 +127,7 @@ if(!empty($_GET['email'])) {
 </section>	
 <script type="text/javascript" src="<?=skin_url('js/conversations.js?v='.rand())?>"></script>
 <div class="clear"></div>
+<script>
+	var positiontop = $('#frm-conversations').offset().top;
+	$('body,html').animate({scrollTop:positiontop}, 800);
+</script>
