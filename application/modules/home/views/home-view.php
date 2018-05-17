@@ -16,7 +16,7 @@
 									$username = get_tag_username($record['customer_id']);
 									$url="";
 									if($username !='') {
-										$url =base_url()."myprofile/".urlencode($username);
+										$url =base_url().urlencode($username);
 									}
 								}
 								if($url !='') { ?> <a href="<?php echo $url; ?>"> <?php } ?>
@@ -93,7 +93,7 @@
 											$username = get_tag_username($tag_user_id[$tkey]);
 											if(!empty($tag) && $username !='') {
 							?>
-												<span><a target="_blank" href="<?php echo base_url().'myprofile/'.urlencode($username); ?>"><?php echo $tag; ?></a></span>
+												<span><a target="_blank" href="<?php echo base_url().urlencode($username); ?>"><?php echo $tag; ?></a></span>
 							<?php
 											}
 										} 
@@ -134,17 +134,7 @@
 											
 									</div>
 								</li>
-								<?php /*
-								<li><a href="javascript:void(0)" class="share_social"><i class="fa fa-share" aria-hidden="true"></i> Share</a>
-									<div class="social_sharing_sections" style="display:none">
-										
-
-										
-										<a href="http://www.facebook.com/sharer.php?u=<?php echo base_url().'home/view/'.$record['post_slug']; ?>&title=<?php echo urlencode($record['post_title']); ?>" target="_blank" title="Click to share">Share on Facebook</a>
-										<a href="http://twitter.com/share?text=<?php echo urlencode($record['post_title']); ?>&url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" title="Click to post to Twitter">Tweet this</a>
-										<a href="https://plus.google.com/share?url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" title="Click to share">Share on Google+</a>
-									</div>
-								</li> */ ?>
+								
 							</ul>
 							<div class="comments_list">
 							</div>	

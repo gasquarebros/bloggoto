@@ -85,9 +85,9 @@ class Login extends CI_Controller {
 									$cookie = array(
 									'name'   => 'login_remeber_me',
 									'value'  => $session_datas['bg_user_id'],
-									'expire' => time()+(300*60*60*24)
+									'expire' => (300*60*60*24)
 									);
-									setcookie('login_remeber_me', $session_datas['bg_user_id'],  time()+(300*60*60*24), "/"); // 86400 = 1 day
+									setcookie('login_remeber_me', $session_datas['bg_user_id'],  (300*60*60*24), "/"); // 86400 = 1 day
 									$this->input->set_cookie($cookie); 
 								}
 							

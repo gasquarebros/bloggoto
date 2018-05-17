@@ -23,15 +23,15 @@ class Authentication {
 			return '';
 		}
 		else if(isset($_COOKIE['login_remeber_me'])) {
-			$check_details = $this->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo', 'customers', array ('customer_id' => $_COOKIE['login_remeber_me'],'customer_status !='=>'D') );
+			$check_details = $this->ci->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo', 'customers', array ('customer_id' => $_COOKIE['login_remeber_me'],'customer_status !='=>'D') );
 		
 			if(!empty($check_details))
 			{
 				if ($check_details['customer_status'] == 'A'){
-					/* storing the values in session */		
-					$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'bg_user_profile_picture'=>($check_details['customer_photo'])?media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo']:'' );
-					if($check_details['customer_photo'] && file_exists(media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'])) {
-						$session_datas['bg_user_profile_picture'] = media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'];
+					/* storing the values in session */				
+					$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'company_name'=>$check_details['company_name'],'customer_username'=>$check_details['customer_username'],'bg_user_profile_picture'=>($check_details['customer_photo'])?media_url().$this->ci->lang->line('customer_image_folder_name')."/".$check_details['customer_photo']:'' );
+					if($check_details['customer_photo'] && file_exists(media_url().$this->ci->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'])) {
+						$session_datas['bg_user_profile_picture'] = media_url().$this->ci->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'];
 					}
 					else
 					{
@@ -44,7 +44,7 @@ class Authentication {
 					);
 					$this->ci->input->set_cookie($cookie); 
 					
-					$this->session->set_userdata($session_datas);
+					$this->ci->session->set_userdata($session_datas);
 				}
 				else
 				{

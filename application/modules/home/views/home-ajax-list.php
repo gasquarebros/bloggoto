@@ -48,7 +48,7 @@ if($i%2 == 0){ ?>
 							$username = get_tag_username($tag_user_id[$tkey]);
 							if(!empty($tag) && $username !='') {
 				?>
-								<span><a target="_blank" href="<?php echo base_url().'myprofile/'.urlencode($username); ?>"><?php echo "#".$tag; ?></a></span>
+								<span><a target="_blank" href="<?php echo base_url().urlencode($username); ?>"><?php echo "#".$tag; ?></a></span>
 				<?php
 							} 
 						}

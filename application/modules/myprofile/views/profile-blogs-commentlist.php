@@ -10,11 +10,12 @@
 	$records = array_reverse($records);
 		foreach($records as $record)
 		{
+			$username = get_tag_username($record['customer_id']);
 	?>		
 			<div class="comments_records">
 				<div class="comment_left">
 				
-					<a href="<?php echo base_url().'myprofile/'.encode_value($record['customer_id']); ?>">
+					<a href="<?php echo base_url().urlencode($username); ?>">
 						<?php if($record['customer_photo'] !='') { ?>
 						<img style="width:100%" src="<?php echo media_url(). $this->lang->line('customer_image_folder_name').$record['customer_photo'];?>" alt="profile" />
 						<?php } else { ?> 
@@ -23,7 +24,7 @@
 					</a>
 				</div>
 				<div class="comment_right">
-					<a href="<?php echo base_url().'myprofile/'.encode_value($record['customer_id']); ?>" class="name"> <?php echo ($record['customer_type'] == 0)?$record['customer_first_name']." ".$record['customer_last_name']:$record['company_name']; ?> 
+					<a href="<?php echo base_url().urlencode($username); ?>" class="name"> <?php echo ($record['customer_type'] == 0)?$record['customer_first_name']." ".$record['customer_last_name']:$record['company_name']; ?> 
 					</a> <span class="datetime"> <?php echo datepostformat(date('Y-m-d H:i:s',strtotime($record['post_comment_created_on']))); ?> </span>
 				</div>
 				<div class="parent_comments">

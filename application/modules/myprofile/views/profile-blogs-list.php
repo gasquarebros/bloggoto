@@ -52,7 +52,9 @@
 									$url ="";									
 								} 
 								else { 
-									$url =base_url()."myprofile/".encode_value($record['customer_id']);
+									$username = get_tag_username($record['customer_id']);
+									$url =base_url().urlencode($username);
+									
 								}
 								if($url !='') { ?> <a href="<?php echo $url; ?>"> <?php } ?>
 								<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
@@ -133,7 +135,7 @@
 										$username = get_tag_username($tag_user_id[$tkey]);
 										if(!empty($tag)) {
 							?>
-											<span><a target="_blank" href="<?php echo base_url().'myprofile/'.urlencode($username); ?>"><?php echo "#".$tag; ?></a></span>
+											<span><a target="_blank" href="<?php echo base_url().urlencode($username); ?>"><?php echo "#".$tag; ?></a></span>
 							<?php
 										} 
 									}
@@ -158,15 +160,7 @@
 											
 									</div>
 								</li>
-								<?php /*
 								
-								<li class="share-section"><a href="javascript:void(0)" class="share_social"><i class="fa fa-share" aria-hidden="true"></i> Share</a>
-									<div class="social_sharing_sections" style="display:none">
-										<a class="fa fa-facebook-square" href="http://www.facebook.com/sharer.php?u=<?php echo base_url().'home/view/'.$record['post_slug']; ?>&title=<?php echo urlencode($record['post_title']); ?>" target="_blank" title="Click to share"></a>
-										<a class="fa fa-twitter" href="http://twitter.com/share?text=<?php echo urlencode($record['post_title']); ?>&url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" title="Click to post to Twitter"></a>
-										<a class="fa fa-google-plus-square" href="https://plus.google.com/share?url=<?php echo base_url().'home/view/'.$record['post_slug']; ?>" target="_blank" title="Click to share"></a>
-									</div>
-								</li>*/ ?>
 							</ul>
 							<div class="comments_list">
 							</div>	

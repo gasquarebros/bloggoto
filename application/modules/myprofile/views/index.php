@@ -34,7 +34,7 @@ if(!empty($_GET['filter']) && $_GET['filter']=='trash') {
 													{
 														if($notify['customer_username'] != '')
 														{
-															$href_url=base_url('myprofile/'.$notify['customer_username']."/".encode_value($notify['post_notification_id'])."/".encode_value($notify['open_status']));
+															$href_url=base_url($notify['customer_username']."/".encode_value($notify['post_notification_id'])."/".encode_value($notify['open_status']));
 														}
 														else
 														{
