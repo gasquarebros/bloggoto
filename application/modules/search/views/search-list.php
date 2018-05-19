@@ -50,7 +50,7 @@ var module_action="search";
 								<div class="search_text">
 									<a href="<?php echo $page_url; ?>">
 										<span class="search_ttile">
-											<?php echo $record['topic_value']; ?>
+										<?php echo ($record['customer_type'] == '0')?$record['customer_first_name']." ".$record['customer_last_name']:$record['company_name']; ?>											
 										</span>
 									</a>
 									<p class="">Section: <?php echo $record['topic_type']; ?></p>

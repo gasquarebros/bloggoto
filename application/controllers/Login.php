@@ -397,9 +397,12 @@ class Login extends CI_Controller {
 	
 	/* this function used to destroy all admin session values */
 	public function logout() {
-		
+		$this->load->helper('cookie');
+
 		$this->session->sess_destroy();
-		
+		setcookie('login_remeber_me', '', time() - 3600);
+		delete_cookie('login_remeber_me'); 
+
 		redirect(base_url());
 	
 	}

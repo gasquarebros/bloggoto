@@ -31,6 +31,8 @@ class Search extends CI_Controller {
 	
 	/* this method used to check login */
 	public function index() {
+		$data = $this->load_module_info ();
+
 		$search_text=$this->input->get ( 'term' );	
 		if($search_text !='')
 		{		

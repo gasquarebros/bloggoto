@@ -1009,6 +1009,7 @@ class Myprofile extends CI_Controller {
 	}
 	public function get_followers_profile($userid)
 	{
+		check_site_ajax_request();
 		$action=$this->input->post('action');
 		$customer_id=decode_value($userid);
 		$following_records = get_following_list($customer_id);
@@ -1025,7 +1026,7 @@ class Myprofile extends CI_Controller {
 	}	
 	public function get_following_profile($userid)
 	{
-
+		check_site_ajax_request();
 		$action=$this->input->post('action');
 		$customer_id=decode_value($userid);
 		$follow_records = get_followers_list($customer_id);
