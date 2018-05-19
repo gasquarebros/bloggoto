@@ -29,7 +29,7 @@
                 <div class="form_field">
                 <?php 
 				//$sort_method = array(''=>'All','top_blog'=>'Top Blog','followers'=>'Followers Only');
-				$sort_method = array(''=>'All','top_blog'=>'Top Blog');
+				$sort_method = array(''=>'All','top_blog'=>'Top Blog','followers'=>'Followers Only');
 					echo form_dropdown('order_field',$sort_method,'','style="width:200px" id="order_field"'); ?>
                 </div>
 				<input type="hidden" name="userid" id="userid" value="<?php echo get_user_id(); ?>" />	
