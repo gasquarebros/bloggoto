@@ -29,11 +29,11 @@ var module_action="addpost";
             <div class="profile_active_details">
                 <div class="followers">
                     <ul>
-                        <li>
-                            <span class="following_count"><?php echo thousandsCurrencyFormat($follow_count); ?></span><span>Followers</span>
+                        <li><a class="follow_popup " data-pop-type="following" data-target="follow_modal" href="<?php echo base_url().'myprofile/get_followers_profile/'.encode_value($info['customer_id']); ?>">
+                            <span class="following_count"><?php echo thousandsCurrencyFormat($follow_count); ?></span><span>Followers</span></a>
                         </li>
-						<li>
-                            <span class="follow_count"><?php echo thousandsCurrencyFormat($following_count); ?></span><span>Following</span>
+						<li><a class="follow_popup " data-pop-type="follow"  data-target="follow_modal"   href="<?php echo base_url().'myprofile/get_following_profile/'.encode_value($info['customer_id']); ?>">
+                            <span class="follow_count"><?php echo thousandsCurrencyFormat($following_count); ?></span><span>Following</span></a>
                         </li>
 						<?php if(!empty($post_infos)) { 
 							foreach($post_infos as $postinfo){ ?> 
@@ -195,7 +195,7 @@ var module_action="addpost";
     </div>
 	<p><a class="popup-modal-dismiss" href="#">Dismiss</a></p>
 </div>	
-	
+	<a id="follow_modal_div" class="popup-modal" href="#follow_modal" ></a>
 </section>
 <script>
 $(window).load(function() {

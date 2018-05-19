@@ -1006,7 +1006,40 @@ class Myprofile extends CI_Controller {
 		
 		echo json_encode ( $result );
 		exit ();
+	}
+	public function get_followers_profile($userid)
+	{
+		$action=$this->input->post('action');
+		$customer_id=decode_value($userid);
+		$following_records = get_following_list($customer_id);
+		$data['title'] = "Followers";
+		$data['results'] = $following_records;
+			$html = get_template ( $this->folder . '/' . $this->module . '-followers-popup', $data );
+
+			echo json_encode ( array (
+					'status' => 'success',
+					'html' => $html,
+					'count' => count($following_records),
+			) );
+			exit ();
 	}	
+	public function get_following_profile($userid)
+	{
+
+		$action=$this->input->post('action');
+		$customer_id=decode_value($userid);
+		$follow_records = get_followers_list($customer_id);
+		$data['title'] = "Following";
+		$data['results'] = $follow_records;
+			$html = get_template ( $this->folder . '/' . $this->module . '-following-popup', $data );
+
+			echo json_encode ( array (
+					'status' => 'success',
+					'html' => $html,
+					'count' => count($follow_records),
+			) );
+			exit ();		
+	}		
 	/* this method used to common module labels */
 	private function load_module_info() {
 		$data = array ();

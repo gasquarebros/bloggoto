@@ -26,7 +26,7 @@
     .foot_rgt { width: 260px; }
     .profile_active_details { width: 70%; }
     .fllow_bns { position: relative; margin-bottom: 15px; top: auto; right: auto; }
-    .followers ul { margin-bottom: 15px; }
+    .followers ul { margin-bottom: 15px; width:100%; }
 	.list_row { width: 48%; }
 	.list_row_section { float: left;width: 100%;margin-bottom: 10px; }
 	.list_img img { width:100%; height: auto !important; }
@@ -70,6 +70,11 @@ position: relative; overflow: visible !important; }
     .signup_form_section label { font-size: 12px; }
     .facebook, .google_plus { font-size: 14px; }
     .profile_active_details, .profile_photo_wrap { width: 100%; display: block; margin: 0; text-align: center; }
+    .profilewrap_popup .profile_photo_wrap {
+        width: 60%;
+        float: left;
+    }
+
     .fllow_bns { width: 100%; text-align: center; }
     .newsfeed_inner { width: 100%; /*padding: 0 15px;*/ }
     .feed_like_share ul li { width: 25%; margin-right: 12px; }
@@ -144,7 +149,6 @@ position: relative; overflow: visible !important; }
 	.input_field.show_image_box { margin-top: 15px; }
 	#profile_form { margin: 0 8px; }
 	.single_feed { margin-bottom: 3px; }
-	
 }
 
 @media screen and (max-width: 600px) {
@@ -168,6 +172,26 @@ position: relative; overflow: visible !important; }
     .mail-subject{
         width: 100%;
     }
+    .profilewrap_popup .prof_dest { float:none; }
+    .profilewrap_popup .profile_photo_wrap {
+        float: left;
+        display: block;
+        width:100%;
+    }
+    .profilewrap_popup {
+        box-shadow: none !important;
+        margin: 0px 0px 10px 0px !important;
+        padding: 0px 0px !important;
+        border-bottom: 1px solid #ccc !important;
+    }
+    .profilewrap_popup .pro_pic {
+        width: 50px;
+        float: left;
+    }
+    .profilewrap_popup .prof_dest { width:100%;display:block; }
+    .profilewrap_popup .profile_photo_wrap { margin-bottom:0px;    margin-top: 8px;  }
+    .profilewrap_popup .fllow_bns { width:100%;clear: both;top: 0px; margin: 0px; }
+    .profilewrap_popup .fllow_bns a.btn { margin:0px; }
 }
 
 @media screen and (max-width: 500px) {

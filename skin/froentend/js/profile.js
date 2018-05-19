@@ -30,6 +30,56 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+	$(document).on('click', '.follow_popup', function(e) {		
+		var popup_type = $(this).attr('data-pop-type');
+		var data_target = $(this).attr('data-target');
+		var url = $(this).attr('href');
+		show_content_loading(); 
+		$.ajax({
+			url : url,
+			data : "secure_key="+secure_key+"&action="+popup_type,
+			type : 'POST',
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				hide_content_loading();
+				if (data.status == "success") 
+				{
+					$('#follow_modal_div').html(data.html);
+					$('#follow_modal_div').trigger('click');
+					// $('#follow_modal_div'+data_target).trigger('click');
+				}
+			}
+		});
+		return false;
+	});	
+	$(document).on('click', '.unfollow_users', function(e) {		
+		var url = $(this).attr('href');
+		var dataid = $(this).parent().parent().attr('id');
+		show_content_loading(); 
+		$.ajax({
+			url : url,
+			data : "secure_key="+secure_key+"&action=follow",
+			type : 'POST',
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				hide_content_loading();
+				if (data.status == "success") {
+					/* reload page if delete the pagination record is empty... */
+					if(data.page_reload == "Yes")
+					{
+						window.location.href= admin_url;
+						return false;
+					}
+					$(".follow_count").html(data.html);
+					$(".follow_users").html(data.msg);
+					$("#"+dataid).remove();
+				}
+			}
+		});
+		return false;
+	});	
 	$(document).on('submit', '.comment_form', function(e) {	
 	
 		var userid = $('#userid').val();

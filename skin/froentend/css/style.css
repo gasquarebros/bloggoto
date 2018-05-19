@@ -1583,6 +1583,32 @@ input[type="file"] {
 
 /* User picture style */
 
+.profilewrap_popup {
+    width: 100%;
+    margin: 0px 0px 0px 0px!important;
+    padding: 10px !important;
+    border: 1px solid #CCC;
+    box-shadow: none!important;
+}
+.profilewrap_popup .profile_photo_wrap {
+    width: 60%;
+}
+.profilewrap_popup .pro_pic {
+    width: 50px;
+    float: left;
+    margin-right: 10px;
+}
+.profilewrap_popup .prof_dest {
+    float: left;
+}
+.profilewrap_popup .fllow_bns {
+    width: 30%;
+    /* float: left; */
+    display: inline-block;
+    position: none;
+    top: 10px;
+}
+
 .profile_wrap {
     padding: 25px;
     background: #ffffff;
@@ -1656,6 +1682,7 @@ input[type="file"] {
 .followers ul {
     padding: 0;
     margin: 10px 10px 30px;
+    width: 70%;
 }
 
 .follow_request {

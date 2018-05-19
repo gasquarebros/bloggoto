@@ -127,8 +127,8 @@
 							<?php 
 								if(!empty($record['post_tag_names'])) { 
 									echo  "<div class='tags'>";
-									$tags = explode(',',$record['post_tag_names']); 
-									$tag_user_id = explode(',',$record['post_tag_ids']); 
+									$tags = array_unique(explode(',',$record['post_tag_names'])); 
+									$tag_user_id = array_unique(explode(',',$record['post_tag_ids'])); 
 									foreach($tags as $tkey=>$tag)
 									{
 										$username = get_tag_username($tag_user_id[$tkey]);
