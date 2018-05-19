@@ -1,5 +1,5 @@
 <?php if($info['customer_id'] == get_user_id()) { if($info['customer_type'] == 0) {  ?>
-				<?php echo form_open_multipart(base_url().'myprofile',' class="form-horizontal" id="profile_form" ' );?>
+				<?php echo form_open_multipart(base_url().'myprofile',' class="form-horizontal profile_edit_form" id="profile_form" style="display:none;"' );?>
 					<h3>General</h3>
 					<div class="form_field">
 						<label>First Name</label>
@@ -258,6 +258,7 @@
 					<div class="clear"></div>
 					<div class="btn_wrap">
 						<input type="submit" value="Update Profile">
+						<button class="cancel_edit_profile">Cancel</button>
 					</div>
 				<?php
 				echo form_hidden('edit_id',$info['customer_id']);
@@ -266,7 +267,7 @@
 				?>	
 			
 <?php } if($info['customer_type'] == 1) { ?> 
-				<?php echo form_open_multipart(base_url().'myprofile',' class="form-horizontal" id="profile_bus_form" ' );?>
+				<?php echo form_open_multipart(base_url().'myprofile',' class="form-horizontal profile_edit_form" id="profile_bus_form" style="display:none;" ' );?>
 					<h3>General</h3>
 					<div class="form_field">
 						<label>Business Name</label>
@@ -504,15 +505,16 @@
 					<div class="clear"></div>
 					<div class="btn_wrap">
 						<input type="submit" value="Update Profile">
+						<button class="cancel_edit_profile">Cancel</button>
 					</div>
 				<?php
 				echo form_hidden('edit_id',$info['customer_id']);
 				echo form_hidden ( 'action', 'edit' );
 				echo form_close ();
 				?>	
-<?php } } else if($info['customer_type'] == 0) { ?> 
-
-	<h3>General</h3>
+<?php } }  if($info['customer_type'] == 0) { ?> 
+	<div class="profile_display_section">
+	<h3>General <?php if($info['customer_id'] == get_user_id()) { ?><a class="edit_profile"><i class="fa fa-edit"></i>Edit Profile</a><?php } ?></h3>
 	<?php if($info['customer_first_name']) {?>
 	<div class="form_field">
 		<label>First Name</label>
@@ -782,9 +784,10 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
+	</div>
 <?php } else if($info['customer_type'] == 1) { ?> 
-
-	<h3>General</h3>
+	<div class="profile_display_section">
+	<h3>General <?php if($info['customer_id'] == get_user_id()) { ?><a class="edit_profile"><i class="fa fa-edit"></i>Edit Profile</a><?php } ?></h3>
 	<?php if($info['business_model']) {?>
 	<div class="form_field">
 		<label>Business Sector</label>
@@ -1032,6 +1035,7 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
+	</div>
 <?php } ?>
 
 <script>

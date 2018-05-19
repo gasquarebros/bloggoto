@@ -30,6 +30,7 @@
 	.list_row { width: 48%; }
 	.list_row_section { float: left;width: 100%;margin-bottom: 10px; }
 	.list_img img { width:100%; height: auto !important; }
+	.boi_data { padding: 15px !important; }
 }
 
 @media screen and (max-width: 920px) {
@@ -149,6 +150,8 @@ position: relative; overflow: visible !important; }
 	.input_field.show_image_box { margin-top: 15px; }
 	#profile_form { margin: 0 8px; }
 	.single_feed { margin-bottom: 3px; }
+	.newsfeed_wrap .form_field label { margin-bottom: 0px !important; }
+	.display_info { margin: 0px !important; }
 }
 
 @media screen and (max-width: 600px) {

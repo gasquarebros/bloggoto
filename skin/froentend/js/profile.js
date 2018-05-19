@@ -428,6 +428,19 @@ $(document).ready(function(){
 			$('.video_section').show();
 		}
 	});
+	
+	$(document).on('click','.edit_profile',function () {
+		$('.profile_edit_form').show();
+		$('.profile_display_section').hide();
+		$('.profile_edit_form select').chosen('destroy');  
+		$('.profile_edit_form select').chosen();  
+	});
+	
+	$(document).on('click','.cancel_edit_profile',function () {
+		$('.profile_edit_form').hide();
+		$('.profile_display_section').show();
+		return false;
+	});
 
 
 	

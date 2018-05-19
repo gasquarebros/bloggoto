@@ -1472,6 +1472,7 @@ input[type="file"] {
 .boi_data {
     /*padding: 15px; */
 }
+.edit_profile { float:right; }
 
 .boi_data .form_field label {
     width: 280px;
