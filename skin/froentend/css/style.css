@@ -1692,6 +1692,10 @@ input[type="file"] {
 .profile_social_share li a {
     font-size: 60px;
     padding-right: 10px;
+	color: #06678e;
+}
+.profile_social_share li a:hover {
+    color: #00c853;
 }
 
 .followers ul {
