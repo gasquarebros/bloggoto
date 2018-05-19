@@ -53,6 +53,14 @@ var module_action="addpost";
 						<?php } ?>
 						<a href="<?php echo base_url()."conversations/new_message/".encode_value($info['customer_id']); ?>" class="btn bt_green message_users">Message</a>
 					</div>
+				<?php } else { $url_social_own = base_url().urlencode($info['customer_username']); ?> 
+					<div class="profile_social_share fllow_bns">
+						<ul>
+							<li><a target="_blank" href="http://www.facebook.com/sharer.php?u=<?php echo $url_social_own; ?>&title=<?php echo urlencode($info['customer_username']); ?>" class="fb_social_share"><i class="fa fa-facebook-square"></i></a></li>	
+							<li><a target="_blank" href="http://twitter.com/share?text=<?php echo urlencode($info['customer_username']); ?>&url=<?php echo $url_social_own; ?>" class="fb_social_share"><i class="fa fa-twitter-square"></i></a></li>	
+							<li><a target="_blank" href="https://plus.google.com/share?url=<?php echo $url_social_own; ?>" class="fb_social_share"><i class="fa fa-google-plus-square"></i></a></li>	
+						</ul>
+					</div>
 				<?php } ?>
                 <div class="foll_desc">
 					<?php if($info['customer_notes']) { ?>

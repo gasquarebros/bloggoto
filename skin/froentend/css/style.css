@@ -1679,6 +1679,20 @@ input[type="file"] {
     display: inline-block;
     vertical-align: top;
 }
+.profile_social_share {
+    top: 25px !important;
+    float: left;
+    width: 30%;
+	right: 0 !important;
+}
+.profile_social_share li {
+    float: left;
+    list-style: none;
+}
+.profile_social_share li a {
+    font-size: 60px;
+    padding-right: 10px;
+}
 
 .followers ul {
     padding: 0;

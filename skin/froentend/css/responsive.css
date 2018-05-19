@@ -26,7 +26,8 @@
     .foot_rgt { width: 260px; }
     .profile_active_details { width: 70%; }
     .fllow_bns { position: relative; margin-bottom: 15px; top: auto; right: auto; }
-    .followers ul { margin-bottom: 15px; width:100%; }
+	.profile_social_share  { top:auto !important; }
+	.followers ul { margin-bottom: 15px; width:100%; }
 	.list_row { width: 48%; }
 	.list_row_section { float: left;width: 100%;margin-bottom: 10px; }
 	.list_img img { width:100%; height: auto !important; }
