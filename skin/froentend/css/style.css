@@ -386,6 +386,7 @@ a.btn:hover {
 .fllow_bns a.btn.btn_blue {
     background: #4080ff;
     margin-right: 2px;
+	display: inline-block;
 }
 
 .fllow_bns a.btn.bt_green {
@@ -1681,6 +1682,7 @@ input[type="file"] {
     color: #666666;
 
 }
+.username_info { text-align: center; padding-top: 5px;}
 
 .profile_active_details {
     width: 925px;
@@ -1951,7 +1953,7 @@ input[type="file"] {
 }
 .comment_left { float: left;width: 50px; }
 .comment_right { float: left; width: 60%;margin-left: 8px; }
-.comment_right span { clear: both; float: left; }
+.comment_right span { clear: both; float: left; color: #afafaf; font-size: 12px;}
 .comment_right a { float: left; }
 
 .comments_records > a {
@@ -1962,11 +1964,14 @@ input[type="file"] {
 .parent_comments {
     float: left;
     margin-left: 10px;
-    width: 80%;
+    width: 100%;
+	font-size: 16px;
 }
 
 .message .datetime {
     font-size: 10px;
+	font-size: 12px; 
+	color: #afafaf; 
 }
 
 .write_post .action_field a {

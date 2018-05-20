@@ -13,7 +13,7 @@ if(!empty($_GET['filter']) && $_GET['filter']=='trash') {
 			</div>
 			<div class="col-md-9">
 				<div id="page-title">
-					<h1 class="page-header text-overflow">
+					<h1 class="page-header text-overflow inbox_header">
 					<?php
 					if(!empty($_GET['filter'])) {
 						if($_GET['filter']=='sentbox') echo get_label('c_sent_mail');

@@ -24,6 +24,7 @@ var module_action="addpost";
 							<?php } } ?>
 						</ul>
 					<?php } ?>
+					<p class="username_info"><?php echo "@".$info['customer_username']; ?></p>
                 </div>
             </div>
             <div class="profile_active_details">

@@ -123,7 +123,7 @@ $notify_logo = skin_url('images/db-logo2.png');
 .panel .panel-body {
     padding-top: 10px;
     padding-bottom: 15px;
-    font-size: 13px;
+    font-size: 20px;
     font-family: 'open_sansregular';
 }
 .panel .panel-heading, .panel .panel-body, .panel .panel-footer {

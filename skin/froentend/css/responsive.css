@@ -78,6 +78,7 @@ position: relative; overflow: visible !important; }
     }
 
     .fllow_bns { width: 100%; text-align: center; }
+	.foll_desc p { padding-bottom: 10px; }
     .newsfeed_inner { width: 100%; /*padding: 0 15px;*/ }
     .feed_like_share ul li { width: 25%; margin-right: 12px; }
     .feed_like_share ul li a { font-size: 12px; }
@@ -102,12 +103,26 @@ position: relative; overflow: visible !important; }
         width: 100%;
         margin-right: 0;
 		min-height: auto !important;
+		padding-bottom:0px;
+		margin-bottom: 10px;
     }
+	.inbox_header { text-align: center; padding: 0; margin: 0;}
+	.conversation_view .panel .panel-heading { padding-left:0px; padding-right:0px; }
+	.conversation_view .panel-control { margin-bottom:10px; }
+	.conversation_view .panel-title { text-align:center }
+	.conversation_view .panel-body p { text-align:center }
+	#load_reply .timeline-label { min-height: auto; }
+	#load_reply .timeline-entry { margin-bottom: 10px !important; }
+	#load_reply .datetime { font-size: 12px; color: #afafaf; }
 	.sort_by form .form_field select { width:49%; margin-right:0px; margin-bottom: 10px;}
     .inbx_right{
         width: 100%;
         margin: 10px 0 0 0;
     }
+	.inbx_right { padding:0px; }
+	.inbx_right #user_id { padding:0 2px; margin: 0;}
+	.inbx_right .margin-top-20 { margin: 0;}
+	.inbx_right .panel-heading { padding:10px; }
 
     .panel-control{
         float: none;
@@ -160,9 +175,9 @@ position: relative; overflow: visible !important; }
 	.single_feed { margin-bottom: 3px; }
 	.newsfeed_wrap .form_field label { margin-bottom: 0px !important; }
 	.display_info { margin: 0px !important; }
-	.followers ul { margin: 0px; float: left;}
+	.followers ul { margin: 10px; float: left;}
 	.profile_wrap { padding:0px; margin-bottom: 0px; }
-	.followers ul li { width:auto !important; float: left;}
+	.followers ul li { width:auto !important; }
 	.newsfeed_menu { margin:0px; }
 }
 
@@ -215,6 +230,8 @@ position: relative; overflow: visible !important; }
     .signup_form_section .switch-field { float: none; }
     .follow_request .lft_img_fllw, .follow_request .rgt_txt_fllw { width: 100%; }
 	.list_row { width: 469px; }
+	.inbx_left .btn-success { width: 60%;text-align: center;display: block;margin: 0 auto; }
+	
 }
 
 @media screen and (max-width: 480px) {
@@ -228,7 +245,7 @@ position: relative; overflow: visible !important; }
     .signup_wrap ul li a { padding: 0 0 0 5px; }
     .facebook, .google_plus { float: none; width: 100%; margin: 0 0 8px; }
     .followers ul li { width: 45%; margin: 12px 1%; }
-    .fllow_bns a.btn { width: 100%; display: block; margin: 8px 0; }
+    .fllow_bns a.btn { width: 49%; float:left; display: block; margin: 8px 0; }
     .form_field .input_field { width: 100%; }
 	.write_post .btn_wrap, .write_post .action_field { width:66%; }
 }
