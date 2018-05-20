@@ -1472,7 +1472,7 @@ input[type="file"] {
 .boi_data {
     /*padding: 15px; */
 }
-.edit_profile { float:right; }
+.edit_profile { float:right; font-size:13px; }
 
 .boi_data .form_field label {
     width: 280px;
@@ -1491,10 +1491,18 @@ input[type="file"] {
     border-bottom: 1px solid #000000;
     padding: 15px 0 20px 0;
 }
-
+.profile_display_section {
+    padding: 0px 10px;
+}
+.profile_display_section h3 {
+    text-transform: uppercase;
+    font-size: 20px;
+    padding: 20px 0px 0px 0px;
+}
+/*
 .input_field.social_section {
     margin: 12px 0px;
-}
+}*/
 
 .form_field .input_field {
     width: 400px;
@@ -1684,13 +1692,15 @@ input[type="file"] {
     float: left;
     width: 30%;
 	right: 0 !important;
+	margin:0px !important;  
 }
+.profile_social_share ul { margin:0px; width: 100%; }
 .profile_social_share li {
-    float: left;
+    float: right;
     list-style: none;
 }
 .profile_social_share li a {
-    font-size: 60px;
+    font-size: 40px;
     padding-right: 10px;
 	color: #06678e;
 }
@@ -1937,6 +1947,7 @@ input[type="file"] {
     padding-bottom: 10px;
 	border-bottom: 1px solid #ccc;
 	margin-bottom: 6px;
+	margin-top:6px;
 }
 .comment_left { float: left;width: 50px; }
 .comment_right { float: left; width: 60%;margin-left: 8px; }
@@ -2181,7 +2192,7 @@ li.shear-btn:hover .social-share {
 
 .feed_comment {
     background: #f6f7f9;
-    padding: 20px 18px;
+    padding: 7px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     border-width: 0 1px 1px 1px;
@@ -2460,7 +2471,8 @@ list-group.bg-trans .list-group-item:not(.active):not(.disabled) {
 }
 
 .load_more {
-    margin-bottom: 25px;
+    margin: 10px 0px;
+	text-align: center;
 
 }
 

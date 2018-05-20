@@ -31,7 +31,7 @@
 	.list_row { width: 48%; }
 	.list_row_section { float: left;width: 100%;margin-bottom: 10px; }
 	.list_img img { width:100%; height: auto !important; }
-	.boi_data { padding: 15px !important; }
+	.boi_data { padding: 0px !important; }
 }
 
 @media screen and (max-width: 920px) {
@@ -87,16 +87,23 @@ position: relative; overflow: visible !important; }
     .toggle_feed { float: right; }
     .feed_name h4, .feed_body_text h4 { font-size: 20px; margin: 0; }
     .feed_name { width: 60%; }
+	.feed_header, .feed_image { margin-bottom:5px; }
     .comment_img > img, .comment_img { width: 45px; height: 45px; }
     .comment_box_wrap { width: 80%; }
-    .follow_request ul li { width: 45%; margin: 12px 2%; }
+	.follow_request ul { margin:0px; }
+    .follow_request ul li { width: 30%; margin: 12px 2%; }
 	/*.list_row { width: 48%; }*/
-	
+	.sort_by form .form_field, .newsfeed_inner .sort_by form .form_field { width:49%; margin-right:0px; margin-bottom: 10px;}
+	.feed_body_text { margin:0; padding:0;}
+	.feed_body_text p { margin-bottom:5px; }
+	.comments_list { margin-top:0px; }
+	.feed_comment { padding:7px; }
 	.inbx_left{
         width: 100%;
         margin-right: 0;
 		min-height: auto !important;
     }
+	.sort_by form .form_field select { width:49%; margin-right:0px; margin-bottom: 10px;}
     .inbx_right{
         width: 100%;
         margin: 10px 0 0 0;
@@ -153,6 +160,10 @@ position: relative; overflow: visible !important; }
 	.single_feed { margin-bottom: 3px; }
 	.newsfeed_wrap .form_field label { margin-bottom: 0px !important; }
 	.display_info { margin: 0px !important; }
+	.followers ul { margin: 0px; float: left;}
+	.profile_wrap { padding:0px; margin-bottom: 0px; }
+	.followers ul li { width:auto !important; float: left;}
+	.newsfeed_menu { margin:0px; }
 }
 
 @media screen and (max-width: 600px) {
@@ -160,15 +171,16 @@ position: relative; overflow: visible !important; }
     .write_text input[type="text"], .write_text input[type="email"], .write_text input[type="password"], .write_text textarea, .write_text select { margin-bottom: 15px; }
     .newsfeed_menu li { width: 50%; }
 	.list_row { width: 565px; }
-	
+	.write_img { width: 20%; float: left; }
 	.mail-time{
         position: static;
     right: inherit;
     text-align: left;
     left: 0;
     }
-    .mail-time .margin-left-10{
-        margin-left: 0;
+	.write_text { width: 80%; float: left; padding: 0px 0px 0px 10px;}
+	.write_post .action_field{
+        text-align:left;
     }
     .mail-from{ 
         width: 100%;
@@ -211,7 +223,7 @@ position: relative; overflow: visible !important; }
 		width: 100%;
 		margin-bottom: 10px;
 	}
-	.sort_by form .form_field { width: 100%; margin-bottom:20px; }
+	.sort_by form .form_field { width:49%; margin-right:0px; margin-bottom: 10px;}
     .signup_wrap { margin: 0; padding-top: 12px; text-align: right; width: 70%; }
     .signup_wrap ul li a { padding: 0 0 0 5px; }
     .facebook, .google_plus { float: none; width: 100%; margin: 0 0 8px; }
@@ -227,9 +239,8 @@ position: relative; overflow: visible !important; }
 		width: 100%;
 		margin-bottom: 10px;
 	}	
-	.sort_by form .form_field { width: 100%; margin-bottom:20px; }
-	.sort_by form .form_field { width: 100%; }
-	.comment_box_wrap { width:76%; }
+	.sort_by form .form_field { width:49%; margin-right:0px; margin-bottom: 10px;}
+	/*.comment_box_wrap { width:76%; }*/
 	.icons_wrap ul li { margin-left: 19px; float: left; }
 	.write_post .btn_wrap, .write_post .action_field { width:66%; }
 }
@@ -239,7 +250,7 @@ position: relative; overflow: visible !important; }
 		width: 100%;
 		margin-bottom: 10px;
 	}	
-	.sort_by form .form_field { width: 100%; margin-bottom:20px; }
+	.sort_by form .form_field { width:49%; margin-right:0px; margin-bottom: 10px;}
 	.show_post_options { margin-top:0px; }
 }
 
