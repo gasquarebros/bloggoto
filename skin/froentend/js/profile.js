@@ -197,7 +197,7 @@ $(document).ready(function(){
 						current.parent('li').parent('ul').next(".comments_list").append(data.html);
 					}
 					else{*/
-					
+						current.parent('li').parent('ul').next(".comments_list").show();
 						current.parent('li').parent('ul').next(".comments_list").html(data.html);
 					//}
 					
@@ -388,6 +388,7 @@ $(document).ready(function(){
 						current.parent('li').parent('ul').next(".comments_list").prepend(data.html);
 					}
 					else{
+						current.parent('li').parent('ul').next(".comments_list").show();
 						current.parent('li').parent('ul').next(".comments_list").html(data.html);
 					}
 					$(".recent").each(function() {

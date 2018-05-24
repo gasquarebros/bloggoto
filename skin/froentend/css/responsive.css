@@ -94,7 +94,7 @@ position: relative; overflow: visible !important; }
 	.follow_request ul { margin:0px; }
     .follow_request ul li { width: 30%; margin: 12px 2%; }
 	/*.list_row { width: 48%; }*/
-	.sort_by form .form_field, .newsfeed_inner .sort_by form .form_field { width:49%; margin-right:0px; margin-bottom: 10px;}
+	.sort_by form .form_field, .newsfeed_inner .sort_by form .form_field { width:49% !important; margin-right:0px; margin-bottom: 10px;}
 	.feed_body_text { margin:0; padding:0;}
 	.feed_body_text p { margin-bottom:5px; }
 	.comments_list { margin-top:0px; }
@@ -114,7 +114,7 @@ position: relative; overflow: visible !important; }
 	#load_reply .timeline-label { min-height: auto; }
 	#load_reply .timeline-entry { margin-bottom: 10px !important; }
 	#load_reply .datetime { font-size: 12px; color: #afafaf; }
-	.sort_by form .form_field select { width:49%; margin-right:0px; margin-bottom: 10px;}
+	.sort_by form .form_field select { width:100%! important; margin-right:0px; margin-bottom: 10px;}
     .inbx_right{
         width: 100%;
         margin: 10px 0 0 0;

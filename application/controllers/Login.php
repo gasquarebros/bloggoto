@@ -11,6 +11,7 @@ class Login extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->module = "login";
+		$this->authentication->already_login_check();
 		$this->module_label = "Login";
 		$this->module_labels = "Login";
 		$this->folder = "login/";

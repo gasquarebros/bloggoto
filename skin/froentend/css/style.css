@@ -724,6 +724,8 @@ ul.profile_rgt {
 
 .listing_wrap {
     margin-bottom: 60px;
+    margin-top: 10px;
+	
 }
 
 .list_row {
@@ -1912,6 +1914,7 @@ input[type="file"] {
 
 .comments_list {
     margin-top: 15px;
+	display: none;
 }
 
 .write_text,
@@ -2013,11 +2016,11 @@ input[type="file"] {
     border-top-right-radius: 5px;
     /*    box-shadow: 0 1px 3px #a0a0a0;*/
 }
-
+/*
 .feed_header,
 .feed_image {
     margin-bottom: 25px;
-}
+}*/
 
 .lft_feed_img {
     /*width: 8%;*/

@@ -63,10 +63,7 @@
 					</div>
 					<div class="form_field">
 						<label>Profession</label>
-						<div class="input_field">
-						
-						
-						
+						<div class="input_field">			
 							<?php $cust_prof = explode(',',$info['customer_prof_profession']); echo form_dropdown('customer_prof_profession[]',$professions,$cust_prof,'multiple="multiple"'); 
 							?>
 						</div>
@@ -114,6 +111,95 @@
 						</div><?php } ?>
 						<div class="clear"></div>
 					</div>
+					<div class="form_field">
+						<label for="customer_places_visted">Places Visited</label>
+						<div class="input_field"><?php  echo form_textarea('customer_places_visted',$info['customer_places_visted'],' class="form-control"  ');?></div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field">
+						<label for="customer_places_tovist">Places likes to Visit</label>
+						<div class="input_field"><?php  echo form_textarea('customer_places_tovist',$info['customer_places_tovist'],' class="form-control"  ');?></div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="form_field">
+						<label for="customer_bucket_list">Bucket List</label>
+						<div class="input_field"><?php  echo form_textarea('customer_bucket_list',$info['customer_bucket_list'],' class="form-control"  ');?></div>
+						<div class="clear"></div>
+					</div>
+					
+					<h3>Professional</h3>
+					<div class="form_field">
+						<label>School</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_school',stripslashes($info['customer_school']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field">
+						<label>Graduation Year</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_school_graduation',stripslashes($info['customer_school_graduation']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field">
+						<label>Pre College</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_college',stripslashes($info['customer_college']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field">
+						<label>Graduation Year</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_college_graduation',stripslashes($info['customer_college_graduation']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field">
+						<label>Post Graduation College</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_college_higher',stripslashes($info['customer_college_higher']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field">
+						<label>Graduation Year</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_college_higher_graduation',stripslashes($info['customer_college_higher_graduation']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="form_field">
+						<label>Nature of Profession</label>
+						<div class="input_field">
+							<?php echo form_dropdown('customer_nature',array(''=>'Select Nature of Profession','working'=>'Working','studying'=>'Studying'),stripslashes($info['customer_nature']),'class="form-control" id="customer_nature"' );?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<?php $show_style = "style='display:none;'"; if($info['customer_nature'] == 'working') { $show_style="style='display:block;'"; } ?>
+					<div class="form_field working_additional" <?php echo $show_style; ?>>
+						<label>Position</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_position',stripslashes($info['customer_position']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field working_additional" <?php echo $show_style; ?>>
+						<label>Current Company</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_current_company',stripslashes($info['customer_current_company']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field working_additional" <?php echo $show_style; ?>>
+						<label for="customer_previous_company">Previous Company</label>
+						<div class="input_field"><?php  echo form_input('customer_previous_company',stripslashes($info['customer_previous_company']),' class="form-control"');?></div>
+						<div class="clear"></div>
+					</div>
+					
 					
 					<h3>Social Media</h3>
 					<div class="form_field">
@@ -629,6 +715,131 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
+	
+	<?php if($info['customer_places_visted']) {?>
+	<div class="form_field">
+		<label>Places Visited</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".$info['customer_places_visted']."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	<?php if($info['customer_places_tovist']) {?>
+	<div class="form_field">
+		<label>Places likes to Visit</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".$info['customer_places_tovist']."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	<?php if($info['customer_bucket_list']) {?>
+	<div class="form_field">
+		<label>Bucket List</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".$info['customer_bucket_list']."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	
+	<h3>Professional</h3>
+	<?php if($info['customer_school']) {?>
+	<div class="form_field">
+		<label>School</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".$info['customer_school']."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	<?php if($info['customer_school_graduation']) {?>
+	<div class="form_field">
+		<label>Graduation Year</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".$info['customer_school_graduation']."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	<?php if($info['customer_college']) {?>
+	<div class="form_field">
+		<label>Pre College</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".$info['customer_college']."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	<?php if($info['customer_college_graduation']) {?>
+	<div class="form_field">
+		<label>Graduation Year</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".$info['customer_college_graduation']."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	<?php if($info['customer_college_higher']) {?>
+	<div class="form_field">
+		<label>Post Graduation College</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".$info['customer_college_higher']."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	<?php if($info['customer_college_higher_graduation']) {?>
+	<div class="form_field">
+		<label>Graduation Year</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".$info['customer_college_higher_graduation']."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	
+	<?php if($info['customer_nature']) {?>
+	<div class="form_field">
+		<label>Nature of Profession</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".$info['customer_nature']."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	
+	<?php if($info['customer_nature'] == 'working' && ($info['customer_position'] !='' ||$info['customer_current_company'] !='' || $info['customer_previous_company'] !='') ) { ?>
+		<?php if($info['customer_position']) {?>
+		<div class="form_field">
+			<label>Position</label>
+			<div class="input_field">
+				<?php echo "<label class='display_info'>".$info['customer_position']."</label>"; ?>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<?php } ?>
+		<?php if($info['customer_current_company']) {?>
+		<div class="form_field">
+			<label>Current Company</label>
+			<div class="input_field">
+				<?php echo "<label class='display_info'>".$info['customer_current_company']."</label>"; ?>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<?php } ?>
+		<?php if($info['customer_previous_company']) {?>
+		<div class="form_field">
+			<label>Previous Company</label>
+			<div class="input_field">
+				<?php echo "<label class='display_info'>".$info['customer_previous_company']."</label>"; ?>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<?php } ?>
+	<?php } ?>
+	
 	<h3>Social Media</h3>
 	<?php if($info['customer_facebook_link']) {?>
 	<div class="form_field">
@@ -1154,6 +1365,15 @@ $("#profile_bus_form").validate(
 
 	}
 });
-	
+
+$('#customer_nature').change(function() {
+	var nature = $(this).val();
+	if(nature == 'working')
+	{
+		$('.working_additional').show();
+	}else {
+		$('.working_additional').hide();
+	}
+});
 	
 </script>

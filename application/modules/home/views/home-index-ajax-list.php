@@ -1,6 +1,30 @@
  <?php if($show == 'Yes') { ?>
 	<div class="newsfeed_inner">
 		<?php if($post_enable == 'Yes') { ?>
+		
+		<div class="comment_section">
+            <div class="cmt_img">
+                <a href="javascript:void(0)" class="img_lft">
+				<?php if($this->session->userdata('bg_user_profile_picture')) { ?>
+					<img style="width:50px" class="img-circle" src="<?php echo $this->session->userdata('bg_user_profile_picture'); ?>" alt="man" />
+				<?php } else {?>
+                    <img src="<?php echo skin_url(); ?>images/man.png" alt="man" />
+				<?php } ?>	
+                </a>
+                <h4><?php if(get_user_id() == '') { echo "Hi Guest"; } else { echo "Hi ".get_user_name().","; } ?></h4>
+            </div>
+            <div class="cmt_form">
+                <form>
+                    <div class="form_field">
+                        <input type="text" id="blog_post_title" placeholder="Click here and enter title to write a blog , story, book or Upload Picture, Videos or To Ask a Question">
+                    </div>
+                    <div class="action_field">
+                        <a  <?php if(get_user_id() == '') { ?> class="popup-modals" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal" href="#test-modal" <?php } ?> value="">Let's Go</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+		<?php /*
 		<div class="write_post">
 			<div class="write_img">
 				<?php if($this->session->userdata('bg_user_profile_picture') !='') { $loged_photo = $this->session->userdata('bg_user_profile_picture') ; } else { $loged_photo=skin_url()."images/man.png"; } ?>
@@ -17,7 +41,7 @@
                 </form>
 			</div>
 			<div class="clear"></div>
-		</div>
+		</div> */ ?>
 		<?php } ?>
 		<?php if($section != 'tags') { ?>
 		<div class="sort_by">
