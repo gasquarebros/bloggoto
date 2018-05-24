@@ -71,7 +71,7 @@ position: relative; overflow: visible !important; }
     .double_input .form_field_inner:first-child { margin-right: 0px;  }
     .signup_form_section label { font-size: 12px; }
     .facebook, .google_plus { font-size: 14px; }
-    .profile_active_details, .profile_photo_wrap { width: 100%; display: block; margin: 0; text-align: center; }
+    .profile_active_details, .profile_photo_wrap { width: 100%; display: inline-block; margin: 0; text-align: center; }
     .profilewrap_popup .profile_photo_wrap {
         width: 60%;
         float: left;
