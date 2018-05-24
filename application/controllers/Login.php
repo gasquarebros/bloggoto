@@ -34,7 +34,7 @@ class Login extends CI_Controller {
 	/* this method used to check login */
 	public function index() {
 		$data = $this->load_module_info ();	
-		if(get_user_id() !=""){
+		if(get_user_id() !=""){ 
 			redirect(base_url()."home");
 		}
 		if ($this->input->post ( 'submit' ) == 'Login') 		
