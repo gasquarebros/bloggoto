@@ -16,7 +16,17 @@ var module_action="addpost";
 					<?php } ?>
                 </div>
                 <div class="prof_dest">
-                    <h4><?php echo ($info['customer_type'] == '0')?$info['customer_first_name']." ".$info['customer_last_name']:$info['company_name']; ?></h4>
+			<?php                	
+				if(get_user_id() !='')
+				{
+					$celebrity_badge_class=($info['customer_celebrity_badge']) ? 'celebrity_badge' :'';
+				}
+				else
+				{
+					$celebrity_badge_class='';
+				}                	
+			?>
+                    <h4><span class="<?php echo $celebrity_badge_class; ?>"><?php echo ($info['customer_type'] == '0')?$info['customer_first_name']." ".$info['customer_last_name']:$info['company_name']; ?></span></h4>
 					<?php if($info['customer_prof_profession'] !='') { $prof = explode(',',$info['customer_prof_profession']);   ?>
 						<ul>
 							<?php foreach($prof as $profs) { if(trim($profs) !='') { ?>
@@ -73,7 +83,16 @@ var module_action="addpost";
                     <?php if(!empty($suggestions) && $info['customer_id'] == get_user_id()) { ?>
 						<h3 class="suggestion_bloggotians">Suggested Bloggotians</h3>
 						<ul>
-							<?php foreach($suggestions as $suggestion) { //echo "<pre>"; print_r($suggestion); exit; ?>
+							<?php foreach($suggestions as $suggestion) { //echo "<pre>"; print_r($suggestion); exit; 
+									if(get_user_id() !='')
+									{
+										$celebrity_badge_class=($suggestion['customer_celebrity_badge']) ? 'celebrity_badge' :'';
+									}
+									else
+									{
+										$celebrity_badge_class='';
+									}
+							?>
 								<li>
 									<div class="lft_img_fllw">
 									<a href="<?php echo base_url().urlencode($suggestion['customer_username']); ?>" target="_blank" >
@@ -85,7 +104,7 @@ var module_action="addpost";
 									</a>	
 									</div>
 									<div class="rgt_txt_fllw">
-										<p><a href="<?php echo base_url().urlencode($suggestion['customer_username']); ?>" target="_blank" ><?php echo ($suggestion['customer_type'] == '0')?$suggestion['customer_first_name']." ".$suggestion['customer_last_name']:$suggestion['company_name']; ?></a></p>
+										<p><a class="<?php echo $celebrity_badge_class; ?>"  href="<?php echo base_url().urlencode($suggestion['customer_username']); ?>" target="_blank" ><?php echo ($suggestion['customer_type'] == '0')?$suggestion['customer_first_name']." ".$suggestion['customer_last_name']:$suggestion['company_name']; ?></a></p>
 										<a href="<?php echo base_url()."myprofile/add_followers/".encode_value($suggestion['customer_id']); ?>" class="follow follow_users follow_users_suggestions">Follow</a>
 									</div>
 								</li>

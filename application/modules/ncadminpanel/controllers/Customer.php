@@ -539,7 +539,53 @@ class Customer extends CI_Controller {
 			$response ['status'] = 'success';
 			$response ['action'] = $postaction;
 		}
+		/* Add Celebrity badge */
+		if ($postaction == 'Add_Celebrity_Badge' && ! empty ( $ids )) {
+			$update_values = array (
+					"customer_celebrity_badge" => 1,
+					"customer_updated_on" => current_date (),
+					'customer_updated_by' => get_admin_id (),
+					'customer_updated_ip' => get_ip () 
+			);
+			
+			if (is_array ( $ids )) {
+				$this->Mydb->update_where_in ( $this->table, $this->primary_key, $ids, $update_values, $where_array );
+				$response ['msg'] = sprintf ( $this->lang->line ( 'success_message_add_celebrity_bage' ), $this->module_labels );
+			} else {
+				$this->Mydb->update_where_in ( $this->table, $this->primary_key, array (
+						$ids 
+				), $update_values, $where_array );
+				$response ['msg'] = sprintf ( $this->lang->line ( 'success_message_add_celebrity_bage' ), $this->module_label );
+			}
+			
+			$response ['status'] = 'success';
+			$response ['action'] = $postaction;
+		}
 	
+		/* Celebrity badge */
+		if ($postaction == 'Remove_Celebrity_Badge' && ! empty ( $ids )) {
+			$update_values = array (
+					"customer_celebrity_badge" => 0,
+					"customer_updated_on" => current_date (),
+					'customer_updated_by' => get_admin_id (),
+					'customer_updated_ip' => get_ip () 
+			);
+			
+			if (is_array ( $ids )) {
+				$this->Mydb->update_where_in ( $this->table, $this->primary_key, $ids, $update_values, $where_array );
+				$response ['msg'] = sprintf ( $this->lang->line ( 'success_message_remove_celebrity_bage' ), $this->module_labels );
+			} else {
+				$this->Mydb->update_where_in ( $this->table, $this->primary_key, array (
+						$ids 
+				), $update_values, $where_array );
+				$response ['msg'] = sprintf ( $this->lang->line ( 'success_message_remove_celebrity_bage' ), $this->module_label );
+			}
+			
+			$response ['status'] = 'success';
+			$response ['action'] = $postaction;
+		}	
+	
+
 		echo json_encode ( $response );
 		exit ();
 	}

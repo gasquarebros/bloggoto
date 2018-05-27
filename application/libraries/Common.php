@@ -112,6 +112,27 @@ class Common {
 			}
 		}
 	}
+	/* this function used to upload video files */
+	function upload_pdf($files = null, $image_path = null) {
+		if (isset ( $files ) && ! empty ( $files ) && $image_path != "") {
+			$this->ci->load->helper ( 'string' );
+			$file_name = $files;
+			$config ['upload_path'] = FCPATH . 'media/' . $image_path;
+			$config ['allowed_types'] = 'pdf|application/pdf|application/x-download';
+			$config ['max_size'] = '15360';
+			//$config ['file_name'] = random_string ( 'alnum', 50 );
+			$config['encrypt_name']=true;
+			$config['remove_spaces']=true;
+			$this->ci->load->library ( 'upload', $config );
+			$this->ci->upload->initialize ( $config );
+			if (! $this->ci->upload->do_upload ( $file_name )) {
+				return array('status'=>'error','message'=>$this->ci->upload->display_errors());
+			} else {
+				$data = $this->ci->upload->data ();
+				return array('status'=>'success','message'=>$data ['file_name']);
+			}
+		}
+	}
 	
 	/* this function used to unlink images */
 	function unlink_image($image_name, $user_folder, $module_image_path) {

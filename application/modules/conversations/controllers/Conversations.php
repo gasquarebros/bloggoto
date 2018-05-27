@@ -121,7 +121,7 @@ class Conversations extends CI_Controller {
 		$cu_date = current_date();
 		$record = array(
 				'notification_id'=>$post_data['notification_id'],
-				'reply'=>$post_data['message_body'],
+				'reply'=>get_censored_string($post_data['message_body']),
 				'created_by'=>$this->user_details->bg_user_id,
 				'created_on'=>$cu_date,				
 				'ip_address'=>get_ip(),
@@ -223,8 +223,8 @@ class Conversations extends CI_Controller {
 			$record = array(
 				'created_type'=>$created_type,
 				'message_type'=>'M',
-				'subject'=>$post_data['subject'],
-				'message'=>$post_data['message'],
+				'subject'=>get_censored_string($post_data['subject']),
+				'message'=>get_censored_string($post_data['message']),
 				'private'=>(isset($post_data['private']))?$post_data['private']:0,
 				'created_by'=>$this->user_details->bg_user_id,
 				'assigned_to'=>$uval,

@@ -24,6 +24,16 @@
 								<?php if($url !='') { ?></a><?php } ?>
 							</div>
 							<div class="feed_name">
+							<?php 								
+								if(get_user_id() !='')
+								{
+									$celebrity_badge_class=($record['customer_celebrity_badge']) ? 'celebrity_badge' :'';
+								}
+								else
+								{
+									$celebrity_badge_class='';
+								}	
+							?>							
 								<h4><span class="post_title"></span> <?php 
 								if($record['post_by'] == 'admin'){								
 									echo "Admin"; 
@@ -31,9 +41,9 @@
 								else { 
 									if($record['customer_type'] == 1)
 									{
-										echo "<a href='".$url."'>".$record['company_name']."</a>"; 
+										echo "<a class='".$celebrity_badge_class."' href='".$url."'>".$record['company_name']."</a>"; 
 									} else {
-										echo "<a href='".$url."'>".$record['customer_first_name']." ".$record['customer_last_name']."</a>"; 
+										echo "<a class='".$celebrity_badge_class."' href='".$url."'>".$record['customer_first_name']." ".$record['customer_last_name']."</a>"; 
 									}
 									
 								} ?></h4>
@@ -113,13 +123,23 @@
 									your  browser does not support the video tag.
 								</video>
 							<?php } ?>
+							<?php 
+							if($record['post_type'] == 'book' || $record['post_type'] =='story') { ?>
+								<a class="pdf_source" href="<?php echo media_url().$this->lang->line('post_pdf_folder_name').$record['post_pdf']; ?>" target="_blank">
+									<i class="fa fa-file-pdf-o" style="font-size:48px;color:#2596B1"></i> </a>
+							<?php } ?>							
 						</div>
 						<div class="feed_like_share">
-							<?php $likes_user_ids = array_values(array_filter(array_unique(explode(',',$record['lkesuser'])))); ?>
+							<?php 
+							$likes_user_ids = array_values(array_filter(array_unique(explode(',',$record['lkesuser'])))); 
+							$favor_user_ids = array_values(array_filter(array_unique(explode(',',$record['favoruser'])))); 
+							
+							?>
 							<ul>
 								<li>
 									<a class="thumbsup <?php if(get_user_id() !='' && in_array(get_user_id(),$likes_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php echo base_url().'myprofile/post_likes/'.$record['post_slug']; ?>"><i class=" fa fa-thumbs-o-up" aria-hidden="true"></i> <span class="likes_display"><?php echo thousandsCurrencyFormat($record['postcount']); ?></span></a>
 								</li>
+								<li><a class="favor <?php if(get_user_id() !='' && in_array(get_user_id(),$favor_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php echo base_url().'myprofile/post_favor/'.$record['post_slug']; ?>"><i class="fa fa-heart-o" aria-hidden="true"></i> </a></li>								
 								<li>
 									<a data-id ="<?php echo encode_value($record['post_id']); ?>" class="comments" href="<?php /*if(get_user_id() !=''){ echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); }*/echo base_url().'myprofile/comments/'.$record['post_slug'];  ?>"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="comments_display"><?php echo thousandsCurrencyFormat($record['commentcount']); ?></span></a>
 								</li>
