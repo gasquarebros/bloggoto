@@ -14,6 +14,7 @@ class Myprofile extends CI_Controller {
 		$this->module = "profile";
 		$this->module_label = get_label('profile_module_label');
 		$this->module_labels = get_label('profile_module_label');
+		$this->post_comment_module_label = get_label('post_comment_module_label');
 		$this->folder = "myprofile/";
 		$this->table = "posts";
 		$this->customer_followers = "customers_followers";
@@ -21,6 +22,7 @@ class Myprofile extends CI_Controller {
 		$this->customers = "customers";
 		$this->customers_followers = "customers_followers";
 		$this->post_likes = "post_likes";
+		$this->post_favor = "post_favor";
 		$this->post_tags = "post_tags";
 		$this->post_comments = "post_comments";
 		$this->professions = "professions";
@@ -201,16 +203,6 @@ class Myprofile extends CI_Controller {
 					'company_name'=>post_value ( 'company_name' ),
 					'customer_business_source'=>post_value ( 'business_source' ),
 					'customer_business_website'=>post_value ( 'business_website' ),
-					'customer_school'=>post_value ( 'customer_school' ),
-					'customer_school_graduation'=>post_value ( 'customer_school_graduation' ),
-					'customer_college'=>post_value ( 'customer_college' ),
-					'customer_college_graduation'=>post_value ( 'customer_college_graduation' ),
-					'customer_college_higher'=>post_value ( 'customer_college_higher' ),
-					'customer_college_higher_graduation'=>post_value ( 'customer_college_higher_graduation' ),
-					'customer_nature'=>post_value ( 'customer_nature' ),
-					'customer_position'=>post_value ( 'customer_position' ),
-					'customer_current_company'=>post_value ( 'customer_current_company' ),
-					'customer_previous_company'=>post_value ( 'customer_previous_company' ),
 					//'customer_type'=>post_value ( 'customer_type' ),
 					//'customer_status' => ($this->input->post ( 'status' ) == "A" ? 'A' : 'I'),
 					//'customer_created_on' => current_date (),
@@ -406,7 +398,7 @@ class Myprofile extends CI_Controller {
 			$join [0] ['condition'] = "post_category = blog_cat_id";
 			$join [0] ['type'] = "LEFT";
 			
-			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name";
+			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge";
 			$join [1] ['table'] = $this->customers;
 			$join [1] ['condition'] = "post_created_by = customer_id and post_by !='admin'";
 			$join [1] ['type'] = "LEFT";
@@ -853,14 +845,16 @@ class Myprofile extends CI_Controller {
 		else 
 		{
 			$data = $this->load_module_info ();
-			if ($this->input->post ( 'action' ) == "comment") {
+			if ($this->input->post ( 'action' ) == "comment") 
+			{
 				$this->form_validation->set_rules ( 'comments', 'lang:comments', 'required|xss_clean|trim' );
-				if ($this->form_validation->run () == TRUE) {
+				if ($this->form_validation->run () == TRUE) 
+				{
 				
 					$insert_array = array (
 							'post_comment_user_id' => $customer_id,
 							'post_comment_post_id' => $postid,
-							'post_comment_message' => json_encode($this->input->post('comments')),
+							'post_comment_message' => json_encode(get_censored_string($this->input->post('comments'))),
 							'post_comment_parent' => 0,
 							'post_comment_created_on' => current_date (),
 							'post_comment_created_by' => get_user_id (),
@@ -893,7 +887,36 @@ class Myprofile extends CI_Controller {
 					$result ['message'] = 'Success';
 					$result ['html'] = thousandsCurrencyFormat($counting);
 				}
-				else {
+				else 
+				{
+					$result ['status'] = 'error';
+					$result ['message'] = validation_errors ();
+				}
+			}
+			else if ($this->input->post ( 'action' ) == "updatecmt") 
+			{
+				$commentid = decode_value(post_value('cmt_record'));
+				$this->form_validation->set_rules ( 'comment_data', 'lang:comments', 'required|xss_clean|trim' );
+				if ($this->form_validation->run () == TRUE) 
+				{
+					$update_array = array (
+						'post_comment_user_id' => $customer_id,
+						'post_comment_post_id' => $postid,
+						'post_comment_message' => json_encode(get_censored_string($this->input->post('comment_data'))),
+						'post_comment_parent' => 0,
+					);
+					$where_array=array('post_comment_id'=>$commentid);
+					$insert_id = $this->Mydb->update ( $this->post_comments,$where_array, $update_array );
+/*					print_r($update_array);
+					echo $this->db->last_query();
+					exit;*/
+					$counting =$this->Mydb->get_num_rows('*',$this->post_comments,array('post_comment_post_id'=>$postid));
+					$result ['status'] = 'success';
+					$result ['message'] = 'Success';
+					$result ['html'] = thousandsCurrencyFormat($counting);
+				}
+				else
+				{
 					$result ['status'] = 'error';
 					$result ['message'] = validation_errors ();
 				}
@@ -1050,7 +1073,171 @@ class Myprofile extends CI_Controller {
 					'count' => count($follow_records),
 			) );
 			exit ();		
+	}
+	public function favorlist()
+	{
+		$data = $this->load_module_info ();	
+		$this->layout->display_site ( $this->folder . $this->module . "-favor-list", $data );
+	}	
+	public function favor_ajax_pagination()
+	{
+		$data = $this->load_module_info ();	
+		$customer_id = get_user_id();
+		check_site_ajax_request();
+
+		$like = array ();
+	
+		$order_by = array ('post_favor.post_favor_id'=>'DESC',
+				$this->primary_key => 'DESC' 
+		);
+		$where = array('post_status'=>'A','post_by !='=>'admin','post_favor.post_favor_user_id'=>$customer_id);
+		$groupby = "post_id";
+		
+		$join = "";
+		$join [0] ['select'] = "blog_cat_id,blog_cat_name";
+		$join [0] ['table'] = $this->blog_categorytable;
+		$join [0] ['condition'] = "post_category = blog_cat_id";
+		$join [0] ['type'] = "LEFT";
+		
+		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge";
+		$join [1] ['table'] = $this->customers;
+		$join [1] ['condition'] = "post_created_by = customer_id and post_by !='admin'";
+		$join [1] ['type'] = "LEFT";
+	
+		$join [2] ['select'] = "(select count(post_like_id) as postcount from pos_".$this->post_likes." pplikes where pplikes.post_like_post_id = pos_".$this->table.".post_id) as postcount,group_concat(',',post_like_user_id) as lkesuser";
+		$join [2] ['table'] = $this->post_likes;
+		$join [2] ['condition'] = "post_id = post_like_post_id";
+		$join [2] ['type'] = "LEFT";
+		
+		$join [3] ['select'] = "(select count(post_comment_id) as commentcount from pos_".$this->post_comments." ppcomments where ppcomments.post_comment_post_id = pos_".$this->table.".post_id) as commentcount";
+		$join [3] ['table'] = $this->post_comments;
+		$join [3] ['condition'] = "post_id = post_comment_post_id";
+		$join [3] ['type'] = "LEFT";
+		
+		$join [4] ['select'] = "group_concat(',',post_tag_user_name) as post_tag_names, group_concat(',',post_tag_user_id) as post_tag_ids";
+		$join [4] ['table'] = $this->post_tags;
+		$join [4] ['condition'] = "post_id = post_tag_post_id";
+		$join [4] ['type'] = "LEFT";
+		
+		$join [5] ['select'] = "group_concat(',',post_favor_user_id) as favoruser";
+		$join [5] ['table'] = $this->post_favor;
+		$join [5] ['condition'] = "post_id = post_favor_post_id";
+		$join [5] ['type'] = "LEFT";
+
+		$totla_rows = $this->Mydb->get_num_join_rows ( $this->primary_key, $this->table, $where, null, null, null, $like, $groupby, $join  );
+
+		$limit = 12;
+		$page = post_value ( 'page' )?$post_value ( 'page' ):1;
+		$offset = post_value ( 'page' )?((post_value ( 'page' )-1) * $limit):0;
+		$offset = post_value ( 'offset' )?post_value ( 'offset' ):$offset;
+		$next_offset = $offset+$limit;
+		$next_set = ($totla_rows > $next_offset)?($offset+$limit):'';
+		
+		$data['offset'] = $offset;
+		$data['next_set'] = $next_set;
+		$select_array = array ('pos_posts.*');
+		$data ['records'] = $this->Mydb->get_all_records ( $select_array, $this->table, $where, $limit, $offset, $order_by, $like, $groupby, $join );
+		$data['page'] = $offset;
+
+		$data['show'] = post_value('show');
+		$data['section'] = post_value('section');
+		$html = get_template ( $this->folder . '/' . $this->module . '-favor-ajax-list', $data );
+		echo json_encode ( array (
+				'status' => 'success',
+				'html' => $html,
+				'next_set' => $next_set,
+		) );
+		exit ();
 	}		
+	public function post_favor($postid)
+	{
+		$customer_id = get_user_id();
+		check_site_ajax_request();
+		$postid = decode_value(post_value('dataid'));
+		if($postid == 'null' || $customer_id == null)
+		{
+			$result ['status'] = 'success';
+			$result ['page_reload'] = 'Yes';
+			$result ['message'] = '';
+		}
+		else {
+			$data = $this->load_module_info ();
+			if ($this->input->post ( 'action' ) == "favor") {
+				
+				$favor_records = $this->Mydb->get_record('post_favor_id',$this->post_favor,array('post_favor_post_id'=>$postid,'post_favor_user_id'=>$customer_id));
+				
+				if(count($favor_records) == 0)
+				{
+					$insert_array = array (
+							'post_favor_user_id' => $customer_id,
+							'post_favor_post_id' => $postid,
+							'post_favor_created_on' => current_date (),
+							'post_favor_created_by' => get_user_id (),
+							'post_favor_created_ip' => get_ip () 
+					);
+					$insert_id = $this->Mydb->insert ( $this->post_favor, $insert_array );
+					$counting = $this->Mydb->get_num_rows('*',$this->post_favor,array('post_favor_post_id'=>$postid));
+
+					$result ['status'] = 'success';
+					$result ['msg'] = 'Favor';
+					$result ['html'] = $counting;
+				}
+				else
+				{
+					$ids = array($favor_records['post_favor_id']);
+					$search_array = array('post_favor_user_id' => $customer_id,'post_favor_post_id' => $postid);
+					$this->Mydb->delete_where_in ( $this->post_favor, 'post_favor_id', $ids, $search_array );
+					$counting = $this->Mydb->get_num_rows('post_favor_id',$this->post_favor,array('post_favor_id'=>$postid));
+					$result ['status'] = 'success';
+					$result ['msg'] = 'Unfavor';
+					$result ['html'] = $counting;
+				}
+
+			}
+		}
+		
+		echo json_encode ( $result );
+		exit ();
+	}
+	public function deletepostcomment($comment_id=null)
+	{
+		$result=array();
+		check_site_ajax_request();
+		$this->authentication->user_authentication();
+		$data = $this->load_module_info ();
+		if ($this->input->post ( 'action' ) == "Delete") 
+		{
+			$_POST['comment_id']=$comment_id;
+			$this->form_validation->set_rules('comment_id','lang:comment_id','required|trim');			
+			if ($this->form_validation->run () == TRUE) 
+			{
+				$postid = decode_value(post_value ( 'dataid' ));
+				$commentid = decode_value( $comment_id);
+				$this->Mydb->delete_where_in($this->post_comments,'post_comment_parent',$commentid,array());
+				$this->Mydb->delete_where_in($this->post_comments,'post_comment_id',$commentid,array());
+
+				// $this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_delete' ), $this->post_comment_module_label ) );
+
+				$counting = $this->Mydb->get_num_rows('*',$this->post_comments,array('post_comment_post_id'=>$postid));
+				$result ['status'] = 'success';
+				$result ['html'] = thousandsCurrencyFormat($counting);
+				$result ['message'] = sprintf ( $this->lang->line ('success_message_delete'), $this->post_comment_module_label );
+			}
+			else 
+			{
+				$result ['status'] = 'error';
+				$result ['message'] = validation_errors ();
+			}
+		}
+		else
+		{
+			$result ['status'] = 'error';
+			$result ['message'] = '';			
+		}
+		echo json_encode ( $result );
+		exit ();
+	}	
+
 	/* this method used to common module labels */
 	private function load_module_info() {
 		$data = array ();

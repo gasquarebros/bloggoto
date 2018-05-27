@@ -24,6 +24,7 @@ class Home extends CI_Controller {
 		$this->customers = "customers";
 		$this->customers_followers = "customers_followers";
 		$this->post_likes = "post_likes";
+		$this->post_favor = "post_favor";
 		$this->post_tags = "post_tags";
 		$this->post_comments = "post_comments";
 		$this->primary_key='post_id';
@@ -135,7 +136,7 @@ class Home extends CI_Controller {
 		$join [0] ['condition'] = "post_category = blog_cat_id";
 		$join [0] ['type'] = "LEFT";
 		
-		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name";
+		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge";
 		$join [1] ['table'] = $this->customers;
 		$join [1] ['condition'] = "post_created_by = customer_id and post_by !='admin'";
 		$join [1] ['type'] = "LEFT";
@@ -155,6 +156,11 @@ class Home extends CI_Controller {
 		$join [4] ['condition'] = "post_id = post_tag_post_id";
 		$join [4] ['type'] = "LEFT";
 		
+		$join [5] ['select'] = "group_concat(',',post_favor_user_id) as favoruser";
+		$join [5] ['table'] = $this->post_favor;
+		$join [5] ['condition'] = "post_id = post_favor_post_id";
+		$join [5] ['type'] = "LEFT";
+
 		$totla_rows = $this->Mydb->get_num_join_rows ( $this->primary_key, $this->table, $where, null, null, null, $like, $groupby, $join  );
 
 		
@@ -383,7 +389,24 @@ class Home extends CI_Controller {
 						$result ['message'] = $post_video['message'];
 					}
 				}
-				
+				/* upload pdf */
+				$post_pdf = "";
+				$res = 0;
+				if (isset ( $_FILES ['post_pdf'] ['name'] ) && $_FILES ['post_pdf'] ['name'] != "" && (post_value ( 'post_type' ) == 'book' || post_value ( 'post_type' ) == 'story' )) {
+					$post_pdf = $this->common->upload_pdf ( 'post_pdf',$this->lang->line('post_pdf_folder_name') );
+					
+					if($post_pdf['status'] == 'success')
+					{
+						$post_pdf = $post_pdf['message'];
+					}
+					else
+					{
+						$res = 1;
+						$result ['status'] = 'error';
+						$result ['message'] = $post_pdf['message'];
+					}
+				}					
+
 				if($res == 0)
 				{
 					$category = array();
@@ -400,9 +423,10 @@ class Home extends CI_Controller {
 							'post_category' => $category[post_value ( 'post_category' )],
 							'post_type' => post_value ( 'post_type' ),
 							'post_title' => post_value ( 'post_title' ),
-							'post_description' => json_encode($this->input->post( 'post_description' )),
+							'post_description' => json_encode(get_censored_string($this->input->post( 'post_description' ))),
 							'post_photo' => $post_photo,
 							'post_video' => $post_video,
+							'post_pdf' => $post_pdf,
 							//'post_tags' => post_value ( 'post_tags' ),
 							'post_status' => (post_value('status'))?post_value('status'):'A',
 							'post_created_on' => current_date (),
@@ -525,6 +549,23 @@ class Home extends CI_Controller {
 						$result ['message'] = $post_video['message'];
 					}
 				}
+				/* upload pdf */
+				$post_pdf = "";
+				$res = 0;
+				if (isset ( $_FILES ['post_pdf'] ['name'] ) && $_FILES ['post_pdf'] ['name'] != "" && (post_value ( 'post_type' ) == 'book' || post_value ( 'post_type' ) == 'story' )) {
+					$post_pdf = $this->common->upload_pdf ( 'post_pdf',$this->lang->line('post_pdf_folder_name') );
+					
+					if($post_pdf['status'] == 'success')
+					{
+						$post_pdf = $post_pdf['message'];
+					}
+					else
+					{
+						$res = 1;
+						$result ['status'] = 'error';
+						$result ['message'] = $post_pdf['message'];
+					}
+				}					
 
 				if($res == 0)
 				{
@@ -542,9 +583,10 @@ class Home extends CI_Controller {
 							//'post_category' => $category[post_value ( 'post_category' )],
 							//'post_type' => post_value ( 'post_type' ),
 							'post_title' => post_value ( 'post_title' ),
-							'post_description' => json_encode($this->input->post ( 'post_description' )),
+							'post_description' => json_encode(get_censored_string($this->input->post ( 'post_description' ))),
 							'post_photo' => $post_photo,
 							'post_video' => $post_video,
+							'post_pdf' => $post_pdf,
 							//'post_tags' => post_value ( 'post_tags' ),
 							'post_status' => (post_value('status'))?post_value('status'):'A',
 							'post_created_on' => current_date (),
@@ -622,7 +664,7 @@ class Home extends CI_Controller {
 			$join [0] ['condition'] = "post_category = blog_cat_id";
 			$join [0] ['type'] = "LEFT";
 			
-			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name";
+			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge";
 			$join [1] ['table'] = $this->customers;
 			$join [1] ['condition'] = "post_created_by = customer_id and post_by !='admin'";
 			$join [1] ['type'] = "LEFT";
@@ -641,6 +683,11 @@ class Home extends CI_Controller {
 			$join [4] ['table'] = $this->post_tags;
 			$join [4] ['condition'] = "post_id = post_tag_post_id";
 			$join [4] ['type'] = "LEFT";
+
+			$join [5] ['select'] = "group_concat(',',post_favor_user_id) as favoruser";
+			$join [5] ['table'] = $this->post_favor;
+			$join [5] ['condition'] = "post_id = post_favor_post_id";
+			$join [5] ['type'] = "LEFT";
 			
 			$groupby = "post_id";
 
@@ -847,6 +894,23 @@ class Home extends CI_Controller {
 						$result ['message'] = $post_video['message'];
 					}
 				}
+				/* upload pdf */
+				$post_pdf = "";
+				$res = 0;
+				if (isset ( $_FILES ['post_pdf'] ['name'] ) && $_FILES ['post_pdf'] ['name'] != "" && (post_value ( 'post_type' ) == 'book' || post_value ( 'post_type' ) == 'story' )) {
+					$post_pdf = $this->common->upload_pdf ( 'post_pdf',$this->lang->line('post_pdf_folder_name') );
+					
+					if($post_pdf['status'] == 'success')
+					{
+						$post_pdf = $post_pdf['message'];
+					}
+					else
+					{
+						$res = 1;
+						$result ['status'] = 'error';
+						$result ['message'] = $post_pdf['message'];
+					}
+				}									
 				if($res == 0)
 				{
 					$category = array();
@@ -866,6 +930,7 @@ class Home extends CI_Controller {
 							'post_description' => json_encode(post_value ( 'post_description' )),
 							'post_photo' => $post_photo,
 							'post_video' => $post_video,
+							'post_pdf' => $post_pdf,
 							'post_status' => (post_value('status'))?post_value('status'):'A',
 							'post_created_on' => current_date (),
 							'post_by' => 'customer',
