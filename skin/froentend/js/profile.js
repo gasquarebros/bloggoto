@@ -223,6 +223,90 @@ $(document).ready(function(){
 		get_profile_section();
 		return false;
 	});
+
+	$(document).on('click', '.comment_delete', function(e) {	
+		var current=$(this);
+		var url = $(this).attr('href');
+		var id = $(this).attr('data-cmtid');
+		var dataid = $(this).attr('data-id');
+		show_content_loading(); 
+		$.ajax({
+			url : url,
+			data : "secure_key="+secure_key+"&dataid="+dataid+"&action=Delete",
+			type : 'POST',
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				hide_content_loading();
+				if (data.status == "success") 
+				{
+					current.parent().parent().parent().find(".comments_display").html(data.html);
+					current.parent().parent().find('#'+id).remove();
+				}
+			}
+		});
+		return false;
+	});	
+	$(document).on('click', '.comment_edit', function(e) {	
+		var current=$(this);
+		var url = $(this).attr('href');
+		var id = $(this).attr('data-cmtid');
+		var dataid = $(this).attr('data-id');
+		$('#'+id).find('.recent').hide();
+		$('#'+id).find('.comment_content').show();
+		var msg=$('#'+id).find('.recent').html();
+		$('#'+id).find('#comment_data').val(msg);
+		return false;
+	});
+	$(document).on('click', '.comment_cancel', function(e) {	
+		$('.recent').show();
+		$('.comment_content').hide();
+		return false;
+	});		
+	$(document).on('submit', '.upcomment_form', function(e) {	
+		var userid = $('#userid').val();
+		if(userid == '')
+		{
+			window.location.href= admin_url;
+			return false;
+		}
+		var url = $(this).attr('action');
+		var current = $(this);
+		current.find(".alert_msg").html('');
+		current.find(".alert_msg").hide();
+		var dataid=$(this).find('#cmt_record').val();
+		if($(this).find('.upcomment').val() !='') 
+		{
+			show_content_loading(); 
+			$.ajax({
+				url : url,
+				data : current.serialize(),
+				type : 'POST',
+				dataType : "json",
+				async:false,
+				success : function(data) {
+					hide_content_loading();
+					if (data.status == "success") 
+					{
+						if(data.page_reload == "Yes")
+						{
+							window.location.href= admin_url;
+							return false;
+						}
+						current.find('.upcomment').val('');
+						$('#'+dataid).parent().parent().find('.comments').trigger('click');
+						current.parent().parent().parent().find(".comments").trigger('click');
+					}
+					else
+					{
+						current.find(".alert_msg").show();
+						current.find(".alert_msg").html(data.message);
+					}				
+				}
+			});
+		}
+		return false;
+	});
 });
 
 function get_state() {
@@ -299,7 +383,41 @@ function get_profile_section(urlsection='')
 	});
 	return false;
 }
-
+function get_favor_section(urlsection='')
+{
+	if(urlsection !='')
+	{
+		var url = admin_url + module + "/"+urlsection+"/";
+	}
+	else {
+		var url = $('.newsfeed_menu .active').attr('href');
+	}
+	var section = $('.newsfeed_menu .active').attr('data-section');
+	show_content_loading(); 
+	$.ajax({
+		url : url,
+		data : "secure_key="+secure_key+"&section="+section+"&show=Yes",
+		type : 'POST',
+		dataType : "json",
+		async:false,
+		success : function(data) {
+			hide_content_loading();
+			if (data.status == "success") {
+				/* reload page if delete the pagination record is empty... */
+				if(data.page_reload == "Yes")
+				{
+					window.location.href= admin_url + 'myprofile';
+					return false;
+				}
+				$(".append_html").html(data.html);
+				trigger_chosen();
+				triger_ajax_popup();
+				trigger_modal_popup();
+			}
+		}
+	});
+	return false;
+}
 function get_content()
 {
 	var section = $('.newsfeed_menu .active').attr('data-section');
@@ -402,6 +520,45 @@ $(document).ready(function(){
 		return false;
 		
 		
+	});
+	$(document).on('click', '.favor', function(e) {
+		var userid = $('#userid').val();
+		if(userid == '')
+		{
+			window.location.href= admin_url;
+			return false;
+		}		
+		var dataid = $(this).data('id'); 
+		var url = $(this).attr('href');
+		var current = $(this);
+		show_content_loading(); 
+		$.ajax({
+			url : url,
+			data : "secure_key="+secure_key+"&action=favor&dataid="+dataid,
+			type : 'POST',
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				hide_content_loading();
+				if (data.status == "success") {
+					/* reload page if delete the pagination record is empty... */
+					if(data.page_reload == "Yes")
+					{
+						window.location.href= admin_url;
+						return false;
+					}
+					if(current.hasClass('active'))
+					{
+						current.removeClass('active');
+					}
+					else
+					{
+						current.addClass('active');
+					}
+				}
+			}
+		});
+		return false;
 	});
 	
 	$(document).on('change', '#order_field', function(e) {	

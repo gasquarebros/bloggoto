@@ -11,7 +11,6 @@ class Home extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
 		//$this->authentication->user_authentication();
-		$this->authentication->already_login_check();
 		$this->module = "home";
 		$this->module_label = get_label('home_module_label');
 		$this->module_labels = get_label('home_module_label');

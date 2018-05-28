@@ -1,46 +1,11 @@
- <?php if($show == 'Yes') { ?>
 	<div class="newsfeed_inner">
-		<?php if($post_enable == 'Yes') { ?>
-		<div class="write_post">
-			<div class="write_img">
-				<?php if($this->session->userdata('bg_user_profile_picture') !='') { $loged_photo = $this->session->userdata('bg_user_profile_picture') ; } else { $loged_photo=skin_url()."images/man.png"; } ?>
-				<img src="<?php echo $loged_photo; ?>" alt="" />
-			</div>
-			<div class="write_text">
-				<form>
-                    <div class="form_field">
-                        <input type="text" id="blog_post_title" placeholder="Click here and enter title to write a blog , story, book or Upload Picture, Videos or To Write a Review">
-                    </div>
-                    <div class="action_field">
-                        <a class="popup-modal" <?php if(get_user_id() == '') { ?>href="<?php echo base_url(); ?>" <?php } else { ?>href="#test-modal" <?php } ?> value="">Let's Go</a>
-                    </div>
-                </form>
-			</div>
-			<div class="clear"></div>
-		</div>
-		<?php } ?>
-		<?php if($section != 'tags') { ?>
-		<div class="sort_by">
-			<?php echo form_open('myprofile/viewblogs',' id="common_search" class="form-inline"');?>
-				<div class="form_field">
-					<?php 
-					echo form_dropdown('search_field',$post_category,'','style="width:200px" id="search_category"'); ?>
-                </div>
-                <div class="form_field">
-                <?php 
-				//$sort_method = array(''=>'All','top_blog'=>'Top Blog','followers'=>'Followers Only');
-				$sort_method = array(''=>'All','top_blog'=>'Top Blog');
-					echo form_dropdown('order_field',$sort_method,'','style="width:200px" id="order_field"'); ?>
-                </div>
-				<input type="hidden" name="userid" id="userid" value="<?php echo $userid; ?>" />	
+		<?php if(!empty($records)) { ?>
+			<?php echo form_open('myprofile/favor_ajax_pagination',' id="common_search" class="form-inline"');?>
+				<input type="hidden" name="userid" id="userid" value="<?php echo get_user_id(); ?>" />	
 				<input type="hidden" name="page_id" id="page_id" value="<?php echo $next_set; ?>" />	
 				<input type="hidden" name="offset" id="load_offset" value="<?php echo $next_set; ?>" />
 			<?php echo form_close(); ?> 
-		</div>
-		<?php } ?>
-		<div class="post_detail_wrap append_html">
-<?php } ?>
-		<?php if(!empty($records)) { ?>
+
 			<?php foreach($records as $record) { ?>
 				<div class="single_feed">
 					<div class="feed_wrapper">
@@ -54,7 +19,6 @@
 								else { 
 									$username = get_tag_username($record['customer_id']);
 									$url =base_url().urlencode($username);
-									
 								}
 								if($url !='') { ?> <a href="<?php echo $url; ?>"> <?php } ?>
 								<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
@@ -70,18 +34,22 @@
 								{
 									$celebrity_badge_class='';
 								}	
-							?>								
+							?>									
 								<h4><span class="post_title"></span> <?php 
-								if($record['post_by'] == 'admin'){								
+								if($record['post_by'] == 'admin')
+								{								
 									echo "Admin"; 
 								} 
-								else { 
-									if($record['customer_type'] == 0) {
+								else 
+								{ 
+									if($record['customer_type'] == 0) 
+									{
 										echo "<a class='".$celebrity_badge_class."' href='".$url."'>".$record['customer_first_name']." ".$record['customer_last_name']."</a>"; 
-									}else { 
+									}
+									else 
+									{ 
 										echo "<a class='".$celebrity_badge_class."' href='".$url."'>".$record['company_name']."</a>";
 									}
-									
 									
 								} ?></h4>
 								<?php if($record['blog_cat_name'] !='') {  ?>
@@ -155,9 +123,15 @@
 							<p><?php echo substr_close_tags(json_decode($record['post_description'])); ?> </p>
 						</div>
 						<div class="feed_like_share">
-							<?php $likes_user_ids = array_values(array_filter(array_unique(explode(',',$record['lkesuser'])))); ?>
+							<?php 
+							$likes_user_ids = array_values(array_filter(array_unique(explode(',',$record['lkesuser'])))); 
+							$favor_user_ids = array_values(array_filter(array_unique(explode(',',$record['favoruser'])))); 
+							?>
 							<ul>
 								<li><a class="thumbsup <?php if(get_user_id() !='' && in_array(get_user_id(),$likes_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php echo base_url().'myprofile/post_likes/'.$record['post_slug']; ?>"><i class=" fa fa-thumbs-o-up" aria-hidden="true"></i> <span class="likes_display"><?php echo thousandsCurrencyFormat($record['postcount']); ?></span></a></li>
+
+								<li><a class="favor <?php if(get_user_id() !='' && in_array(get_user_id(),$favor_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php echo base_url().'myprofile/post_favor/'.$record['post_slug']; ?>"><i class="fa fa-heart-o" aria-hidden="true"></i> </a></li>			
+
 								<li><a data-id ="<?php echo encode_value($record['post_id']); ?>" class="comments" href="<?php /*if(get_user_id() !=''){ echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); }*/ echo base_url().'myprofile/comments/'.$record['post_slug']; ?>"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="comments_display"><?php echo thousandsCurrencyFormat($record['commentcount']); ?></span></a></li>
 								<li class="shear-btn">
 									<a href="javascript:;">
@@ -203,7 +177,4 @@
 		<div class="load_more" <?php if($next_set !='') { echo 'style="display:block;"'; } else { echo "style='display:none;'"; } ?>>
 			<button class="more_posts">Load More</button>
 		</div>
- <?php if($show == 'Yes') { ?>		
 	</div>
-</div>
- <?php } ?>

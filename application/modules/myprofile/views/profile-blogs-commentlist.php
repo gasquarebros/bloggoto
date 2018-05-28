@@ -1,6 +1,4 @@
-
 <?php 
-
 	if(!empty($records)) {
 	?>
 		<div class="load_more" <?php if($next_set !='') { echo 'style="display:block;"'; } else { echo "style='display:none;'"; } ?>>
@@ -12,7 +10,7 @@
 		{
 			$username = get_tag_username($record['customer_id']);
 	?>		
-			<div class="comments_records">
+			<div class="comments_records" id="<?php echo encode_value($record['post_comment_id']);?>">
 				<div class="comment_left">
 				
 					<a href="<?php echo base_url().urlencode($username); ?>">
@@ -32,9 +30,32 @@
 						<span class="body recent"> 
 							<?php echo $text = $record['post_comment_message']; ?> 
 						</span> 
+						<span class="comment_content" style="display:none">
+						<?php echo form_open_multipart(base_url().'myprofile/addcomments',' class="upcomment_form" autocomplete="'.form_autocomplte().'" ' );?>
+							<div class="comment_box_wrap">
+								<input type="text" value="<?php echo output_value($record['post_comment_message']); ?>" id="comment_data" name="comment_data"  class="upcomment"  placeholder="Write a comment..." />
+								<input type="hidden" id="post_record" name="post_record" value="<?php echo encode_value($record['post_id']); ?>" />
+								<input type="hidden" id="cmt_record" name="cmt_record" value="<?php echo encode_value($record['post_comment_id']); ?>" />
+							</div>
+						<?php
+						echo form_hidden ( 'action', 'updatecmt' );
+						echo form_close ();
+						?>							
+						</span>
 					</div>
 					
 				</div>
+		<?php if(get_user_id() != '' && get_user_id() == $record['post_comment_created_by']) 
+				{ 
+		?>		
+				<a href="<?php echo base_url()."myprofile/deletepostcomment/".encode_value($record['post_comment_id']); ?>" class="comment_delete" data-id="<?php echo encode_value($record['post_comment_post_id']);?>" data-cmtid="<?php echo encode_value($record['post_comment_id']);?>" title="Delete" ><i class="fa fa-trash-o"></i></a>
+
+				<a href="<?php echo base_url()."myprofile/updatecomments/".encode_value($record['post_comment_post_id'])."/".encode_value($record['post_comment_id']); ?>" class="comment_edit" data-id="<?php echo encode_value($record['post_comment_post_id']);?>" data-cmtid="<?php echo encode_value($record['post_comment_id']);?>" title="Delete" ><i class="fa fa-edit"></i></a>
+
+
+		<?php 
+				} 
+		?>
 			</div>
 	<?php
 		}

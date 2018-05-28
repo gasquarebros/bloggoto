@@ -8,6 +8,14 @@
 		 {
 		 	foreach ($results as $key => $info) 
 		 	{
+				if(get_user_id() !='')
+				{
+					$celebrity_badge_class=($info['customer_celebrity_badge']) ? 'celebrity_badge' :'';
+				}
+				else
+				{
+					$celebrity_badge_class='';
+				}		 		
 ?>
         <div class="profile_wrap profilewrap_popup" id="<?php echo encode_value($info['customer_id']); ?>">
 	            <div class="profile_photo_wrap">
@@ -19,7 +27,7 @@
 						<?php } ?>
 	                </div>
 	                <div class="prof_dest">
-	                    <h4><?php echo ($info['customer_type'] == '0')?$info['customer_first_name']." ".$info['customer_last_name']:$info['company_name']; ?></h4>
+	                    <h4><span class="<?php echo $celebrity_badge_class; ?>"><?php echo ($info['customer_type'] == '0')?$info['customer_first_name']." ".$info['customer_last_name']:$info['company_name']; ?></span></h4>
 	                </div>
 	            </div>
 	            <div class="fllow_bns"> 

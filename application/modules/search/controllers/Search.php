@@ -47,13 +47,13 @@ class Search extends CI_Controller {
 			$join [0] ['condition'] = "post_category = blog_cat_id";
 			$join [0] ['type'] = "LEFT";
 			
-			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_type,company_name,customer_photo";
+			$join [1] ['select'] = "customer_id,,CONCAT(COALESCE(customer_first_name,''),' ',COALESCE(customer_last_name,'')) topic_value,customer_email,customer_type,company_name, customer_photo,customer_celebrity_badge";
 			$join [1] ['table'] = $this->customers;
 			$join [1] ['condition'] = "post_created_by = customer_id and post_by !='admin'";
 			$join [1] ['type'] = "LEFT";
 			
 			
-			$where_array = array('post_status'=>'A');
+			$where_array = array('post_status'=>'A','post_by !='=>'admin');
 			$order_by_array = array('post_title'=>'ASC');
 			$like_array = array('post_title'=>$search_text);
 			$limit = get_label('search_result_limit');
@@ -64,7 +64,7 @@ class Search extends CI_Controller {
 			$where = array('customer_status'=>'A',"(customer_first_name like '%$search_text%' OR customer_last_name like '%$search_text%' OR company_name like '%$search_text%')"=>NULL,'customer_username !='=>'');
 			$order_by = array('customer_first_name'=>'ASC');
 			
-			$records = $this->Mydb->get_all_records ( "customer_type,customer_notes,customer_photo,customer_id topic_label,CONCAT(COALESCE(customer_first_name,''),' ',COALESCE(customer_last_name,'')) topic_value,company_name,customer_username,CASE customer_type WHEN 0 THEN 'Person' WHEN 1 THEN 'Business' END  'topic_type'", $this->customers, $where, '', '', $order_by, $like, $groupby, $join );
+			$records = $this->Mydb->get_all_records ( "customer_type,customer_notes,customer_photo,customer_id topic_label,CONCAT(COALESCE(customer_first_name,''),' ',COALESCE(customer_last_name,'')) topic_value,company_name,customer_celebrity_badge,customer_username,CASE customer_type WHEN 0 THEN 'Person' WHEN 1 THEN 'Business' END  'topic_type'", $this->customers, $where, '', '', $order_by, $like, $groupby, $join );
 			
 			$post_records=array_merge($post_records,$records);
 			/*

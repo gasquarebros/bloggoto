@@ -5,7 +5,7 @@ var module_action="addpost";
     <div class="container">
         <h2 class="main_heading">Magazines</h2>
         <div class="listing_wrap cntloading_wrapper ">
-			<div class="boi_data"></div>
+			<div class="append_html"></div>
 			<?php echo loading_image('cnt_loading');?>
         </div>
     </div>
@@ -61,7 +61,6 @@ var module_action="addpost";
 					<div class="form_field tagging_section">
 						<?php 
 							$followers_lst = get_followers_list(); 
-							$followers= array();
 							if(!empty($followers_lst)) {
 								foreach($followers_lst as $foll_list)
 								{
@@ -83,11 +82,6 @@ var module_action="addpost";
 							<input type="file" name="post_video" placeholder="Video"  id="post_video" class=""  />
 						</div>
 					</div>
-					<div class="form_field pdf_section" style="display:none;">
-						<div class="left_fm_field">
-							<input type="file" name="post_pdf" placeholder="Pdf"  id="post_pdf" class=""  />
-						</div>
-					</div>					
 					<div class="form_field">
 						<div class="left_fm_field">
 							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
@@ -109,45 +103,11 @@ var module_action="addpost";
     </div>
 	<p><a class="popup-modal-dismiss" href="#">Dismiss</a></p>
 </div>
-<!--<script type="text/javascript" src="<?php echo skin_url(); ?>js/home.js"></script>-->
 <script type="text/javascript" src="<?php echo skin_url(); ?>js/profile.js"></script>
 <script>
 /*  load initial content.. */
 $(window).load(function(){
-	get_profile_section('wall_ajax_pagination');
+	get_favor_section('favor_ajax_pagination');
 });
 
-$('.post_category_selection li a').click(function(){
-	
-	$('.post_category_selection li a').removeClass('active');
-	$(this).addClass('active');
-	var current_val = $(this).data('section');
-	$('#post_category').val(current_val);
-});
-$('.post_type_selection li a').click(function(){
-	var current_val = $(this).data('type');
-	$('.post_type_selection li a').removeClass('active');
-	$(this).addClass('active');
-	$('#post_type').val(current_val);
-	$('.video_section').hide();
-	$('.pdf_section').hide();
-	if(current_val == 'video')
-	{
-		$('.video_section').show();
-	}
-	else if(current_val == 'book' || current_val == 'story' )
-	{
-		$('.pdf_section').show();
-	}	
-});
-
-$('#blog_post_title').blur(function() { 
-	var blog_text = $('#blog_post_title').val();
-	$('#post_title').val(blog_text);
-});
-
-$('.draft_post').click(function() {
-	$('#status').val('D');
-	$('#common_form').submit();
-});
 </script>

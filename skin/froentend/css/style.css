@@ -2795,3 +2795,6 @@ td p {
     text-transform: none;
 }
 
+a.favor.active {
+    color: #0099CC !important;
+}

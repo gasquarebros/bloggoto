@@ -336,7 +336,39 @@ $('body').on('click', '.multi_action', function() {
 						$("#multiaction").val('');
 				 })
 			}
-			
+
+	 <?php /*   Add Celebrity Badge action  */?>
+		if(this_action=="Add_Celebrity_Badge")
+		{    
+			 customAlertmsg("<?php echo sprintf($this->lang->line('confirm_add_celebrity_bage'), ucfirst($module_labels)); ?>");
+			 	
+			 $( "#alt1" ).click(function() { 
+	   			$("#actionid").val("Add_Celebrity_Badge");
+	   			$("#multiaction").val("Yes");
+	   			action_submit('');
+
+			 }); 
+
+			 $( "#alt0" ).click(function() { 
+					$("#multiaction").val('');
+			 });
+		}			
+	 <?php /*   Remove Celebrity Badge action  */?>
+		if(this_action=="Remove_Celebrity_Badge")
+		{    
+			 customAlertmsg("<?php echo sprintf($this->lang->line('confirm_remove_celebrity_bage'), ucfirst($module_labels)); ?>");
+			 	
+			 $( "#alt1" ).click(function() { 
+	   			$("#actionid").val("Remove_Celebrity_Badge");
+	   			$("#multiaction").val("Yes");
+	   			action_submit('');
+
+			 }); 
+
+			 $( "#alt0" ).click(function() { 
+					$("#multiaction").val('');
+			 });
+		}			
 	 } 	
  	
 });

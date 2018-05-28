@@ -4,6 +4,8 @@
            <button class="btn btn-default multi_action" data="Activate" type="button"><?php echo get_label('activate');?></button>
             <button class="btn btn-default multi_action" data="Deactivate"="Deactivate" type="button"><?php echo get_label('deactivate');?></button>
             <button class="btn btn-default multi_action" data="Delete" type="button"><?php echo get_label('delete');?></button>
+           <button class="btn btn-default multi_action" data="Add_Celebrity_Badge" type="button"><?php echo get_label('add_celebrity_bage');?></button>
+           <button class="btn btn-default multi_action" data="Remove_Celebrity_Badge" type="button"><?php echo get_label('remove_celebrity_bage');?></button>
         </div>   
     </div>
     <div class="pagination_custom pull-right">
@@ -98,6 +100,8 @@
                         <button class="btn btn-default multi_action" data="Activate" type="button"><?php echo get_label('activate');?></button>
 						<button class="btn btn-default multi_action" data="Deactivate"="Deactivate" type="button"><?php echo get_label('deactivate');?></button>
                         <button class="btn btn-default multi_action" data="Delete" type="button"> <?php echo get_label('delete');?></button>
+			           <button class="btn btn-default multi_action" data="Add_Celebrity_Badge" type="button"><?php echo get_label('add_celebrity_bage');?></button>
+			           <button class="btn btn-default multi_action" data="Remove_Celebrity_Badge" type="button"><?php echo get_label('remove_celebrity_bage');?></button>                        
                         </div>      
                     </div>
                     <div class="pagination_custom pull-right">

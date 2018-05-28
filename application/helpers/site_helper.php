@@ -143,7 +143,7 @@ if (! function_exists ( 'get_followers_list' )) {
 		{
 			$join = '';
 			$order_by = array('customer_first_name'=>'ASC');
-			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name";
+			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge";
 			$join [0] ['table'] = 'customers';
 			$join [0] ['condition'] = "follow_user_id = customer_id";
 			$join [0] ['type'] = "INNER";
@@ -163,7 +163,7 @@ if (! function_exists ( 'get_following_list' )) {
 		{
 			$join = '';
 			$order_by = array('customer_first_name'=>'ASC');
-			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name";
+			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge";
 			$join [0] ['table'] = 'customers';
 			$join [0] ['condition'] = "follow_customer_id = customer_id";
 			$join [0] ['type'] = "INNER";
@@ -334,5 +334,26 @@ if (! function_exists ( 'get_tag_username' )){
 		}
 		
 		return $username;
+	}
+}
+if (! function_exists ( 'get_censored_string' )){
+	function get_censored_string($string) 
+	{
+		$CI=& get_instance();
+		$CI->load->helper ( 'text' );
+
+		#List of bad words to censor
+		$disallowed = array('darn', 
+							'shucks', 
+							'golly',
+							'phooey');
+
+		$post_description='';
+		if($string !=  '')
+		{
+			$description = word_censor($string, $disallowed, '***');//each word with space replace
+			$description = str_ireplace($disallowed, "***", $string);//find the all occur word replace
+		}
+		return ($description != '') ? $description: '';
 	}
 }

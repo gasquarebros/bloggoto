@@ -74,6 +74,7 @@ $lang['customer_image_folder_name'] = "customers/";
 $lang['adminusers_image_folder_name'] = "profile-pictures/admin-users/";
 $lang['post_photo_folder_name'] = "posts/images/";
 $lang['post_video_folder_name'] = "posts/videos/";
+$lang['post_pdf_folder_name'] = "posts/pdf/";
 
 $lang['menu_icon_folder_name'] = "menu-icon/";
 
@@ -87,6 +88,9 @@ $lang['product_category_image_folder_name'] = "products/category-image";
 $lang['product_gallery_image_folder_name'] = "products/gallery-image";
 $lang['product_main_image_folder_name'] = "products/main-image";
 $lang['country_image_folder_name'] = "country";
+
+$lang['add_celebrity_bage'] = "add celebrity bage";
+$lang['remove_celebrity_bage'] = "remove celebrity bage";
 
 /* reset password module starts here */
 $lang['reset_password']="Reset Password";

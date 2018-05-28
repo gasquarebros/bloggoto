@@ -18,4 +18,5 @@ $lang['book'] = 'Book';
 $lang['qa'] = 'Q&A';
 $lang['customer_photo'] = "Profile Picture";
 $lang['customer_notes'] = "Bio";
+$lang['post_comment_module_label'] = "Comment";
 
