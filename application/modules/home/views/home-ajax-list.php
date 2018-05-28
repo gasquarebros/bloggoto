@@ -58,11 +58,22 @@ if($i%2 == 0){ ?>
 				<span>
 				<?php echo substr_close_tags(json_decode($record['post_description'])); ?>
 				</span>
+			
+				<?php 			
+				if($record['post_type'] == 'video' && $record['post_video'] !='') { ?>
+					<video autoplay poster="PreviewImage.jpeg"  width="100%"  controls="controls" muted>
+						<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/webm" />
+						<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/mp4" />
+						<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/ogg" />
+						your  browser does not support the video tag.
+					</video>
+				<?php } ?>
 				<div class="post_by">
 					<p><span class="post_title">Posted by</span> <?php if($record['post_by'] == 'admin') { echo "Admin"; } else { echo ($record['customer_type']==0)?$record['customer_first_name']:$record['company_name']; } ?></p>
 					<a href="<?php echo base_url().$module.'/view/'.$record['post_slug']; ?>" class="read">Read More</a>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 <?php $i++; 

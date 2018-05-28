@@ -24,7 +24,7 @@
                 </form>
             </div>
         </div>
-		<?php /*
+		<?php /* ?>
 		<div class="write_post">
 			<div class="write_img">
 				<?php if($this->session->userdata('bg_user_profile_picture') !='') { $loged_photo = $this->session->userdata('bg_user_profile_picture') ; } else { $loged_photo=skin_url()."images/man.png"; } ?>
@@ -41,7 +41,7 @@
                 </form>
 			</div>
 			<div class="clear"></div>
-		</div>
+		</div> <?php */ ?>
 		<?php } ?>
 		<?php if($section != 'tags') { ?>
 		<div class="sort_by">
@@ -174,6 +174,16 @@
 								} 
 							?>
 							<p><?php echo substr_close_tags(json_decode($record['post_description'])); ?> </p>
+							<?php 
+							
+							if($record['post_type'] == 'video' && $record['post_video'] !='') { ?>
+								<video autoplay poster="PreviewImage.jpeg"  width="100%"  controls="controls" muted>
+									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/webm" />
+									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/mp4" />
+									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/ogg" />
+									your  browser does not support the video tag.
+								</video>
+							<?php } ?>
 						</div>
 						<div class="feed_like_share">
 							<?php 

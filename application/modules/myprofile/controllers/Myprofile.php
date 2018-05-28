@@ -445,7 +445,7 @@ class Myprofile extends CI_Controller {
 			}
 			
 			
-			$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'));
+			$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'),'','',array('blog_cat_sequence'=>'ASC'));
 			$category[''] = "Select Category"; 
 			if(!empty($post_category))
 			{

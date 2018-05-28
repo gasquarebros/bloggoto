@@ -180,6 +180,7 @@ position: relative; overflow: visible !important; }
 	.profile_wrap { padding:0px; margin-bottom: 0px; }
 	.followers ul li { width:auto !important; }
 	.newsfeed_menu { margin:0px; }
+	.share_n_text { margin-left: 65%; } 
 }
 
 @media screen and (max-width: 600px) {
@@ -224,6 +225,7 @@ position: relative; overflow: visible !important; }
     .profilewrap_popup .profile_photo_wrap { margin-bottom:0px;    margin-top: 8px;  }
     .profilewrap_popup .fllow_bns { width:100%;clear: both;top: 0px; margin: 0px; }
     .profilewrap_popup .fllow_bns a.btn { margin:0px; }
+	.share_n_text { margin-left: 60%; } 
 }
 
 @media screen and (max-width: 500px) {
@@ -232,6 +234,7 @@ position: relative; overflow: visible !important; }
     .follow_request .lft_img_fllw, .follow_request .rgt_txt_fllw { width: 100%; }
 	.list_row { width: 469px; }
 	.inbx_left .btn-success { width: 60%;text-align: center;display: block;margin: 0 auto; }
+	.share_n_text { margin-left: 60%; } 
 	
 }
 
@@ -249,6 +252,7 @@ position: relative; overflow: visible !important; }
     .fllow_bns a.btn { width: 49%; float:left; display: block; margin: 8px 0; }
     .form_field .input_field { width: 100%; }
 	.write_post .btn_wrap, .write_post .action_field { width:66%; }
+	.share_n_text { margin-left: 40%; } 
 }
 
 @media screen and (max-width: 320px) {
@@ -270,6 +274,7 @@ position: relative; overflow: visible !important; }
 	}	
 	.sort_by form .form_field { width:49%; margin-right:0px; margin-bottom: 10px;}
 	.show_post_options { margin-top:0px; }
+	.share_n_text { margin-left: 25%; } 
 }
 
 

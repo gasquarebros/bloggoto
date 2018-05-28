@@ -66,6 +66,7 @@ $lang ['customer_writer_type'] = "I'm Person";
 $lang ['customer_brand_type'] = "I'm Business";
 $lang ['postal_code_max_length'] = 8;
 $lang ['phone_max_length'] = 12;
+$lang ['post_photo'] = "Image";
 
 
 /*  upload folder name  */$lang['client_min_amount'] = "Minimum Amount For Free Delivery";

@@ -153,6 +153,16 @@
 								} 
 							?>
 							<p><?php echo substr_close_tags(json_decode($record['post_description'])); ?> </p>
+							<?php 
+							
+							if($record['post_type'] == 'video' && $record['post_video'] !='') { ?>
+								<video autoplay poster="PreviewImage.jpeg"  width="100%"  controls="controls" muted>
+									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/webm" />
+									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/mp4" />
+									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/ogg" />
+									your  browser does not support the video tag.
+								</video>
+							<?php } ?>
 						</div>
 						<div class="feed_like_share">
 							<?php $likes_user_ids = array_values(array_filter(array_unique(explode(',',$record['lkesuser'])))); ?>

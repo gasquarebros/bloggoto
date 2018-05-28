@@ -1700,6 +1700,13 @@ input[type="file"] {
 	right: 0 !important;
 	margin:0px !important;  
 }
+
+.share_n_text {
+	width: auto;
+	float: left;
+	margin-left: 103px;
+	margin-top: 17px;
+}
 .profile_social_share ul { margin:0px; width: 100%; }
 .profile_social_share li {
     float: right;

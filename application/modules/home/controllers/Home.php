@@ -35,7 +35,7 @@ class Home extends CI_Controller {
 		//echo "inn"; exit;
 		
 		$data = $this->load_module_info ();	
-		$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'));
+		$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'),'','',array('blog_cat_sequence'=>'ASC'));
 		$category['']='Select Category';
 		if(!empty($post_category))
 		{
@@ -216,7 +216,7 @@ class Home extends CI_Controller {
 		
 		//echo "inn"; exit;
 		$data = $this->load_module_info ();	
-		$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'));
+		$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'),'','',array('blog_cat_sequence'=>'ASC'));
 		if(!empty($post_category))
 		{
 			foreach($post_category as $blogcat)
@@ -364,6 +364,10 @@ class Home extends CI_Controller {
 			$this->form_validation->set_rules('post_type','lang:post_type','required');
 			$this->form_validation->set_rules ( 'post_video', 'lang:post_video', 'trim|callback_validate_image' );
 			
+			if(post_value('post_type') == 'picture') { 
+				$this->form_validation->set_rules ( 'post_photo', 'lang:post_photo', 'required' );
+			}
+			
 			if ($this->form_validation->run () == TRUE) {
 				
 				/* upload image */
@@ -509,11 +513,22 @@ class Home extends CI_Controller {
 		$this->authentication->user_authentication();
 		$data = $this->load_module_info ();
 		if ($this->input->post ( 'action' ) == "Add") {
+			
 			$this->form_validation->set_rules('post_title','lang:post_title','required|trim|strip_tags');			
 			$this->form_validation->set_rules('post_description','lang:post_description','required');
+			$this->form_validation->set_rules('post_category','lang:post_category','required');
+			$this->form_validation->set_rules('post_type','lang:post_type','required');
+			$this->form_validation->set_rules ( 'post_video', 'lang:post_video', 'trim|callback_validate_image' );
+			
+			//$this->form_validation->set_rules('post_title','lang:post_title','required|trim|strip_tags');			
+		//	$this->form_validation->set_rules('post_description','lang:post_description','required');
 			//$this->form_validation->set_rules('post_category','lang:post_category','required');
 			//$this->form_validation->set_rules('post_type','lang:post_type','required');
 			$this->form_validation->set_rules('record_id','lang:record_id','required');
+			
+			/*if(post_value('post_type') == 'picture') { 
+				$this->form_validation->set_rules ( 'post_photo', 'lang:post_photo', 'required' );
+			}*/
 			
 			if ($this->form_validation->run () == TRUE) {
 				

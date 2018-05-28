@@ -37,7 +37,7 @@ var module_action="addpost";
 				</ul>
 			</div>
 			<div class="cat_list">
-				<h5>Choose what you post</h5>
+				<h5>Choose what you posting</h5>
 				<input type="hidden" id="post_type" name="post_type" value="blog" />
 				<ul class="post_type_selection">
 					<li><a data-type="blog" href="javascript:void(0)" class="active">Blogs</a></li>
@@ -45,7 +45,7 @@ var module_action="addpost";
 					<li><a data-type="video" href="javascript:void(0)">Videos</a></li>
 					<li><a data-type="story" href="javascript:void(0)">Stories</a></li>
 					<li><a data-type="book" href="javascript:void(0)">Books</a></li>
-					<li><a data-type="qa" href="javascript:void(0)">Q & A</a></li>
+					<li><a data-type="qa" href="javascript:void(0)">Review</a></li>
 					<?php /*<li><a data-type="must_see" href="javascript:void(0)">Must See</a></li>*/ ?>
 				</ul>
 			</div>
