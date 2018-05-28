@@ -23,7 +23,7 @@ class Authentication {
 			return '';
 		}
 		else if($this->ci->input->cookie('login_remeber_me') !='') {
-			$check_details = $this->ci->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo', 'customers', array ('customer_id' => $this->ci->input->cookie('login_remeber_me'),'customer_status !='=>'D') );
+			$check_details = $this->ci->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo,customer_username,company_name', 'customers', array ('customer_id' => $this->ci->input->cookie('login_remeber_me'),'customer_status !='=>'D') );
 		
 			if(!empty($check_details))
 			{
@@ -73,8 +73,8 @@ class Authentication {
 			return '';
 		}
 		else if($this->ci->input->cookie('login_remeber_me') !='') {
-			$check_details = $this->ci->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo', 'customers', array ('customer_id' => $this->ci->input->cookie('login_remeber_me'),'customer_status !='=>'D') );
-		
+			$check_details = $this->ci->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo,customer_username,company_name', 'customers', array ('customer_id' => $this->ci->input->cookie('login_remeber_me'),'customer_status !='=>'D') );
+		//echo "<pre>"; print_r($check_details); exit;
 			if(!empty($check_details))
 			{
 				if ($check_details['customer_status'] == 'A'){

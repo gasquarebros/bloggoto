@@ -61,6 +61,7 @@ var module_action="addpost";
 					<div class="form_field tagging_section">
 						<?php 
 							$followers_lst = get_followers_list(); 
+							$followers= array();
 							if(!empty($followers_lst)) {
 								foreach($followers_lst as $foll_list)
 								{

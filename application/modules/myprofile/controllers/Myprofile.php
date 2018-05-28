@@ -87,7 +87,6 @@ class Myprofile extends CI_Controller {
 			//$userid = decode_value($userid);
 			$userid = urldecode($userid);
 		}
-		
 		if($userid == null)
 		{
 			$this->authentication->user_authentication();
