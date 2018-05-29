@@ -145,7 +145,7 @@ if (! function_exists ( 'get_followers_list' )) {
 			$order_by = array('customer_first_name'=>'ASC');
 			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge";
 			$join [0] ['table'] = 'customers';
-			$join [0] ['condition'] = "follow_user_id = customer_id";
+			$join [0] ['condition'] = "follow_user_id = customer_id and customer_private != 1";
 			$join [0] ['type'] = "INNER";
 			$follow_records = $CI->Mydb->get_all_records('customers_followers.*','customers_followers',array('follow_customer_id'=>$userid,'customer_status'=>'A'),$limit='', $offset='', $order_by, $like='', $groupby=array(), $join );
 		}
@@ -165,7 +165,7 @@ if (! function_exists ( 'get_following_list' )) {
 			$order_by = array('customer_first_name'=>'ASC');
 			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge";
 			$join [0] ['table'] = 'customers';
-			$join [0] ['condition'] = "follow_customer_id = customer_id";
+			$join [0] ['condition'] = "follow_customer_id = customer_id and customer_private != 1";
 			$join [0] ['type'] = "INNER";
 			$following_records = $CI->Mydb->get_all_records('customers_followers.*','customers_followers',array('follow_user_id'=>$userid,'customer_status'=>'A'),$limit='', $offset='', $order_by, $like='', $groupby=array(), $join );
 
