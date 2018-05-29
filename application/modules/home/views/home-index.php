@@ -1,6 +1,8 @@
 <script>
 var module_action="addpost";
 </script>
+<script type="text/javascript" src="<?php echo skin_url(); ?>js/profile.js"></script>
+<script type="text/javascript" src="<?php echo skin_url(); ?>js/profile.js"></script>
 <section>
     <div class="container">
         <h2 class="main_heading">Magazines</h2>
@@ -78,20 +80,22 @@ var module_action="addpost";
 						?>
 						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag Bloggotians" title="Tag Bloggotians" id="post_tags" style="width:100%" multiple="multiple"');?>
 					</div>
+					<div class="form_field">
+						<div class="left_fm_field">
+							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
+						</div>
+					</div>					
 					<div class="form_field video_section" style="display:none;">
 						<div class="left_fm_field">
 							<input type="file" name="post_video" placeholder="Video"  id="post_video" class=""  />
 						</div>
 					</div>
-					<div class="form_field pdf_section" style="display:none;">
+					<div class="form_field pdf_section" style="display:block;">
 						<div class="left_fm_field">
 							<input type="file" name="post_pdf" placeholder="Pdf"  id="post_pdf" class=""  />
 						</div>
 					</div>					
 					<div class="form_field">
-						<div class="left_fm_field">
-							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
-						</div>
 						<div class="rgt_fm_field btn_submit_div">
 							<input type="hidden" name="status" id="status" value="" />
 							<input type="button" value="Sava as draft" class="grey_btn draft_post">
@@ -110,7 +114,6 @@ var module_action="addpost";
 	<p><a class="popup-modal-dismiss" href="#">Dismiss</a></p>
 </div>
 <!--<script type="text/javascript" src="<?php echo skin_url(); ?>js/home.js"></script>-->
-<script type="text/javascript" src="<?php echo skin_url(); ?>js/profile.js"></script>
 <script>
 /*  load initial content.. */
 $(window).load(function(){
@@ -135,7 +138,7 @@ $('.post_type_selection li a').click(function(){
 	{
 		$('.video_section').show();
 	}
-	else if(current_val == 'book' || current_val == 'story' )
+	else if(current_val == 'blog' || current_val == 'book' || current_val == 'story' )
 	{
 		$('.pdf_section').show();
 	}	

@@ -396,7 +396,7 @@ class Home extends CI_Controller {
 				/* upload pdf */
 				$post_pdf = "";
 				$res = 0;
-				if (isset ( $_FILES ['post_pdf'] ['name'] ) && $_FILES ['post_pdf'] ['name'] != "" && (post_value ( 'post_type' ) == 'book' || post_value ( 'post_type' ) == 'story' )) {
+				if (isset ( $_FILES ['post_pdf'] ['name'] ) && $_FILES ['post_pdf'] ['name'] != "" && (post_value ( 'post_type' ) == 'book' || post_value('post_type') == 'story' || post_value('post_type') == 'blog' )) {
 					$post_pdf = $this->common->upload_pdf ( 'post_pdf',$this->lang->line('post_pdf_folder_name') );
 					
 					if($post_pdf['status'] == 'success')
@@ -845,6 +845,7 @@ class Home extends CI_Controller {
 	}
 	public function editpost($slug=null)
 	{	
+		$this->authentication->user_authentication();		
 		$data = $this->load_module_info ();
 		if($slug !='')
 		{
@@ -862,6 +863,7 @@ class Home extends CI_Controller {
 	public function updatepost()
 	{
 		$result=array();
+		$this->authentication->user_authentication();		
 			//check_site_ajax_request();
 		if ($this->input->post ( 'action' ) == "Update") 
 		{
@@ -912,7 +914,7 @@ class Home extends CI_Controller {
 				/* upload pdf */
 				$post_pdf = "";
 				$res = 0;
-				if (isset ( $_FILES ['post_pdf'] ['name'] ) && $_FILES ['post_pdf'] ['name'] != "" && (post_value ( 'post_type' ) == 'book' || post_value ( 'post_type' ) == 'story' )) {
+				if (isset ( $_FILES ['post_pdf'] ['name'] ) && $_FILES ['post_pdf'] ['name'] != "" && (post_value ( 'post_type' ) == 'book' || post_value ( 'post_type' ) == 'story'  || post_value('post_type') == 'blog'  )) {
 					$post_pdf = $this->common->upload_pdf ( 'post_pdf',$this->lang->line('post_pdf_folder_name') );
 					
 					if($post_pdf['status'] == 'success')

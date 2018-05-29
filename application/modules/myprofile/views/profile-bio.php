@@ -510,6 +510,50 @@
 						<?php } ?>
 						<div class="clear"></div>
 					</div>
+					<h3>Bank Details</h3>
+					<div class="form_field">
+						<label>Account Holder Name </label>
+						<div class="input_field">
+							<?php  echo form_input('customer_account_holder_name',stripslashes($info['customer_account_holder_name']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field">
+						<label>Account No</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_account_no',stripslashes($info['customer_account_no']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field">
+						<label>Ifsc code</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_ifsc_code',stripslashes($info['customer_ifsc_code']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>					
+					<div class="form_field">
+						<label>Pan No</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_pan_no',stripslashes($info['customer_pan_no']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field">
+						<label>GST No</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_gst_no',stripslashes($info['customer_gst_no']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field">
+						<label>TIN No</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_tin_no',stripslashes($info['customer_tin_no']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>															
+
 					
 					<h3>Social Media</h3>
 					<div class="form_field">

@@ -65,11 +65,6 @@ var module_action="updatepost";
 						?>
 						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Title" id="post_tags" style="width:100%" multiple="multiple"');?>
 					</div>
-					<div class="form_field video_section" style="display:none;">
-						<div class="left_fm_field">
-							<input type="file" name="post_video" placeholder="Video"  id="post_video" class=""  />
-						</div>
-					</div>
 					
 					<div class="form_field">
 						<?php if($result['post_photo']){ ?>
@@ -93,9 +88,29 @@ var module_action="updatepost";
 						<div class="clear"></div>
 					</div>	
 					<div class="form_field ">
+							<?php 
+							if($result['post_type'] == 'blog' || $result['post_type'] == 'book' || $result['post_type'] =='story') { ?>
+								<a class="pdf_source" href="<?php echo media_url().$this->lang->line('post_pdf_folder_name').$result['post_pdf']; ?>" target="_blank">
+									<i class="fa fa-file-pdf-o" style="font-size:48px;color:#2596B1"></i> </a>
+							<?php } ?>					
+					</div>	
+					<div class="form_field ">
 						<div class="left_fm_field">
 							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
 						</div>
+					</div>	
+					<div class="form_field video_section" style="<?php echo ($result['post_type'] == 'video')? 'display:block':'display: none'?>">
+						<div class="left_fm_field">
+							<input type="file" name="post_video" placeholder="Video"  id="post_video" class=""  />
+						</div>
+					</div>
+					<?php $pdf_cls= ($result['post_type'] == 'blog' || $result['post_type'] == 'story' || ($result['post_type'] == 'book'))? 'display:block':'display: none'?>
+					<div class="form_field pdf_section" style="<?php echo $pdf_cls;?>">
+						<div class="left_fm_field">
+							<input type="file" name="post_pdf" placeholder="Pdf"  id="post_pdf" class=""  />
+						</div>
+					</div>					
+					<div class="form_field ">						
 						<div class="rgt_fm_field btn_submit_div">
 							<input type="hidden" name="status" id="status" value="" />
 							<input type="hidden" value="Sava as draft" class="grey_btn draft_post">
@@ -149,11 +164,16 @@ $('.post_type_selection li a').click(function(){
 	$('.post_type_selection li a').removeClass('active');
 	$(this).addClass('active');
 	$('#post_type').val(current_val);
+	$('.pdf_section').hide();
 	$('.video_section').hide();
 	if(current_val == 'video')
 	{
 		$('.video_section').show();
 	}
+	else if(current_val == 'blog' || current_val == 'book' || current_val == 'story' )
+	{
+		$('.pdf_section').show();
+	}	
 });
 
 $('#blog_post_title').blur(function() { 

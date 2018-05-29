@@ -581,10 +581,16 @@ $(document).ready(function(){
 		$(this).addClass('active');
 		$('#post_type').val(current_val);
 		$('.video_section').hide();
+		$('.pdf_section').hide();
+
 		if(current_val == 'video')
 		{
 			$('.video_section').show();
 		}
+		else if(current_val == 'blog' || current_val == 'book' || current_val == 'story' )
+		{
+			$('.pdf_section').show();
+		}		
 	});
 	
 	$(document).on('click','.edit_profile',function () {
