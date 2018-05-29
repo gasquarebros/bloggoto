@@ -1721,6 +1721,11 @@ input[type="file"] {
     color: #00c853;
 }
 
+.input_field.social_section { margin-top: 12px; }
+
+.show_image_box div { float: left;width: auto;margin-right: 10px; }
+.show_image_box .image_help { float: left;width: 263px;;margin-right: 10px; }
+
 .followers ul {
     padding: 0;
     margin: 10px 10px 30px;

@@ -107,8 +107,12 @@
 						<?php if($info['customer_photo']){ ?>
 						<label></label>
 						<div class="input_field show_image_box">
-							<img class="img-responsive common_delete_image" style="width: 100px; height:100px;"  src="<?php echo media_url(). $this->lang->line('customer_image_folder_name')."/".$info['customer_photo'];?>">
-						</div><?php } ?>
+							<div class="image_sec"><img class="img-responsive common_delete_image" style="width: 100px; height:100px;"  src="<?php echo media_url(). $this->lang->line('customer_image_folder_name')."/".$info['customer_photo'];?>"></div>
+							<div class="image_help">
+							<span class="float:left">(New Image Uploaded will appear here only after clicking update profile button)</span></div>
+						</div><?php } else { ?>
+						<span>(New Image Uploaded will appear here only after clicking update profile button)</span>
+						<?php } ?>
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
@@ -230,6 +234,14 @@
 						<label>Youtube Link</label>
 						<div class="input_field">
 							<?php  echo form_input('customer_youtube_link',stripslashes($info['customer_youtube_link']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+						
+					<div class="form_field">
+						<label>Linkedin Link</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_linkedin_link',stripslashes($info['customer_linkedin_link']),' class="form-control"');?>
 						</div>
 						<div class="clear"></div>
 					</div>
@@ -490,8 +502,12 @@
 						<?php if($info['customer_photo']){ ?>
 						<label></label>
 						<div class="input_field show_image_box">
-							<img class="img-responsive common_delete_image" style="width: 100px; height:100px;"  src="<?php echo media_url(). $this->lang->line('customer_image_folder_name')."/".$info['customer_photo'];?>">
-						</div><?php } ?>
+							<div class="image_sec"><img class="img-responsive common_delete_image" style="width: 100px; height:100px;"  src="<?php echo media_url(). $this->lang->line('customer_image_folder_name')."/".$info['customer_photo'];?>"></div>
+							<div class="image_help">
+							<span class="float:left">(New Image Uploaded will appear here only after clicking update profile button)</span></div>
+						</div><?php } else { ?>
+						<span>(New Image Uploaded will appear here only after clicking update profile button)</span>
+						<?php } ?>
 						<div class="clear"></div>
 					</div>
 					
@@ -524,6 +540,14 @@
 						<label>Youtube Link</label>
 						<div class="input_field">
 							<?php  echo form_input('customer_youtube_link',stripslashes($info['customer_youtube_link']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="form_field">
+						<label>Linkedin Link</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_linkedin_link',stripslashes($info['customer_linkedin_link']),' class="form-control"');?>
 						</div>
 						<div class="clear"></div>
 					</div>
@@ -623,7 +647,7 @@
 	<div class="form_field">
 		<label>Phone</label>
 		<div class="input_field">
-			<?php echo "<label class='display_info'>".stripslashes($info['customer_phone'])."</label>"; ?>
+			<?php echo "<label class='display_info'><a href='tel:".stripslashes($info['customer_phone'])."'>".stripslashes($info['customer_phone'])."</a></label>"; ?>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -877,6 +901,16 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
+
+	<?php if($info['customer_linkedin_link']) {?>
+	<div class="form_field">
+		<label>Linkedin Link</label>
+		<div class="input_field social_section">
+			<?php if($info['customer_linkedin_link'] !='') { echo "<a class='display_info' target='_blank' href='".addhttp($info['customer_linkedin_link'])."'>".stripslashes($info['customer_linkedin_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_linkedin_link'])."</label>"; } ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
 	<h3>Interest</h3>
 	<?php if($info['customer_hobbies']) {?>
 	<div class="form_field">
@@ -1001,7 +1035,7 @@
 	<h3>General <?php if($info['customer_id'] == get_user_id()) { ?><a class="edit_profile"><i class="fa fa-edit"></i>Edit Profile</a><?php } ?></h3>
 	<?php if($info['business_model']) {?>
 	<div class="form_field">
-		<label>Business Sector</label>
+		<label>Business Model</label>
 		<div class="input_field">
 			<?php  
 			$business_model = array(''=>'','sales'=>'Sales','service'=>'Service','sale-service'=>'Sales/Services');
@@ -1014,7 +1048,7 @@
 	
 	<?php if($info['customer_business_source']) {?>
 	<div class="form_field">
-		<label>Business Sector</label>
+		<label>Business Source</label>
 		<div class="input_field">
 			<?php  
 			$business_source = array(''=>'','online'=>'Online Business','offline'=>'Offline Business','both'=>'Both Online/Offline');
@@ -1186,13 +1220,23 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
+
+	<?php if($info['customer_linkedin_link']) {?>
+	<div class="form_field">
+		<label>Linkedin Link</label>
+		<div class="input_field social_section">
+			<?php if($info['customer_linkedin_link'] !='') { echo "<a class='display_info' target='_blank' href='".addhttp($info['customer_linkedin_link'])."'>".stripslashes($info['customer_linkedin_link'])."</a>"; } else { echo "<label class='display_info'>".stripslashes($info['customer_linkedin_link'])."</label>"; } ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
 	<h3>Contact</h3>
 	
 	<?php if($info['customer_phone']) {?>
 	<div class="form_field">
 		<label>Mobile</label>
 		<div class="input_field">
-			<?php echo "<label class='display_info'>".stripslashes($info['customer_phone'])."</label>"; ?>
+			<?php echo "<label class='display_info'><a href='tel:".stripslashes($info['customer_phone'])."'>".stripslashes($info['customer_phone'])."</a></label>"; ?>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -1201,7 +1245,7 @@
 	<div class="form_field">
 		<label>Office</label>
 		<div class="input_field">
-			<?php echo "<label class='display_info'>".stripslashes($info['customer_prof_official_phone'])."</label>"; ?>
+			<?php echo "<label class='display_info'><a href='tel:".stripslashes($info['customer_prof_official_phone'])."'>".stripslashes($info['customer_prof_official_phone'])."</a></label>"; ?>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -1219,7 +1263,7 @@
 	<div class="form_field">
 		<label>Website</label>
 		<div class="input_field">
-			<?php echo "<label class='display_info'>".stripslashes($info['customer_prof_official_website'])."</label>"; ?>
+			<?php echo "<label class='display_info'><a class='' target='_blank' href='".addhttp($info['customer_prof_official_website'])."'>".stripslashes($info['customer_prof_official_website'])."</a></label>"; ?>
 		</div>
 		<div class="clear"></div>
 	</div>

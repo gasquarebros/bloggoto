@@ -167,6 +167,7 @@ class Myprofile extends CI_Controller {
 					'customer_instagram_link'=>post_value ( 'customer_instagram_link' ),
 					'customer_twitter_link'=>post_value ( 'customer_twitter_link' ),
 					'customer_youtube_link'=>post_value ( 'customer_youtube_link' ),
+					'customer_linkedin_link'=>post_value ( 'customer_linkedin_link' ),
 					'customer_fav_color'=>post_value ( 'customer_fav_color' ),
 					'customer_fav_brand'=>post_value ( 'customer_fav_brand' ),
 					'customer_fav_place'=>post_value ( 'customer_fav_place' ),
