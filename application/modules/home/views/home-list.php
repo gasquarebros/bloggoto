@@ -131,15 +131,22 @@ var module_action="addpost";
 						?>
 						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag Bloggotians" title="Tag Bloggotians" id="post_tags" style="width:100%" multiple="multiple"');?>
 					</div>
+					<div class="form_field">
+						<div class="left_fm_field">
+							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
+						</div>
+					</div>
 					<div class="form_field video_section" style="display:none;">
 						<div class="left_fm_field">
 							<input type="file" name="post_video" placeholder="Video"  id="post_video" class=""  />
 						</div>
 					</div>
-					<div class="form_field">
+					<div class="form_field pdf_section" style="display:block;">
 						<div class="left_fm_field">
-							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
+							<input type="file" name="post_pdf" placeholder="Pdf"  id="post_pdf" class=""  />
 						</div>
+					</div>					
+					<div class="form_field">						
 						<div class="rgt_fm_field btn_submit_div">
 							<input type="hidden" name="status" id="status" value="" />
 							<input type="button" value="Sava as draft" class="grey_btn draft_post">
@@ -186,10 +193,15 @@ $('.post_type_selection li a').click(function(){
 	$(this).addClass('active');
 	$('#post_type').val(current_val);
 	$('.video_section').hide();
+	$('.pdf_section').hide();
 	if(current_val == 'video')
 	{
 		$('.video_section').show();
 	}
+	else if(current_val == 'blog' || current_val == 'book' || current_val == 'story' )
+	{
+		$('.pdf_section').show();
+	}	
 });
 
 $('#blog_post_title').blur(function() { 
