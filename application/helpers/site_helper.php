@@ -357,3 +357,21 @@ if (! function_exists ( 'get_censored_string' )){
 		return ($description != '') ? $description: '';
 	}
 }
+if (! function_exists ( 'get_blocked_user_lists' )){
+	function get_blocked_user_lists($userid) {
+		$blocked_user_array=array();
+		$CI=& get_instance();
+		if($userid != '')
+		{
+			$user_info = $CI->Mydb->get_all_records('block_user_id','customer_blocked_lists',array('block_customer_id'=>$userid));
+			if(!empty($user_info))
+			{
+				foreach($user_info as $info)
+				{
+					$blocked_user_array[] = encode_value($info['block_user_id']);
+				}
+			}
+		}
+		return (!empty($blocked_user_array)) ? $blocked_user_array : array();
+	}
+}

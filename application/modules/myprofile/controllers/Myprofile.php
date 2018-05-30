@@ -217,8 +217,30 @@ class Myprofile extends CI_Controller {
 				);
 
 				$res=$this->Mydb->update ( $this->customers, array ('customer_id' => get_user_id() ), $update_array );
-				
-				
+				$blocked_lists=$this->input->post( 'blocked_lists' );
+				$this->Mydb->delete ( 'customer_blocked_lists', array('block_customer_id'=>get_user_id ()));
+				if(!empty($blocked_lists))
+				{
+					$blocked_insert_array=array();					
+					foreach($blocked_lists as $block_user)
+					{
+						if(!empty($block_user)) 
+						{
+							$blocked_insert_array[] = array (
+														'block_customer_id' => get_user_id (),
+														'block_user_id' => decode_value($block_user),
+														'block_created_on' => current_date (),
+														'block_created_by' => get_user_id (),
+														'block_created_ip' => get_ip () 
+													 );
+						}
+					}
+					if(!empty($blocked_insert_array))
+					{
+						$this->Mydb->insert_batch ( 'customer_blocked_lists', $blocked_insert_array );					
+					}
+				}
+			
 				$this->session->set_userdata(array('bg_user_profile_picture'=>media_url().$this->lang->line('customer_image_folder_name')."/".$customer_photo ,'company_name'=>post_value ( 'company_name' )));
 				
 				$this->session->set_flashdata ( 'admin_success', 'Profile updated successfully' );

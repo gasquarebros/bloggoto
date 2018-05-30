@@ -1303,7 +1303,6 @@ if(!function_exists('thousandsCurrencyFormat'))
 	  return $x_display;
 	}
 }
-
 if(!function_exists('datepostformat'))
 {
 	function datepostformat($date) {
@@ -1344,3 +1343,21 @@ if(!function_exists('datepostformat'))
 		return $result_display." ago";
 	}
 }
+if (! function_exists ( 'get_privacy_option_dropdown' )) 
+{
+	function get_privacy_option_dropdown($name='privacy_option',$selected = null, $addStatus=array(),$extra=null) 
+	{
+
+		$status	=	array (
+				0 => 'Every One',
+				1 => 'Only Me',
+				2 => 'Followers',
+		);
+		if(!empty($addStatus)){
+			$status	=	$status + $addStatus;
+		}
+		$extra = ($extra == "")?  'class="" id="privacy_option"' : $extra;
+		return form_dropdown ( $name, $status, $selected, $extra );
+	}
+}
+?>

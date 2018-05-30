@@ -347,12 +347,37 @@
 					<div class="form_field">
 						<label>Set as Private</label>
 						<div class="input_field">
-							<input type="hidden" name="customer_private" value="0" />
-							<?php  echo form_checkbox('customer_private',1,set_checkbox('customer_private', $info['customer_private'], false) , ' class="form-control"');?>
+								<?php 
+								echo get_privacy_option_dropdown('customer_private',$info['customer_private'],'',' class="form-control"'); 
+								?>
 						</div>
 						<div class="clear"></div>
 					</div>
-					
+					<div class="form_field">
+						<label>Blocked List</label>
+					<div class="input_field tagging_section">
+						<?php 
+							$followers_lst = get_followers_list(); 
+							$followers= array();
+							if(!empty($followers_lst)) {
+								foreach($followers_lst as $foll_list)
+								{
+									if($foll_list['customer_type'] == 0)
+									{
+										$followers[encode_value($foll_list['follow_user_id'])] = $foll_list['customer_first_name']." ".$foll_list['customer_last_name']; 	
+									}
+									else
+									{
+										$followers[encode_value($foll_list['follow_user_id'])]=$foll_list['company_name']; 
+									}
+								}
+							}
+						?>
+						<?php  $selected_array=get_blocked_user_lists(get_user_id ());
+						echo form_dropdown('blocked_lists[]',$followers,$selected_array,' class="form-control"  placeholder="Blocked" title="Blocked" id="blocked_lists" style="width:100%" multiple="multiple"');?>
+					</div>
+						<div class="clear"></div>
+					</div>					
 					<div class="clear"></div>
 					<div class="btn_wrap btn_submit_div">
 						<input type="submit" value="Update Profile">
@@ -651,11 +676,37 @@
 					<div class="form_field">
 						<label>Set as Private</label>
 						<div class="input_field">
-							<input type="hidden" name="customer_private" value="0" />
-							<?php  echo form_checkbox('customer_private',1,set_checkbox('customer_private', $info['customer_private'], false) , ' class="form-control"');?>
+								<?php 
+								echo get_privacy_option_dropdown('customer_private',$info['customer_private'],'',' class="form-control"'); 
+								?>
 						</div>
 						<div class="clear"></div>
 					</div>
+					<div class="form_field">
+						<label>Blocked List</label>
+					<div class="input_field tagging_section">
+						<?php 
+							$followers_lst = get_followers_list(); 
+							$followers= array();
+							if(!empty($followers_lst)) {
+								foreach($followers_lst as $foll_list)
+								{
+									if($foll_list['customer_type'] == 0)
+									{
+										$followers[encode_value($foll_list['follow_user_id'])] = $foll_list['customer_first_name']." ".$foll_list['customer_last_name']; 	
+									}
+									else
+									{
+										$followers[encode_value($foll_list['follow_user_id'])]=$foll_list['company_name']; 
+									}
+								}
+							}
+						?>
+						<?php  $selected_array=get_blocked_user_lists(get_user_id ());
+						echo form_dropdown('blocked_lists[]',$followers,$selected_array,' class="form-control"  placeholder="Blocked" title="Blocked" id="blocked_lists" style="width:100%" multiple="multiple"');?>
+					</div>
+						<div class="clear"></div>
+					</div>	
 					<div class="clear"></div>
 					<div class="btn_wrap btn_submit_div">
 						<input type="submit" value="Update Profile">
