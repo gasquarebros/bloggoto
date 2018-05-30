@@ -605,7 +605,16 @@ $(document).ready(function(){
 		$('.profile_display_section').show();
 		return false;
 	});
+	
+	$(document).on('click','.suggestion_close',function () {
+		$(this).parent().parent().parent().remove();
+		if($('.follow_request').children('ul').children('li').length < 1)
+		{
+			$('.follow_request').remove();
+		}
+		return false;
+	});
 
-
+	
 	
 });

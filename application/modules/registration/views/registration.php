@@ -30,7 +30,7 @@
 							</div>
 						</div>
 						<div class="form_field">
-							<?php  echo form_input('customer_username',set_value('customer_username'),' class="form-control placeholder-no-fix required"  placeholder="'.get_label('customer_username').'" ');?>
+							<?php  echo form_input('customer_username',set_value('customer_username'),' class="form-control placeholder-no-fix required" id="customer_username"  placeholder="'.get_label('customer_username').'" ');?>
 						</div>
 						<?php /*
 						<div class="form_field">

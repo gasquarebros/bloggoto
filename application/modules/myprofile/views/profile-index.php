@@ -105,7 +105,7 @@ var module_action="addpost";
 									</a>	
 									</div>
 									<div class="rgt_txt_fllw">
-										<p><a class="<?php echo $celebrity_badge_class; ?>"  href="<?php echo base_url().urlencode($suggestion['customer_username']); ?>" target="_blank" ><?php echo ($suggestion['customer_type'] == '0')?$suggestion['customer_first_name']." ".$suggestion['customer_last_name']:$suggestion['company_name']; ?></a></p>
+										<p><a class="<?php echo $celebrity_badge_class; ?>"  href="<?php echo base_url().urlencode($suggestion['customer_username']); ?>" target="_blank" ><?php echo ($suggestion['customer_type'] == '0')?$suggestion['customer_first_name']." ".$suggestion['customer_last_name']:$suggestion['company_name']; ?></a><span class="close suggestion_close">X</span></p>
 										<a href="<?php echo base_url()."myprofile/add_followers/".encode_value($suggestion['customer_id']); ?>" class="follow follow_users follow_users_suggestions">Follow</a>
 									</div>
 								</li>

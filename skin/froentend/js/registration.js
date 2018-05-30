@@ -79,6 +79,18 @@ $(document).ready(function() {
 			$('.business_field').hide();
 		}
 	});
+	
+	$('#customer_username').bind('keypress', function(e) {
+		//alert('');
+		if ((e.which < 48 && e.which != 8) || 
+			(e.which > 57 && e.which < 65) || 
+			(e.which > 90 && e.which < 97) ||
+			e.which > 122) {
+			e.preventDefault();
+		}
+	});
+	
+	
 
 }); /* end of document ready*/
 
