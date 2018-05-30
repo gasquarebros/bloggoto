@@ -1644,6 +1644,17 @@ input[type="file"] {
     margin-right: 8px;
 }
 
+.profilewrap_popup .prof_dest h4 {
+    font-size: 15px;
+}
+.profilewrap_popup ..pro_pic {
+    margin-bottom: 0px;
+}
+.profilewrap_popup {
+	padding-bottom: 0px !important;
+	padding-top: 2px !important;
+}
+
 .prof_dest h4 {
     color: #263238;
     font-size: 25px;
@@ -1735,6 +1746,7 @@ input[type="file"] {
 .follow_request {
     padding: 0 10px
 }
+.suggestion_close { font-size:10px; cursor: pointer; }
 
 .followers ul li,
 .followers ul li span.follow_count,

@@ -31,7 +31,7 @@
 	                    </h4>	                </div>
 	            </div>
 	                <div class="fllow_bns"> 
-						<a href="<?php echo base_url()."myprofile/add_followers/".encode_value($info['customer_id']); ?>" class="btn btn_blue unfollow_users">Unfollow</a> 
+						<a href="<?php echo base_url()."myprofile/add_followers/".encode_value($info['customer_id']); ?>" class="unfollow_users">Unfollow</a> 
 					</div>
 	        </div>
 <?php		 	}

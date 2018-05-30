@@ -354,7 +354,7 @@
 					</div>
 					
 					<div class="clear"></div>
-					<div class="btn_wrap">
+					<div class="btn_wrap btn_submit_div">
 						<input type="submit" value="Update Profile">
 						<button class="cancel_edit_profile">Cancel</button>
 					</div>
@@ -657,7 +657,7 @@
 						<div class="clear"></div>
 					</div>
 					<div class="clear"></div>
-					<div class="btn_wrap">
+					<div class="btn_wrap btn_submit_div">
 						<input type="submit" value="Update Profile">
 						<button class="cancel_edit_profile">Cancel</button>
 					</div>
