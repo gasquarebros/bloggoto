@@ -1360,4 +1360,21 @@ if (! function_exists ( 'get_privacy_option_dropdown' ))
 		return form_dropdown ( $name, $status, $selected, $extra );
 	}
 }
+if (! function_exists ( 'get_blog_category' )) 
+{
+	function get_blog_category() 
+	{	
+		$CI = & get_instance ();
+		$category = array();
+		$post_category = $CI->Mydb->get_all_records('*','blog_category',array('blog_cat_status' => 'A'),'','',array('blog_cat_sequence'=>'ASC'));
+		if(!empty($post_category))
+		{
+			foreach($post_category as $blogcat)
+			{
+				$category[$blogcat['blog_cat_slug']] = $blogcat['blog_cat_name'];
+			}
+		}
+		return $category;
+	}
+}
 ?>

@@ -1202,8 +1202,8 @@ ul.device_nav li.active > .s_arrow {
     padding: 0px 0px;
     position: relative;
     text-align: left;
-    -webkit-box-shadow: 0 2px 10px 0 #626161;
-    box-shadow: 0 2px 10px 0 #626161;
+    -webkit-box-shadow:0 2px 6px 0 #d0d0d0;
+    box-shadow:0 2px 6px 0 #d0d0d0;
 }
 
 .responsive_sidebar {
@@ -1222,7 +1222,7 @@ ul.device_nav li.active > .s_arrow {
     height: 32px;
     background: url(../images/close.png) no-repeat center center;
     position: absolute;
-    top: 10px;
+    top: 7px;
     right: 5px;
     z-index: 999999;
     font-size: 0px;
@@ -1230,7 +1230,7 @@ ul.device_nav li.active > .s_arrow {
 
 .popup_header {
     background: #3f3f3f;
-    padding: 15px 25px;
+    padding: 10px 25px;
 }
 
 .popup_header h4 {
@@ -1609,18 +1609,19 @@ input[type="file"] {
 }
 .profilewrap_popup .pro_pic {
     width: 50px;
-    float: left;
+    display: inline-block;
+    vertical-align: middle;
     margin-right: 10px;
 }
 .profilewrap_popup .prof_dest {
-    float: left;
+        display: inline-block;
 }
 .profilewrap_popup .fllow_bns {
     width: 30%;
     /* float: left; */
     display: inline-block;
     position: none;
-    top: 10px;
+    top: 20px;
 }
 
 .profile_wrap {
@@ -1634,7 +1635,7 @@ input[type="file"] {
 }
 
 .pro_pic {
-    margin-bottom: 8px;
+    /*margin-bottom: 8px;*/
 }
 
 .profile_photo_wrap {
@@ -1651,8 +1652,8 @@ input[type="file"] {
     margin-bottom: 0px;
 }
 .profilewrap_popup {
-	padding-bottom: 0px !important;
-	padding-top: 2px !important;
+	/*padding-bottom: 0px !important;
+	padding-top: 2px !important;*/
 }
 
 .prof_dest h4 {

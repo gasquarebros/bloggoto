@@ -122,7 +122,7 @@
 							
 							
 							<?php if($record['post_photo'] !=''){ $photo=media_url().$this->lang->line('post_photo_folder_name').$record['post_photo']; } else { /*$photo=media_url().$this->lang->line('post_photo_folder_name')."default.png";*/ $photo =''; } ?>
-								<?php if($photo !='') { ?>
+								<?php if($record['post_type'] != 'video' && $record['post_video'] =='' && $photo !='') { ?>
 								<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
 								<?php } ?>
 							

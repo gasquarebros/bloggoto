@@ -77,15 +77,10 @@ var module_action="addpost";
 				<h5>Choose your category</h5>
 				<input type="hidden" id="post_category" name="post_category" value="Fashion" />
 				<ul class="post_category_selection">
-					<li><a data-section="Fashion" href="javascript:void(0)" class="active">Fashion</a></li>
-					<li><a data-section="Travel" href="javascript:void(0)" >Travel</a></li>
-					<li><a data-section="Food" href="javascript:void(0)" >Food</a></li>
-					<li><a data-section="Tech" href="javascript:void(0)" >Tech</a></li>
-					<li><a data-section="Business" href="javascript:void(0)" >Business</a></li>
-					<li><a data-section="Health" href="javascript:void(0)" >Health</a></li>
-					<li><a data-section="life style" href="javascript:void(0)" >Lifestyle</a></li>
-					<li><a data-section="Paparazzi" href="javascript:void(0)" >Paparazzi</a></li>
-					<li><a data-section="Others" href="javascript:void(0)" >Others</a></li>
+					<?php $categories = get_blog_category(); 
+					if(!empty($categories)) { foreach($categories as $catkey=>$cat) { ?>
+						<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class=""><?php echo $cat; ?></a></li>
+					<?php } } ?>
 					
 				</ul>
 			</div>

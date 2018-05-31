@@ -190,7 +190,7 @@ class Home extends CI_Controller {
 		//}
 		
 		
-		$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'));
+		$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'),'','',array('blog_cat_sequence'=>'ASC'));
 		$category[''] = "Select Category"; 
 		if(!empty($post_category))
 		{
@@ -414,12 +414,12 @@ class Home extends CI_Controller {
 				if($res == 0)
 				{
 					$category = array();
-					$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'));
+					$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'),'','',array('blog_cat_sequence'=>'ASC'));
 					if(!empty($post_category))
 					{
 						foreach($post_category as $blogcat)
 						{
-							$category[$blogcat['blog_cat_name']] = $blogcat['blog_cat_id'];
+							$category[$blogcat['blog_cat_slug']] = $blogcat['blog_cat_id'];
 						}
 					}
 
@@ -585,7 +585,7 @@ class Home extends CI_Controller {
 				if($res == 0)
 				{
 					$category = array();
-					$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'));
+					$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'),'','',array('blog_cat_sequence'=>'ASC'));
 					if(!empty($post_category))
 					{
 						foreach($post_category as $blogcat)
@@ -931,7 +931,7 @@ class Home extends CI_Controller {
 				if($res == 0)
 				{
 					$category = array();
-					$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'));
+					$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'),'','',array('blog_cat_sequence'=>'ASC'));
 					if(!empty($post_category))
 					{
 						foreach($post_category as $blogcat)

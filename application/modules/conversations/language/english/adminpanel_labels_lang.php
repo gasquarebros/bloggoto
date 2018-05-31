@@ -9,7 +9,7 @@ Description		: Page contains common label for project module
 
 /*Common label */
 $lang['reply_succ'] = 'Your reply send successfully.';
-$lang['trash_conf'] = 'Are you sure moved to trash this Conversation?';
+$lang['trash_conf'] = 'Are you sure you want to move this conversation to trash?';
 $lang['trash_succ'] = 'Conversation has been moved to trash.';
 $lang['restore_succ'] = 'Conversation has been restored.';
 $lang['message_succ'] = 'Your message has been sent.';

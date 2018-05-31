@@ -14,6 +14,12 @@ $('.more_items').click(function(){
 	$('.section_menu').toggleClass('more_menu');
 });
 
+function isInView(el) {
+  var rect = el.getBoundingClientRect();           // absolute position of video element
+  return !(rect.top > $(window).height() || rect.bottom < 0);   // visible?
+}
+
+
 $(window).scroll(function(){
 	if($(this).scrollTop() !=0){
 		$('#back-to-top').fadeIn();
@@ -21,6 +27,18 @@ $(window).scroll(function(){
 	else{
 		$('#back-to-top').fadeOut();
 	}
+	
+	$('video').each(function(){
+		if (isInView($(this)[0])) {                    // visible?
+		  if ($(this)[0].paused) $(this)[0].play();    // play if not playing
+		}
+		else {
+			console.log($(this).attr('src'));
+		  if (!$(this)[0].paused) $(this)[0].pause();  // pause if not paused
+		}
+
+	})
+	
 });
 $('#back-to-top').click(function(){
 	$('body,html').animate({scrollTop:0}, 800);
