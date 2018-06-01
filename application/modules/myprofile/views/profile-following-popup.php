@@ -32,7 +32,9 @@
 	                    </h4>	                </div>
 	            </div>
 	                <div class="fllow_bns"> 
-						<a href="<?php echo base_url()."myprofile/add_followers/".encode_value($info['customer_id']); ?>" class="unfollow_users">Unfollow</a> 
+						<?php if($info['customer_id'] == get_user_id()) { ?>
+							<a href="<?php echo base_url()."myprofile/add_followers/".encode_value($info['customer_id']); ?>" class="unfollow_users">Unfollow</a> 
+						<?php } ?>
 					</div>
 	        </div>
 <?php		 	}

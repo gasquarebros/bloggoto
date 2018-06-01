@@ -1425,18 +1425,6 @@ if (! function_exists ( 'get_follow_block_me' ))
 	}
 }
 
-/*This is used to get all the blocked users for the logged uses, which means it will combine above two functions*/
-if (! function_exists ( 'get_all_block_users' )) 
-{
-	function get_all_block_users() 
-	{
-		$private_array = get_private_me();
-		$follow_block_array = get_follow_block_me();
-		$overall_block = array_merge($private_array,$follow_block_array);
-		return array_unique($overall_block);
-	}
-}
-
 /*get user id who have set followers only */
 if (! function_exists ( 'get_follow_settings_users' )) 
 {
@@ -1448,18 +1436,43 @@ if (! function_exists ( 'get_follow_settings_users' ))
 		if($loggedin_id)
 		{
 			$block_records = $CI->Mydb->get_all_records('customer_id','customers',array('customer_private' => '2','customer_id != '.$loggedin_id=>NULL));	
-			
+			$currentuser_followers = get_followers_list($loggedin_id);
+			$loggedin_followers = array();
+			if(!empty($currentuser_followers)) {
+				foreach($currentuser_followers as $followerslist)
+				{
+					$loggedin_followers[] = $followerslist['customer_id'];
+				}
+			}
+
 			if(!empty($block_records))
 			{
 				foreach($block_records as $block_record)
 				{
-					$set_follow_users[] = $block_record['block_customer_id'];
+					if(!in_array($block_record['customer_id'],$loggedin_followers)) {
+						$set_follow_users[] = $block_record['customer_id'];
+					}
 				}
 			}
 		}
 		return $set_follow_users;
 	}
 }
+
+/*This is used to get all the blocked users for the logged uses, which means it will combine above two functions*/
+if (! function_exists ( 'get_all_block_users' )) 
+{
+	function get_all_block_users() 
+	{
+		$private_array = get_private_me();
+		$follow_block_array = get_follow_block_me();
+		$follow_only_block_array = get_follow_settings_users();
+		$overall_block = array_merge($private_array,$follow_block_array,$follow_only_block_array);
+		return array_unique($overall_block);
+	}
+}
+
+
 
 
 ?>

@@ -21,6 +21,7 @@ $(document).ready(function(){
 					}
 					$(".follow_count").html(data.html);
 					$(".follow_users").html(data.msg);
+					window.location.reload();
 					if(suggestion == true)
 					{
 						window.location.reload();
@@ -75,6 +76,7 @@ $(document).ready(function(){
 					$(".follow_count").html(data.html);
 					$(".follow_users").html(data.msg);
 					$("#"+dataid).remove();
+					window.location.reload();
 				}
 			}
 		});
