@@ -60,7 +60,15 @@ class Home extends CI_Controller {
 		);
 		$where = array('post_status'=>'A','post_by !='=>'admin');
 		$groupby = "post_id";
-		
+		$blocked_users = get_all_block_users();
+		if(!empty($blocked_users))
+		{
+			$blockedlist = implode(',',$blocked_users);
+			$where = array_merge ( $where, array (
+				"customer_id NOT IN (".$blockedlist.")" => null,
+			));
+
+		}
 		if(post_value('section') !=''&& post_value('section') == 'blogs')
 		{
 			$where = array_merge ( $where, array (
@@ -162,8 +170,7 @@ class Home extends CI_Controller {
 		$join [5] ['type'] = "LEFT";
 
 		$totla_rows = $this->Mydb->get_num_join_rows ( $this->primary_key, $this->table, $where, null, null, null, $like, $groupby, $join  );
-
-		
+	
 		$limit = 12;
 		$page = post_value ( 'page' )?$post_value ( 'page' ):1;
 		$offset = post_value ( 'page' )?((post_value ( 'page' )-1) * $limit):0;
@@ -239,7 +246,15 @@ class Home extends CI_Controller {
 		);
 		$where = array('post_status'=>'A');
 		/* Search part start */
-		
+		$blocked_users = get_all_block_users();
+		if(!empty($blocked_users))
+		{
+			$blockedlist = implode(',',$blocked_users);
+			$where = array_merge ( $where, array (
+				"customer_id NOT IN (".$blockedlist.")" => null,
+			));
+
+		}
 		if (post_value ( 'paging' ) == "") {
 			$search_field = post_value ( 'search_field' );
 			$type = post_value ( 'type' );
@@ -667,8 +682,20 @@ class Home extends CI_Controller {
 		if($slug !='')
 		{
 			$data = $this->load_module_info ();
-			$where = "post_slug = '".$slug."'";
+			//$where = "post_slug = '".$slug."'";
 			$like = array ();
+			
+			$where = array('post_status'=>'A','post_slug'=>$slug);
+			$groupby = "post_id";
+			$blocked_users = get_all_block_users();
+			if(!empty($blocked_users))
+			{
+				$blockedlist = implode(',',$blocked_users);
+				$where = array_merge ( $where, array (
+					"customer_id NOT IN (".$blockedlist.")" => null,
+				));
+
+			}
 			
 			$order_by = array (
 					$this->primary_key => 'DESC' 
@@ -708,6 +735,7 @@ class Home extends CI_Controller {
 
 			$select_array = array ('pos_posts.*');
 			$records = $this->Mydb->get_all_records ( $select_array, $this->table, $where, '', '', $order_by, $like, $groupby, $join );
+
 			$data ['records'] = $records;
 			if(!empty($records))
 			{
@@ -715,11 +743,14 @@ class Home extends CI_Controller {
 				$data['meta_description'] = $records[0]['post_description'];
 				$data['meta_keyword'] = $records[0]['post_title'];
 			}
+			else {
+				redirect(base_url());
+			}
 			$this->layout->display_site ( $this->folder . $this->module . "-view", $data );
 		}
 		else
 		{
-			
+			redirect(base_url());
 		}
 	}
 	

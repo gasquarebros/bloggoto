@@ -252,7 +252,7 @@ $notify_logo = skin_url('images/db-logo2.png');
 										$name = (!empty($allusers[$notification[0]['assigned_to']]) && $notification[0]['assigned_to']!='' && $notification[0]['message_type'] != 'N')?$allusers[$notification[0]['assigned_to']]['customer_first_name']:'Anonymous';
 									}
 
-									if($allusers[$notification[0]['assigned_from']]['customer_type'] == 1) {
+									if(!empty($allusers[$notification[0]['assigned_from']]) && $allusers[$notification[0]['assigned_from']]['customer_type'] == 1) {
 										$from_name = (!empty($allusers[$notification[0]['assigned_from']]) && $notification[0]['assigned_from']!='')?$allusers[$notification[0]['assigned_from']]['company_name']:'';
 									} else {
 										$from_name = (!empty($allusers[$notification[0]['assigned_from']]) && $notification[0]['assigned_from']!='')?$allusers[$notification[0]['assigned_from']]['customer_first_name']:'';
@@ -260,29 +260,35 @@ $notify_logo = skin_url('images/db-logo2.png');
 									echo '<em>Conversation between </em>'.$name.' , '.$from_name;
 									?>
 								</small>
-								<p class="margin-top-10">
-									<a class="btn btn-default btn-sm accordion-toggle" data-toggle="collapse" href="#collapse">
-										<i class="fa fa-envelope margin-right-5"></i>
-										<?=get_label('c_reply')?>
-									</a>
-								</p>
-								<div class="collapse" id="collapse">
-									<p class="margin-top-10"></p>
-									<form class="simple_form message" id="frm-send_replay">
-										<div class="form-group">
-											<div class="control-group text required message_body">
-												<div class="controls">
-													<textarea class="text required form-control input-sm" autocomplete="off" rows="3" required="required" placeholder="<?=get_label('c_your_reply')?>"  id="message_body" data-rule-required="true" data-msg="Please fill reply" ></textarea>
+								<?php 
+								$blocked_users = get_all_block_users();
+								if(!in_array($notification[0]['assigned_from'],$blocked_users))
+								{
+								?>
+									<p class="margin-top-10">
+										<a class="btn btn-default btn-sm accordion-toggle" data-toggle="collapse" href="#collapse">
+											<i class="fa fa-envelope margin-right-5"></i>
+											<?=get_label('c_reply')?>
+										</a>
+									</p>
+									<div class="collapse" id="collapse">
+										<p class="margin-top-10"></p>
+										<form class="simple_form message" id="frm-send_replay">
+											<div class="form-group">
+												<div class="control-group text required message_body">
+													<div class="controls">
+														<textarea class="text required form-control input-sm" autocomplete="off" rows="3" required="required" placeholder="<?=get_label('c_your_reply')?>"  id="message_body" data-rule-required="true" data-msg="Please fill reply" ></textarea>
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="text-left">
-											<input type="hidden" id="notification_id" value="<?=$notification[0]['notification_id']?>">
-											<input name="commit" value="<?=get_label('c_send_reply');?>" class="btn btn-sm" id="post_reply" type="button">
-										</div>
-									</form>
-									<p></p>
-								</div>
+											<div class="text-left">
+												<input type="hidden" id="notification_id" value="<?=$notification[0]['notification_id']?>">
+												<input name="commit" value="<?=get_label('c_send_reply');?>" class="btn btn-sm" id="post_reply" type="button">
+											</div>
+										</form>
+										<p></p>
+									</div>
+								<?php } ?>
 							</div>
 							<?php } ?>
 						</div>

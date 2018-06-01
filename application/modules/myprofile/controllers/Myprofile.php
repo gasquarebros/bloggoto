@@ -1076,6 +1076,7 @@ class Myprofile extends CI_Controller {
 		$following_records = get_following_list($customer_id);
 		$data['title'] = "Followers";
 		$data['results'] = $following_records;
+		$data['customer_id'] = $customer_id;
 			$html = get_template ( $this->folder . '/' . $this->module . '-followers-popup', $data );
 
 			echo json_encode ( array (
@@ -1093,6 +1094,7 @@ class Myprofile extends CI_Controller {
 		$follow_records = get_followers_list($customer_id);
 		$data['title'] = "Following";
 		$data['results'] = $follow_records;
+		$data['customer_id'] = $customer_id;
 			$html = get_template ( $this->folder . '/' . $this->module . '-following-popup', $data );
 
 			echo json_encode ( array (

@@ -12,7 +12,7 @@ if (! function_exists ( 'loadallUser' )){
 	function loadallUser()
 	{
 		$CI=& get_instance();
-		$where=array('customer_status'=>'A','customer_private !='=>1);
+		$where=array('customer_status'=>'A');
 		$user = $CI->Mydb->get_all_records('*','customers',$where,$limit='', $offset='', $order_by='', $like='', $groupby=array(), $join='' );
 		
 		//$user = $CI->session->all_userdata();

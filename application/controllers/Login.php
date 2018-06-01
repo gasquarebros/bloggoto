@@ -11,7 +11,7 @@ class Login extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->module = "login";
-		$this->authentication->already_login_check();
+		
 		$this->module_label = "Login";
 		$this->module_labels = "Login";
 		$this->folder = "login/";
@@ -33,6 +33,7 @@ class Login extends CI_Controller {
 	
 	/* this method used to check login */
 	public function index() {
+		$this->authentication->already_login_check();
 		$data = $this->load_module_info ();	
 		if(get_user_id() !=""){ 
 			redirect(base_url()."home");
@@ -252,6 +253,7 @@ class Login extends CI_Controller {
 	
 	public function reset_password()
 	{
+		$this->authentication->already_login_check();
 		if ($this->input->post ( 'submit' ) == 'Reset') 	
 		{
 			$alert = "";
@@ -316,6 +318,7 @@ class Login extends CI_Controller {
 	
 	public function activation()
 	{
+		$this->authentication->already_login_check();
 		$activation_key=($this->uri->segment(2))?$this->uri->segment(2):'';
 		if($activation_key !='')
 		{
@@ -344,6 +347,7 @@ class Login extends CI_Controller {
 
 	public function changepassword()
 	{
+		$this->authentication->already_login_check();
 		$blog_user = $this->session->userdata ( "bg_user_id" );
 		($blog_user == "") ? redirect ( base_url () ) : '';
 		$data=array();

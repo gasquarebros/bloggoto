@@ -196,7 +196,15 @@ class Conversations extends CI_Controller {
 		// echo "<pre>";
 		// print_r($data);
 		// exit;
-        $data['allusers'] = loadfollowers(array('follow_customer_id'=>$this->user_details->bg_user_id,'customer_status'=>'A'));
+		$blocked_users = get_all_block_users();
+		if(!empty($blocked_users)) {
+			$blocks = implode(',',$blocked_users);
+			$data['allusers'] = loadfollowers(array('follow_customer_id'=>$this->user_details->bg_user_id,'customer_status'=>'A','customer_id NOT IN ('.$blocks.')'=>NULL));
+		}
+		else
+		{
+			$data['allusers'] = loadfollowers(array('follow_customer_id'=>$this->user_details->bg_user_id,'customer_status'=>'A'));
+		}
        
         $this->layout->display_site($this->folder . 'new',$data);
          

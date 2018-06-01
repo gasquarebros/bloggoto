@@ -1377,4 +1377,89 @@ if (! function_exists ( 'get_blog_category' ))
 		return $category;
 	}
 }
+/*Those who have set as only me, this will provide those user ids*/
+if (! function_exists ( 'get_private_me' )) 
+{
+	function get_private_me() 
+	{
+		$CI = & get_instance ();
+		$loggedin_id = $CI->session->userdata('bg_user_id');
+		$block_users = array();
+		if($loggedin_id)
+		{
+			$block_records = $CI->Mydb->get_all_records('customer_id','customers',array('customer_private' => '1','customer_id != '.$loggedin_id=>NULL));	
+			
+			if(!empty($block_records))
+			{
+				foreach($block_records as $block_record)
+				{
+					$block_users[] = $block_record['customer_id'];
+				}
+			}
+		}
+		return $block_users;
+	}
+}
+
+/*This function will provide you the list of users who blocked the current logged in user id*/
+if (! function_exists ( 'get_follow_block_me' )) 
+{
+	function get_follow_block_me() 
+	{
+		$CI = & get_instance ();
+		$loggedin_id = $CI->session->userdata('bg_user_id');
+		$block_users = array();
+		if($loggedin_id)
+		{
+			$block_records = $CI->Mydb->get_all_records('block_customer_id','customer_blocked_lists',array('block_user_id' => $loggedin_id));	
+			
+			if(!empty($block_records))
+			{
+				foreach($block_records as $block_record)
+				{
+					$block_users[] = $block_record['block_customer_id'];
+				}
+			}
+		}
+		return $block_users;
+	}
+}
+
+/*This is used to get all the blocked users for the logged uses, which means it will combine above two functions*/
+if (! function_exists ( 'get_all_block_users' )) 
+{
+	function get_all_block_users() 
+	{
+		$private_array = get_private_me();
+		$follow_block_array = get_follow_block_me();
+		$overall_block = array_merge($private_array,$follow_block_array);
+		return array_unique($overall_block);
+	}
+}
+
+/*get user id who have set followers only */
+if (! function_exists ( 'get_follow_settings_users' )) 
+{
+	function get_follow_settings_users() 
+	{
+		$CI = & get_instance ();
+		$loggedin_id = $CI->session->userdata('bg_user_id');
+		$set_follow_users = array();
+		if($loggedin_id)
+		{
+			$block_records = $CI->Mydb->get_all_records('customer_id','customers',array('customer_private' => '2','customer_id != '.$loggedin_id=>NULL));	
+			
+			if(!empty($block_records))
+			{
+				foreach($block_records as $block_record)
+				{
+					$set_follow_users[] = $block_record['block_customer_id'];
+				}
+			}
+		}
+		return $set_follow_users;
+	}
+}
+
+
 ?>

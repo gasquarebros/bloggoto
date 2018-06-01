@@ -101,14 +101,16 @@ $route['registration'] = 'registration/index';
 $route['search'] = 'search/index';
 $route['conversations'] = 'conversations/index';
 $route['conversations/view/(.*)'] = 'conversations/view/$1';
+$route['conversations/new_message/(.*)'] = 'conversations/new_message/$1';
 $route['conversations/new_message'] = 'conversations/new_message';
 $route['conversations/create_message'] = 'conversations/create_message';
 $route['conversations/post_reply'] = 'conversations/post_reply';
-$route['conversations/*'] = 'conversations/$1';
+$route['conversations/(.*)'] = 'conversations/$1';
+$route['keep_alive'] = 'login/keep_alive';
 $route['page/(.*)'] = 'home/page/$1';
 $route['(.*)'] = 'myprofile/index/$1';
 $route['products/ajax_pagination'] = 'products/ajax_pagination';
-$route['keep_alive'] = 'login/keep_alive';
+
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

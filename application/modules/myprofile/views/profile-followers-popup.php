@@ -4,8 +4,9 @@
     </div>
 	<div class="popup_body">
 		<?php
-		 if(!empty($results))
-		 {
+		$blocked_users = get_all_block_users();
+		if(!empty($results) && (!(in_array($customer_id,$blocked_users))) )
+		{
 		 	foreach ($results as $key => $info) 
 		 	{
 				if(get_user_id() !='')
@@ -35,7 +36,9 @@
 				</div>
 	        </div>
 <?php		 	}
-		 }
+		} else if(in_array($customer_id,$blocked_users)){ 
+			echo "<p>You dont have access</p>";
+		}
 		?>
     </div>
 	<p><a class="popup-modal-dismiss" href="#">Dismiss</a></p>
