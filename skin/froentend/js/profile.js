@@ -219,7 +219,6 @@ $(document).ready(function(){
 	});
 	
 	$('.profile_section').click(function() {
-	
 		$('.profile_section').removeClass('active');
 		$(this).addClass('active');
 		get_profile_section();

@@ -833,6 +833,7 @@ ul.profile_rgt {
     float: right;
 	position:relative;
 	padding:0 7px;
+    cursor: pointer !important;
 }
 
 .show_post_options {
@@ -1477,7 +1478,7 @@ input[type="file"] {
 .boi_data {
     /*padding: 15px; */
 }
-.edit_profile { float:right; font-size:13px; }
+.edit_profile { float:right; font-size:13px; cursor: pointer !important;}
 
 .boi_data .form_field label {
     width: 280px;
