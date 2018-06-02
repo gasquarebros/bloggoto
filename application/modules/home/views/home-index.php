@@ -82,6 +82,7 @@ var module_action="addpost";
 					<div class="form_field video_section" style="display:none;">
 						<div class="left_fm_field">
 							<input type="file" name="post_video" placeholder="Video"  id="post_video" class=""  />
+							<span class="help">Video upto 5MB only can be uploaded</span>
 						</div>
 					</div>
 					<div class="form_field pdf_section" style="display:block;">

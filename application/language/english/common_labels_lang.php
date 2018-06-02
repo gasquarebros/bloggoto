@@ -67,6 +67,7 @@ $lang ['customer_brand_type'] = "I'm Business";
 $lang ['postal_code_max_length'] = 8;
 $lang ['phone_max_length'] = 12;
 $lang ['post_photo'] = "Image";
+$lang ['account_success_created'] = "success! Account created successfully.";
 
 
 /*  upload folder name  */$lang['client_min_amount'] = "Minimum Amount For Free Delivery";

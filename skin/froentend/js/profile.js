@@ -127,8 +127,7 @@ $(document).ready(function(){
 		return false;
 	});
 		
-	
-	$(document).on('click', '.thumbsup', function(e) {
+	$(document).off('click', '.thumbsup').on('click', '.thumbsup',function(e) {
 		var userid = $('#userid').val();
 		if(userid == '')
 		{
@@ -169,7 +168,7 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	$(document).on('click', '.comments', function(e) {		
+	$(document).off('click', '.comments').on('click', '.comments',function(e) {	
 		var dataid = $(this).data('id'); 
 		var url = $(this).attr('href');
 		var current = $(this);
@@ -213,7 +212,7 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	$(document).on('click', '.share_social', function(e) {		
+	$(document).off('click', '.share_social').on('click', '.share_social',function(e) {	
 		$(this).parent().children('.social_sharing_sections').toggle('slow');
 		return false;
 	});
@@ -225,7 +224,7 @@ $(document).ready(function(){
 		return false;
 	});
 
-	$(document).on('click', '.comment_delete', function(e) {	
+	$(document).off('click', '.comment_delete').on('click', '.comment_delete',function(e) {		
 		var current=$(this);
 		var url = $(this).attr('href');
 		var id = $(this).attr('data-cmtid');
@@ -248,7 +247,8 @@ $(document).ready(function(){
 		});
 		return false;
 	});	
-	$(document).on('click', '.comment_edit', function(e) {	
+	
+	$(document).off('click', '.comment_edit').on('click', '.comment_edit',function(e) {	
 		var current=$(this);
 		var url = $(this).attr('href');
 		var id = $(this).attr('data-cmtid');
@@ -259,12 +259,13 @@ $(document).ready(function(){
 		$('#'+id).find('#comment_data').val(msg);
 		return false;
 	});
-	$(document).on('click', '.comment_cancel', function(e) {	
+	
+	$(document).off('click', '.comment_cancel').on('click', '.comment_cancel',function(e) {
 		$('.recent').show();
 		$('.comment_content').hide();
 		return false;
-	});		
-	$(document).on('submit', '.upcomment_form', function(e) {	
+	});		 
+	$(document).off('submit', '.upcomment_form').on('submit', '.upcomment_form',function(e) {
 		var userid = $('#userid').val();
 		if(userid == '')
 		{

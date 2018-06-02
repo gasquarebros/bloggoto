@@ -108,7 +108,38 @@ class Common {
 				return '';
 			} else {
 				$data = $this->ci->upload->data ();
-				return $data ['file_name'];
+				
+				
+				
+				$filename = $data ['full_path']; /*ADD YOUR FILENAME WITH PATH*/
+				$exif = exif_read_data($filename);
+
+				$ort = (!empty($exif['Orientation']))?$exif['Orientation']:null; /*STORES ORIENTATION FROM IMAGE */
+				$ort1 = $ort;
+				$exif = exif_read_data($filename, 0, true);
+				if (!empty($ort1))
+				{
+					$image = imagecreatefromjpeg($filename);
+					$ort = $ort1;
+					switch ($ort) {
+						case 3:
+							$image = imagerotate($image, 180, 0);
+							break;
+
+						case 6:
+							$image = imagerotate($image, -90, 0);
+							break;
+
+						case 8:
+							$image = imagerotate($image, 90, 0);
+							break;
+					}
+					imagejpeg($image,$filename, 90);
+				}
+					   
+				
+				
+				return $data['file_name'];
 			}
 		}
 	}

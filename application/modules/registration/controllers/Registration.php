@@ -104,8 +104,9 @@ class Registration extends CI_Controller {
 				 	$this->load->library('myemail');
 				 	$check_arr = array('[NAME]','[EMAIL]','[ACTIVATELINK]','[PASSWORD]');
 				 	$replace_arr = array($this->input->post('customer_first_name')." ".$this->input->post('customer_last_name'),$this->input->post('customer_email'),$activate_link,$this->input->post('customer_password'));
-				 	//$this->myemail->send_admin_mail($this->input->post('customer_email'),get_label('customer_registration_template'),$check_arr,$replace_arr);
-
+				 	$this->myemail->send_admin_mail($this->input->post('customer_email'),get_label('customer_registration_template'),$check_arr,$replace_arr);
+					
+					$this->session->set_flashdata ( 'success', sprintf ( $this->lang->line ( 'account_success_created' ) ) );
 				 	$result ['status'] = 'success';
 				}
 				

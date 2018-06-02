@@ -30,7 +30,7 @@
 							</div>
 						</div>
 						<div class="form_field">
-							<?php  echo form_input('customer_username',set_value('customer_username'),' class="form-control placeholder-no-fix required" id="customer_username"  placeholder="'.get_label('customer_username').'" ');?>
+							<?php  echo form_input('customer_username',set_value('customer_username'),' class="form-control placeholder-no-fix required" id="customer_username"  placeholder="'.get_label('customer_username').'" onkeydown="keyDown()" onkeypress="keypress()" onkeyup="keyup()" ');?>
 						</div>
 						<?php /*
 						<div class="form_field">
@@ -108,7 +108,60 @@
 					$.magnificPopup.close();
 				});
 			});
+			$('#customer_username').bind("cut copy paste",function(e) {
+				e.preventDefault();
+			});
+			
+
+			$(document).on('keypress', '#customer_username', function(evt){
+				if ((e.which < 48 && e.which != 8) || 
+					(e.which > 57 && e.which < 65) || 
+					(e.which > 90 && e.which < 97) ||
+					e.which > 122) {
+					e.preventDefault();
+				}
+			});
+			
+			$("#customer_username").keyup(function (e) {
+				if ((e.which < 48 && e.which != 8) || 
+					(e.which > 57 && e.which < 65) || 
+					(e.which > 90 && e.which < 97) ||
+					e.which > 122) {
+					e.preventDefault();
+				}	
+			});
+			
 		});
+		
+		function keyDown()
+		{
+			if ((e.which < 48 && e.which != 8) || 
+				(e.which > 57 && e.which < 65) || 
+				(e.which > 90 && e.which < 97) ||
+				e.which > 122) {
+				e.preventDefault();
+			}	
+		}
+		function keypress()
+		{
+			if ((e.which < 48 && e.which != 8) || 
+				(e.which > 57 && e.which < 65) || 
+				(e.which > 90 && e.which < 97) ||
+				e.which > 122) {
+				e.preventDefault();
+			}	
+
+		}
+		function keyup()
+		{
+			if ((e.which < 48 && e.which != 8) || 
+				(e.which > 57 && e.which < 65) || 
+				(e.which > 90 && e.which < 97) ||
+				e.which > 122) {
+				e.preventDefault();
+			}	
+
+		}
 	</script>
 	
 	
