@@ -25,7 +25,7 @@
 						<?php echo form_open(base_url(),'id="user_login_form" class="login-form" autocomplete= "'.form_autocomplte().'" ');?>
 							<div class="form_field">
 								<?php /*<label class="control-label visible-ie8 visible-ie9">Username</label>*/ ?>	
-								<?php echo  form_input('username','','class="form-control form-control-solid placeholder-no-fix required email" placeholder="Email Address"');?>
+								<?php echo  form_input('username','','class="form-control form-control-solid placeholder-no-fix required" placeholder="Email Address"');?>
 							</div>
 							<div class="form_field">
 								<?php echo  form_password('password','','class="form-control form-control-solid placeholder-no-fix required" placeholder="Password" minlength="'.PASSWORD_LENGTH.'" ');?>

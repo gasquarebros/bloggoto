@@ -51,8 +51,7 @@ class Login extends CI_Controller {
 				$password = $this->mysqli->real_escape_string ( trim ( $this->input->post ( 'password' ) ) );
 				$username = $this->mysqli->real_escape_string ( trim ( $this->input->post ( 'username' ) ) );
 
-				$check_details = $this->Mydb->get_record ('customer_id,customer_first_name,customer_username,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo,company_name', $this->table, array ('customer_email' => $username,'customer_status !='=>'D') );
-				
+				$check_details = $this->Mydb->get_record ('customer_id,customer_first_name,customer_username,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo,company_name', $this->table, array ('(customer_email = "'.$username.'" OR customer_username ="'.$username.'")'=>NULL,'customer_status !='=>'D') );
 				if ($check_details)
 				{
 					if ($check_details['customer_status'] == 'A'){

@@ -78,7 +78,7 @@ $(document).on('click', '.toggle_feed',function(){
 		$('img').one('load',function() {
 			setTimeout(equalheight(), 2000);
 		});*/
-		setTimeout(function(){ $('.close').trigger('click') } , 4000);
+		// setTimeout(function(){ $('.close').trigger('click') } , 4000);
 
 	
     });

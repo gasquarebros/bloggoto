@@ -39,6 +39,7 @@
 						*/ ?>
 						<div class="form_field">
 							<?php  echo form_input('customer_email',set_value('customer_email'),' class="form-control placeholder-no-fix required email"  placeholder="'.get_label('customer_email').'" ');?>
+							<span class="email_info"><i class="fa fa-info" aria-hidden="true"></i></span>
 						</div>
 						<div class="form_field">
 							<?php  echo form_password('customer_password',set_value('customer_password'),' class="form-control placeholder-no-fix  required" id="customer_password"   minlength="'.get_label('company_password_minlength').'"  placeholder="'.get_label('customer_password').'"  ');?>

@@ -295,7 +295,6 @@ $notify_logo = skin_url('images/db-logo2.png');
 					</div>
 				</div>
 				<div class="clear"></div>
-				<?php if($notification[0]['message_type'] != 'N') { ?>
 				<div id="load_reply">
 					<?php
 					$notification_id = $this->uri->segment('4');
@@ -320,6 +319,7 @@ $notify_logo = skin_url('images/db-logo2.png');
 							
 							<div class="timeline-stat" >
 								<?php
+				 if($notification[0]['message_type'] != 'N') { 
 
 								if($val['message_type']=='N' || $val['msg_type']='R') {
 									$notify_logo = skin_url('images/man.png');
@@ -333,6 +333,12 @@ $notify_logo = skin_url('images/db-logo2.png');
 									}
 									$username=($allusers[$user_id1]['customer_type']==1)?$allusers[$user_id1]['company_name']:$allusers[$user_id1]['customer_first_name'];
 								}
+							}
+							else
+							{
+								$username='';
+								$notify_logo = skin_url('images/man.png');
+							}
 								?>
 								<small ><img class="circle-md" src="<?=$notify_logo?>" alt="Bloggotoweb"></small>
 								<div class="message-heading">
@@ -360,7 +366,6 @@ $notify_logo = skin_url('images/db-logo2.png');
 					
 					?>
 				</div>
-				<?php } ?>
 			</div>
 		</div>
 	</div>
