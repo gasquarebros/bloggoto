@@ -2824,3 +2824,10 @@ td p {
 a.favor.active {
     color: #0099CC !important;
 }
+.email_info
+{
+    cursor: pointer !important;
+}
+.registration_from .email{
+    width: 95% !important;
+}

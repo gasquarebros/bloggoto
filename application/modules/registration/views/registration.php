@@ -20,7 +20,7 @@
 				</div>
 				<div class="signup_form_section">
 					<div class="alert alert-danger log_alert alert_msg" role="alert" style="display:none;"></div>
-					<?php echo form_open_multipart(base_url().$module,' class="" id="common_form" ' );?>
+					<?php echo form_open_multipart(base_url().$module,' class="registration_from" id="common_form" ' );?>
 						<div class="form_field double_input">
 							<div class="form_field_inner">
 								<?php  echo form_input('customer_first_name',set_value('customer_first_name'),' class="form-control placeholder-no-fix required" placeholder="'.get_label('customer_first_name').'"  ');?>
@@ -39,7 +39,7 @@
 						*/ ?>
 						<div class="form_field">
 							<?php  echo form_input('customer_email',set_value('customer_email'),' class="form-control placeholder-no-fix required email"  placeholder="'.get_label('customer_email').'" ');?>
-							<span class="email_info"><i class="fa fa-info" aria-hidden="true"></i></span>
+							<span class="email_info" title="email"><i class="fa fa-info" aria-hidden="true"  title="email"></i></span>
 						</div>
 						<div class="form_field">
 							<?php  echo form_password('customer_password',set_value('customer_password'),' class="form-control placeholder-no-fix  required" id="customer_password"   minlength="'.get_label('company_password_minlength').'"  placeholder="'.get_label('customer_password').'"  ');?>
