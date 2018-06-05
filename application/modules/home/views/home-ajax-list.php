@@ -1,4 +1,10 @@
 <?php if(!empty($records)) { ?>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+	google_ad_client: "ca-pub-1049218876507748",
+	enable_page_level_ads: true
+  });
+</script> 
 <?php $i=0; foreach($records as $record) { ?>
 <?php 
 if($i%2 == 0){ ?>

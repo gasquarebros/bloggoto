@@ -41,6 +41,12 @@
 		<div class="post_detail_wrap append_html">
 <?php } ?>
 		<?php if(!empty($records)) { ?>
+			<script>
+			  (adsbygoogle = window.adsbygoogle || []).push({
+				google_ad_client: "ca-pub-1049218876507748",
+				enable_page_level_ads: true
+			  });
+			</script> 
 			<?php foreach($records as $record) { ?>
 				<div class="single_feed">
 					<div class="feed_wrapper">

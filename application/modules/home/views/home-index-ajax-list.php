@@ -65,6 +65,12 @@
 		<div class="post_detail_wrap append_html">
 <?php } ?>
 		<?php if(!empty($records)) { ?>
+			<script>
+			  (adsbygoogle = window.adsbygoogle || []).push({
+				google_ad_client: "ca-pub-1049218876507748",
+				enable_page_level_ads: true
+			  });
+			</script> 
 			<?php foreach($records as $record) { ?>
 				<div class="single_feed">
 					<div class="feed_wrapper">
@@ -239,8 +245,10 @@
 						?>
 					</div>
 				</div>
-			<?php }
-		} else if($page <= 1) { echo  "<p>No Records Found</p>"; } ?>
+			<?php } ?>
+			
+			
+		<?php } else if($page <= 1) { echo  "<p>No Records Found</p>"; } ?>
 		<div class="load_more" <?php if($next_set !='') { echo 'style="display:block;"'; } else { echo "style='display:none;'"; } ?>>
 			<button class="more_posts">Load More</button>
 		</div>
