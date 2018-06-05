@@ -28,11 +28,11 @@
 						<?php } ?>
 	                </div>
 	                <div class="prof_dest">
-	                    <h4><span class="<?php echo $celebrity_badge_class; ?>"><?php echo ($info['customer_type'] == '0')?$info['customer_first_name']." ".$info['customer_last_name']:$info['company_name']; ?></span>
+	                    <h4><span class="<?php echo $celebrity_badge_class; ?>"><?php echo ($info['customer_type'] == '0')?(($info['customer_first_name'] !='' || $info['customer_last_name'] !='')?$info['customer_first_name']." ".$info['customer_last_name']:$info['customer_username']):(($info['company_name'])?$info['company_name']:$info['customer_username']); ?></span>
 	                    </h4>	                </div>
 	            </div>
 	                <div class="fllow_bns"> 
-						<?php if($info['customer_id'] == get_user_id()) { ?>
+						<?php if($customer_id == get_user_id()) { ?>
 							<a href="<?php echo base_url()."myprofile/add_followers/".encode_value($info['customer_id']); ?>" class="unfollow_users">Unfollow</a> 
 						<?php } ?>
 					</div>

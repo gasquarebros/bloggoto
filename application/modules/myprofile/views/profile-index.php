@@ -56,7 +56,7 @@ var module_action="addpost";
 						} ?> 
                     </ul>
                 </div>
-				<?php if($info['customer_id'] != get_user_id() && !(in_array($info['customer_id'],$blocked_users))) { ?>
+				<?php if(get_user_id() !='' && $info['customer_id'] != get_user_id() && !(in_array($info['customer_id'],$blocked_users))) { ?>
 					<div class="fllow_bns">
 						<?php if(in_array($info['customer_id'],$follow_list)) { ?>  
 							<a href="<?php echo base_url()."myprofile/add_followers/".encode_value($info['customer_id']); ?>" class="btn btn_blue follow_users">Unfollow</a>
@@ -65,7 +65,7 @@ var module_action="addpost";
 						<?php } ?>
 						<a href="<?php echo base_url()."conversations/new_message/".encode_value($info['customer_id']); ?>" class="btn bt_green message_users">Message</a>
 					</div>
-				<?php } else if(!(in_array($info['customer_id'],$blocked_users))) { $url_social_own = base_url().urlencode($info['customer_username']); ?> 
+				<?php } else if(get_user_id() !='' && !(in_array($info['customer_id'],$blocked_users))) { $url_social_own = base_url().urlencode($info['customer_username']); ?> 
 					<div class="profile_social_share fllow_bns">
 						<span class="share_n_text">Share On</span>
 						<ul>
@@ -106,7 +106,7 @@ var module_action="addpost";
 									</a>	
 									</div>
 									<div class="rgt_txt_fllw">
-										<p><a class="<?php echo $celebrity_badge_class; ?>"  href="<?php echo base_url().urlencode($suggestion['customer_username']); ?>" target="_blank" ><?php echo ($suggestion['customer_type'] == '0')?$suggestion['customer_first_name']." ".$suggestion['customer_last_name']:$suggestion['company_name']; ?></a><span class="close suggestion_close">X</span></p>
+										<p><a class="<?php echo $celebrity_badge_class; ?>"  href="<?php echo base_url().urlencode($suggestion['customer_username']); ?>" target="_blank" ><?php echo ($suggestion['customer_type'] == '0')?(($suggestion['customer_first_name'] !='' || $suggestion['customer_last_name'] !='')?$suggestion['customer_first_name']." ".$suggestion['customer_last_name']:$suggestion['customer_username']):(($suggestion['company_name'])?$suggestion['company_name']:$suggestion['customer_username']); ?></a><span class="close suggestion_close">X</span></p>
 										<a href="<?php echo base_url()."myprofile/add_followers/".encode_value($suggestion['customer_id']); ?>" class="follow follow_users follow_users_suggestions">Follow</a>
 									</div>
 								</li>
@@ -116,7 +116,7 @@ var module_action="addpost";
                 </div>
             </div>
         </div>
-		<?php  if(!(in_array($info['customer_id'],$blocked_users))) { ?>
+		<?php  if(get_user_id() !='' && !(in_array($info['customer_id'],$blocked_users))) { ?>
 		<div class="newsfeed_wrap">
 			<ul class="newsfeed_menu">
 				

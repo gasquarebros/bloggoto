@@ -10,7 +10,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Myprofile extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
-		$this->authentication->user_authentication();
+		//$this->authentication->user_authentication();
 		$this->module = "profile";
 		$this->module_label = get_label('profile_module_label');
 		$this->module_labels = get_label('profile_module_label');
@@ -295,6 +295,7 @@ class Myprofile extends CI_Controller {
 	
 	public function viewbio($userid = null)
 	{
+		$this->authentication->user_authentication();
 		//$this->authentication->user_authentication();
 		check_site_ajax_request();
 		//$userid = get_user_id();
@@ -332,6 +333,7 @@ class Myprofile extends CI_Controller {
 	
 	public function viewblogs($userid =null)
 	{
+		$this->authentication->user_authentication();
 		check_site_ajax_request();
 		$userid = (post_value('userid'))?post_value('userid'):$userid;
 		if($userid == null)
@@ -499,6 +501,7 @@ class Myprofile extends CI_Controller {
 	
 	public function viewtags($userid =null)
 	{
+		$this->authentication->user_authentication();
 		check_site_ajax_request();
 		$userid = (post_value('userid'))?post_value('userid'):$userid;
 		if($userid == null)
@@ -635,6 +638,7 @@ class Myprofile extends CI_Controller {
 	
 	public function post_likes($postid)
 	{
+		$this->authentication->user_authentication();
 		$customer_id = get_user_id();
 		check_site_ajax_request();
 		$postid = decode_value(post_value('dataid'));
@@ -712,6 +716,7 @@ class Myprofile extends CI_Controller {
 	
 	public function add_followers($userid)
 	{
+		$this->authentication->user_authentication();
 		$customer_id = get_user_id();
 		check_site_ajax_request();
 		if($userid == 'null' || $customer_id == null)
@@ -802,7 +807,7 @@ class Myprofile extends CI_Controller {
 	
 	public function comments($postslug = null)
 	{
-		
+		$this->authentication->user_authentication();
 		//check_site_ajax_request();
 		
 		if($postslug == null)
@@ -861,6 +866,7 @@ class Myprofile extends CI_Controller {
 	
 	public function addcomments()
 	{
+		$this->authentication->user_authentication();
 		$customer_id = get_user_id();
 		check_site_ajax_request();
 		$postid = decode_value(post_value('post_record'));
@@ -968,6 +974,7 @@ class Myprofile extends CI_Controller {
 	}
 	public function notification($userid =null)
 	{
+		$this->authentication->user_authentication();
 		$data=$limit=$offset=$like=$groupby=$join=array();
 		$data = $this->load_module_info ();
 
@@ -992,6 +999,7 @@ class Myprofile extends CI_Controller {
 	}	
 	public function pull_post_log()
 	{
+		$this->authentication->user_authentication();
 		$result=array();
 
 		$customer_id = get_user_id();
@@ -1042,6 +1050,7 @@ class Myprofile extends CI_Controller {
 
 	public function notify_mark_read()
 	{
+		$this->authentication->user_authentication();
 		$result=array();
 		$customer_id = get_user_id();
 		$mark_read_type=$this->input->post('data_type');
@@ -1070,6 +1079,7 @@ class Myprofile extends CI_Controller {
 	}
 	public function get_followers_profile($userid)
 	{
+		$this->authentication->user_authentication();
 		check_site_ajax_request();
 		$action=$this->input->post('action');
 		$customer_id=decode_value($userid);
@@ -1088,6 +1098,7 @@ class Myprofile extends CI_Controller {
 	}	
 	public function get_following_profile($userid)
 	{
+		$this->authentication->user_authentication();
 		check_site_ajax_request();
 		$action=$this->input->post('action');
 		$customer_id=decode_value($userid);
@@ -1106,11 +1117,13 @@ class Myprofile extends CI_Controller {
 	}
 	public function favorlist()
 	{
+		$this->authentication->user_authentication();
 		$data = $this->load_module_info ();	
 		$this->layout->display_site ( $this->folder . $this->module . "-favor-list", $data );
 	}	
 	public function favor_ajax_pagination()
 	{
+		$this->authentication->user_authentication();
 		$data = $this->load_module_info ();	
 		$customer_id = get_user_id();
 		check_site_ajax_request();
@@ -1181,6 +1194,7 @@ class Myprofile extends CI_Controller {
 	}		
 	public function post_favor($postid)
 	{
+		$this->authentication->user_authentication();
 		$customer_id = get_user_id();
 		check_site_ajax_request();
 		$postid = decode_value(post_value('dataid'));
@@ -1231,6 +1245,7 @@ class Myprofile extends CI_Controller {
 	}
 	public function deletepostcomment($comment_id=null)
 	{
+		$this->authentication->user_authentication();
 		$result=array();
 		check_site_ajax_request();
 		$this->authentication->user_authentication();

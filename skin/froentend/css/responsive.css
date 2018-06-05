@@ -176,7 +176,7 @@ position: relative; overflow: visible !important; }
 	.single_feed { margin-bottom: 3px; }
 	.newsfeed_wrap .form_field label { margin-bottom: 0px !important; }
 	.display_info { margin: 0px !important; }
-	.followers ul { margin: 10px; float: left;}
+	.followers ul { margin: 0px !important; float: left;}
 	.profile_wrap { padding:0px; margin-bottom: 0px;overflow:hidden }
 	.followers ul li { width:auto !important; }
 	.newsfeed_menu { margin:0px; }

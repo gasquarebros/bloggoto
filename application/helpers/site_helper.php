@@ -143,7 +143,7 @@ if (! function_exists ( 'get_followers_list' )) {
 		{
 			$join = '';
 			$order_by = array('customer_first_name'=>'ASC');
-			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge";
+			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge,customer_username";
 			$join [0] ['table'] = 'customers';
 			$join [0] ['condition'] = "follow_user_id = customer_id and customer_private != 1";
 			$join [0] ['type'] = "INNER";
@@ -163,7 +163,7 @@ if (! function_exists ( 'get_following_list' )) {
 		{
 			$join = '';
 			$order_by = array('customer_first_name'=>'ASC');
-			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge";
+			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge,customer_username";
 			$join [0] ['table'] = 'customers';
 			$join [0] ['condition'] = "follow_customer_id = customer_id and customer_private != 1";
 			$join [0] ['type'] = "INNER";
