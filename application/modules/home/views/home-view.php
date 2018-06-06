@@ -124,7 +124,7 @@
 								</video>
 							<?php } ?>
 							<?php 
-							if($record['post_type'] == 'blog' || $record['post_type'] == 'book' || $record['post_type'] =='story') { ?>
+							if(($record['post_type'] == 'blog' || $record['post_type'] == 'book' || $record['post_type'] =='story') && $record['post_pdf'] !='' ) { ?>
 								<a class="pdf_source" href="<?php echo media_url().$this->lang->line('post_pdf_folder_name').$record['post_pdf']; ?>" target="_blank">
 									<i class="fa fa-file-pdf-o" style="font-size:48px;color:#2596B1"></i> </a>
 							<?php } ?>							
