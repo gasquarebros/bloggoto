@@ -424,7 +424,7 @@ class Home extends CI_Controller {
 						$result ['status'] = 'error';
 						$result ['message'] = $post_pdf['message'];
 					}
-				}					
+				}			
 
 				if($res == 0)
 				{
@@ -446,6 +446,7 @@ class Home extends CI_Controller {
 							'post_photo' => $post_photo,
 							'post_video' => $post_video,
 							'post_pdf' => $post_pdf,
+							'post_embed_video_url' => post_value('post_embed_video_url'),
 							//'post_tags' => post_value ( 'post_tags' ),
 							'post_status' => (post_value('status'))?post_value('status'):'A',
 							'post_created_on' => current_date (),
@@ -617,6 +618,7 @@ class Home extends CI_Controller {
 							'post_photo' => $post_photo,
 							'post_video' => $post_video,
 							'post_pdf' => $post_pdf,
+							'post_embed_video_url' => post_value('post_embed_video_url'),
 							//'post_tags' => post_value ( 'post_tags' ),
 							'post_status' => (post_value('status'))?post_value('status'):'A',
 							'post_created_on' => current_date (),

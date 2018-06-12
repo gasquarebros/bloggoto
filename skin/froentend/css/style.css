@@ -2832,3 +2832,43 @@ a.favor.active {
 .registration_from .email{
     width: 95% !important;
 }
+
+
+
+/*sidebar menu css*/
+/*
+.mCustomScrollbar{
+	height: 100%;
+    background: #06678e;
+    position: absolute;
+    width: 85%;
+    top: 0;
+    z-index: 999999;
+}
+
+.mCustomScrollbar .side-menu{
+	background: #fff;
+}
+
+.mCustomScrollbar .side-menu  a{
+	color: #fff;
+}
+
+.mCustomScrollbar .signup_wrap {
+    margin: 0;
+    padding-top: 35px;
+    text-align: right;
+    width: 50%;
+    padding-right: 20px;
+}
+
+.mCustomScrollbar  .side-menu{
+	    padding-top: 30px;
+}
+#firstli  .side-menu{
+	    float: none;
+}
+.mCustomScrollbar   .main_menu{
+	    float: none;
+    color: #fff;
+}*/

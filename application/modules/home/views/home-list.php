@@ -106,6 +106,11 @@ var module_action="addpost";
 					<div class="form_field">
 						<textarea name="post_description" placeholder="Description"></textarea>
 					</div>
+					<div class="form_field">
+						<div class="">
+							<input type="text" name="post_embed_video_url" placeholder="Youtube Embed Video URL"  id="post_embed_video_url" class="form-control"  />
+						</div>
+					</div>
 					<div class="form_field tagging_section">
 						<?php 
 							$followers_lst = get_followers_list(); 

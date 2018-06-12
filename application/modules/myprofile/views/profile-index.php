@@ -177,6 +177,11 @@ var module_action="addpost";
 					<div class="form_field">
 						<textarea name="post_description" placeholder="Description"></textarea>
 					</div>
+					<div class="form_field">
+						<div class="">
+							<input type="text" name="post_embed_video_url" placeholder="Youtube Embed Video URL"  id="post_embed_video_url" class="form-control"  />
+						</div>
+					</div>
 					<div class="form_field tagging_section">
 						<?php 
 							$followers_lst = get_followers_list();
@@ -197,6 +202,7 @@ var module_action="addpost";
 						?>
 						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag Bloggotians" title="Tag Bloggotians" id="post_tags" style="width:100%"');?>
 					</div>
+					
 					<div class="form_field">
 						<div class="left_fm_field">
 							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
