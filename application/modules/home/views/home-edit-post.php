@@ -52,6 +52,12 @@ var module_action="updatepost";
 					<div class="form_field">
 						<textarea name="post_description" placeholder="Enter Your Description"><?php echo json_decode($result['post_description']); ?></textarea>
 					</div>
+					<div class="form_field">
+						<div class="">
+						<?php  echo form_input('post_embed_video_url',$result['post_embed_video_url'],' class="form-control"  placeholder="Youtube Embed Video URL" id="post_embed_video_url" ');?>
+
+						</div>
+					</div>					
 					<div class="form_field tagging_section">
 						<?php 
 							$followers = array(''=>'Select Users');
@@ -89,7 +95,7 @@ var module_action="updatepost";
 					</div>	
 					<div class="form_field ">
 							<?php 
-							if($result['post_type'] == 'blog' || $result['post_type'] == 'book' || $result['post_type'] =='story') { ?>
+							if(($result['post_type'] == 'blog' || $result['post_type'] == 'book' || $result['post_type'] =='story') && ($result['post_pdf'] != '')) { ?>
 								<a class="pdf_source" href="<?php echo media_url().$this->lang->line('post_pdf_folder_name').$result['post_pdf']; ?>" target="_blank">
 									<i class="fa fa-file-pdf-o" style="font-size:48px;color:#2596B1"></i> </a>
 							<?php } ?>					
