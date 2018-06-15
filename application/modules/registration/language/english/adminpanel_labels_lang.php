@@ -25,3 +25,4 @@ $lang['customer_email_exist'] = "This email address already exists";
 $lang['customer_username_exist'] = "This username already exists";
 $lang['registration_success_message_add'] = "Thankyou, You have registered successfully, once your account is activated you can able to login using your credentials";
 $lang['success_message'] = "Thank you for registering your Account with BlogGoto. You will receive an Activation Email.";
+$lang['email_signup_message'] = "We are not sharing the email to anyone. <br> Please enter a valid email ID as this is used for resetting passwords and deactivating/Deleting the account from Bloggoto Servers.";

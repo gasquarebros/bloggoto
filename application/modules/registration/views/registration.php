@@ -39,7 +39,7 @@
 						*/ ?>
 						<div class="form_field">
 							<?php  echo form_input('customer_email',set_value('customer_email'),' class="form-control placeholder-no-fix required email"  placeholder="'.get_label('customer_email').'" ');?>
-							<span class="email_info" title="email"><i class="texthover fa fa-info" aria-hidden="true"  title="email"></i><span class="hovertext" style="display:none; border:1px solid; padding:3px; ">We are not sharing the email to anyone.</span></span>
+							<span class="email_info" title="email"><i class="texthover fa fa-info" aria-hidden="true"  title="email"></i><span class="hovertext" style="display:none;  padding:3px; "><?php echo get_label('email_signup_message'); ?></span></span>
 						</div>
 						<div class="form_field">
 							<?php  echo form_password('customer_password',set_value('customer_password'),' class="form-control placeholder-no-fix  required" id="customer_password"   minlength="'.get_label('company_password_minlength').'"  placeholder="'.get_label('customer_password').'"  ');?>
@@ -62,7 +62,7 @@
 							<div class="form_field_inner fl">
 								<p class="term">
 								<?php  echo form_checkbox('agree','1','0','id="agree" class="toggle-checkbox required"'); ?>
-								<label for="agree">I agree to our <a href="javascript:void(0)">terms & conditions</a>.</label>
+								<label for="agree">I agree to our <a target="_blank" href="<?php echo base_url()."page/terms-of-use"; ?>">terms & conditions</a>.</label>
 								</p>
 							</div>                        
 						</div>

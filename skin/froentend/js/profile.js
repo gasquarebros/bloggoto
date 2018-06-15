@@ -114,6 +114,7 @@ $(document).ready(function(){
 						}
 						current.find('.comment').val('');
 						current.parent().parent().find(".comments_display").html(data.html);
+						current.parent().parent().find('.comments_list').hide();
 						current.parent().parent().find('.comments').trigger('click');
 					}
 					else
@@ -172,43 +173,48 @@ $(document).ready(function(){
 		var dataid = $(this).data('id'); 
 		var url = $(this).attr('href');
 		var current = $(this);
-		
-		var page = current.parent().parent().parent().find('.comment_page').val();
-		current.parent().parent().parent().find('.comment_page').remove();
-		show_content_loading(); 
-		$.ajax({
-			url : url,
-			data : "secure_key="+secure_key+"&action=comments&dataid="+dataid+"&offset=0",
-			type : 'POST',
-			dataType : "json",
-			async:false,
-			success : function(data) {
-				
-				hide_content_loading();
-				if (data.status == "success") {
-					/* reload page if delete the pagination record is empty... */
-					if(data.page_reload == "Yes")
-					{
-						window.location.href= admin_url;
-						return false;
-					}
+		if(current.parent('li').parent('ul').next(".comments_list").is(":visible") == true)
+		{
+			current.parent('li').parent('ul').next(".comments_list").hide();
+		}
+		else {
+			var page = current.parent().parent().parent().find('.comment_page').val();
+			current.parent().parent().parent().find('.comment_page').remove();
+			show_content_loading(); 
+			$.ajax({
+				url : url,
+				data : "secure_key="+secure_key+"&action=comments&dataid="+dataid+"&offset=0",
+				type : 'POST',
+				dataType : "json",
+				async:false,
+				success : function(data) {
 					
-					/*if(page > 0)
-					{
-						current.parent('li').parent('ul').next(".comments_list").append(data.html);
+					hide_content_loading();
+					if (data.status == "success") {
+						/* reload page if delete the pagination record is empty... */
+						if(data.page_reload == "Yes")
+						{
+							window.location.href= admin_url;
+							return false;
+						}
+						
+						/*if(page > 0)
+						{
+							current.parent('li').parent('ul').next(".comments_list").append(data.html);
+						}
+						else{*/
+							current.parent('li').parent('ul').next(".comments_list").show();
+							current.parent('li').parent('ul').next(".comments_list").html(data.html);
+						//}
+						
+						$(".body").each(function() {
+							var myObj = JSON.parse($(this).html());
+							$(this).html(myObj);
+						});
 					}
-					else{*/
-						current.parent('li').parent('ul').next(".comments_list").show();
-						current.parent('li').parent('ul').next(".comments_list").html(data.html);
-					//}
-					
-					$(".body").each(function() {
-						var myObj = JSON.parse($(this).html());
-						$(this).html(myObj);
-					});
 				}
-			}
-		});
+			});
+		}
 		return false;
 	});
 	
