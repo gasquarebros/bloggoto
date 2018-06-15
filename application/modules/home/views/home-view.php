@@ -149,7 +149,7 @@
 								</li>
 								<li class="shear-btn">
 									<a href="javascript:;"><i class="fa fa-external-link"></i>
-										&nbsp;Share
+										&nbsp;
 									</a>
 									<div class="social-share"> 
 											<a class="" href="http://www.facebook.com/sharer.php?u=<?php echo base_url().'home/view/'.$record['post_slug']; ?>&title=<?php echo urlencode($record['post_title']); ?>" target="_blank" ><i class="fa fa-facebook-square" aria-hidden="true"></i></a>

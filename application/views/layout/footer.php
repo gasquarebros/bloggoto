@@ -22,6 +22,7 @@
 					<ul>
 						<li><a href="<?php echo base_url()."page/about"; ?>">About Us</a></li>
 						<li><a href="<?php echo base_url()."page/faq"; ?>">FAQ</a></li>
+						<li><a href="<?php echo base_url()."page/how-it-works"; ?>">How it Works</a></li>
 						<?php /*<li><a href="<?php echo base_url()."contact"; ?>">Contact Us</a></li> */ ?>
 					</ul>
 				</div>
@@ -29,6 +30,12 @@
 					<h4>Yayy! We have been waiting for you!</h4>
 					
 					<p>Now Read, Write, Comment, Review, Share, Sell, Buy, Advertise and Much More. Its all Yours!!<br> Free Signup and always will be.</p>
+					<div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        
 				</div>
 			</div>
 			

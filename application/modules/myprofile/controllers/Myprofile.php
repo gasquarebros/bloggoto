@@ -191,8 +191,13 @@ class Myprofile extends CI_Controller {
 					'customer_prof_profession'=>(!empty($profession))?implode(',',$this->input->post( 'customer_prof_profession' )):'',
 					'business_sector'=>(!empty($business_sector))?$business_sector:'',
 					'customer_photo'=>$customer_photo,
-					'customer_prof_school'=>post_value ( 'customer_prof_school' ),
-					'customer_prof_college'=>post_value ( 'customer_prof_college' ),
+					'customer_school'=>post_value ( 'customer_school' ),
+					'customer_college'=>post_value ( 'customer_college' ),
+					'customer_college_higher'=>post_value ( 'customer_college_higher' ),
+					'customer_nature'=>post_value ( 'customer_nature' ),
+					'customer_position'=>post_value ( 'customer_position' ),
+					'customer_current_company'=>post_value ( 'customer_current_company' ),
+					'customer_previous_company'=>post_value ( 'customer_previous_company' ),
 					'customer_prof_work'=>post_value ( 'customer_prof_work' ),
 					'customer_prof_official_website'=>post_value ( 'customer_prof_official_website' ),
 					'customer_prof_official_email'=>post_value ( 'customer_prof_official_email' ),
@@ -217,6 +222,8 @@ class Myprofile extends CI_Controller {
 				);
 
 				$res=$this->Mydb->update ( $this->customers, array ('customer_id' => get_user_id() ), $update_array );
+				echo $this->db->last_query();
+				exit;
 				$blocked_lists=$this->input->post( 'blocked_lists' );
 				$this->Mydb->delete ( 'customer_blocked_lists', array('block_customer_id'=>get_user_id ()));
 				if(!empty($blocked_lists))
@@ -477,7 +484,7 @@ class Myprofile extends CI_Controller {
 			
 			
 			$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'),'','',array('blog_cat_sequence'=>'ASC'));
-			$category[''] = "Select Category"; 
+			$category[''] = "All Category"; 
 			if(!empty($post_category))
 			{
 				foreach($post_category as $blogcat)

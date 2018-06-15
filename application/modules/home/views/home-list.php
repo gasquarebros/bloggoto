@@ -31,7 +31,7 @@ var module_action="addpost";
             <div class="cmt_form">
                 <form>
                     <div class="form_field">
-                        <input type="text" id="blog_post_title" placeholder="Click here and enter title to write a blog , story, book or Upload Picture, Videos or To Write a Review">
+                        <input type="text" id="blog_post_title" placeholder="<?php echo get_label('placeholder_post_title');?>">
                     </div>
                     <div class="action_field">
                         <a  <?php if(get_user_id() == '') { ?> class="popup-modals" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal" href="#test-modal" <?php } ?> value="">Let's Go</a>
@@ -78,9 +78,9 @@ var module_action="addpost";
 				<input type="hidden" id="post_category" name="post_category" value="Fashion" />
 				<ul class="post_category_selection">
 					<?php $categories = get_blog_category(); 
-					if(!empty($categories)) { foreach($categories as $catkey=>$cat) { ?>
-						<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class=""><?php echo $cat; ?></a></li>
-					<?php } } ?>
+					if(!empty($categories)) { $i=0; foreach($categories as $catkey=>$cat) { ?>
+						<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class="<?php if($i==0) echo 'active'; ?>"><?php echo $cat; ?></a></li>
+					<?php $i++; } } ?>
 					
 				</ul>
 			</div>
@@ -139,6 +139,7 @@ var module_action="addpost";
 					<div class="form_field video_section" style="display:none;">
 						<div class="left_fm_field">
 							<input type="file" name="post_video" placeholder="Video"  id="post_video" class=""  />
+							<span class="help">Video upto 5MB only can be uploaded</span>
 						</div>
 					</div>
 					<div class="form_field pdf_section" style="display:block;">

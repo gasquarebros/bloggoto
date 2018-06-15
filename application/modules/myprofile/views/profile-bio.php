@@ -140,13 +140,14 @@
 						</div>
 						<div class="clear"></div>
 					</div>
+					<?php /*
 					<div class="form_field">
 						<label>Graduation Year</label>
 						<div class="input_field">
 							<?php  echo form_input('customer_school_graduation',stripslashes($info['customer_school_graduation']),' class="form-control"');?>
 						</div>
 						<div class="clear"></div>
-					</div>
+					</div>*/ ?>
 					<div class="form_field">
 						<label>Pre College</label>
 						<div class="input_field">
@@ -154,13 +155,14 @@
 						</div>
 						<div class="clear"></div>
 					</div>
+					<?php /*
 					<div class="form_field">
 						<label>Graduation Year</label>
 						<div class="input_field">
 							<?php  echo form_input('customer_college_graduation',stripslashes($info['customer_college_graduation']),' class="form-control"');?>
 						</div>
 						<div class="clear"></div>
-					</div>
+					</div>*/ ?>
 					<div class="form_field">
 						<label>Post Graduation College</label>
 						<div class="input_field">
@@ -168,13 +170,14 @@
 						</div>
 						<div class="clear"></div>
 					</div>
+					<?php /*
 					<div class="form_field">
 						<label>Graduation Year</label>
 						<div class="input_field">
 							<?php  echo form_input('customer_college_higher_graduation',stripslashes($info['customer_college_higher_graduation']),' class="form-control"');?>
 						</div>
 						<div class="clear"></div>
-					</div>
+					</div>*/ ?>
 					
 					<div class="form_field">
 						<label>Nature of Profession</label>
@@ -199,7 +202,7 @@
 						<div class="clear"></div>
 					</div>
 					<div class="form_field working_additional" <?php echo $show_style; ?>>
-						<label for="customer_previous_company">Previous Company</label>
+						<label for="customer_previous_company">Previous Companies</label>
 						<div class="input_field"><?php  echo form_input('customer_previous_company',stripslashes($info['customer_previous_company']),' class="form-control"');?></div>
 						<div class="clear"></div>
 					</div>
@@ -873,7 +876,7 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
-	<?php if($info['customer_school_graduation']) {?>
+	<?php /*if($info['customer_school_graduation']) {?>
 	<div class="form_field">
 		<label>Graduation Year</label>
 		<div class="input_field">
@@ -881,7 +884,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<?php } ?>
+	<?php }*/ ?>
 	<?php if($info['customer_college']) {?>
 	<div class="form_field">
 		<label>Pre College</label>
@@ -891,7 +894,7 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
-	<?php if($info['customer_college_graduation']) {?>
+	<?php /*if($info['customer_college_graduation']) {?>
 	<div class="form_field">
 		<label>Graduation Year</label>
 		<div class="input_field">
@@ -899,7 +902,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<?php } ?>
+	<?php } */ ?>
 	<?php if($info['customer_college_higher']) {?>
 	<div class="form_field">
 		<label>Post Graduation College</label>
@@ -909,7 +912,7 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
-	<?php if($info['customer_college_higher_graduation']) {?>
+	<?php /* if($info['customer_college_higher_graduation']) {?>
 	<div class="form_field">
 		<label>Graduation Year</label>
 		<div class="input_field">
@@ -917,7 +920,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<?php } ?>
+	<?php } */ ?>
 	
 	<?php if($info['customer_nature']) {?>
 	<div class="form_field">
@@ -950,7 +953,7 @@
 		<?php } ?>
 		<?php if($info['customer_previous_company']) {?>
 		<div class="form_field">
-			<label>Previous Company</label>
+			<label>Previous Companies</label>
 			<div class="input_field">
 				<?php echo "<label class='display_info'>".$info['customer_previous_company']."</label>"; ?>
 			</div>

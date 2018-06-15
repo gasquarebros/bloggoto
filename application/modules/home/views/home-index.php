@@ -2,7 +2,6 @@
 var module_action="addpost";
 </script>
 <script type="text/javascript" src="<?php echo skin_url(); ?>js/profile.js"></script>
-<script type="text/javascript" src="<?php echo skin_url(); ?>js/profile.js"></script>
 <section>
     <div class="container">
         <h2 class="main_heading">Magazines</h2>
@@ -27,9 +26,9 @@ var module_action="addpost";
 				<input type="hidden" id="post_category" name="post_category" value="Fashion" />
 				<ul class="post_category_selection">
 					<?php $categories = get_blog_category(); 
-					if(!empty($categories)) { foreach($categories as $catkey=>$cat) { ?>
-						<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class=""><?php echo $cat; ?></a></li>
-					<?php } } ?>
+					if(!empty($categories)) { $i=0; foreach($categories as $catkey=>$cat) { ?>
+						<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class="<?php if($i==0) echo 'active'; ?>"><?php echo $cat; ?></a></li>
+					<?php $i++; } } ?>
 				</ul>
 			</div>
 			<div class="cat_list">

@@ -47,6 +47,8 @@ var module_action="addpost";
 						<li><a class="follow_popup " data-pop-type="follow"  data-target="follow_modal"   href="<?php echo base_url().'myprofile/get_following_profile/'.encode_value($info['customer_id']); ?>">
                             <span class="follow_count"><?php echo thousandsCurrencyFormat($following_count); ?></span><span>Following</span></a>
                         </li>
+					</ul>
+					<ul>		
 						<?php if(!empty($post_infos)) { 
 							foreach($post_infos as $postinfo){ ?> 
 								<li>
@@ -150,9 +152,9 @@ var module_action="addpost";
 				<input type="hidden" id="post_category" name="post_category" value="Fashion" />
 				<ul class="post_category_selection">
 					<?php $categories = get_blog_category(); 
-					if(!empty($categories)) { foreach($categories as $catkey=>$cat) { ?>
-						<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class=""><?php echo $cat; ?></a></li>
-					<?php } } ?>
+					if(!empty($categories)) $i=0; { foreach($categories as $catkey=>$cat) { ?>
+						<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class="<?php if($i==0) echo 'active'; ?>"><?php echo $cat; ?></a></li>
+					<?php $i++; } } ?>
 				</ul>
 			</div>
 			<div class="cat_list">
@@ -185,7 +187,7 @@ var module_action="addpost";
 					<div class="form_field tagging_section">
 						<?php 
 							$followers_lst = get_followers_list();
-							$followers = array();		
+							$followers = array(''=>'Select users');		
 							if(!empty($followers_lst)) {
 								foreach($followers_lst as $foll_list)
 								{
@@ -211,6 +213,7 @@ var module_action="addpost";
 					<div class="form_field video_section" style="display:none;">
 						<div class="left_fm_field">
 							<input type="file" name="post_video" placeholder="Video"  id="post_video" class=""  />
+							<span class="help">Video upto 5MB only can be uploaded</span>
 						</div>
 					</div>
 					<div class="form_field pdf_section" style="display:block;">

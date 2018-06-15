@@ -36,7 +36,7 @@ class Home extends CI_Controller {
 		
 		$data = $this->load_module_info ();	
 		$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'),'','',array('blog_cat_sequence'=>'ASC'));
-		$category['']='Select Category';
+		$category['']='All Category';
 		if(!empty($post_category))
 		{
 			foreach($post_category as $blogcat)
@@ -198,7 +198,7 @@ class Home extends CI_Controller {
 		
 		
 		$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'),'','',array('blog_cat_sequence'=>'ASC'));
-		$category[''] = "Select Category"; 
+		$category[''] = "All Category"; 
 		if(!empty($post_category))
 		{
 			foreach($post_category as $blogcat)

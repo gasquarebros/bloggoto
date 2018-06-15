@@ -16,7 +16,7 @@
             <div class="cmt_form">
                 <form>
                     <div class="form_field">
-                        <input type="text" id="blog_post_title" placeholder="Click here and enter title to write a blog , story, book or Upload Picture, Videos or To Write a Review">
+                        <input type="text" id="blog_post_title" placeholder="<?php echo get_label('placeholder_post_title');?>">
                     </div>
                     <div class="action_field">
                         <a  <?php if(get_user_id() == '') { ?> class="popup-modals" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal" href="#test-modal" <?php } ?> value="">Let's Go</a>
@@ -205,7 +205,7 @@
 								<li><a data-id ="<?php echo encode_value($record['post_id']); ?>" class="<?php if(get_user_id() != '') { ?> comments <?php } ?>" href="<?php /*if(get_user_id() !=''){ echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); }*/ if(get_user_id() != '') { echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); } ?>"><i class="<?php echo $like_icon; ?>fa fa-commenting-o" aria-hidden="true"></i> <span class="comments_display"><?php echo thousandsCurrencyFormat($record['commentcount']); ?></span></a></li>
 								<li class="shear-btn">
 									<a href="javascript:;"><i class="fa fa-external-link"></i>
-										&nbsp;Share
+										&nbsp;
 									</a>
 									<div class="social-share"> 
 											<a class="" href="http://www.facebook.com/sharer.php?u=<?php echo base_url().'home/view/'.$record['post_slug']; ?>&title=<?php echo urlencode($record['post_title']); ?>" target="_blank" ><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
