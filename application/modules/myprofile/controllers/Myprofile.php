@@ -222,8 +222,8 @@ class Myprofile extends CI_Controller {
 				);
 
 				$res=$this->Mydb->update ( $this->customers, array ('customer_id' => get_user_id() ), $update_array );
-				echo $this->db->last_query();
-				exit;
+				//echo $this->db->last_query();
+				//exit;
 				$blocked_lists=$this->input->post( 'blocked_lists' );
 				$this->Mydb->delete ( 'customer_blocked_lists', array('block_customer_id'=>get_user_id ()));
 				if(!empty($blocked_lists))
