@@ -131,20 +131,16 @@ class Login extends CI_Controller {
 		
 		if ($this->input->post ( 'submit' ) == 'Submit') 		// if ajax submit
 		{
-			
 			$response = array ();
 			$alert = "";
 			$this->form_validation->set_rules ( 'email_address', 'Email Address', 'required|trim|valid_email' );
-			if ($this->form_validation->run ( $this ) == TRUE) {
-				
+			if ($this->form_validation->run ( $this ) == TRUE) 
+			{
 				$check_details = $this->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_password,customer_status,customer_type', $this->table, array ('customer_email' => post_value('email_address'),'customer_status !='=>'D') );
 				if ($check_details)
 				{
-					
-					if ($check_details['customer_status'] == 'A'){
-						
-						
-						
+					if ($check_details['customer_status'] == 'A')
+					{
 						$password_key=get_random_key('30',$this->table,'customer_password_key');
 						if($password_key)
 						{
@@ -161,11 +157,11 @@ class Login extends CI_Controller {
 							$this->session->set_flashdata ( 'success', sprintf ( $this->lang->line ( 'reset_password_link' ) ) );
 							echo json_encode ( array('status'=>'success') ); exit;
 				
-						} else{
+						} 
+						else
+						{
 							$alert = 'forgot_error';
 						}
-						
-						
 						if($check_details['type'] == 'company')
 						{
 							$password_key=get_random_key('30',$this->company_table,'company_password_key');

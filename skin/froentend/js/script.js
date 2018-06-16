@@ -296,3 +296,30 @@ $(document).on('click','.post_options_action',function(e) {
 		}
 		return false;
 	});
+	$(document).on('click', '.account_delete', function(e) {	
+		var url = $(this).attr('action');
+		var dataaction = $(this).attr('data-action');
+		console.log(123);
+		// if($(this).find('.comment').val() !='') {
+			//show_content_loading(); 
+			$.ajax({
+				url : url,
+				data : {secure_key:secure_key,action:dataaction},
+				type : 'POST',
+				dataType : "json",
+				async:false,
+				success : function(data) {
+					//hide_content_loading();
+					if (data.status == "success") 
+					{
+						$('.mailboxer_conversation').attr('style','');
+					}
+					else
+					{
+
+					}
+				}
+			});
+		// }
+		return false;
+	});

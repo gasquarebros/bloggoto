@@ -64,8 +64,9 @@
 				<li><a href="javascript:void(0)" class="<?php if($this->uri->segment(1)== 'myprofile' || $this->uri->segment(2) == 'draftpost') { echo "active"; } ?>">My Account</a>
 					<ul class="submenu">
 						<li><a href="<?php echo base_url().'myprofile'; ?>">My Profile</a></li>
-<!-- 						<li><a href="<?php echo base_url().'myprofile/favorlist'; ?>">My Favorites</a></li>
- -->						<li><a href="<?php echo base_url().'home/draftpost'; ?>">Draft Post</a></li>
+ 						<li><a href="<?php echo base_url().'myprofile/favorlist'; ?>">My Favorites</a></li>
+ 						<li><a href="<?php echo base_url().'home/draftpost'; ?>">Draft Post</a></li>
+ 						<li><a href="#" class="account_delete" data-action='Submit' action="<?php echo base_url().'myprofile/accountdelete/'.encode_value(get_user_id()); ?>">Delete Account</a></li>
 					</ul>
 				</li>
 			</ul>
