@@ -1277,8 +1277,9 @@ class Myprofile extends CI_Controller {
 							$replace_arr = array($check_details['customer_first_name']." ".$check_details['customer_last_name'],$reset_link,$site_url);
 							$this->myemail->send_admin_mail($check_details['customer_email'],get_label('customer_account_delete_template'),$check_arr,$replace_arr);
 						}
-						$this->session->set_flashdata ( 'success', sprintf ( $this->lang->line ( 'account_delete_link' ) ) );
-						echo json_encode ( array('status'=>'success') ); 
+						$message=sprintf ( $this->lang->line ( 'account_delete_link' ) );
+						$this->session->set_flashdata ( 'admin_success', $message  );
+						echo json_encode ( array('status'=>'success','message'=>$message) ); 
 						exit;
 			
 					} 
@@ -1324,7 +1325,7 @@ class Myprofile extends CI_Controller {
 					$this->Mydb->delete ( 'post_tags', array ('post_created_by' => $user_id ));
 					$this->Mydb->delete ( 'customers', array ('customer_id' => $user_id ));
 					$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_delete' ) ) );
-					
+
 					/*redirect(base_url().'logout');*/					
 					$this->load->helper('cookie');
 					$this->session->sess_destroy();

@@ -355,8 +355,8 @@ a.btn,
 .map_wrapper li a {
     font-size: 13px;
     color: #ffffff;
-    background: #43a047;
-    border: 1px solid #43a047;
+    background: #06678e;
+    border: 1px solid #06678e;
     border-radius: 3px;
     padding: 8px 15px;
     display: inline-block;
@@ -2895,3 +2895,44 @@ a.favor.active {
 	    float: none;
     color: #fff;
 }*/
+/*  custom alert box start here */
+.alert_header {
+    background: #34353a;    
+    color: #fff;    
+    font-size: 17px;
+    padding: 7px 14px;
+    position: relative;
+    text-align: left;
+}
+.alrt_overlay {
+    background: #fff;
+    bottom: 0;
+    box-sizing: border-box;
+    height: 100%;
+    left: 0;
+    opacity: 0.7;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+.custom_alert {     
+    bottom: 0;
+    box-sizing: border-box;    
+    left: 0;
+    margin: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 450px;
+    z-index: 9999; display: table; height: inherit !important;
+}
+.custom_alertin{ display: table-cell; vertical-align: middle;}
+.custom_alertin .alert_height{background: #fff ;box-shadow: 0 0 20px rgba(86, 84, 84, 0.65); -webkit-box-shadow: 0 0 20px rgba(86, 84, 84, 0.65); }
+.alert_body {
+    text-align: center; 
+    padding: 20px;    
+}
+.alt_btns a{margin: 10px 5px 0; }
+/* custom alert box css end here */

@@ -299,8 +299,9 @@ $(document).on('click','.post_options_action',function(e) {
 	$(document).on('click', '.account_delete', function(e) {	
 		var url = $(this).attr('action');
 		var dataaction = $(this).attr('data-action');
-		console.log(123);
-		// if($(this).find('.comment').val() !='') {
+            // showInfo("Please select category.", "Message");		
+			customAlertmsg("Are you sure you want to account delete?");	
+	   $( "#alt1" ).click(function() {
 			//show_content_loading(); 
 			$.ajax({
 				url : url,
@@ -312,14 +313,16 @@ $(document).on('click','.post_options_action',function(e) {
 					//hide_content_loading();
 					if (data.status == "success") 
 					{
-						$('.mailboxer_conversation').attr('style','');
+						$(".cmmn_error").show();
+						$('.cmmn_error').find(".msg").html(data.message);					
 					}
 					else
 					{
-
+						$(".cmmn_error").show();
+						$('.cmmn_error').find(".msg").html(data.message);
 					}
 				}
 			});
-		// }
+		 });
 		return false;
 	});
