@@ -94,11 +94,9 @@ class Registration extends CI_Controller {
 				);
 				
 				$insert_id = $this->Mydb->insert ( $this->table, $insert_array );
-				
-				
+		
 				if($insert_id)
 				{
-					
 					$activate_link=base_url()."activation/".$activation_key;
 					
 				 	$this->load->library('myemail');
@@ -106,11 +104,10 @@ class Registration extends CI_Controller {
 				 	$replace_arr = array($this->input->post('customer_first_name')." ".$this->input->post('customer_last_name'),$this->input->post('customer_email'),$activate_link,$this->input->post('customer_password'));
 				 	$this->myemail->send_admin_mail($this->input->post('customer_email'),get_label('customer_registration_template'),$check_arr,$replace_arr);
 					
-					$this->session->set_flashdata ( 'success', sprintf ( $this->lang->line ( 'account_success_created' ) ) );
+					$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'account_success_created' ) ) );
 				 	$result ['status'] = 'success';
 				}
-				
-				
+			
 			} else {
 				$result ['status'] = 'error';
 				$result ['message'] = validation_errors ();

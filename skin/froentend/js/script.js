@@ -196,7 +196,7 @@ window.setInterval(function() {
 			},
 			error: function(jqXHR, textStatus, errorThrown) 
 			{
-  				console.log(textStatus, errorThrown);
+  				// console.log(textStatus, errorThrown);
 			}
 		});
 }, 5000);

@@ -53,7 +53,7 @@ $(document).ready(function() {
 					if (response.status == "success") {
 						 var redirect =  (typeof(custom_redirect_url) !="undefined" && custom_redirect_url !="" )?  custom_redirect_url :  module;
 						
-						window.location.href = SITE_URL+"registration/thankyou";
+						window.location.href = SITE_URL;
 						
 					} else if (response.status == "error") {
 						$(".alert_msg,.container_div").show();

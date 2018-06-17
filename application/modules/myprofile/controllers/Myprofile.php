@@ -426,6 +426,11 @@ class Myprofile extends CI_Controller {
 			$join [4] ['condition'] = "post_id = post_tag_post_id";
 			$join [4] ['type'] = "LEFT";
 			
+			$join [5] ['select'] = "group_concat(',',post_favor_user_id) as favoruser";
+			$join [5] ['table'] = $this->post_favor;
+			$join [5] ['condition'] = "post_id = post_favor_post_id";
+			$join [5] ['type'] = "LEFT";
+
 			$totla_rows = $this->Mydb->get_num_join_rows ( $this->primary_key, $this->table, $where, null, null, null, $like, $groupby, $join  );
 
 			
@@ -1319,7 +1324,13 @@ class Myprofile extends CI_Controller {
 					$this->Mydb->delete ( 'post_tags', array ('post_created_by' => $user_id ));
 					$this->Mydb->delete ( 'customers', array ('customer_id' => $user_id ));
 					$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_delete' ) ) );
-					redirect(base_url().'logout');					
+					
+					/*redirect(base_url().'logout');*/					
+					$this->load->helper('cookie');
+					$this->session->sess_destroy();
+					setcookie('login_remeber_me', '', time() - 3600);
+					delete_cookie('login_remeber_me'); 
+					redirect(base_url());					
 				}
 				else
 				{
