@@ -177,7 +177,7 @@
 							<?php 
 							if($record['post_embed_video_url'] !='')
 							{
-								echo "<iframe allow='autoplay; encrypted-media' allowfullscreen src='".$record['post_embed_video_url']."' autoplay='false'></iframe>";
+								echo "<iframe allow='autoplay; style='width:100%' width='100%' encrypted-media' allowfullscreen src='".$record['post_embed_video_url']."' autoplay='false'></iframe>";
 							}
 							if($record['post_type'] == 'video' && $record['post_video'] !='') { ?>
 								<video autoplay poster="PreviewImage.jpeg"  width="100%"  controls="controls" muted>
@@ -232,9 +232,12 @@
 							</div>
 							<div class="comment_box_wrap">
 								<input type="hidden" name="post_record" value="<?php echo encode_value($record['post_id']); ?>" />
-								<input type="text" class="comment" name="comments" placeholder="Write a comment..." />
+								<input type="text" style="display:none" class="comment_section" name="comments" placeholder="Write a comment..." />
+								<div class="comment"  contenteditable="true"> </div>
 								<button type="submit" class="comment_submit">></button>
 							</div>
+							<div class='display'></div>
+							<div class="msgbox"></div>
 							<div class="clear"></div>
 							<div class="alert_msg"></div>
 						<?php

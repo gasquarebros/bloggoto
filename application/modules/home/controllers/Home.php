@@ -1132,6 +1132,46 @@ class Home extends CI_Controller {
 		echo json_encode ( $result );
 		exit ();
 	}	
+	
+	public function gettagnames() {
+
+		$followers = array(''=>'Select users');
+		$search	= $this->input->post('searchword');
+		$search=str_replace("@","",$search);
+		$search=str_replace(" ","%",$search);
+
+		$followers_lst = array();
+		$userid = get_user_id();
+		if($userid !='')
+		{
+			$join = '';
+			$order_by = array('customer_first_name'=>'ASC');
+			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge,customer_username";
+			$join [0] ['table'] = 'customers';
+			$join [0] ['condition'] = "follow_user_id = customer_id and customer_private != 1";
+			$join [0] ['type'] = "INNER";
+			$followers_lst = $this->Mydb->get_all_records('customers_followers.*','customers_followers',array('follow_customer_id'=>$userid,'customer_status'=>'A','(((customer_first_name like "%'.$search.'%" OR customer_last_name like "%'.$search.'%" ) AND customer_type =0)OR (company_name like "%'.$search.'%" AND customer_type = 1))'=>null),$limit='', $offset='', $order_by, $like='', $groupby=array(), $join );
+		}
+		if(!empty($followers_lst)) {
+			foreach($followers_lst as $foll_list)
+			{
+				if($foll_list['customer_type'] == 0)
+				{
+				?>
+					<a class='addname' data-link="<?php echo base_url().$foll_list['customer_username']; ?>" title='<?php echo $foll_list['customer_first_name']." ".$foll_list['customer_last_name']; ?>'><?php echo $foll_list['customer_first_name']." ".$foll_list['customer_last_name']; ?></a><br/>
+				<?php			
+				}
+				else
+				{
+				?>
+					<a class='addname' title='<?php echo $foll_list['company_name']; ?>'><?php echo $foll_list['company_name']; ?></a><br/>
+				<?php
+				}	
+			}
+		}
+		exit;
+	}
+	
 	/* this method used to common module labels */
 	private function load_module_info() {
 		$data = array ();

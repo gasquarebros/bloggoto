@@ -27,16 +27,23 @@
 				</div>
 				<div class="parent_comments">
 					<div class="message"> <span class="arrow"> </span> 
+						<div class="before_edit_content">
 						<span class="body recent"> 
-							<?php echo $text = $record['post_comment_message']; ?> 
+							<?php echo $text = json_decode($record['post_comment_message']); ?> 
 						</span> 
+						</div>
 						<span class="comment_content" style="display:none">
 						<?php echo form_open_multipart(base_url().'myprofile/addcomments',' class="upcomment_form" autocomplete="'.form_autocomplte().'" ' );?>
 							<div class="comment_box_wrap">
-								<input type="text" value="<?php echo output_value($record['post_comment_message']); ?>" id="comment_data" name="comment_data"  class="upcomment"  placeholder="Write a comment..." />
+								<!--<input type="text" value="<?php echo output_value(json_decode($record['post_comment_message'])); ?>" id="comment_data" name="comment_data"  class="upcomment"  placeholder="Write a comment..." />-->
+								<input type="text" style="display:none" class="comment_edit_section" name="comment_data" placeholder="Write a comment..." />
+								<div class="comment"  contenteditable="true"><?php echo json_decode($record['post_comment_message']); ?> </div>
+								<button type="submit" class="comment_submit">></button>
 								<input type="hidden" id="post_record" name="post_record" value="<?php echo encode_value($record['post_id']); ?>" />
 								<input type="hidden" id="cmt_record" name="cmt_record" value="<?php echo encode_value($record['post_comment_id']); ?>" />
 							</div>
+							<div class='display'></div>
+							<div class="msgbox"></div>
 						<?php
 						echo form_hidden ( 'action', 'updatecmt' );
 						echo form_close ();
@@ -50,7 +57,7 @@
 		?>		
 				<a href="<?php echo base_url()."myprofile/deletepostcomment/".encode_value($record['post_comment_id']); ?>" class="comment_delete" data-id="<?php echo encode_value($record['post_comment_post_id']);?>" data-cmtid="<?php echo encode_value($record['post_comment_id']);?>" title="Delete" ><i class="fa fa-trash-o"></i></a>
 
-				<a href="<?php echo base_url()."myprofile/updatecomments/".encode_value($record['post_comment_post_id'])."/".encode_value($record['post_comment_id']); ?>" class="comment_edit" data-id="<?php echo encode_value($record['post_comment_post_id']);?>" data-cmtid="<?php echo encode_value($record['post_comment_id']);?>" title="Delete" ><i class="fa fa-edit"></i></a>
+				<a href="<?php echo base_url()."myprofile/updatecomments/".encode_value($record['post_comment_post_id'])."/".encode_value($record['post_comment_id']); ?>" class="comment_edit" data-id="<?php echo encode_value($record['post_comment_post_id']);?>" data-cmtid="<?php echo encode_value($record['post_comment_id']);?>" title="Edit" ><i class="fa fa-edit"></i></a>
 
 
 		<?php 

@@ -82,8 +82,13 @@ $(document).ready(function(){
 		});
 		return false;
 	});	
-	$(document).on('submit', '.comment_form', function(e) {	
 	
+	$(document).on('click','.comment_submit',function() {
+			$(this).parent().parent().submit();
+			return false;
+	});
+	$(document).on('submit', '.comment_form', function(e) {	
+		
 		var userid = $('#userid').val();
 		if(userid == '')
 		{
@@ -94,7 +99,8 @@ $(document).ready(function(){
 		var current = $(this);
 		current.find(".alert_msg").html('');
 		current.find(".alert_msg").hide();
-		if($(this).find('.comment').val() !='') {
+		$(this).find('.comment_section').val($(this).find('.comment').html());
+		if($(this).find('.comment_section').val() !='') {
 			show_content_loading(); 
 			$.ajax({
 				url : url,
@@ -116,6 +122,7 @@ $(document).ready(function(){
 						current.parent().parent().find(".comments_display").html(data.html);
 						current.parent().parent().find('.comments_list').hide();
 						current.parent().parent().find('.comments').trigger('click');
+						current.find('.comment').html('');
 					}
 					else
 					{
@@ -259,9 +266,9 @@ $(document).ready(function(){
 		var url = $(this).attr('href');
 		var id = $(this).attr('data-cmtid');
 		var dataid = $(this).attr('data-id');
-		$('#'+id).find('.recent').hide();
+		$('#'+id).find('.before_edit_content').children('.recent').hide();
 		$('#'+id).find('.comment_content').show();
-		var msg=$('#'+id).find('.recent').html();
+		var msg=$('#'+id).find('.before_edit_content').children('.recent').html();
 		$('#'+id).find('#comment_data').val(msg);
 		return false;
 	});
@@ -283,7 +290,9 @@ $(document).ready(function(){
 		current.find(".alert_msg").html('');
 		current.find(".alert_msg").hide();
 		var dataid=$(this).find('#cmt_record').val();
-		if($(this).find('.upcomment').val() !='') 
+		
+		$(this).find('.comment_edit_section').val($(this).find('.comment').html());
+		if($(this).find('.comment_edit_section').val() !='')
 		{
 			show_content_loading(); 
 			$.ajax({
@@ -518,7 +527,6 @@ $(document).ready(function(){
 						current.parent('li').parent('ul').next(".comments_list").html(data.html);
 					}
 					$(".recent").each(function() {
-						console.log($(this).html());
 						var myObj = JSON.parse($(this).html());
 						$(this).html(myObj);
 					});
@@ -623,6 +631,54 @@ $(document).ready(function(){
 		return false;
 	});
 
+		
+	var start=/@/ig;
+	var word=/@(\w+)/ig;
+
+	$(document).on("keyup",'.comment',function() 
+	{
+		var current = $(this);
+		var content=$(this).text();
+		var go= content.match(start);
+		var name= content.match(word);
+		var dataString = 'searchword='+name+"&secure_key="+secure_key;
+		if(go.length>0)
+		{
+			$("#msgbox").slideDown('show');
+			$("#display").slideUp('show');
+			$("#msgbox").html("Type the name of someone or something...");
+			if(name.length>0)
+			{
+				var url = admin_url + "home/gettagnames";
+				$.ajax({
+					type: "POST",
+					url: url,
+					data: dataString,
+					cache: false,
+					success: function(html)
+					{
+						current.parent().next(".msgbox").hide();
+						current.parent().next(".display").html(html).show();
+					}
+				});
+
+			}
+		}
+		return false;
+	});
 	
+	$(document).on("click",'.addname',function() 
+	{
+		var username=$(this).attr('title');
+		var taglink=$(this).attr('data-link');
+		var old= $(this).parent().parent().find('.comment').html();
+		var content=old.replace(word,""); 
+		$(this).parent().parent().find('.comment').html(content);
+		var E="<a class='red' target='_blank' contenteditable='false' href='"+taglink+"' >"+username+"</a>";
+		$(this).parent().parent().find('.comment').append(E);
+		$(this).parent().parent().find(".display").hide();
+		$(this).parent().parent().find(".msgbox").hide();
+		$(this).parent().parent().find(".comment").focus();
+	});
 	
 });
