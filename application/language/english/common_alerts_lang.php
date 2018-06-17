@@ -89,6 +89,7 @@ $lang['account_disabled'] = "Your account has been disabled contact your adminis
 $lang['account_initially_disabled'] = "You already registered with your email account, please check your email and verify your account";
 $lang['send_mail_error'] = "Unable to send mail. Please try again later.";
 $lang['reset_password_link'] = "Reset link has been sent to your registered email address, please use this to reset your password";
+$lang['account_delete_link'] = "Account delete link has been sent to your registered email address, please use this to delete account";
 $lang['reset_link_sent'] = "Reset password link already sent to your email address";
 $lang['password_changed'] = "Your password has been reset successfully!";
 $lang['confirm_delete_selected'] = "Do you want to delete this %s!";

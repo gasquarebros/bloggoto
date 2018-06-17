@@ -133,9 +133,6 @@ class Home extends CI_Controller {
 					'post_likes' => 'DESC' 
 				);
 			}
-			
-			
-			
 		}
 		
 		$join = "";

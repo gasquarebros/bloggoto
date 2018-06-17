@@ -79,6 +79,7 @@ $route['myprofile/get_followers_profile/(.*)'] = 'myprofile/get_followers_profil
 $route['myprofile/get_following_profile/(.*)'] = 'myprofile/get_following_profile/$1';		
 $route['myprofile/deletepostcomment/(.*)'] = 'myprofile/deletepostcomment/$1';		
 $route['myprofile/notify_mark_read'] = 'myprofile/notify_mark_read';		
+$route['myprofile/accountdelete/(.*)'] = 'myprofile/accountdelete/$1';		
 $route['notification'] = 'myprofile/notification';
 $route['myprofile/(.*)'] = 'myprofile/index/$1';
 $route['myprofile'] = 'myprofile/index';

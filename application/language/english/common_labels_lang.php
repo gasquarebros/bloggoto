@@ -93,7 +93,6 @@ $lang['country_image_folder_name'] = "country";
 
 $lang['add_celebrity_bage'] = "add celebrity bage";
 $lang['remove_celebrity_bage'] = "remove celebrity bage";
-$lang['placeholder_post_title'] = "Enter a title of your post";
 
 /* reset password module starts here */
 $lang['reset_password']="Reset Password";
@@ -109,6 +108,7 @@ $lang['a_users_password_minlength'] = 6 ;
 /* email template id's for users*/
 $lang['customer_registration_template'] = 1;
 $lang['customer_forgot_password_template'] = 2;
+$lang['customer_account_delete_template'] =4;
 $lang['customer_forgotpassword'] = 4;
 $lang['order_confirmation_template'] = 5;
 $lang['order_confirmation_admin_template'] = 6;

@@ -115,25 +115,16 @@ class Myprofile extends CI_Controller {
 		
 		$follow_records = get_followers_list($info['customer_id']);
 		$following_records = get_following_list($info['customer_id']);
-		/*
-		$follow_records = $this->Mydb->get_all_records('*',$this->customer_followers,array('follow_customer_id'=>$userid));
-		$follow_count = count($follow_records);
-		*/
-		
+	
 		
 		$following_count = count($follow_records);
 		$follow_count = count($following_records);
 		
 		if ($this->input->post ( 'action' ) == "edit") {
 
-			//check_site_ajax_request();
 			$this->form_validation->set_rules ( 'customer_country', 'lang:customer_country', 'required' );
 			$this->form_validation->set_rules ( 'customer_first_name', 'lang:customer_first_name', 'required' );
-			//$this->form_validation->set_rules ( 'customer_password', 'lang:customer_password', 'required|min_length[6]' );
-			//$this->form_validation->set_rules ( 'customer_email', 'lang:customer_email', 'required|callback_customeremail_exists' );
-			//$this->form_validation->set_rules ( 'customer_postal_code', 'lang:customer_postal_code', 'required|max_length[' . get_label ( 'postal_code_max_length' ) . ']' );
 			$this->form_validation->set_rules ( 'customer_phone', 'lang:customer_phone', 'trim|max_length[' . get_label ( 'phone_max_length' ) . ']' );
-			//$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			$this->form_validation->set_rules ( 'customer_photo', 'lang:customer_photo', 'callback_validate_image' );
 			if($info['customer_type'] == 1)
 			{
@@ -191,13 +182,8 @@ class Myprofile extends CI_Controller {
 					'customer_prof_profession'=>(!empty($profession))?implode(',',$this->input->post( 'customer_prof_profession' )):'',
 					'business_sector'=>(!empty($business_sector))?$business_sector:'',
 					'customer_photo'=>$customer_photo,
-					'customer_school'=>post_value ( 'customer_school' ),
-					'customer_college'=>post_value ( 'customer_college' ),
-					'customer_college_higher'=>post_value ( 'customer_college_higher' ),
-					'customer_nature'=>post_value ( 'customer_nature' ),
-					'customer_position'=>post_value ( 'customer_position' ),
-					'customer_current_company'=>post_value ( 'customer_current_company' ),
-					'customer_previous_company'=>post_value ( 'customer_previous_company' ),
+					'customer_prof_school'=>post_value ( 'customer_prof_school' ),
+					'customer_prof_college'=>post_value ( 'customer_prof_college' ),
 					'customer_prof_work'=>post_value ( 'customer_prof_work' ),
 					'customer_prof_official_website'=>post_value ( 'customer_prof_official_website' ),
 					'customer_prof_official_email'=>post_value ( 'customer_prof_official_email' ),
@@ -214,16 +200,9 @@ class Myprofile extends CI_Controller {
 					'customer_pan_no'=>post_value ( 'customer_pan_no' ),
 					'customer_gst_no'=>post_value ( 'customer_gst_no' ),
 					'customer_tin_no'=>post_value ( 'customer_tin_no' ),					
-					//'customer_type'=>post_value ( 'customer_type' ),
-					//'customer_status' => ($this->input->post ( 'status' ) == "A" ? 'A' : 'I'),
-					//'customer_created_on' => current_date (),
-					//'customer_created_by' => get_admin_id (),
-					//'customer_created_ip' => get_ip () 
 				);
 
 				$res=$this->Mydb->update ( $this->customers, array ('customer_id' => get_user_id() ), $update_array );
-				//echo $this->db->last_query();
-				//exit;
 				$blocked_lists=$this->input->post( 'blocked_lists' );
 				$this->Mydb->delete ( 'customer_blocked_lists', array('block_customer_id'=>get_user_id ()));
 				if(!empty($blocked_lists))
@@ -303,9 +282,7 @@ class Myprofile extends CI_Controller {
 	public function viewbio($userid = null)
 	{
 		$this->authentication->user_authentication();
-		//$this->authentication->user_authentication();
 		check_site_ajax_request();
-		//$userid = get_user_id();
 		
 		if($userid == null)
 		{
@@ -379,13 +356,7 @@ class Myprofile extends CI_Controller {
 				$order_field = post_value ( 'order_field' );
 			}
 			
-			/*
-			if ($search_field !='') {
-				$like = array (
-						get_session_value ( $this->module . "_search_field" ) => $search_field 
-				);
-			}*/
-			
+		
 			if ($search_field != "") {
 				$where = array_merge ( $where, array (
 						"post_category" => $search_field 
@@ -484,7 +455,7 @@ class Myprofile extends CI_Controller {
 			
 			
 			$post_category = $this->Mydb->get_all_records('*',$this->blog_categorytable,array('blog_cat_status' => 'A'),'','',array('blog_cat_sequence'=>'ASC'));
-			$category[''] = "All Category"; 
+			$category[''] = "Select Category"; 
 			if(!empty($post_category))
 			{
 				foreach($post_category as $blogcat)
@@ -547,13 +518,7 @@ class Myprofile extends CI_Controller {
 				$order_field = post_value ( 'order_field' );
 			}
 			
-			/*
-			if ($search_field !='') {
-				$like = array (
-						get_session_value ( $this->module . "_search_field" ) => $search_field 
-				);
-			}*/
-			
+		
 			if ($search_field != "") {
 				$where = array_merge ( $where, array (
 						"post_category" => $search_field 
@@ -748,14 +713,8 @@ class Myprofile extends CI_Controller {
 							'follow_created_ip' => get_ip () 
 					);
 					$insert_id = $this->Mydb->insert ( $this->customer_followers, $insert_array );
-					//$counting = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$customer_id));
-                   // $counting_profile = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$userid));
 					if($insert_id>0)
 					{
-/*						 $follow_notify_record=array();
-						$select_array=array('customer_first_name as customer_name');
- 						$follow_user = $this->Mydb->get_record($select_array, $this->customers, array('customer_id'=>$customer_id) );
-						$message = "follow you ".$follow_user['customer_name'];*/
 							$customer_username=get_tag_username(get_user_id());						
 							$message=$customer_username." started following you";						
 							$follow_notify_record = array(
@@ -789,9 +748,7 @@ class Myprofile extends CI_Controller {
 					$ids = array($follow_records['follow_id']);
 					$search_array = array('follow_customer_id' => $customer_id,'follow_user_id' => $userid);
 					$this->Mydb->delete_where_in ( $this->customer_followers, 'follow_id', $ids, $search_array );
-					$this->Mydb->delete ( 'post_notification',array('created_by'=>$customer_id,'assigned_to' => $userid) );
-					//$counting = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$customer_id));
-                   // $counting_profile = $this->Mydb->get_num_rows('*',$this->customer_followers,array('follow_customer_id'=>$userid));
+					$this->Mydb->delete ( 'post_notification',array('created_by'=>$customer_id,'assigned_to' => $userid));
 					
 					$counting = count(get_followers_list($customer_id));
 					$counting_following = count(get_following_list($customer_id));
@@ -948,9 +905,6 @@ class Myprofile extends CI_Controller {
 					);
 					$where_array=array('post_comment_id'=>$commentid);
 					$insert_id = $this->Mydb->update ( $this->post_comments,$where_array, $update_array );
-/*					print_r($update_array);
-					echo $this->db->last_query();
-					exit;*/
 					$counting =$this->Mydb->get_num_rows('*',$this->post_comments,array('post_comment_post_id'=>$postid));
 					$result ['status'] = 'success';
 					$result ['message'] = 'Success';
@@ -1289,7 +1243,102 @@ class Myprofile extends CI_Controller {
 		echo json_encode ( $result );
 		exit ();
 	}	
+	public function accountdelete($user_id='')
+	{
+		if ($this->input->post ( 'action' ) == 'Submit') 		// if ajax submit
+		{
+			if($user_id == '')
+				$userid=get_user_id();
+			else
+				$userid=decode_value($user_id);
 
+			$response = array ();
+			$alert = "";
+			$check_details = $this->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_password,customer_status,customer_type', $this->customers, array ('customer_id'=>$userid));
+			if ($check_details)
+			{
+				if ($check_details['customer_status'] == 'A')
+				{
+					$password_key=get_random_key('30',$this->customers,'customer_account_delete_key');
+					if($password_key)
+					{
+						$res=$this->Mydb->update ( $this->customers, array ('customer_id' => $check_details['customer_id'] ), array('customer_account_delete_key'=>$password_key) );
+						if($res)
+						{
+							$reset_link=base_url()."myprofile/accountdelete/".encode_value($check_details['customer_id'])."-".$password_key;
+							$site_url =  base_url();
+							$this->load->library('myemail');
+							$check_arr = array('[NAME]','[RESETLINK]','[SITEURL]');
+							$replace_arr = array($check_details['customer_first_name']." ".$check_details['customer_last_name'],$reset_link,$site_url);
+							$this->myemail->send_admin_mail($check_details['customer_email'],get_label('customer_account_delete_template'),$check_arr,$replace_arr);
+						}
+						$this->session->set_flashdata ( 'success', sprintf ( $this->lang->line ( 'account_delete_link' ) ) );
+						echo json_encode ( array('status'=>'success') ); 
+						exit;
+			
+					} 
+					else
+					{
+						$alert = 'forgot_error';
+					}
+				}
+				else
+				{
+					$alert = 'account_disabled';
+				}
+			}
+			else
+			{
+				$alert = 'forgot_error';
+			}
+			$response ['status'] = 'error';
+			$response ['message'] = get_label ( $alert );
+			echo json_encode ( $response ); 
+			exit;
+		}
+
+		$password_key=($this->uri->segment(3))?$this->uri->segment(3):'';
+		if($password_key !='')
+		{
+			$pass_key=explode('-',$password_key);
+			if(count($pass_key) > 1)
+			{
+				$user_id=decode_value($pass_key[0]);
+				$passwordkey=$pass_key[1];
+				$check_details = $this->Mydb->get_record ('customer_id', 'customers', array ('customer_id' => $user_id,'customer_account_delete_key'=>$passwordkey) );
+				if ($check_details)
+				{
+					$this->Mydb->delete ( 'pos_posts', array ('post_created_by' => $user_id,'post_by'=>'customer' ));
+					$this->Mydb->delete ( 'post_comments', array ('post_comment_user_id' => $user_id ));
+					$this->Mydb->delete ( 'post_favor', array ('post_favor_user_id' => $user_id ));
+					$this->Mydb->delete ( 'post_likes', array ('post_like_user_id' => $user_id ));
+					$this->Mydb->delete ( 'post_notification', array ("assigned_to = $user_id OR created_by = $user_id " => NULL ));
+					$this->Mydb->delete ( 'notification', array ("assigned_to = $user_id OR created_by = $user_id " => NULL ));
+					$this->Mydb->delete ( 'notification_message', array ("assigned_from = $user_id OR assigned_to = $user_id " =>NULL));
+					$this->Mydb->delete ( 'post_reports', array ('report_created_by' => $user_id ));
+					$this->Mydb->delete ( 'post_tags', array ('post_created_by' => $user_id ));
+					$this->Mydb->delete ( 'customers', array ('customer_id' => $user_id ));
+					$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_delete' ) ) );
+					redirect(base_url().'logout');					
+				}
+				else
+				{
+					$this->session->set_flashdata ( 'success', sprintf ( $this->lang->line ( 'flash_invaliddetails' ) ) );
+					redirect(base_url());
+				}
+			}
+			else
+			{
+				$this->session->set_flashdata ( 'success', sprintf ( $this->lang->line ( 'flash_invaliddetails' ) ) );
+				redirect(base_url());
+			}
+		}
+		else
+		{
+			redirect(base_url());
+		}
+
+	}
 	/* this method used to common module labels */
 	private function load_module_info() {
 		$data = array ();
