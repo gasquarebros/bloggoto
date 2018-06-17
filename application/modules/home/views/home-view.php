@@ -116,7 +116,7 @@
 							<?php 
 							if($record['post_embed_video_url'] !='')
 							{
-								echo "<iframe allow='autoplay; style='width:100%' width='100%' encrypted-media' allowfullscreen src='".$record['post_embed_video_url']."' autoplay='false'></iframe>";
+								echo "<iframe allow='autoplay; encrypted-media' allowfullscreen src='".$record['post_embed_video_url']."' autoplay='false'></iframe>";
 							}
 							if($record['post_type'] == 'video' && $record['post_video'] !='') { ?>
 								<video autoplay poster="PreviewImage.jpeg"  width="100%"  controls="controls" muted>
@@ -143,10 +143,10 @@
 								<li>
 									<a class="thumbsup <?php if(get_user_id() !='' && in_array(get_user_id(),$likes_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php if(get_user_id() != '') { echo base_url().'myprofile/post_likes/'.$record['post_slug']; } else { echo base_url(); } ?>"><i class="<?php echo $like_icon; ?>" aria-hidden="true"></i> <span class="likes_display"><?php echo thousandsCurrencyFormat($record['postcount']); ?></span></a>
 								</li>
-<?php /* 								<li><a class="favor <?php if(get_user_id() !='' && in_array(get_user_id(),$favor_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php echo base_url().'myprofile/post_favor/'.$record['post_slug']; ?>"><i class="fa fa-heart-o" aria-hidden="true"></i> </a></li>								
-*/ ?>								<li>
+								<li>
 									<a data-id ="<?php echo encode_value($record['post_id']); ?>" class="<?php if(get_user_id() != '') { ?>comments<?php } ?>" href="<?php /*if(get_user_id() !=''){ echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); }*/ if(get_user_id() != '') { echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); }  ?>"><i class="fa fa-commenting-o" aria-hidden="true"></i> <span class="comments_display"><?php echo thousandsCurrencyFormat($record['commentcount']); ?></span></a>
 								</li>
+ 								<li><a class="favor <?php if(get_user_id() !='' && in_array(get_user_id(),$favor_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php echo base_url().'myprofile/post_favor/'.$record['post_slug']; ?>"><i class="fa fa-heart-o" aria-hidden="true"></i> </a></li>								
 								<li class="shear-btn">
 									<a href="javascript:;"><i class="fa fa-external-link"></i>
 										&nbsp;
@@ -176,12 +176,8 @@
 							</div>
 							<div class="comment_box_wrap">
 								<input type="hidden" name="post_record" value="<?php echo encode_value($record['post_id']); ?>" />
-								<input type="text" style="display:none" class="comment_section" name="comments" placeholder="Write a comment..." />
-								<div class="comment"  contenteditable="true"> </div>
-								<button type="submit" class="comment_submit">></button>
+								<input type="text" class="comment" name="comments" placeholder="Write a comment..." />
 							</div>
-							<div class='display'></div>
-							<div class="msgbox"></div>
 							<div class="clear"></div>
 							<div class="alert_msg"></div>
 						<?php
