@@ -1324,13 +1324,13 @@ class Myprofile extends CI_Controller {
 					$this->Mydb->delete ( 'post_reports', array ('report_created_by' => $user_id ));
 					$this->Mydb->delete ( 'post_tags', array ('post_created_by' => $user_id ));
 					$this->Mydb->delete ( 'customers', array ('customer_id' => $user_id ));
-					$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_delete' ) ) );
 
 					/*redirect(base_url().'logout');*/					
 					$this->load->helper('cookie');
 					$this->session->sess_destroy();
 					setcookie('login_remeber_me', '', time() - 3600);
 					delete_cookie('login_remeber_me'); 
+					$this->session->set_flashdata( 'success',sprintf( $this->lang->line('success_msg_delete_account'),' Account '));
 					redirect(base_url());					
 				}
 				else

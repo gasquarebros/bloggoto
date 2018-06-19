@@ -31,6 +31,7 @@ $lang['confirm_pending'] = "Are you sure you want to pending this %s?";
 $lang['confirm_sequence'] = "Are you sure you want to update Sort Order this %s?";
 $lang['success_message_report'] = "The Selected %s has been reported successfully.";
 $lang['success_message_delete'] = "The Selected %s has been deleted successfully.";
+$lang['success_msg_delete_account'] = "%s has been deleted successfully.";
 $lang['success_message_edit'] = "%s has been updated successfully.";
 $lang['success_message_order_status'] = "%s status has been updated successfully.";
 $lang['success_message_activate'] = " The Selected %s has been activated successfully.";

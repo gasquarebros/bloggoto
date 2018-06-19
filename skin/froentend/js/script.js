@@ -300,7 +300,7 @@ $(document).on('click','.post_options_action',function(e) {
 		var url = $(this).attr('action');
 		var dataaction = $(this).attr('data-action');
             // showInfo("Please select category.", "Message");		
-			customAlertmsg("Are you sure you want to account delete?");	
+			customAlertmsg("Are you sure you want to delete account?");	
 	   $( "#alt1" ).click(function() {
 			//show_content_loading(); 
 			$.ajax({
