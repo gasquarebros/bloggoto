@@ -7,7 +7,7 @@
 <head>
    <?php echo $this->load->view('layout/header');?>
 </head>
-<body>
+<body <?php if($this->session->userdata ( "bg_user_id" )) { echo "loggedin = '".encode_value($this->session->userdata ( "bg_user_id" ))."'"; } else { echo "loggedin = ''"; } ?>>
 	<?php echo get_template('layout/top-menu','')?>
 	<?php echo get_template('layout/notifications','')?>
 	<?php  echo $admin_body; ?>

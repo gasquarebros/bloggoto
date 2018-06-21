@@ -465,4 +465,69 @@ class Login extends CI_Controller {
 		exit;
 	}
 	
+	/*This is for the purpose of the app login if they have username or email and id already in the local*/
+	public function applogin()
+	{
+		$username = urldecode($this->input->get('username'));
+		$userid = decode_value($this->input->get('userid'));
+		
+		if($username !='' && $userid !='')
+		{
+			$userid = $this->mysqli->real_escape_string ( trim ( $userid ) );
+			$username = $this->mysqli->real_escape_string ( trim ( $username ) );
+
+			$check_details = $this->Mydb->get_record ('customer_id,customer_first_name,customer_username,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo,company_name', $this->table, array ('(customer_email = "'.$username.'" OR customer_username ="'.$username.'")'=>NULL,'customer_status !='=>'D','customer_id'=>$userid));
+			if ($check_details)
+			{
+				if ($check_details['customer_status'] == 'A'){
+					
+					$session_datas = array();
+					$redirect= "";
+					/* storing the values in session */
+					$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'company_name'=>$check_details['company_name'],'customer_username'=>$check_details['customer_username']);
+
+					if($check_details['customer_photo'] !='' && file_exists(FCPATH."media/".$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'])) {
+						$session_datas['bg_user_profile_picture'] = media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'];
+					}
+					else
+					{
+						$session_datas['bg_user_profile_picture'] = '';
+					}
+					
+					if(!empty($session_datas))
+					{
+					
+						/*Checking for remember me*/
+						//if($this->input->post('remember')==1)
+						//{
+							$cookie = array(
+							'name'   => 'login_remeber_me',
+							'value'  => $session_datas['bg_user_id'],
+							'expire' => (300*60*60*24)
+							);
+							setcookie('login_remeber_me', $session_datas['bg_user_id'],  (300*60*60*24), "/"); // 86400 = 1 day
+							$this->input->set_cookie($cookie); 
+						//}
+					
+						$this->session->set_userdata($session_datas);
+						/* store last login details...*/
+						$this->Mydb->insert($this->customer_login_history,array('login_time'=>current_date(),'login_ip'=>get_ip(),'login_customer_id'=>$check_details['customer_id']));
+						// success , then redirect to base url
+					}
+				}
+				else {
+					$this->session->set_flashdata ( 'admin_error', 'Your Account is Deactive');
+					// account is deactive, then error and redirec to base url
+				}
+			}
+			else {
+				// no user found  so redirect to the baseurl
+			}
+		}
+		else {
+			// nothing has sent so redirect to the baseurl
+		}
+		redirect(base_url());
+	}
+	
 }

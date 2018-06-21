@@ -4,7 +4,7 @@
     <?php echo get_template('layout/header','')?>
 </head>
 
-<body>
+<body loggedin=''>
 	
 	<?php echo get_template('layout/top-menu','')?>
 	<?php echo get_template('layout/notifications','')?>
