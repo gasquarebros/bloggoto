@@ -1,4 +1,5 @@
 @media screen and (max-width: 1220px) {
+    .post_media {width: 50% !important;}
     .container { width: 1100px; }
     .header_menuwrap ul li a { padding: 12px 13px; }
     .list_col { width: 530px; }
@@ -7,6 +8,7 @@
 }
 
 @media screen and (max-width: 1120px) {
+    .post_media {width: 50% !important;}
     .container { width: 1000px; }
     .list_col { width: 490px; }
     .header_form { width: 440px; }
@@ -15,6 +17,7 @@
 }
 
 @media screen and (max-width: 1020px) {
+    .post_media {width: 50% !important;}
     .container { width: 900px; }
     .header_menuwrap ul li a { font-size: 12px; }
     .list_col { width: 100%; }
@@ -35,6 +38,7 @@
 }
 
 @media screen and (max-width: 920px) {
+    .post_media {width: 50% !important;}
     .container { width: 100%; padding: 0 15px; }
     .comment_section { width: 90%; }
     .header_form { width: 350px; }
@@ -57,9 +61,11 @@ position: relative; overflow: visible !important; }
     .newsfeed_inner { width: 700px; }
 	.list_row { width: 48%; }
 	video { max-height:500px; }
+    .post_media {width: 100% !important;}
 }
 
 @media screen and (max-width: 768px) {
+    .post_media {width: 50% !important;}
     .foot_logo, .policy, .comp_info, .foot_rgt { width: 100%; float: none; margin: 15px 0;padding: 15px; }  
     .list_decp, .list_img, .list_col_inner { width: 100%; display: block; }
     .header_form { width: 100%; margin: 0; }
@@ -184,6 +190,7 @@ position: relative; overflow: visible !important; }
 }
 
 @media screen and (max-width: 600px) {
+    .post_media {width: 100% !important;}
     .write_post .form_field { width: 100%; display: block; }
     .write_text input[type="text"], .write_text input[type="email"], .write_text input[type="password"], .write_text textarea, .write_text select { margin-bottom: 15px; }
     .newsfeed_menu li { width: 50%; }
@@ -230,6 +237,8 @@ position: relative; overflow: visible !important; }
 }
 
 @media screen and (max-width: 500px) {
+    .post_media {width: 100% !important;}
+
     .double_input .form_field_inner, .double_input .form_field_inner:last-child { width: 100%; float: none; text-align: left; }
     .signup_form_section .switch-field { float: none; }
     .follow_request .lft_img_fllw, .follow_request .rgt_txt_fllw { width: 100%; }
@@ -240,6 +249,8 @@ position: relative; overflow: visible !important; }
 }
 
 @media screen and (max-width: 480px) {
+    .post_media {width: 100% !important;}
+
 	.list_row {
 		margin: 0;
 		width: 100%;
@@ -268,6 +279,7 @@ position: relative; overflow: visible !important; }
 }
 
 @media screen and (max-width: 320px) {
+    .post_media {width: 100% !important;}
 	.list_row {
 		margin: 0;
 		width: 100%;
