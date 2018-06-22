@@ -445,7 +445,7 @@ class Myprofile extends CI_Controller {
 			
 			$data['offset'] = $offset;
 			$data['next_set'] = $next_set;
-			$select_array = array ('pos_posts.*');
+			$select_array = array ("pos_posts.*,(SELECT group_concat(post_media_filename) FROM pos_post_media WHERE post_media_post_id=post_id) as post_photo");
 			$data ['records'] = $this->Mydb->get_all_records ( $select_array, $this->table, $where, $limit, $offset, $order_by, $like, $groupby, $join );
 			$data['page'] = $offset;
 			
@@ -1144,7 +1144,7 @@ class Myprofile extends CI_Controller {
 		
 		$data['offset'] = $offset;
 		$data['next_set'] = $next_set;
-		$select_array = array ('pos_posts.*');
+		$select_array = array ("pos_posts.*,(SELECT group_concat(post_media_filename) FROM pos_post_media WHERE post_media_post_id=post_id) as post_photo");
 		$data ['records'] = $this->Mydb->get_all_records ( $select_array, $this->table, $where, $limit, $offset, $order_by, $like, $groupby, $join );
 		$data['page'] = $offset;
 

@@ -179,10 +179,14 @@ class Home extends CI_Controller {
 		
 		$data['offset'] = $offset;
 		$data['next_set'] = $next_set;
-		$select_array = array ('pos_posts.*');
+		// $select_array = array ('pos_posts.*');
+		$select_array = array ("pos_posts.*,(SELECT group_concat(post_media_filename) FROM pos_post_media WHERE post_media_post_id=post_id) as post_photo");
+
 		$data ['records'] = $this->Mydb->get_all_records ( $select_array, $this->table, $where, $limit, $offset, $order_by, $like, $groupby, $join );
 		$data['page'] = $offset;
-
+// echo "<pre>";
+// echo $this->db->last_query();
+// exit;
 		/*
 		if($userid == get_user_id())
 		{
@@ -383,10 +387,10 @@ class Home extends CI_Controller {
 			if ($this->form_validation->run () == TRUE) {
 				
 				/* upload image */
-				$post_photo = "";
-				if (isset ( $_FILES ['post_photo'] ['name'] ) && $_FILES ['post_photo'] ['name'] != "") {
-					$post_photo = $this->common->upload_image ( 'post_photo', $this->lang->line('post_photo_folder_name') );
-				}
+				// $post_photo = "";
+				// if (isset ( $_FILES ['post_photo'] ['name'] ) && $_FILES ['post_photo'] ['name'] != "") {
+				// 	$post_photo = $this->common->upload_image ( 'post_photo', $this->lang->line('post_photo_folder_name') );
+				// }
 				
 				/* upload video */
 				$post_video = "";
@@ -434,13 +438,14 @@ class Home extends CI_Controller {
 							$category[$blogcat['blog_cat_slug']] = $blogcat['blog_cat_id'];
 						}
 					}
-
+// echo "<pre>";
+// print_r($category);
+// echo "</pre>";
 					$insert_array = array (
 							'post_category' => $category[post_value ( 'post_category' )],
 							'post_type' => post_value ( 'post_type' ),
 							'post_title' => post_value ( 'post_title' ),
 							'post_description' => json_encode(get_censored_string($this->input->post( 'post_description' ))),
-							'post_photo' => $post_photo,
 							'post_video' => $post_video,
 							'post_pdf' => $post_pdf,
 							'post_embed_video_url' => post_value('post_embed_video_url'),
@@ -455,6 +460,11 @@ class Home extends CI_Controller {
 					$insert_array['post_slug']=make_slug($title,$this->table,'post_slug');
 					
 					$insert_id = $this->Mydb->insert ( $this->table, $insert_array );
+					// 'post_photo' => $post_photo,
+					if (isset ( $_FILES ['post_photo'] ['name'] ) && $_FILES ['post_photo'] ['name'] != "") 
+					{
+							$this->do_multi_upload("post_photo",$this->lang->line('post_photo_folder_name'),$insert_id);
+					}					
 					if($insert_id)
 					{
 						$customer_username=get_tag_username(get_user_id());						
@@ -732,7 +742,7 @@ class Home extends CI_Controller {
 			
 			$groupby = "post_id";
 
-			$select_array = array ('pos_posts.*');
+			$select_array = array ("pos_posts.*,(SELECT group_concat(post_media_filename) FROM pos_post_media WHERE post_media_post_id=post_id) as post_photo");
 			$records = $this->Mydb->get_all_records ( $select_array, $this->table, $where, '', '', $order_by, $like, $groupby, $join );
 
 			$data ['records'] = $records;
@@ -879,9 +889,12 @@ class Home extends CI_Controller {
 		$data = $this->load_module_info ();
 		if($slug !='')
 		{
-		$select_array=array("post_id,post_slug,post_category,post_type,post_title,post_description,post_photo,post_video,post_tags");
+/*		$select_array=array("post_id,post_slug,post_category,post_type,post_title,post_description,post_video,post_tags,(SELECT group_concat(post_media_filename) FROM pos_post_media WHERE post_media_post_id=post_id) as post_photo");
+*/
+			$select_array = array ("pos_posts.*,(SELECT group_concat(post_media_filename) FROM pos_post_media WHERE post_media_post_id=post_id) as post_photo");
+
 				$where=array('post_slug'=>$slug,'post_created_by'=>get_user_id());
-				$result = $this->Mydb->get_record('*',$this->table,$where);
+				$result = $this->Mydb->get_record($select_array,$this->table,$where);
 				$post_category = $this->Mydb->get_record('blog_cat_name','blog_category',array('blog_cat_id'=>$result['post_category']));
 				$data['postslug']=$slug;
 				$data['result']=$result;
@@ -907,8 +920,8 @@ class Home extends CI_Controller {
 			{
 				$editid=decode_value(post_value('editid'));
 				/* upload image */
-				$post_photo = "";
-				if (isset ( $_FILES ['post_photo'] ['name'] ) && $_FILES ['post_photo'] ['name'] != "") 
+				// $post_photo = "";
+/*				if (isset ( $_FILES ['post_photo'] ['name'] ) && $_FILES ['post_photo'] ['name'] != "") 
 				{
 	 				$post_image_path = FCPATH . 'media/' .  $this->lang->line('post_photo_folder_name'). post_value('existpostphoto');
 					if (file_exists ( $post_image_path )) 
@@ -916,7 +929,28 @@ class Home extends CI_Controller {
 						@unlink ( $post_image_path );
 					}
 					$post_photo = $this->common->upload_image ( 'post_photo', $this->lang->line('post_photo_folder_name') );
-				}
+				}*/
+				if (isset ( $_FILES ['post_photo'] ['name'] ) && $_FILES ['post_photo'] ['name'] != "") 
+				{
+					if($editid !='')
+					{
+						$this->Mydb->delete ( 'post_media', array ('post_media_post_id' => $editid ));
+					}	
+					$existpostphoto=post_value('existpostphoto');
+					$existpostphotos=explode(",", $existpostphoto);
+					if(!empty($existpostphotos))
+					{
+						foreach($existpostphotos as $existphoto)
+						{
+			 				$post_image_path = FCPATH.'media/'.$this->lang->line('post_photo_folder_name').$existphoto;
+							if (file_exists ( $post_image_path )) 
+							{
+								@unlink ( $post_image_path );
+							}
+						}
+					}
+					$this->do_multi_upload("post_photo",$this->lang->line('post_photo_folder_name'),$editid);
+				}									
 				/* upload video */
 				$post_video = "";
 				$res = 0;
@@ -976,7 +1010,6 @@ class Home extends CI_Controller {
 							'post_title' => post_value ( 'post_title' ),
 							'post_description' => json_encode(post_value ( 'post_description' )),
 							'post_embed_video_url' => post_value('post_embed_video_url'),
-							'post_photo' => $post_photo,
 							'post_video' => $post_video,
 							'post_pdf' => $post_pdf,
 							'post_status' => (post_value('status'))?post_value('status'):'A',
@@ -1168,7 +1201,80 @@ class Home extends CI_Controller {
 		}
 		exit;
 	}
-	
+public function do_multi_upload($file_name,$image_path, $insert_id) 
+{	
+		    $cpt = count($_FILES[$file_name]['name']);
+		if (! empty ( $file_name )) 
+		{
+			$post_image_arary=array();
+			$insertid = $insert_id;
+		    $files = $_FILES;
+			for($i = 0; $i < $cpt; $i ++) 
+			{
+				$image_data=array();
+				$_FILES [$file_name] ['name'] = $files [$file_name] ['name'] [$i];
+				$_FILES [$file_name] ['type'] = $files [$file_name] ['type'] [$i];
+				$_FILES [$file_name] ['tmp_name'] = $files [$file_name] ['tmp_name'][$i];
+				$_FILES [$file_name] ['error'] = $files [$file_name] ['error'] [$i];
+				$_FILES [$file_name] ['size'] = $files [$file_name] ['size'] [$i];
+
+				// $config['upload_path']=constant ( 'event_upload_path' );
+				// $config['allowed_types']=constant ( 'image_allowed_types' );
+				// $config['max_size']     = constant ( 'image_max_size' );					
+				$config ['upload_path'] = FCPATH . 'media/' . $image_path;
+				$config ['allowed_types'] = 'gif|jpg|jpeg|png|pdf';				
+				$config['encrypt_name']=true;
+				$config['remove_spaces']=true;					
+				$this->load->library('upload',$config);	
+				if(!$this->upload->do_upload($file_name))
+				{
+					$error=$this->upload->display_errors();						
+					$response = array("status"=>"error","message"=>$error);
+					echo json_encode($response); 
+					exit;												
+			    }
+			    else
+			    {
+                    $image_data = $this->upload->data();//store the file info
+				// $filename = $image_data ['full_path']; /*ADD YOUR FILENAME WITH PATH*/
+				// $exif = exif_read_data($filename);
+
+				// $ort = (!empty($exif['Orientation']))?$exif['Orientation']:null; /*STORES ORIENTATION FROM IMAGE */
+				// $ort1 = $ort;
+				// $exif = exif_read_data($filename, 0, true);
+				// if (!empty($ort1))
+				// {
+				// 	$image = imagecreatefromjpeg($filename);
+				// 	$ort = $ort1;
+				// 	switch ($ort) {
+				// 		case 3:
+				// 			$image = imagerotate($image, 180, 0);
+				// 			break;
+
+				// 		case 6:
+				// 			$image = imagerotate($image, -90, 0);
+				// 			break;
+
+				// 		case 8:
+				// 			$image = imagerotate($image, 90, 0);
+				// 			break;
+				// 	}
+				// 	imagejpeg($image,$filename, 90);
+				// }
+				// // return $data['file_name'];
+					$post_image_arary[] = array ( 'post_media_post_id' => $insertid,
+										'post_media_type'=>'image',
+										'post_media_filename' => $image_data['file_name'],
+										);
+
+				}
+			}
+			if(!empty($post_image_arary))
+			{
+					$this->Mydb->insert_batch('post_media', $post_image_arary );
+			}
+		}
+	}								
 	/* this method used to common module labels */
 	private function load_module_info() {
 		$data = array ();

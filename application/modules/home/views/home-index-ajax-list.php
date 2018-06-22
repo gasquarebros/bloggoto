@@ -70,17 +70,30 @@
 					<div class="feed_wrapper">
 						<div class="feed_header">
 							<div class="lft_feed_img">
-								<?php if($record['customer_photo'] !=''){ $photo=media_url().$this->lang->line('customer_image_folder_name').$record['customer_photo']; } else { $photo=media_url().$this->lang->line('customer_image_folder_name')."default.png"; } ?>
 								<?php 
-								if($record['post_by'] == 'admin'){
+										if($record['customer_photo'] !='')
+										{ 
+											$photo=media_url().$this->lang->line('customer_image_folder_name').$record['customer_photo']; 
+										} 
+										else 
+										{ 
+											$photo=media_url().$this->lang->line('customer_image_folder_name')."default.png"; 
+										} 
+								?>
+								<?php 
+								if($record['post_by'] == 'admin')
+								{
 									$url ="";									
 								} 
-								else { 
+								else 
+								{ 
 									$username = get_tag_username($record['customer_id']);
 									$url =base_url().urlencode($username);
 								}
-								if($url !='') { ?> <a href="<?php echo $url; ?>"> <?php } ?>
-								<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
+								if($url !='') { ?> 
+									<a href="<?php echo $url; ?>"> 
+									<?php } ?>
+									<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
 								<?php if($url !='') { ?></a><?php } ?>
 							</div>
 							<div class="feed_name">
@@ -140,12 +153,65 @@
 						</div>
 						<div class="toggle_content">
 						<div class="feed_image">
-							
-							
-							<?php if($record['post_photo'] !=''){ $photo=media_url().$this->lang->line('post_photo_folder_name').$record['post_photo']; } else { /*$photo=media_url().$this->lang->line('post_photo_folder_name')."default.png";*/ $photo =''; } ?>
-								<?php if($record['post_type'] != 'video' && $record['post_video'] =='' && $photo !='') { ?>
-								<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
-								<?php } ?>
+							<?php /*if($record['post_type'] != 'video' && $record['post_video'] =='' && $record['post_photo'] !='')
+									{ 
+										$photo=media_url().$this->lang->line('post_photo_folder_name').$record['post_photo']; 
+										if($photo !='') 
+											{ ?>
+												<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
+										<?php } 
+									} 
+									else 
+									{ 
+										$photo=media_url().$this->lang->line('post_photo_folder_name')."default.png";
+										$photo =''; 
+									}*/
+							 ?>
+							<?php 
+							if($record['post_photo'] !='' && $record['post_type'] != 'video' && $record['post_video'] =='')
+							{ 
+								$postimages=explode(",", $record['post_photo']);
+								$more_class='';
+								$image_count = count ( $postimages );
+								$total_image_count="+ ".($image_count-6)." More";
+								$popupclass = "show_post_images";
+								if($image_count==6)
+								{
+									$total_image_count="";
+									$popupclass = "";
+								}										
+								if(!empty($postimages))
+								{
+					?>
+								<div class="post_media imgcnt_<?php echo  ($image_count > 6)?  6 : $image_count; ?> popup-gallery">
+					<?php								
+									foreach ($postimages as $key => $postimage) 
+									{
+										$image_url=media_url().$this->lang->line('post_photo_folder_name').$postimage; 
+										if($key > 5)
+										{
+											$more_class='style=display:none;';
+										}
+										if($key == 5)
+										{
+											$more_div='<div id="" class="more_class_image">'.$total_image_count.'</div>';
+										}
+										else
+										{
+											$more_div='';
+										}												
+							?>
+											<a href="<?php echo $image_url; ?>" class="" <?php echo $more_class; ?>>
+													<div>
+														<img src="<?php echo $image_url; ?>"/>
+													</div>
+													<?php echo $more_div; ?>
+												</a>							
+							<?php					
+											}
+										}
+									} 
+						?>			
 							
 						</div>
 						<div class="feed_body_text">
@@ -257,3 +323,4 @@
 	</div>
 </div>
  <?php } ?>
+ <script type='text/javascript' src='<?php echo skin_url(); ?>js/image_popup.js'></script>

@@ -207,7 +207,7 @@ var module_action="addpost";
 					
 					<div class="form_field">
 						<div class="left_fm_field">
-							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
+							<input type="file" name="post_photo[]" placeholder="Image"  id="post_photo" class=""  multiple="multiple" />
 						</div>
 					</div>					
 					<div class="form_field video_section" style="display:none;">

@@ -72,12 +72,27 @@ var module_action="updatepost";
 						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Title" id="post_tags" style="width:100%" multiple="multiple"');?>
 					</div>
 					
+					<div class="form_field"><div class="clear">&nbsp;&nbsp;</div></div>
 					<div class="form_field">
-						<?php if($result['post_photo']){ ?>
-						<label></label>
-						<div class="input_field show_image_box">
-							<img class="img-responsive common_delete_image" style="width: 100px; height:100px;"  src="<?php echo media_url(). $this->lang->line('post_photo_folder_name')."/".$result['post_photo'];?>">
-						</div><?php } ?>
+						<?php if($result['post_photo'] != '')
+								{ 
+							?>
+							<label></label>
+							<div class="input_field show_image_box">
+							<?php								
+									$existpostphotos=explode(",",$result['post_photo']);
+									if(!empty($existpostphotos))
+									{
+										foreach($existpostphotos as $existphoto)
+										{								
+							?>										<label></label>
+				
+								<img class="img-responsive common_delete_image" style="width: 100px; height:100px;"  src="<?php echo media_url(). $this->lang->line('post_photo_folder_name')."/".$existphoto;?>">
+							<?php 		} 	
+									}?>
+							</div>
+								<?php 	 
+								}?>
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
@@ -102,7 +117,7 @@ var module_action="updatepost";
 					</div>	
 					<div class="form_field ">
 						<div class="left_fm_field">
-							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
+							<input type="file" name="post_photo[]" placeholder="Image"  id="post_photo" class="" multiple="multiple" />
 						</div>
 					</div>	
 					<div class="form_field video_section" style="<?php echo ($result['post_type'] == 'video')? 'display:block':'display: none'?>">

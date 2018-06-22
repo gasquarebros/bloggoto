@@ -23,7 +23,7 @@ var module_action="addpost";
 			<div class="cate_wrap">
 			<div class="cat_list">
 				<h5>Choose your category</h5>
-				<input type="hidden" id="post_category" name="post_category" value="Fashion" />
+				<input type="hidden" id="post_category" name="post_category" value="fashion" />
 				<ul class="post_category_selection">
 					<?php $categories = get_blog_category(); 
 					if(!empty($categories)) { $i=0; foreach($categories as $catkey=>$cat) { ?>
@@ -83,7 +83,7 @@ var module_action="addpost";
 					
 					<div class="form_field">
 						<div class="left_fm_field">
-							<input type="file" name="post_photo" placeholder="Image"  id="post_photo" class=""  />
+							<input type="file" name="post_photo[]" placeholder="Image"  id="post_photo" class=""  multiple="multiple" />
 						</div>
 					</div>					
 					
