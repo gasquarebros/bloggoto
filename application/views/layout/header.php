@@ -13,7 +13,6 @@
 
 <link rel='stylesheet' href='<?php echo load_lib(); ?>chosen/css/chosen.min.css' type='text/css' media='all' />
 
-
 <script type="text/javascript" src="<?php echo load_lib()?>jquery/jquery-2.2.2.min.js"></script>
 <script type="text/javascript" src="<?php echo load_lib()?>jquery/jquery-ui.js"></script>
 

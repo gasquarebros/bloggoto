@@ -6,9 +6,6 @@
 <script type="text/javascript" src="<?php echo load_lib()?>chosen/js/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo load_lib()?>theme/js/app.js"></script>
 <script src="<?php echo skin_url()?>js/additional-methods.min.js" type="text/javascript"></script>
-
-
-
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('ul.device_nav').accordion();
@@ -25,7 +22,6 @@
 			});
 		});
 	});
-	
 	function trigger_modal_popup()
 	{
 		$('.popup-modal').magnificPopup({
