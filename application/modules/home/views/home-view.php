@@ -155,7 +155,7 @@
 							<?php 
 							if($record['post_embed_video_url'] !='')
 							{
-								echo "<iframe allow='autoplay; encrypted-media' allowfullscreen src='".$record['post_embed_video_url']."' autoplay='false'></iframe>";
+								echo "<iframe style='width:100%' height='300px' width='100%'  allow='autoplay; encrypted-media' allowfullscreen src='".addhttp($record['post_embed_video_url'])."' autoplay='false'></iframe>";
 							}
 							if($record['post_type'] == 'video' && $record['post_video'] !='') { ?>
 								<video autoplay poster="PreviewImage.jpeg"  width="100%"  controls="controls" muted>

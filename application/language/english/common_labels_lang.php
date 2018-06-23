@@ -93,6 +93,7 @@ $lang['country_image_folder_name'] = "country";
 
 $lang['add_celebrity_bage'] = "add celebrity bage";
 $lang['remove_celebrity_bage'] = "remove celebrity bage";
+$lang['placeholder_post_title'] = "Enter the title";
 
 /* reset password module starts here */
 $lang['reset_password']="Reset Password";

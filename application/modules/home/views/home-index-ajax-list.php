@@ -243,7 +243,7 @@
 							<?php 
 							if($record['post_embed_video_url'] !='')
 							{
-								echo "<iframe allow='autoplay; style='width:100%' width='100%' encrypted-media' allowfullscreen src='".$record['post_embed_video_url']."' autoplay='false'></iframe>";
+								echo "<iframe allow='autoplay; style='width:100%' height='300px' width='100%' encrypted-media' allowfullscreen src='".addhttp($record['post_embed_video_url'])."' autoplay='false'></iframe>";
 							}
 							if($record['post_type'] == 'video' && $record['post_video'] !='') { ?>
 								<video autoplay poster="PreviewImage.jpeg"  width="100%"  controls="controls" muted>

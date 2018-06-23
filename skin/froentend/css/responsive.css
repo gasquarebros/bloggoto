@@ -87,7 +87,7 @@ position: relative; overflow: visible !important; }
     .fllow_bns { width: 100%; text-align: center; }
 	.foll_desc p { padding-bottom: 10px; }
     .newsfeed_inner { width: 100%; /*padding: 0 15px;*/ }
-    .feed_like_share ul li { width: 25%; margin-right: 12px; }
+    .feed_like_share ul li { width: 19%; margin-right: 12px; }
     .feed_like_share ul li a { font-size: 12px; }
     .feed_like_share ul li a i { font-size: 18px; }
     .newsfeed_menu li a { font-size: 14px; padding: 8px; }
