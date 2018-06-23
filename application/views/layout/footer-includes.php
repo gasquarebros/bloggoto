@@ -28,7 +28,7 @@
 								['NumberedList','BulletedList','-','Blockquote'],
 								['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
 								['Link','Unlink','Anchor'],
-								['Table','HorizontalRule','SpecialChar','PageBreak','Format','Font','FontSize','TextColor','BGColor']
+								['Image','Table','HorizontalRule','SpecialChar','PageBreak','Format','Font','FontSize','TextColor','BGColor']
 							],
 							filebrowserBrowseUrl: '<?php echo load_lib();?>ckeditor/ckfinder/ckfinder.html',
 							filebrowserUploadUrl: '<?php echo load_lib();?>ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
@@ -65,7 +65,7 @@
 							['NumberedList','BulletedList','-','Blockquote'],
 							['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
 							['Link','Unlink','Anchor'],
-							['Table','HorizontalRule','SpecialChar','PageBreak','Format','Font','FontSize','TextColor','BGColor']
+							['Image','Table','HorizontalRule','SpecialChar','PageBreak','Format','Font','FontSize','TextColor','BGColor']
 						],
 						filebrowserBrowseUrl: '<?php echo load_lib();?>ckeditor/ckfinder/ckfinder.html',
 						filebrowserUploadUrl: '<?php echo load_lib();?>ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
