@@ -110,6 +110,9 @@ $lang['a_users_password_minlength'] = 6 ;
 $lang['customer_registration_template'] = 1;
 $lang['customer_forgot_password_template'] = 2;
 $lang['customer_account_delete_template'] =4;
+$lang['customer_post_email_notify_template'] =5;
+
+
 $lang['customer_forgotpassword'] = 4;
 $lang['order_confirmation_template'] = 5;
 $lang['order_confirmation_admin_template'] = 6;

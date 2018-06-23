@@ -370,11 +370,8 @@ public function __construct()
 
 			$query = " SELECT e.newsletter_subject,e.newsletter_content,e.newsletter_fromEmail,e.newsletter_toEmail,s.client_from_email,s.client_to_email,s.client_site_name,s.client_sendmail_form_smptp,s.client_logo,s.client_folder_name,s.client_site_url,s.client_smpt_host,s.client_smpt_user,s.client_smpt_password,s.client_smpt_port,s.client_mail_path,s.client_email_footer_content FROM  $client_template_table as e
 			LEFT JOIN $setting_table as s ON  s.client_id ='".$client_id."' AND s.client_app_id='".$app_id."'  WHERE  e.newsletter_id = '".$newletter_ID."'";
-			
-            
             
 			$result = $this->ci->Mydb->custom_query_single($query);
-
 			if(!empty($result))
 			{
 				/* get basic mail config values */
@@ -383,13 +380,11 @@ public function __construct()
 				$site_title = ucfirst($result['newsletter_subject']);
 				$subject = $result['newsletter_subject'];
 				$email_content = stripcslashes($result['newsletter_content']);
-
 				/* merge contents */
 				$base_url= base_url();
 				$datas = array('CONTENT' => $email_content);
 
 				$this->ci->load->library(array('parser','email'));
-
 				$message = $this->ci->parser->parse('email_template_head', $datas,true);
 
 				/* mail part */
@@ -422,21 +417,12 @@ public function __construct()
 			   
 				if($email_status)
 				{
-					
-
 					return 1;
 				}
 				else
 				{
-					
-					
 					return 0;
 				}
-				 
-				 
 			}
 	 }
- 
- 
-
 }
