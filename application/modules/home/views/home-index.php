@@ -1,5 +1,5 @@
-<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/_samples/sample.js"></script>
+<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/ckeditor4.js"></script>
+<!--<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/_samples/sample.js"></script>-->
 <script>
 var module_action="addpost";
 </script>
@@ -120,6 +120,8 @@ var module_action="addpost";
 	<p><a class="popup-modal-dismiss" href="#">Dismiss</a></p>
 </div>
 <!--<script type="text/javascript" src="<?php echo skin_url(); ?>js/home.js"></script>-->
+
+
 <script>
 /*  load initial content.. */
 $(window).load(function(){
@@ -159,4 +161,5 @@ $('.draft_post').click(function() {
 	$('#status').val('D');
 	$('#common_form').submit();
 });
+
 </script>
