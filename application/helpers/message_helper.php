@@ -158,6 +158,7 @@ if (! function_exists ( 'post_notify' )){
 	function post_notify($notify_array) {
 		$notification_id = '';
 		$CI=& get_instance();
+		$notify_status=false;
 			if($notify_array['notification_type'] == 'post')
 			{
 					$following_records = get_following_list();
@@ -167,30 +168,60 @@ if (! function_exists ( 'post_notify' )){
 						foreach($following_records as $following) {
 							$notify_array['assigned_to'] = $following['follow_customer_id'];
 							$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
+							post_email_notify($notify_array['assigned_to'],$notify_array['message']);
 						}
-					}		
+					}
+				$notify_status=false;
 			}
 			else if($notify_array['notification_type'] == 'post_tag')
 			{
 				$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
+				$notify_status=true;
 			}			
 			else if($notify_array['notification_type'] == 'like')
 			{
 				$post_records = $CI->Mydb->get_record('post_created_by','pos_posts',array('post_id'=>$notify_array['notification_post_id'],'post_status'=>'A'));
 				$notify_array['assigned_to'] = $post_records['post_created_by'];
 				$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
+				$notify_status=true;				
 			}
 			else if($notify_array['notification_type'] == 'comment' || $notify_array['notification_type'] == 'reply' )
 			{
 				$post_record = $CI->Mydb->get_record('post_created_by','pos_posts',array('post_id'=>$notify_array['notification_post_id']));
 				$notify_array['assigned_to'] = $post_record['post_created_by'];
 				$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
+				$notify_status=true;				
 			}
 			else if($notify_array['notification_type'] == 'follow')
 			{
 				$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
+				$notify_status=true;				
+			}
+			if((!empty($notify_array)) && ($notify_status))
+			{
+				post_email_notify($notify_array['assigned_to'],$notify_array['message']);
 			}
 
 		return $notification_id;
 	}
+
+}
+if (! function_exists ( 'post_email_notify' )){
+	 function post_email_notify($customer_id='',$msg='')
+	 {
+		$CI=& get_instance();
+	 	if($customer_id != '' && $msg != '')
+	 	{
+	 		$email_sent_status='';
+			$site_url =  base_url();
+			$CI->load->library('myemail');
+			$check_details = $CI->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_status,customer_type', $this->customers, array ('customer_id'=>$customer_id));
+			if ($check_details)
+			{
+				$check_arr = array('[NAME]','[RESETLINK]','[SITEURL]','[MESSAGE]');
+				$replace_arr = array($check_details['customer_first_name']." ".$check_details['customer_last_name'],$reset_link,$site_url,$msg);
+				$email_sent_status=$CI->myemail->send_admin_mail($check_details['customer_email'],get_label('customer_post_email_notify_template'),$check_arr,$replace_arr);
+			}
+	 	}
+	 }
 }
