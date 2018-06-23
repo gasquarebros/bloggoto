@@ -1013,13 +1013,19 @@ class Home extends CI_Controller {
 							$category[$blogcat['blog_cat_name']] = $blogcat['blog_cat_id'];
 						}
 					}
+					
+					$embed_video_url='';
+					if(post_value('post_embed_video_url') !='')
+					{
+						$embed_video_url = preg_replace("/\s*[a-zA-Z\/\/:\.]*youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i","//www.youtube.com/embed/$1",post_value('post_embed_video_url'));
+					}
 
 					$update_array = array (
 							'post_category' => $category[post_value ( 'post_category' )],
 							'post_type' => post_value ( 'post_type' ),
 							'post_title' => post_value ( 'post_title' ),
 							'post_description' => json_encode(post_value ( 'post_description' )),
-							'post_embed_video_url' => post_value('post_embed_video_url'),
+							'post_embed_video_url' => $embed_video_url,
 							'post_video' => $post_video,
 							'post_pdf' => $post_pdf,
 							'post_status' => (post_value('status'))?post_value('status'):'A',

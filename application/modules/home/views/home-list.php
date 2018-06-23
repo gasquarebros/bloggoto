@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/_samples/sample.js"></script>
 <script>
 var module_action="addpost";
 </script>
@@ -104,7 +106,7 @@ var module_action="addpost";
 						<?php  echo form_input('post_title',set_value('post_title'),' class="form-control required"  placeholder="Title" id="post_title" ');?>
 					</div>
 					<div class="form_field">
-						<textarea name="post_description" placeholder="Description"></textarea>
+						<textarea name="post_description" id="post_description" placeholder="Description"></textarea>
 					</div>
 					<div class="form_field">
 						<div class="">

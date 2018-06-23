@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/_samples/sample.js"></script>
 <script>
 var module_action="updatepost";
 </script>
@@ -50,7 +52,7 @@ var module_action="updatepost";
 						<?php  echo form_input('post_title',$result['post_title'],' class="form-control required"  placeholder="Title" id="post_title" ');?>
 					</div>
 					<div class="form_field">
-						<textarea name="post_description" placeholder="Enter Your Description"><?php echo json_decode($result['post_description']); ?></textarea>
+						<textarea id="post_description" name="post_description" placeholder="Enter Your Description"><?php echo json_decode($result['post_description']); ?></textarea>
 					</div>
 					<div class="form_field">
 						<div class="">
@@ -60,7 +62,7 @@ var module_action="updatepost";
 					</div>					
 					<div class="form_field tagging_section">
 						<?php 
-							$followers = array(''=>'Select Users');
+							$followers = array();
 							$followers_lst = get_followers_list(); 
 							if(!empty($followers_lst)) {
 								foreach($followers_lst as $foll_list)
@@ -205,5 +207,21 @@ $('#blog_post_title').blur(function() {
 $('.draft_post').click(function() {
 	$('#status').val('D');
 	$('#common_form').submit();
+});
+
+CKEDITOR.replace( 'post_description',{
+	uiColor: '#DAF2FE',
+	forcePasteAsPlainText:	true,
+	toolbar :
+	[
+		['PasteFromWord','-', 'SpellChecker'],
+		['SelectAll','RemoveFormat'],
+		['Bold','Italic','Underline','-','Subscript','Superscript'],
+		['NumberedList','BulletedList','-','Blockquote'],
+		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+		['Link','Unlink','Anchor'],
+		['Table','HorizontalRule','SpecialChar','PageBreak','Format','Font','FontSize','TextColor','BGColor']
+	]
+	
 });
 </script>

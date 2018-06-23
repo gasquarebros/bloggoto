@@ -14,7 +14,26 @@
 				type: 'inline',
 				preloader: false,
 				focus: '#username',
-				modal: true
+				modal: true,
+				callbacks: {
+					open: function() {
+						CKEDITOR.replace( 'post_description',{
+							uiColor: '#DAF2FE',
+							forcePasteAsPlainText:	true,
+							toolbar :
+							[
+								['PasteFromWord','-', 'SpellChecker'],
+								['SelectAll','RemoveFormat'],
+								['Bold','Italic','Underline','-','Subscript','Superscript'],
+								['NumberedList','BulletedList','-','Blockquote'],
+								['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+								['Link','Unlink','Anchor'],
+								['Table','HorizontalRule','SpecialChar','PageBreak','Format','Font','FontSize','TextColor','BGColor']
+							]
+							
+						});
+					}
+				}
 			});
 			$(document).on('click', '.popup-modal-dismiss', function (e) {
 				e.preventDefault();
@@ -28,7 +47,26 @@
 			type: 'inline',
 			preloader: false,
 			focus: '#username',
-			modal: true
+			modal: true,
+			callbacks: {
+				open: function() {
+					CKEDITOR.replace( 'post_description',{
+						uiColor: '#DAF2FE',
+						forcePasteAsPlainText:	true,
+						toolbar :
+						[
+							['PasteFromWord','-', 'SpellChecker'],
+							['SelectAll','RemoveFormat'],
+							['Bold','Italic','Underline','-','Subscript','Superscript'],
+							['NumberedList','BulletedList','-','Blockquote'],
+							['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+							['Link','Unlink','Anchor'],
+							['Table','HorizontalRule','SpecialChar','PageBreak','Format','Font','FontSize','TextColor','BGColor']
+						]
+						
+					});
+				}
+			}
 		});
 	}
 </script>
