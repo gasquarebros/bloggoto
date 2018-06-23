@@ -90,7 +90,7 @@
   		$title = get_site_title($data['metatitle']);
   		$meta = array(
   				array('name' => 'robots', 'content' => 'index,follow'),
-  				array('name' => 'description', 'content' => (isset($data['metacontent']) && $data['metacontent']!="")  ? $data['metacontent'] : $title ),
+  				array('name' => 'description', 'content' => (isset($data['metacontent']) && $data['metacontent']!="")  ? json_decode(strip_tags($data['metacontent'])) : $title ),
   				array('name' => 'keywords', 'content' => (isset($data['metakeyword']) && $data['metakeyword'] !='' )? $data['metakeyword'] : $title),
   				array('name' => 'Content-type', 'content' => 'text/html; charset=utf-8', 'type' => 'equiv'));
   			

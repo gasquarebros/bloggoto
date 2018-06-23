@@ -168,7 +168,7 @@ if (! function_exists ( 'post_notify' )){
 						foreach($following_records as $following) {
 							$notify_array['assigned_to'] = $following['follow_customer_id'];
 							$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
-							post_email_notify($notify_array['assigned_to'],$notify_array['message']);
+							post_email_notify($notify_array);
 						}
 					}
 				$notify_status=false;
@@ -199,27 +199,33 @@ if (! function_exists ( 'post_notify' )){
 			}
 			if((!empty($notify_array)) && ($notify_status))
 			{
-				post_email_notify($notify_array['assigned_to'],$notify_array['message']);
+				post_email_notify($notify_array);
 			}
-
 		return $notification_id;
 	}
-
 }
 if (! function_exists ( 'post_email_notify' )){
-	 function post_email_notify($customer_id='',$msg='')
+	 function post_email_notify($notify_array=array())
 	 {
 		$CI=& get_instance();
-	 	if($customer_id != '' && $msg != '')
+	 	if(!empty($notify_array))
 	 	{
-	 		$email_sent_status='';
+	 		$notify_customer_id=$notify_array['assigned_to'];
+	 		$notify_message=$notify_array['message'];
+	 		$notify_post_id=$notify_array['notification_post_id'];
+	 		$email_sent_status=$post_link='';
 			$site_url =  base_url();
 			$CI->load->library('myemail');
-			$check_details = $CI->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_status,customer_type', $this->customers, array ('customer_id'=>$customer_id));
+			$post_details = $CI->Mydb->get_record ('post_id,post_slug','posts',array('post_id'=>$notify_post_id));
+			if($post_details)
+			{
+				$post_link=base_url()."home/view/".$post_details['post_slug'];
+			}
+			$check_details = $CI->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_status,customer_type','customers', array ('customer_id'=>$notify_customer_id));
 			if ($check_details)
 			{
-				$check_arr = array('[NAME]','[RESETLINK]','[SITEURL]','[MESSAGE]');
-				$replace_arr = array($check_details['customer_first_name']." ".$check_details['customer_last_name'],$reset_link,$site_url,$msg);
+				$check_arr = array('[NAME]','[POSTLINK]','[SITEURL]','[MESSAGE]');
+				$replace_arr = array($check_details['customer_first_name']." ".$check_details['customer_last_name'],$post_link,$site_url,$notify_message);
 				$email_sent_status=$CI->myemail->send_admin_mail($check_details['customer_email'],get_label('customer_post_email_notify_template'),$check_arr,$replace_arr);
 			}
 	 	}
