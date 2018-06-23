@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/ckeditor4.js"></script>
+<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/ckeditor/ckeditor.js"></script>
 <!--<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/_samples/sample.js"></script>-->
 <script>
 var module = "home";

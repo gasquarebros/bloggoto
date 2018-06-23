@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/ckeditor4.js"></script>
+<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/ckeditor/ckeditor.js"></script>
 <!--<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/_samples/sample.js"></script>-->
 <script>
 var module_action="addpost";
@@ -120,8 +120,10 @@ var module_action="addpost";
 	<p><a class="popup-modal-dismiss" href="#">Dismiss</a></p>
 </div>
 <!--<script type="text/javascript" src="<?php echo skin_url(); ?>js/home.js"></script>-->
-
-
+test
+<textarea name="content" id="editor">
+    <p>Here goes the initial content of the editor.</p>
+</textarea>
 <script>
 /*  load initial content.. */
 $(window).load(function(){
@@ -161,5 +163,11 @@ $('.draft_post').click(function() {
 	$('#status').val('D');
 	$('#common_form').submit();
 });
-
+CKEDITOR.replace( 'editor',{
+	filebrowserBrowseUrl: '<?php echo load_lib();?>ckfinder/ckfinder.html',
+    filebrowserUploadUrl: '<?php echo load_lib();?>ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+    filebrowserWindowWidth: '1000',
+    filebrowserWindowHeight: '700'
+	
+});
 </script>
