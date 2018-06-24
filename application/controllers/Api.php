@@ -33,7 +33,7 @@ class Api extends REST_Controller {
 					'customer_device_id' => $deviceid,
 					'customer_device_type' => $device_type 
 			) );
-			
+			 
 			$return_array = array (
 					'status' => "ok",
 					'message' => 'Success' 
