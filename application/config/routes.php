@@ -110,6 +110,7 @@ $route['conversations/post_reply'] = 'conversations/post_reply';
 $route['conversations/(.*)'] = 'conversations/$1';
 $route['keep_alive'] = 'login/keep_alive';
 $route['page/(.*)'] = 'home/page/$1';
+$route['api/(.*)'] = 'api/$1';
 $route['(.*)'] = 'myprofile/index/$1';
 $route['products/ajax_pagination'] = 'products/ajax_pagination';
 
