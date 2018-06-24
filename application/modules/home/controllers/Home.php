@@ -444,13 +444,13 @@ class Home extends CI_Controller {
 					$embed_video_url='';
 					if(post_value('post_embed_video_url') !='')
 					{
-						$embed_video_url = preg_replace("/\s*[a-zA-Z\/\/:\.]*youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i","//www.youtube.com/embed/$1",post_value('post_embed_video_url'));
+						$embed_video_url = preg_replace("/\s*[a-zA-Z\/\/:\.]*youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i","www.youtube.com/embed/$1",post_value('post_embed_video_url'));
 					}
 					$insert_array = array (
 							'post_category' => $category[post_value ( 'post_category' )],
 							'post_type' => post_value ( 'post_type' ),
 							'post_title' => post_value ( 'post_title' ),
-							'post_description' => json_encode(get_censored_string($this->input->post( 'post_description' ))),
+							'post_description' => json_encode(get_censored_string($this->input->post( 'post_description',FALSE ))),
 							'post_video' => $post_video,
 							'post_pdf' => $post_pdf,
 							'post_embed_video_url' => $embed_video_url,
@@ -624,14 +624,14 @@ class Home extends CI_Controller {
 					$embed_video_url='';
 					if(post_value('post_embed_video_url') !='')
 					{
-						$embed_video_url = preg_replace("/\s*[a-zA-Z\/\/:\.]*youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i","//www.youtube.com/embed/$1",post_value('post_embed_video_url'));
+						$embed_video_url = preg_replace("/\s*[a-zA-Z\/\/:\.]*youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i","www.youtube.com/embed/$1",post_value('post_embed_video_url'));
 					}
 
 					$update_array = array (
 							//'post_category' => $category[post_value ( 'post_category' )],
 							//'post_type' => post_value ( 'post_type' ),
 							'post_title' => post_value ( 'post_title' ),
-							'post_description' => json_encode(get_censored_string($this->input->post ( 'post_description' ))),
+							'post_description' => json_encode(get_censored_string($this->input->post ( 'post_description',FALSE ))),
 							'post_photo' => $post_photo,
 							'post_video' => $post_video,
 							'post_pdf' => $post_pdf,
@@ -1017,14 +1017,14 @@ class Home extends CI_Controller {
 					$embed_video_url='';
 					if(post_value('post_embed_video_url') !='')
 					{
-						$embed_video_url = preg_replace("/\s*[a-zA-Z\/\/:\.]*youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i","//www.youtube.com/embed/$1",post_value('post_embed_video_url'));
+						$embed_video_url = preg_replace("/\s*[a-zA-Z\/\/:\.]*youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i","www.youtube.com/embed/$1",post_value('post_embed_video_url'));
 					}
 
 					$update_array = array (
 							'post_category' => $category[post_value ( 'post_category' )],
 							'post_type' => post_value ( 'post_type' ),
 							'post_title' => post_value ( 'post_title' ),
-							'post_description' => json_encode(post_value ( 'post_description' )),
+							'post_description' => json_encode(post_value ( 'post_description',FALSE )),
 							'post_embed_video_url' => $embed_video_url,
 							'post_video' => $post_video,
 							'post_pdf' => $post_pdf,
