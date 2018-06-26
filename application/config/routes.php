@@ -55,6 +55,7 @@ $route['reset_password/(.*)'] = 'login/reset_password/$1';
 $route['activation/(.*)'] = 'login/activation/$1';
 $route['logout'] = 'login/logout';
 $route['login'] = 'login/index';
+$route['applogin'] = 'login/applogin';
 $route['faq/(.*)'] = 'faq/index/$1';
 $route['ncadminpanel'] = 'ncadminpanel/index';
 $route['ncadminpanel/(.*)'] = 'ncadminpanel/$1';
