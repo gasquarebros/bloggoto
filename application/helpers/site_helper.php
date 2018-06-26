@@ -315,10 +315,54 @@ if (! function_exists ( 'delete_post' )){
 
 if (! function_exists ( 'addhttp' )){
 	function addhttp($url) {
-		if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
-			$url = "http://" . $url;
+		if (!preg_match("~^(?:f|ht)tps?://~i", $url)) 
+		{
+			$url = "https://" . $url;
 		}
-		return $url;
+	    $finalUrl = '';
+	    if(strpos($url, 'facebook.com/') !== false) 
+	    {
+	        //it is FB video
+	        $finalUrl='https://www.facebook.com/plugins/video.php?href='.rawurlencode($url).'&show_text=1&width=200';
+	    }
+	    else if(strpos($url, 'vimeo.com/') !== false) 
+	    {
+	        //it is Vimeo video
+	        $videoId = explode("vimeo.com/",$url)[1];
+	        if(strpos($videoId, '&') !== false){
+	            $videoId = explode("&",$videoId)[0];
+	        }
+	        $finalUrl='https://player.vimeo.com/video/'.$videoId;
+	    }
+	    else if(strpos($url, 'youtube.com/') !== false) 
+	    {
+	        //it is Youtube video
+			preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $url, $matches);	        
+	        if(!empty($matches))
+	        {
+	            $videoId = $matches[1];
+	        	$finalUrl='https://www.youtube.com/embed/'.$videoId;
+	        }
+		    else
+		    {
+		        $finalUrl=$url;
+		    }
+	    }
+	    else if(strpos($url, 'youtu.be/') !== false)
+	    {
+	        //it is Youtube video
+	        $videoId = explode("youtu.be/",$url)[1];
+	        if(strpos($videoId, '&') !== false){
+	            $videoId = explode("&",$videoId)[0];
+	        }
+	        $finalUrl.='https://www.youtube.com/embed/'.$videoId;
+	    }
+	    else
+	    {
+	        //Enter valid video URL
+			$finalUrl= $url;
+	    }
+	    return $finalUrl;		
 	}
 }
 
