@@ -94,6 +94,13 @@ class Authentication {
 					);
 					$this->ci->input->set_cookie($cookie); 
 					
+					$cookie = array(
+						'name'   => 'login_user_name',
+						'value'  => $session_datas['customer_username'],
+						'expire' => (300*60*60*24)
+					);
+					$this->ci->input->set_cookie($cookie);
+					
 					$this->ci->session->set_userdata($session_datas);
 				}
 				else

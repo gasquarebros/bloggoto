@@ -90,6 +90,14 @@ class Login extends CI_Controller {
 									);
 									setcookie('login_remeber_me', $session_datas['bg_user_id'],  (300*60*60*24), "/"); // 86400 = 1 day
 									$this->input->set_cookie($cookie); 
+									
+									$cookie = array(
+									'name'   => 'login_user_name',
+									'value'  => $session_datas['customer_username'],
+									'expire' => (300*60*60*24)
+									);
+									setcookie('login_user_name', $session_datas['customer_username'],  (300*60*60*24), "/"); // 86400 = 1 day
+									$this->input->set_cookie($cookie); 
 								}
 							
 								$this->session->set_userdata($session_datas);
