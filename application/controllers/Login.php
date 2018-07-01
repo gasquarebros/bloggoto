@@ -90,6 +90,14 @@ class Login extends CI_Controller {
 									);
 									setcookie('login_remeber_me', $session_datas['bg_user_id'],  (300*60*60*24), "/"); // 86400 = 1 day
 									$this->input->set_cookie($cookie); 
+									
+									$cookie = array(
+									'name'   => 'login_user_name',
+									'value'  => $session_datas['customer_username'],
+									'expire' => (300*60*60*24)
+									);
+									setcookie('login_user_name', $session_datas['customer_username'],  (300*60*60*24), "/"); // 86400 = 1 day
+									$this->input->set_cookie($cookie); 
 								}
 							
 								$this->session->set_userdata($session_datas);
@@ -468,15 +476,17 @@ class Login extends CI_Controller {
 	/*This is for the purpose of the app login if they have username or email and id already in the local*/
 	public function applogin()
 	{
+		//$this->load->model('mydb');
 		$username = urldecode($this->input->get('username'));
 		$userid = decode_value($this->input->get('userid'));
 		
 		if($username !='' && $userid !='')
 		{
-			$userid = $this->mysqli->real_escape_string ( trim ( $userid ) );
-			$username = $this->mysqli->real_escape_string ( trim ( $username ) );
+			$userid = trim ( $userid );
+			$username = trim ( $username );
 
 			$check_details = $this->Mydb->get_record ('customer_id,customer_first_name,customer_username,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo,company_name', $this->table, array ('(customer_email = "'.$username.'" OR customer_username ="'.$username.'")'=>NULL,'customer_status !='=>'D','customer_id'=>$userid));
+
 			if ($check_details)
 			{
 				if ($check_details['customer_status'] == 'A'){
