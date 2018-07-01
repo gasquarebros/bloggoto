@@ -121,17 +121,12 @@
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
-						<label for="customer_places_tovist">Places likes to Visit</label>
+						<label for="customer_places_tovist">Places to Visit</label>
 						<div class="input_field"><?php  echo form_textarea('customer_places_tovist',$info['customer_places_tovist'],' class="form-control"  ');?></div>
 						<div class="clear"></div>
 					</div>
 					
-					<div class="form_field">
-						<label for="customer_bucket_list">Bucket List</label>
-						<div class="input_field"><?php  echo form_textarea('customer_bucket_list',$info['customer_bucket_list'],' class="form-control"  ');?></div>
-						<div class="clear"></div>
-					</div>
-					
+				
 					<h3>Professional</h3>
 					<div class="form_field">
 						<label>School</label>
@@ -346,7 +341,11 @@
 						</div>
 						<div class="clear"></div>
 					</div>
-
+					<div class="form_field">
+						<label for="customer_bucket_list">Bucket List</label>
+						<div class="input_field"><?php  echo form_textarea('customer_bucket_list',$info['customer_bucket_list'],' class="form-control"  ');?></div>
+						<div class="clear"></div>
+					</div>
 					<div class="form_field">
 						<label>Set as Private</label>
 						<div class="input_field">
@@ -853,22 +852,14 @@
 	<?php } ?>
 	<?php if($info['customer_places_tovist']) {?>
 	<div class="form_field">
-		<label>Places likes to Visit</label>
+		<label>Places to Visit</label>
 		<div class="input_field">
 			<?php echo "<label class='display_info'>".$info['customer_places_tovist']."</label>"; ?>
 		</div>
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
-	<?php if($info['customer_bucket_list']) {?>
-	<div class="form_field">
-		<label>Bucket List</label>
-		<div class="input_field">
-			<?php echo "<label class='display_info'>".$info['customer_bucket_list']."</label>"; ?>
-		</div>
-		<div class="clear"></div>
-	</div>
-	<?php } ?>
+
 	
 	<h3>Professional</h3>
 	<?php if($info['customer_school']) {?>
@@ -1131,6 +1122,15 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
+	<?php if($info['customer_bucket_list']) {?>
+	<div class="form_field">
+		<label>Bucket List</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".$info['customer_bucket_list']."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>	
 	</div>
 <?php } else if($info['customer_type'] == 1) { ?> 
 	<div class="profile_display_section">

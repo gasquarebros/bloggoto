@@ -231,6 +231,8 @@ window.setInterval(function() {
 	$(document).on('click', '.post_delete', function(e) {		
 		var dataid = $(this).attr('data-id');
 		var action = $(this).attr('title');
+			customAlertmsg("Are you sure you want to delete permanently? Yes, No");	
+	   $( "#alt1" ).click(function() {		
 		//show_content_loading(); 
 		//$('.load_more').hide();
 		$.ajax({
@@ -250,6 +252,7 @@ window.setInterval(function() {
 					 // alert('');
 				}
 			}
+		});
 		});
 	});		
 
@@ -300,7 +303,7 @@ $(document).on('click','.post_options_action',function(e) {
 		var url = $(this).attr('action');
 		var dataaction = $(this).attr('data-action');
             // showInfo("Please select category.", "Message");		
-			customAlertmsg("Are you sure you want to delete account?");	
+			customAlertmsg("Are you sure you want to delete permanently? Yes, No");	
 	   $( "#alt1" ).click(function() {
 			//show_content_loading(); 
 			$.ajax({

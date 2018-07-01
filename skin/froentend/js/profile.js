@@ -242,6 +242,8 @@ $(document).ready(function(){
 		var url = $(this).attr('href');
 		var id = $(this).attr('data-cmtid');
 		var dataid = $(this).attr('data-id');
+			customAlertmsg("Are you sure you want to delete permanently? Yes, No");	
+	   $( "#alt1" ).click(function() {		
 		show_content_loading(); 
 		$.ajax({
 			url : url,
@@ -257,6 +259,7 @@ $(document).ready(function(){
 					current.parent().parent().find('#'+id).remove();
 				}
 			}
+		});
 		});
 		return false;
 	});	

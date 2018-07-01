@@ -2844,7 +2844,9 @@ td p {
 #blog_post_title::placeholder {
     text-transform: none;
 }
-
+.comment::placeholder {
+    text-transform: none !important;
+}
 a.favor.active {
     color: #0099CC !important;
 }
@@ -2935,7 +2937,6 @@ a.favor.active {
     padding: 20px;    
 }
 .alt_btns a{margin: 10px 5px 0; }
-
 /************** Image Popup gallery ***********************/
 .full-width.link_text{ text-align: center; padding: 0 23px}
 .more_class_image{   position: absolute;top: 0;right: 0;bottom: 0;left: 0;margin: auto;background: rgba(0, 0, 0, 0.6); padding: 5px; text-align: center; color: #fff;     font-family: 'MyriadPro-Semibold'; line-height: 5; -webkit-transition: 0.4s linear all; transition: 0.4s linear all}

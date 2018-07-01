@@ -561,7 +561,10 @@ class Myprofile extends CI_Controller {
 			$join [4] ['table'] = $this->post_tags;
 			$join [4] ['condition'] = "post_id = post_tag_post_id and post_tag_user_id = ".$userid;
 			$join [4] ['type'] = "INNER";
-			
+			$join [5] ['select'] = "group_concat(',',post_favor_user_id) as favoruser";
+			$join [5] ['table'] = $this->post_favor;
+			$join [5] ['condition'] = "post_id = post_favor_post_id";
+			$join [5] ['type'] = "LEFT";			
 			$totla_rows = $this->Mydb->get_num_join_rows ( $this->primary_key, $this->table, $where, null, null, null, $like, $groupby, $join  );
 
 			

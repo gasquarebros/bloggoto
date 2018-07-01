@@ -47,6 +47,7 @@
 		<?php $activesegment = $this->uri->segment(2); ?>
 			<ul class="main_menu blog_section">
 				<li><a data-section="Fashion" href="<?php echo base_url()."home/fashion"; ?>" <?php if($activesegment=='' || $activesegment=='fashion') { ?> class="active" <?php } ?>>Fashion</a></li>
+				<li><a data-section="General" href="<?php echo base_url()."home/general"; ?>" <?php if($activesegment=='general') { ?> class="active" <?php } ?>>General</a></li>
 				<li><a data-section="Travel" href="<?php echo base_url()."home/travel"; ?>" <?php if($activesegment=='travel') { ?> class="active" <?php } ?>>Travel</a></li>
 				<li><a data-section="Food" href="<?php echo base_url()."home/food"; ?>" <?php if($activesegment=='food') { ?> class="active" <?php } ?>>Food</a></li>
 				<li><a data-section="Tech" href="<?php echo base_url()."home/tech"; ?>" <?php if($activesegment=='tech') { ?> class="active" <?php } ?>>Tech</a></li>

@@ -77,10 +77,20 @@ var module_action="addpost";
 			<div class="cate_wrap">
 			<div class="cat_list">
 				<h5>Choose your category</h5>
-				<input type="hidden" id="post_category" name="post_category" value="fashion" />
 				<ul class="post_category_selection">
 					<?php $categories = get_blog_category(); 
-					if(!empty($categories)) { $i=0; foreach($categories as $catkey=>$cat) { ?>
+					if(!empty($categories)) 
+						{ 
+							$i=0; 
+							foreach($categories as $catkey=>$cat) 
+							{ 
+								if($i==0)
+								{
+						?>
+								<input type="hidden" id="post_category" name="post_category" value="<?php echo $catkey; ?>" />
+						<?php	
+								}	
+						?>						
 						<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class="<?php if($i==0) echo 'active'; ?>"><?php echo $cat; ?></a></li>
 					<?php $i++; } } ?>
 					

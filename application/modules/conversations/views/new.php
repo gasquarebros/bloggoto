@@ -84,7 +84,7 @@ if(!empty($_GET['email'])) {
 										<div class="col-md-10 margin-top-20">
 											<div class="control-group string required conversation_subject">
 												<div class="controls">
-													<input class="string required form-control input-sm blacktip" type="text" name="subject" data-rule-required="true" data-msg="Please fill <?=get_label('c_subject')?>" placeholder="Enter your <?=get_label('c_subject')?> here">
+													<input class="string required form-control input-sm blacktip" type="text" name="subject" data-rule-required="true" data-msg="Please fill <?=get_label('c_subject')?>" placeholder="<?=get_label('c_subject')?>">
 												</div>
 											</div>
 										</div>
@@ -94,7 +94,7 @@ if(!empty($_GET['email'])) {
 										<div class="col-md-10 margin-top-20">
 											<div class="control-group text required conversation_body">
 												<div class="controls">
-													<textarea class="text required form-control input-sm" autocomplete="off" rows="8" required="required" aria-required="true" placeholder="Enter your <?=get_label('c_message')?> here" name="message" id="message" data-rule-required="true" data-msg="Please fill <?=get_label('c_message')?>"></textarea>
+													<textarea class="text required form-control input-sm" autocomplete="off" rows="8" required="required" aria-required="true" placeholder="<?=get_label('c_message')?>" name="message" id="message" data-rule-required="true" data-msg="Please fill <?=get_label('c_message')?>"></textarea>
 												</div>
 											</div>
 										</div>

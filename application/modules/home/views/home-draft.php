@@ -9,7 +9,8 @@ var custom_redirect_url="home/draftpost";
 </style>
 <section>
     <div class="container">
-		<?php if(!empty($records)) { ?>
+		<?php if(!empty($records)) { 
+			?>
 		<?php $i=0; foreach($records as $record) {  ?>
 		<?php 
 if($i%2 == 0){ ?>
@@ -72,6 +73,7 @@ if($i%2 == 0){ ?>
 						<div class="post_by">
 							<p><span class="post_title"></span> <?php if($record['post_by'] == 'admin') { echo "Admin"; } else { echo $record['customer_first_name']; } ?></p>
 							<input type="hidden" class="post_info_title" value="<?php echo $record['post_title']; ?>" />
+							<input type="hidden" class="post_info_category" value="<?php echo $record['blog_cat_slug']; ?>" />
 							<input type="hidden" class="post_info_type" value="<?php echo $record['post_type']; ?>" />
 							<input type="hidden" class="post_info_embed" value="<?php echo $record['post_embed_video_url']; ?>" />
 							<input type="hidden" class="post_info_description" value="<?php echo json_decode($record['post_description']); ?>" />
@@ -104,37 +106,7 @@ if($i%2 == 0 || count($records) < $i){
 			</div>
 			<div class="popup_body">
 				<?php echo form_open_multipart(base_url().$module.'/add',' class="form-horizontal" id="common_form" ' );?>
-					<?php /*<div class="cate_wrap">
-					<div class="cat_list">
-						<h5>Choose your category</h5>
-						<input type="hidden" id="post_category" name="post_category" value="Fashion" />
-						<ul class="post_category_selection">
-							<li><a data-section="Fashion" href="javascript:void(0)" class="active">Fashion</a></li>
-							<li><a data-section="Travel" href="javascript:void(0)" >Travel</a></li>
-							<li><a data-section="Food" href="javascript:void(0)" >Food</a></li>
-							<li><a data-section="Tech" href="javascript:void(0)" >Tech</a></li>
-							<li><a data-section="News" href="javascript:void(0)" >News</a></li>
-							<li><a data-section="health" href="javascript:void(0)" >Health</a></li>
-							<li><a data-section="Life-style" href="javascript:void(0)" >Lifestyle</a></li>
-							<li><a data-section="Celebrates" href="javascript:void(0)" >Celeb</a></li>
-							<li><a data-section="Others" href="javascript:void(0)" >Others</a></li>
-							
-						</ul>
-					</div>
-					<div class="cat_list">
-						<h5>Choose what you post</h5>
-						<input type="hidden" id="post_type" name="post_type" value="blog" />
-						<ul class="post_type_selection">
-							<li><a data-type="blog" href="javascript:void(0)" class="active">Blogs</a></li>
-							<li><a data-type="picture" href="javascript:void(0)">Pictures</a></li>
-							<li><a data-type="video" href="javascript:void(0)">Videos</a></li>
-							<li><a data-type="story" href="javascript:void(0)">Stories</a></li>
-							<li><a data-type="book" href="javascript:void(0)">Books</a></li>
-							<li><a data-type="qa" href="javascript:void(0)">Q & A</a></li>
-							<li><a data-type="must_see" href="javascript:void(0)">Must See</a></li>
-						</ul>
-					</div>
-					</div>*/ ?>
+					<?php  ?>
 					<div class="cat_list_form">
 						
 							<div class="form_field">
@@ -179,6 +151,8 @@ if($i%2 == 0 || count($records) < $i){
 								</div>
 								<div class="rgt_fm_field btn_submit_div">
 									<input type="hidden" name="status" id="status" value="" />
+									<input type="hidden" name="post_type" id="post_type" value="" />
+									<input type="hidden" name="post_category" id="post_category" value="" />
 									<input type="hidden" name="record_id" id="record_id" value="" />
 									<input type="button" value="Sava as draft" class="grey_btn draft_post">
 									<input type="submit" value="Publish">
@@ -206,6 +180,7 @@ $(document).ready(function() {
 		var video_post = $(this).parent().find('.post_info_video').val();
 		var tag_post = $(this).parent().find('.post_info_tags').val();
 		var type_post = $(this).parent().find('.post_info_type').val();
+		var category_post = $(this).parent().find('.post_info_category').val();
 		var embed_post = $(this).parent().find('.post_info_embed').val();
 		var record_id = $(this).parent().find('.record_id').val();
 
@@ -225,28 +200,14 @@ $(document).ready(function() {
 		}
 		if(tag_post !='')
 		{
-			/*
-			$(tagging).each(function(key,values){
-				$('#post_tags option').each(function() {
-					console.log($(this).val());
-					console.log('formed');
-					console.log(values);
-					console.log('out');
-					if($(this).val() == values) {
-						console.log('inn');
-						$(this).prop("selected", true);
-					}
-				});
-				
-				$("#post_tags option[value='"+values+"']").prop("selected", true);
-			});
-			*/
 			$('#post_tags').val(tagging);
 		}
 		
 		$('#record_id').val(record_id);
 		$('#post_title').val(post_title);
 		$('#post_description').val(post_description);
+		$('#post_type').val(type_post);
+		$('#post_category').val(category_post);
 		$('#post_embed_video_url').val(embed_post);
 		console.log(image_post);
 		console.log(video_post);

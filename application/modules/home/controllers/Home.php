@@ -784,7 +784,7 @@ class Home extends CI_Controller {
 				$this->primary_key => 'DESC' 
 		);
 		$join = array();
-		$join [0] ['select'] = "blog_cat_id,blog_cat_name";
+		$join [0] ['select'] = "blog_cat_id,blog_cat_name,blog_cat_slug";
 		$join [0] ['table'] = $this->blog_categorytable;
 		$join [0] ['condition'] = "post_category = blog_cat_id";
 		$join [0] ['type'] = "LEFT";
