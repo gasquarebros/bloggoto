@@ -29,12 +29,14 @@ $(window).scroll(function(){
 	}
 	
 	$('video').each(function(){
-		if (isInView($(this)[0])) {                    // visible?
-		  if ($(this)[0].paused) $(this)[0].play();    // play if not playing
-		}
-		else {
-			console.log($(this).attr('src'));
-		  if (!$(this)[0].paused) $(this)[0].pause();  // pause if not paused
+		if($(this).hasClass('autoplay')) {
+			if (isInView($(this)[0])) {                    // visible?
+			  if ($(this)[0].paused) $(this)[0].play();    // play if not playing
+			}
+			else {
+				console.log($(this).attr('src'));
+			  if (!$(this)[0].paused) $(this)[0].pause();  // pause if not paused
+			}
 		}
 
 	})
