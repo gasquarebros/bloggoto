@@ -1750,6 +1750,7 @@ input[type="file"] {
 }
 .suggestion_close { font-size:10px; cursor: pointer; }
 
+
 .followers ul li,
 .followers ul li span.follow_count,
 .followers ul li span.following_count {
@@ -1761,7 +1762,9 @@ input[type="file"] {
     font-weight: bold;
 
 }
-
+.followers ul li span.follow_count, .followers ul li span.following_count{ color: grey; }
+.followers ul li { color: grey; }
+.followers ul li span { color: black; }
 .followers ul li span.follow_count,
 .followers ul li span.following_count {
     margin: 0;

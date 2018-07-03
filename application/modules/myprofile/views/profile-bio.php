@@ -382,10 +382,11 @@
 					</div>					
 					<div class="clear"></div>
 					<div class="btn_wrap btn_submit_div">
-						<input type="submit" value="Update Profile">
-						<button class="cancel_edit_profile">Cancel</button>
-						<span>&nbsp;</span>
-						<a href="#" class="account_delete" data-action='Submit' action="<?php echo base_url().'myprofile/accountdelete/'.encode_value(get_user_id()); ?>"><i class="fa fa-trash-o"></i> Delete Account</a>						
+						<input type="submit" class="fl" value="Update Profile">
+						<span class="fl">&nbsp;</span>
+						<button class="cancel_edit_profile fl">Cancel</button>
+						<span class="fl">&nbsp;</span>
+						<a href="#" class="account_delete fl" data-action='Submit' action="<?php echo base_url().'myprofile/accountdelete/'.encode_value(get_user_id()); ?>"><i class="fa fa-trash-o"></i> Delete Account</a>						
 					</div>
 				<?php
 				echo form_hidden('edit_id',$info['customer_id']);
@@ -713,10 +714,11 @@
 					</div>	
 					<div class="clear"></div>
 					<div class="btn_wrap btn_submit_div">
-						<input type="submit" value="Update Profile">
-						<button class="cancel_edit_profile">Cancel</button>
-						<span>&nbsp;</span>
-						<a href="#" class="account_delete" data-action='Submit' action="<?php echo base_url().'myprofile/accountdelete/'.encode_value(get_user_id()); ?>"><i class="fa fa-trash-o"></i> Delete Account</a>
+						<input type="submit" value="Update Profile" class="fl">
+						<span class="fl">&nbsp;</span>
+						<button class="cancel_edit_profile fl">Cancel</button>
+						<span class="fl">&nbsp;</span>
+						<a href="#" class="account_delete fl" data-action='Submit' action="<?php echo base_url().'myprofile/accountdelete/'.encode_value(get_user_id()); ?>"><i class="fa fa-trash-o"></i> Delete Account</a>
 					</div>
 				<?php
 				echo form_hidden('edit_id',$info['customer_id']);
