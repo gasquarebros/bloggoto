@@ -287,7 +287,7 @@
 						</div>
 						</div>
 					 </div>
-					<div class="feed_comment toggle_content" style="display: none;">
+					<div class="feed_comment toggle_content" >
 						<?php echo form_open_multipart(base_url().'myprofile/addcomments',' class="comment_form" autocomplete="'.form_autocomplte().'" ' );?>
 							<div class="comment_img">
 								<?php if($this->session->userdata('bg_user_profile_picture')) { ?>
