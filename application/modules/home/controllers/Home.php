@@ -380,8 +380,8 @@ class Home extends CI_Controller {
 			$this->form_validation->set_rules('post_type','lang:post_type','required');
 			$this->form_validation->set_rules ( 'post_video', 'lang:post_video', 'trim|callback_validate_image' );
 			
-			if(post_value('post_type') == 'picture') { 
-				$this->form_validation->set_rules ( 'post_photo', 'lang:post_photo', 'required' );
+			if((post_value('post_type') == 'picture') && (empty($_FILES['post_photo']['name']))) { 
+				$this->form_validation->set_rules ( 'post_photo[]', 'lang:post_photo', 'required' );
 			}
 			
 			if ($this->form_validation->run () == TRUE) {
