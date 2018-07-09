@@ -41,12 +41,7 @@
 		<div class="post_detail_wrap append_html">
 <?php } ?>
 		<?php if(!empty($records)) { ?>
-			<script>
-			  (adsbygoogle = window.adsbygoogle || []).push({
-				google_ad_client: "ca-pub-1049218876507748",
-				enable_page_level_ads: true
-			  });
-			</script> 
+
 			<?php foreach($records as $record) { ?>
 				<div class="single_feed">
 					<div class="feed_wrapper">
@@ -203,7 +198,7 @@
 								echo "<iframe style='width:100%' height='300px' width='100%'  allow='autoplay; encrypted-media' allowfullscreen src='".addhttp($record['post_embed_video_url'])."' autoplay='false'></iframe>";
 							}
 							if($record['post_type'] == 'video' && $record['post_video'] !='') { ?>
-								<video autoplay poster="PreviewImage.jpeg"  width="100%"  controls="controls" muted>
+								<video poster="PreviewImage.jpeg"  width="100%"  controls="controls" muted>
 									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/webm" />
 									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/mp4" />
 									<source src="<?php echo media_url().$this->lang->line('post_video_folder_name').$record['post_video']; ?>" type="video/ogg" />
