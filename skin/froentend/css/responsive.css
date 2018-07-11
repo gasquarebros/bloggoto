@@ -234,6 +234,7 @@ position: relative; overflow: visible !important; }
     .profilewrap_popup .fllow_bns { width:100%;clear: both;top: 0px; margin: 0px; padding: 5px 0;}
     .profilewrap_popup .fllow_bns a.btn { margin:0px; }
 	.share_n_text { margin-left: 60%; } 
+	.popup-gallery img { width: 100%; }
 }
 
 @media screen and (max-width: 500px) {
