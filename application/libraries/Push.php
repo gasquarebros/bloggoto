@@ -153,7 +153,8 @@ public function __construct()
 	
 	$url = 'https://fcm.googleapis.com/fcm/send';
 	
-	$server_key = 'AIzaSyAD712SKyatGE2Jow5XBw8Aii-Kk79EJTk';				
+	// $server_key = 'AIzaSyAD712SKyatGE2Jow5XBw8Aii-Kk79EJTk';				
+	$server_key = 'AAAAAP11DSU:APA91bEufU2wVzmJ9WhkCTSQDLOXpaaF4LTzR0Rm1iBRbYyK8rbjDakM0Y1g2s5KjebgWag6YtNVcERtvf8tISmYh9ff0W7g5HEwlvRbFrOrQ5gyZWjkuSQSCEbw5i-yVRm5NvAxSK6k';				
 	$fields = array (
             'registration_ids' => $device_id,
             'data' =>  $data

@@ -299,7 +299,7 @@
 							<div class="comment_box_wrap">
 								<input type="hidden" name="post_record" value="<?php echo encode_value($record['post_id']); ?>" />
 								<input type="text" style="display:none" class="comment_section" name="comments" placeholder="Write a comment..." />
-								<div class="comment"  contenteditable="true"> </div>
+								<div class="comment"  contenteditable="true" placeholder=" Write a Comment..."></div>
 								<button type="submit" class="comment_submit">></button>
 							</div>
 							<div class='display'></div>
