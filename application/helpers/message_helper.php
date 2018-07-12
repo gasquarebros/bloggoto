@@ -169,6 +169,7 @@ if (! function_exists ( 'post_notify' )){
 							$notify_array['assigned_to'] = $following['follow_customer_id'];
 							$notification_id = $CI->Mydb->insert('post_notification',$notify_array);
 							post_email_notify($notify_array);
+							post_push_notify($notify_array);
 						}
 					}
 				$notify_status=false;
@@ -200,6 +201,7 @@ if (! function_exists ( 'post_notify' )){
 			if((!empty($notify_array)) && ($notify_status))
 			{
 				post_email_notify($notify_array);
+				post_push_notify($notify_array);
 			}
 		return $notification_id;
 	}
@@ -227,6 +229,54 @@ if (! function_exists ( 'post_email_notify' )){
 				$check_arr = array('[NAME]','[POSTLINK]','[SITEURL]','[MESSAGE]');
 				$replace_arr = array($check_details['customer_first_name']." ".$check_details['customer_last_name'],$post_link,$site_url,$notify_message);
 				$email_sent_status=$CI->myemail->send_admin_mail($check_details['customer_email'],get_label('customer_post_email_notify_template'),$check_arr,$replace_arr);
+			}
+	 	}
+	 }
+}
+if (! function_exists ( 'post_push_notify' )){
+	 function post_push_notify($notify_array=array())
+	 {
+		$CI=& get_instance();
+	 	if(!empty($notify_array))
+	 	{
+			$CI->load->library ('push');
+	 		$notify_customer_id=$notify_array['assigned_to'];
+	 		$notify_message=$notify_array['message'];
+	 		$notify_post_id=$notify_array['notification_post_id'];
+			$post_details = $CI->Mydb->get_record ('post_id,post_slug,post_title','posts',array('post_id'=>$notify_post_id));
+			$post_image_details = $CI->Mydb->get_record ('post_media_type,post_media_post_id,post_media_filename','post_media',array('post_media_post_id'=>$notify_post_id));
+			if($post_details)
+			{
+				$post_link=base_url()."home/view/".$post_details['post_slug'];
+			}
+			$check_details = $CI->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_photo,customer_status,customer_type','customers', array ('customer_id'=>$notify_customer_id));
+			if (!empty($check_details))
+			{
+				$device_id = array($check_details ['customer_device_id']);
+				$device_type = $check_details ['customer_device_type'];
+				$imagePath = media_url()."customers/default.png";
+				if($check_details['customer_photo'])
+				{
+					$imagePath=media_url()."customers/".$check_details['customer_photo'];
+				}				
+				if((!empty($post_image_details)) && ($post_image_details['post_media_filename']))
+				{
+					$imagePath=media_url()."posts/images/".$post_image_details['post_media_filename'];
+				}
+			  	$data = array("message"=>$notify_message,"notification_title"=>$post_details['post_title'],'notification_image'=>$imagePath);
+			   if(!empty($device_id))
+				{					
+					/****** for android user ******/
+				   if($device_type == 'andriod')
+				   {
+						$status = $this->push->sendMessage ($device_id, $data);
+				   }			
+				   /********for ios user*****/
+				   if($device_type == 'ios')
+				   {
+					// $status = $this->push->push_message_ios ( $device_token, $data,$countPush );
+				   }
+				}				
 			}
 	 	}
 	 }
