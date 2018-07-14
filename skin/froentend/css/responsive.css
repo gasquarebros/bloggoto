@@ -265,7 +265,7 @@ position: relative; overflow: visible !important; }
     .fllow_bns a.btn { width: 49%; float:left; display: block; margin: 8px 0; }
     .form_field .input_field { width: 100%; }
 	.write_post .btn_wrap, .write_post .action_field { width:66%; }
-	.share_n_text { margin-left: 40%; } 
+	.share_n_text { margin-left: 30%; } 
 }
 
 @media screen and (max-width: 360px) {
@@ -276,7 +276,7 @@ position: relative; overflow: visible !important; }
 	}	
 	.sort_by form .form_field { width:49%; margin-right:0px; margin-bottom: 10px;}
 	.show_post_options { margin-top:0px; }
-	.share_n_text { margin-left: 35%; } 
+	.share_n_text { margin-left: 29%; } 
 }
 
 @media screen and (max-width: 320px) {
@@ -290,7 +290,7 @@ position: relative; overflow: visible !important; }
 	/*.comment_box_wrap { width:76%; }*/
 	.icons_wrap ul li { margin-left: 19px; float: left; }
 	.write_post .btn_wrap, .write_post .action_field { width:66%; }
-	.share_n_text { margin-left: 30% !important; } 
+	.share_n_text { margin-left: 20% !important; } 
 }
 
 

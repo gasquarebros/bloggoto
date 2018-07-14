@@ -324,3 +324,9 @@
 </div>
  <?php } ?>
  <script type='text/javascript' src='<?php echo skin_url(); ?>js/image_popup.js'></script>
+<script>
+$('#blog_post_title').blur(function() { 
+	var blog_text = $('#blog_post_title').val();
+	$('#post_title').val(blog_text);
+});
+</script>

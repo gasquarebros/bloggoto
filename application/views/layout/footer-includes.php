@@ -54,6 +54,12 @@
 			modal: true,
 			callbacks: {
 				open: function() {
+					
+					var editor = CKEDITOR.instances.post_description;
+					if (editor) {
+						editor.destroy(true); 
+					}   
+					
 					CKEDITOR.replace( 'post_description',{
 						uiColor: '#DAF2FE',
 						forcePasteAsPlainText:	true,

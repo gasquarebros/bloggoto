@@ -1729,6 +1729,7 @@ input[type="file"] {
     font-size: 40px;
     padding-right: 10px;
 	color: #06678e;
+	font-size: 34px;
 }
 .profile_social_share li a:hover {
     color: #00c853;
@@ -2964,11 +2965,11 @@ a.favor.active {
 div .comment:empty::after {
     content: attr(placeholder) !important;
       opacity:.5;
-}
+}/*
 .fa-whatsapp:before {
     content: "\f232";
     background-color: #06678e;
     color: white;
     border-radius: 10px;
     border: 2px solid #06678e;
-}
+}*/
