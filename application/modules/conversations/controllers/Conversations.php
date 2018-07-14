@@ -126,6 +126,8 @@ class Conversations extends CI_Controller {
 				'created_on'=>$cu_date,				
 				'ip_address'=>get_ip(),
 				);
+				
+
 		/*$this->Mydb->insert($this->reply,$record);*/
 
 		new_reply($record);

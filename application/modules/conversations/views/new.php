@@ -1,3 +1,4 @@
+<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/ckeditor/ckeditor.js"></script>
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 $notify_logo = skin_url('images/db-logo2.png');
@@ -130,4 +131,27 @@ if(!empty($_GET['email'])) {
 <script>
 	var positiontop = $('#frm-conversations').offset().top;
 	$('body,html').animate({scrollTop:positiontop}, 800);
+	
+	
+	CKEDITOR.replace( 'message',{
+		uiColor: '#DAF2FE',
+		forcePasteAsPlainText:	true,
+		toolbar :
+		[
+			['PasteFromWord','-', 'SpellChecker'],
+			['SelectAll','RemoveFormat'],
+			['Bold','Italic','Underline','-','Subscript','Superscript'],
+			['NumberedList','BulletedList','-','Blockquote'],
+			['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+			['Link','Unlink','Anchor'],
+			['Image','Table','HorizontalRule','SpecialChar','PageBreak','Format','Font','FontSize','TextColor','BGColor']
+		],
+		filebrowserBrowseUrl: '<?php echo load_lib();?>ckeditor/ckfinder/ckfinder.html',
+		filebrowserUploadUrl: '<?php echo load_lib();?>ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+		filebrowserWindowWidth: '1000',
+		filebrowserWindowHeight: '700'
+
+		
+	});
+	
 </script>

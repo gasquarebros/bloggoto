@@ -6,7 +6,8 @@ $(document).ready(function() {
         if ($("#frm-send_replay").valid()) {
         datas = new FormData();
         datas.append( 'secure_key', secure_key);
-        datas.append( 'message_body', $('#message_body').val());
+		var value = CKEDITOR.instances['message_body'].getData();
+        datas.append( 'message_body', value);
         datas.append( 'notification_id', $('#notification_id').val());
         $.ajax({
             url         : base_url+"conversations/post_reply",
@@ -26,6 +27,7 @@ $(document).ready(function() {
             }
         });
         }
+		else { console.log('invalid'); }
     });
 
     $('body').on('click', '.trash', function() {
@@ -115,10 +117,16 @@ $(document).ready(function() {
                 btn = $(this);
                 //btn.button('loading');
                 var form = $('#frm-conversations');
+				var value = CKEDITOR.instances['message'].getData();
+				$('#message').val(value);
+				$('#message').html(value);
                 var formdata = false;
                 if (window.FormData){
                     formdata = new FormData(form[0]);
+					//var value = CKEDITOR.instances['message'].getData();
+					formdata.append( 'message', value);
                 }
+				
                 $.ajax({
                     url         : base_url+"conversations/create_message",
                     data        : formdata ? formdata : form.serialize(),

@@ -392,7 +392,7 @@ if (! function_exists ( 'get_censored_string' )){
 							'golly',
 							'phooey');
 
-		$post_description='';
+		$description='';
 		if($string !=  '')
 		{
 			$description = word_censor($string, $disallowed, '***');//each word with space replace
