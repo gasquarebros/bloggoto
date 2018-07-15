@@ -29,7 +29,7 @@
 					<?php } ?>
 				<?php } else { ?> 
 					<div class="signup_wrap">
-						<a href="<?php echo base_url().'myprofile'; ?>" class=""><span class="loggedin_text"><?php echo get_user_name(); ?></span></a> | <a href="<?php echo base_url().'logout'; ?>" class="">Logout</a>
+						<a href="<?php echo base_url().'myprofile'; ?>" class=""><span class="loggedin_text"><?php echo get_user_name(); ?></span></a> | <a id="logout" href="<?php echo base_url().'logout'; ?>" class="">Logout</a>
 					</div>
 				<?php } ?>
 				<form class="header_form" action="<?php echo base_url().'search'; ?>">
@@ -177,3 +177,9 @@
 		</div>
 	</div>
 </div> */ ?>
+
+<script>
+	$('#logout').on('click',function () { 
+		
+	});
+</script>
