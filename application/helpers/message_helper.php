@@ -245,6 +245,7 @@ if (! function_exists ( 'post_push_notify' )){
 	 		$notify_post_id=$notify_array['notification_post_id'];
 			$post_details = $CI->Mydb->get_record ('post_id,post_slug,post_title','posts',array('post_id'=>$notify_post_id));
 			$post_image_details = $CI->Mydb->get_record ('post_media_type,post_media_post_id,post_media_filename','post_media',array('post_media_post_id'=>$notify_post_id));
+			$post_link = '';
 			if($post_details)
 			{
 				$post_link=base_url()."home/view/".$post_details['post_slug'];
@@ -263,7 +264,7 @@ if (! function_exists ( 'post_push_notify' )){
 				{
 					$imagePath=media_url()."posts/images/".$post_image_details['post_media_filename'];
 				}
-			  	$data = array("message"=>$notify_message,"notification_title"=>$post_details['post_title'],'notification_image'=>$imagePath);
+			  	$data = array("message"=>$notify_message,"notification_title"=>$post_details['post_title'],'notification_image'=>$imagePath,'notification_link'=>$post_link);
 			   if(!empty($device_id))
 				{					
 					/****** for android user ******/
