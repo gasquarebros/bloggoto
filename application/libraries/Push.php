@@ -84,6 +84,7 @@ public function __construct()
 
      // Send it to the server
      $result = fwrite($fp, $msg, strlen($msg));
+	$this->ci->push_log($result);	
 
      if (!$result)
 	   echo 'Message not delivered' . PHP_EOL;
@@ -133,6 +134,7 @@ public function __construct()
 
      // Send it to the server
      $result = fwrite($fp, $msg, strlen($msg));
+	$this->ci->push_log($result);	
      
     
 
@@ -176,18 +178,20 @@ public function __construct()
 	$result = curl_exec($ch);
 	
 	//print_r($result);
-	
+	$this->ci->push_log($result);	
 	if ($result === FALSE) {
 		die('FCM Send Error: ' . curl_error($ch));
 	}
 	curl_close($ch);
 	//return $result;
 	}
- 
- 
-
-
-
+     function push_log($push_data_array)
+    {
+    	 $push_array=json_encode($push_data_array);
+        $file_name='push_log_'.date('Y_m_d_H_i_s').'.txt';
+        $log_file =APPPATH.'/logs/'.$file_name;
+        file_put_contents($log_file,$push_array);
+    }            
 function checkAppleErrorResponse($fp) {
 
 //byte1=always 8, byte2=StatusCode, bytes3,4,5,6=identifier(rowID). 
