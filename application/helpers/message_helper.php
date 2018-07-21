@@ -251,6 +251,7 @@ if (! function_exists ( 'post_push_notify' )){
 				$post_link=base_url()."home/view/".$post_details['post_slug'];
 			}
 			$check_details = $CI->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_device_id,customer_device_type,customer_username,customer_email,customer_photo,customer_status,customer_type','customers', array ('customer_id'=>$notify_customer_id));
+			$encode_data = json_encode($check_details);
 			if (!empty($check_details))
 			{
 				$device_id = array($check_details ['customer_device_id']);

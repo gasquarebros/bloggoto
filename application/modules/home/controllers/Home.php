@@ -698,6 +698,7 @@ class Home extends CI_Controller {
     			$record = array('open_status'=>'Y');
 				$this->Mydb->update('post_notification',array('post_notification_id'=>$notification_id, 'open_status'=>'N'),$record);
 		}
+		
 		if($slug !='')
 		{
 			$data = $this->load_module_info ();
@@ -761,6 +762,10 @@ class Home extends CI_Controller {
 				$data['meta_title'] = $records[0]['post_title'];
 				$data['meta_description'] = $records[0]['post_description'];
 				$data['meta_keyword'] = $records[0]['post_title'];
+				if(get_user_id()) {	
+					$notify_update = array('open_status'=>'Y');
+					$this->Mydb->update('post_notification',array('notification_post_id'=>$records[0]['post_id'], 'open_status'=>'N','assigned_to'=>get_user_id()),$notify_update);
+				}
 			}
 			else {
 				redirect(base_url());
