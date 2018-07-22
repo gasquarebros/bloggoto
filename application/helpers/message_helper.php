@@ -212,22 +212,28 @@ if (! function_exists ( 'post_email_notify' )){
 		$CI=& get_instance();
 	 	if(!empty($notify_array))
 	 	{
+	 		$notification_type=$notify_array['notification_type'];
 	 		$notify_customer_id=$notify_array['assigned_to'];
 	 		$notify_message=$notify_array['message'];
-	 		$notify_post_id=$notify_array['notification_post_id'];
 	 		$email_sent_status=$post_link='';
 			$site_url =  base_url();
 			$CI->load->library('myemail');
-			$post_details = $CI->Mydb->get_record ('post_id,post_slug','posts',array('post_id'=>$notify_post_id));
-			if($post_details)
-			{
-				$post_link=base_url()."home/view/".$post_details['post_slug'];
+			if($notification_type  != 'follow')
+			{			
+		 		$notify_post_id=$notify_array['notification_post_id'];
+				$post_details = $CI->Mydb->get_record ('post_id,post_slug','posts',array('post_id'=>$notify_post_id));
+				if($post_details)
+				{
+					$post_link=base_url()."home/view/".$post_details['post_slug'];
+				}
 			}
 			$check_details = $CI->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_status,customer_type','customers', array ('customer_id'=>$notify_customer_id));
 			if ($check_details)
 			{
+				$user_link=base_url()."myprofile/".$check_details['customer_username'];
+				$notify_link=($notification_type != 'follow') ? $post_link : $user_link;				
 				$check_arr = array('[NAME]','[POSTLINK]','[SITEURL]','[MESSAGE]');
-				$replace_arr = array($check_details['customer_first_name']." ".$check_details['customer_last_name'],$post_link,$site_url,$notify_message);
+				$replace_arr = array($check_details['customer_first_name']." ".$check_details['customer_last_name'],$notify_link,$site_url,$notify_message);
 				$email_sent_status=$CI->myemail->send_admin_mail($check_details['customer_email'],get_label('customer_post_email_notify_template'),$check_arr,$replace_arr);
 			}
 	 	}
@@ -240,15 +246,20 @@ if (! function_exists ( 'post_push_notify' )){
 	 	if(!empty($notify_array))
 	 	{
 			$CI->load->library ('push');
+	 		$notification_type=$notify_array['notification_type'];
 	 		$notify_customer_id=$notify_array['assigned_to'];
 	 		$notify_message=$notify_array['message'];
-	 		$notify_post_id=$notify_array['notification_post_id'];
-			$post_details = $CI->Mydb->get_record ('post_id,post_slug,post_title','posts',array('post_id'=>$notify_post_id));
-			$post_image_details = $CI->Mydb->get_record ('post_media_type,post_media_post_id,post_media_filename','post_media',array('post_media_post_id'=>$notify_post_id));
-			$post_link = '';
-			if($post_details)
-			{
-				$post_link=base_url()."home/view/".$post_details['post_slug'];
+	 		$notification_subject=$notify_array['subject'];
+			if($notification_type  != 'follow')
+			{	 		
+		 		$notify_post_id=$notify_array['notification_post_id'];
+				$post_details = $CI->Mydb->get_record ('post_id,post_slug,post_title','posts',array('post_id'=>$notify_post_id));
+				$post_image_details = $CI->Mydb->get_record ('post_media_type,post_media_post_id,post_media_filename','post_media',array('post_media_post_id'=>$notify_post_id));
+				$post_link = '';
+				if($post_details)
+				{
+					$post_link=base_url()."home/view/".$post_details['post_slug'];
+				}
 			}
 			$check_details = $CI->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_device_id,customer_device_type,customer_username,customer_email,customer_photo,customer_status,customer_type','customers', array ('customer_id'=>$notify_customer_id));
 			$encode_data = json_encode($check_details);
@@ -265,18 +276,27 @@ if (! function_exists ( 'post_push_notify' )){
 				{
 					$imagePath=media_url()."posts/images/".$post_image_details['post_media_filename'];
 				}
-			  	$data = array("message"=>$notify_message,"notification_title"=>$post_details['post_title'],'notification_image'=>$imagePath,'notification_link'=>$post_link);
+				$user_link=base_url()."myprofile/".$check_details['customer_username'];
+				$notify_link=($notification_type != 'follow') ? $post_link : $user_link;				
+				$notification_title=($notification_type != 'follow') ? $post_details['post_title'] : $notification_subject;				
+			  	$data = array("message"=>$notify_message,"notification_title"=>$notification_title,'notification_image'=>$imagePath,'notification_link'=>$notify_link);
+/*			  	echo "<pre>";
+			  	print_r($check_details);
+			  	print_r($data);
+			  	echo "</pre>";*/
 			   if(!empty($device_id))
 				{					
+	 				$countPush=1;
 					/****** for android user ******/
-				   if($device_type == 'andriod')
+				   if($device_type == 'android')
 				   {
-						$status = $this->push->sendMessage ($device_id, $data);
+						$status = $CI->push->sendMessage ($device_id, $data);
 				   }			
 				   /********for ios user*****/
 				   if($device_type == 'ios')
 				   {
-					// $status = $this->push->push_message_ios ( $device_token, $data,$countPush );
+						$status = $CI->push->push_message_ios ( $device_id, $data,$countPush );
+						$countPush++;
 				   }
 				}				
 			}

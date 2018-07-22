@@ -10,7 +10,6 @@ public function __construct()
 	
  public function  push_message($device_id,$message)
  {
- 	//echo 232323; exit;
  	// simple loading
  	// note: you have toPushGateway specify API key in config before
     //$this->ci->load->library('gcm');
@@ -52,111 +51,52 @@ public function __construct()
  	//print_r($this->ci->gcm->messagesStatuses);
 
  }
-  public function push_message_ios_dine($device_token,$data,$countPush)
- {
-		 $this->ci->load->config('apn',true);
-	     $pushServer=$this->ci->config->item('PushGateway','apn');
-		 $keyCertFilePath=$this->ci->config->item('PermissionFile_dine','apn');
-		 $passphrase = $this->ci->config->item('PassPhrase_dine','apn');
-		 $deviceToken = $device_token;
-
-		$ctx = stream_context_create();
-		stream_context_set_option($ctx, 'ssl', 'local_cert', $keyCertFilePath);
-		stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
-
-		// Open a connection to the APNS server
-		$fp = stream_socket_client($pushServer, $err,$errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
-
-		//print_r($fp);
-
-		if (!$fp)
-	     exit("Failed to connect: $err $errstr" . PHP_EOL);
-	     //echo 'Connected to APNS' . PHP_EOL;
-
-      // Encode the payload as JSON
-      $payload = json_encode($data);
-
-		//print_r($payload);
-
-
-      // Build the binary notification
-      $msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
-
-     // Send it to the server
-     $result = fwrite($fp, $msg, strlen($msg));
-	$this->ci->push_log($result);	
-
-     if (!$result)
-	   echo 'Message not delivered' . PHP_EOL;
-     else
-     {
-		//echo $device_token.'_Message successfully delivered' . PHP_EOL;
-	 }
-
-     // Close the connection to the server
-     fclose($fp);
- 
- } 
-
  public function push_message_ios($device_token,$data,$countPush)
  {
-		 $this->ci->load->config('apn',true);
-	         $pushServer=$this->ci->config->item('PushGateway','apn');
-	   
-		 $keyCertFilePath=$this->ci->config->item('PermissionFile','apn');
+	$this->ci->load->config('push_config',true);
+	$pushServer=$this->ci->config->item('PushGateway','push_config');
+	$keyCertFilePath=$this->ci->config->item('PermissionFile','push_config');
+	$passphrase = $this->ci->config->item('PassPhrase','push_config');
+	$deviceToken = $device_token;
 	
-		 $passphrase = $this->ci->config->item('PassPhrase','apn');
-		
-		 $deviceToken = $device_token;
-		
+	$ctx = stream_context_create();
+	stream_context_set_option($ctx, 'ssl', 'local_cert', $keyCertFilePath);
+	stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
 
-		$ctx = stream_context_create();
-		 
-		stream_context_set_option($ctx, 'ssl', 'local_cert', $keyCertFilePath);
-		stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
+	// Open a connection to the APNS server
+	$fp = stream_socket_client($pushServer, $err,$errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
+	if (!$fp)
+    	 exit("Failed to connect: $err $errstr" . PHP_EOL);
+     //echo 'Connected to APNS' . PHP_EOL;
 
-
-		// Open a connection to the APNS server
-		$fp = stream_socket_client($pushServer, $err,$errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
-
-		
-
-		if (!$fp)
-	    	 exit("Failed to connect: $err $errstr" . PHP_EOL);
-	     //echo 'Connected to APNS' . PHP_EOL;
-
-      // Encode the payload as JSON
-      $payload = json_encode($data);
+    // Encode the payload as JSON
+    $payload = json_encode($data);
       
-       print_r($payload);
-      // Build the binary notification
-      $msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
+    print_r($payload);
+    // Build the binary notification
+    $msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
 
      // Send it to the server
      $result = fwrite($fp, $msg, strlen($msg));
-	$this->ci->push_log($result);	
-     
-    
-
+	$this->push_log($result);	
      if (!$result)
 	   echo 'Message not delivered' . PHP_EOL;
      else
      {
-		
 		echo $device_token.'_Message successfully delivered' . PHP_EOL;
 	 }
 	//$this->checkAppleErrorResponse($fp); 
      // Close the connection to the server
      fclose($fp);
- 
  } 
- 
- public function sendMessage($device_id,$data){
-	
-	$url = 'https://fcm.googleapis.com/fcm/send';
-	
-	// $server_key = 'AIzaSyAD712SKyatGE2Jow5XBw8Aii-Kk79EJTk';				
-	$server_key = 'AAAAAP11DSU:APA91bEufU2wVzmJ9WhkCTSQDLOXpaaF4LTzR0Rm1iBRbYyK8rbjDakM0Y1g2s5KjebgWag6YtNVcERtvf8tISmYh9ff0W7g5HEwlvRbFrOrQ5gyZWjkuSQSCEbw5i-yVRm5NvAxSK6k';				
+  public function sendMessage($device_id,$data)
+ {
+	// $url = 'https://fcm.googleapis.com/fcm/send';
+	//	$server_key = 'AAAAAP11DSU:APA91bEufU2wVzmJ9WhkCTSQDLOXpaaF4LTzR0Rm1iBRbYyK8rbjDakM0Y1g2s5KjebgWag6YtNVcERtvf8tISmYh9ff0W7g5HEwlvRbFrOrQ5gyZWjkuSQSCEbw5i-yVRm5NvAxSK6k';				
+	$this->ci->load->config('push_config',true);
+	$url=$this->ci->config->item('url','push_config');
+	$server_key=$this->ci->config->item('server_key','push_config');
+
 	$fields = array (
             'registration_ids' => $device_id,
             'data' =>  $data
@@ -177,8 +117,8 @@ public function __construct()
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 	$result = curl_exec($ch);
 	
-	//print_r($result);
-	$this->ci->push_log($result);	
+	// print_r($result);
+	$this->push_log($result);	
 	if ($result === FALSE) {
 		die('FCM Send Error: ' . curl_error($ch));
 	}
@@ -255,5 +195,5 @@ return false;
  
  
 }
-/* End of file authentication.php */
+/* End of file push.php */
 /* Location: ./application/libraries/push.php */
