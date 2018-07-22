@@ -72,13 +72,13 @@ public function __construct()
     // Encode the payload as JSON
     $payload = json_encode($data);
       
-    print_r($payload);
+    // print_r($payload);
     // Build the binary notification
     $msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
 
      // Send it to the server
      $result = fwrite($fp, $msg, strlen($msg));
-	$this->push_log($result);	
+	$this->push_log($result.' '.$payload);	
      if (!$result)
 	   echo 'Message not delivered' . PHP_EOL;
      else
@@ -91,8 +91,6 @@ public function __construct()
  } 
   public function sendMessage($device_id,$data)
  {
-	// $url = 'https://fcm.googleapis.com/fcm/send';
-	//	$server_key = 'AAAAAP11DSU:APA91bEufU2wVzmJ9WhkCTSQDLOXpaaF4LTzR0Rm1iBRbYyK8rbjDakM0Y1g2s5KjebgWag6YtNVcERtvf8tISmYh9ff0W7g5HEwlvRbFrOrQ5gyZWjkuSQSCEbw5i-yVRm5NvAxSK6k';				
 	$this->ci->load->config('push_config',true);
 	$url=$this->ci->config->item('url','push_config');
 	$server_key=$this->ci->config->item('server_key','push_config');
@@ -118,7 +116,7 @@ public function __construct()
 	$result = curl_exec($ch);
 	
 	// print_r($result);
-	$this->push_log($result);	
+	$this->push_log($result.' '.$fields);	
 	if ($result === FALSE) {
 		die('FCM Send Error: ' . curl_error($ch));
 	}
