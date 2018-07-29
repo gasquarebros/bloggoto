@@ -1,3 +1,16 @@
+function CopyToClipboard () {
+ 			$('span[id^="success-alert"]').remove();
+ 				this.select();
+ 				 $(this).focus();
+                  document.execCommand("copy");
+                 document.getSelection().removeAllRanges();
+             $(this).after('<span id="success-alert"><br>Copied to clipboard</span>');
+			$('#success-alert').css( "color", "green" );
+};
+$('.copy_to_clipboard').click(function(){
+  var text=$(this).attr('data-text');
+  text.CopyToClipboard();
+});
 $('.device_nav li').each(function() {
 	$(this).children('ul').parent('li').append('<span class="s_arrow"></span>');
 });

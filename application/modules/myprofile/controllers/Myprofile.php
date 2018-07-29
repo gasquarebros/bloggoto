@@ -98,9 +98,18 @@ class Myprofile extends CI_Controller {
 		//$info = $this->Mydb->get_record('customer_type,customer_photo',$this->customers,array('customer_id'=>$userid));
 		$info = $this->Mydb->get_record('customer_id,customer_type,customer_photo',$this->customers,array('customer_username'=>$userid));
 
-		if(empty($info)) {
+		if(!empty($info)) 
+		{
+				if(get_user_id()) {	
+					$notify_update = array('open_status'=>'Y');
+					$this->Mydb->update('post_notification',array('assigned_to'=>$info['customer_id'], 'open_status'=>'N','assigned_to'=>get_user_id()),$notify_update);
+				}			
+		}
+		else
+		{
 			redirect(base_url());
 		}
+		// }
 		$post_infos = $this->Mydb->get_all_records('COUNT(post_id) as postcount, post_type',$this->table,array('post_created_by'=>$info['customer_id'],'post_status'=>'A'),$limit = '', $offset = '', $order = '', $like = '', $groupby = array('post_type'));
 		
 		

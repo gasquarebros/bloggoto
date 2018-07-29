@@ -76,7 +76,7 @@ var module_action="addpost";
 							<li><a target="_blank" href="https://plus.google.com/share?url=<?php echo $url_social_own; ?>" class="fb_social_share"><i class="fa fa-google-plus"></i></a></li>	
 							<li><a target="_blank" href="http://twitter.com/share?text=<?php echo urlencode($info['customer_username']); ?>&url=<?php echo $url_social_own; ?>" class="fb_social_share"><i class="fa fa-twitter"></i></a></li>	
 							<li><a target="_blank" href="http://www.facebook.com/sharer.php?u=<?php echo $url_social_own; ?>&title=<?php echo urlencode($info['customer_username']); ?>" class="fb_social_share"><i class="fa fa-facebook"></i></a></li>	
-							<li><a target="_blank" href="https://web.whatsapp.com/send?text=<?php echo $url_social_own; ?>&title=<?php echo urlencode($info['customer_username']); ?>" class="fb_social_share"><i class="fa fa-whatsapp"></i></a></li>	
+							<li><a href="#" data-text="<?php echo $url_social_own; ?>" class="copy_to_clipboard"><i class="fa fa-copy"></i></a></li>	
 								
 						</ul>
 					</div>

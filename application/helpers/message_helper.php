@@ -214,15 +214,27 @@ if (! function_exists ( 'post_email_notify' )){
 	 	{
 	 		$notification_type=$notify_array['notification_type'];
 	 		$notify_customer_id=$notify_array['assigned_to'];
+	 		$notify_created_by=$notify_array['created_by'];
 	 		$notify_message=$notify_array['message'];
 	 		$email_sent_status=$post_link='';
-			$site_url =  base_url();
+	 		$email_temp_text='post';
+			$site_url= $user_link= $post_link = base_url();
 			$CI->load->library('myemail');
-			if($notification_type  != 'follow')
+			if($notification_type  == 'follow')
 			{			
+		 		$email_temp_text='profile';
+				$notify_created_info = $CI->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_status,customer_type','customers', array ('customer_id'=>$notify_created_by));	
+				if(!empty($notify_created_info))
+				{
+					$user_link=base_url()."myprofile/".$notify_created_info['customer_username'];
+				}
+			}
+			else
+			{
+		 		$email_temp_text='post';
 		 		$notify_post_id=$notify_array['notification_post_id'];
 				$post_details = $CI->Mydb->get_record ('post_id,post_slug','posts',array('post_id'=>$notify_post_id));
-				if($post_details)
+				if(!empty($post_details))
 				{
 					$post_link=base_url()."home/view/".$post_details['post_slug'];
 				}
@@ -230,10 +242,10 @@ if (! function_exists ( 'post_email_notify' )){
 			$check_details = $CI->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_status,customer_type','customers', array ('customer_id'=>$notify_customer_id));
 			if ($check_details)
 			{
-				$user_link=base_url()."myprofile/".$check_details['customer_username'];
+				// $user_link=base_url()."myprofile/".$check_details['customer_username'];
 				$notify_link=($notification_type != 'follow') ? $post_link : $user_link;				
-				$check_arr = array('[NAME]','[POSTLINK]','[SITEURL]','[MESSAGE]');
-				$replace_arr = array($check_details['customer_first_name']." ".$check_details['customer_last_name'],$notify_link,$site_url,$notify_message);
+				$check_arr = array('[NAME]','[POSTLINK]','[SITEURL]','[MESSAGE]','[TEMP_TEXT]');
+				$replace_arr = array($check_details['customer_first_name']." ".$check_details['customer_last_name'],$notify_link,$site_url,$notify_message,$email_temp_text);
 				$email_sent_status=$CI->myemail->send_admin_mail($check_details['customer_email'],get_label('customer_post_email_notify_template'),$check_arr,$replace_arr);
 			}
 	 	}
@@ -242,21 +254,31 @@ if (! function_exists ( 'post_email_notify' )){
 if (! function_exists ( 'post_push_notify' )){
 	 function post_push_notify($notify_array=array())
 	 {
+		$site_url= $user_link= $post_link = base_url();
 		$CI=& get_instance();
 	 	if(!empty($notify_array))
 	 	{
 			$CI->load->library ('push');
 	 		$notification_type=$notify_array['notification_type'];
+	 		$notify_created_by=$notify_array['created_by'];
 	 		$notify_customer_id=$notify_array['assigned_to'];
 	 		$notify_message=$notify_array['message'];
 	 		$notification_subject=$notify_array['subject'];
-			if($notification_type  != 'follow')
+			if($notification_type  == 'follow')
+			{			
+				$notify_created_info = $CI->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_status,customer_type','customers', array ('customer_id'=>$notify_created_by));	
+				if(!empty($notify_created_info))
+				{
+					$user_link=base_url()."myprofile/".$notify_created_info['customer_username'];
+				}
+			}	 		
+			else
 			{	 		
 		 		$notify_post_id=$notify_array['notification_post_id'];
 				$post_details = $CI->Mydb->get_record ('post_id,post_slug,post_title','posts',array('post_id'=>$notify_post_id));
 				$post_image_details = $CI->Mydb->get_record ('post_media_type,post_media_post_id,post_media_filename','post_media',array('post_media_post_id'=>$notify_post_id));
 				$post_link = '';
-				if($post_details)
+				if(!empty($post_details))
 				{
 					$post_link=base_url()."home/view/".$post_details['post_slug'];
 				}
@@ -276,7 +298,7 @@ if (! function_exists ( 'post_push_notify' )){
 				{
 					$imagePath=media_url()."posts/images/".$post_image_details['post_media_filename'];
 				}
-				$user_link=base_url()."myprofile/".$check_details['customer_username'];
+				// $user_link=base_url()."myprofile/".$check_details['customer_username'];
 				$notify_link=($notification_type != 'follow') ? $post_link : $user_link;				
 				$notification_title=($notification_type != 'follow') ? $post_details['post_title'] : $notification_subject;				
 			  	$data = array("message"=>$notify_message,"notification_title"=>$notification_title,'notification_image'=>$imagePath,'notification_link'=>$notify_link);
