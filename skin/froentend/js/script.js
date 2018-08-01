@@ -1,16 +1,21 @@
-function CopyToClipboard () {
- 			$('span[id^="success-alert"]').remove();
- 				this.select();
- 				 $(this).focus();
-                  document.execCommand("copy");
-                 document.getSelection().removeAllRanges();
-             $(this).after('<span id="success-alert"><br>Copied to clipboard</span>');
-			$('#success-alert').css( "color", "green" );
-};
 $('.copy_to_clipboard').click(function(){
   var text=$(this).attr('data-text');
-  text.CopyToClipboard();
+  var self=$(this);
+  copyToClipboard(self,text);
 });
+function copyToClipboard(current,text) {
+  var temp = $("<input>");
+  $("body").append(temp);
+  temp.val(text).select();
+  document.execCommand("copy");
+  temp.remove();
+  $("#success-alert").remove();
+  current.append('<span id="success-alert">Copied to Clipboard</span>');
+  setTimeout(function() { 
+	current.parent().find("#success-alert").remove();
+  }, 3000);
+}
+
 $('.device_nav li').each(function() {
 	$(this).children('ul').parent('li').append('<span class="s_arrow"></span>');
 });

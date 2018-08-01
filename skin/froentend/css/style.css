@@ -35,7 +35,7 @@ body {
     overflow-x: hidden;
     font-size: 14px;
 }
-
+#success-alert{color:green;font-size: 10px;}
 .fa {
     font-family: fontAwesome !important;
 }
