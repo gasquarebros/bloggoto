@@ -93,8 +93,8 @@ if (! function_exists ( 'new_notify' )){
 	 		$push_notify_array['notification_id']=$notification_id;
 	 		$push_notify_array['created_by']=$notifyData['created_by'];
 	 		$push_notify_array['assigned_to']=$notifyData['assigned_to'];
-	 		$push_notify_array['message']=$notifyData['message'];
-	 		$push_notify_array['subject']=$notifyData['subject'];
+	 		$push_notify_array['message']=strip_tags($notifyData['message']);
+	 		$push_notify_array['subject']=strip_tags($notifyData['subject']);
 			post_push_notify($push_notify_array);
 
 		$notify_message = array(
@@ -142,11 +142,11 @@ if (! function_exists ( 'new_reply' )){
 
 		$push_notify_array=array();
 	 		$push_notify_array['notification_type']='message_reply';
-	 		$push_notify_array['notification_id']=$notification_id;
+	 		$push_notify_array['notification_id']=$notifyData['notification_id'];
 	 		$push_notify_array['created_by']=$assigned_from;
 	 		$push_notify_array['assigned_to']=$assigned_to;
-	 		$push_notify_array['message']=$notifyData['reply'];
-	 		$push_notify_array['subject']=$notifyData['reply'];
+	 		$push_notify_array['message']=strip_tags($notifyData['reply']);
+	 		$push_notify_array['subject']=strip_tags($notifyData['reply']);
 			post_push_notify($push_notify_array);	
 
 		return $notification_id;
@@ -290,6 +290,7 @@ if (! function_exists ( 'post_push_notify' )){
 				{
 					$push_redirect_link=base_url()."myprofile/".$notify_created_info['customer_username'];
 				}
+				$notification_title=$notification_subject;
 			}	
 			else if($notification_type  == 'message' || $notification_type  == 'message_reply')
 			{	 		
@@ -299,6 +300,7 @@ if (! function_exists ( 'post_push_notify' )){
 				{
 					$push_redirect_link=base_url()."conversations/view/".encode_value($notification_id);
 				}
+				$notification_title=$notification_subject;
 			}			 		
 			else
 			{	 		
@@ -309,6 +311,7 @@ if (! function_exists ( 'post_push_notify' )){
 				{
 					$push_redirect_link=base_url()."home/view/".$post_details['post_slug'];
 				}
+				$notification_title=$post_details['post_title'];
 			}
 			$check_details = $CI->Mydb->get_record ('customer_id,customer_first_name,customer_last_name,customer_device_id,customer_device_type,customer_username,customer_email,customer_photo,customer_status,customer_type','customers', array ('customer_id'=>$notify_customer_id));
 			$encode_data = json_encode($check_details);
@@ -329,7 +332,7 @@ if (! function_exists ( 'post_push_notify' )){
 				// $notify_link=($notification_type != 'follow') ? $post_link : $user_link;				
 				// $notify_link=$push_redirect_link;
 				$notify_link=($push_redirect_link != '') ? $push_redirect_link : base_url();
-				$notification_title=($notification_type != 'follow') ? $post_details['post_title'] : $notification_subject;				
+				$notification_title=($notification_title != '') ? $notification_title : $notification_subject;				
 			  	$data = array("message"=>$notify_message,"notification_title"=>$notification_title,'notification_image'=>$imagePath,'notification_link'=>$notify_link);
 /*			  	echo "<pre>";
 			  	print_r($check_details);
