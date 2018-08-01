@@ -149,8 +149,8 @@ class Common {
 			$this->ci->load->helper ( 'string' );
 			$file_name = $files;
 			$config ['upload_path'] = FCPATH . 'media/' . $image_path;
-			$config ['allowed_types'] = 'pdf|application/pdf|application/x-download';
-			$config ['max_size'] = '15360';
+			$config ['allowed_types'] = 'pdf|PDF';
+			$config ['max_size'] = '3145728';//433994 - 3145728 -15360
 			//$config ['file_name'] = random_string ( 'alnum', 50 );
 			$config['encrypt_name']=true;
 			$config['remove_spaces']=true;
