@@ -22,7 +22,7 @@ var module_action="addpost";
 			<?php                	
 				if(get_user_id() !='')
 				{
-					$celebrity_badge_class=($info['customer_celebrity_badge']) ? 'celebrity_badge' :'';
+					$celebrity_badge_class=($info['customer_celebrity_badge']) ? 'fa fa-diamond' :'';
 				}
 				else
 				{
