@@ -357,10 +357,10 @@ class Home extends CI_Controller {
 	}
 	
 	/* this method used to to check validate image file */
-	public function validate_image() {
+	public function validate_video() {
 		if (isset ( $_FILES ['post_video'] ['name'] ) && $_FILES ['post_video'] ['name'] != "") {
 			if ($this->common->valid_video ( $_FILES ['post_video'] ) == "No") {
-				$this->form_validation->set_message ( 'validate_image', get_label ( 'upload_valid_image' ) );
+				$this->form_validation->set_message ( 'validate_video', get_label ( 'upload_valid_image' ) );
 				return false;
 			}
 		}
@@ -378,7 +378,7 @@ class Home extends CI_Controller {
 			$this->form_validation->set_rules('post_description','lang:post_description','required');
 			$this->form_validation->set_rules('post_category','lang:post_category','required');
 			$this->form_validation->set_rules('post_type','lang:post_type','required');
-			$this->form_validation->set_rules ( 'post_video', 'lang:post_video', 'trim|callback_validate_image' );
+			$this->form_validation->set_rules ( 'post_video', 'lang:post_video', 'trim|callback_validate_video' );
 			
 			if((post_value('post_type') == 'picture') && (empty($_FILES['post_photo']['name']))) { 
 				$this->form_validation->set_rules ( 'post_photo[]', 'lang:post_photo', 'required' );

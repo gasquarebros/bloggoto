@@ -65,7 +65,7 @@
 							<?php 								
 								if(get_user_id() !='')
 								{
-									$celebrity_badge_class=($record['customer_celebrity_badge']) ? 'celebrity_badge' :'';
+									$celebrity_badge_class=($record['customer_celebrity_badge']) ? 'fa fa-diamond' :'';
 								}
 								else
 								{

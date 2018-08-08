@@ -11,7 +11,7 @@
 		 	{
 				if(get_user_id() !='')
 				{
-					$celebrity_badge_class=($info['customer_celebrity_badge']) ? 'celebrity_badge' :'';
+					$celebrity_badge_class=($info['customer_celebrity_badge']) ? 'fa fa-diamond' :'';
 				}
 				else
 				{
@@ -28,7 +28,7 @@
 						<?php } ?>
 	                </div>
 	                <div class="prof_dest">
-	                    <h4><span class="<?php echo $celebrity_badge_class; ?>"><?php echo ($info['customer_type'] == '0')?(($info['customer_first_name'] !='' || $info['customer_last_name'] !='')?$info['customer_first_name']." ".$info['customer_last_name']:$info['customer_username']):(($info['company_name'])?$info['company_name']:$info['customer_username']); ?></span>
+	                    <h4><a href="<?php echo base_url().urlencode($info['customer_username']); ?>" target="_blank" class="<?php echo $celebrity_badge_class; ?>"><?php echo ($info['customer_type'] == '0')?(($info['customer_first_name'] !='' || $info['customer_last_name'] !='')?$info['customer_first_name']." ".$info['customer_last_name']:$info['customer_username']):(($info['company_name'])?$info['company_name']:$info['customer_username']); ?></a>
 	                    </h4>	                </div>
 	            </div>
 	                <div class="fllow_bns"> 

@@ -33,14 +33,17 @@ class Api extends REST_Controller {
 					'customer_device_id' => $deviceid,
 					'customer_device_type' => $device_type 
 			) );
-			 
+			
 			$return_array = array (
 					'status' => "ok",
 					'message' => 'Success' 
 			);
 			$this->set_response ( $return_array, success_response () );
 			
-			
+	    	$log_array=json_encode(array_merge($return_array,array('userid'=>$userid,'device_type'=>$device_type,'deviceid'=>$deviceid)));
+	        $file_name='device_log.txt';
+	        $log_file =APPPATH.'/logs/'.$file_name;
+	        file_put_contents($log_file,$log_array);			
 		} else {
 			
 			$this->response ( array (
