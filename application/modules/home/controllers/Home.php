@@ -1222,6 +1222,44 @@ class Home extends CI_Controller {
 		}
 		exit;
 	}
+	public function likeuser($post_id)
+	{
+		$result=$result_set=$join=array();
+		// check_site_ajax_request();
+		// $this->authentication->user_authentication();
+		$data = $this->load_module_info ();
+			$postid = decode_value($post_id);
+		if ($postid != "") 
+		{
+			$order_by = array('customer_first_name'=>'ASC');
+			$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_type,company_name,customer_celebrity_badge,customer_username";
+			$join [0] ['table'] = 'customers';
+			$join [0] ['condition'] = "customer_id = post_like_created_by and customer_private != 1";
+			$join [0] ['type'] = "INNER";
+			$result_set = $this->Mydb->get_all_records($this->post_likes.'.*',$this->post_likes,array('post_like_post_id'=>$postid),$limit='', $offset='', $order_by, $like='', $groupby=array(), $join );
+			if(!empty($result_set))
+			{
+				$result ['status'] = 'success';
+				$data['results'] = $result_set;
+				$data['title'] = "Post Like";
+				$data['customer_id'] = get_user_id();
+				$result['html'] = get_template ( $this->folder . '/' . $this->module . '-post-like-user-popup', $data );
+			}
+			else
+			{
+				$result ['status'] = 'error';
+				$result ['message'] = '';				
+			}
+		}
+		else
+		{
+			$result ['status'] = 'error';
+			$result ['message'] = '';	
+		}
+		echo json_encode ( $result );
+		exit ();
+
+	}
 public function do_multi_upload($file_name,$image_path, $insert_id) 
 {	
 		    $cpt = count($_FILES[$file_name]['name']);
@@ -1243,12 +1281,24 @@ public function do_multi_upload($file_name,$image_path, $insert_id)
 				// $config['allowed_types']=constant ( 'image_allowed_types' );
 				// $config['max_size']     = constant ( 'image_max_size' );					
 				$config ['upload_path'] = FCPATH . 'media/' . $image_path;
-				$config ['allowed_types'] = 'gif|jpg|jpeg|png|pdf';				
+				if(preg_match("/\.(gif|jpg|jpeg|png)$/", $_FILES [$file_name] ['name']))
+				{
+					$config ['allowed_types'] = '*';				
+				}
+				else
+				{
+					$config ['allowed_types'] = 'gif|jpg|jpeg|png';				
+				}				
 				$config['encrypt_name']=true;
 				$config['remove_spaces']=true;					
 				$this->load->library('upload',$config);	
 				if(!$this->upload->do_upload($file_name))
 				{
+			    	$img_log_array=json_encode($_FILES [$file_name] ['type']);
+			        $img_file_name='image_log.txt';
+			        $img_log_file =APPPATH.'/logs/'.$img_file_name;
+			        file_put_contents($img_log_file,$img_log_array);
+
 					$error=$this->upload->display_errors();						
 					$response = array("status"=>"error","message"=>$error);
 					echo json_encode($response); 
@@ -1256,32 +1306,31 @@ public function do_multi_upload($file_name,$image_path, $insert_id)
 			    }
 			    else
 			    {
-                    $image_data = $this->upload->data();//store the file info
-				// $filename = $image_data ['full_path']; /*ADD YOUR FILENAME WITH PATH*/
-				// $exif = exif_read_data($filename);
+	                $image_data = $this->upload->data();//store the file info
+					$filename = $image_data ['full_path']; /*ADD YOUR FILENAME WITH PATH*/
+					$exif = exif_read_data($filename);
 
-				// $ort = (!empty($exif['Orientation']))?$exif['Orientation']:null; /*STORES ORIENTATION FROM IMAGE */
-				// $ort1 = $ort;
-				// $exif = exif_read_data($filename, 0, true);
-				// if (!empty($ort1))
-				// {
-				// 	$image = imagecreatefromjpeg($filename);
-				// 	$ort = $ort1;
-				// 	switch ($ort) {
-				// 		case 3:
-				// 			$image = imagerotate($image, 180, 0);
-				// 			break;
+					$ort = (!empty($exif['Orientation']))?$exif['Orientation']:null; /*STORES ORIENTATION FROM IMAGE */
+					$ort1 = $ort;
+					$exif = exif_read_data($filename, 0, true);
+					if (!empty($ort1))
+					{
+						$image = imagecreatefromjpeg($filename);
+						$ort = $ort1;
+						switch ($ort) {
+							case 3:
+								$image = imagerotate($image, 180, 0);
+								break;
+							case 6:
+								$image = imagerotate($image, -90, 0);
+								break;
 
-				// 		case 6:
-				// 			$image = imagerotate($image, -90, 0);
-				// 			break;
-
-				// 		case 8:
-				// 			$image = imagerotate($image, 90, 0);
-				// 			break;
-				// 	}
-				// 	imagejpeg($image,$filename, 90);
-				// }
+							case 8:
+								$image = imagerotate($image, 90, 0);
+								break;
+						}
+						imagejpeg($image,$filename, 90);
+					}
 				// // return $data['file_name'];
 					$post_image_arary[] = array ( 'post_media_post_id' => $insertid,
 										'post_media_type'=>'image',
