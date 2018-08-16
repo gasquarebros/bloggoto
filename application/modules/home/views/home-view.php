@@ -180,7 +180,8 @@
 							?>
 							<ul>
 								<li>
-									<a class="thumbsup <?php if(get_user_id() !='' && in_array(get_user_id(),$likes_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php if(get_user_id() != '') { echo base_url().'myprofile/post_likes/'.$record['post_slug']; } else { echo base_url(); } ?>"><i class="<?php echo $like_icon; ?>" aria-hidden="true"></i> <span class="likes_display"><?php echo thousandsCurrencyFormat($record['postcount']); ?></span></a>
+									<a class="thumbsup <?php if(get_user_id() !='' && in_array(get_user_id(),$likes_user_ids)) { echo "active"; } ?>" data-id ="<?php echo encode_value($record['post_id']); ?>" href="<?php if(get_user_id() != '') { echo base_url().'myprofile/post_likes/'.$record['post_slug']; } else { echo base_url(); } ?>"><i class="<?php echo $like_icon; ?>" aria-hidden="true"></i> </span></a>
+									<a class="like_popup" data-pop-type="likeuser" data-target="#test-modal" href="<?php echo base_url().'home/likeuser/'.encode_value($record['post_id']); ?>"><span class="likes_display"><?php echo thousandsCurrencyFormat($record['postcount']); ?></span></a>
 								</li>
 								<li>
 									<a data-id ="<?php echo encode_value($record['post_id']); ?>" class="<?php if(get_user_id() != '') { ?>comments<?php } ?>" href="<?php /*if(get_user_id() !=''){ echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); }*/ if(get_user_id() != '') { echo base_url().'myprofile/comments/'.$record['post_slug']; } else { echo base_url(); }  ?>"><i class="fa fa-commenting-o" aria-hidden="true"></i> <span class="comments_display"><?php echo thousandsCurrencyFormat($record['commentcount']); ?></span></a>
