@@ -98,6 +98,7 @@ $route['home/editpost/(.*)'] = 'home/editpost/$1';
 $route['home/deletepost'] = 'home/deletepost';
 $route['home/reportpost'] = 'home/reportpost';
 $route['home/gettagnames'] = 'home/gettagnames';
+$route['home/likeuser/(.*)'] = 'home/likeuser/$1';
 $route['home/view/(.*)'] = 'home/view/$1';
 $route['home/(.*)'] = 'home/index/$1';
 $route['registration'] = 'registration/index';
