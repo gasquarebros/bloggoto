@@ -154,6 +154,31 @@ class Products extends CI_Controller
 		exit ();
 	}
 	
+	public function get_product_modifiers()
+	{
+		check_ajax_request (); /* skip direct access */
+		$html = '';
+		$associate = '';
+		$data = '';
+		$product_category = $this->input->post('product_category');
+		$product_modifiers = $this->input->post('product_modifiers');
+		if($product_category !='') {
+			$prod_cat = explode('~',$product_category);
+			$where_array = array('pro_modifier_status' => 'A','pro_modifier_category_id'=>$prod_cat[0]);
+			$html = get_product_modifier($where_array,$product_modifiers,'class="form-control search_select " id="product_modifier" ',' multiple="multiple" onchange="get_attribute_enabled()" data-placeholder="'.get_label('product_modifier_select').'"','pro_modifier_id');
+
+			//$data[''] = $this->Mydb->get_all_records('pro_modifier_primary_id,pro_modifier_name,pro_modifier_id','product_modifiers',$where_array,'','',array('pro_modifier_name'=>"ASC"));
+			$data['selected_modifiers'] = $product_modifiers;
+			$associate = get_template ( $this->folder . $this->module . '-associate-list', $data );
+		}
+		echo json_encode ( array (
+				'status' => 'ok',
+				'html' => $html,
+				'associate' => $associate
+		) );
+		exit ();
+	}
+	
 	/* this method used to add record . */
 	public function add() 
 	{
@@ -196,34 +221,37 @@ class Products extends CI_Controller
 				if (isset ( $_FILES ['product_thumbnail'] ['name'] ) && $_FILES ['product_thumbnail'] ['name'] != "") {
 					$product_image = $this->common->upload_image ( 'product_thumbnail', $this->lang->line ( 'product_main_image_folder_name' ) );
 				}
+				
+				$categories = explode('~',post_value ( 'subcategory' ));
 
 			
 				$insert_array = array (
-						'product_type' => post_value ( 'product_type' ),
-						'product_name' => post_value ( 'product_name' ),
-						'product_alias' => post_value ( 'product_alias_text' ),
-						'product_sku' => post_value ( 'product_sku' ),
-						'product_id' => $product_id,
-						'product_slug' => $product_slug,
-						'product_customer_id' => post_value ( 'product_customer_id' ),
-						'product_category_id' => post_value ( 'product_category' ),
-						'product_short_description' => post_value ( 'product_short_description' ),
-						'product_long_description' => post_value ( 'product_long_description' ),
-						'product_thumbnail' => $product_image,
-						'product_status' => (post_value ( 'status' ) == "A" ? 'A' : 'I'),
-						'product_sequence' => $product_sequence,
-						'product_cost' => post_value ( 'product_cost' ),
-						'product_price' => post_value ( 'product_price' ),
-						'product_alt_price' => post_value ( 'product_alt_price' ),
-						'product_special_price' => post_value ( 'product_spl_price' ),
-						'product_special_price_from_date' => date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_from' ) ) ),
-						'product_special_price_to_date' => date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_to' ) ) ),
-						'product_meta_title' => post_value ( 'product_meta_title' ),
-						'product_meta_keywords' => post_value ( 'product_meta_keywords' ),
-						'product_meta_description' => post_value ( 'product_meta_description' ),
-						'product_created_on' => current_date (),
-						'product_created_by' => get_admin_id (),
-						'product_created_ip' => get_ip ()
+					'product_type' => post_value ( 'product_settings' ),
+					'product_name' => post_value ( 'product_name' ),
+					'product_alias' => post_value ( 'product_alias_text' ),
+					'product_sku' => post_value ( 'product_sku' ),
+					'product_id' => $product_id,
+					'product_slug' => $product_slug,
+					'product_customer_id' => post_value ( 'product_customer_id' ),
+					'product_category_id' => $categories[0],
+					'product_subcategory_id' => $categories[1],
+					'product_short_description' => post_value ( 'product_short_description' ),
+					'product_long_description' => post_value ( 'product_long_description' ),
+					'product_thumbnail' => $product_image,
+					'product_status' => (post_value ( 'status' ) == "A" ? 'A' : 'I'),
+					'product_sequence' => $product_sequence,
+					'product_cost' => post_value ( 'product_cost' ),
+					'product_price' => post_value ( 'product_price' ),
+					'product_alt_price' => post_value ( 'product_alt_price' ),
+					'product_special_price' => post_value ( 'product_spl_price' ),
+					'product_special_price_from_date' => (post_value ( 'product_spl_price_from' ))?date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_from' ) ) ):'',
+					'product_special_price_to_date' => (post_value ( 'product_spl_price_to' ))?date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_to' ) ) ):'',
+					'product_meta_title' => post_value ( 'product_meta_title' ),
+					'product_meta_keywords' => post_value ( 'product_meta_keywords' ),
+					'product_meta_description' => post_value ( 'product_meta_description' ),
+					'product_created_on' => current_date (),
+					'product_created_by' => get_admin_id (),
+					'product_created_ip' => get_ip ()
 				);
 				
 				$insert_id = $this->Mydb->insert ( $this->table, $insert_array );
@@ -232,8 +260,12 @@ class Products extends CI_Controller
 				if ($insert_id != "") {
 
 					/* insert product tags .. */
-					$this->insert_tags ( 'add', $product_tags, $insert_id, $product_id );
+					//$this->insert_tags ( 'add', $product_tags, $insert_id, $product_id );
+					if(post_value ( 'product_settings' ) == 'attribute') {
+						$this->insert_product_assosiate($insert_id);
+					}
 					
+					$this->insert_product_shipping($insert_id);
 					
 					/* insert gallery images */
 					if (! empty ( $_FILES ['product_gallery'] ['name'] )) {
@@ -263,6 +295,149 @@ class Products extends CI_Controller
 		$this->layout->display_admin ( $this->folder . $this->module . '-add', $data );
 	}
 	
+	private function insert_product_assosiate($parent_product)
+	{
+		$modelsProductAssociates = $this->input->post('ProductAssociates');
+		$associate_keys = array_keys($modelsProductAssociates);
+		// delete the associates products assigned table entries
+		//ProductAssociates::deleteAll(['prod_ass_product_id' => $model->product_id]);
+		//ProductAttributes::deleteAll(['prod_ass_att_parent_productid' => $model->product_id]);
+		$this->db->delete('product_associate_products',array('prod_ass_product_id' => $parent_product));
+		$this->db->delete('product_assigned_attributes',array('prod_ass_att_parent_productid' => $parent_product));
+		if(!empty($modelsProductAssociates))
+		{
+			$subsequence = 1;
+			$associates_products = array();
+			foreach($modelsProductAssociates[0]['product_name'] as $subprod_key=>$model_product_sublevels)
+			{			
+
+				$categories = explode('~',post_value ( 'subcategory' ));
+
+				// insert or update need to perform here
+				if($modelsProductAssociates[0]['product_ids'][$subprod_key] !='')
+				{
+					$product_slug = make_slug ( $model_product_sublevels, $this->table, 'product_slug', array (
+						$this->primary_key . "!=" => $record [$this->primary_key] 
+					));
+					$record = $this->Mydb->get_record ( '*', $this->table, array (
+						$this->primary_key => $modelsProductAssociates[0]['product_ids'][$subprod_key]
+					) );
+					
+					$update_array = array (
+						'product_type' => 'simple',
+						'product_name' => $model_product_sublevels,
+						'product_alias' => '',
+						'product_sku' => $modelsProductAssociates[0]['product_sku'][$subprod_key],
+						'product_parent_id' => $parent_product,
+						'product_slug' => $product_slug,
+						'product_customer_id' => post_value ( 'product_customer_id' ),
+						'product_category_id' => $categories[0],
+						'product_subcategory_id' => $categories[1],
+						'product_short_description' => post_value ( 'product_short_description' ),
+						'product_long_description' => post_value ( 'product_long_description' ),
+						'product_status' => (post_value ( 'status' ) == "A" ? 'A' : 'I'),
+						'product_price' => $modelsProductAssociates[0]['product_price'][$subprod_key],
+						'product_special_price' => $modelsProductAssociates[0]['product_special_price'][$subprod_key],
+						'product_updated_on' => current_date (),
+						'product_updated_by' => get_admin_id (),
+						'product_updated_ip' => get_ip () 
+					);
+					
+					
+					$this->Mydb->update ( $this->table, array (
+						$this->primary_key => $record [$this->primary_key] 
+					), $update_array );
+					$insert_id = $record [$this->primary_key];
+				}
+				else
+				{
+					$product_slug = make_slug ( $model_product_sublevels, $this->table, 'product_slug' );
+					$insert_array = array (
+						'product_type' => 'simple',
+						'product_name' => $model_product_sublevels,
+						'product_alias' => '',
+						'product_sku' => $modelsProductAssociates[0]['product_sku'][$subprod_key],
+						'product_parent_id' => $parent_product,
+						'product_slug' => $product_slug,
+						'product_customer_id' => post_value ( 'product_customer_id' ),
+						'product_category_id' => $categories[0],
+						'product_subcategory_id' => $categories[1],
+						'product_short_description' => post_value ( 'product_short_description' ),
+						'product_long_description' => post_value ( 'product_long_description' ),
+						'product_status' => (post_value ( 'status' ) == "A" ? 'A' : 'I'),
+						'product_price' => $modelsProductAssociates[0]['product_price'][$subprod_key],
+						'product_special_price' => $modelsProductAssociates[0]['product_special_price'][$subprod_key],
+						//'product_special_price_from_date' => date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_from' ) ) ),
+						//'product_special_price_to_date' => date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_to' ) ) ),
+						//'product_meta_title' => post_value ( 'product_meta_title' ),
+						//'product_meta_keywords' => post_value ( 'product_meta_keywords' ),
+						//'product_meta_description' => post_value ( 'product_meta_description' ),
+						'product_created_on' => current_date (),
+						'product_created_by' => get_admin_id (),
+						'product_created_ip' => get_ip ()
+					);
+
+					
+					$insert_id = $this->Mydb->insert ( $this->table, $insert_array );
+				}
+				
+				$attributes_subprod = array();
+				foreach($associate_keys as $ass_att_key=>$assocaite_attribute)
+				{
+					
+					if($ass_att_key > 0)
+					{
+						$attributes_subprod[]= ['prod_ass_att_attribute_id' => $assocaite_attribute,'prod_ass_att_attribute_name'=>'','prod_ass_att_attribute_value_name'=>'','prod_ass_att_attribute_value_id'=>$modelsProductAssociates[$assocaite_attribute][$subprod_key],'prod_ass_att_product_id'=>$insert_id,'prod_ass_att_parent_productid'=>$parent_product];
+					}
+				}
+				$associates_products[]=['prod_ass_product_id' => $parent_product,'prod_ass_sub_product_id'=>$insert_id];
+				if(!empty($attributes_subprod))
+				{
+					$this->db->insert_batch('product_assigned_attributes',$attributes_subprod);
+				}
+				$subsequence++;
+			}
+		}
+		if(!empty($associates_products))
+		{
+			$this->db->insert_batch('product_associate_products',$associates_products);
+			
+			
+			$product_modifier = $this->input->post('product_modifier');
+			$associates_products_modifiers = array();
+			if(!empty($product_modifier)) { 
+				foreach($product_modifier as $ass_mod) {
+					$associates_products_modifiers[] = array('assigned_mod_product_id'=>$parent_product,'assigned_mod_modifier_id'=>$ass_mod);
+				}
+				$this->db->insert_batch('product_assigned_modifiers',$associates_products_modifiers);
+			}
+		}
+	}
+	
+	private function insert_product_shipping($insertid)
+	{
+		$modelsProductShippings = $this->input->post('ProductShipping');
+		$this->db->delete('product_assigned_shipping_methods',array('prod_ass_ship_method_prodid' => $insertid));
+		$attributes_subprod = array();
+		if(!empty($modelsProductShippings))
+		{
+			$subsequence = 1;
+			$associates_products = array();
+			foreach($modelsProductShippings['prod_ass_ship_method_shipid'] as $shipkey=>$shipping)
+			{			
+				$price = $modelsProductShippings['prod_ass_ship_method_price'][$shipkey];
+				$is_combined = (!empty($modelsProductShippings['prod_ass_ship_method_is_combined'][$shipkey]))?$modelsProductShippings['prod_ass_ship_method_is_combined'][$shipkey]:0;
+				$attributes_subprod[]= ['prod_ass_ship_method_shipid' => $shipping,'prod_ass_ship_method_prodid'=>$insertid,'prod_ass_ship_method_price'=>$price,'prod_ass_ship_method_is_combined'=>$is_combined];
+			}
+			
+			if(!empty($attributes_subprod))
+			{
+				$this->db->insert_batch('product_assigned_shipping_methods',$attributes_subprod);
+			}	
+		}
+	}
+	
+	
 	/* this method used to update record info.. */
 	public function edit($edit_id = NULL) 
 	{
@@ -281,88 +456,58 @@ class Products extends CI_Controller
 			check_ajax_request (); /* skip direct access */
 			
 			$this->form_validation->set_rules ( 'product_name', 'lang:product_name', 'required|callback_productnameexists' );
-			//$this->form_validation->set_rules ( 'product_long_description', 'lang:product_long_description', 'required' );
 			$this->form_validation->set_rules ( 'product_sku', 'lang:product_sku', 'required|callback_validate_sku' );
 			$this->form_validation->set_rules ( 'product_price', 'lang:product_price', 'required' );
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
-			$this->form_validation->set_rules ( 'product_category', 'lang:product_categorie', 'required|callback_validate_category' );
-			//$this->form_validation->set_rules ( 'subcategory', 'lang:product_categorie', 'required|callback_validate_subcategory' );
-			$this->form_validation->set_rules ( 'product_thumbnail', 'lang:product_thumbnail', 'trim|callback_validate_image' );
-		    /*	$this->form_validation->set_rules ( 'product_avilablity', 'lang:availability', 'trim|callback_availability_count' ); */
-			$this->form_validation->set_rules ( 'modifier_value', 'lang:product_modifier', 'trim|callback_validate_modifier' );
-
+			$this->form_validation->set_rules ( 'product_customer_id', 'lang:product_customer_id', 'required' );
+		
+			/*$this->form_validation->set_rules ( 'product_category', 'lang:product_categorie', 'required|callback_validate_category' );
 			
-						
-			/* if special price enabled. */
+			$this->form_validation->set_rules ( 'product_thumbnail', 'lang:product_thumbnail', 'trim|callback_validate_image' );
+	
+			   if special price enabled. */
 			if (( int ) $this->input->post ( 'product_spl_price' ) != 0) {
 				
 				$this->form_validation->set_rules ( 'product_spl_price', 'lang:product_spl_price', 'required' );
 				$this->form_validation->set_rules ( 'product_spl_price_from', 'lang:product_spl_price_from', 'required' );
 				$this->form_validation->set_rules ( 'product_spl_price_to', 'lang:product_spl_price_to', 'required' );
 			}
-			
 			if ($this->form_validation->run () == TRUE) {
 				
 									
 				$product_slug = make_slug ( $this->input->post ( 'product_name' ), $this->table, 'product_slug', array (
-						$this->primary_key . "!=" => $record [$this->primary_key] 
+					$this->primary_key . "!=" => $record [$this->primary_key] 
 				));
 				$product_sequence = (( int ) $this->input->post ( 'product_sequence' ) == 0) ? get_sequence ( 'product_sequence', $this->table) : $this->input->post ( 'product_sequence' );
 				
-				//$category = explode ( '~', post_value ( 'subcategory' ) ); /* get category */
-				$categories =  $this->input->post  ( 'product_category' ); /* get category */
-				$category = '';
-				if(!empty($categories))
-				{
-					$category = $categories['pro_cate_id'];
-				}
-				/* find parent parent details */
-				$is_modifier_default = "No";
-				$parent_primary_id = $parent_id =  "";
-				if (post_value ( 'parent_product' ) != "") {
-					$parent_rec = $this->Mydb->get_record ( 'product_primary_id', $this->table, array (
-							'product_id' => post_value ( 'parent_product' )
-					) );
-						
-					if(!empty($parent_rec)){
-						$parent_primary_id = $parent_rec['product_primary_id'];
-						$parent_id = post_value ( 'parent_product' );
-						$is_modifier_default = (post_value('is_modifier_default') == 'Yes'? 'Yes' : 'No');
-					}
-				}
-					// echo $this->input->post('apply_minmax_setup')."test";
-				//echo post_value('apply_minmax_setup'; exit;
-				$update_array = array (
-						'product_type' => post_value ( 'product_type' ),
-						'product_name' => post_value ( 'product_name' ),
-						'product_alias' => post_value ( 'product_alias_text' ),
-						'product_sku' => post_value ( 'product_sku' ),
-						'product_customer_id' => post_value ( 'product_customer_id' ),
-						'product_slug' => $product_slug,
-						//'product_parent_primary_id' => $parent_primary_id,
-						//'product_parent_id' => $parent_id,
-						'product_category_id' => $category,
-						//'product_subcategory_id' => $category [1],
-						'product_short_description' => post_value ( 'product_short_description' ),
-						'product_long_description' => post_value ( 'product_long_description' ),
-						'product_status' => (post_value ( 'status' ) == "A" ? 'A' : 'I'),
-						//'product_alias_is_default' => $is_modifier_default,
-						'product_sequence' => $product_sequence,
-						'product_cost' => post_value ( 'product_cost' ),
-						'product_price' => post_value ( 'product_price' ),
-						'product_alt_price' => post_value ( 'product_alt_price' ),
-						'product_special_price' => post_value ( 'product_spl_price' ),
-						'product_special_price_from_date' => date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_from' ) ) ),
-						'product_special_price_to_date' => date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_to' ) ) ),									
-						'product_meta_title' => post_value ( 'product_meta_title' ),
-						'product_meta_keywords' => post_value ( 'product_meta_keywords' ),
-						'product_meta_description' => post_value ( 'product_meta_description' ),
-						'product_updated_on' => current_date (),
-						'product_updated_by' => get_admin_id (),
-						'product_updated_ip' => get_ip () 
-				);
+				$categories = explode('~',post_value ( 'product_category' ));
 				
-				//print_r($update_array); exit;
+				$update_array = array (
+				
+					'product_type' => post_value ( 'product_settings' ),
+					'product_name' => post_value ( 'product_name' ),
+					'product_alias' => post_value ( 'product_alias_text' ),
+					'product_sku' => post_value ( 'product_sku' ),
+					'product_slug' => $product_slug,
+					'product_customer_id' => post_value ( 'product_customer_id' ),
+					'product_category_id' => $categories[0],
+					'product_subcategory_id' => $categories[1],
+					'product_short_description' => post_value ( 'product_short_description' ),
+					'product_long_description' => post_value ( 'product_long_description' ),
+					//'product_thumbnail' => $product_image,
+					'product_status' => (post_value ( 'status' ) == "A" ? 'A' : 'I'),
+					'product_sequence' => $product_sequence,
+					'product_price' => post_value ( 'product_price' ),
+					'product_special_price' => post_value ( 'product_spl_price' ),
+					'product_special_price_from_date' => (post_value ( 'product_spl_price_from' ))?date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_from' ) ) ):'',
+					'product_special_price_to_date' => (post_value ( 'product_spl_price_to' ))?date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_to' ) ) ):'',
+					'product_meta_title' => post_value ( 'product_meta_title' ),
+					'product_meta_keywords' => post_value ( 'product_meta_keywords' ),
+					'product_meta_description' => post_value ( 'product_meta_description' ),
+					'product_updated_on' => current_date (),
+					'product_updated_by' => get_admin_id (),
+					'product_updated_ip' => get_ip () 
+				);
 				/* upload image and unlink old image */
 				$image_arr = array ();
 				if (isset ( $_FILES ['product_thumbnail'] ['name'] ) && $_FILES ['product_thumbnail'] ['name'] != "") {
@@ -381,32 +526,24 @@ class Products extends CI_Controller
 				}
 				
 				$update_array = array_merge ( $update_array, $image_arr );
-				//echo "<pre>";
-				//print_r($update_array);
-				//exit;
+
 				$this->Mydb->update ( $this->table, array (
-						$this->primary_key => $record [$this->primary_key] 
+					$this->primary_key => $record [$this->primary_key] 
 				), $update_array );
 				
-				//echo $this->db->last_query(); exit;
+
 				
-				/* insert product modifiers .. 
-				$this->insert_modifiers ( 'update', $product_modifiers, $id, $record ['product_id'] );
-				*/
+
 				/* insert gallery images */
 				if (! empty ( $_FILES ['product_gallery'] ['name'] )) {
 					$this->add_gallery_images ( $_FILES, $_FILES ['product_gallery'] ['name'], $id, $record ['product_id'] );
 				}
 				
-				/* insert product alias information.. 
-				$this->insert_alias ( 'update', $product_alias, $id, $record ['product_id'] ,$is_modifier_default,$parent_id);
-				*/
+				$this->insert_product_shipping($record[$this->primary_key]);
 				
-				/* insert combo products..
-				$this->insert_combo_products('update',$id, $record ['product_id']);
-				*/
-	
-				
+				if(post_value ( 'product_settings' ) == 'attribute') {
+					$this->insert_product_assosiate($record[$this->primary_key]);
+				}
 				
 				$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_edit' ), $this->module_label ) );
 				$response ['status'] = 'success';
@@ -418,67 +555,59 @@ class Products extends CI_Controller
 			echo json_encode ( $response );
 			exit ();
 		}
-		
-	//	echo "<pre>";
-		// print_r($record); exit;
 		$data ['records'] = $record;
-		
-
-		
-		/* get selected modifiers..
-		$sel_modifier = $this->Mydb->get_all_records ( 'psm_modifier_id', 'product_assigned_modifiers', array (
-				'psm_product_primary_id' => $record [$this->primary_key] 
-		) );
-		$data ['sel_modifier'] = (! empty ( $sel_modifier )) ? array_column ( $sel_modifier, "psm_modifier_id" ) : array ();
-		*/
-	
 		/* get gallery images */
 		$data ['gallery_images'] = $this->Mydb->get_all_records ( 'pro_gallery_image,pro_gallery_primary_id', 'product_gallery', array (
 				'pro_gallery_product_primary_id' => $record [$this->primary_key] 
 		) );
 		
-		/* get selected alias .. 
-		$sel_alias = $this->Mydb->get_all_records ( 'alias_modifier_id,alias_modifier_value_id', 'product_assigned_alias', array (
-				'alias_product_primary_id' => $record [$this->primary_key] 
+		/*get shipping methods*/
+		$data ['assigned_shipping'] = $this->Mydb->get_all_records ( '*', 'product_assigned_shipping_methods', array (
+			'prod_ass_ship_method_prodid' => $record[$this->primary_key] 
 		) );
-		$sel_alias = (! empty ( $sel_alias )) ? array_column ( $sel_alias, "alias_modifier_value_id", 'alias_modifier_id' ) : array ();
-		*/
-		/* get checked condiment values 
-		if ($data ['condiment_enable'] == 1) {
-			$sel_condiments = $this->Mydb->get_all_records ( 'con_condiment_id,con_qty', 'condiment_products', array (
-					'con_product_id' => $record ['product_id']
+		
+		if($record['product_type'] == 'attribute') {
+			
+			$join = "";
+		
+			$join [0] ['select'] = "pro_modifier_primary_id,pro_modifier_id,pro_modifier_name";
+			$join [0] ['table'] = "product_modifiers";
+			$join [0] ['condition'] = "pro_modifier_primary_id = assigned_mod_modifier_id";
+			$join [0] ['type'] = "INNER";
+			/* not in product availability id condition  */
+			$join [1] ['select'] = "group_concat(pro_modifier_value_primary_id) as value_primary_id,group_concat(pro_modifier_value_id) as value_id,group_concat(pro_modifier_value_name) as value_name";
+			$join [1] ['table'] = "product_modifier_values";
+			$join [1] ['condition'] = "pro_modifier_value_modifier_primary_id = product_modifiers.pro_modifier_primary_id";
+			$join [1] ['type'] = "LEFT";	
+			
+			$groupby = "pro_modifier_value_modifier_primary_id";
+			$select_array = array (
+				'*',  
+			);
+			$where = array("assigned_mod_product_id"=>$record[$this->primary_key]);
+			
+			$assigned_modifiers = $this->Mydb->get_all_records ( 'assigned_mod_modifier_id,assigned_mod_product_id', 'product_assigned_modifiers', $where );
+			$selected_modifiers = array();
+			if(!empty($assigned_modifiers)) {
+				foreach($assigned_modifiers as $selmodifier) {
+					$selected_modifiers[] = $selmodifier['assigned_mod_modifier_id'];
+				}
+			}
+			
+			$data['assigned_modifiers'] = $selected_modifiers;
+			
+			/*get_assigned_associate_products*/
+			$data ['assigned_associate_attributes'] = $this->Mydb->get_all_records ( '*', 'product_assigned_attributes', array (
+				'prod_ass_att_parent_productid' => $record[$this->primary_key] 
 			) );
-			$data ['sel_condiment_id'] = (! empty ( $sel_condiments )) ? array_column ( $sel_condiments, "con_condiment_id" ) : array ();
-			$data ['sel_condiment_qty'] = (! empty ( $sel_condiments )) ? array_column ( $sel_condiments, "con_qty", 'con_condiment_id') : array ();
-		}
-		*/
 
-		/* get selected modifiers.. 
-		$sel_modifier = array();
-		if($settings['client_category_modifier_enable'] == 1 ) {
-		$sel_modifier = $this->Mydb->get_all_records ( 'pa_modifier_id', 'pos_product_alias', array (
-				'pa_product_primary_id' => $record [$this->primary_key]
-		) );
-	
+			$data ['assigned_products'] = $this->Mydb->get_all_records ( '*', 'products', array (
+				'product_parent_id' => $record[$this->primary_key] 
+			) );
+			// echo "<pre>";
+			// print_r($data);
+			// exit;
 		}
-		$data ['sel_modifier'] = (! empty ( $sel_modifier )) ? array_column ( $sel_modifier, "pa_modifier_id" ) : array ();
-		*/
-		
-		/* repopulate alias values */
-		$data ['apply_filter'] = $data ['html_values'] = "";
-		/*
-		$modifier_resut = $this->check_alias ( $record ['product_parent_id'], 'HTML', $sel_alias );
-		if (isset ( $modifier_resut ) && ! empty ( $modifier_resut )) {
-			$data ['apply_filter'] = $modifier_resut ['apply_filter'];
-			$data ['html_values'] = $modifier_resut ['dropdown'];
-		}*/
-		
-		/*
-		$combo_products = $this->Mydb->get_all_records ( 'combo_id,combo_name,combo_qty,combo_is_saving,combo_max_select,combo_min_select,combo_price_apply ', 'product_combos', array (
-				'combo_product_primary_id' => $record [$this->primary_key]));
-				
-		$data['combo_set'] = $combo_products;
-*/
 		/* Common labels */
 		
 		$get_all_users_list = get_all_users_list();

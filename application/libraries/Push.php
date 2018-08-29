@@ -89,6 +89,130 @@ public function __construct()
      // Close the connection to the server
      fclose($fp);
  } 
+ 
+	public function sendIospush($deviceToken,$data)
+	{
+		$this->ci->load->config('push_config',true);
+		$pushServer=$this->ci->config->item('PushGateway','push_config');
+		$pushServer='ssl://gateway.sandbox.push.apple.com:2195';
+		//$pushServer='ssl://gateway.push.apple.com:2195';
+		//$keyCertFilePath=str_replace('backend','frontend/web',Yii::getAlias('@webroot')).Yii::$app->params['ios_server_key'];
+		//$passphrase = Yii::$app->params['ios_server_password'];
+		
+		$keyCertFilePath=$this->ci->config->item('PermissionFile','push_config');
+		$passphrase = $this->ci->config->item('PassPhrase','push_config');
+		//exit;
+		//$deviceToken = 'bfb08b27261bf9c884dcf7ad8a0e4e0bbae0be0d0274b92b060ebe4061caa4ad';
+		//$message = $data = array ("alert" => 'Testing Freelor push notify from local path ');
+		
+		
+		//$ctx = stream_context_create();
+		$ctx = stream_context_create(array('ssl' => array(
+//          'verify_peer' => isset($this->_sRootCertificationAuthorityFile),
+//          'cafile' => $this->_sRootCertificationAuthorityFile,
+            'local_cert' => $keyCertFilePath
+        )));
+		stream_context_set_option($ctx, 'ssl', 'local_cert', $keyCertFilePath);
+		stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
+
+		// Open a connection to the APNS server
+		try {
+			$fp = stream_socket_client($pushServer, $err,$errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
+		} catch (Exception $e) {
+			return "failed";
+		}
+		//print_r($fp);
+
+		if (!$fp)
+			return "failed";
+	     //exit("Failed to connect: $err $errstr" . PHP_EOL);
+	     
+	     //echo 'Connected to APNS' . PHP_EOL;
+	     
+        
+		$body['aps'] = array_merge($data,array('sound'=>'default'));
+			
+
+		// Encode the payload as JSON
+		$payload = json_encode($body);
+		if(is_array($deviceToken))
+		{
+			$i=0;
+			$apple_expiry = time() + (90 * 24 * 60 * 60);
+			foreach($deviceToken as $key=>$deviceTokens)
+			{
+				
+				if($key % 50 == 0)
+				{
+					fclose($fp);
+					// Open a connection to the APNS server
+					try {
+						$fp = stream_socket_client($pushServer, $err,$errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
+					} catch (Exception $e) {
+						return "failed";
+					}
+					//print_r($fp);
+
+					if (!$fp)
+						return "failed";
+				}
+				$apple_identifier = $key;
+				// Build the binary notification
+				$msg = pack("C", 1) . pack("N", $apple_identifier) . pack("N", $apple_expiry) . pack("n", 32) . pack('H*', str_replace(' ', '', $deviceToken)) . pack("n", strlen($payload)) . $payload;
+				
+				// Build the binary notification
+				//$msg = chr(0) . pack('n', 32) . pack('H*', $deviceTokens) . pack('n', strlen($payload)) . $payload;
+				try {
+
+					$txt = "<br><hr>Notification success".json_encode($deviceTokens)." ".json_encode($data);
+					$myfile = file_put_contents('notification.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+
+					// Send it to the server
+					$result = fwrite($fp, $msg, strlen($msg));
+				} catch(Exception $e)
+				{
+					$txt = "<br><hr>Notification error".json_encode($deviceTokens)." ".json_encode($data);
+					$myfile = file_put_contents('notification.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+				}
+				$i++;
+			}
+		}
+		else
+		{
+			// Build the binary notification
+			$msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
+			try {
+				
+				echo $txt = "<br><hr>Notification success".json_encode($deviceToken)." ".json_encode($data);
+				$myfile = file_put_contents('notification.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+
+				// Send it to the server
+				$result = fwrite($fp, $msg, strlen($msg));
+				
+				
+				
+			} catch(Exception $e)
+			{
+				echo $txt = "<br><hr>Notification error".json_encode($deviceToken)." ".json_encode($data);
+				$myfile = file_put_contents('notification.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+			}
+			 print_r($result);
+			if (!$result)
+			{
+				return "failed";
+				//echo 'Message not delivered' . PHP_EOL;
+			}
+			else
+			{ 
+				return "success";
+				//echo $deviceToken.'_Message successfully delivered' . PHP_EOL;
+			}
+		}
+		
+		 // Close the connection to the server
+		 fclose($fp);
+	}
+ 
   public function sendMessage($device_id,$data)
  {
 	$this->ci->load->config('push_config',true);

@@ -17,11 +17,9 @@
 					</div>
 
 					<div class="card-body">
-					<ul class=" alert_msg  alert-danger  alert container_alert" style="display: none;">
-					
-					</ul>	          
+						          
                 <?php echo form_open_multipart(admin_url().$module.'/add',' class="form-horizontal" id="common_form" autocomplete="'.form_autocomplte().'" ' );?>
-                      
+						<ul class=" alert_msg  alert-danger  alert container_alert" style="display: none;"></ul>
                          
                          <div class="form-group">
 							<label for="pro_cate_name" class="col-sm-2 control-label"><?php echo get_label('pro_cate_name').get_required();?></label>

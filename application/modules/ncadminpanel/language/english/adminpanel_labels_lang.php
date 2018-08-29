@@ -61,6 +61,23 @@ $lang['category_invalid'] = "Selected Category (OR) Subcategory Invalid";
 $lang['menu_custom_title'] = "Custom Title";
 
 
+
+
+/* subcategory module */
+$lang['pro_subcate_label'] = "Subcategory";
+$lang['pro_subcate_labels'] = "Subcategories";
+$lang['pro_subcate_name'] = "Subcategory Name";
+$lang['pro_subcate_short_desc'] = "Short Description";
+$lang['pro_subcate_sequence'] = "Sort Order";
+$lang['pro_subcate_desc'] = "Description";
+$lang['pro_subcate_image'] = "Image";
+$lang['pro_subcate_default_image'] = "Default Icon Image";
+$lang['pro_subcate_active_image'] = "Active Icon Image";
+$lang['pro_subcate_Sort Orderuence'] = "Sort Order";
+$lang['subcategory_select'] = "Select Subcategory";
+$lang['subcategory_exist'] = "This Subcategory already exists";
+$lang['subcategory_invalid'] = "Selected Subcategory Invalid";
+
 /* blog category module */
 $lang['blogcategories'] = "Blog Category";
 $lang['blog_cate_label'] = "Category";
@@ -179,16 +196,54 @@ $lang['post_created_ip'] = "post created ip";
 /* posts modules ends here */
 
 
+
+/* modifier module */
+$lang['pro_modifier_label'] = "Modifier";
+$lang['pro_modifier_labels'] = "Modifiers";
+$lang['pro_modifier_name'] = "Modifier Name";
+$lang['pro_modifier_short_desc'] = "Short Description";
+$lang['pro_modifier_desc'] = "Description";
+$lang['pro_modifier_image'] = "Image";
+$lang['pro_modifier_max_select'] = "Maximum select";
+$lang['pro_modifier_min_select'] = "Minimum select";
+$lang['pro_modifier_sequence'] = "Sort Order";
+$lang['modifier_select'] = "Select Modifier";
+$lang['modifier_exist'] = "This Modifier already exists";
+
+
+/* modifier values  module */
+$lang['pro_modifier_value_label'] = "Modifier Value";
+$lang['pro_modifier_value_labels'] = "Modifier Values";
+$lang['pro_modifier_value_name'] = "Modifier Value Name";
+$lang['pro_modifier_value_price'] = "Price";
+$lang['pro_modifier_value_short_desc'] = "Short Description";
+$lang['pro_modifier_value_desc'] = "Description";
+$lang['pro_modifier_value_image'] = "Image";
+$lang['pro_modifier_value_sequence'] = "Sort Order";
+$lang['modifier_select'] = "Select Modifier";
+$lang['modifier_value_exist'] = "This Modifier Value already exists";
+$lang['add_modifier_value'] = "Add Modifier Value";
+$lang['modifier_invalid'] = "Selected Modifier Invalid";
+
+/* shipping methods module */
+$lang['pro_shipping_label'] = "Shipping Method";
+$lang['pro_shipping_labels'] = "Shipping Methods";
+$lang['ship_method_name'] = "Shipping Method Name";
+$lang['shipping_method_exist'] = "This Shipping Method already exists";
+
 /* Product  module */
 $lang['product_label'] = "Product";
 $lang['product_labels'] = "Products";
+$lang['product_parent'] = "Parent Product";
+$lang['category_modifier'] = "Modifier";
 $lang['product_tab1'] = "General";
 $lang['product_tab2'] = "Categories"; 
 $lang['product_tab3'] = "Prices";
 $lang['product_tab4'] = "Images";
-$lang['product_tab5'] = "Settings";
-$lang['product_tab6'] = "Meta Information";
-$lang['product_tab9'] = "Prices";
+$lang['product_tab5'] = "Meta Information";
+$lang['product_tab6'] = "Associate Products";
+$lang['product_tab7'] = "Shipping Methods";
+$lang['product_settings'] = "Product Type";
 $lang['product_name'] = "Name"; 
 $lang['product_alias'] = "Alias";
 $lang['product_sku'] = "SKU";

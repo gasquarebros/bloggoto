@@ -16,12 +16,12 @@
                         
 					</div>
 
-					<div class="card-body">
-					<ul class=" alert_msg  alert-danger  alert container_alert" style="display: none;">
-					
-					</ul>	          
+					<div class="card-body">	          
                 <?php echo form_open_multipart(admin_url().$module."/$module_action",' class="form-horizontal" id="common_form" ' );?>
-                         <div class="form-group">
+                        
+						<ul class=" alert_msg  alert-danger  alert container_alert" style="display: none;"></ul>
+						
+						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('pro_cate_name').get_required();?></label>
 							<div class="col-sm-<?php echo get_form_size();?>"><div class="input_box"><?php  echo form_input('pro_cate_name',stripslashes($records['pro_cate_name']),' class="form-control "   ');?></div></div>
 						</div>

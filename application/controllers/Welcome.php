@@ -23,7 +23,7 @@ class Welcome extends CI_Controller {
 		$this->load->library ( 'form_validation' );
 		$this->form_validation->set_error_delimiters ( '<p>', '</p>' );
 		$this->table = "orders";
-		$this->load->helper('promotion');
+		//$this->load->helper('promotion');
 		//asashvahs
 	}		/* this function used to product menu component items */
 	public function product_menu_component_get($order_id="",$item_id="",$type,$field,$response=null) {  
@@ -397,7 +397,7 @@ $countPush = 1;
 
 //$deviceToken = '8fdaf0d12b371dab37457b7740463cf298f8ba00819a1b2ec4daa99e76cbaaa1';
 
-$deviceToken = '06512095cde01f41e44679cc0f2ae171bf178dca83e543372ab923d533114c4b';
+$deviceToken = 'be7c2724 c3c6e76e 44b35b36 a95e0d68 1948351d 71fe80f1 260cddeb ff4d70eb';
 
 //$deviceToken = 'b3a667c380ae821e4cfa9d35f4f7ba083befcf8a2324106ccd19bd68b344c472';
 
@@ -417,4 +417,12 @@ echo $status;
 exit;	
 
     }
+	
+	public function testing_push_ios()
+	{
+		$this->load->library ('push');
+		$ios_array = "be7c2724c3c6e76e44b35b36a95e0d681948351d71fe80f1260cddebff4d70eb";
+		$message = $data = array ("alert" => "Test from code",'banner_img'=>"",'url'=>"");
+		echo $response = $this->push->sendIospush($ios_array,$message);
+	}
 }

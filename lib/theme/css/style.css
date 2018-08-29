@@ -359,6 +359,13 @@ a:hover {
 
 .app-container.expanded .side-body {
   margin-left: 260px; }
+  
+.associates-item .form-group{
+	margin:0px;
+}  
+.associate_product_tab  th, .associate_product_tab  td {
+	border: 1px solid #ccc !important;
+}
 
 /* small screen */
 @media (max-width: 768px) {

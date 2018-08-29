@@ -8,3 +8,4 @@ Description		: Page contains adminpanel tooltip
 
 
 $lang['select_category'] = "Select Category";
+$lang['modifier_enabled_ttip'] = "Modifier";

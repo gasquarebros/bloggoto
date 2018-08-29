@@ -3,10 +3,9 @@
 <link rel="stylesheet" href="<?php echo load_lib()?>timepicker-master/jquery.ui.timepicker.css" type="text/css" />
 <script type="text/javascript" src="<?php echo load_lib()?>timepicker-master/jquery.ui.core.min.js"></script>
 <script type="text/javascript" src="<?php echo load_lib()?>timepicker-master/jquery.ui.timepicker.js"></script>
-<script type="text/javascript"
-	src="<?php echo load_lib()?>bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript"
-	src="<?php echo admin_skin()?>js/products.js"></script>
+<script type="text/javascript" src="<?php echo admin_skin()?>js/timepicker_outlet.js"></script>
+<script type="text/javascript" src="<?php echo load_lib()?>bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="<?php echo admin_skin()?>js/products.js"></script>
 <script>
 var validation_container ="Yes";
 var gallery_image_label = "<?php echo get_label('product_gallery');?>";
@@ -49,29 +48,33 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 
 										</div>
 								</a></li>
-								
-								<li role="step" class=""><a aria-expanded="false"
-									aria-controls="home" data-toggle="tab" role="tab"
-									id="step9-vtab" href="#stepv9">
-										<div class="icon fa fa-dollar"></div>
-										<div class="step-title">
-											<div class="title"><?php echo get_label('product_tab9').get_required();?></div>
-
-										</div>
-								</a></li>
-								
 								<li role="step" class=""><a aria-controls="profile"
 									data-toggle="tab" id="step2-vtab" role="tab" href="#stepv2"
 									aria-expanded="false">
 										<div class="icon fa fa-object-group"></div>
 										<div class="step-title">
 											<div class="title"><?php echo get_label('product_tab2').get_required();?></div>
+										</div>
+								</a></li>
+								
+								<li role="step" class=""><a aria-expanded="false"
+									aria-controls="home" data-toggle="tab" role="tab"
+									id="step3-vtab" href="#stepv3">
+										<div class="icon fa fa-dollar"></div>
+										<div class="step-title">
+											<div class="title"><?php echo get_label('product_tab3').get_required();?></div>
 
 										</div>
 								</a></li>
-
-
-
+								<li role="step" class=""><a aria-controls="profile"
+									data-toggle="tab" id="step7-vtab" role="tab" href="#stepv7"
+									aria-expanded="true">
+										<div class="icon fa fa-truck"></div>
+										<div class="step-title">
+											<div class="title"><?php echo get_label('product_tab7');?></div>
+											<div class="description"></div>
+										</div>
+								</a></li>
 								<li role="step" class=""><a aria-controls="profile"
 									data-toggle="tab" id="step4-vtab" role="tab" href="#stepv4"
 									aria-expanded="true">
@@ -81,22 +84,44 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 											<div class="description"></div>
 										</div>
 								</a></li>
-
 								<li role="step" class=""><a aria-controls="profile"
-									data-toggle="tab" id="step6-vtab" role="tab" href="#stepv6"
+									data-toggle="tab" id="step5-vtab" role="tab" href="#stepv5"
 									aria-expanded="true">
+										<div class="icon fa fa-tags"></div>
+										<div class="step-title">
+											<div class="title"><?php echo get_label('product_tab5');?></div>
+											<div class="description"></div>
+										</div>
+								</a></li> 
+								<li role="step" class="associate_product_tab" style="display:none;">
+									<a aria-controls="profile" data-toggle="tab" id="step6-vtab" role="tab" href="#stepv6" aria-expanded="true">
 										<div class="icon fa fa-tags"></div>
 										<div class="step-title">
 											<div class="title"><?php echo get_label('product_tab6');?></div>
 											<div class="description"></div>
 										</div>
-								</a></li> 
-                            </ul>
+									</a>
+								</li> 
+							</ul>
+							
 							<div class="tab-content">
 								<!-- tab1  -->
 								<div aria-labelledby="home-tab" id="stepv1" class="tab-pane fade active in " role="tabpanel">
-
-				
+                                    <div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_parent');?></label>
+										<div class="col-sm-8">
+											<div class="input_box">
+												<?php echo get_product_list(array('product_status'=>'A','product_parent_id' =>''),'','class="form-control search_select check_option" id="products_list"  data-placeholder="'.get_label('select_products').'" ','','','1','parent_product');?>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="product_customer_id" class="col-sm-2 control-label"><?php echo get_label('product_customer');?></label>
+										<div class="col-sm-8">
+											<div class="input_box">
+										 <?php echo get_product_customer(array('customer_status'=>'A'),'','class="form-control search_select" id="product_customer_id"  data-placeholder="'.get_label('product_customer_id').'" ','','','1','');?></div>
+										</div>
+									</div>
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_name').get_required();?></label>
 										<div class="col-sm-8">
@@ -115,42 +140,33 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 											<div class="input_box"><?php  echo form_textarea('product_short_description',set_value('product_short_description'),' class="form-control"  ');?></div>
 										</div>
 									</div>
-
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_long_description');?></label>
 										<div class="col-sm-8">
 											<div class="input_box"><?php  echo form_textarea('product_long_description',set_value('product_long_description'),' class="form-control" title="'.sprintf(get_label('product_errors'),get_label('product_long_description')).'"   ');?></div>
 										</div>
 									</div>
-
-									
-									
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_sku').get_required();?></label>
 										<div class="col-sm-8">
 											<div class="input_box"><?php  echo form_input('product_sku',set_value('product_sku'),' class="form-control required"   title="'.sprintf(get_label('product_errors'),get_label('product_sku')).'"  ');?></div>
 										</div>
 									</div>
-
+									<?php /*
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_barcode');?></label>
+										<div class="col-sm-8">
+											<div class="input_box"><?php  echo form_input('product_barcode',set_value('product_barcode'),' class="form-control"   ');?></div>
+										</div>
+									</div> */ ?>
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_sequence');?></label>
 										<div class="col-sm-8">
 											<div class="input_box">
-												<input type="number" value="" class="form-control "
-													name="product_sequence" id="product_sequence"
-													onkeypress="return isNumber(event)">
-
+												<input type="number" value="" class="form-control " name="product_sequence" id="product_sequence" onkeypress="return isNumber(event)">
 											</div>
 										</div>
 									</div>
-									
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_customer').get_required();?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_dropdown('product_customer_id',$all_users,set_value('product_customer_id'),'class="required"    title="'.sprintf(get_label('product_errors'),get_label('product_customer')).'"  ');?></div>
-										</div>
-									</div>
-									
 									<?php /*
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_tags') .add_tooltip('product_tags');?></label>
@@ -158,100 +174,119 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 											<div class="input_box"><?php  echo get_product_tags(array('pro_tag_status'=>'A'),'','  title="'.sprintf(get_label('product_errors'),get_label('product_tags')).'"   class="form-control multi_select "   data-placeholder="'.get_label('tag_select').'" ','multiple="multiple"');?></div>
 										</div>
 									</div> */ ?>
-
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('status').get_required();?></label>
 										<div class="col-sm-<?php echo get_form_size();?>">
 											<div class="input_box"><?php  echo get_status_dropdown('A','','class="required"    title="'.sprintf(get_label('product_errors'),get_label('status')).'"  ');;?></div>
 										</div>
 									</div>
-
-
-
 								</div>
-								
-								<!-- tab 9  -->
-								<div aria-labelledby="dropdown1-tab" id="stepv9"
-									class="tab-pane fade " role="tabpanel">
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_cost').add_tooltip('product_cost');?> </label>
-											<div class="col-sm-8">
-												<div class="input_box">
-													<input type="number" value="" class="form-control   "
-														name="product_cost" id="product_cost"
-														onkeypress="return isFloat(event)">
-												</div>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price').get_required().add_tooltip('product_price');?></label>
-											<div class="col-sm-8">
-												<div class="input_box">
-													<input type="number" value="" class="form-control required"
-														title="<?php echo sprintf(get_label('product_errors'),get_label('product_price')); ?>"
-														name="product_price" onkeypress="return isFloat(event)"
-														id="product_price">
-												</div>
-											</div>
-										</div>
-										
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price').add_tooltip('product_spl_price');?></label>
-											<div class="col-sm-8">
-												<div class="input_box">
-													<input type="number" value="" class="form-control "
-														name="product_spl_price" onkeypress="return isFloat(event)"
-														id="product_spl_price">
-												</div>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price_from').add_tooltip('product_spl_price_from');?></label>
-											<div class="col-sm-8">
-												<div class="input_box">
-													<input type="text" value=""
-														class="form-control datepickerchange1 "
-														name="product_spl_price_from" id="product_spl_price_from"
-														onkeypress="return isFloat(event)">
-												</div>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price_to').add_tooltip('product_spl_price_to');?></label>
-											<div class="col-sm-8">
-												<div class="input_box">
-													<input type="text" value=""
-														class="form-control datepickerchange2 "
-														name="product_spl_price_to" id="product_spl_price_to"
-														onkeypress="return isFloat(event)">
-												</div>
-											</div>
-										</div> 
-								</div>
-								
-								
 								
 								<!-- tab2  -->
-								<div aria-labelledby="profile-tab" id="stepv2"
-									class="tab-pane fade " role="tabpanel">
-
-															
-                                    <div class="form-group" id="">
+								<div aria-labelledby="profile-tab" id="stepv2" class="tab-pane fade " role="tabpanel">
+									<div class="form-group" id="">
+										<label for="product_settings_type" class="col-sm-2 control-label"><?php echo get_label('product_settings').get_required().add_tooltip('product_settings');?></label>
+										<div class="col-sm-8">
+											<div class="input_box"><?php  echo form_dropdown('product_settings',array('simple'=>'Simple Product','attribute'=>'Attribute Product'),'simple','class="form-control required" onchange="get_attribute_enabled()" id="product_settings_type"' );?></div>
+										</div>
+									</div>
+									
+									<div class="form-group" id="">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_categorie').get_required().add_tooltip('product_categorie');?></label>
 										<div class="col-sm-8">
-											<div class="input_box"><?php  echo get_product_category(array('pro_cate_status'=>'A'),'', '  class="search_select required" id="product_category" ','pro_cate_id');?></div>
+											<div class="input_box"><?php  echo get_product_category_select_edit(array('pro_cate_status'=>'A'),'', '  class="search_select required" id="prod_category" onchange="get_attribute_enabled()" ','pro_cate_id');?></div>
 										</div>
 									</div>
 									<div id="category_div"></div>
-
 									
-									<!------------------------ catring available ------------------------>
-                                </div>
+									<div class="form-group  associate_product_tab" style="display:none">
+										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('category_modifier').add_tooltip('modifier_enabled');?></label>
+										<div class="col-sm-8"><div class="input_box modi_div"><?php  echo get_product_modifier(array('pro_modifier_status' => 'A'),'','class="form-control search_select " onchange="get_attribute_enabled()" id="product_modifier" ',' multiple="multiple" data-placeholder="'.get_label('product_modifier_select').'" ','pro_modifier_id');?></div></div>
+									</div>
+								</div>
+								
+								<!-- tab 3  -->
+								<div aria-labelledby="dropdown1-tab" id="stepv3" class="tab-pane fade " role="tabpanel">
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price').get_required().add_tooltip('product_price');?></label>
+										<div class="col-sm-8">
+											<div class="input_box">
+												<input type="number" value="" class="form-control required" title="<?php echo sprintf(get_label('product_errors'),get_label('product_price')); ?>" name="product_price" onkeypress="return isFloat(event)" id="product_price">
+											</div>
+										</div>
+									</div>
+										
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price').add_tooltip('product_spl_price');?></label>
+										<div class="col-sm-8">
+											<div class="input_box">
+												<input type="number" value="" class="form-control " name="product_spl_price" onkeypress="return isFloat(event)" id="product_spl_price">
+											</div>
+										</div>
+									</div>
 
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price_from').add_tooltip('product_spl_price_from');?></label>
+										<div class="col-sm-8">
+											<div class="input_box">
+												<input type="text" value="" class="form-control datepickerchange1 " name="product_spl_price_from" id="product_spl_price_from" onkeypress="return isFloat(event)">
+											</div>
+										</div>
+									</div>
 
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price_to').add_tooltip('product_spl_price_to');?></label>
+										<div class="col-sm-8">
+											<div class="input_box">
+												<input type="text" value="" class="form-control datepickerchange2 " name="product_spl_price_to" id="product_spl_price_to" onkeypress="return isFloat(event)">
+											</div>
+										</div>
+									</div> 
+								</div>
+                                <!-- tab 7 -->
+								<div aria-labelledby="dropdown1-tab" id="stepv7" class="tab-pane fade " role="tabpanel">
+									<table class="table table-bordered table-striped">
+										<thead>
+											<tr>
+												<th>Shipping Method</th>
+												<th>Shipping Delivery Price</th>
+												<th>Shipping Delivery Is Combined</th>
+												<th class="text-center" style="width: 90px;">
+													<button type="button" class="add-shipping btn btn-success btn-xs"><span class="fa fa-plus"></span></button>
+												</th>
+											</tr>
+										</thead>
+										<tbody class="container-shippingitems" data-count="1">
+											<?php $shipping_methods_list = get_shipping_list(array('ship_method_status'=>'A')); ?>
+											<tr class="shipping-item" >
+												<td>
+													<select class="form-control" name="ProductShipping[prod_ass_ship_method_shipid][]">
+														<option value="">Select Shipping Method</option>
+														<?php foreach($shipping_methods_list as $shippingmethod) {  ?>
+														<option value="<?php echo $shippingmethod['ship_method_id']; ?>"><?php echo $shippingmethod['ship_method_name']; ?></option>
+														<?php } ?>
+													</select>
+												</td>
+												<td>
+													<input class="form-control input" name="ProductShipping[prod_ass_ship_method_price][]" type="text">
+												</td>
+												<td>
+													<input name="ProductShipping[prod_ass_ship_method_uncheck][0]" value="0" class="shipping_free_unassign" type="hidden">
+													<label>
+														<input class="display shipping_free_assign" name="ProductShipping[prod_ass_ship_method_is_combined][0]" value="1" type="checkbox"> 
+														Is Combined
+													</label>
+												</td>
+												<td class="text-center vcenter" style="width: 90px; verti">
+													<button type="button" class="remove-shipping btn btn-danger btn-xs"><span class="fa fa-minus"></span></button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+                                
+								<!-- tab 7 -- >
+							   
 								<!-- tab 4  -->
 								<div aria-labelledby="dropdown1-tab" id="stepv4"
 									class="tab-pane fade " role="tabpanel">
@@ -260,36 +295,29 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_thumbnail');?></label>
 										<div class="col-sm-8">
 											<div class="input_box">
-												<div class="custom_browsefile"> <?php echo form_upload('product_thumbnail');?> <span
-														class="result_browsefile"><span class="brows"></span> + <?php echo get_label('product_thumbnail');?></span>
+												<div class="custom_browsefile"> <?php echo form_upload('product_thumbnail');?> <span class="result_browsefile"><span class="brows"></span> + <?php echo get_label('product_thumbnail');?></span>
 												</div>
 											</div>
 										</div>
 									</div>
-
 									<div class="form-group multi_field">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_gallery');?></label>
 										<div class="col-sm-8 ">
 											<div class="input_box">
-												<div class="custom_browsefile"> <?php echo form_upload('product_gallery[]');?> <span
-														class="result_browsefile"><span class="brows"></span> + <?php echo get_label('product_gallery');?></span>
+												<div class="custom_browsefile"> <?php echo form_upload('product_gallery[]');?> <span class="result_browsefile"><span class="brows"></span> + <?php echo get_label('product_gallery');?></span>
 												</div>
 											</div>
 											<span class="hint"><?php echo "* ". get_label('product_max_image_count');?></span>
 										</div>
-
-
 										<div class="col-sm-2 ">
 											<span class="add_field_button fa fa-plus  more_link"></span>
 										</div>
 									</div>
-
 								</div>
 
-
 								
-								<!-- tab 6  -->
-								<div aria-labelledby="dropdown1-tab" id="stepv6"
+								<!-- tab 5  -->
+								<div aria-labelledby="dropdown1-tab" id="stepv5"
 									class="tab-pane fade " role="tabpanel">
 
 									<div class="form-group">
@@ -314,33 +342,62 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 									</div>
 								</div>
 
-
+                                                           
+                                <!-- tab 6  -->
+								<div aria-labelledby="dropdown1-tab" id="stepv6" class="tab-pane fade associate_product_tab" role="tabpanel">
+									<div class="">
+										<table class="table table-bordered table-striped">
+											<thead>
+												<tr>
+													<th>Product Name</th>
+													<th>Product Sku</th>
+													<th>Product Attributes</th>
+													<th>Product Price</th>
+													<th>Product Special Price</th>
+													<th>Product Qty</th>
+													<th style="width: 90px;" class="text-center">
+														<button class="add-associates btn btn-success btn-xs" type="button"><span class="fa fa-plus"></span></button>
+													</th>
+												</tr>
+											</thead>
+											<tbody class="container-items1 product_associate_section">
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
 
 
-						<div  class="form-group">
+						<div class="form-group">
 							<div
 								class="col-sm-offset-6 col-sm-<?php echo get_form_size();?>  btn_submit_div">
 								<button type="submit" class="btn btn-primary " name="submit"
 									value="Submit"><?php echo get_label('submit');?></button>
-								<a class="btn btn-info" href="<?php echo camp_url().$module;?>"><?php echo get_label('cancel');?></a>
+								<a class="btn btn-info" href="<?php echo admin_url().$module;?>"><?php echo get_label('cancel');?></a>
 							</div>
 						</div>
-
-
-
-
-
 					</div>
 				
-				<input type="hidden" id="form_action"  value="add" >
-				<input type="hidden" id="form_id"  value="" >
+					<input type="hidden" id="form_action"  value="add" >
+					<input type="hidden" id="form_id"  value="" >
 				                		<?php
 					echo form_hidden ( 'action', 'Add' );
 					echo form_close (); 
 					?>
-			</div>
+				</div>
 			</div>
 		</div>
 	</div>
+<script>
+jQuery("#dynamic-form").on("click", ".add-shipping", function(e) {
+    e.preventDefault();
+    
+});
+
+jQuery("#dynamic-form").on("click", ".remove-shipping", function(e) {
+    e.preventDefault();
+    jQuery(".dynamicform_shippingmethod").yiiDynamicForm("deleteItem", dynamicform_74805eeb, e, jQuery(this));
+});
+</script>

@@ -87,6 +87,7 @@ $lang['testimonial_image_folder_name'] = "testimonial/";
 $lang['tag_image_folder_name'] = "tag/";
 
 $lang['product_category_image_folder_name'] = "products/category-image";
+$lang['product_subcategory_image_folder_name'] = "products/subcategory-image";
 $lang['product_gallery_image_folder_name'] = "products/gallery-image";
 $lang['product_main_image_folder_name'] = "products/main-image";
 $lang['country_image_folder_name'] = "country";

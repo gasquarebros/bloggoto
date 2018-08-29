@@ -187,7 +187,7 @@ $(document).ready(function() {
 	   }
 	});
  
-	});
+});
 
 
 /* add combo set */
@@ -236,6 +236,76 @@ function load_combo_html() {
 
 }
 
+
+function get_attribute_enabled()
+{
+	var product_settings = $('#product_settings_type').val();
+	if(product_settings == 'attribute') {
+		var product_category = $('#prod_category').val();
+		var product_modifiers = $('#product_modifier').val();
+		$.ajax({
+			url : admin_url + module + "/get_product_modifiers",
+			data : {
+				secure_key : secure_key,
+				'product_category' : product_category,
+				'product_modifiers' : product_modifiers,
+			},
+			type : 'POST',
+			dataType : "json",
+			success : function(data) {
+				if (data.html != "") {
+					$('.associate_product_tab').show();
+					$(".modi_div").html(data.html);
+					$('.product_associate_section').html(data.associate);
+					$('#product_modifier').chosen({});
+				}
+
+			}
+		});
+	}
+	else {
+		$('.associate_product_tab').hide();
+	}
+}
+
+$(document).off("click", ".add-associates").on("click", ".add-associates", function(e) {
+	e.preventDefault();
+	var newdrop = jQuery(".container-items1  tr:first").html();
+	jQuery(".container-items1").append("<tr class=\"associates-item\">"+newdrop+"</tr>");
+	jQuery(".container-items1 tr:last").find("input").val("");
+	jQuery(".container-items1 tr:last").find("select").val("");
+
+});
+$(document).off("click", ".remove-associates").on("click", ".remove-associates", function(e) {
+	e.preventDefault();
+	if(jQuery(".container-items1 .associates-item").length > 1) {
+		jQuery(this).parent("td").parent("tr").remove();
+	}
+});
+
+$(document).off("click", ".add-shipping").on("click", ".add-shipping", function(e) {
+	e.preventDefault();
+	var newdrop = jQuery(".container-shippingitems tr:first").html();
+	var nextcount = parseInt(jQuery(".container-shippingitems").attr('data-count'));
+	jQuery(".container-shippingitems").append("<tr class=\"shipping-item\">"+newdrop+"</tr>");
+
+	jQuery(".container-shippingitems tr:last").find(".input").val("");
+	jQuery(".container-shippingitems tr:last").find("select").val("");
+	jQuery(".container-shippingitems tr:last").find("select").chosen("destroy");
+	
+	jQuery(".container-shippingitems tr:last").find('.shipping_free_unassign').attr('name','ProductShipping[prod_ass_ship_method_uncheck]['+nextcount+']');
+	jQuery(".container-shippingitems tr:last").find('.shipping_free_assign').attr('name','ProductShipping[prod_ass_ship_method_is_combined]['+nextcount+']');
+	var updatecount = parseInt(nextcount)+1;
+	jQuery(".container-shippingitems").attr('data-count',updatecount);
+	
+
+});
+$(document).off("click", ".remove-shipping").on("click", ".remove-shipping", function(e) {
+	e.preventDefault();
+	if(jQuery(".container-shippingitems .shipping-item").length > 1) {
+		jQuery(this).parent("td").parent("tr").remove();
+	}
+});
 
 
 
