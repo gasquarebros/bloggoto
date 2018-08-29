@@ -47,6 +47,8 @@ function googleTranslateElementInit() {
 		</div>
 	</div>
 </footer>
+<a id="like_modal_div" class="popup-modal" href="#like_modal" ></a>
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119921329-1"></script>
 <script>

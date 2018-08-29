@@ -169,7 +169,7 @@ $(document).ready(function(){
 					{
 						current.addClass('active');
 					}
-					current.find(".likes_display").html(data.html);
+					current.parent().children().find(".likes_display").html(data.html);
 				}
 			}
 		});
