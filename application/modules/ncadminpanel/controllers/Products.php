@@ -384,7 +384,7 @@ class Products extends CI_Controller
 					
 					$insert_id = $this->Mydb->insert ( $this->table, $insert_array );
 				}
-				echo $this->db->last_query();
+				//echo $this->db->last_query();
 				
 				
 				$attributes_subprod = array();
@@ -540,7 +540,7 @@ class Products extends CI_Controller
 				), $update_array );
 				
 
-				echo $this->db->last_query();
+				//echo $this->db->last_query();
 
 				/* insert gallery images */
 				if (! empty ( $_FILES ['product_gallery'] ['name'] )) {
