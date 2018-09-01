@@ -139,6 +139,7 @@ class Products extends CI_Controller
 				'product_price',
 				'product_condition',
 				'product_quantity',  
+				'product_type'
 		);
 
 		$data ['records'] = $this->Mydb->get_all_records ( $select_array, $this->table, $where, $limit, $offset, $order_by, $like,$groupby, $join );
@@ -243,6 +244,7 @@ class Products extends CI_Controller
 					'product_cost' => post_value ( 'product_cost' ),
 					'product_price' => post_value ( 'product_price' ),
 					'product_alt_price' => post_value ( 'product_alt_price' ),
+					'product_quantity' => post_value ( 'product_quantity' ),
 					'product_special_price' => post_value ( 'product_spl_price' ),
 					'product_special_price_from_date' => (post_value ( 'product_spl_price_from' ))?date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_from' ) ) ):'',
 					'product_special_price_to_date' => (post_value ( 'product_spl_price_to' ))?date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_to' ) ) ):'',
@@ -329,6 +331,7 @@ class Products extends CI_Controller
 						'product_alias' => '',
 						'product_sku' => $modelsProductAssociates[0]['product_sku'][$subprod_key],
 						'product_parent_id' => $parent_product,
+						'product_quantity' => $modelsProductAssociates[0]['product_quantity'][$subprod_key],
 						'product_slug' => $product_slug,
 						'product_customer_id' => post_value ( 'product_customer_id' ),
 						'product_category_id' => $categories[0],
@@ -480,7 +483,7 @@ class Products extends CI_Controller
 				));
 				$product_sequence = (( int ) $this->input->post ( 'product_sequence' ) == 0) ? get_sequence ( 'product_sequence', $this->table) : $this->input->post ( 'product_sequence' );
 				
-				$categories = explode('~',post_value ( 'product_category' ));
+				$categories = explode('~',post_value ( 'subcategory' ));
 				
 				$update_array = array (
 				
@@ -501,6 +504,7 @@ class Products extends CI_Controller
 					'product_special_price' => post_value ( 'product_spl_price' ),
 					'product_special_price_from_date' => (post_value ( 'product_spl_price_from' ))?date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_from' ) ) ):'',
 					'product_special_price_to_date' => (post_value ( 'product_spl_price_to' ))?date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_to' ) ) ):'',
+					'product_quantity' => post_value ( 'product_quantity' ),
 					'product_meta_title' => post_value ( 'product_meta_title' ),
 					'product_meta_keywords' => post_value ( 'product_meta_keywords' ),
 					'product_meta_description' => post_value ( 'product_meta_description' ),

@@ -29,8 +29,9 @@
 			
 			<th><?=get_label('product_alias');?></th>
 			
-				<th><?=get_label('product_price').add_sort_by('product_price',$module);?></th>
-				<th><?=get_label('product_sku').add_sort_by('product_sku',$module);?></th>
+			<th><?=get_label('product_price').add_sort_by('product_price',$module);?></th>
+			<th><?=get_label('product_sku').add_sort_by('product_sku',$module);?></th>
+			<th><?=get_label('product_type').add_sort_by('product_type',$module);?></th>
 				
 			<th><?=get_label('product_sequence').add_sort_by('product_sequence',$module);;?></th>
 		   <th><?= get_label('status');?></th>
@@ -54,11 +55,10 @@
 					
 			<td><?php echo stripslashes($val['product_name']);?></td>
 			<td><?php echo stripslashes($val['product_alias']);?></td>
-				<td><?php echo show_price($val['product_price']);?></td>
-				<td><?php echo output_value($val['product_sku']);?></td>
-					 
-			<td><input type="number" name="sequence[<?php echo $val['product_primary_id']; ?>]" value="<?php echo $val['product_sequence']; ?>" class="seq_form_control" onkeypress="return isNumber(event)"  ></td>
-	
+			<td><?php echo show_price($val['product_price']);?></td>
+			<td><?php echo output_value($val['product_sku']);?></td>	 
+			<td><?php echo output_value($val['product_type']); ?></td>
+			<td><?php echo $val['product_sequence']; ?></td>
 			<td><a href="javascript:;"><?php echo show_status($val['product_status'],$val['product_primary_id']);?></a> </td>
 
 			
@@ -83,20 +83,15 @@
 	</tbody>
 	<thead class="last">
 		<tr>
-			<th><div
-					class="checkbox3 checkbox-inline checkbox-check checkbox-light"> <?= form_checkbox('multicheck','Y',FALSE,' class="multicheck_bottom"  type="checkbox"  id="mul_check_bottom"');?>  <label
-						for="mul_check_bottom" class="chk_box_label"></label>
-				</div></th>
-				
-				<th><?=get_label('product_name').add_sort_by('product_name',$module);?></th>
-				<th><?=get_label('product_alias');?></th>
-				<th><?=get_label('product_price').add_sort_by('product_price',$module);?></th>
-						<th><?=get_label('product_sku').add_sort_by('product_sku',$module);?></th>
-						
+			<th><div class="checkbox3 checkbox-inline checkbox-check checkbox-light"> <?= form_checkbox('multicheck','Y',FALSE,' class="multicheck_bottom"  type="checkbox"  id="mul_check_bottom"');?>  <label for="mul_check_bottom" class="chk_box_label"></label></div></th>
+			<th><?=get_label('product_name').add_sort_by('product_name',$module);?></th>
+			<th><?=get_label('product_alias');?></th>
+			<th><?=get_label('product_price').add_sort_by('product_price',$module);?></th>
+			<th><?=get_label('product_sku').add_sort_by('product_sku',$module);?></th>
+			<th><?=get_label('product_type').add_sort_by('product_type',$module);?></th>
 			<th><?=get_label('product_sequence').add_sort_by('product_sequence',$module);;?></th>
-					<th><?= get_label('status');?></th>
+			<th><?= get_label('status');?></th>
 			<th><?=get_label('actions');?></th>
-
 		</tr>
 	</thead>
 

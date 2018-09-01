@@ -288,10 +288,12 @@ $(document).off("click", ".add-shipping").on("click", ".add-shipping", function(
 	var newdrop = jQuery(".container-shippingitems tr:first").html();
 	var nextcount = parseInt(jQuery(".container-shippingitems").attr('data-count'));
 	jQuery(".container-shippingitems").append("<tr class=\"shipping-item\">"+newdrop+"</tr>");
-
 	jQuery(".container-shippingitems tr:last").find(".input").val("");
 	jQuery(".container-shippingitems tr:last").find("select").val("");
-	jQuery(".container-shippingitems tr:last").find("select").chosen("destroy");
+	setTimeout(function() { 
+		jQuery(".container-shippingitems tr:last").find("select").next('.chosen-container').remove();jQuery(".container-shippingitems tr:last").find("select").chosen();
+	}, 500);
+	
 	
 	jQuery(".container-shippingitems tr:last").find('.shipping_free_unassign').attr('name','ProductShipping[prod_ass_ship_method_uncheck]['+nextcount+']');
 	jQuery(".container-shippingitems tr:last").find('.shipping_free_assign').attr('name','ProductShipping[prod_ass_ship_method_is_combined]['+nextcount+']');

@@ -143,13 +143,19 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_long_description');?></label>
 										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_textarea('product_long_description',set_value('product_long_description'),' class="form-control" title="'.sprintf(get_label('product_errors'),get_label('product_long_description')).'"   ');?></div>
+											<div class="input_box"><?php  echo form_textarea('product_long_description',set_value('product_long_description'),' class="form-control" title="'.sprintf(get_label('product_long_description'),get_label('product_long_description')).'"   ');?></div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_sku').get_required();?></label>
 										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_input('product_sku',set_value('product_sku'),' class="form-control required"   title="'.sprintf(get_label('product_errors'),get_label('product_sku')).'"  ');?></div>
+											<div class="input_box"><?php  echo form_input('product_sku',set_value('product_sku'),' class="form-control required"   title="'.sprintf(get_label('product_sku'),get_label('product_sku')).'"  ');?></div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_quantity').get_required();?></label>
+										<div class="col-sm-8">
+											<div class="input_box"><?php  echo form_input('product_quantity',set_value('product_quantity'),' class="form-control required"   title="'.sprintf(get_label('product_quantity'),get_label('product_quantity')).'"  ');?></div>
 										</div>
 									</div>
 									<?php /*
