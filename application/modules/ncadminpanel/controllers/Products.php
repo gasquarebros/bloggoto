@@ -319,7 +319,7 @@ class Products extends CI_Controller
 				if($modelsProductAssociates[0]['product_ids'][$subprod_key] !='')
 				{
 					$product_slug = make_slug ( $model_product_sublevels, $this->table, 'product_slug', array (
-						$this->primary_key . "!=" => $record [$this->primary_key] 
+						$this->primary_key . "!=" => $modelsProductAssociates[0]['product_ids'][$subprod_key]
 					));
 					$record = $this->Mydb->get_record ( '*', $this->table, array (
 						$this->primary_key => $modelsProductAssociates[0]['product_ids'][$subprod_key]
@@ -331,7 +331,7 @@ class Products extends CI_Controller
 						'product_alias' => '',
 						'product_sku' => $modelsProductAssociates[0]['product_sku'][$subprod_key],
 						'product_parent_id' => $parent_product,
-						'product_quantity' => $modelsProductAssociates[0]['product_quantity'][$subprod_key],
+						'product_quantity' => $modelsProductAssociates[0]['product_qty'][$subprod_key],
 						'product_slug' => $product_slug,
 						'product_customer_id' => post_value ( 'product_customer_id' ),
 						'product_category_id' => $categories[0],
@@ -348,9 +348,9 @@ class Products extends CI_Controller
 					
 					
 					$this->Mydb->update ( $this->table, array (
-						$this->primary_key => $record [$this->primary_key] 
+						$this->primary_key => $modelsProductAssociates[0]['product_ids'][$subprod_key] 
 					), $update_array );
-					$insert_id = $record [$this->primary_key];
+					$insert_id = $modelsProductAssociates[0]['product_ids'][$subprod_key];
 				}
 				else
 				{
@@ -361,6 +361,7 @@ class Products extends CI_Controller
 						'product_alias' => '',
 						'product_sku' => $modelsProductAssociates[0]['product_sku'][$subprod_key],
 						'product_parent_id' => $parent_product,
+						'product_quantity' => $modelsProductAssociates[0]['product_qty'][$subprod_key],
 						'product_slug' => $product_slug,
 						'product_customer_id' => post_value ( 'product_customer_id' ),
 						'product_category_id' => $categories[0],
@@ -383,6 +384,8 @@ class Products extends CI_Controller
 					
 					$insert_id = $this->Mydb->insert ( $this->table, $insert_array );
 				}
+				echo $this->db->last_query();
+				
 				
 				$attributes_subprod = array();
 				foreach($associate_keys as $ass_att_key=>$assocaite_attribute)
@@ -484,7 +487,8 @@ class Products extends CI_Controller
 				$product_sequence = (( int ) $this->input->post ( 'product_sequence' ) == 0) ? get_sequence ( 'product_sequence', $this->table) : $this->input->post ( 'product_sequence' );
 				
 				$categories = explode('~',post_value ( 'subcategory' ));
-				
+				//print_r($categories);
+				//exit;
 				$update_array = array (
 				
 					'product_type' => post_value ( 'product_settings' ),
@@ -536,7 +540,7 @@ class Products extends CI_Controller
 				), $update_array );
 				
 
-				
+				echo $this->db->last_query();
 
 				/* insert gallery images */
 				if (! empty ( $_FILES ['product_gallery'] ['name'] )) {

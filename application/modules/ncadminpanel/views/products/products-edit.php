@@ -157,7 +157,7 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_quantity').get_required();?></label>
 										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_input('product_quantity',set_value('product_quantity'),' class="form-control required"   title="'.sprintf(get_label('product_quantity'),get_label('product_quantity')).'"  ');?></div>
+											<div class="input_box"><?php  echo form_input('product_quantity',$records['product_quantity'],' class="form-control required"   title="'.sprintf(get_label('product_quantity'),get_label('product_quantity')).'"  ');?></div>
 										</div>
 									</div>
 									<?php /*

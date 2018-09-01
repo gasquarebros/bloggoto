@@ -247,6 +247,7 @@ $lang['product_settings'] = "Product Type";
 $lang['product_name'] = "Name"; 
 $lang['product_alias'] = "Alias";
 $lang['product_sku'] = "SKU";
+$lang['product_quantity'] = "Quantity";
 $lang['product_barcode'] = "Bar Code";
 $lang['product_short_description'] = "Short Description";
 $lang['product_long_description'] = "Description ";
