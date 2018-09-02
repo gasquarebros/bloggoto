@@ -72,7 +72,7 @@ $(document).on('click', '.toggle_feed',function(){
 });
 /* Custom Browse */    
     $(window).load(function(e) {
-		var fileinput=$('input[type=file]');
+		var fileinput=$('input[type=file]:not(.notneeded)');
 		fileinput.each(function() {
 		$(this).wrap('<div class="custom_file"></div>');
 		$(this).parent('.custom_file').append('<span class="result"><span class="brows"></span></span>');

@@ -97,7 +97,7 @@ position: relative; overflow: visible !important; }
     .feed_name { width: 60%; }
 	.feed_header, .feed_image { margin-bottom:5px; }
     .comment_img > img, .comment_img { width: 45px; height: 45px; }
-    .comment_box_wrap { width: 80%; }
+    .comment_box_wrap { width: calc(100% - 50px); }
 	.follow_request ul { margin:0px; }
     .follow_request ul li { width: 30%; margin: 12px 2%; }
 	/*.list_row { width: 48%; }*/
@@ -105,7 +105,7 @@ position: relative; overflow: visible !important; }
 	.feed_body_text { margin:0; padding:0;}
 	.feed_body_text p { margin-bottom:5px; }
 	.comments_list { margin-top:0px; }
-	.feed_comment { padding:7px; }
+	.feed_comment { padding:7px 0px 7px 7px; }
 	.inbx_left{
         width: 100%;
         margin-right: 0;

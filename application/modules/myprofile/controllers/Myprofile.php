@@ -1363,6 +1363,7 @@ class Myprofile extends CI_Controller {
 		}
 
 	}
+	
 	/* this method used to common module labels */
 	private function load_module_info() {
 		$data = array ();

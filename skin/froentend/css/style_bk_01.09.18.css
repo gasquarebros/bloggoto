@@ -1929,7 +1929,7 @@ input[type="file"] {
 .write_img,
 .comment_img,
 .comments_records img {
-    width: 50px;
+    width: 6%;
     float: left;
 }
 
@@ -1950,7 +1950,7 @@ input[type="file"] {
 }
 
 .write_text, .comment_box_wrap {
-    width: calc(100% - 50px);
+    width: 88%;
     float: left;
 }
 .comment_content .comment_box_wrap { width: 100%; float:left; }
@@ -2246,14 +2246,14 @@ li.shear-btn:hover .social-share {
     line-height: 36px;
     margin: 0;
     background: #ffffff;
-	width:calc(100% - 50px);
+	width:88%;
 }
 .feed_comment .comment_submit { 
-	height: 46px;width: 45px;text-align: center;padding: 0px;margin: 0px 0px 0px 3px; border-radius: 50%;
+	height: 46px;width: 10%;text-align: center;padding: 0px;margin: 0px;
 }
 
 div .comment {
-	width: calc(100% - 50px);
+	width: 88%;
 	height: 48px;
 	border: 1px solid #f0f0f0;
 	font-family: Arial, Helvetica, sans-serif;
@@ -2902,7 +2902,7 @@ a.favor.active {
     color: #fff;
 }*/
 /*  custom alert box start here */
-.post_detail_wrap .write_img, .comment_img, .comments_records img { width: 50px; }
+.post_detail_wrap .write_img, .comment_img, .comments_records img { width: 8%; }
 .post_detail_wrap div .comment  {   line-height: 48px;    padding-left: 5px; }
 i.fa.fa-location-arrow {
     transform: rotate(43deg);
@@ -2979,3 +2979,26 @@ div .comment:empty::after {
     border-radius: 10px;
     border: 2px solid #06678e;
 }*/
+.custom_file{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;    
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+}
+.inputfile + label {
+    cursor: pointer; /* "hand" cursor */
+}
