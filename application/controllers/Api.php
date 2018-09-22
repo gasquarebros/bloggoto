@@ -12,6 +12,9 @@ class Api extends REST_Controller {
 		parent::__construct ();
 		$this->load->library ( 'form_validation' );
 		$this->form_validation->set_error_delimiters ( '<p>', '</p>' );
+		$this->table = "customers";
+		$this->customer_login_history = "customer_login_history";
+		$this->primary_key='customer_id';
 	}
 
 	function insert_post() {
@@ -51,6 +54,66 @@ class Api extends REST_Controller {
 					'message' => get_label ( 'rest_form_error' ),
 					'form_error' => validation_errors () 
 			), something_wrong () ); /* error message */
+		}
+	}
+	
+	function login_post() {
+		$alert = '';
+		$this->form_validation->set_rules ( 'username', 'Username', 'required|trim' );
+		$this->form_validation->set_rules ( 'password', 'Password', 'required|min_length[' . PASSWORD_LENGTH . ']|trim' );
+		if ($this->form_validation->run ( $this ) == TRUE) {
+			
+			$this->mysqli = new mysqli ( $this->db->hostname, $this->db->username, $this->db->password, $this->db->database );
+			$password = $this->mysqli->real_escape_string ( trim ( $this->input->post ( 'password' ) ) );
+			$username = $this->mysqli->real_escape_string ( trim ( $this->input->post ( 'username' ) ) );
+
+			$check_details = $this->Mydb->get_record ('customer_id,customer_first_name,customer_username,customer_last_name,customer_email,customer_password,customer_status,customer_type,customer_photo,company_name', $this->table, array ('(customer_email = "'.$username.'" OR customer_username ="'.$username.'")'=>NULL,'customer_status !='=>'D') );
+			if ($check_details)
+			{
+				if ($check_details['customer_status'] == 'A'){
+						
+					$password_verify = check_hash($password,$check_details['customer_password']);
+						
+					if($password_verify == "Yes")
+					{
+						$session_datas = array();
+						$redirect= "";
+						$session_datas = array('bg_user_id' => $check_details['customer_id'],'bg_first_name' => $check_details['customer_first_name'],'bg_last_name' => $check_details['customer_last_name'],'bg_user_group' => ($check_details['customer_type'] == 0)?'writer':'brand','bg_user_type'=>$check_details['customer_type'],'company_name'=>$check_details['company_name'],'customer_username'=>$check_details['customer_username']);
+
+						if($check_details['customer_photo'] !='' && file_exists(FCPATH."media/".$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'])) {
+							$session_datas['bg_user_profile_picture'] = media_url().$this->lang->line('customer_image_folder_name')."/".$check_details['customer_photo'];
+						}
+						else
+						{
+							$session_datas['bg_user_profile_picture'] = '';
+						}
+						
+						$this->Mydb->insert($this->customer_login_history,array('login_time'=>current_date(),'login_ip'=>get_ip(),'login_customer_id'=>$check_details['customer_id']));
+						$this->response ( array('status'=>'success','user_data'=>$session_datas), success_response () );
+					}	else{
+						$alert = 'acount_login_missmatch';
+					}
+				}
+				else{
+					$alert = 'account_disabled';
+				}
+			}
+			else
+			{
+				$alert = 'acount_not_found';
+					
+			}
+			
+			$response ['status'] = 'error';
+			$response ['message'] = get_label ( $alert );
+
+			$this->response ( $response, something_wrong () ); /* error message */
+			
+		} else {
+
+			$response ['status'] = 'error';
+			$response ['message'] = validation_errors ();
+			$this->response ( $response, something_wrong () ); /* error message */
 		}
 	}
 } /* end of files */
