@@ -1,11 +1,9 @@
-<link href="<?php echo load_lib()?>bootstrap-datepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+<!--<link href="<?php echo load_lib()?>bootstrap-datepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">-->
 <link rel="stylesheet" href="<?php echo load_lib()?>timepicker-master/jquery-ui-1.10.0.custom.min.css" type="text/css" />
-<link rel="stylesheet" href="<?php echo load_lib()?>timepicker-master/jquery.ui.timepicker.css" type="text/css" />
 <script type="text/javascript" src="<?php echo load_lib()?>timepicker-master/jquery.ui.core.min.js"></script>
-<script type="text/javascript" src="<?php echo load_lib()?>timepicker-master/jquery.ui.timepicker.js"></script>
 <script type="text/javascript" src="<?php echo admin_skin()?>js/timepicker_outlet.js"></script>	
-<script type="text/javascript"
-	src="<?php echo load_lib()?>bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<!--<script type="text/javascript"
+	src="<?php echo load_lib()?>bootstrap-datepicker/js/bootstrap-datepicker.js"></script>-->
 <script type="text/javascript"
 	src="<?php echo admin_skin()?>js/products.js"></script>
 <script>
@@ -104,7 +102,7 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 							<div class="tab-content">
 								<!-- tab1  -->
 								<div aria-labelledby="home-tab" id="stepv1" class="tab-pane fade active in " role="tabpanel">
-									
+									<?php /*
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_parent');?></label>
 										<div class="col-sm-8">
@@ -112,14 +110,8 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 												<?php echo get_product_list(array('product_status'=>'A','product_parent_id' =>''),'','class="form-control search_select check_option" id="products_list"  data-placeholder="'.get_label('select_products').'" ','','','1','parent_product');?>
 											</div>
 										</div>
-									</div>
-									<div class="form-group">
-										<label for="product_customer_id" class="col-sm-2 control-label"><?php echo get_label('product_customer');?></label>
-										<div class="col-sm-8">
-											<div class="input_box">
-										 <?php echo get_product_customer(array('customer_status'=>'A'),$records['product_customer_id'],'class="form-control search_select" id="product_customer_id"  data-placeholder="'.get_label('product_customer_id').'" ','','','1','');?></div>
-										</div>
-									</div>
+									</div>*/ ?>
+
 									
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_name').get_required();?></label>
@@ -185,7 +177,7 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('status').get_required();?></label>
-										<div class="col-sm-<?php echo get_form_size();?>">
+										<div class="col-sm-8">
 											<div class="input_box"><?php  echo get_status_dropdown($records['product_status'],'','class="required"  title="'.sprintf(get_label('product_errors'),get_label('status')).'"   ');;?></div>
 										</div>
 									</div>
@@ -244,7 +236,7 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 										<div class="form-group">
 											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price_from').add_tooltip('product_spl_price_from');?></label>
 											<div class="col-sm-8"><div class="input_box">
-												<input type="text"  value="<?php echo ($records['product_special_price_from_date'] !='' && $records['product_special_price_from_date'] !="NULL" && $records['product_special_price_from_date'] != '0000-00-00 00:00:00' && $records['product_special_price_from_date'] != '1970-01-01')?stripslashes(date('d-m-Y',strtotime($records['product_special_price_from_date']))):"";?>" class="form-control datepickerchange1 valid" name="product_spl_price_from" id="product_spl_price_from" onkeypress="return isFloat(event)" >
+												<input type="text"  value="<?php echo ($records['product_special_price_from_date'] !='' && $records['product_special_price_from_date'] !="NULL" && $records['product_special_price_from_date'] != '0000-00-00 00:00:00' && $records['product_special_price_from_date'] != '1970-01-01')?stripslashes(date('d-m-Y',strtotime($records['product_special_price_from_date']))):"";?>" class="form-control datepickerchange1 valid datepicker" name="product_spl_price_from" id="product_spl_price_from" onkeypress="return isFloat(event)" >
 											</div></div>
 											<!--output_date( $records['product_special_price_from_date']) -->
 											<!--div class="col-sm-8"><div class="input_box"><?php  echo form_input('product_spl_price_from',($records['product_special_price_from_date'] !='' && $records['product_special_price_from_date'] !="NULL" && $records['product_special_price_from_date'] != '0000-00-00 00:00:00' )?stripslashes(date('d-m-Y',strtotime($records['product_special_price_from_date']))):"",' class="form-control datepickerchange1 required"  ','onkeypress="return isFloat(event)"');?></div></div-->					
@@ -253,7 +245,7 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 										<div class="form-group">
 											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price_to').add_tooltip('product_spl_price_to');?></label>
 											<div class="col-sm-8"><div class="input_box">
-											<input type="text"  value="<?php echo ($records['product_special_price_to_date'] !='' && $records['product_special_price_to_date'] !="NULL" && $records['product_special_price_to_date'] != '0000-00-00 00:00:00' && $records['product_special_price_to_date'] != '1970-01-01' )?stripslashes(date('d-m-Y',strtotime($records['product_special_price_to_date']))):"" ;?>" class="form-control datepickerchange2 valid" name="product_spl_price_to" id="product_spl_price_to" onkeypress="return isFloat(event)" >
+											<input type="text"  value="<?php echo ($records['product_special_price_to_date'] !='' && $records['product_special_price_to_date'] !="NULL" && $records['product_special_price_to_date'] != '0000-00-00 00:00:00' && $records['product_special_price_to_date'] != '1970-01-01' )?stripslashes(date('d-m-Y',strtotime($records['product_special_price_to_date']))):"" ;?>" class="form-control datepickerchange2 valid datepicker" name="product_spl_price_to" id="product_spl_price_to" onkeypress="return isFloat(event)" >
 											</div></div>
 											<!--div class="col-sm-8"><div class="input_box"><?php  echo form_input('product_spl_price_to',($records['product_special_price_to_date'] !='' && $records['product_special_price_to_date'] !="NULL" && $records['product_special_price_to_date'] != '0000-00-00 00:00:00' )?stripslashes(date('d-m-Y',strtotime($records['product_special_price_to_date']))):"",' class="form-control datepickerchange2 required"  ','onkeypress="return isFloat(event)"');?></div></div-->					
 										</div>
@@ -327,7 +319,7 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 												title="<?php echo get_label('remove_image_title');?>"> <img
 												class="img-responsive common_delete_image"
 												style="width: 250px; height: 250px;"
-												src="<?php echo media_url().get_company_folder()."/". $this->lang->line('product_main_image_folder_name')."/".$records['product_thumbnail'];?>">
+												src="<?php echo media_url(). $this->lang->line('product_main_image_folder_name')."/".$records['product_thumbnail'];?>">
 											</a>
 										</div>
 									</div>
@@ -528,3 +520,149 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 		</div>
 	</div>
 
+
+<script>
+jQuery("#dynamic-form").on("click", ".add-shipping", function(e) {
+    e.preventDefault();
+    
+});
+
+jQuery("#dynamic-form").on("click", ".remove-shipping", function(e) {
+    e.preventDefault();
+    jQuery(".dynamicform_shippingmethod").yiiDynamicForm("deleteItem", dynamicform_74805eeb, e, jQuery(this));
+});
+</script>
+<script type="text/javascript">
+	jQuery( ".tabs-left" ).tabs();
+	
+	
+	if(jQuery('.datepickerchange1').length && jQuery('.datepickerchange2').length) {
+		
+		jQuery('.datepickerchange1').datepicker({'format': 'dd-mm-yyyy','startDate':'today'})
+		.on('changeDate', function(ev){
+			var endDate = new Date(jQuery('.datepickerchange2').val());
+			if (ev.date.valueOf() > endDate.valueOf()){
+				jQuery('#alert').show().find('strong').text('The start date should be lesser than the end date');
+			} else {
+				jQuery('#alert').hide();
+
+			}
+			jQuery('.datepickerchange2').datepicker('hide');
+		});
+		jQuery('.datepickerchange2').datepicker({'format': 'dd-mm-yyyy','startDate':'today'})
+		.on('changeDate', function(ev){
+			var startDate = new Date(jQuery('.datepickerchange1').val());
+			if (ev.date.valueOf() < startDate.valueOf()){
+				jQuery('#alert').show().find('strong').text('The end date should be greater than the start date');
+			} else {
+				jQuery('#alert').hide();
+			}
+			jQuery('.datepickerchange2').datepicker('hide');
+		});
+		jQuery('.datepickerchange1').datepicker({'format': 'dd-mm-yyyy','startDate':'today'});
+		jQuery('.datepickerchange2').datepicker({'format': 'dd-mm-yyyy','startDate':'today'})
+	}
+
+
+//jQuery('.datepicker').datepicker({changeMonth: true,changeYear: true,dateFormat: 'dd-mm-yy'});
+
+</script>	
+<style>
+#common_form .chosen-container {
+    min-width: 200px !important;
+}
+.form_field {height:40px;}
+.remove_gallery { width: 35px;
+float: left; 
+}
+.input_box {
+    position: relative;
+}
+.custom_browsefile input[type=file]{ height: 34px; width: 100%; opacity: 0; filter: alpha(opacity=0);cursor: pointer; }
+.result_browsefile{ border: 1px solid #dcd9d9;position: absolute; height: 34px; color: #aaa7a7; line-height: 34px; left:0; top:0; width: 100%; pointer-events: none; text-align: center; font-size: 15px; overflow: hidden;}
+.result_browsefile:before{content: ""; height: 100%; width: 0; display: inline-block; vertical-align: middle;}
+.brows{display: inline-block;}
+
+.more_link{ display: inline-block; width: 30px; height: 30px; background: #E74C3C; text-align: center; line-height: 30px; color: #fff; border-radius: 100%; -webkit-border-radius: 100%; margin: 2px 0; font-size: 18px; cursor: pointer;}
+.gallery_images_flow{ overflow-y: auto; max-height: 275px; display: inline-block;}
+.show_image_box .thumbnail, .image_outer .thumbnail{ display: inline-block; position: relative; margin: 3px;}
+.show_image_box .thumbnail:before, .image_outer .thumbnail:before{ content: ""; position: absolute; right:0; top:0; left:0; bottom: 0; background: rgba(255, 255, 255, 0.6) url(../images/cross-out.png) no-repeat center;  opacity: 0; filter: alpha(opacity=0); transition: all 400ms; -webkit-transition: all 400ms; pointer-events: none;}
+.show_image_box .thumbnail:hover, .image_outer .thumbnail:hover{ box-shadow: 0 0 3px 0 #b8b8b8; -webkit-box-shadow: 0 0 3px 0 #b8b8b8; border-color: #dcd9d9;  transition: all 400ms; -webkit-transition: all 400ms;}
+.show_image_box .thumbnail:hover:before, .image_outer .thumbnail:hover:before{ opacity: 1; filter: alpha(opacity=100);}
+
+a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover{ border-color: #252525;}
+
+
+.tabs-left {
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+    border: 0px;
+}
+
+.ui-tabs .ui-tabs-nav {
+	background: none;
+	border: 0px;
+	padding:0px;
+	width: 200px;
+	float: left;
+	margin-right: 10px;
+}
+.ui-tabs .ui-tabs-nav li, .ui-tabs .ui-tabs-nav li a {
+	width:100%;
+}
+.ui-tabs .ui-tabs-nav li a > div {
+	width:25px;
+	float: left;
+}
+.ui-tabs .ui-tabs-nav li a .step-title {
+    width: calc(100% - 25px) !important;
+    font-size: 14px;
+}
+.tab-content {
+    width: calc(100% - 210px);
+    float: left;
+}
+#common_form .chosen-container {
+	width: 100% !important;
+	margin-top:0px !important;
+}
+.col-sm-2 {
+	width:15%;
+	float:left;
+}
+.col-sm-8 {
+	width:80%;
+	float:left;
+}
+.form-group {
+    margin: 15px 5px;
+}
+.card-header {
+	width: 100%;
+	float: left;
+	clear: both;
+	margin-top: 21px;
+	padding-right: 30px;
+}
+.card-title{
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	width: calc(100% - 100px);
+	float: left;
+}
+#common_form {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin: 5px;
+}
+.btn_submit_div {
+	width: 100%;
+	text-align: center;
+}
+table { width:100%; text-align:center; }
+.custom_file { display:none; }
+.brows { border:0px; }
+</style>

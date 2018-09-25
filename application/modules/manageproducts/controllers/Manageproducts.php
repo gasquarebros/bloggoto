@@ -322,16 +322,22 @@ class Manageproducts extends CI_Controller
 					$record = $this->Mydb->get_record ( '*', $this->table, array (
 						$this->primary_key => $modelsProductAssociates[0]['product_ids'][$subprod_key]
 					) );
+					if($record['product_id'] !='') {
+						$subproduct_id = $record['product_id'];
+					} else {
+						$subproduct_id = get_guid ( $this->table, 'product_id' );
+					}
 					
 					$update_array = array (
 						'product_type' => 'simple',
+						'product_id' => $subproduct_id,
 						'product_name' => $model_product_sublevels,
 						'product_alias' => '',
 						'product_sku' => $modelsProductAssociates[0]['product_sku'][$subprod_key],
 						'product_parent_id' => $parent_product,
 						'product_quantity' => $modelsProductAssociates[0]['product_qty'][$subprod_key],
 						'product_slug' => $product_slug,
-						'product_customer_id' => post_value ( 'product_customer_id' ),
+						'product_customer_id' => get_user_id(),
 						'product_category_id' => $categories[0],
 						'product_subcategory_id' => $categories[1],
 						'product_short_description' => post_value ( 'product_short_description' ),
@@ -340,7 +346,7 @@ class Manageproducts extends CI_Controller
 						'product_price' => $modelsProductAssociates[0]['product_price'][$subprod_key],
 						'product_special_price' => $modelsProductAssociates[0]['product_special_price'][$subprod_key],
 						'product_updated_on' => current_date (),
-						'product_updated_by' => get_admin_id (),
+						'product_updated_by' => get_user_id (),
 						'product_updated_ip' => get_ip () 
 					);
 					
@@ -463,7 +469,7 @@ class Manageproducts extends CI_Controller
 			$this->form_validation->set_rules ( 'product_sku', 'lang:product_sku', 'required|callback_validate_sku' );
 			$this->form_validation->set_rules ( 'product_price', 'lang:product_price', 'required' );
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
-			$this->form_validation->set_rules ( 'product_customer_id', 'lang:product_customer_id', 'required' );
+			//$this->form_validation->set_rules ( 'product_customer_id', 'lang:product_customer_id', 'required' );
 		
 			/*$this->form_validation->set_rules ( 'product_category', 'lang:product_categorie', 'required|callback_validate_category' );
 			
@@ -592,7 +598,8 @@ class Manageproducts extends CI_Controller
 			);
 			$where = array("assigned_mod_product_id"=>$record[$this->primary_key]);
 			
-			$assigned_modifiers = $this->Mydb->get_all_records ( 'assigned_mod_modifier_id,assigned_mod_product_id', 'product_assigned_modifiers', $where );
+			$assigned_modifiers = $this->Mydb->get_all_records ( 'assigned_mod_modifier_id,assigned_mod_product_id', 'product_assigned_modifiers', $where, '', '' ,'' ,'',array('assigned_mod_product_id','assigned_mod_modifier_id') );
+			
 			$selected_modifiers = array();
 			if(!empty($assigned_modifiers)) {
 				foreach($assigned_modifiers as $selmodifier) {
@@ -616,8 +623,8 @@ class Manageproducts extends CI_Controller
 		}
 		/* Common labels */
 		
-		$get_all_users_list = get_all_users_list();
-		$data['all_users'] = $get_all_users_list;
+		//$get_all_users_list = get_all_users_list();
+		//$data['all_users'] = $get_all_users_list;
 		$data ['breadcrumb'] = $data ['form_heading'] = get_label ( 'edit' ) . ' ' . $this->module_label;
 		//$data['condiment_products'] = $this->get_condiment_products();
 		$data ['module_action'] = 'edit/' . encode_value ( $record [$this->primary_key] );
