@@ -1,4 +1,5 @@
-<script type="text/javascript" src="<?php echo admin_skin()?>js/products.js"></script>
+
+<!--<script type="text/javascript" src="<?php echo admin_skin()?>js/products.js"></script>-->
 <div class="container flat-blue">
 	<div class="profile_wrap">
 	   
@@ -77,141 +78,13 @@
 	</div>
 </div>
 <script type="text/javascript" src="<?php echo skin_url(); ?>js/products_manage.js"></script>
-
+<link rel='stylesheet' href='<?php echo skin_url().'css/manageproduct.css'; ?>' type='text/css' media='all' /> 
 <script>
 /*  load initial content.. */
 $(window).load(function(){
 	  get_content({paging:"true"});
 });
-</script>
-<style>
-.card .card-body {
-    padding: 25px 0px;
-}
-.form-inline .form-group {
-    display: inline-block;
-    margin-bottom: 0;
-    vertical-align: middle;
-}
-.form-inline .form-control {
-    display: inline-block;
-    width: auto;
-    vertical-align: middle;
-}
-input.form-control {
-    color: #000;
-    font-family: Myriad Pro;
-}
-.form-control {
-    height: 48px;
-    border: 1px solid #dcd9d9;
-    background: #fff;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    font-size: 15px;
-    color: #aaa7a7;
-}
-.form-control {
-    display: block;
-    width: 100%;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
-input[type="text"], input[type="email"], input[type="password"], textarea, select {
-	margin:0px;
-	height:30px;
-}
-.flat-blue a.an_btn {
-    color: #e43232;
-}
 
-.an_btn {
-    text-align: center;
-    font-size: 13px;
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    color: #e43232;
-    display: inline-block;
-    text-transform: uppercase;
-    margin-left: 10px;
-}
-
-.an_btn span {
-    line-height: 44px;
-    font-size: 24px;
-    border: 3px solid #e43232;
-    height: 50px;
-    width: 50px;
-    display: block;
-    margin: 0 auto 3px;
-    border-radius: 100%;
-    -webkit-border-radius: 100%;
-}
-
-.table_overflow {
-    overflow-x: auto;
-    max-width: 100%;
-}
-.pagination_bar {
-    margin-bottom: 12px;
-}
-.table {
-    margin-bottom: 12px;
-	width:100%;
-}
-.table > thead > tr {
-    background: #e2e2e2;
-}
-.table > thead > tr > th, .flat-blue .table > thead > tr > td {
-    border-width: 0;
-        border-top-width: 0px;
-    text-transform: uppercase;
-    font-weight: normal;
-    padding: 15px 20px;
-    padding: 12px 8px;
-    vertical-align: middle;
-}
-
-
- /* Table Check box */
-.table .checkbox3 label:before{ width: 19px; height: 19px; top: 3px; background: #fff;}
-.table .checkbox3.checkbox-light input:checked+label:before{ background: #fff;}
-.table .checkbox3 label:after{ top:3px; margin-left: 0; }
-.checkbx_sec{ position: relative;}
-.checkbx_sec .checkbox-inline{ position: static;}
-input.edit_txt{ width: calc(100% - 50px);}
-    /* Subtable */
-/* .ltable_outer{background: #F0F0F0;} */
-.table tbody tr.ltable_outer:hover{ background: #fff;}
-.loop_table{}
- .loop_table{background: #F0F0F0;}
-.table.loop_table > tbody > tr:first-child > td, .flat-blue .table.loop_table > tbody > tr:first-child > th{border-top:0;}
-.table.loop_table > tbody > tr > td, .flat-blue .table.loop_table > tbody > tr > th, .flat-blue .table.loop_table > tfoot > tr > td, .flat-blue .table.loop_table > tfoot > tr > th{padding: 10px 20px; border-color: #ccc;}
-a.expand{  width: 18px; height: 18px; line-height: 17px; text-align: center; color: #252525; background: #fff; cursor: pointer; border: 1px solid #ccc; display: inline-block;margin-right: 5px;}
-a.expand .fa{font-size: 13px;}
-.expand.open_icon .fa:before{ content: "\f068";}
-
-tbody.append_html input[type="checkbox"] {
-	margin-left: 10px;
-}
-</style>
-
-
-<script type="text/javascript">
-
- <?php /* Change  status */ ?>  
 $(document).ready(function(){
 
 $('body').on('click', '.status,.delete_record', function() { 

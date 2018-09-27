@@ -10,6 +10,8 @@ Description		: Page contains common label for adminpanel
 /*$lang['user_registration'] = 'Sign up';*/
 $lang['home_module_label'] = 'Home';
 $lang['home_module_labels'] = 'Home';
+$lang['manageproducts_module_label'] = "Manage Product";
+$lang['manageproducts_module_labels'] = "Manage Products";
 $lang['product_label'] = "Product";
 $lang['product_labels'] = "Products";
 $lang['product_parent'] = "Parent Product";

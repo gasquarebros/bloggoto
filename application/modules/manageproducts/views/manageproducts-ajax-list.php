@@ -49,12 +49,12 @@
 			</td>
 					
 			<td><?php echo stripslashes($val['product_name']);?></td>
-			<td><?php echo stripslashes($val['product_alias']);?></td>
+			<td><?php echo output_value(stripslashes($val['product_alias']));?></td>
 			<td><?php echo show_price($val['product_price']);?></td>
 			<td><?php echo output_value($val['product_sku']);?></td>	 
-			<td><?php echo output_value($val['product_type']); ?></td>
-			<td><?php echo $val['product_sequence']; ?></td>
-			<td><a href="javascript:;"><?php echo show_status($val['product_status'],$val['product_primary_id']);?></a> </td>
+			<td class="align-center"><?php echo output_value($val['product_type']); ?></td>
+			<td class="align-center"><?php echo $val['product_sequence']; ?></td>
+			<td class="align-center"><a href="javascript:;"><?php echo show_status($val['product_status'],$val['product_primary_id']);?></a> </td>
 
 			
 	<td> 

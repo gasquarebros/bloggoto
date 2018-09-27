@@ -171,7 +171,7 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 									</div> */ ?>
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('status').get_required();?></label>
-										<div class="col-sm-<?php echo get_form_size();?>">
+										<div class="col-sm-8">
 											<div class="input_box"><?php  echo get_status_dropdown('A','','class="required"    title="'.sprintf(get_label('product_errors'),get_label('status')).'"  ');;?></div>
 										</div>
 									</div>
@@ -405,10 +405,10 @@ float: left;
 .input_box {
     position: relative;
 }
-    .custom_browsefile input[type=file]{ height: 34px; width: 100%; opacity: 0; filter: alpha(opacity=0);cursor: pointer; }
-    .result_browsefile{ border: 1px solid #dcd9d9;position: absolute; height: 34px; color: #aaa7a7; line-height: 34px; left:0; top:0; width: 100%; pointer-events: none; text-align: center; font-size: 15px; overflow: hidden;}
-    .result_browsefile:before{content: ""; height: 100%; width: 0; display: inline-block; vertical-align: middle;}
-    .brows{display: inline-block;}
+.custom_browsefile input[type=file]{ height: 34px; width: 100%; opacity: 0; filter: alpha(opacity=0);cursor: pointer; }
+.result_browsefile{ border: 1px solid #dcd9d9;position: absolute; height: 34px; color: #aaa7a7; line-height: 34px; left:0; top:0; width: 100%; pointer-events: none; text-align: center; font-size: 15px; overflow: hidden;}
+.result_browsefile:before{content: ""; height: 100%; width: 0; display: inline-block; vertical-align: middle;}
+.brows{display: inline-block;}
 
 .more_link{ display: inline-block; width: 30px; height: 30px; background: #E74C3C; text-align: center; line-height: 30px; color: #fff; border-radius: 100%; -webkit-border-radius: 100%; margin: 2px 0; font-size: 18px; cursor: pointer;}
 .gallery_images_flow{ overflow-y: auto; max-height: 275px; display: inline-block;}
@@ -419,4 +419,77 @@ float: left;
 
 a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover{ border-color: #252525;}
 
+
+.tabs-left {
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+    border: 0px;
+}
+
+.ui-tabs .ui-tabs-nav {
+	background: none;
+	border: 0px;
+	padding:0px;
+	width: 200px;
+	float: left;
+	margin-right: 10px;
+}
+.ui-tabs .ui-tabs-nav li, .ui-tabs .ui-tabs-nav li a {
+	width:100%;
+}
+.ui-tabs .ui-tabs-nav li a > div {
+	width:25px;
+	float: left;
+}
+.ui-tabs .ui-tabs-nav li a .step-title {
+    width: calc(100% - 25px) !important;
+    font-size: 14px;
+}
+.tab-content {
+    width: calc(100% - 210px);
+    float: left;
+}
+#common_form .chosen-container {
+	width: 100% !important;
+	margin-top:0px !important;
+}
+.col-sm-2 {
+	width:15%;
+	float:left;
+}
+.col-sm-8 {
+	width:80%;
+	float:left;
+}
+.form-group {
+    margin: 15px 5px;
+}
+.card-header {
+	width: 100%;
+	float: left;
+	clear: both;
+	margin-top: 21px;
+	padding-right: 30px;
+}
+.card-title{
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	width: calc(100% - 100px);
+	float: left;
+}
+#common_form {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin: 5px;
+}
+.btn_submit_div {
+	width: 100%;
+	text-align: center;
+}
+table { width:100%; text-align:center; }
+.custom_file { display:none; }
+.brows { border:0px; }
 </style>

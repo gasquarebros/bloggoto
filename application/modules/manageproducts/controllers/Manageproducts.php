@@ -250,7 +250,7 @@ class Manageproducts extends CI_Controller
 					'product_meta_keywords' => post_value ( 'product_meta_keywords' ),
 					'product_meta_description' => post_value ( 'product_meta_description' ),
 					'product_created_on' => current_date (),
-					'product_created_by' => get_admin_id (),
+					'product_created_by' => get_user_id (),
 					'product_created_ip' => get_ip ()
 				);
 				
@@ -322,16 +322,22 @@ class Manageproducts extends CI_Controller
 					$record = $this->Mydb->get_record ( '*', $this->table, array (
 						$this->primary_key => $modelsProductAssociates[0]['product_ids'][$subprod_key]
 					) );
+					if($record['product_id'] !='') {
+						$subproduct_id = $record['product_id'];
+					} else {
+						$subproduct_id = get_guid ( $this->table, 'product_id' );
+					}
 					
 					$update_array = array (
 						'product_type' => 'simple',
+						'product_id' => $subproduct_id,
 						'product_name' => $model_product_sublevels,
 						'product_alias' => '',
 						'product_sku' => $modelsProductAssociates[0]['product_sku'][$subprod_key],
 						'product_parent_id' => $parent_product,
 						'product_quantity' => $modelsProductAssociates[0]['product_qty'][$subprod_key],
 						'product_slug' => $product_slug,
-						'product_customer_id' => post_value ( 'product_customer_id' ),
+						'product_customer_id' => get_user_id(),
 						'product_category_id' => $categories[0],
 						'product_subcategory_id' => $categories[1],
 						'product_short_description' => post_value ( 'product_short_description' ),
@@ -340,7 +346,7 @@ class Manageproducts extends CI_Controller
 						'product_price' => $modelsProductAssociates[0]['product_price'][$subprod_key],
 						'product_special_price' => $modelsProductAssociates[0]['product_special_price'][$subprod_key],
 						'product_updated_on' => current_date (),
-						'product_updated_by' => get_admin_id (),
+						'product_updated_by' => get_user_id (),
 						'product_updated_ip' => get_ip () 
 					);
 					
@@ -452,7 +458,7 @@ class Manageproducts extends CI_Controller
 		$record = $this->Mydb->get_record ( '*', $this->table, array (
 				$this->primary_key => $id
 		) );
-		(empty ( $record )) ? redirect ( camp_url () . $this->module ) : '';
+		(empty ( $record )) ? redirect ( base_url () . $this->module ) : '';
 
 		if ($this->input->post ( 'action' ) == "edit") {
 
@@ -463,7 +469,7 @@ class Manageproducts extends CI_Controller
 			$this->form_validation->set_rules ( 'product_sku', 'lang:product_sku', 'required|callback_validate_sku' );
 			$this->form_validation->set_rules ( 'product_price', 'lang:product_price', 'required' );
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
-			$this->form_validation->set_rules ( 'product_customer_id', 'lang:product_customer_id', 'required' );
+			//$this->form_validation->set_rules ( 'product_customer_id', 'lang:product_customer_id', 'required' );
 		
 			/*$this->form_validation->set_rules ( 'product_category', 'lang:product_categorie', 'required|callback_validate_category' );
 			
@@ -494,7 +500,7 @@ class Manageproducts extends CI_Controller
 					'product_alias' => post_value ( 'product_alias_text' ),
 					'product_sku' => post_value ( 'product_sku' ),
 					'product_slug' => $product_slug,
-					'product_customer_id' => post_value ( 'product_customer_id' ),
+					'product_customer_id' => get_user_id(),
 					'product_category_id' => $categories[0],
 					'product_subcategory_id' => $categories[1],
 					'product_short_description' => post_value ( 'product_short_description' ),
@@ -511,7 +517,7 @@ class Manageproducts extends CI_Controller
 					'product_meta_keywords' => post_value ( 'product_meta_keywords' ),
 					'product_meta_description' => post_value ( 'product_meta_description' ),
 					'product_updated_on' => current_date (),
-					'product_updated_by' => get_admin_id (),
+					'product_updated_by' => get_user_id (),
 					'product_updated_ip' => get_ip () 
 				);
 				/* upload image and unlink old image */
@@ -592,7 +598,8 @@ class Manageproducts extends CI_Controller
 			);
 			$where = array("assigned_mod_product_id"=>$record[$this->primary_key]);
 			
-			$assigned_modifiers = $this->Mydb->get_all_records ( 'assigned_mod_modifier_id,assigned_mod_product_id', 'product_assigned_modifiers', $where );
+			$assigned_modifiers = $this->Mydb->get_all_records ( 'assigned_mod_modifier_id,assigned_mod_product_id', 'product_assigned_modifiers', $where, '', '' ,'' ,'',array('assigned_mod_product_id','assigned_mod_modifier_id') );
+			
 			$selected_modifiers = array();
 			if(!empty($assigned_modifiers)) {
 				foreach($assigned_modifiers as $selmodifier) {
@@ -616,8 +623,8 @@ class Manageproducts extends CI_Controller
 		}
 		/* Common labels */
 		
-		$get_all_users_list = get_all_users_list();
-		$data['all_users'] = $get_all_users_list;
+		//$get_all_users_list = get_all_users_list();
+		//$data['all_users'] = $get_all_users_list;
 		$data ['breadcrumb'] = $data ['form_heading'] = get_label ( 'edit' ) . ' ' . $this->module_label;
 		//$data['condiment_products'] = $this->get_condiment_products();
 		$data ['module_action'] = 'edit/' . encode_value ( $record [$this->primary_key] );
@@ -678,7 +685,7 @@ class Manageproducts extends CI_Controller
 			$update_values = array (
 					"product_status" => 'A',
 					"product_updated_on" => current_date (),
-					'product_updated_by' => get_admin_id (),
+					'product_updated_by' => get_user_id (),
 					'product_updated_ip' => get_ip () 
 			);
 			
@@ -703,7 +710,7 @@ class Manageproducts extends CI_Controller
 			$update_values = array (
 					"product_status" => 'I',
 					"product_updated_on" => current_date (),
-					'product_updated_by' => get_admin_id (),
+					'product_updated_by' => get_user_id (),
 					'product_updated_ip' => get_ip () 
 			);
 			
@@ -733,7 +740,7 @@ class Manageproducts extends CI_Controller
 						$update_values = array (
 								"product_sequence" => $sequnce_value,
 								"product_updated_on" => current_date (),
-								'product_updated_by' => get_admin_id (),
+								'product_updated_by' => get_user_id (),
 								'product_updated_ip' => get_ip () 
 						);
 						$this->Mydb->update_where_in ( $this->table, $this->primary_key, array (
@@ -1143,563 +1150,7 @@ function numcheck($in)
 		$data ['module'] = $this->module;
 		return $data;
 	}
-	
-	public function import() {
 
-		$result=array();
-		$settings = $this->get_compnay_settings ();
-		$data['apply_product_type'] = $settings['client_producttype_enable_option'];
-		$data['condiment_enable'] = $settings['client_condiment_enable'];
-		$data['reward_enable'] = $settings['client_loyality_enable'];
-		$data['category_modifier_enabled'] = $settings['client_category_modifier_enable'];
-
-		if ($this->input->post ('action' ) == "Add") 
-		{
-				check_ajax_request ();		    
-				$this->form_validation->set_rules ( 'csc_file11', 'lang:import_csv_file', 'callback_validate_file1' );
-				if (empty($_FILES['csc_file11']['name']))
-				{
-				$this->form_validation->set_rules('csc_file11', 'lang:import_csv_file','required');	
-				}  
-				     
-			/*if($this->form_validation->run()==TRUE)
-			{ */
-			
-		
-			if(pathinfo($_FILES['csc_file11']['name'], PATHINFO_EXTENSION) == 'csv') 
-				{
-					if ($_FILES['csc_file11']['name'] != '')
-					{
-							$error = false;
-							$line = false;
-							$lname = '';
-							$fname = ''; 
-							$donotreadfirst = true;     
-
-							ini_set('auto_detect_line_endings', true);
-				  
-					  $handle = fopen($_FILES["csc_file11"]["tmp_name"], "r");
-					  while (($line_of_text = fgetcsv($handle, 2000, ",")) !== FALSE)
-					  {
-
-						if($donotreadfirst)
-						{
-							$donotreadfirst = false;
-							continue;
-						}
-						$product_parent = trim(stripslashes($line_of_text[0]));  
-						$product_default_check = trim(stripslashes($line_of_text[1]));
-						$product_default = ucfirst(strtolower($product_default_check));
-						$mainproductname = trim(stripslashes($line_of_text[2]));
-						$brand = trim(stripslashes($line_of_text[3]));
-						$pro_cate_name = trim(stripslashes($line_of_text[4]));
-						$prosubcate = trim(stripslashes($line_of_text[5]));
-						$productsku = trim(stripslashes($line_of_text[6]));
-						$tags = trim(stripslashes($line_of_text[14]));
-						$tagsarray = explode(',',trim(stripslashes($line_of_text[14])));
-						$productcost = trim(stripslashes($line_of_text[7]));
-						$productprice = trim(stripslashes($line_of_text[8]));					
-						//$modifiername_check = (trim(stripslashes($line_of_text[9])));
-						$modifiername = (trim(stripslashes($line_of_text[9])));
-						$modifiername_check = (trim(stripslashes($line_of_text[9])) !='')?trim(stripslashes($line_of_text[9])):$modifiername_check;
-						$modifierarrayname = explode(',',trim(stripslashes($line_of_text[9])));
-						$modifiervalue = trim(stripslashes($line_of_text[10]));
-						$modifierarrayvalues = explode(',',trim(stripslashes($line_of_text[10])));
-						$productshort = trim(stripslashes($line_of_text[11]));
-						$productdesc = trim(stripslashes($line_of_text[12]));
-						$proavailvalue = explode(',',trim(stripslashes($line_of_text[13])));
-						$thumbilimage = trim(stripslashes($line_of_text[15]));
-						$gallery = (trim(stripslashes($line_of_text[16])));
-						$galleryimage = explode(',',trim(stripslashes($line_of_text[16])));
-						$metatilte = trim(stripslashes($line_of_text[17]));
-						$metakeywords = trim(stripslashes($line_of_text[18]));
-						$metadescription = trim(stripslashes($line_of_text[19]));
-						$productalias = trim(stripslashes($line_of_text[20]));	
-						$p_outlet = trim(stripslashes($line_of_text[21]));				
-						$product_outlet = explode('~',trim(stripslashes($line_of_text[21])));
-						$brandcompanytags = trim(stripslashes($line_of_text[22]));
-						$brandcompanytagsarray = explode(',',trim(stripslashes($line_of_text[22])));
-                        //print_r($product_outlet);
-                        //exit;
-						/*product categories table field*/
-						$procatetablename = "pos_product_categories";
-						$catcompany_array = array('pro_cate_company_id' => get_company_id(),'pro_cate_app_id' => get_company_app_id());
-						$procat_cate_id = get_guid($procatetablename,'pro_cate_id',$catcompany_array);
-						$procat_cate_slug  = make_slug($pro_cate_name,$procatetablename,'pro_cate_slug',$catcompany_array);
-						$procatefiled = array(
-						'pro_cate_name' => addslashes($pro_cate_name),
-						'pro_cate_id' => $procat_cate_id,
-						'pro_cate_slug'=>$procat_cate_slug,
-						'pro_cate_company_id'=>get_company_id(),
-						'pro_cate_app_id' => get_company_app_id (),
-						'pro_cate_status'=>"A",
-						'pro_cate_sequence'=>1,
-						'pro_cate_app_id'=>get_company_app_id(),
-						'pro_cate_created_on' => current_date (),
-						'pro_cate_created_by' => get_company_admin_id (),
-						'pro_cate_created_ip' => get_ip ()					
-						);
-						
-						$wherepro = array('pro_cate_app_id' => get_company_app_id (),'pro_cate_name'=> addslashes($pro_cate_name));
-						$res = $this->Mydb->get_record('*',$procatetablename,$wherepro,'');					
-						if(!empty($res)) 
-						{
-						$product_cate_id = $res['pro_cate_id'];
-						$product_primary = $res['pro_cate_primary_id'];
-						} else {
-							$id = $this->Mydb->insert($procatetablename, $procatefiled);
-							$res = $this->Mydb->get_record('*',$procatetablename,array('pro_cate_primary_id'=> $id),'');
-							$product_cate_id = $res['pro_cate_id'];
-							$product_primary = $res['pro_cate_primary_id'];
-							if ($id != "") 
-							{
-								/* insert modifier availability */
-								$product_category_type="Category";
-								$this->insert_avalablity_pro ( 'add', $proavailvalue, $product_primary, $product_cate_id,$product_category_type);
-							}
-						}
-
-						/*MODIFIER TABLE*/
-						$modifiertablename = "pos_product_modifiers";
-								
-						$modifier_ref_ids = array();
-						$pro_modifier_id_ar = array();
-						if($modifiername != '') {
-							$modifier_ref_ids = explode(',',$modifiername);
-							if(!empty($modifier_ref_ids)) {
-							foreach($modifier_ref_ids as $mod_name) {		
-								$modifiercompany_array = array (
-								'pro_modifier_company_id' => get_company_id (),
-								'pro_modifier_app_id' => get_company_app_id () 
-								);
-					   $pro_modifier_id = get_guid ( $modifiertablename, 'pro_modifier_id', $modifiercompany_array );					
-									
-					            /*search product name and parent product same*/	
-					
-					            /*insert options function*/
-					            $main_product_parent_product = '';
-								$modifierfiled = array (
-								'pro_modifier_name' =>addslashes($mod_name),
-								'pro_modifier_id' => $pro_modifier_id,
-								'pro_modifier_company_id' => get_company_id (),
-								'pro_modifier_status' => 'A',
-								'pro_modifier_min_select' => 1,
-								'pro_modifier_max_select' => 1,
-								'pro_modifier_sequence'=>1,
-								'pro_modifier_app_id' => get_company_app_id (),
-								'pro_modifier_created_on' => current_date (),
-								'pro_modifier_created_by' => get_company_admin_id (),
-								'pro_modifier_created_ip' => get_ip () 
-								);	
-								$res = $this->Mydb->get_record('*',$modifiertablename,array('pro_modifier_app_id' => get_company_app_id (),'pro_modifier_name'=> addslashes($mod_name)),'');					
-								if(!empty($res)) 
-								{
-									
-										$modifiername_last_id = encode_value($res['pro_modifier_id']);
-										//$modifier_name_value = $res['pro_modifier_value_modifier_id'];
-										$pro_modifier_id_ar[] = $res['pro_modifier_id'];
-								} else 
-								{
-									
-									$id = $this->Mydb->insert($modifiertablename, $modifierfiled);
-									$res = $this->Mydb->get_record('*',$modifiertablename,array('pro_modifier_primary_id'=> $id),'');
-									$modifiername_last_id = encode_value($res['pro_modifier_id']);
-									//$modifier_name_value = $res['pro_modifier_value_modifier_id'];
-									//echo $pro_modifier_id;
-									//exit;
-									$pro_modifier_id_ar[] = $pro_modifier_id;
-								}
-							}						
-						}
-					}
-					
-					//echo '<pre>';
-					//print_r($pro_modifier_id_ar);
-					//exit;
-					/*MODIFIER VALUES TABLE*/	
-						$modifiervaluetablename = "pos_product_modifier_values";
-						$modi_values_ids = array();					
-						$modifer_selected_option = array();
-						$modi_value_ref_id = array();
-						if($modifiervalue != '') 
-						{
-							
-							$modi_values_ids = explode(',',$modifiervalue);
-							
-							if(!empty($modi_values_ids)) {
-								$i=0;
-			
-								foreach($modi_values_ids as $modi_values) {	
-									//echo $pro_modifier_id_ar[$i];
-									//echo '<br>';								
-									$modifier_val = $this->validate_modifiervalue($pro_modifier_id_ar[$i]);
-									//echo '<pre>';
-									//print_r($modifier_val);
-									//echo '<br>';	
-									//echo '<pre>';
-									//print_r($modifiervalue);
-									//exit;							
-									$modivalcompany_array = array('pro_modifier_value_company_id' => get_company_id(),'pro_modifier_value_app_id' => get_company_app_id());
-									$pro_modifier_value_id = get_guid($modifiervaluetablename,'pro_modifier_value_id',$modivalcompany_array);
-									$modifiervaluefiled = array (
-											'pro_modifier_value_name' => addslashes($modi_values),
-											'pro_modifier_value_modifier_primary_id'=> $modifier_val['pro_modifier_primary_id'],
-											'pro_modifier_value_modifier_id' => $modifier_val['pro_modifier_id'],
-											'pro_modifier_value_id' => $pro_modifier_value_id,
-											'pro_modifier_value_sequence'=>1,
-											'pro_modifier_value_company_id'=>get_company_id(),
-											'pro_modifier_value_is_default'=>'Yes',
-											'pro_modifier_value_status' => 'A',
-											'pro_modifier_value_app_id'=>get_company_app_id(),
-											'pro_modifier_value_created_on' => current_date(),
-											'pro_modifier_value_created_by' => get_company_admin_id(),
-											'pro_modifier_value_created_ip' => get_ip() 
-									);
-
-									$res = $this->Mydb->get_record('*',$modifiervaluetablename,array('pro_modifier_value_app_id' => get_company_app_id (),'pro_modifier_value_name'=>addslashes($modi_values),'pro_modifier_value_modifier_id'=>$pro_modifier_id_ar[$i]),'');					
-
-									if(!empty($res)) {
-										$modi_value_ref_id[] = $res['pro_modifier_value_id'];
-						$modifer_selected_option[] = $res['pro_modifier_value_modifier_id'].'~'.$res['pro_modifier_value_id'];
-
-										} else {
-											$id = $this->Mydb->insert($modifiervaluetablename, $modifiervaluefiled);
-											$res = $this->Mydb->get_record('*',$modifiervaluetablename,array('pro_modifier_value_primary_id'=> $id),'');
-											$modi_value_ref_id[] = $res['pro_modifier_value_id'];
-											$modifer_selected_option[] = $res['pro_modifier_value_modifier_id'].'~'.$res['pro_modifier_value_id'];
-										}	
-										$i++;								
-								}
-							}
-						}
-						
-						/*PRODUCT SUB CATOGARIES TABLE*/			
-						$category_val = $this->validate_category($product_cate_id);
-						$prosubcatetablename = "pos_product_subcategories";
-						if($prosubcate == "")
-						{
-							$prosubcate = $pro_cate_name;
-						}					
-						$company_array = array('pro_subcate_company_id' => get_company_id(),'pro_subcate_app_id' => get_company_app_id());
-						$pro_subcate_id = get_guid($prosubcatetablename,'pro_subcate_id',$company_array);
-						$pro_subcate_slug  = make_slug($prosubcate,$prosubcatetablename,'pro_subcate_slug',$company_array);
-						$prosubcatefiled = array(
-						'pro_subcate_id'=>$pro_subcate_id,					
-						'pro_subcate_company_id'=>get_company_id(),
-						'pro_subcate_app_id'=>get_company_app_id(),
-						'pro_subcate_category_primary_id '=> $category_val['pro_cate_primary_id'],
-						'pro_subcate_category_id' => $category_val['pro_cate_id'],
-						'pro_subcate_name'=>addslashes($prosubcate),
-						'pro_subcate_status'=>'A',
-						'pro_subcate_sequence'=>1,
-						'pro_subcate_slug'=>$pro_subcate_slug,
-						'pro_subcate_created_on'=>current_date (),
-						'pro_subcate_created_by'=>get_company_admin_id (),
-						'pro_subcate_created_ip'=>get_ip ()
-						);
-
-						$res = $this->Mydb->get_record('*',$prosubcatetablename,array('pro_subcate_app_id' => get_company_app_id (),'pro_subcate_name'=> addslashes($prosubcate)),'');					
-						if(!empty($res)) {
-								$pro_cate_id = $res['pro_subcate_id'];
-								$pro_subcate_category_primary = $res['pro_subcate_category_primary_id'];
-						} else {
-
-							$id = $this->Mydb->insert($prosubcatetablename, $prosubcatefiled);
-							$res = $this->Mydb->get_record('*',$prosubcatetablename,array('pro_subcate_primary_id'=> $id),'');
-							$pro_cate_id = $res['pro_subcate_id'];
-							$pro_subcate_category_primary = $res['pro_subcate_category_primary_id'];
-
-						if($id != "")
-						{
-												
-							/* insert modifier availability */
-							$product_category_type="Subcategory";
-							$this->insert_avalablity_pro ( 'add', $proavailvalue, $id, $pro_cate_id,$product_category_type); 
-							
-							/* insert product modifiers */
-							$this->insert_subcategory_modifiers( 'add', $modifiername_last_id, $pro_subcate_category_primary, $pro_cate_id ); 
-							}
-						}
-					/*PRODUCT BRANDS TABLE*/
-					$pro_brand_cate_id = '';
-					if($brand != '') {
-					$brandtablename = "pos_product_brands";
-					$brandscompany_array = array('pro_brand_company_id' => get_company_id(),'pro_brand_app_id' => get_company_app_id());
-					$pro_brand_id = get_guid($brandtablename,'pro_brand_id',$brandscompany_array);
-					$pro_brand_slug  = make_slug($brand,$brandtablename,'pro_brand_slug',$brandscompany_array);
-					$brandfiled = array (
-							'pro_brand_name' => addslashes($brand),
-							'pro_brand_id' => $pro_brand_id,
-							'pro_brand_slug'=>$pro_brand_slug,
-							'pro_brand_company_id'=>get_company_id(),
-							'pro_brand_status' => 'A',						
-							'pro_brand_app_id'=>get_company_app_id(),
-							'pro_brand_created_on' => current_date (),
-							'pro_brand_created_by' => get_company_admin_id (),
-							'pro_brand_created_ip' => get_ip () 
-					);
-					$res = $this->Mydb->get_record('*',$brandtablename,array('pro_brand_app_id' => get_company_app_id (),'pro_brand_name'=> addslashes($brand)),'');					
-					
-					if(!empty($res)) {
-					$pro_brand_cate_id = $res['pro_brand_id'];
-					
-					} 
-					else {
-						$id = $this->Mydb->insert($brandtablename, $brandfiled);
-						$res = $this->Mydb->get_record('*',$brandtablename,array('pro_brand_primary_id'=> $id),'');
-						$pro_brand_cate_id = $res['pro_brand_id'];
-					
-					}	
-				}		
-						/*BRAND TAGS TABLE*/									
-						$brandtagstablename = "pos_product_brand_tags";
-						$ref_brandcompanytag_ids = array();
-
-						if($brandcompanytags != '') {
-							
-							$brandcompanytags_arr = explode(',',$brandcompanytags);
-							if(!empty($brandcompanytags_arr)) {
-										
-								foreach($brandcompanytags_arr as $brandcompany_name) {
-											
-									$brandtagscompany_array = array('pro_brand_tag_company_id' => get_company_id(),'pro_brand_tag_app_id' => get_company_app_id());
-									$tagspro_tag_id = get_guid($brandtagstablename,'pro_brand_tag_id',$brandtagscompany_array);
-									$brandcompanytagsfiled = array (
-									'pro_brand_tag_name' => addslashes($brandcompany_name),
-									'pro_brand_tag_id' => $tagspro_tag_id,
-									'pro_brand_tag_company_id'=>get_company_id(),
-									'pro_brand_tag_status' => 'A',
-									'pro_brand_tag_app_id'=>get_company_app_id(),
-									'pro_brand_tag_created_on' => current_date (),
-									'pro_brand_tag_created_by' => get_company_admin_id (),
-									'pro_brand_tag_created_ip' => get_ip () 
-									);
-
-									$res = $this->Mydb->get_record('*',$brandtagstablename,array('pro_brand_tag_app_id' => get_company_app_id (),'pro_brand_tag_name'=> addslashes($brandcompany_name)),'');					
-
-									if(!empty($res)) {
-										$ref_brandcompanytag_ids[] = $res['pro_brand_tag_id'];
-									} else {
-										$id = $this->Mydb->insert($brandtagstablename, $brandcompanytagsfiled);
-										$res = $this->Mydb->get_record('*',$tagstablename,array('pro_brand_tag_primary_id'=> $id),'');
-										$ref_brandcompanytag_ids[] = $res['pro_brand_tag_id'];
-									}
-								}
-							}
-						}			
-						/*TAGS TABLE*/	
-						$tagstablename = "pos_product_tags";
-						$ref_tag_ids = array();
-
-						if($tags != '') {
-							
-							$tags_arr = explode(',',$tags);
-							if(!empty($tags_arr)) {
-										
-								foreach($tags_arr as $tag_name) {
-											
-									$tagscompany_array = array('pro_tag_company_id' => get_company_id(),'pro_tag_app_id' => get_company_app_id());
-									$tagspro_tag_id = get_guid($tagstablename,'pro_tag_id',$tagscompany_array);
-									$tagsfiled = array (
-									'pro_tag_name' => addslashes($tag_name),
-									'pro_tag_id' => $tagspro_tag_id,
-									'pro_tag_company_id'=>get_company_id(),
-									'pro_tag_status' => 'A',
-									'pro_tag_app_id'=>get_company_app_id(),
-									'pro_tag_created_on' => current_date (),
-									'pro_tag_created_by' => get_company_admin_id (),
-									'pro_tag_created_ip' => get_ip () 
-									);
-
-									$res = $this->Mydb->get_record('*',$tagstablename,array('pro_tag_app_id' => get_company_app_id (),'pro_tag_name'=> addslashes($tag_name)),'');					
-
-									if(!empty($res)) {
-										$ref_tag_ids[] = $res['pro_tag_id'];
-									} else {
-										$id = $this->Mydb->insert($tagstablename, $tagsfiled);
-										$res = $this->Mydb->get_record('*',$tagstablename,array('pro_tag_primary_id'=> $id),'');
-										$ref_tag_ids[] = $res['pro_tag_id'];
-									}
-								}
-							}
-						}				
-					/*PRODUCT TABLE*/
-					$producttablename = "pos_products";
-					$product_company_array = array (
-							'product_company_id' => get_company_id (),
-							'product_company_app_id' => get_company_app_id () 
-					);
-					$product_id = get_guid ( $producttablename, 'product_id', $product_company_array);
-					$product_slug = make_slug ( $mainproductname, $producttablename, 'product_slug', $product_company_array);
-					if($productsku == "")
-					{
-						$productsku = $product_slug;
-					}
-
-					$is_modifier_default = ($product_default == 'Yes'? 'Yes' : 'No');
-					$parent_primary_id = $parent_id =  "";
-
-					/*search product name same*/
-					$main_product_name = '';
-					/*if($mainproductname != "") 
-					{
-						$mainproduct_rec = $this->Mydb->get_record ('product_name', $producttablename, array (
-								'product_name' => addslashes($mainproductname),'product_company_app_id' => get_company_app_id ()),'' );
-						if(!empty($mainproduct_rec))
-						{
-							$main_product_name = $mainproduct_rec['product_name'];						
-						}
-					}*/
-					if($product_parent != "") 
-					{
-
-						/*$parent_rec = $this->Mydb->get_record ( 'product_primary_id,product_id,product_name', $producttablename, array (
-								'product_name' => addslashes($product_parent),'product_parent_primary_id'=>'','product_company_app_id' => get_company_app_id ()),'' );*/
-								
-						$parent_rec = $this->Mydb->get_all_records ('product_primary_id,product_id,product_name,product_price', $producttablename,array (
-								'product_name' => addslashes($product_parent),'product_parent_primary_id'=>'','product_company_app_id' => get_company_app_id ()), 1, 0,array('product_primary_id' => 'DESC'), '', '', '' );		
-								
-
-						if(!empty($parent_rec))
-						{
-							$parent_primary_id = $parent_rec[0]['product_primary_id'];
-							$parent_id = $parent_rec[0]['product_id'];
-						}
-					}				
-						$modifier_value_check = ($modifiervalue != '')?'-'.$modifiervalue:'';
-						/*$cheking_product_name=($main_product_name == $mainproductname) ? addslashes($mainproductname).addslashes($modifier_value_check) : addslashes($mainproductname);*/
-						$insert_array = array (
-								'product_name' =>addslashes($mainproductname),
-								'product_sku' => addslashes($productsku),
-								'product_alias' => addslashes($productalias),							
-								'product_id' => $product_id,
-								'product_type'=>1,
-								'product_slug' => $product_slug,
-								'product_parent_primary_id' => $parent_primary_id,
-								'product_parent_id' => addslashes($parent_id),
-								'product_company_id' => get_company_id (),
-								'product_company_app_id' => get_company_app_id (),
-								'product_category_id' => $product_cate_id,
-								'product_subcategory_id' => $pro_cate_id,
-								'product_brand_id' => $pro_brand_cate_id,
-								'product_short_description' => ucfirst(addslashes($productshort)),
-								'product_long_description' => ucfirst(addslashes($productdesc)),
-								'product_thumbnail' => $thumbilimage,
-								'product_status' => 'A',
-								'product_alias_is_default' => $is_modifier_default,
-								'product_cost' => $productcost,
-								'product_price' => $productprice,
-								'product_bagel_min_select' => 1,
-								'product_bagel_max_select' => 1,
-								'product_sequence'=>1,
-								'product_meta_title' => $metatilte,
-								'product_meta_keywords' => $metakeywords,
-								'product_meta_description' => $metadescription,
-								'product_import' => 1,
-								'product_created_on' => current_date (),
-								'product_created_by' => get_company_admin_id (),
-								'product_created_ip' => get_ip () 
-						);
-						/*$whereproduct = array('product_company_app_id' => get_company_app_id (),'product_name'=> addslashes($mainproductname));
-						$res = $this->Mydb->get_record('*',$producttablename,$whereproduct,'');					
-						if(!empty($res)) {
-							$mainproduct_primary_id = $res['product_primary_id'];
-							$mainproduct_id = $res['product_id'];
-						}else {*/							
-							$where=array('(product_name = "'.addslashes($mainproductname).'" OR product_sku = "'.addslashes($productsku).'")' => NULL, 'product_company_id' => get_company_id (), 'product_company_app_id' => get_company_app_id (), 'product_category_id' => $product_cate_id );
-                            $product_exit = $this->Mydb->get_record('*', $producttablename,$where, array('product_company_id' => get_company_id (),
-								'product_company_app_id' => get_company_app_id ()));
-							//echo $this->db->last_query();
-						    //exit;
-							//echo '<pre>';
-							//print_r($product_exit);
-							//exit;	
-							if(empty($product_exit))
-							{ 
-							$id = $this->Mydb->insert($producttablename, $insert_array);
-							$res = $this->Mydb->get_record('*',$producttablename,array('product_primary_id'=> $id),'');
-							$mainproduct_id = $res['product_primary_id'];						
-							if(!empty($product_parent) && $is_modifier_default == "Yes")
-							{
-							
-							      //$get_parent_price = $this->Mydb->get_record('product_price',$producttablename,array('product_parent_primary_id'=> $parent_primary_id));
-							      
-							      $productprice_fi = (isset($parent_rec[0]['product_price'])? $parent_rec[0]['product_price'] : $productprice );
-							      
-									  $checkprice = $this->Mydb->update($producttablename,array('product_price'=>'','product_company_id' => get_company_id (),
-								'product_company_app_id' => get_company_app_id (),'product_primary_id'=>$id),array('product_price'=>$productprice_fi));  
-							}						
-							
-							//echo $this->db->last_query();
-
-							if ($id != "") {
-								//echo '<pre>';
-								//print_r($pro_modifier_id_ar);
-								//exit;
-								/* insert product availability */
-								$this->insert_avalablity_product( 'add', $proavailvalue, $mainproduct_id, $product_id );
-								/* insert product Outlet */
-								if($p_outlet!="")
-								{
-									if(!empty($product_outlet))
-									{
-										$this->insert_product_outlet ( 'add', $product_outlet, $mainproduct_id, $product_id );
-									}
-							    }							
-								/* insert product tags availability */
-								$this->insert_product_tags('add', $ref_tag_ids, $mainproduct_id, $product_id);
-								/* insert product brandcompany tags availability */
-								$this->insert_product_brandcompanytags('add', $ref_brandcompanytag_ids, $mainproduct_id, $product_id);
-								/* insert alias table*/
-								$this->insert_alias ( 'add', $modifer_selected_option, $mainproduct_id, $product_id ,$is_modifier_default,$parent_id);
-								/* insert product modifiers .. */
-								$this->insert_modifiers_product ( 'add', $pro_modifier_id_ar, $mainproduct_id, $product_id );
-								/*  insert category modifier details...  */
-									
-									if($settings['client_category_modifier_enable'] == 1 ) {						
-										if(!empty($pro_modifier_id_ar)){
-										$this->insert_options('add', $pro_modifier_id_ar,$mainproduct_id,$product_id);
-										}
-									}
-								    /* insert gallery images */
-								   if($gallery!="")
-								   { 
-								    if (!empty($galleryimage)) 
-								    {										
-										$this->add_product_gallery_images('add',$galleryimage, $mainproduct_id, $product_id );
-									   
-									}
-								   }
-									
-								}
-							}
-					}
-						fclose($handle); 
-							$result ['status'] = 'success';
-					        $result ['message'] = 'Your Product has been added successfully.';								
-					 }
-					else     
-					{
-						$result ['status'] = 'error';	
-					    $result ['message'] = 'invalid File name';	
-					}				 
-				}
-				else     
-				{
-					$result ['status'] = 'error';	
-					$result ['message'] = 'This is not an allowed file type';	
-                }	
-			   
-				$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_add' ), $this->module_label ) );
-				echo json_encode ( $result );
-				exit ();
-			}			
-		$data=array();		
-		$data ['module_label'] = $this->module_label;
-		$data ['module_labels'] = $this->module_labels;
-		$data ['module'] = $this->module;
-		$this->load->view($this->folder."/".$this->module."-import",$data);		
-	}
 	/* this method used to validate posted category */
 	public function validate_category()
 	{
@@ -1767,92 +1218,6 @@ function numcheck($in)
 			}
 		}
 	}
-
-	/* clear imported csv file */
-	public function clear_import ()
-    {
-			if ($this->input->post ('action' ) == "Add")
-			{
-				$record_product = $this->Mydb->get_all_records ( $select_array, $this->table, array (
-				'product_company_id' => get_company_id (),
-				'product_company_app_id' => get_company_app_id () ,
-				'product_import' => 1 
-				));
-
-				foreach($record_product as $product_res) {
-
-					$product_primary_id = $product_res['product_primary_id'];
-					$product_id = $product_res['product_id'];
-
-					$this->Mydb->delete('pos_product_alias',array('pa_product_primary_id'=>$pa_product_primary_id));
-					$this->Mydb->delete('pos_product_assigned_outlets',array('pao_product_primary_id'=>$pa_product_primary_id));					
-					$this->Mydb->delete('pos_product_assigned_alias',array('alias_product_primary_id'=>$pa_product_primary_id));
-					$this->Mydb->delete('pos_product_assigned_groups',array('pag_product_primary_id'=>$pa_product_primary_id));
-					
-					$this->Mydb->delete('pos_product_assigned_modifiers',array('psm_product_primary_id'=>$pa_product_primary_id));
-
-					$this->Mydb->delete('pos_product_assigned_outlets',array('pao_product_primary_id'=>$pa_product_primary_id));
-
-					$this->Mydb->delete('pos_product_assigned_tags',array('tag_product_primary_id'=>$pa_product_primary_id));
-
-					$this->Mydb->delete('pos_product_availability',array('product_availability_product_primary_id'=>$pa_product_primary_id));
-
-					$this->Mydb->delete('pos_product_bagel_modifiers',array('pbm_product_primary_id'=>$pa_product_primary_id));
-
-					$this->Mydb->delete('pos_product_combos',array('combo_product_primary_id'=>$pa_product_primary_id));
-
-					$this->Mydb->delete('pos_product_gallery',array('pro_gallery_product_primary_id'=>$pa_product_primary_id));
-
-					$this->Mydb->delete('pos_product_groups_details',array('group_detail_product_id'=>$product_id));
-
-					$this->Mydb->delete('pos_product_menu_component',array('pro_component_default_product_id'=>$product_id));
-
-					$this->Mydb->delete('pos_product_menu_component_items',array('menu_component_product_id'=>$product_id));
-
-					//pos_product_menu_set_component
-					//pos_product_menu_set_component_items
-
-				}
-
-					$recorddeleted = $this->Mydb->delete('pos_products',array('product_company_app_id'=>get_company_app_id(),'product_import' => 1 ));
-
-					if($recorddeleted != "")
-					{
-						$this->session->set_flashdata ( 'admin_success', 'Imported products deleted successfully' );
-						$result ['status'] = 'success';
-					}
-					else
-					{		   
-						$result ['status'] = 'error';
-						$result ['message'] = 'Failed to delete';				
-					}	
-
-					echo json_encode ( $result );
-					exit ();
-			} 
-
-			$data=array();		
-			$data ['module_label'] = $this->module_label;
-			$data ['module_labels'] = $this->module_labels;
-			$data ['module'] = $this->module;
-			$this->load->view($this->folder."/".$this->module."-import",$data);		
-                 
-	   }
-
-	/* download file */
-	public function download ($file_path = "")
-    {
-		$data=array();
-        $this->load->helper('download'); //load helper            
-        //$file_path = "product-template.csv";         
-        $layout="no_theme"; //if you have layout          
-        $data['download_path'] = $file_path;                                 		
-		$data ['module_label'] = $this->module_label;
-		$data ['module_labels'] = $this->module_labels;
-		$data ['module'] = $this->module;
-		$this->load->view($this->folder."/".$this->module."-import",$data);	                      
-                     
-    }
 
 	
 }

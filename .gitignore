@@ -22,6 +22,7 @@ media/posts/images/1ab15e40a72149c8adc2c7c737e62f44.jpg
 media/posts/images/1476c42cefdafc69ef7b5d6bf4ee2e25.jpg
 media/posts/videos/21555556fa49d2c92cd264f62ba895a4.mp4
 application/logs/log-2018-07-21.php
+<<<<<<< HEAD
 application/logs/log-2018-07-22.php
 application/config/bloggotoPro.pem
 application/logs/push_log_2018_07_22_15_00_21.txt
@@ -70,3 +71,9 @@ application/logs/vc/output_1/image.jpg
 application/logs/vc/output_1/Thumbs.db
 application/logs/vc/input/drop.avi
 application/logs/vc/input/Thumbs.db
+=======
+application/logs/log-2018-09-14.php
+application/logs/log-2018-09-15.php
+application/logs/log-2018-09-22.php
+application/logs/log-2018-09-25.php
+>>>>>>> d40556dc3fb2be64e15ec98037c16b51c8662e4e
