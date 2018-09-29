@@ -161,6 +161,9 @@ class Products extends CI_Controller {
 		}
 		else
 		{
+			$data = $this->load_module_info ();
+
+			$this->layout->display_site ( $this->folder . $this->module . "-views", $data );
 			
 		}
 	}
@@ -398,6 +401,21 @@ class Products extends CI_Controller {
 					'message' => get_label ( 'rest_cart_empty' ) 
 			);
 		}
+	}
+	public function cart()
+	{
+		//echo "inn"; exit;
+		$data = $this->load_module_info ();	
+		$product_category = $this->Mydb->get_all_records('*',$this->product_categorytable,array('pro_cate_status' => 'A'));
+		if(!empty($product_category))
+		{
+			foreach($product_category as $procat)
+			{
+				$category[$procat['pro_cate_id']] = $procat['pro_cate_name'];
+			}
+		}
+		$data['product_category'] = $category;
+		$this->layout->display_site ( $this->folder . $this->module . "-cart", $data );
 	}
 	
 	/* this method used to common module labels */
