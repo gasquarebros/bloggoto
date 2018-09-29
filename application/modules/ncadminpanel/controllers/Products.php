@@ -594,7 +594,7 @@ class Products extends CI_Controller
 			);
 			$where = array("assigned_mod_product_id"=>$record[$this->primary_key]);
 			
-			$assigned_modifiers = $this->Mydb->get_all_records ( 'assigned_mod_modifier_id,assigned_mod_product_id', 'product_assigned_modifiers', $where );
+			$assigned_modifiers = $this->Mydb->get_all_records ( 'assigned_mod_modifier_id,assigned_mod_product_id', 'product_assigned_modifiers', $where, '', '' ,'' ,'',array('assigned_mod_product_id','assigned_mod_modifier_id') );
 			$selected_modifiers = array();
 			if(!empty($assigned_modifiers)) {
 				foreach($assigned_modifiers as $selmodifier) {

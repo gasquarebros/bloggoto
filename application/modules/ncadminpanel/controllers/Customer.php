@@ -437,7 +437,7 @@ class Customer extends CI_Controller {
 		
 		$select_values="t1.*,t4.*, (SELECT login_time FROM pos_customer_login_history WHERE login_customer_id = t1.customer_id ORDER BY login_time DESC LIMIT 1) AS login_time";				
 		$record = $this->Mydb->custom_query_single ( "SELECT $select_values FROM pos_customers AS t1
-		LEFT JOIN pos_countries AS t4 ON t1.customer_country=t4.country_id
+		LEFT JOIN pos_countries AS t4 ON t1.customer_country=t4.id
 		WHERE t1.$this->primary_key= $id GROUP BY t1.$this->primary_key " );
 		
 		(empty ( $record )) ? redirect ( admin_url () . $this->module ) : '';

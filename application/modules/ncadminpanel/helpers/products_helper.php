@@ -234,6 +234,19 @@ if(!function_exists('get_shipping_list'))
 }
 
 
+if(!function_exists('get_order_item_modifier'))
+{
+	function get_order_item_modifier($item_subproduct_id='') {
+		if($item_subproduct_id !='')
+		{
+			
+		} else {
+			return array();
+		}
+		
+	}
+}
+
 /*  this function used to get all company avilability  list  
 if(!function_exists('get_product_availability'))
 {

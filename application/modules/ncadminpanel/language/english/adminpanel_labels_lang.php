@@ -294,3 +294,15 @@ $lang['report_post_title'] = "Post Title";
 $lang['report_customer_name'] = "Report Customer Name";
 $lang['post_customer_name'] = "Post Customer Name";
 $lang['report_created_on'] = "Created on";
+
+
+/* Orders module */
+$lang['orders_module'] = "Orders";
+$lang['order_label'] = "Order";
+$lang['order_labels'] = "Orders";
+$lang['order_local_no'] = "Local Order No.";
+$lang['customer_name'] = "Customer Name";
+$lang['order_sub_total'] = "Sub Total";
+$lang['order_total_amount'] = "Total";
+$lang['order_status'] = "Status";
+$lang['order_created_on'] = "Created on";

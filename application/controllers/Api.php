@@ -58,6 +58,7 @@ class Api extends REST_Controller {
 	}
 	
 	function login_post() {
+		
 		$alert = '';
 		$this->form_validation->set_rules ( 'username', 'Username', 'required|trim' );
 		$this->form_validation->set_rules ( 'password', 'Password', 'required|min_length[' . PASSWORD_LENGTH . ']|trim' );
@@ -106,14 +107,21 @@ class Api extends REST_Controller {
 			
 			$response ['status'] = 'error';
 			$response ['message'] = get_label ( $alert );
-
+		echo "response";
+		exit;
 			$this->response ( $response, something_wrong () ); /* error message */
+			exit;
 			
 		} else {
 
 			$response ['status'] = 'error';
 			$response ['message'] = validation_errors ();
+		echo "response";
+		exit;
 			$this->response ( $response, something_wrong () ); /* error message */
+			exit;
 		}
+		echo "sucess";
+		exit;
 	}
 } /* end of files */
