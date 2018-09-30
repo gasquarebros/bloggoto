@@ -8,7 +8,7 @@ ul {
 .inner-main {padding: 20px;}
 .mCustomScrollbar{height: 150px;}
 .search-key-box {
-    width: 100%;
+    width: 75%;
 }
 .search-key-box input[type="text"] {
     border: none;
@@ -20,6 +20,10 @@ ul {
     padding: 10px 25px;
     border-right: 1px solid #e7e7e7;
     border-radius: 5px 0 0 5px;
+}
+.search-key { 
+    width: calc(100% - 90px) !important;
+    float:left;
 }
 .cate_left {
     width: 19.0625%
@@ -68,45 +72,52 @@ ul {
     color: #4e4e4e
 }
 
-.cate_main .cate_list {
+.cate_main .cate_list,.subcate_list {
     position: relative
 }
 
-.cate_main .cate_list ul {
+.cate_main .cate_list ul, .subcate_list ul {
     padding: 0px
 }
 
-.cate_main .cate_list ul:hover {
+.cate_main .cate_list ul:hover, .subcate_list ul:hover {
     opacity: 1
 }
 
-.cate_main .cate_list ul li {
+.cate_main .cate_list ul li, .subcate_list ul li {
     list-style: none;
-    position: relative
+    position: relative;
+    border-bottom: 1px solid #e9e9e9;
 }
 
-.cate_main .cate_list>ul>li {
+.cate_main .cate_list ul li.active a, .subcate_list ul li.active a {
+    color: #FE9C1E
+}
+
+.cate_main .cate_list>ul>li, .subcate_list > ul > li {
     border-bottom: 1px solid #e9e9e9
 }
 
-.cate_main .cate_list>ul>li>a {
+.cate_main .cate_list>ul>li>a, .subcate_list>ul>li>a {
     display: inline-block;
     padding: 10px 19px 11px 45px
 }
 
-.cate_main .cate_list ul li a {
+.cate_main .cate_list ul li a, .subcate_list ul li a {
     font-size: 15px;
     color: #4e4e4e;
     position: relative;
     transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease
+    -webkit-transition: all 0.3s ease;
+    display: inline-block;
+    padding: 10px 19px 11px 45px;
 }
 
-.cate_main .cate_list ul li a:hover {
+.cate_main .cate_list ul li a:hover, .subcate_list ul li a:hover {
     color: #FE9C1E
 }
 
-.cate_main .cate_list ul li a:before {
+.cate_main .cate_list ul li a:before, .subcate_list ul li a:before {
     background: url(/images/full_sprite.png) no-repeat scroll 0 0 transparent;
     width: 35px;
     height: 35px;
@@ -119,7 +130,7 @@ ul {
     background-position: -3px -1585px
 }
 
-.cate_main .cate_list ul li a:after {
+.cate_main .cate_list ul li a:after, .subcate_list ul li a:before {
     width: 1px;
     height: 39px;
     position: absolute;
@@ -187,15 +198,14 @@ ul {
 
 .cate_right .searchbar-form .search-key-box input[type="text"] {
     border-radius: 0px;
-    -webkit-border-radius: 0px
+    -webkit-border-radius: 0px;
+    width: calc(100% - 90px);
+    float: left;
 }
 
 .cate_right .search-operate-box button[type="submit"] {
     border-radius: 0 5px 5px 0;
     -webkit-border-radius: 0 5px 5px 0;
-    right: -1px;
-    position: absolute;
-    top: 0;
     background: url(media/common/search-icon.png) no-repeat scroll center center #00c853;
     height: 55px;
     width: 70px;
@@ -207,6 +217,10 @@ ul {
 }
 .cate_right .search-operate-box button[type="submit"]:hover {
     background: url(media/common/search-icon.png) no-repeat scroll center center #2596b1;
+}
+.filter_part { 
+    width: 20%;
+    float: left;
 }
 
 .cate_banner {
@@ -274,7 +288,7 @@ ul {
     content: ''
 }
 
-.deals_part ul li {
+.list_prod_section {
     list-style: none;
     float: left;
     background: #fff;
@@ -285,16 +299,16 @@ ul {
     padding: 15px 15px 15px 15px
 }
 
-.deals_part ul li:hover {
+.list_prod_section:hover {
     box-shadow: 0 0 10px rgb(204, 204, 204);
     -webkit-box-shadow: 0 0 10px rgb(204, 204, 204)
 }
 
-.deals_part ul li:nth-child(3n+3) {
+.list_prod_section:nth-child(3n+3) {
     margin-right: 0px
 }
 
-.deals_part ul li .img_part {
+.list_prod_section .img_part {
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -302,7 +316,7 @@ ul {
     margin-bottom: 17px
 }
 
-.deals_part ul li .img_part .deal_icon {
+.list_prod_section .img_part .deal_icon {
     position: absolute;
     z-index: 1;
     max-width: 60px;
@@ -310,73 +324,73 @@ ul {
     bottom: 5px
 }
 
-.deals_part ul li .cont_part {
+.list_prod_section .cont_part {
     padding: 10px 10px 15px 10px
 }
 
-.deals_part ul li .cont_part .freedeals_list_bottom {
+.list_prod_section .cont_part .freedeals_list_bottom {
     min-height: 35px
 }
 
-.deals_part ul li .cont_part .freedeals_list_bottom:after {
+.list_prod_section .cont_part .freedeals_list_bottom:after {
     clear: both;
     display: block;
     content: ''
 }
 
-.deals_part ul li .cont_part .freedeals_list_bottom .quiz_merchant_sec,
-.deals_part ul li .cont_part .freedeals_list_bottom .endby {
+.list_prod_section .cont_part .freedeals_list_bottom .quiz_merchant_sec,
+.list_prod_section .cont_part .freedeals_list_bottom .endby {
     float: left;
     width: 48.5%
 }
 
-.deals_part ul li .cont_part .freedeals_list_bottom .endby {
+.list_prod_section .cont_part .freedeals_list_bottom .endby {
     float: right;
     text-align: right
 }
 
-.deals_part ul li .cont_part .sub_offer {
+.list_prod_section .cont_part .sub_offer {
     color: #d92b2e;
     font: 16px 'proxima_nova_rgbold';
     margin: 0 0 10px
 }
 
-.deals_part ul li .cont_part a {
+.list_prod_section .cont_part a {
     color: #2a2a2a;
     transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease
 }
 
-.deals_part ul li .cont_part a.quiz_merchant_sec {
+.list_prod_section .cont_part a.quiz_merchant_sec {
     font: 14px 'proxima_nova_rgbold'
 }
 
-.deals_part ul li .cont_part .quiz_merchant_title {
+.list_prod_section .cont_part .quiz_merchant_title {
     font-size: 13px;
     text-transform: none;
     margin-bottom: 10px
 }
 
-.deals_part ul li .cont_part a:hover {
+.list_prod_section .cont_part a:hover {
     color: #25c0d5
 }
 
-.deals_part ul li .cont_part .endby {
+.list_prod_section .cont_part .endby {
     margin: 0px;
     color: #2a2a2a;
     font: 14px 'proxima_nova_rgbold';
     min-height: 35px
 }
 
-.deals_part ul li .cont_part .endby span {
+.list_prod_section .cont_part .endby span {
     font-family: 'proxima_nova_rgbold'
 }
 
-.deals_part ul li .cont_part .endby span:nth-child(2) {
+.list_prod_section .cont_part .endby span:nth-child(2) {
     color: #25C6E1
 }
 
-.deals_part ul li .cont_part p {
+.list_prod_section .cont_part p {
     margin-bottom: 12px;
     line-height: normal;
     font-size: 14px;
@@ -384,39 +398,39 @@ ul {
     overflow: hidden
 }
 
-.deals_part ul li .cont_part .quiz_list_title {
+.list_prod_section .cont_part .quiz_list_title {
     font-family: "proxima_nova_rgbold";
     text-transform: none;
     font-size: 15px;
     line-height: normal
 }
 
-.deals_part ul li .cont_part .quiz_list_title a,
-.deals_part ul li .cont_part .quiz_list_title span {
+.list_prod_section .cont_part .quiz_list_title a,
+.list_prod_section .cont_part .quiz_list_title span {
     display: block
 }
 
-.deals_part ul li .cont_part .quiz_description {
+.list_prod_section .cont_part .quiz_description {
     font: 14px 'proxima_nova_rgregular';
     max-height: 32px
 }
 
-.deals_part ul li .cont_part .startby {
+.list_prod_section .cont_part .startby {
     margin: 0px;
     color: #2a2a2a;
     font: 14px 'proxima_nova_rgbold';
     min-height: 35px
 }
 
-.deals_part ul li .cont_part .startby span {
+.list_prod_section .cont_part .startby span {
     font-family: 'proxima_nova_rgbold'
 }
 
-.deals_part ul li .cont_part .startby span:nth-child(2) {
+.list_prod_section .cont_part .startby span:nth-child(2) {
     color: #25C6E1
 }
 
-.deals_part ul li .button_bar {
+.list_prod_section .button_bar {
     text-align: center;
     background: #fff;
     position: absolute;
@@ -435,14 +449,14 @@ ul {
     -webkit-transition: all 0.2s ease
 }
 
-.deals_part ul li:hover .button_bar {
+.list_prod_section:hover .button_bar {
     filter: alpha(opacity=100);
     -moz-opacity: 1;
     -khtml-opacity: 1;
     opacity: 1
 }
 
-.deals_part ul li .button_bar .common_but {
+.list_prod_section .button_bar .common_but {
     font-size: 16px;
     width: 100%;
     padding: 11px 10px 9px 10px;
@@ -455,17 +469,17 @@ ul {
     -webkit-border-radius: 4px
 }
 
-.deals_part ul li .button_bar .common_but:hover {
+.list_prod_section .button_bar .common_but:hover {
     border: 1px solid #25c0d5;
     color: #25c0d5;
     background-color: #fff
 }
 
-.deals_part ul li .button_bar .common_but:hover span {
+.list_prod_section .button_bar .common_but:hover span {
     color: #25c0d5
 }
 
-.deals_part ul li .button_bar:before {
+.list_prod_section .button_bar:before {
     width: 100%;
     height: 10px;
     background: #fff;
@@ -478,6 +492,9 @@ ul {
 
 .more_details_par {
     margin-top: 30px
+}
+.txtc {
+    text-align: center;
 }
 
 .more_details_par h5 {
@@ -523,9 +540,27 @@ ul {
     border: 2px solid #787878;
     padding: 6px 10px 5px 10px;
     min-width: 200px;
-    color: #787878
+    color: #787878;
+    cursor: pointer;
 }
-
+.common_but {
+    position: relative;
+    margin: 0px auto;
+    font: 14px 'proxima_nova_rgbold';
+    overflow: hidden;
+    color: #fff;
+    display: inline-block;
+    z-index: 8;
+    transition: all 0.1s ease;
+    -webkit-transition: all 0.1s ease;
+    background: #25c0d5;
+    text-transform: uppercase;
+    padding: 7px 10px 6px 10px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    min-width: 90px;
+    text-align: center;
+}
 .more_details_par .common_but:hover {
     background: #25c0d5;
     color: #fff;
@@ -560,11 +595,11 @@ ul {
     padding-bottom: 20px
 }
 
-.flashsale-main .deals_part ul li .img_part {
+.flashsale-main .list_prod_section .img_part {
     position: relative
 }
 
-.flashsale-main .deals_part ul li .img_part img {
+.flashsale-main .list_prod_section .img_part img {
     max-height: 195px
 }
 
@@ -683,209 +718,165 @@ select {
     transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
 }
+.show_less_category, .show_less_subcategory { 
+    display:none;
+}
+
+#slider-range {
+    margin:0px 13px 13px 13px;
+}
+
+.ui-slider-range {
+    background-color: #2874f0;
+}
+.ui-slider-handle {
+    border-radius: 50%;
+}
+
 </style>
 <?php
 echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css'));
 ?>
-
+<script type="text/javascript" src="<?php echo skin_url(); ?>js/products.js"></script>
 <section>
-   <div class="container">
-      <h2 class="main_heading">Magazines</h2>
-<!--       <div class="section_menu">
-			<?php if(!empty($product_category)) { ?>
-         <ul class="category_menu blog_category">
-				<?php $active = "active";
-				foreach($product_category as $prokey=>$productcategory) { ?>         	
-            <li> <a data-type="" href="javascript:void(0)" class="	active"><?php echo $productcategory; ?></a> </li>
-				<?php $active=''; } ?>
-         </ul>
-			<?php } ?>         
-         <a href="javascript:void(0)" class="more_items"> <i class="fa fa-angle-double-down" aria-hidden="true"></i> </a> 
-      </div> -->
-      <div class="inner-main flashsale-main leftcatdisplay">
-         <div class="category_part">
-            <div class="container">
-               <div class="cate_left fl">
-                  <div class="cate_main">
-                     <div class="cate_title">
-                        <h6> <i class="fa fa-bars" aria-hidden="true"></i> View By CATEGORIES </h6>
-                     </div>
-                     <div class="cate_list">
-			<?php if(!empty($product_category)) { ?>
-                        <ul class="mCustomScrollbar">
-				<?php $active = "active";
-				foreach($product_category as $prokey=>$productcategory) { ?>         	
-            <li> <a data-type="" href="javascript:void(0)" class="	active"><?php echo $productcategory; ?></a> </li>
-				<?php $active=''; } ?>                        	
-                           <li class="allcategories"> <a class="freedeal_filters" data-slug="" href="/flash-sale">View All Categories</a> </li>
-                        </ul>
-			<?php } ?>         
-                     </div>
-                  </div>
-                  <div class="cate_main">
-                     <div class="cate_title">
-                        <h6> <i class="fa fa-bars" aria-hidden="true"></i> View By SUB-CATEGORIES </h6>
-                     </div>
-                     <div class="cate_list mCustomScrollbar" >
-                        <ul>
-                           <li class="food">
-                              <a class="freedeal_filters" data-slug="food-dining" href="/flash-sale/index/food-dining">Food &amp; Dining</a> 
-                            </li>
-                           <li class="women">
-                              <a class="freedeal_filters" data-slug="fashion-accessories" href="/flash-sale/index/fashion-accessories">Fashion &amp; Accessories</a> 
-                           </li>
-                           <li class="beauty">
-                              <a class="freedeal_filters" data-slug="beauty-spas" href="/flash-sale/index/beauty-spas">Beauty &amp; Spas</a> 
-                           </li>
-                           <li class="toys">
-                              <a class="freedeal_filters" data-slug="lifestyle-gifts" href="/flash-sale/index/lifestyle-gifts">Lifestyle &amp; Gifts</a> 
-                           </li>
-                           <li class="automobile">
-                              <a class="freedeal_filters" data-slug="transport-automotive" href="/flash-sale/index/transport-automotive">Transport &amp; Automotive</a> 
-                           </li>
-                           <li class="digital">
-                              <a class="freedeal_filters" data-slug="digital-electronics" href="/flash-sale/index/digital-electronics">Digital &amp; Electronics</a> 
-                           </li>
-                           <li class="allcategories"> <a class="freedeal_filters" data-slug="" href="/flash-sale">View All Categories</a> </li>                        </ul>
-                     </div>
-                  </div>                  
-               </div>
-               <div class="cate_right fr">
-                  <div class="category_with_search">
-                     <form id="form-flashsale-searchbar" action="/flash-sale" method="post" role="form">
-                        <div class="search-key-box fl">
-                           <div class="form-group field-products-product_name required"> <input type="text" id="products-product_name" class="search-key" name="Products[product_name]" placeholder="I'm shopping for..." autocomplete="off"> </div>
+    <div class="container">
+        <div class="inner-main flashsale-main leftcatdisplay">
+            <div class="category_part">
+                <div class="container">
+                <div class="cate_left fl">
+                    <div class="cate_main">
+                        <div class="cate_title">
+                            <h6> <i class="fa fa-bars" aria-hidden="true"></i> CATEGORIES </h6>
                         </div>
-                        <div class="search-operate-box fl">
-                           <button type="submit" class="search-button"></button> 
+                        <div class="cate_list">
+                            <ul class="mCustomScrollbar">
+                                <li class="categories active"><a data-type="">All Categories</a></li>
+                            <?php if(!empty($product_category)) { ?>
+                                <?php 
+                                $active = "category_product";
+                                $i=1;
+                                foreach($product_category as $prokey=>$productcategory) { 
+                                    if($i > 5) { $active="category_product show_less_category"; } ?> 
+                                    <li class=" categories <?php echo $active; ?>"> <a data-type="<?php echo $prokey; ?>" href="javascript:void(0)" class=""><?php echo $productcategory; ?></a> </li>
+                                <?php $i++; } ?>  
+                                <?php if($i > 5) { ?>                      	
+                                    <li class="allcategories"> <a class="freedeal_filters">View More</a> </li>
+                                    <li class="show_less_category hide_category" style="display:none;"><a class="freedeal_filters">View Less</a></li>
+                                <?php } ?>
+                            <?php } ?>    
+                                    
+                            </ul>     
                         </div>
+                    </div>
+                    <div class="cate_main">
+                        <div class="cate_title">
+                            <h6> <i class="fa fa-bars" aria-hidden="true"></i> SUB-CATEGORIES </h6>
+                        </div>
+                        <div class="subcate_list " >
+                            <ul class="mCustomScrollbar">
+                                <li class="categories active"><a data-type="">All Sub Categories</a></li>
+                                <?php 
+                                $active = "subcategory_product";
+                                $i=1;
+                                foreach($product_subcategory as $prokey=>$productsubcategory) { 
+                                    if($i > 5) { $active="subcategory_product show_less_subcategory"; } ?> 
+                                    <li class="categories <?php echo $active; ?>"> <a data-type="<?php echo $prokey; ?>" href="javascript:void(0)" class=""><?php echo $productsubcategory; ?></a> </li>
+                                <?php $i++; } ?>  
+                                <?php if($i > 5) { ?>                      	
+                                    <li class="allsubcategories"> <a class="freedeal_filters">View More</a> </li>
+                                    <li class="show_less_subcategory hide_subcategory" style="display:none;"><a class="freedeal_filters">View Less</a></li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </div>  
+                    <div class="cate_main">
+                        <div class="cate_title">
+                            <h6> <i class="fa fa-bars" aria-hidden="true"></i> PRICE </h6>
+                        </div>            
+                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                        <input type="text" id="price_from" readonly style="display:none">
+                        <input type="text" id="price_end" readonly style="display:none">
+                        
+                        <div id="slider-range"></div>         
+                    </div>                
+                </div>
+                <div class="cate_right fr">
+                    <div class="category_with_search">
+                         <?php echo form_open('',' id="common_search" class="form-inline"');?>
+                            <div class="search-key-box fl">
+                                <div class="form-group field-products-product_name required"> 
+                                    <input type="text" id="products-product_name" class="search-key" name="Products[product_name]" placeholder="I'm shopping for..." autocomplete="off"> 
+                                    <div class="search-operate-box fl">
+                                    <button type="submit" class="search-button"></button> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter_part">
+                                <div class="filter_heading"> <span>Sort By</span> </div>
+                                <div class="filter_section">
+                                    <div class="filter_sortby">
+                                        <select id="product-sort" name="sort_by">
+                                            <option value="" selected="">Select Sort By</option>
+                                            <option value="price-low">Price Low to High</option>
+                                            <option value="price-high">Price High to Low</option>
+                                            <option value="asc">A-Z </option>
+                                            <option value="desc">Z-A </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        <?php echo form_close(); ?>
                         <div class="clear"></div>
-                     </form>
-                     <div class="clear"></div>
-                  </div>
-                  <div class="filter_part">
-                     <div class="filter_heading"> <span>All Sales</span> </div>
-                     <div class="filter_section">
-
-                        <div class="filter_sortby">
-                           <select id="flashsale-sort" name="sort_by">
-                              <option value="" selected="">Select Sort By</option>
-                              <option value="featured">Featured FlashSale</option>
-                              <option value="toprated">Top Rated FlashSale</option>
-                              <option value="bestselling">Best Selling </option>
-                           </select>
-                        </div>
-                     </div>
-                  </div>
-                     	<br>      
-
-                  <div class="deals_part flash_sale_deals">
-                     <ul>
-                        <li style="height: 433px;">
-                           <div class="img_part">
-                              <a class="main-title  flash_section-any-2-choices-of-castella-spongecakes-for-2-off" title="Any 2 choices of Castella Spongecakes for $2 off" href="<?php echo base_url().'products/view';?>"> <img src="https://freelor.com/frontend/web/images/products/lecastellahYLvAyIXAVfMC-m7uOVJZr7DHW-VP8BE.jpg" alt="Any 2 choices of Castella Spongecakes for $2 off"> </a> <span class="feature-tag"> <img src="/images/featured.png" alt="featured Flash Sale"> </span> 
-                              <span class="discount-tag">
-                                 11% Off 
-                                 <p></p>
-                              </span>
-                           </div>
-                           <div class="cont_part">
-                              <a class="main-title  flash_section-any-2-choices-of-castella-spongecakes-for-2-off" title="Any 2 choices of Castella Spongecakes for $2 off" href="/flash-sale/detail/any-2-choices-of-castella-spongecakes-for-2-off">Any 2 choices of Castella Spongecakes for $2 off</a> 
-                              <p>Taiwan's famous Le Castella Fluffy Sponge Cakes</p>
-                              <a href="<?php echo base_url().'products/view';?>" class="product_merchant">Le Castella Singapore</a> 
-                              <div class="discount-part fl txtl">
-                                 <p class="discount">5% Cashback</p>
-                                 <p class="sold">14 Sold</p>
-                              </div>
-                              <div class="price-part fr txtr">
-                                 <p class="old-price">S$19.80</p>
-                                 <p class="new-price">S$17.80</p>
-                              </div>
-                              <div class="clear"></div>
-                           </div>
-                           <div class="button_bar"> <a href="<?php echo base_url().'products/view';?>" class=" common_but flash_section-any-2-choices-of-castella-spongecakes-for-2-off"> <span>Buy Now</span> </a> </div>
-                        </li>
-                        <li style="height: 433px;">
-                           <div class="img_part">
-                              <a class="main-title  flash_section-hard-shell-aluminum-alloy-abs-polycarbonate-travel-luggage" title="Hard Shell Aluminum Alloy ABS Polycarbonate Travel Luggage" href="<?php echo base_url().'products/view';?>"> <img src="https://freelor.com/frontend/web/images/products/freelor-luggage6Mabld4d1WctuFaMrxqKTEBLfzDiUaB4.jpg" alt="Hard Shell Aluminum Alloy ABS Polycarbonate Travel Luggage"> </a> <span class="feature-tag"> <img src="/images/featured.png" alt="featured Flash Sale"> </span> 
-                              <span class="discount-tag">
-                                 48% Off 
-                                 <p></p>
-                              </span>
-                           </div>
-                           <div class="cont_part">
-                              <a class="main-title  flash_section-hard-shell-aluminum-alloy-abs-polycarbonate-travel-luggage" title="Hard Shell Aluminum Alloy ABS Polycarbonate Travel Luggage" href="<?php echo base_url().'products/view';?>">Hard Shell Aluminum Alloy ABS Polycarbonate Travel Luggage</a> 
-                              <p>Retro design luggage with multiple size and colors to choose from</p>
-                              <a href="/merchants/detail/freelor" class="product_merchant">Freelor.com!</a> 
-                              <div class="discount-part fl txtl">
-                                 <p class="discount">5% Cashback</p>
-                                 <p class="sold">12 Sold</p>
-                              </div>
-                              <div class="price-part fr txtr">
-                                 <p class="old-price">S$150.00</p>
-                                 <p class="new-price">S$79.00</p>
-                              </div>
-                              <div class="clear"></div>
-                           </div>
-                           <div class="button_bar"> <a href="<?php echo base_url().'products/view';?>" class=" common_but flash_section-hard-shell-aluminum-alloy-abs-polycarbonate-travel-luggage"> <span>Buy Now</span> </a> </div>
-                        </li>
-                        <li style="height: 433px;">
-                           <div class="img_part">
-                              <a class="main-title  flash_section-brightime-boxy-fancy-brick-single-watch-winder" title="Brightime Boxy Fancy Brick Single Watch Winder" href="<?php echo base_url().'products/view';?>"> <img src="https://freelor.com/frontend/web/images/products/brightime-boxytqKI0FHsupDFmosTpDe8wUFdPAiNVofv.jpg" alt="Brightime Boxy Fancy Brick Single Watch Winder"> </a> <span class="feature-tag"> <img src="/images/featured.png" alt="featured Flash Sale"> </span> 
-                              <span class="discount-tag">
-                                 20% Off 
-                                 <p></p>
-                              </span>
-                           </div>
-                           <div class="cont_part">
-                              <a class="main-title  flash_section-brightime-boxy-fancy-brick-single-watch-winder" title="Brightime Boxy Fancy Brick Single Watch Winder" href="<?php echo base_url().'products/view';?>">Brightime Boxy Fancy Brick Single Watch Winder</a> 
-                              <p>Superior Edition of Brick Winder System. Perfect gift for any occasion.</p>
-                              <a href="/merchants/detail/brightime" class="product_merchant">Brightime By Championtime</a> 
-                              <div class="discount-part fl txtl">
-                                 <p class="discount">5% Cashback</p>
-                                 <p class="sold">3 Sold</p>
-                              </div>
-                              <div class="price-part fr txtr">
-                                 <p class="old-price">S$198.00</p>
-                                 <p class="new-price">S$160.00</p>
-                              </div>
-                              <div class="clear"></div>
-                           </div>
-                           <div class="button_bar"> <a href="<?php echo base_url().'products/view';?>" class=" common_but flash_section-brightime-boxy-fancy-brick-single-watch-winder"> <span>Buy Now</span> </a> </div>
-                        </li>
-                     </ul>
-                     <div class="more_details_par txtc">
-                        <h5> <span> <span class="display_current_count">12</span> of <span class="total_current_count">136</span> </span> </h5>
-                        <a data-search="yes" data-type="past" href="/flash-sale" data-nextpage="2" class="common_but lazy_load_flashsale"> <span>Show more</span> </a> 
-                     </div>
+                    </div>
                     
-                  </div>
-               </div>
-               <div class="clear"></div>
+                    <br>      
+
+                    <div class="deals_part flash_sale_deals append_html">
+                        <!--<div class="deals_part flash_sale_deals">
+                            <ul class="append_html">
+                            </ul>
+                        </div>
+                        <div class="more_details_par txtc">
+                            <h5> <span> <span class="display_current_count">12</span> of <span class="total_current_count">136</span> </span> </h5>
+                            <a data-search="yes" data-type="past" href="/flash-sale" data-nextpage="2" class="common_but lazy_load_flashsale"> <span>Show more</span> </a> 
+                        </div>-->
+                    </div>
+                    <?php echo loading_image('cnt_loading');?>
+                </div>
+                <div class="clear"></div>
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </section>
 
 <?php
 	echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js'));
-?>
-	<script> 
-		$(window).on("load",function(){
-			$(".mCustomScrollbar").mCustomScrollbar({
-				autoHideScrollbar:true,
-			});
-		});
-		
-	</script>
-<!-- <script>
-/*  load initial content.. */
-$(window).load(function(){
-	$(".mCustomScrollbar").mCustomScrollbar({
-		autoHideScrollbar:true,
-		   axis:"x", // horizontal scrollbar
-		theme:"rounded"
-	});	
-});
-</script> -->
+?> 
+
+
+<script> 
+    $(window).on("load",function(){
+        $(".mCustomScrollbar").mCustomScrollbar({
+            autoHideScrollbar:true,
+        });
+        get_content(); 
+    });
+    $( "#slider-range" ).slider({
+        range: true,
+        min: 1,
+        max: 10000,
+        values: [ 1, 10000 ],
+        slide: function( event, ui ) {
+            $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+            $('#price_from').val(ui.values[0]);
+            $('#price_end').val(ui.values[1]);
+        },
+        stop: function( event, ui ) {
+            get_content();
+        },
+    });
+    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +" - $" + $( "#slider-range" ).slider( "values", 1 ) );
+    $('#price_from').val($( "#slider-range" ).slider( "values", 0 ));
+    $('#price_end').val($( "#slider-range" ).slider( "values", 1 ));
+</script>

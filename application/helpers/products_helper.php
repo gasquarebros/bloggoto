@@ -241,6 +241,31 @@ if (!function_exists('show_status')) {
 	}
 }
 
+/* this function used to show output status */
+if (!function_exists('find_discount')) {
+	function find_discount($orginal_price,$special_price=null,$from_date=null,$to_date=null) {
+		$valid = true;
+		$discount_percent = 0;
+	
+		if($from_date !='' && strtotime(date('Y-m-d')) < strtotime($from_date))
+		{
+			$valid = false;
+		}
+		if($to_date !='' && strtotime(date('Y-m-d')) > strtotime($to_date))
+		{
+			$valid = false;
+		}
+		if($valid == true && $special_price !='')
+		{
+			$discount_price = $orginal_price - $special_price;
+			$discount_percent = (($discount_price * 100)/$orginal_price);  
+		}
+		return ceil($discount_percent);
+	}
+}
+
+
+
 
 /*  this function used to get all company avilability  list  
 if(!function_exists('get_product_availability'))

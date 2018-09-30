@@ -19,8 +19,10 @@ class Products extends CI_Controller {
 		$this->product_gallery = "product_gallery";
 		$this->customers = "customers";
 		$this->product_categorytable = "product_categories";
+		$this->product_subcategorytable = "product_subcategories";
 		$this->primary_key='product_primary_id';
 		$this->load->library('common');
+		$this->load->helper('products');
 	}
 	
 	/* this method used to check login */
@@ -37,6 +39,16 @@ class Products extends CI_Controller {
 			}
 		}
 		$data['product_category'] = $category;
+
+		$product_subcategory = $this->Mydb->get_all_records('*',$this->product_subcategorytable,array('pro_subcate_status' => 'A'));
+		if(!empty($product_subcategory))
+		{
+			foreach($product_subcategory as $procat)
+			{
+				$subcategory[$procat['pro_subcate_id']] = $procat['pro_subcate_name'];
+			}
+		}
+		$data['product_subcategory'] = $subcategory;
 		$this->layout->display_site ( $this->folder . $this->module . "-list", $data );
 	}
 	
@@ -57,7 +69,13 @@ class Products extends CI_Controller {
 			$type = post_value ( 'type' );
 			$order_field = post_value ( 'order_field' );
 		}
-		
+
+		$cat = post_value ( 'type' );
+		$subcat = post_value('subcat');
+		$price_range_from = post_value ( 'price_from' );
+		$price_range_end = post_value('price_end');
+		$sortby = post_value('sortby');
+		$search = post_value('search');
 		/*
 		if ($search_field !='') {
 			$like = array (
@@ -65,16 +83,56 @@ class Products extends CI_Controller {
 			);
 		}*/
 		
-		if ($search_field != "") {
+		if ($search != "") {
 			$where = array_merge ( $where, array (
-					"product_category_id" => $search_field 
+				"product_name" => $search 
 			));
 		}
 		
-		if ($type != "") {
+		if ($cat != "" && $cat != 'undefined') {
 			$where = array_merge ( $where, array (
-					"product_category_id" => $type 
+				"product_category_id" => $cat 
 			));
+		}
+
+		if ($subcat != "" && $subcat != 'undefined') {
+			$where = array_merge ( $where, array (
+				"product_subcategory_id" => $subcat 
+			));
+		}
+
+		if ($price_range_from != "" && $price_range_from != 'undefined') {
+			$where = array_merge ( $where, array (
+				"product_price >=" => $price_range_from 
+			));
+		}
+
+		if ($price_range_end != "" && $price_range_end != 'undefined') {
+			$where = array_merge ( $where, array (
+				"product_price <=" => $price_range_end 
+			));
+		}
+
+		if($sortby !='' && $sortby == 'price-low')
+		{
+			$order_by = array (
+				'product_price' => 'ASC' 
+			);
+		} else if($sortby !='' && $sortby == 'price-high')
+		{
+			$order_by = array (
+				'product_price' => 'DESC' 
+			);
+		} else if($sortby !='' && $sortby == 'asc')
+		{
+			$order_by = array (
+				'product_name' => 'ASC' 
+			);
+		} else if($sortby !='' && $sortby == 'desc')
+		{
+			$order_by = array (
+				'product_name' => 'DESC' 
+			);
 		}
 		
 		/* add sort bu option */
@@ -101,20 +159,29 @@ class Products extends CI_Controller {
 		$groupby = $this->primary_key;
 	    $totla_rows = $this->Mydb->get_num_join_rows ( $this->primary_key, $this->table, $where, null, null, null, $like, $groupby, $join  );
 		
-		
+		//print_r(post_value('page'));
+		//exit;
 		$limit = 12;
-		$page = post_value ( 'page' )?$post_value ( 'page' ):1;
+		$page = post_value ( 'page' )?post_value ( 'page' ):1;
 		$offset = post_value ( 'page' )?((post_value ( 'page' )-1) * $limit):0;
 		$offset = post_value ( 'offset' )?post_value ( 'offset' ):$offset;
 		$next_offset = $offset+$limit;
 		$next_set = ($totla_rows > $next_offset)?($offset+$limit):'';
-		
+
 		
 		
 		$data['offset'] = $offset;
 		$select_array = array ($this->table.'.*');
 		$data ['records'] = $this->Mydb->get_all_records ( $select_array, $this->table, $where, $limit, $offset, $order_by, $like, $groupby, $join );
-		
+		//echo  "<pre>";
+		//print_r($data);
+		//exit;
+		$current_records = (($page-1)*$limit)+count($data ['records']);
+		$data['current_records'] = $current_records;
+		$data['total_rows'] = $totla_rows;
+		$data['page'] = $page;
+//echo $this->db->last_query();
+//exit;
 		$html = get_template ( $this->folder . '/' . $this->module . '-ajax-list', $data );
 		echo json_encode ( array (
 				'status' => 'ok',

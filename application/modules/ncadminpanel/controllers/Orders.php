@@ -134,10 +134,61 @@ class Orders extends CI_Controller
 		) );
 		exit ();
 	}
+
+	function update_order_status($order_primary_id)
+	{
+
+	}
 	
 	function view($view_id)
 	{
 		$id=decode_value($view_id);
+		if ($this->input->post ( 'action' ) == "Add") {
+			//if ($this->form_validation->run () == TRUE) {
+				$order_items = $_POST['orderitems'];
+				if(!empty($order_items)) {
+					$item_statuses = $order_items['item_status'];
+					$item_shipping = $order_items['shiiping_id'];
+					$shipping_items = $order_items['item_shipping'];
+					
+					$all_item_update = 1;
+					if(!empty($item_statuses)){
+						foreach($item_statuses as $item_key=>$item_status)
+						{
+							$update_array = array(
+								'item_order_status' => $item_status
+							);
+							$this->Mydb->update ( 'pos_order_items', array ('item_id' => $item_key ), $update_array );
+							$i_shipping = $shipping_items[$item_key];
+							
+							$shipping_update = array(
+								'shipping_track_code' => $item_shipping[$item_key]
+							);
+							$this->Mydb->update ( 'order_item_shipping', array ('shipping_id' => $i_shipping ), $shipping_update );
+
+							if($item_status != 2){
+								$all_item_update = 0;
+							}
+							
+						}
+					}
+				}
+				if($all_item_update == 1){
+					$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>5) );
+				} else {
+					$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>1) );
+				}
+
+				$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_edit' ), $this->module_label ) );
+				$response ['status'] = 'success';
+			/*} else {
+				$result ['status'] = 'error';
+				$result ['message'] = validation_errors ();
+			}*/
+			
+			echo json_encode ( $response );
+			exit ();
+		}
 		$data = $this->load_module_info ();
 		$like = array ();
 		$where = array (
@@ -160,7 +211,8 @@ class Orders extends CI_Controller
 		$join [1] ['condition'] = "order_status = status_id";
 		$join [1] ['type'] = "INNER";
 		
-		$join [2] ['select'] = "item_order_primary_id,item_product_id,item_subproductid,item_subproduct_name,item_name,item_image,item_sku,item_slug,item_specification,item_qty,item_unit_price,item_total_amount,item_merchant_name,item_merchant_id, (select shipping_name from pos_order_item_shipping where shipping_id = shiiping_id) as item_shipping_details";
+		//$join [2] ['select'] = "item_id,item_order_primary_id,item_product_id,item_subproductid,item_subproduct_name,item_name,item_image,item_sku,item_slug,item_specification,item_qty,item_unit_price,item_total_amount,item_merchant_name,item_merchant_id, item_order_status,shiiping_id, (select shipping_name from pos_order_item_shipping where shipping_id = shiiping_id) as item_shipping_details,(select shipping_track_url from pos_order_item_shipping where shipping_id = shiiping_id) as item_shipping_url,(select shipping_track_code from pos_order_item_shipping where shipping_id = shiiping_id) as item_shipping_code";
+		$join [2] ['select'] = "item_id,item_order_primary_id,item_product_id,item_subproductid,item_subproduct_name,item_name,item_image,item_sku,item_slug,item_specification,item_qty,item_unit_price,item_total_amount,item_merchant_name,item_merchant_id, item_order_status,shiiping_id";
 		$join [2] ['table'] = "pos_order_items";
 		$join [2] ['condition'] = "item_order_primary_id = ".$this->primary_key;
 		$join [2] ['type'] = "LEFT";
@@ -170,15 +222,20 @@ class Orders extends CI_Controller
 		$join [3] ['table'] = "pos_order_shipping_address";
 		$join [3] ['condition'] = "order_shipping_order_primary_id = ".$this->primary_key;
 		$join [3] ['type'] = "INNER";
+
+		$join [4] ['select'] = "pos_order_item_shipping.*";
+		$join [4] ['table'] = "pos_order_item_shipping";
+		$join [4] ['condition'] = "shipping_id = shiiping_id";
+		$join [4] ['type'] = "INNER";
 		
 		$groupby = "order_primary_id";
 		$select_array = array (
 			'pos_orders.*'
 		);
 		$record = $this->Mydb->get_all_records ( $select_array, $this->table, $where, '','', $order_by, $like,$groupby, $join );
-		echo "<pre>";
-		print_r($record);
-		exit;
+		//echo "<pre>";
+		//print_r($record);
+		//exit;
 		(empty ( $record )) ? redirect ( admin_url () . $this->module ) : '';
 		
 		$data['records'] 	= 	$record;
