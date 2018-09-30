@@ -12,12 +12,13 @@
 	</td>
 	<td class="associates_dropdown">
 		<?php if(!empty($selected_modifiers)) { 
+			$i=0;
 			foreach($selected_modifiers as $sel_modifier) { 
 				$assigned_modifier_values = get_modifier_list(array('pro_modifier_value_modifier_id'=>$sel_modifier));
 
 				if(!empty($assigned_modifier_values)) { 
 		?>
-					<select name="ProductAssociates[<?php echo $sel_modifier; ?>][]">
+					<select name="ProductAssociates[<?php echo $i; ?>][attributes][<?php echo $sel_modifier; ?>][]">
 						<?php 
 						foreach($assigned_modifier_values as $modifiervalue) { ?>
 							<option value="<?php echo $modifiervalue['pro_modifier_value_id']; ?>"><?php echo $modifiervalue['pro_modifier_value_name']; ?></option>
@@ -28,7 +29,7 @@
 		<?php	}
 		?>
 				
-		<?php }
+		<?php $i++; }
 		} ?>
 	</td>
 	<td>

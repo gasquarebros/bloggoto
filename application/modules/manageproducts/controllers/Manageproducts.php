@@ -193,7 +193,7 @@ class Manageproducts extends CI_Controller
 			$this->form_validation->set_rules ( 'product_sku', 'lang:product_sku', 'required|callback_validate_sku' );
 			$this->form_validation->set_rules ( 'product_price', 'lang:product_price', 'required' );
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
-			$this->form_validation->set_rules ( 'product_customer_id', 'lang:product_customer_id', 'required' );
+			//$this->form_validation->set_rules ( 'product_customer_id', 'lang:product_customer_id', 'required' );
 		
 			/*$this->form_validation->set_rules ( 'product_category', 'lang:product_categorie', 'required|callback_validate_category' );
 			
@@ -298,7 +298,8 @@ class Manageproducts extends CI_Controller
 	private function insert_product_assosiate($parent_product)
 	{
 		$modelsProductAssociates = $this->input->post('ProductAssociates');
-		$associate_keys = array_keys($modelsProductAssociates);
+		
+
 		// delete the associates products assigned table entries
 		//ProductAssociates::deleteAll(['prod_ass_product_id' => $model->product_id]);
 		//ProductAttributes::deleteAll(['prod_ass_att_parent_productid' => $model->product_id]);
@@ -310,7 +311,8 @@ class Manageproducts extends CI_Controller
 			$associates_products = array();
 			foreach($modelsProductAssociates[0]['product_name'] as $subprod_key=>$model_product_sublevels)
 			{			
-
+				$associate_keys = array_keys($modelsProductAssociates[0]['attributes']);
+				
 				$categories = explode('~',post_value ( 'subcategory' ));
 
 				// insert or update need to perform here
@@ -319,12 +321,16 @@ class Manageproducts extends CI_Controller
 					$product_slug = make_slug ( $model_product_sublevels, $this->table, 'product_slug', array (
 						$this->primary_key . "!=" => $modelsProductAssociates[0]['product_ids'][$subprod_key]
 					));
-					$record = $this->Mydb->get_record ( '*', $this->table, array (
-						$this->primary_key => $modelsProductAssociates[0]['product_ids'][$subprod_key]
-					) );
-					if($record['product_id'] !='') {
-						$subproduct_id = $record['product_id'];
-					} else {
+					if($modelsProductAssociates[0]['product_ids'][$subprod_key] != '') {
+						$record = $this->Mydb->get_record ( '*', $this->table, array (
+							$this->primary_key => $modelsProductAssociates[0]['product_ids'][$subprod_key]
+						) );
+						if($record['product_id'] !='') {
+							$subproduct_id = $record['product_id'];
+						} else {
+							$subproduct_id = get_guid ( $this->table, 'product_id' );
+						}
+					} else { 
 						$subproduct_id = get_guid ( $this->table, 'product_id' );
 					}
 					
@@ -358,16 +364,18 @@ class Manageproducts extends CI_Controller
 				}
 				else
 				{
+					$subproduct_id = get_guid ( $this->table, 'product_id' );
 					$product_slug = make_slug ( $model_product_sublevels, $this->table, 'product_slug' );
 					$insert_array = array (
 						'product_type' => 'simple',
+						'product_id' => $subproduct_id,
 						'product_name' => $model_product_sublevels,
 						'product_alias' => '',
 						'product_sku' => $modelsProductAssociates[0]['product_sku'][$subprod_key],
 						'product_parent_id' => $parent_product,
 						'product_quantity' => $modelsProductAssociates[0]['product_qty'][$subprod_key],
 						'product_slug' => $product_slug,
-						'product_customer_id' => post_value ( 'product_customer_id' ),
+						'product_customer_id' => get_user_id(),
 						'product_category_id' => $categories[0],
 						'product_subcategory_id' => $categories[1],
 						'product_short_description' => post_value ( 'product_short_description' ),
@@ -381,7 +389,7 @@ class Manageproducts extends CI_Controller
 						//'product_meta_keywords' => post_value ( 'product_meta_keywords' ),
 						//'product_meta_description' => post_value ( 'product_meta_description' ),
 						'product_created_on' => current_date (),
-						'product_created_by' => get_admin_id (),
+						'product_created_by' => get_user_id (),
 						'product_created_ip' => get_ip ()
 					);
 
@@ -392,22 +400,25 @@ class Manageproducts extends CI_Controller
 				
 				
 				$attributes_subprod = array();
+
 				foreach($associate_keys as $ass_att_key=>$assocaite_attribute)
 				{
-					
-					if($ass_att_key > 0)
-					{
-						$attributes_subprod[]= ['prod_ass_att_attribute_id' => $assocaite_attribute,'prod_ass_att_attribute_name'=>'','prod_ass_att_attribute_value_name'=>'','prod_ass_att_attribute_value_id'=>$modelsProductAssociates[$assocaite_attribute][$subprod_key],'prod_ass_att_product_id'=>$insert_id,'prod_ass_att_parent_productid'=>$parent_product];
-					}
+
+						$attributes_subprod[]= ['prod_ass_att_attribute_id' => $assocaite_attribute,'prod_ass_att_attribute_name'=>'','prod_ass_att_attribute_value_name'=>'','prod_ass_att_attribute_value_id'=>$modelsProductAssociates[0]['attributes'][$assocaite_attribute][$subprod_key],'prod_ass_att_product_id'=>$insert_id,'prod_ass_att_parent_productid'=>$parent_product];
 				}
-				$associates_products[]=['prod_ass_product_id' => $parent_product,'prod_ass_sub_product_id'=>$insert_id];
+				$associates_products[]=array('prod_ass_product_id' => $parent_product,'prod_ass_sub_product_id'=>$insert_id);
 				if(!empty($attributes_subprod))
 				{
 					$this->db->insert_batch('product_assigned_attributes',$attributes_subprod);
 				}
+				//echo "<pre>";
+				//print_r($attributes_subprod);
+				//echo $this->db->last_query();
+				
 				$subsequence++;
 			}
 		}
+		//exit;
 		if(!empty($associates_products))
 		{
 			$this->db->insert_batch('product_associate_products',$associates_products);
@@ -613,6 +624,7 @@ class Manageproducts extends CI_Controller
 			$data ['assigned_associate_attributes'] = $this->Mydb->get_all_records ( '*', 'product_assigned_attributes', array (
 				'prod_ass_att_parent_productid' => $record[$this->primary_key] 
 			) );
+
 
 			$data ['assigned_products'] = $this->Mydb->get_all_records ( '*', 'products', array (
 				'product_parent_id' => $record[$this->primary_key] 
@@ -1095,7 +1107,7 @@ function numcheck($in)
 						'pro_gallery_product_primary_id' => $insert_id,
 						'pro_gallery_product_id' => $product_id,
 						'pro_gallery_updated_on' => current_date (),
-						'pro_gallery_updated_by' => get_admin_id (),
+						'pro_gallery_updated_by' => get_user_id (),
 						'pro_gallery_updated_ip' => get_ip () 
 				);
 				

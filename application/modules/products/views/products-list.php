@@ -292,8 +292,8 @@ ul {
     list-style: none;
     float: left;
     background: #fff;
-    width: 32.282352941176473%;
-    margin-right: 1.568627450980392%;
+    width: 32%;
+    margin-right: 1%;
     margin-bottom: 1.568627450980392%;
     position: relative;
     padding: 15px 15px 15px 15px
@@ -304,9 +304,6 @@ ul {
     -webkit-box-shadow: 0 0 10px rgb(204, 204, 204)
 }
 
-.list_prod_section:nth-child(3n+3) {
-    margin-right: 0px
-}
 
 .list_prod_section .img_part {
     position: relative;

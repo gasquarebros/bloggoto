@@ -47,7 +47,7 @@
 			if($record['product_special_price'] !='' && $discount > 0) {?>
 				<div class="price-part fr txtr">
 					<p class="old-price"><?php echo show_price($record['product_price']);?></p>
-					<p class="new-price"><?php echo show_pricey($record['product_special_price']);?></p>
+					<p class="new-price"><?php echo show_price($record['product_special_price']);?></p>
 				</div>
 			<?php } else { ?>
 				<div class="price-part fr">

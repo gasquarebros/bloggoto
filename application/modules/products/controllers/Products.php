@@ -209,7 +209,7 @@ class Products extends CI_Controller {
 			$join [0] ['condition'] = "pro_cate_id = product_category_id";
 			$join [0] ['type'] = "LEFT";
 			
-			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo";
+			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_username";
 			$join [1] ['table'] = $this->customers;
 			$join [1] ['condition'] = "product_customer_id = customer_id";
 			$join [1] ['type'] = "LEFT";
@@ -224,7 +224,62 @@ class Products extends CI_Controller {
 			$select_array = array ($this->table.'.*');
 			$records = $this->Mydb->get_all_records ( $select_array, $this->table, $where, '', '', $order_by, $like, $groupby, $join );
 			$data ['records'] = $records;
-			$this->layout->display_site ( $this->folder . $this->module . "-view", $data );
+
+			$data ['gallery_images'] = $this->Mydb->get_all_records ( 'pro_gallery_image,pro_gallery_primary_id', 'product_gallery', array (
+				'pro_gallery_product_primary_id' => $records[0] [$this->primary_key] 
+			) );
+
+			/*get shipping methods*/
+			$data ['assigned_shipping'] = $this->Mydb->get_all_records ( '*', 'product_assigned_shipping_methods', array (
+				'prod_ass_ship_method_prodid' => $records[0][$this->primary_key] 
+			) );
+			
+			if($records[0]['product_type'] == 'attribute') {
+				
+				$join = "";
+			
+				$join [0] ['select'] = "pro_modifier_primary_id,pro_modifier_id,pro_modifier_name,pro_modifier_display";
+				$join [0] ['table'] = "product_modifiers";
+				$join [0] ['condition'] = "pro_modifier_id = prod_ass_att_attribute_id";
+				$join [0] ['type'] = "INNER";
+				/* not in product availability id condition  */
+				$join [1] ['select'] = "group_concat(pro_modifier_value_primary_id) as value_primary_id,group_concat(pro_modifier_value_id) as value_id,group_concat(pro_modifier_value_name) as value_name,group_concat(pro_modifier_value_image) as value_images";
+				$join [1] ['table'] = "product_modifier_values";
+				$join [1] ['condition'] = "pro_modifier_value_id = prod_ass_att_attribute_value_id";
+				$join [1] ['type'] = "LEFT";	
+				
+				$groupby = "pro_modifier_value_modifier_primary_id";
+				$select_array = array (
+					'*',  
+				);
+				$where = array("assigned_mod_product_id"=>$records[0][$this->primary_key]);
+				
+				$assigned_modifiers = $this->Mydb->get_all_records ( 'assigned_mod_modifier_id,assigned_mod_product_id', 'product_assigned_modifiers', $where, '', '' ,'' ,'',array('assigned_mod_product_id','assigned_mod_modifier_id') );
+				
+				$selected_modifiers = array();
+				if(!empty($assigned_modifiers)) {
+					foreach($assigned_modifiers as $selmodifier) {
+						$selected_modifiers[] = $selmodifier['assigned_mod_modifier_id'];
+					}
+				}
+				
+				$data['assigned_modifiers'] = $selected_modifiers;
+				
+				/*get_assigned_associate_products*/
+				$data ['assigned_associate_attributes'] = $this->Mydb->get_all_records ( 'product_assigned_attributes.*', 'product_assigned_attributes', array (
+					'prod_ass_att_parent_productid' => $records[0][$this->primary_key] 
+				) ,'', '', '', '', '',$join);
+
+				$data ['assigned_products'] = $this->Mydb->get_all_records ( '*', 'products', array (
+					'product_parent_id' => $records[0][$this->primary_key] 
+				) );
+				// echo "<pre>";
+				// print_r($data);
+				// exit;
+			}
+			
+			//echo "<pre>"; print_r($data); exit;
+			$this->layout->display_site ( $this->folder . $this->module . "-views", $data );
 		}
 		else
 		{
@@ -234,6 +289,208 @@ class Products extends CI_Controller {
 			
 		}
 	}
+
+	public function getattributecombination() {
+		
+		check_site_ajax_request();
+		$data = $this->load_module_info ();
+		$like = array ();
+		
+		$order_by = array (
+				$this->primary_key => 'DESC' 
+		);
+		$where = array('product_status'=>'A');
+		/* Search part start */
+		$params = $response = array();
+		$status= "failed";
+		if($_POST['selectionid'] !='')
+		{
+			$productid = decode_value($_POST['selectionid']);
+			$selected_attributes = $_POST['selected_attribute_values'];
+			if(!empty($selected_attributes))
+			{
+				foreach($selected_attributes as $choosedattributes)
+				{
+					$sel_attribute_id = str_replace('sku-','',$choosedattributes['selectionid']);
+					$sel_attribute_value_id = ($choosedattributes['selectionvalue'])?$choosedattributes['selectionvalue']:'';
+					
+					$atrributes[] =array('attribute_id'=>$sel_attribute_id,'attribute_value'=>$sel_attribute_value_id);
+				}
+			}
+			$params['attributes'] = $atrributes;
+			$params['productid'] = $productid;
+
+			$combinations = $this->actionProductcombination($params);
+
+			if(!empty($combinations))
+			{
+
+				$status = "success";
+				$response = $combinations['data'][0];
+			}
+			echo json_encode ( array (
+					'status' => $status,
+					'response' => $response,
+			) );
+			//return json_encode(array('status'=>$status,'response'=>$response));
+		}
+		else{
+			return $this->redirect(['index']);
+		}
+	}
+
+
+	public function actionProductcombination($filters)
+	{
+		
+		$records = array();
+		$records[]= array('message'=>"Invalid Combination");
+		$status = "error";
+		//$filters = Yii::$app->request->get('filter');
+		$get_sub_product ='yes';
+		$sel_where = '';
+		$attributes = $filters['attributes'];
+		$source = (isset($filters['source']))?$filters['source']:'';
+		if($source == 'mobile')
+		{
+			$attributes = json_decode($attributes,true);
+		}
+		$groupby = array('prod_ass_att_product_id');
+		if(!empty($attributes) && $filters['productid'] !='')
+		{
+			$selected_attributes = array();
+			foreach($attributes as $selattribute)
+			{
+				if($selattribute['attribute_value'] !='')
+				{
+					$selected_attributes[$selattribute['attribute_id']] = $selattribute['attribute_value'];
+					if($sel_where !='')
+					{
+						$sel_where.=" OR ";
+					}
+					$sel_where .= "(prod_ass_att_attribute_id = '".$selattribute['attribute_id']."' AND prod_ass_att_attribute_value_id = '".$selattribute['attribute_value']."')";
+				}
+			}
+
+			if(!empty($selected_attributes))
+			{
+				if(count($attributes) == count($selected_attributes))
+				{
+					$where = "prod_ass_att_parent_productid = '".$filters['productid']."'";
+					if($sel_where !='')
+					{
+						$where .= " AND (".$sel_where.")";
+					}
+					$join = '';
+					$join [0] ['select'] = "products.*";
+					$join [0] ['table'] = "products";
+					$join [0] ['condition'] = "product_primary_id = prod_ass_att_product_id";
+					$join [0] ['type'] = "INNER";
+					/* not in product availability id condition  */
+					/*$join [1] ['select'] = "group_concat(pro_modifier_value_primary_id) as value_primary_id,group_concat(pro_modifier_value_id) as value_id,group_concat(pro_modifier_value_name) as value_name,group_concat(pro_modifier_value_image) as value_images";
+					$join [1] ['table'] = "product_modifier_values";
+					$join [1] ['condition'] = "pro_modifier_value_id = prod_ass_att_attribute_value_id";
+					$join [1] ['type'] = "LEFT";*/	
+					
+					$products = $this->Mydb->get_all_records ( 'product_assigned_attributes.*', 'product_assigned_attributes', $where ,'', '', $order_by='', $like='', $groupby, $join);
+				
+					/*$query = ProductAttributes::find()->select('count(prod_ass_att_product_id ) as attributecount, product_assigned_attributes.prod_ass_att_product_id,products.*')->joinWith(['prodAssAttProduct','prodAssAttProduct.productsGalleries'])->where(['and', $where])->groupBy($groupby)->having("attributecount = :count", [":count" => count($selected_attributes)]);
+					//echo $query->createCommand()->getRawSql();
+					$products = $query->all();*/
+					if(!empty($products))
+					{
+						$product = $products[0];
+						if(!empty($product))
+						{
+							$product_image = '';
+							$records = array();
+							$status ="success";
+						
+							$product_special_from_date = ($product['product_special_price_from_date'] !='' && $product['product_special_price_from_date'] !='0000-00-00 00:00:00')?date('Y-m-d',strtotime($product['product_special_price_from_date'])):'';
+							$product_special_to_date = ($product['product_special_price_to_date'] !='' && $product['product_special_price_to_date'] !='0000-00-00 00:00:00')?date('Y-m-d',strtotime($product['product_special_price_to_date'])):'';
+						
+							$discount_percent = 0;
+							if($product['product_special_price'] !='')
+							{
+								$discount_percent = find_discount($product['product_price'],$product['product_special_price'],$product_special_from_date,$product_special_to_date);
+							}
+							/*
+							if(!empty($product['productsGalleries']))
+							{
+								$product_image = Url::base(Yii::$app->params['server_scheme']).Yii::$app->params['thumb_prod_img_350'].$product['productsGalleries'][0]['prod_gallery_image_name'];
+							}*/		
+							$records[] = array('id'=>$product['product_id'],'name'=>$product['product_name'],'product_slug'=>$product['product_slug'],'product_description'=>$product['product_long_description'],'product_short_description'=>$product['product_short_description'],'product_price'=>$product['product_price'],'product_special_price'=>$product['product_special_price'],'product_special_from_date'=>$product_special_from_date,'product_special_to_date'=>$product_special_to_date,'discount_percent'=>$discount_percent,'product_qty'=>$product['product_quantity'],'product_image'=>$product_image);
+						}
+					}			
+					// get the sub product entry prices and its info
+				}
+				else
+				{
+					$where = "prod_ass_att_parent_productid = ".$filters['productid'];
+					if($sel_where !='')
+					{
+						$where .= " AND (".$sel_where.")";
+					}
+					$query = ProductAttributes::find()->select('count(prod_ass_att_product_id ) as attributecount, product_assigned_attributes.prod_ass_att_product_id')->where(['and', $where])->groupBy($groupby)->having("attributecount = :count", [":count" => count($selected_attributes)]);
+					//echo $query->createCommand()->getRawSql();
+					//exit;
+					$products = $query->all();
+					if(!empty($products))
+					{
+						foreach($products as $product)
+						{
+							$associate_product[]= $product['prod_ass_att_product_id'];
+						}
+						$subwhere = "prod_ass_att_product_id in (".implode(',',$associate_product).")";
+						$subproducts_attributes_options = ProductAttributes::find()->joinWith(['prodAssAttAttribute','prodAssAttAttributeValue'])->where($subwhere);
+						//echo $subproducts_attributes_options->createCommand()->getRawSql();
+						$subproducts_attributes_options = $subproducts_attributes_options->all();
+						$options = array();
+						if(!empty($subproducts_attributes_options))
+						{
+							foreach($subproducts_attributes_options as $suboptions)
+							{
+								$prod_attributes = $suboptions->prodAssAttAttribute;
+								if(empty($options[$prod_attributes['attribute_id']]))
+								{
+									$options[$prod_attributes['attribute_id']] = array('attribute_id'=>$prod_attributes['attribute_id'],'attribute_name'=>$prod_attributes['attribute_name'],'attribute_display'=>$prod_attributes['attribute_display'],'attribute_values'=>array());
+								}
+								
+								$prod_attributes_values = $suboptions->prodAssAttAttributeValue;
+								if(isset($options[$prod_attributes_values['value_attribute_id']]) && !empty($options[$prod_attributes_values['value_attribute_id']]))
+								{
+									$options[$prod_attributes_values['value_attribute_id']]['attribute_values'][$prod_attributes_values['value_id']] = array('value_id'=>$prod_attributes_values['value_id'],'value_name'=>$prod_attributes_values['value_name'],'value_image'=>$prod_attributes_values['value_image']);
+								}
+							}
+							
+							$final_available_options = array();
+							$i=0;
+							foreach($options as $opt)
+							{
+								$final_available_options[$opt['attribute_name']] = $opt;
+								$final_available_options[$opt['attribute_name']]['attribute_values'] = array_values($opt['attribute_values']);
+								$i++;
+							}
+							$status="success";
+							//$records = array();
+							$records = array('availableoptions'=>$final_available_options);
+						}
+					}
+					
+					// get the combination of the attributes for the selected attributes
+					
+				}
+			}
+			else{
+				// get all attribute for the main product section
+			}
+		}
+		return [
+			'status' =>$status,
+			'data'=>$records,
+		];
+	}
+	
 	
 
 	public function add_to_cart()
