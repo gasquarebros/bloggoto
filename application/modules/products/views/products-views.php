@@ -382,7 +382,7 @@ var module_action="addpost";
 
 .color-size-ship {
     border-bottom: 1px solid #d3d3d3;
-    margin-bottom: 23px;
+    margin-bottom: 15px;
     position: relative
 }
 
@@ -816,6 +816,13 @@ var module_action="addpost";
     border: 1px solid #53a318
 }
 
+.selectship-part { 
+    margin-bottom: 15px;
+}
+.selectship-part h6 {
+    font-size: 16px;
+}
+
 </style>
 <?php
 echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css'));
@@ -931,6 +938,27 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 						</ul>
 					</div>
 				<?php } $attribu++; } ?>
+            </div>
+        <?php } ?>
+    
+        <?php if(!empty($assigned_shipping)) { ?>
+            <div class="selectship-part">
+                <h6>SELECT SHIPPING <span class="estimate"></span></h6>
+                <select name="shpping_method" id="shipping_method">
+                    <option value="">Select Shipping Method</option>
+                    <?php 
+                    $enable=0;
+                    foreach($assigned_shipping as $product_shipping) { 
+                        if($product_shipping['prod_ass_ship_method_is_combined'] == 'Yes') { 
+                            $enable = 1; 
+                        }
+                    ?>
+                            <option value="<?php echo encode_value($product_shipping['prod_ass_ship_method_shipid'])."--".$product_shipping['ship_method_name']; ?>"><?php echo $product_shipping['ship_method_name'].' - '.show_price($product_shipping['prod_ass_ship_method_price']); ?></option>
+                    <?php } ?>
+                </select>
+                <?php /* if($enable == 1) { 
+                    echo "<p class='shipping_combine_enable'>".($merchant['count_products']>0)?"Available for combine shipping (<a href='".Url::toRoute('merchants/detail/'.$merchant['slug'])."#shopping' target='_self'>".$merchant['count_products']."</a>)":'Available for combine shipping '."</p>";
+                } */ ?>
             </div>
         <?php } ?>
             

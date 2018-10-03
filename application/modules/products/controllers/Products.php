@@ -228,11 +228,17 @@ class Products extends CI_Controller {
 			$data ['gallery_images'] = $this->Mydb->get_all_records ( 'pro_gallery_image,pro_gallery_primary_id', 'product_gallery', array (
 				'pro_gallery_product_primary_id' => $records[0] [$this->primary_key] 
 			) );
-
+			
+			
 			/*get shipping methods*/
-			$data ['assigned_shipping'] = $this->Mydb->get_all_records ( '*', 'product_assigned_shipping_methods', array (
-				'prod_ass_ship_method_prodid' => $records[0][$this->primary_key] 
-			) );
+			$join = "";
+			$join [0] ['select'] = "ship_method_name,ship_method_status";
+			$join [0] ['table'] = "shipping_methods";
+			$join [0] ['condition'] = "ship_method_id = prod_ass_ship_method_shipid";
+			$join [0] ['type'] = "INNER";
+			$data ['assigned_shipping'] = $this->Mydb->get_all_records ( 'product_assigned_shipping_methods.*', 'product_assigned_shipping_methods', array (
+				'prod_ass_ship_method_prodid' => $records[0][$this->primary_key],'ship_method_status'=>'A' 
+			) ,'', '', '', '', '',$join);
 			
 			if($records[0]['product_type'] == 'attribute') {
 				
@@ -253,7 +259,7 @@ class Products extends CI_Controller {
 					'*',  
 				);
 				$where = array("assigned_mod_product_id"=>$records[0][$this->primary_key]);
-				
+				/*
 				$assigned_modifiers = $this->Mydb->get_all_records ( 'assigned_mod_modifier_id,assigned_mod_product_id', 'product_assigned_modifiers', $where, '', '' ,'' ,'',array('assigned_mod_product_id','assigned_mod_modifier_id') );
 				
 				$selected_modifiers = array();
@@ -263,19 +269,16 @@ class Products extends CI_Controller {
 					}
 				}
 				
-				$data['assigned_modifiers'] = $selected_modifiers;
+				$data['assigned_modifiers'] = $selected_modifiers;*/
 				
 				/*get_assigned_associate_products*/
 				$data ['assigned_associate_attributes'] = $this->Mydb->get_all_records ( 'product_assigned_attributes.*', 'product_assigned_attributes', array (
 					'prod_ass_att_parent_productid' => $records[0][$this->primary_key] 
 				) ,'', '', '', '', '',$join);
 
-				$data ['assigned_products'] = $this->Mydb->get_all_records ( '*', 'products', array (
+				/*$data ['assigned_products'] = $this->Mydb->get_all_records ( '*', 'products', array (
 					'product_parent_id' => $records[0][$this->primary_key] 
-				) );
-				// echo "<pre>";
-				// print_r($data);
-				// exit;
+				) );*/
 			}
 			
 			//echo "<pre>"; print_r($data); exit;
@@ -283,10 +286,7 @@ class Products extends CI_Controller {
 		}
 		else
 		{
-			$data = $this->load_module_info ();
-
-			$this->layout->display_site ( $this->folder . $this->module . "-views", $data );
-			
+			redirect(base_url().'products');	
 		}
 	}
 
@@ -490,6 +490,20 @@ class Products extends CI_Controller {
 			'data'=>$records,
 		];
 	}
+
+	private function validate_product($productid,$subproductid=null){
+		$join = '';
+		$join [0] ['select'] = "customers.*";
+		$join [0] ['table'] = "customers";
+		$join [0] ['condition'] = "customer_id = product_customer_id";
+		$join [0] ['type'] = "INNER";
+		if($subproductid !=''){
+			$where = array('product_id'=>$subproductid);
+		} else {
+			$where = array('product_primary_id'=>decode_value($productid));
+		}
+		return $this->Mydb->get_join_record ( $this->table.'.*', $this->table, $where,'',$join);
+	}
 	
 	
 
@@ -499,77 +513,100 @@ class Products extends CI_Controller {
 		check_site_ajax_request();
 		if($userid !='')
 		{
-			$this->form_validation->set_rules ( 'reference_id', 'lang:rest_customer_id_required', 'trim|callback_validate_cutomer' );
-			$this->form_validation->set_rules ( 'product_name', 'lang:rest_product_name', 'trim|required' );
-			$this->form_validation->set_rules ( 'product_sku', 'lang:rest_product_sku', 'required' );
+			//$this->form_validation->set_rules ( 'reference_id', 'lang:rest_customer_id_required', 'trim|callback_validate_cutomer' );
+			//$this->form_validation->set_rules ( 'product_name', 'lang:rest_product_name', 'trim|required' );
+			//$this->form_validation->set_rules ( 'product_sku', 'lang:rest_product_sku', 'required' );
 			$this->form_validation->set_rules ( 'product_qty', 'lang:rest_product_cart_qty', 'trim|required' );
-			$this->form_validation->set_rules ( 'product_unit_price', 'lang:rest_product_unit_price', 'trim|required' );
-			$this->form_validation->set_rules ( 'product_total_price', 'lang:rest_product_total_price', 'trim|required' );
+			$this->form_validation->set_rules('productid','lang:product_id','required');
+			$this->form_validation->set_rules('shipping_method','lang:shipping_method','trim|required');
+			//$this->form_validation->set_rules ( 'product_unit_price', 'lang:rest_product_unit_price', 'trim|required' );
+			//$this->form_validation->set_rules ( 'product_total_price', 'lang:rest_product_total_price', 'trim|required' );
 			if ($this->form_validation->run () == TRUE) {
 				
 				/* post values */
-				$reference_id = $this->post ( 'reference_id' ); /* mobile device id or browser session id */
-				$customer_id = $this->post ( 'customer_id' );
-				$product_id = $this->post ( 'product_id' );
-				$product_price = $this->post ( 'product_total_price' );
-				$product_qty = $this->post ( 'product_qty' );
-				
+				$reference_id = $customer_id = $userid; /* mobile device id or browser session id */
+				$product_id = $this->input->post ( 'productid' );
+				$product_price = $this->input->post ( 'product_total_price' );
+				$product_qty = $this->input->post ( 'product_qty' );
+				//echo "<pre>"; print_r($_POST); 
 				/* validate product */
-				$products = $this->validate_product ($product_id);
-				$user_where = ($reference_id == "") ? array (
-						'cart_customer_id' => $customer_id 
-				) : array (
-						'cart_session_id' => $reference_id 
-				);
 				
-				$cart_exists = $this->Mydb->get_record ( 'cart_id', 'cart_details', array_merge ( array (
-						'cart_app_id' => $app_id,
-						'cart_availability_id' => $avilablity_id 
-				), $user_where ) );
-				
-				if (empty ( $cart_exists )) {
+				$products = $this->validate_product($product_id,$this->input->post('subproduct'));
 
-					/* Add new cart details */
-					//$delivery_charge = $this->get_delivery_charge( $avilablity_id, $delivery_charge ); /* if set delivery charge only delivery products.. */
+				if(!empty($products)) {
+					$shipping_method_assigned = array();
+					$shipping = explode('--',$this->input->post('shipping_method'));
+					$products['assigned_shipping'] = array();
 					$delivery_charge = 0;
-					$sub_total = $product_price;
-					$grand_total = $sub_total + $delivery_charge;
-				
-					$cart = array (
-						'cart_customer_id' => $customer_id,
-						'cart_session_id' => $reference_id,
-						'cart_total_items' => $product_qty,
-						'cart_delivery_charge' => $delivery_charge,
-						'cart_sub_total' => $product_price,
-						'cart_grand_total' => $grand_total,
-						'cart_created_on' => current_date (),
-						'cart_created_ip' => get_ip () 
+					if(count($shipping) == 2)
+					{
+						$shipping_id = decode_value($shipping[0]);
+						$shipping_method_assigned = $this->Mydb->get_record ( '*', 'product_assigned_shipping_methods', array('prod_ass_ship_method_shipid'=>$shipping_id,'prod_ass_ship_method_prodid'=>decode_value($product_id)));
+						$products['assigned_shipping'] = $shipping_method_assigned;
+						if(!empty($shipping_method_assigned)) {
+							$shipping_option = array('shipping_id'=>$shipping_id,'shipping_name'=>$shipping[1],'shipping_method_price'=>$shipping_method_assigned['prod_ass_ship_method_price']);
+							$delivery_charge = $shipping_method_assigned['prod_ass_ship_method_price'];
+						}
+					}
+					$subproduct_selection_name = '';
+					$product_id = $this->input->post ( 'productid' );
+					$product_quantity = $this->input->post ( 'product_qty' );
+					$user_where = ($reference_id == "") ? array (
+						'cart_customer_id' => $customer_id 
+					) : array (
+						'cart_session_id' => $reference_id 
 					);
 					
-					$insert_id = $this->Mydb->insert ( 'cart_details', $cart );
-				}
-				
-				$cart_unique_id = (! empty ( $cart_exists )) ? $cart_exists ['cart_id'] : $insert_id;
-				/* insert cart products.. */
-				if ($cart_unique_id != "") {
+					$cart_exists = $this->Mydb->get_record ( 'cart_id', 'cart_details', $user_where );
 					
+					if (empty ( $cart_exists )) {
+						$delivery_charge = $cart_exists['cart_delivery_charge'] + $delivery_charge;
+						$sub_total = $product_price;
+						$grand_total = $sub_total + $delivery_charge;
+						$cart = array (
+							'cart_customer_id' => $customer_id,
+							'cart_session_id' => $reference_id,
+							'cart_total_items' => $product_quantity,
+							'cart_delivery_charge' => $delivery_charge,
+							'cart_sub_total' => $sub_total,
+							'cart_grand_total' => $grand_total,
+							'cart_created_on' => current_date (),
+							'cart_created_ip' => get_ip () 
+						);
 						
-					$simple_items = $this->Mydb->get_record ( 'cart_item_id,cart_item_cart_id', 'cart_items', array (
-							'cart_item_cart_id' => $cart_unique_id,
-							'cart_item_type' => 'Simple',
-							'cart_item_product_id' => $product_id,
-							'cart_item_special_notes' =>  (trim($this->post ( 'product_remarks' ))=="" ? "" : trim($this->post ( 'product_remarks' ))) 
-					) );
-					
-					if (empty ( $simple_items )  ) {
-						$result = $this->insert_cart_items ( $cart_unique_id, $_POST); /* insert cart items */
-					} else {
-						$result = $this->update_cart_items ( $simple_items ['cart_item_id'], $_POST, $simple_items ['cart_item_cart_id']);
+						$insert_id = $this->Mydb->insert ( 'cart_details', $cart );
+						
 					}
-				}
-				else {
+					$cart_unique_id = (! empty ( $cart_exists )) ? $cart_exists ['cart_id'] : $insert_id;
+					
+					if ($cart_unique_id != "") {
+						$simple_items = $this->Mydb->get_record ( 'cart_item_id,cart_item_cart_id', 'cart_items', array (
+							'cart_item_cart_id' => $cart_unique_id,
+							'cart_item_product_id' => decode_value($product_id)
+						) );
+						
+							
+						if (empty ( $simple_items )  ) {
+
+							$shipping_option['cartid'] = $cart_unique_id;
+							$insert_shipping_id = $this->Mydb->insert ( 'cart_details', $shipping_option );
+							$products['assigned_shipping']['insert_shipping_id'] = $insert_shipping_id;
+
+							$result = $this->insert_cart_items ( $cart_unique_id, $_POST,$products); 
+
+						} else {
+
+							$result = $this->update_cart_items ( $simple_items ['cart_item_id'], $_POST, $simple_items ['cart_item_cart_id'],$products);
+							
+						}
+					}
+					else {
+						$result['status']  = "error";
+						$result['message'] = "Something Went Wrong, Try again later";
+					}
+				} else{
 					$result['status']  = "error";
-					$result['message'] = "Something Went Wrong, Try again later";
+					$result['message'] = "Invalid Product";
 				}
 			} else {
 				
@@ -585,39 +622,106 @@ class Products extends CI_Controller {
 		}
 		echo json_encode($result);
 	}
+
+	/* this function used to insert product modifier information */
+	private function _insert_item_modifier($cart_item_id, $modifiers, $cart_id) {
+
+		$join = "";
+		$join [0] ['select'] = "product_assigned_attributes.*";
+		$join [0] ['table'] = "product_assigned_attributes";
+		$join [0] ['condition'] = "prod_ass_att_product_id = product_primary_id";
+		$join [0] ['type'] = "INNER";
+
+		$join [1] ['select'] = "product_modifiers.*";
+		$join [1] ['table'] = "product_modifiers";
+		$join [1] ['condition'] = "pro_modifier_id = product_assigned_attributes.prod_ass_att_attribute_id";
+		$join [1] ['type'] = "LEFT";
+
+		$join [2] ['select'] = "product_modifier_values.*";
+		$join [2] ['table'] = "product_modifier_values";
+		$join [2] ['condition'] = "pro_modifier_value_id = product_assigned_attributes.prod_ass_att_attribute_value_id";
+		$join [2] ['type'] = "LEFT";
+
+		$where = array('product_id' => $this->input->post('subproduct'));
+		$modifiers_section = $this->Mydb->get_all_records ( $this->table.'.*', $this->table, $where, '', '', '', '','', $join );
+		$modifiers_insert = array();
+		if(!empty($modifiers_section)){
+			foreach($modifiers_section as $modifierselection){
+				$modifiers_insert[] = array(
+					'cartid' => $cart_id,
+					'itemid' => $cart_item_id,
+					'attribute_id' => $modifierselection['pro_modifier_id'],
+					'attribute_name' => $modifierselection['pro_modifier_name'],
+					'attribute_value_id' => $modifierselection['pro_modifier_value_id'],
+					'attribute_value_name' => $modifierselection['pro_modifier_value_name'],
+					'attribute_value_image' => $modifierselection['pro_modifier_value_image']
+				);
+			}
+		}
+
+		if(!empty($modifiers_insert)){
+			$this->db->insert_batch('pos_cart_attributes',$modifiers_insert);
+		}
+		return true;
+	}
 	
 	
 	/* this method used to insert cart items */
-	private function insert_cart_items($cart_unique_id, $post_arary) {
+	private function insert_cart_items($cart_unique_id, $post_arary,$products) {
 		$_POST = $post_arary;
 		$cart_unique_id = $cart_unique_id;
-		$reference_id = $this->post ( 'reference_id' ); /* mobile device id or browser session id */
-		$customer_id = $this->post ( 'customer_id' );
-		$product_id = $this->post ( 'product_id' );
-		$product_price = $this->post ( 'product_total_price' );
-		$product_qty = $this->post ( 'product_qty' );
-		$product_remarks = ($this->post ( 'product_remarks' )!="")?$this->post('product_remarks'):"";
+		$reference_id = $this->input->post ( 'reference_id' ); /* mobile device id or browser session id */
+		$customer_id = get_user_id();
+		$product_id = $this->input->post ( 'productid' );
+		//$product_price = $this->post ( 'product_total_price' );
+		$product_qty = $this->input->post ( 'product_qty' );
+		$product_remarks = ($this->input->post ( 'product_remarks' )!="")?$this->input->post('product_remarks'):"";
+		
+		$discount_percent = 0;
+		$product_special_from_date = ($products['product_special_price_from_date'] !='' && $products['product_special_price_from_date'] !='0000-00-00 00:00:00')?date('Y-m-d',strtotime($products['product_special_price_from_date'])):'';
+		$product_special_to_date = ($products['product_special_price_to_date'] !='' && $products['product_special_price_to_date'] !='0000-00-00 00:00:00')?date('Y-m-d',strtotime($products['product_special_price_to_date'])):'';
+		if($products['product_special_price'] !='')
+		{
+			$discount_percent = find_discount($products['product_price'],$products['product_special_price'],$product_special_from_date,$product_special_to_date);
+		}
+		if($discount_percent > 0){
+			$product_current_price = $products['product_special_price'];
+		} else { 
+			$product_current_price = $products['product_price']; 
+		}
 		
 		$cart_items = array (
-				'cart_item_customer_id' => $customer_id,
-				'cart_item_session_id' => $reference_id,
-				'cart_item_cart_id' => $cart_unique_id,
-				'cart_item_product_id' => $product_id,
-				'cart_item_product_name' => addslashes ( $this->post ( 'product_name' ) ),
-				'cart_item_product_sku' => addslashes ( $this->post ( 'product_sku' ) ),
-				'cart_item_product_image' => addslashes ( $this->post ( 'product_image' ) ),
-				'cart_item_qty' => $product_qty,
-				'cart_item_unit_price' => $this->post ( 'product_unit_price' ),
-				'cart_item_total_price' => $this->post ( 'product_total_price' ),
-				'cart_item_created_on' => current_date (),
-				'cart_item_special_notes' => $product_remarks,  
+			'cart_item_customer_id' => $customer_id,
+			'cart_item_session_id' => $reference_id,
+			'cart_item_cart_id' => $cart_unique_id,
+			'cart_item_product_id' => decode_value($product_id),
+			'cart_item_product_name' => addslashes ( urldecode($this->input->post ( 'product_name' ) )),
+			'cart_item_product_sku' => addslashes ( $this->input->post ( 'product_sku' ) ),
+			'cart_item_product_image' => addslashes ( $products['product_thumbnail'] ),
+			'cart_item_qty' => $product_qty,
+			'cart_item_unit_price' => $product_current_price,
+			'cart_item_product_orginal_price' => $products['product_price'],
+			'cart_item_total_price' => $product_current_price * $product_qty,
+			'cart_item_created_on' => current_date (),
+			//'cart_item_special_notes' => $product_remarks,
+			'cart_item_product_type'  => ($products['product_parent_id'] !='')?'attribute':$products['product_type'],
+			'cart_item_product_discount' => $discount_percent,
+			'cart_item_subproduct_id' 	=> $this->input->post('subproduct'),
+			'cart_item_subproduct_name' 	=> $products['product_name'],
+			'cart_item_merchant_id' 	=> $products['product_customer_id'],
+			'cart_item_merchant_name' 	=> $products['customer_username'],
+			'cart_item_shiiping_id' => (!empty($products['assigned_shipping']))?$products['assigned_shipping']['insert_shipping_id']:'',
+			'cart_item_shipping_product_price' => (!empty($products['assigned_shipping']))?$products['assigned_shipping']['prod_ass_ship_method_price']:'',
 		);
 		
-		$cart_item_id = $this->Mydb->insert ( 'cart_items', $cart_items );
+		$cart_item_id = $this->Mydb->insert('cart_items', $cart_items);
 		
+		if($cart_item_id !='' && !empty($post_arary['selected_attribute_values']))
+		{
+			$this->_insert_item_modifier($cart_item_id,$post_arary['selected_attribute_values'],$cart_unique_id);
+		}
 		
-		
-		/* get catr details */
+		/* get cart details */
 		$contents = $this->contents_get ( $reference_id, $customer_id, 'callback' );
 		
 		return $return_array = array (
@@ -632,9 +736,9 @@ class Products extends CI_Controller {
 	private function update_cart_items($eqaul_cart_id, $post_arary, $cart_id, $time) {
 
 		$_POST = $post_arary;
-		$reference_id = $this->post ( 'reference_id' ); /* mobile device id or browser session id */
-		$customer_id = $this->post ( 'customer_id' );
-		$product_qty = $this->post ( 'product_qty' );
+		$reference_id = $this->input->post ( 'reference_id' ); /* mobile device id or browser session id */
+		$customer_id = get_user_id();
+		$product_qty = $this->input->post ( 'product_qty' );
 		$item_details = $this->Mydb->get_record ( array (
 				'cart_item_qty',
 				'cart_item_total_price',
@@ -672,9 +776,9 @@ class Products extends CI_Controller {
 		$productlead=array();	
 		$maxs=0;
 
-		$reference_id = ($reference_id == "" ? $this->get ( 'reference_id' ) : $reference_id); /* mobile device id or browser session id */
+		$reference_id = ($reference_id == "" ? '' : $reference_id); /* mobile device id or browser session id */
 
-		$customer_id = ($customer_id != "" ? $customer_id : $this->get ( 'customer_id' ));
+		$customer_id = ($customer_id != "" ? $customer_id : '');
 
 		/* validate customer id */
 		$customer_array = ($reference_id == "" ? array (
@@ -686,7 +790,7 @@ class Products extends CI_Controller {
 		$cart_details = $this->Mydb->get_record ( '*', 'cart_details', $customer_array, array (
 				'cart_id' => 'DESc' 
 		) );
-
+		
 		if (! empty ( $cart_details )) {
 
 			$select = array (
@@ -697,10 +801,16 @@ class Products extends CI_Controller {
 					'cart_item_product_image',
 					'cart_item_qty',
 					'cart_item_unit_price',
+					'cart_item_product_orginal_price',
 					'cart_item_total_price',
-					'cart_item_type',
-					'cart_item_added_condiment',
-					'cart_item_special_notes', 
+					'cart_item_product_type',
+					'cart_item_product_discount',
+					'cart_item_subproduct_id',
+					'cart_item_subproduct_name',
+					'cart_item_merchant_id',
+					'cart_item_merchant_name',
+					'cart_item_shipping_product_price',
+					'cart_item_shiiping_id' 
 			);
 			$all_items = $this->Mydb->get_all_records ( $select, 'cart_items', array (
 					'cart_item_cart_id' => $cart_details ['cart_id'] 

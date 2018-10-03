@@ -10,7 +10,7 @@
 						<li id="firstli"><a href="<?php echo base_url()."wall"; ?>" class="home"><i class="fa fa-home" aria-hidden="true"></i></a></li>
 						<li><a  href="<?php echo base_url()."notification"; ?>" class="notify"><i class="fa fa-bell-o" aria-hidden="true"></i><?=(!empty($post_notify_count))?'<span class="badge notification_circle">'.$post_notify_count.'</span>':''?></a></li>
 						<li><a href="<?php echo base_url()."conversations"; ?>" class="message"><i class="fa fa-envelope-o" aria-hidden="true"></i><?=(!empty($load_message))?'<span class="badge notification_circle">'.count($load_message).'</span>':''?></a></li>
-						<li><a href="javascript:void(0)" style="display:none;" class="cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+						<li><a href="<?php echo base_url()."cart"; ?>"  class="cart "><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge notification_circle cart-number"><?php echo get_cart_count(); ?></span></a></li>
 					</ul>
 				</div>
 				<?php $CI = & get_instance (); if(get_user_id() == '') { ?>

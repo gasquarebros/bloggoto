@@ -2,7 +2,7 @@
 .discount-tag {
     position: absolute;
     left: 0;
-	top: 0;
+	bottom: 0;
     background: #53a318;
     color: #ffffff;
     font-family: "proxima_nova_rgbold";

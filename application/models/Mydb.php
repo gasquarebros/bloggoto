@@ -53,6 +53,32 @@ class Mydb extends CI_Model {
 		$result = $query->row_array ();
 		return $result;
 	}
+
+	/* Method used to get single record from database */
+	function get_join_record($select, $table, $where = null, $order = '',$join='') {
+		if (! empty ( $join )) {
+			
+			for($i = 0; $i < count ( $join ); $i ++) {
+				$this->db->select ( $join [$i] ['select'] );
+				$this->db->join ( $join [$i] ['table'], $join [$i] ['condition'], $join [$i] ['type'] );
+			}
+		}
+		
+		$this->db->select ( $select );
+		
+		if (is_array ( $order )) {
+			foreach ( $order as $key => $value ) {
+				$this->db->order_by ( $key, $value );
+			}
+		}
+		if ($where) {
+			$this->db->where ( $where );
+		}
+		$query = $this->db->get ( $table, 1 );
+		// echo $this->db->last_query();
+		$result = $query->row_array ();
+		return $result;
+	}
 	/* Method used to get all records from database */
 	function get_all_records($select, $table, $where = null, $limit = '', $offset = '', $order = '', $like = '', $groupby = '', $join = '',$where_in='') {
 		if (! empty ( $join )) {

@@ -162,6 +162,7 @@ $(document).ready(function(){
 		var product_sku = jQuery('#product_sku').val();
 		var product_slug = jQuery('#product_slug').val();
 		var subproduct = jQuery('#subproduct').val();
+		var shipping_method = (jQuery('#shipping_method').length)?jQuery('#shipping_method').val():'';
 
 		var selected_attribute_values = new Array();
 		var selected_attribute_values_object = new Array();
@@ -216,24 +217,33 @@ $(document).ready(function(){
 			// simple product
 		}
 
+		/*shipping_validation*/
+		if(jQuery('#shipping_method').length && jQuery('#shipping_method').val() == '')
+		{
+			error = 'true';
+			jQuery('.selectship-part').append('<p class="error error-info shipping_add_error attribute_add_error">Please select the shipping method</p>');
+		} else {
+			jQuery('.selectship-part').children('.shipping_add_error').remove();
+		}
+
 		if(error == 'false')
 		{
 			current.hide();
 			//current.parent('div').append(loading);
 
 			jQuery.ajax({
-				url    : url+'product/add_to_cart/',
-				data   : { 'selected_attribute_values' : selected_attribute_values_object, 'productid' : productid, 'type' :type,'product_qty':product_qty,'product_name':product_name,'product_sku':product_sku,'product_slug':product_slug,'product_max_qty':product_max_qty,'subproduct':subproduct,secure_key:security_token },
+				url    : url+'products/add_to_cart/',
+				data   : { 'selected_attribute_values' : selected_attribute_values_object, 'productid' : productid, 'type' :type,'product_qty':product_qty,'product_name':product_name,'product_sku':product_sku,'product_slug':product_slug,'product_max_qty':product_max_qty,'subproduct':subproduct,secure_key:secure_key,'shipping_method':shipping_method },
 				type   : "post",
 				dataType:'json',
 				success: function (responses)
 				{
 					current.show();
 					jQuery('.loading').remove();
-					if(responses.status == 'success')
+					if(responses.status == 'ok')
 					{
-						var result = responses.response;
-						var cartcount = parseInt(result.cart_count);
+						var result = responses.contents;
+						var cartcount = parseInt(result.cart_details.cart_total_items);
 						current.parent().append('<p class="success success-info">'+result.message+'</p>');
 						setTimeout("jQuery('.success-info').remove()", 2000);
 						if(cartcount >0)
@@ -245,7 +255,7 @@ $(document).ready(function(){
 						}
 					}
 					else{
-						var result = responses.response;
+						var result = responses.contents;
 						if(typeof result.form_error != 'undefined')
 						{
 							var error ='<ul class="cart_error">';
@@ -265,6 +275,7 @@ $(document).ready(function(){
 					console.log("internal server error");
 				}
 			});
+			return false;
 		}
 		return false;
 /*
