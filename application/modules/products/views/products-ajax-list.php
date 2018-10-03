@@ -41,7 +41,7 @@
 			<a class="main-title " title="<?php echo $record['product_name']; ?>" href="<?php echo base_url().$module.'/view/'.$record['product_slug']; ?>"><?php echo $record['product_name']; ?></a> 
 			<?php echo substr_close_tags($record['product_short_description']); ?>
 
-			<a href="<?php echo base_url().'products/view';?>" class="product_merchant">Le Castella Singapore</a> 
+			<a href="<?php echo base_url().'myprofile/'.encode_value($record['customer_id']); ?>" class="product_merchant"><?php echo $record['customer_username']; ?></a> 
 
 			<?php 
 			if($record['product_special_price'] !='' && $discount > 0) {?>

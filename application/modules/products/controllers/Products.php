@@ -145,11 +145,11 @@ class Products extends CI_Controller {
 		$join [0] ['table'] = $this->product_categorytable;
 		$join [0] ['condition'] = "pro_cate_id = product_category_id";
 		$join [0] ['type'] = "LEFT";
-		/*
-		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email";
+		
+		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_email";
 		$join [1] ['table'] = $this->customers;
 		$join [1] ['condition'] = "product_customer_id = customer_id";
-		$join [1] ['type'] = "LEFT";*/
+		$join [1] ['type'] = "LEFT";
 		/*
 		$join [2] ['select'] = "group_concat(',',post_tag_user_id) as post_tag_ids,group_concat(',',post_tag_user_name) as post_tag_names";
 		$join [2] ['table'] = $this->post_tags;
@@ -589,7 +589,7 @@ class Products extends CI_Controller {
 						if (empty ( $simple_items )  ) {
 
 							$shipping_option['cartid'] = $cart_unique_id;
-							$insert_shipping_id = $this->Mydb->insert ( 'cart_details', $shipping_option );
+							$insert_shipping_id = $this->Mydb->insert ( 'cart_item_shipping', $shipping_option );
 							$products['assigned_shipping']['insert_shipping_id'] = $insert_shipping_id;
 
 							$result = $this->insert_cart_items ( $cart_unique_id, $_POST,$products); 
@@ -597,7 +597,7 @@ class Products extends CI_Controller {
 						} else {
 
 							$result = $this->update_cart_items ( $simple_items ['cart_item_id'], $_POST, $simple_items ['cart_item_cart_id'],$products);
-							
+
 						}
 					}
 					else {
