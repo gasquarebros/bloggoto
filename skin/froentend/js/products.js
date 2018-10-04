@@ -282,5 +282,139 @@ $(document).ready(function(){
 		$('.show_less_subcategory').hide();
 		$('.allsubcategories').show();
 	});
-	
+/* increase and decrease product quantity starts here */
+$(document).on('click','.page_lefter',function() {
+    var int_val = parseInt($(this).parent().find('input').val());
+    var red_val = 1;
+    var maxqty =  parseInt($(this).parent().find('input').data('maxquantity'));
+    $('.qty-box-full-outer .qty_exceed_error').hide();
+
+    if(!isNaN(int_val) && int_val != 0 && int_val != 1 && int_val > 0)
+    {
+        var red_val = parseInt(int_val - 1);
+    }
+    var int_val = parseInt($(this).parent().find('input').val(red_val));
+
+});
+
+$(document).on('click','.page_righter',function() {
+    var int_val_inc = parseInt($(this).parent().find('input').val());
+    var red_val_inc = 1;
+    //var maxqty = parseInt($('#product_qty').val());
+    var maxqty = parseInt($(this).parent().find('input').data('maxquantity'));
+
+    $('.qty-box-full-outer .qty_exceed_error').hide();
+    if(!isNaN(int_val_inc) && int_val_inc > 0 && int_val_inc < maxqty)
+    {
+        var red_val_inc = parseInt(int_val_inc + 1);
+    }
+    else if(int_val_inc >= maxqty)
+    {
+        var red_val_inc = parseInt(int_val_inc);
+        $('.qty-box-full-outer .qty_exceed_error').show();
+    }
+    parseInt($(this).parent().find('input').val(red_val_inc));
+});
+
+$(document).on('click', '.update_cart_qty', function(e) { 
+        var url = $(this).attr('href');
+        var product_qty = $(this).parent('span').parent('td').find('input').val();
+        show_content_loading(); 
+        $.ajax({
+            url : url,
+            data : "secure_key="+secure_key+"&action=Updateqty"+"&product_qty="+product_qty,
+            type : 'POST',
+            dataType : "json",
+            async:false,
+            success : function(data) {
+                hide_content_loading();
+				$('#cart-empty').hide();                
+                if (data.status == "success") {
+                	var result = data.response;
+					var cartcount = parseInt(data.cart_count);
+					if(cartcount >0)
+					{
+						$('.cart-number').html(cartcount);
+					}
+					else
+					{
+						$('.cart-number').html('0');
+						$('#main_shopping_cart').remove();
+						$('#cart-empty').show();						
+					}
+					console.log(data.cart);
+					$('#cart').html(result.cart);               	
+                }
+            }
+        });
+        return false;
+    });		
+    $(document).on('click', '.remove_cart_item', function(e) {   
+		if(confirm('Are you sure you would like to remove this item from the shopping cart?'))
+		{       
+	        var url = $(this).attr('href');
+	        show_content_loading(); 
+	        $.ajax({
+	            url : url,
+	            data : "secure_key="+secure_key+"&action=Removeitem",
+	            type : 'POST',
+	            dataType : "json",
+	            async:false,
+	            success : function(data) {
+	                hide_content_loading();
+					$('#cart-empty').hide();                
+	                if (data.status == "success") {
+	                	var result = data.response;
+						var cartcount = parseInt(data.cart_count);
+						if(cartcount >0)
+						{
+							$('.cart-number').html(cartcount);
+						}
+						else
+						{
+							$('.cart-number').html('0');
+							$('#main_shopping_cart').remove();
+							$('#cart-empty').show();
+						}
+						$('#cart').html(result.cart); 
+	                }
+	            }
+	        });
+	    }
+        return false;
+    });
+    $(document).on('click', '.remove_cart', function(e) {      
+		if(confirm('Are you sure you would like to delete cart items from the shopping cart?'))
+		{     	
+	        var url = $(this).attr('href');
+	        show_content_loading(); 
+	        $.ajax({
+	            url : url,
+	            data : "secure_key="+secure_key+"&action=Removecart",
+	            type : 'POST',
+	            dataType : "json",
+	            async:false,
+	            success : function(data) {
+	                hide_content_loading();
+					$('#cart-empty').hide();                
+	                if (data.status == "success") {
+	                	var result = data.response;
+						var cartcount = parseInt(data.cart_count);
+						if(cartcount >0)
+						{
+							$('.cart-number').html(cartcount);
+						}
+						else
+						{
+							$('.cart-number').html('0');
+							$('#main_shopping_cart').remove();
+							$('#cart-empty').show();
+						}
+						$('#cart').html(result.cart); 
+	                }
+	            }
+	        });
+   		}
+        return false;
+    });        	
 });
