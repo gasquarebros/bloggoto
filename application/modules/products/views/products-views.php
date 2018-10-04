@@ -286,7 +286,6 @@ var module_action="addpost";
     margin-bottom: 20px;
     padding-bottom: 15px;
     position: relative;
-    padding-left: 45px
 }
 
 .shopping_cart_right .option-part .field {
@@ -383,7 +382,7 @@ var module_action="addpost";
 
 .color-size-ship {
     border-bottom: 1px solid #d3d3d3;
-    margin-bottom: 23px;
+    margin-bottom: 15px;
     position: relative
 }
 
@@ -714,7 +713,8 @@ var module_action="addpost";
 
 .color-size-ship h6 {
     color: #3a3a3a;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    font-size: 16px;
 }
 
 .color-size-ship ul {
@@ -816,6 +816,13 @@ var module_action="addpost";
     border: 1px solid #53a318
 }
 
+.selectship-part { 
+    margin-bottom: 15px;
+}
+.selectship-part h6 {
+    font-size: 16px;
+}
+
 </style>
 <?php
 echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css'));
@@ -823,53 +830,39 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 
 <section>
    <div class="inner_content">
-   <div class="container">
-      <h2 class="main_heading">Magazines</h2>
-<div class="shopping_cart">
-    <h2>Any 2 choices of Castella Spongecakes for $2 off</h2>
-    <p>
-        <span class="small_desc"><a href="/merchants/detail/le-castella-singapore">Le Castella Singapore</a></span>
-    </p>
+        <div class="container">
+            <div class="shopping_cart">
+                <h2><?php echo $records[0]['product_name']; ?></h2>
+                <p>
+                    <span class="small_desc"><a href="<?php echo base_url().'myprofile/'.encode_value($records[0]['customer_id']); ?>"><?php echo $records[0]['customer_username']; ?></a></span>
+                </p>
 
     <div class="shopping_cart_left fl">
         <div class="slider-part">
             <div class="zoom-slider">
-                <div id="elevatezoom" class="elevatezoom"><img id="elevatezoom-0" src="https://freelor.com/frontend/web/images/products/lecastellahYLvAyIXAVfMC-m7uOVJZr7DHW-VP8BE.jpg" alt="" data-zoom-image="https://freelor.com/frontend/web/images/products/lecastellahYLvAyIXAVfMC-m7uOVJZr7DHW-VP8BE.jpg" style="width:100%;">
-                    <div id="galez">
-                        <a class="elevatezoom-gallery" href="#" data-zoom-image="https://freelor.com/frontend/web/images/products/lecastellahYLvAyIXAVfMC-m7uOVJZr7DHW-VP8BE.jpg" data-image="https://freelor.com/frontend/web/images/products/lecastellahYLvAyIXAVfMC-m7uOVJZr7DHW-VP8BE.jpg"><img class="elevatethumb thumbnail col-xs-3" src="https://freelor.com/frontend/web/images/products/lecastellahYLvAyIXAVfMC-m7uOVJZr7DHW-VP8BE.jpg" alt=""></a>
-                    </div>
-                </div>
+                <?php if($records[0]['product_thumbnail'] !='') {
+                    $img_thumb = media_url(). $this->lang->line('product_main_image_folder_name')."/".$records[0]['product_thumbnail'];
+                } else { $img_thumb = "" ; } 
+                ?>
+                <img class="" id="zoom_image" src="<?php echo $img_thumb; ?>">
+                <?php 
+                if(!empty($gallery_images)) { ?>
+                    <div id="gal1">
+                    <?php
+                        foreach($gallery_images as $gallery) {
+                    ?>       
+                            <a href="#" data-image="<?php echo media_url()."/". $this->lang->line('product_gallery_image_folder_name')."/".$gallery['pro_gallery_image'];?>" data-zoom-image="<?php echo media_url()."/". $this->lang->line('product_gallery_image_folder_name')."/".$gallery['pro_gallery_image'];?>">
+                                <img src="<?php echo media_url()."/". $this->lang->line('product_gallery_image_folder_name')."/".$gallery['pro_gallery_image'];?>" />
+                            </a>
+                        <?php } ?>
+                    </div>    
+                <?php } ?>
             </div>
             <div class="slider-desc">
-                <p>Le Castella, the Taiwanese brand sponge cakes uses specially imported ingredients from Taiwan and the cakes are freshly baked and wheeled out of the kitchen every 15 minutes, flipped, stamped with the brand's logo and cut up into blocks using a measuring ruler. There are three flavours available here: Original, Cheese and Chocolate.</p>
+                <?php echo $records[0]['product_short_description']; ?>
             </div>
             <div class="desc-part">
-                <h3>What You'll Get</h3>
-                <ul>
-                    <li>Any 2 choices of Castella Spongecakes</li>
-                    <li>Flavors: Original, Cheese, Chocolate</li>
-                </ul>
-            </div>
-            <div class="desc-part">
-                <h3>Fine Print</h3>
-                <ul>
-                    <li>Prior booking on cakes collection is required due to long queue.</li>
-                    <li>Strictly SMS/Whatsapp to +65 9790 2735 for booking.</li>
-                    <li>Strictly SMS/Whatsapp on cake flavors and collection date and time.</li>
-                    <li>Cakes collection will be from 10.00am to 6.00pm daily only.</li>
-                    <li>Not valid with other offers / promotions / discounts.</li>
-                </ul>
-            </div>
-            <div class="desc-part desc-part-enquiry">
-                <h3>Enquiries</h3>
-                <a class="common_but ask-question">Ask a question</a>
-                <div class="product_enquiry ask-question-section" style="display: none;">
-                    <form>
-                        <label>Message</label>
-                        <textarea></textarea>
-                        <input type="submit" value="submit">
-                    </form>
-                </div>
+                <?php echo $records[0]['product_long_description']; ?>
             </div>
         </div>
 
@@ -877,152 +870,143 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 
     <div class="shopping_cart_right fr">
         <div class="option-part subproduct_section">
-            <a class="prdtitle subproduct_title_display">Any 2 choices of Castella Spongecakes for $2 off</a>
-
-            <span class="cashback">Earn 5% Cashback</span>
-            <div class="price-part">
-                <span class="offer">11% Off </span>
-                <span class="sold">14 Sold</span>
-                <span class="price">
-									<span class="old-price">S$19.80 </span>
-                <span class="new-price">S$17.80</span>
-                </span>
-            </div>
+            <a class="prdtitle subproduct_title_display"><?php echo $records[0]['product_name']; ?></a>
+            
+            <?php 
+            $discount = find_discount($records[0]['product_price'],$records[0]['product_special_price'],$records[0]['product_special_price_from_date'],$records[0]['product_special_price_to_date']);
+			if($records[0]['product_special_price'] !='' && $discount > 0) {?>
+				<div class="price-part">
+					<p class="old-price"><?php echo get_currency_symbol(); ?><span class="priceval"><?php echo ($records[0]['product_price']);?></span></p>
+					<p class="new-price"><?php echo get_currency_symbol(); ?><span class="priceval"><?php echo ($records[0]['product_special_price']);?></span></p>
+				</div>
+			<?php } else { ?>
+				<div class="price-part">
+					<p class="new-price"><?php echo get_currency_symbol(); ?><span class="priceval"><?php echo ($records[0]['product_price']);?></span></p>
+				</div>
+			<?php } ?>
         </div>
 
         <div class="option-part subproduct_section_duplicate" style="display:none">
-            <a class="prdtitle subproduct_title_display">Any 2 choices of Castella Spongecakes for $2 off</a>
-            <div class="price-part">
-                <span class="offer"><span class="priceval"></span>% Off </span>
-                <span class="sold">14 Sold</span> <span class="price">
-							<span class="old-price">S$ <span class="priceval"></span></span>
-                <span class="new-price">S$ <span class="priceval"></span></span>
-                </span>
-            </div>
+            <a class="prdtitle subproduct_title_display"><?php echo $records[0]['product_name']; ?></a>
+            <?php if($records[0]['product_special_price'] !='' && $discount > 0) {?>
+				<div class="price-part">
+					<p class="old-price"><?php echo get_currency_symbol(); ?><span class="priceval"><?php echo $records[0]['product_price'];?></span></p>
+					<p class="new-price"><?php echo get_currency_symbol(); ?><span class="priceval"><?php echo $records[0]['product_special_price'];?></span></p>
+				</div>
+			<?php } else { ?>
+				<div class="price-part">
+					<p class="new-price"><?php echo get_currency_symbol(); ?><span class="priceval"><?php echo ($records[0]['product_price']);?></span></p>
+				</div>
+			<?php } ?>
+            
         </div>
-        <div class="color-size-ship attributes_sections">
-            <div class="value_section_selection size-part">
-                <h6>SELECT First Flavor Choice</h6>
-                <ul data-section_selection="sku-OA">
-                    <li class="MTI2 MTI5 MTMw"><a data-sku-related="MTI2,MTI5,MTMw" id="sku-MQ-MTM" data-sku-id="MTM" title="Original" class="attribute_values MTI2 MTI5 MTMw">
-									Original</a></li>
-                    <li class="MTI3 MTMx MTMy"><a data-sku-related="MTI3,MTMx,MTMy" id="sku-MQ-MTQ" data-sku-id="MTQ" title="Cheese" class="attribute_values MTI3 MTMx MTMy">
-									Cheese</a></li>
-                    <li class="MTI4 MTMz MTM0"><a data-sku-related="MTI4,MTMz,MTM0" id="sku-MQ-MTU" data-sku-id="MTU" title="Chocolate" class="attribute_values MTI4 MTMz MTM0">
-									Chocolate</a></li>
-                </ul>
-            </div>
-            <div class="value_section_selection size-part">
-                <h6>SELECT Second Flavor Choice</h6>
-                <ul data-section_selection="sku-OQ">
-                    <li class="MTI2 MTMy MTMz"><a data-sku-related="MTI2,MTMy,MTMz" id="sku-Mg-MTY" data-sku-id="MTY" title="Original" class="attribute_values MTI2 MTMy MTMz">
-									Original</a></li>
-                    <li class="MTI3 MTI5 MTM0"><a data-sku-related="MTI3,MTI5,MTM0" id="sku-Mg-MTc" data-sku-id="MTc" title="Cheese" class="attribute_values MTI3 MTI5 MTM0">
-									Cheese</a></li>
-                    <li class="MTI4 MTMw MTMx"><a data-sku-related="MTI4,MTMw,MTMx" id="sku-Mg-MTg" data-sku-id="MTg" title="Chocolate" class="attribute_values MTI4 MTMw MTMx">
-									Chocolate</a></li>
-                </ul>
-            </div>
-        </div>
+        <?php if($records[0]['product_type'] == 'attribute') { ?>
+            <div class="color-size-ship attributes_sections">
+            <?php $attribu = 1; foreach($assigned_associate_attributes as $attribute) {  
+                if(!empty($attribute['value_id'])) {
+                    $class="size-part";
+                    if($attribute['pro_modifier_display'] == 'image')
+                    {
+                        $class="color-part";
+                    }
+                ?>
+                     <div class="value_section_selection <?php echo $class; ?>">
+						<h6>SELECT <?php echo $attribute['pro_modifier_name']; ?></h6>
+						<ul data-section_selection="sku-<?php echo $attribute['pro_modifier_id']; ?>" >
+                            <?php 
+                                if($attribute['value_name'] !='') {
+                                    $attribute_values_names_array = explode(',',$attribute['value_name'] );
+                                    $attribute_values_ids_array = explode(',',$attribute['value_id'] );
+                                    $attribute_values_primary_ids_array = explode(',',$attribute['value_primary_id'] );
+                                    $attribute_values_images_array = explode(',',$attribute['value_images']);
+                                    
 
+                                foreach($attribute_values_ids_array as $key=>$attribute_values) {
+								$related_values = '';
+							?>
+                            <li class="">
+                                <?php $mod_id = $attribute['pro_modifier_id']; 
+                                    $mod_val_id = $attribute_values_ids_array[$key];
+                                    $dataimage= '';
+                                ?>
+                                <a id="sku-<?php echo $mod_id."~".$mod_val_id; ?>" data-sku-id="<?php echo $mod_val_id; ?>" class="attribute_values" title="<?php echo $attribute_values_names_array[$key]; ?>" data-image="<?php echo $dataimage; ?>" data-sku-related="">
+                                    <?php if(!empty($attribute_values_images_array[$key]) && $attribute['pro_modifier_display'] == 'image') { ?><img src="<?php echo $attribute_values_images_array[$key]; ?>"> <?php } else { ?><?php echo $attribute_values_names_array[$key]; ?><?php } ?>
+                                </a>
+                            </li>
+							
+							<?php } } ?>
+						</ul>
+					</div>
+				<?php } $attribu++; } ?>
+            </div>
+        <?php } ?>
+    
+        <?php if(!empty($assigned_shipping)) { ?>
+            <div class="selectship-part">
+                <h6>SELECT SHIPPING <span class="estimate"></span></h6>
+                <select name="shpping_method" id="shipping_method">
+                    <option value="">Select Shipping Method</option>
+                    <?php 
+                    $enable=0;
+                    foreach($assigned_shipping as $product_shipping) { 
+                        if($product_shipping['prod_ass_ship_method_is_combined'] == 'Yes') { 
+                            $enable = 1; 
+                        }
+                    ?>
+                            <option value="<?php echo encode_value($product_shipping['prod_ass_ship_method_shipid'])."--".$product_shipping['ship_method_name']; ?>"><?php echo $product_shipping['ship_method_name'].' - '.show_price($product_shipping['prod_ass_ship_method_price']); ?></option>
+                    <?php } ?>
+                </select>
+                <?php /* if($enable == 1) { 
+                    echo "<p class='shipping_combine_enable'>".($merchant['count_products']>0)?"Available for combine shipping (<a href='".Url::toRoute('merchants/detail/'.$merchant['slug'])."#shopping' target='_self'>".$merchant['count_products']."</a>)":'Available for combine shipping '."</p>";
+                } */ ?>
+            </div>
+        <?php } ?>
+            
         <div class="qty-box-full-outer">
-            <p class="error qty_exceed_error" style="display:none;">We're sorry! Only <span class="max_qty">999</span> quantity of <span class="qty_error_product_name">Any 2 choices of Castella Spongecakes for $2 off</span> for each customer.</p>
+            <p class="error qty_exceed_error" style="display:none;"></p>
             <div class="qty-box-full">
                 <div class="qty-box">
                     <span class="title">QTY:</span>
                     <span class="qty-full">
-								<i class="p-quantity-decrease fa fa-minus page_lefter" data-role="decrease"></i>
-								<input readonly="readonly" id="quantity-input" data-maxquantity="999" data-role="quantity-input" class="p-quantity-input" name="quantity" type="text" value="1" maxlength="5" autocomplete="off">
-								<i data-role="increase" class="p-quantity-increase fa fa-plus page_righter"></i>
+								<i class="p-quantity-decrease fa fa-minus page_lefter lefter_cart" data-role="decrease"></i>
+								<input readonly="readonly" id="quantity-input" data-maxquantity="<?php echo $records[0]['product_quantity']; ?>" data-role="quantity-input" class="p-quantity-input" name="quantity" type="text" value="1" maxlength="5" autocomplete="off">
+								<i data-role="increase" class="p-quantity-increase fa fa-plus page_righter righter_cart"></i>
 							</span>
-                    <input type="hidden" name="product_id" id="product_id" value="MTI1">
-                    <input type="hidden" name="product_qty" id="product_qty" value="999">
-                    <input type="hidden" name="product_name" id="product_name" value="Any 2 choices of Castella Spongecakes for $2 off">
-                    <input type="hidden" name="product_sku" id="product_sku" value="lecastella">
-                    <input type="hidden" name="product_slug" id="product_slug" value="any-2-choices-of-castella-spongecakes-for-2-off">
-                    <input type="hidden" name="subproduct" id="subproduct" value="MTI1">
+                    <input type="hidden" name="product_id" id="product_id" value="<?php echo encode_value($records[0]['product_primary_id']); ?>">
+                    <input type="hidden" name="product_qty" id="product_qty" value="<?php echo $records[0]['product_quantity']; ?>">
+                    <input type="hidden" name="product_name" id="product_name" value="<?php echo urlencode($records[0]['product_name']); ?>">
+                    <input type="hidden" name="product_sku" id="product_sku" value="<?php echo $records[0]['product_sku']; ?>">
+                    <input type="hidden" name="product_slug" id="product_slug" value="<?php echo $records[0]['product_slug']; ?>">
+                    <input type="hidden" name="subproduct" id="subproduct" value="">
                 </div>
-                <a href="<?php echo base_url().'products/cart';?>" title="Buy Now" class="common_but buy_now_btn">Buy Now</a>
+                <?php if(get_user_id() !='') {
+                    $buy_url = base_url()."products/add_to_cart";
+                    $class="buy_now add_cart";
+                } else { 
+                    $buy_url = base_url();
+                    $class="buy_now";
+                } ?>
+                <a href="<?php echo $buy_url;?>" title="Buy Now" class="common_but buy_now_btn <?php echo $class; ?>">Buy Now</a>
             </div>
         </div>
-        <div class="redeem-offer">
-            <h6>Redeem offer at</h6>
-            <div class="redeem-offer-inner">
-                <div class="img-part">
-                    <a href="/merchants/detail/le-castella-singapore"><img src="https://freelor.com/frontend/web/images/merchant/le-castella-logoCn6p0TLQw_cXpeBQ6VXT1JeDh4G7k9vO.png" alt="Le Castella Singapore"></a>
-                </div>
-                <div class="cont-part">
-                    <h6><a href="/merchants/detail/le-castella-singapore">Le Castella Singapore</a></h6>
-                    <p>
-                        <button id="makefollow" class="MzI">Follow Shop</button> <span class="follow_count">33 </span> following</p>
-                    <a class="show-redeem-outlet">Show all outlets location</a>
-                </div>
-            </div>
-            <div class="redeem-offer-inner-section">
-                <div class="redeem-outlet-info outlet-info" style="display:none;">
-                    <ul>
-                        <li>
-                            <p class="redeem_outlet_name">Tampines One</p>
-                            <p class="redeem_outlet_address"><span>10 Tampines Central 1, #B1-32 Singapore 529536</span></p>
-                        </li>
-                        <li>
-                            <p class="redeem_outlet_name">Jurong Point</p>
-                            <p class="redeem_outlet_address"><span>1 Jurong West Central 2, #03-40/41 Singapore 648886</span></p>
-                        </li>
-                        <li>
-                            <p class="redeem_outlet_name">Northpoint City South Wing</p>
-                            <p class="redeem_outlet_address"><span>930 Yishun Avenue 2, #01-151 Singapore 769098</span></p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
+        
         <div class="share_icon">
             <span>SHARE THIS DEAL:</span>
             <ul>
-                <li class="face"><a target="_blank" href="https://www.facebook.com/sharer.php?u=https://freelor.com/flash-sale/detail/any-2-choices-of-castella-spongecakes-for-2-off"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                <li class="goog"><a target="_blank" href="https://plus.google.com/share?url=https://freelor.com/flash-sale/detail/any-2-choices-of-castella-spongecakes-for-2-off"><i class="fa fa-google" aria-hidden="true"></i></a></li>
-                <li class="whatsapp"><a target="_blank" href="https://web.whatsapp.com/send?text=https://freelor.com/flash-sale/detail/any-2-choices-of-castella-spongecakes-for-2-off"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-                <li class="twitter"><a target="_blank" href="https://twitter.com/share?text=https://freelor.com/flash-sale/detail/any-2-choices-of-castella-spongecakes-for-2-off"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                <li class="email"><a target="_blank" href="mailto:?subject=Referal&amp;body=https://freelor.com/flash-sale/detail/any-2-choices-of-castella-spongecakes-for-2-off"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+                <?php $page_url = base_url()."products/view/".$records[0]['product_slug']; ?>
+                <li class="face"><a target="_blank" href="https://www.facebook.com/sharer.php?u=<?php echo $page_url; ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li class="goog"><a target="_blank" href="https://plus.google.com/share?url=<?php echo $page_url; ?>"><i class="fa fa-google" aria-hidden="true"></i></a></li>
+                <li class="whatsapp"><a target="_blank" href="https://web.whatsapp.com/send?text=<?php echo $page_url; ?>"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
+                <li class="twitter"><a target="_blank" href="https://twitter.com/share?text=<?php echo $page_url; ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                <li class="email"><a target="_blank" href="mailto:?subject=Referal&amp;body=<?php echo $page_url; ?>"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
 
             </ul>
         </div>
-        <div class="how-to-redeem">
-            <h6>How to redeem</h6>
-            <div class="no-print">
-                <div class="no-print-img">
-                    <img src="/images/redeem-mobile.png" alt="">
-                </div>
-                You can easily redeem from your phone. No printout required.
-            </div>
-            <div class="redeem-steps-part steps-part" style="display:none;">
-                <ul>
-                    <li>
-                        <span class="icon">Step 1</span>
-                        <p>Go to <a href="/">www.freelor.com</a> and log into your account </p>
-                    </li>
-                    <li>
-                        <span class="icon">Step 2</span>
-                        <img src="/images/mobile-small.png" alt="">
-                        <p>To redeem, simply go to <a href="/site/my-coupons">My Coupons</a> under My Account page tab</p>
-                    </li>
-                    <li>
-                        <span class="icon">Step 3</span>
-                        <span style="display: block;text-align: center;color:#3a3a3a;font-size:12px;line-height: normal;margin-bottom:5px;">Scan QR code for coupon redemption</span>
-                        <img src="/images/qr-code-small.jpg" alt="">
-                        <p>Inform the staff to scan your coupon QR code for redemption.</p>
-                    </li>
-                </ul>
-                <a class="redeem-hide-part show-hide"><span>Hide</span> Redemption Instruction</a>
-            </div>
-            <a class="redeem-show-part show-hide"><span>Show</span> Redemption Instruction</a>
-        </div>
+        
 
         <div class="cancel-policy">
             <h6>Cancellation Policy</h6>
-            <p>We accept a 7 days cancellation policy on your purchase with refunds to your E-Wallet. Not valid for in-store cashback purchase. Contact us at <a href="mailto:orders@freelor.com">orders@freelor.com</a> if you have any enquiries </p>
+            <p>We accept a 7 days cancellation policy on your purchase with refunds to your E-Wallet. Not valid for in-store cashback purchase. Contact us at <a href="mailto:#">#</a> if you have any enquiries </p>
 
         </div>
 
@@ -1036,13 +1020,48 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 <?php
 	echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js'));
 ?>
+<script type="text/javascript" src="<?php echo skin_url().'js/jquery.elevatezoom.js' ?>"></script>
+<script type="text/javascript" src="<?php echo skin_url(); ?>js/products.js"></script>
+<script>
+		$("#zoom_image").elevateZoom({gallery:'gal1', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true,"zoomType":"lens","containLensZoom":true,"borderSize":0,"scrollZoom":false, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'}); 
+
+//pass the images to Fancybox
+$("#zoom_image").bind("click", function(e) {  
+  var ez =   $('#zoom_image').data('elevateZoom');	
+	$.fancybox(ez.getGalleryList());
+  return false;
+});
+
+		function trigger_zoom()
+		{
+            alert();
+			if(jQuery(window).width() <= 640)
+			{
+				var imageElement = jQuery("#elevatezoom-0");
+				jQuery(".zoomContainer").remove();
+				jQuery("#elevatezoom-0").removeAttr("data-zoom-image");
+				jQuery("#elevatezoom-0").removeData("elevateZoom");
+				jQuery("#elevatezoom-0").removeData("zoomImage");
+				jQuery.removeData(imageElement, "elevateZoom");
+			}
+			else
+			{
+                alert('ass');
+				jQuery("#elevatezoom-0").elevateZoom({"zoomType":"lens","containLensZoom":true,"borderSize":0,"scrollZoom":false,"gallery":"galez"});
+			}
+		}
+		jQuery(window).resize(function() {
+			setTimeout(trigger_zoom, 100);
+		});
+		setTimeout(trigger_zoom, 300);
+			
+</script>
 	<script> 
 		$(window).on("load",function(){
 			$(".mCustomScrollbar").mCustomScrollbar({
 				autoHideScrollbar:true,
 			});
-		});
-		
+        });	
 	</script>
 <!-- <script>
 /*  load initial content.. */

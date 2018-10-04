@@ -358,7 +358,7 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 														title="<?php echo get_label('remove_image_title');?>"> <img
 														class="img-responsive "
 														style="width: 250px; height: 250px;"
-														src="<?php echo media_url().get_company_folder()."/". $this->lang->line('product_gallery_image_folder_name')."/".$gallery['pro_gallery_image'];?>">
+														src="<?php echo media_url()."/". $this->lang->line('product_gallery_image_folder_name')."/".$gallery['pro_gallery_image'];?>">
 													</a>
 													
 							                         <?php } ?>
@@ -416,7 +416,8 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 												</tr>
 											</thead>
 											<tbody class="container-items1 product_associate_section">
-												<?php if(!empty($assigned_products)) {
+												<?php if(!empty($assigned_products)) { 
+													//echo "<pre>"; print_r($assigned_associate_attributes); print_r($assigned_modifiers); exit;
 													foreach($assigned_products as $subproduct) { 
 												?>
 														<tr class="associates-item">
@@ -446,7 +447,7 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 
 																		if(!empty($assigned_modifier_values)) { 
 																?>
-																			<select name="ProductAssociates[<?php echo $sel_modifier; ?>][]">
+																			<select name="ProductAssociates[0][attributes][<?php echo $sel_modifier; ?>][]">
 																				<?php 
 																				foreach($assigned_modifier_values as $modifiervalue) { ?>
 																					<option value="<?php echo $modifiervalue['pro_modifier_value_id']; ?>" <?php if(!empty($sel_ass_att_val[$subprodid]) && in_array($modifiervalue['pro_modifier_value_id'],$sel_ass_att_val[$subprodid])){ echo "selected='selected'"; } ?>><?php echo $modifiervalue['pro_modifier_value_name']; ?></option>

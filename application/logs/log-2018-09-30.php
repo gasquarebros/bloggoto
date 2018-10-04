@@ -2118,3 +2118,747 @@ ERROR - 2018-09-30 12:28:27 --> Could not find the language line "products_modul
 ERROR - 2018-09-30 12:28:27 --> Could not find the language line "products_module_label"
 ERROR - 2018-09-30 12:28:31 --> Could not find the language line "products_module_label"
 ERROR - 2018-09-30 12:28:31 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:31:57 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:31:57 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:31:57 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:31:58 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:31:58 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:33:25 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:33:28 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:13 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:20 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:40 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:46 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:46 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:46 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:47 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:47 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:49 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:50 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:50 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:50 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:50 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:54 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:54 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:54 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:54 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:54 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:55 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:55 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:55 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:56 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:56 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:57 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:57 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:57 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:58 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:58 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:58 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:58 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:58 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:59 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:34:59 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:01 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:05 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:05 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:05 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:07 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:13 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:14 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:14 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:14 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:15 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:15 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:15 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:15 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:16 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:16 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:16 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:16 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:16 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:17 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:18 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:18 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:18 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:18 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:18 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:18 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:18 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:18 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:19 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:21 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:23 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:23 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:24 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:25 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:30 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:30 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:30 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:32 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:36 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:36 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:38 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:51 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:52 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:52 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:53 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:35:55 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:25 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:25 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:25 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:25 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:26 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:26 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:26 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:26 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:27 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:27 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:27 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:27 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:28 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:28 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:30 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:30 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:30 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:31 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:31 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:31 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:31 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:31 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:32 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:32 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:33 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:33 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:33 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:33 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:34 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:34 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:35 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:36 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:36 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:37 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:37 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:37 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:37 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:37 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:38 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:38 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:39 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:36:48 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:37:04 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:37:04 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:37:05 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:37:06 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:37:06 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:37:23 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:37:23 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:37:23 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 12:37:25 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:37:25 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:37:30 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:37:30 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:44:36 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:44:36 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:46:03 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:46:03 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:49:14 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 12:49:14 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:00:25 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:00:25 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:01:16 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:01:16 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:01:31 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:01:31 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:01:43 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:01:43 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:04:19 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:04:19 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:04:45 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:04:45 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:05:10 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:05:10 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:06:14 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:06:14 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:06:44 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:06:44 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:07:57 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:07:57 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:23:46 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:23:46 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:24:21 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:24:21 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:25:08 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:25:08 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:31:51 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:31:51 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:32:30 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:32:30 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:42:51 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 13:42:51 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:01:42 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:01:42 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:01:49 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:01:49 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:01:52 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:01:52 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:13:06 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:13:06 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:19:22 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:19:22 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:19:23 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 14:19:24 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:19:24 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:19:29 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:19:29 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:20:12 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:20:12 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:48:54 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 14:48:54 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 14:48:54 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 14:48:54 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 14:48:54 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 14:48:54 --> Could not find the language line "category_modifier"
+ERROR - 2018-09-30 14:48:54 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-09-30 14:48:54 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 14:48:54 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 14:48:54 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 14:48:54 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 14:48:54 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 14:51:10 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:51:10 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:51:10 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '*
+FROM `pos_product_assigned_attributes`
+INNER JOIN `pos_product_modifiers` ON `' at line 1 - Invalid query: SELECT `pro_modifier_primary_id`, `pro_modifier_id`, `pro_modifier_name`, group_concat(pro_modifier_value_primary_id) as value_primary_id, group_concat(pro_modifier_value_id) as value_id, group_concat(pro_modifier_value_name) as value_name, *
+FROM `pos_product_assigned_attributes`
+INNER JOIN `pos_product_modifiers` ON `pro_modifier_primary_id` = `assigned_mod_modifier_id`
+LEFT JOIN `pos_product_modifier_values` ON `pro_modifier_value_modifier_primary_id` = `pos_product_modifiers`.`pro_modifier_primary_id`
+WHERE `prod_ass_att_parent_productid` = '43'
+ERROR - 2018-09-30 14:51:30 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:51:30 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:52:15 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:52:15 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 14:52:15 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '*
+FROM `pos_product_assigned_attributes`
+INNER JOIN `pos_product_modifiers` ON `' at line 1 - Invalid query: SELECT `pro_modifier_primary_id`, `pro_modifier_id`, `pro_modifier_name`, group_concat(pro_modifier_value_primary_id) as value_primary_id, group_concat(pro_modifier_value_id) as value_id, group_concat(pro_modifier_value_name) as value_name, *
+FROM `pos_product_assigned_attributes`
+INNER JOIN `pos_product_modifiers` ON `pro_modifier_primary_id` = `prod_ass_att_attribute_id`
+LEFT JOIN `pos_product_modifier_values` ON `pro_modifier_value_id` = `prod_ass_att_attribute_value_id`
+WHERE `prod_ass_att_parent_productid` = '43'
+ERROR - 2018-09-30 14:58:52 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-09-30 14:58:53 --> Could not find the language line "products_module"
+ERROR - 2018-09-30 14:58:54 --> Could not find the language line "products_module"
+ERROR - 2018-09-30 14:58:57 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-09-30 14:59:13 --> Could not find the language line "products_module"
+ERROR - 2018-09-30 14:59:13 --> Could not find the language line "select_products"
+ERROR - 2018-09-30 14:59:13 --> Could not find the language line "select_products"
+ERROR - 2018-09-30 14:59:13 --> Could not find the language line "product_customer_id"
+ERROR - 2018-09-30 14:59:13 --> Could not find the language line "select_customer"
+ERROR - 2018-09-30 14:59:13 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 14:59:13 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 14:59:13 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 14:59:13 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 14:59:13 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 14:59:13 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 14:59:13 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 14:59:16 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-09-30 14:59:29 --> Could not find the language line "products_module"
+ERROR - 2018-09-30 14:59:29 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "select_products"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "select_products"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "category_modifier"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 15:03:35 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 15:03:37 --> 404 Page Not Found: ../modules/manageproducts/controllers/Manageproducts/get_combo_html
+ERROR - 2018-09-30 15:04:26 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:04:28 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:04:29 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:11:16 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:11:17 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:13:08 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:13:09 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:13:38 --> Severity: Notice --> Undefined index: attributes D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 301
+ERROR - 2018-09-30 15:13:38 --> Severity: Warning --> array_keys() expects parameter 1 to be array, null given D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 301
+ERROR - 2018-09-30 15:15:28 --> Severity: Notice --> Undefined index: product_name D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 312
+ERROR - 2018-09-30 15:15:28 --> Severity: Warning --> Invalid argument supplied for foreach() D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 312
+ERROR - 2018-09-30 15:15:29 --> The upload path does not appear to be valid.
+ERROR - 2018-09-30 15:15:29 --> Severity: Error --> Call to undefined function get_admin_id() D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 1100
+ERROR - 2018-09-30 15:18:00 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:18:02 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:19:18 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:19:21 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:20:37 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:20:38 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:20:44 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:20:46 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:21:59 --> Severity: Error --> Call to undefined function get_admin_id() D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 386
+ERROR - 2018-09-30 15:27:38 --> Severity: Notice --> Undefined offset: 1 D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 314
+ERROR - 2018-09-30 15:27:38 --> Severity: Warning --> array_keys() expects parameter 1 to be array, null given D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 314
+ERROR - 2018-09-30 15:27:38 --> Severity: Warning --> Invalid argument supplied for foreach() D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 398
+ERROR - 2018-09-30 15:27:38 --> The upload path does not appear to be valid.
+ERROR - 2018-09-30 15:27:38 --> Severity: Error --> Call to undefined function get_admin_id() D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 1101
+ERROR - 2018-09-30 15:28:12 --> The upload path does not appear to be valid.
+ERROR - 2018-09-30 15:28:12 --> Severity: Error --> Call to undefined function get_admin_id() D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 1101
+ERROR - 2018-09-30 15:29:08 --> The upload path does not appear to be valid.
+ERROR - 2018-09-30 15:33:10 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 15:33:10 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 15:33:10 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:33:10 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:33:10 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:33:10 --> Could not find the language line "category_modifier"
+ERROR - 2018-09-30 15:33:10 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-09-30 15:33:10 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:33:10 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 15:33:10 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 15:33:10 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 15:33:10 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 15:33:11 --> Severity: Error --> Call to undefined function get_company_folder() D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\views\manageproducts-edit.php 361
+ERROR - 2018-09-30 15:33:45 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 15:33:45 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 15:33:45 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:33:45 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:33:45 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:33:45 --> Could not find the language line "category_modifier"
+ERROR - 2018-09-30 15:33:45 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-09-30 15:33:45 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:33:45 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 15:33:45 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 15:33:45 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 15:33:45 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 15:34:15 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 15:34:15 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 15:34:15 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:34:15 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:34:15 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:34:15 --> Could not find the language line "category_modifier"
+ERROR - 2018-09-30 15:34:15 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-09-30 15:34:15 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:34:15 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 15:34:15 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 15:34:15 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 15:34:15 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 15:35:18 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 15:35:18 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 15:35:18 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:35:18 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:35:18 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:35:18 --> Could not find the language line "category_modifier"
+ERROR - 2018-09-30 15:35:18 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-09-30 15:35:18 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:35:18 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 15:35:18 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 15:35:18 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 15:35:18 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "select_products"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "select_products"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "category_modifier"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 15:38:19 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 15:38:19 --> 404 Page Not Found: ../modules/manageproducts/controllers/Manageproducts/get_combo_html
+ERROR - 2018-09-30 15:39:23 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:39:24 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:39:25 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:41:34 --> The upload path does not appear to be valid.
+ERROR - 2018-09-30 15:42:34 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 15:42:34 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 15:42:34 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:42:34 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:42:34 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:42:34 --> Could not find the language line "category_modifier"
+ERROR - 2018-09-30 15:42:34 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-09-30 15:42:34 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:42:34 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 15:42:34 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 15:42:34 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 15:42:34 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 15:42:47 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 15:42:47 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 15:42:47 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:42:47 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:42:47 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:42:47 --> Could not find the language line "category_modifier"
+ERROR - 2018-09-30 15:42:47 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-09-30 15:42:47 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:42:47 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 15:42:47 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 15:42:47 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 15:42:47 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 15:43:16 --> Severity: Notice --> Undefined index: attributes D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 314
+ERROR - 2018-09-30 15:43:16 --> Severity: Warning --> array_keys() expects parameter 1 to be array, null given D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 314
+ERROR - 2018-09-30 15:43:17 --> Severity: Warning --> Invalid argument supplied for foreach() D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 404
+ERROR - 2018-09-30 15:43:17 --> Severity: Notice --> Undefined index: attributes D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 314
+ERROR - 2018-09-30 15:43:17 --> Severity: Warning --> array_keys() expects parameter 1 to be array, null given D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 314
+ERROR - 2018-09-30 15:43:17 --> Severity: Warning --> Invalid argument supplied for foreach() D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 404
+ERROR - 2018-09-30 15:43:23 --> Severity: Notice --> Undefined index: attributes D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 314
+ERROR - 2018-09-30 15:43:23 --> Severity: Warning --> array_keys() expects parameter 1 to be array, null given D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 314
+ERROR - 2018-09-30 15:43:24 --> Severity: Warning --> Invalid argument supplied for foreach() D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 404
+ERROR - 2018-09-30 15:43:24 --> Severity: Notice --> Undefined index: attributes D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 314
+ERROR - 2018-09-30 15:43:24 --> Severity: Warning --> array_keys() expects parameter 1 to be array, null given D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 314
+ERROR - 2018-09-30 15:43:24 --> Severity: Warning --> Invalid argument supplied for foreach() D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\controllers\Manageproducts.php 404
+ERROR - 2018-09-30 15:44:05 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 15:44:05 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 15:44:05 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:44:05 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:44:05 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:44:05 --> Could not find the language line "category_modifier"
+ERROR - 2018-09-30 15:44:05 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-09-30 15:44:05 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:44:05 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 15:44:05 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 15:44:05 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 15:44:05 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 15:44:58 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 15:44:58 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 15:44:58 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:44:58 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:44:58 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:44:58 --> Could not find the language line "category_modifier"
+ERROR - 2018-09-30 15:44:58 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-09-30 15:44:58 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:44:58 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 15:44:58 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 15:44:58 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 15:44:58 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 15:45:21 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-09-30 15:45:21 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-09-30 15:45:21 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:45:21 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:45:21 --> Could not find the language line "category_select"
+ERROR - 2018-09-30 15:45:21 --> Could not find the language line "category_modifier"
+ERROR - 2018-09-30 15:45:21 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-09-30 15:45:21 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:45:21 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-09-30 15:45:21 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-09-30 15:45:21 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-09-30 15:45:21 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-09-30 15:45:58 --> Could not find the language line "products_module"
+ERROR - 2018-09-30 15:45:59 --> Could not find the language line "products_module"
+ERROR - 2018-09-30 15:46:02 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-09-30 15:46:05 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:46:05 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:46:05 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 15:46:06 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:46:06 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:46:06 --> Severity: Error --> Call to undefined function show_pricey() D:\xampp\htdocs\bloggotoweb\application\modules\products\views\products-ajax-list.php 50
+ERROR - 2018-09-30 15:46:17 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:46:17 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:46:18 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 15:46:19 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:46:19 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:46:19 --> Severity: Error --> Call to undefined function show_pricey() D:\xampp\htdocs\bloggotoweb\application\modules\products\views\products-ajax-list.php 50
+ERROR - 2018-09-30 15:46:48 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:46:48 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:46:48 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 15:46:49 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:46:49 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:47:00 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:47:00 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:47:00 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '*
+FROM `pos_product_assigned_attributes`
+INNER JOIN `pos_product_modifiers` ON `' at line 1 - Invalid query: SELECT `pro_modifier_primary_id`, `pro_modifier_id`, `pro_modifier_name`, group_concat(pro_modifier_value_primary_id) as value_primary_id, group_concat(pro_modifier_value_id) as value_id, group_concat(pro_modifier_value_name) as value_name, *
+FROM `pos_product_assigned_attributes`
+INNER JOIN `pos_product_modifiers` ON `pro_modifier_primary_id` = `prod_ass_att_attribute_id`
+LEFT JOIN `pos_product_modifier_values` ON `pro_modifier_value_id` = `prod_ass_att_attribute_value_id`
+WHERE `prod_ass_att_parent_productid` = '73'
+ERROR - 2018-09-30 15:48:39 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:48:39 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:48:39 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '*
+FROM `pos_product_assigned_attributes`
+INNER JOIN `pos_product_modifiers` ON `' at line 1 - Invalid query: SELECT `pro_modifier_primary_id`, `pro_modifier_id`, `pro_modifier_name`, group_concat(pro_modifier_value_primary_id) as value_primary_id, group_concat(pro_modifier_value_id) as value_id, group_concat(pro_modifier_value_name) as value_name, *
+FROM `pos_product_assigned_attributes`
+INNER JOIN `pos_product_modifiers` ON `pro_modifier_id` = `prod_ass_att_attribute_id`
+LEFT JOIN `pos_product_modifier_values` ON `pro_modifier_value_id` = `prod_ass_att_attribute_value_id`
+WHERE `prod_ass_att_parent_productid` = '73'
+ERROR - 2018-09-30 15:48:53 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:48:53 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 15:51:42 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-09-30 15:51:44 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-09-30 15:52:00 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-09-30 15:52:01 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:52:03 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 15:52:03 --> Could not find the language line "product_modifiervalues_image_folder_name"
+ERROR - 2018-09-30 15:52:03 --> Could not find the language line "makeit_default"
+ERROR - 2018-09-30 15:52:03 --> Could not find the language line "makeit_default_ttip"
+ERROR - 2018-09-30 15:52:05 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-09-30 16:17:34 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:17:34 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:17:37 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-09-30 16:17:37 --> Could not find the language line "product_modifiervalues_image_folder_name"
+ERROR - 2018-09-30 16:17:37 --> Could not find the language line "makeit_default"
+ERROR - 2018-09-30 16:17:37 --> Could not find the language line "makeit_default_ttip"
+ERROR - 2018-09-30 16:17:40 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-09-30 16:17:57 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:17:57 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:18:14 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:18:14 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:18:14 --> Severity: Error --> Call to undefined function get_company_folder() D:\xampp\htdocs\bloggotoweb\application\modules\products\views\products-views.php 847
+ERROR - 2018-09-30 16:18:40 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:18:40 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:18:40 --> Severity: Error --> Call to undefined function get_company_folder() D:\xampp\htdocs\bloggotoweb\application\modules\products\views\products-views.php 847
+ERROR - 2018-09-30 16:18:56 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:18:56 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:23:15 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:23:15 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:24:41 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:24:41 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:27:39 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:27:39 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:28:53 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:28:53 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:29:54 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:29:54 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:30:24 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:30:24 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:32:01 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:32:01 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:32:20 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:32:20 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:40:40 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:40:40 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:41:08 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:41:08 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:45:35 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:45:35 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:46:04 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:46:04 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:47:20 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:47:20 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:47:35 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 16:47:35 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 20:40:24 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 20:40:24 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 20:41:43 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 20:41:43 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:09:45 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:09:45 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:11:20 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:11:20 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:11:51 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:11:51 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:11:52 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:11:52 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:33:43 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:33:43 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:33:46 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:33:46 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:33:48 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:33:48 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:33:58 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:33:58 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:34:22 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:34:22 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:34:22 --> Severity: Warning --> trim() expects parameter 1 to be string, array given D:\xampp\htdocs\bloggotoweb\application\helpers\common_settings_helper.php 251
+ERROR - 2018-09-30 21:34:22 --> Severity: Notice --> Undefined variable: atrributes D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 320
+ERROR - 2018-09-30 21:34:22 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 328
+ERROR - 2018-09-30 21:34:22 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 329
+ERROR - 2018-09-30 21:35:24 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:35:24 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:35:54 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:35:54 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:35:54 --> Severity: Warning --> trim() expects parameter 1 to be string, array given D:\xampp\htdocs\bloggotoweb\application\helpers\common_settings_helper.php 251
+ERROR - 2018-09-30 21:35:54 --> Severity: Notice --> Undefined variable: atrributes D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 321
+ERROR - 2018-09-30 21:35:54 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 329
+ERROR - 2018-09-30 21:35:54 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 330
+ERROR - 2018-09-30 21:38:08 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:38:08 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:38:08 --> Severity: Warning --> trim() expects parameter 1 to be string, array given D:\xampp\htdocs\bloggotoweb\application\helpers\common_settings_helper.php 251
+ERROR - 2018-09-30 21:38:08 --> Severity: Notice --> Undefined variable: atrributes D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 321
+ERROR - 2018-09-30 21:38:08 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 329
+ERROR - 2018-09-30 21:38:08 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 330
+ERROR - 2018-09-30 21:38:32 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:38:32 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:40:01 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:40:01 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:40:01 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' O' at line 4 - Invalid query: SELECT `pos_products`.*, `pos_product_assigned_attributes`.*
+FROM `pos_product_assigned_attributes`
+INNER JOIN `pos_products` ON `product_id` = `prod_ass_att_product_id`
+WHERE `prod_ass_att_parent_productid` = `5BA6F980-05F0-464B-A1F7-3D02486B44B4` AND ((prod_ass_att_attribute_id = 1 AND prod_ass_att_attribute_value_id =  O ØQãŸ|÷­½Ô17Ô.))
+GROUP BY `prod_ass_att_product_id`
+ERROR - 2018-09-30 21:45:15 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:45:15 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:46:07 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:46:07 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:46:39 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:46:39 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:46:39 --> Query error: Unknown column 'A77DF41E' in 'where clause' - Invalid query: SELECT `pos_products`.*, `pos_product_assigned_attributes`.*
+FROM `pos_product_assigned_attributes`
+INNER JOIN `pos_products` ON `product_id` = `prod_ass_att_product_id`
+WHERE `prod_ass_att_parent_productid` = '5BA6F980-05F0-464B-A1F7-3D02486B44B4' AND ((prod_ass_att_attribute_id = 1 AND prod_ass_att_attribute_value_id = A77DF41E-072D-49EB-B0E1-6A2908703833))
+GROUP BY `prod_ass_att_product_id`
+ERROR - 2018-09-30 21:47:07 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:47:07 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:47:25 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:47:25 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:51:50 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:51:50 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:52:38 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:52:38 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:52:43 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:52:43 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:53:00 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:53:00 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:53:01 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:53:01 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:53:06 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:53:06 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:53:28 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:53:28 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:55:20 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:55:20 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:56:17 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:56:17 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:56:17 --> Severity: Notice --> Undefined index: product_special_from_date D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 405
+ERROR - 2018-09-30 21:56:17 --> Severity: Notice --> Undefined index: product_special_to_date D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 406
+ERROR - 2018-09-30 21:56:17 --> Severity: Notice --> Trying to get property of non-object D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 409
+ERROR - 2018-09-30 21:56:17 --> Severity: Notice --> Undefined index: product_description D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 419
+ERROR - 2018-09-30 21:56:17 --> Severity: Notice --> Undefined index: product_qty D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 419
+ERROR - 2018-09-30 21:56:17 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 328
+ERROR - 2018-09-30 21:56:17 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 329
+ERROR - 2018-09-30 21:57:24 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:57:24 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:57:24 --> Severity: Notice --> Trying to get property of non-object D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 409
+ERROR - 2018-09-30 21:57:24 --> Severity: Notice --> Undefined index: product_description D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 419
+ERROR - 2018-09-30 21:57:24 --> Severity: Notice --> Undefined index: product_qty D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 419
+ERROR - 2018-09-30 21:57:24 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 328
+ERROR - 2018-09-30 21:57:24 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 329
+ERROR - 2018-09-30 21:57:52 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:57:52 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:57:52 --> Severity: Error --> Call to undefined method Products::_find_discount() D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 411
+ERROR - 2018-09-30 21:58:18 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:58:18 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:58:28 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:58:28 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:58:28 --> Severity: Notice --> Undefined index: product_description D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 419
+ERROR - 2018-09-30 21:58:28 --> Severity: Notice --> Undefined index: product_qty D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 419
+ERROR - 2018-09-30 21:58:28 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 328
+ERROR - 2018-09-30 21:58:28 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 329
+ERROR - 2018-09-30 21:59:03 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:59:03 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:59:03 --> Severity: Notice --> Undefined index: product_qty D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 419
+ERROR - 2018-09-30 21:59:03 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 328
+ERROR - 2018-09-30 21:59:03 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 329
+ERROR - 2018-09-30 21:59:38 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:59:38 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 21:59:38 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 328
+ERROR - 2018-09-30 21:59:38 --> Severity: Notice --> Undefined offset: 0 D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 329
+ERROR - 2018-09-30 22:00:00 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:00:00 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:01:26 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:01:26 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:01:26 --> Severity: Notice --> Undefined index: id D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 329
+ERROR - 2018-09-30 22:01:32 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:01:32 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:01:32 --> Severity: Notice --> Undefined index: id D:\xampp\htdocs\bloggotoweb\application\modules\products\controllers\Products.php 329
+ERROR - 2018-09-30 22:01:45 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:01:45 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:02:44 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:02:44 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:03:15 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:03:15 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:04:24 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:04:24 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:04:29 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:04:29 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:04:31 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 22:04:31 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:18:17 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:18:17 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:18:18 --> 404 Page Not Found: ../modules/products/controllers/Products/media
+ERROR - 2018-09-30 23:18:19 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:18:19 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:18:21 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:18:21 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:19:02 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:19:02 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:25:07 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:25:07 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:25:45 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:25:45 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:25:50 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:25:50 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:26:26 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:26:26 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:26:26 --> Severity: Error --> Call to undefined function show_currency() D:\xampp\htdocs\bloggotoweb\application\modules\products\views\products-views.php 891
+ERROR - 2018-09-30 23:27:44 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:27:44 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:27:50 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:27:50 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:27:52 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:27:52 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:28:00 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:28:00 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:28:01 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:28:01 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:29:03 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:29:03 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:29:31 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:29:31 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:29:35 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:29:35 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:30:22 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:30:22 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:33:39 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:33:39 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:33:44 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:33:44 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:34:16 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:34:16 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:34:18 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:34:18 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:34:20 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:34:20 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:53:11 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:53:11 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:57:01 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:57:01 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:57:03 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:57:03 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:37 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:37 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:41 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:41 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:41 --> Could not find the language line "form_validation_validate_cutomer"
+ERROR - 2018-09-30 23:58:41 --> Could not find the language line "rest_form_error"
+ERROR - 2018-09-30 23:58:42 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:42 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:42 --> Could not find the language line "form_validation_validate_cutomer"
+ERROR - 2018-09-30 23:58:42 --> Could not find the language line "rest_form_error"
+ERROR - 2018-09-30 23:58:43 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:43 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:43 --> Could not find the language line "form_validation_validate_cutomer"
+ERROR - 2018-09-30 23:58:43 --> Could not find the language line "rest_form_error"
+ERROR - 2018-09-30 23:58:44 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:44 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:44 --> Could not find the language line "form_validation_validate_cutomer"
+ERROR - 2018-09-30 23:58:44 --> Could not find the language line "rest_form_error"
+ERROR - 2018-09-30 23:58:46 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:46 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:47 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:47 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:47 --> Could not find the language line "form_validation_validate_cutomer"
+ERROR - 2018-09-30 23:58:47 --> Could not find the language line "rest_form_error"
+ERROR - 2018-09-30 23:58:49 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:49 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:49 --> Could not find the language line "form_validation_validate_cutomer"
+ERROR - 2018-09-30 23:58:49 --> Could not find the language line "rest_form_error"
+ERROR - 2018-09-30 23:58:54 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:54 --> Could not find the language line "products_module_label"
+ERROR - 2018-09-30 23:58:54 --> Could not find the language line "form_validation_validate_cutomer"
+ERROR - 2018-09-30 23:58:54 --> Could not find the language line "rest_form_error"

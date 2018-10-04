@@ -291,6 +291,25 @@ if (! function_exists ( 'message_notify_count' )){
 	}
 }
 
+
+//Cart Counting
+if (! function_exists ( 'get_cart_count' )){
+	function get_cart_count() {
+		$CI=& get_instance();
+		$cart_count = 0;
+		$customer_id = ($CI->session->userdata('bg_user_id'))?$CI->session->userdata('bg_user_id'):'';
+		if($customer_id !='') {
+			$where =array("cart_customer_id"=>$customer_id);
+			$cart_count_details = $CI->Mydb->get_record('cart_total_items','cart_details',$where);	
+			if(!empty($cart_count_details))
+			{
+				$cart_count = $cart_count_details['cart_total_items'];
+			}
+		}	
+		return $cart_count;		
+	}
+}
+
 if (! function_exists ( 'delete_post' )){
 	function delete_post($postid) {
 		$CI=& get_instance();
