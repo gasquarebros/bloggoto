@@ -855,17 +855,258 @@ class Products extends CI_Controller {
 			);
 		}
 	}
+	/* this function used to get cart details */
+	public function get_cart_contents($reference_id = null, $customer_id = null, $returndata = "") {
+		$result=array();	
+		$cart_item_count=0;
+
+		$reference_id="";
+		$customer_id=get_user_id ();
+		$reference_id = ($reference_id == "" ? $this->input->get ( 'reference_id' ) : $reference_id); /* mobile device id or browser session id */
+		$customer_id = ($customer_id != "" ? $customer_id : $this->input->get ( 'customer_id' ));
+
+		/* validate customer id */
+		$customer_array = ($reference_id == "" ? array ('cart_customer_id' => $customer_id) : 
+												 array ('cart_session_id' => $reference_id ));
+
+		$cart_details = $this->Mydb->get_record ( '*', 'cart_details', $customer_array, array ('cart_id' => 'DESC') );
+
+		if (! empty ( $cart_details )) 
+		{
+			$select = array ('cart_item_cart_id',
+					'cart_item_id',
+					'cart_item_product_id',
+					'cart_item_product_name',
+					'cart_item_product_sku',
+					'cart_item_product_image',
+					'cart_item_qty',
+					'cart_item_unit_price',
+					'cart_item_total_price',
+					'cart_item_type',
+					'cart_item_shipping_product_price',
+					'cart_item_merchant_name'
+			);
+			$cart_items = $this->Mydb->get_all_records ( $select, 'cart_items',array('cart_item_cart_id' => 
+				$cart_details ['cart_id']) );
+			if (! empty ( $cart_items )) 
+			{
+				$result ['cart_details'] = $cart_details;
+				$result ['cart_items'] = $cart_items;
+				$response ['status'] = "success";
+				if ($returndata == "callback") 
+				{
+					$cart_details_html =get_template($this->folder . $this->module . "-cart-details", $result);  
+					$response ['cart'] = $cart_details_html;
+				}
+				else
+				{
+					$response['result_set']=  $result;
+				} 
+				return $response;
+			}
+		} else {
+			return array ('status' => "success",'message' => get_label ( 'rest_cart_empty'));
+		}
+	}
 	public function cart()
 	{
-		//echo "inn"; exit;
 		$data = $this->load_module_info ();	
-		$reference_id = '';
-		$customer_id = get_user_id();
-		$cart_content = $this->contents_get ( $reference_id, $customer_id, 'callback' );
-		//echo "<pre>"; print_r($cart_content); exit;
-		$data['cart_content'] = $cart_content;
-		$this->layout->display_site ( $this->folder . $this->module . "-cart", $data );
+		$product=array();	
+		$maxs=0;
+		$reference_id="";
+		$customer_id=get_user_id ();
+		$reference_id = ($reference_id == "" ? $this->input->get ( 'reference_id' ) : $reference_id); 
+		$customer_id = ($customer_id != "" ? $customer_id : $this->input->get ( 'customer_id' ));
+		$cart_array = $this->get_cart_contents ( $reference_id, $customer_id, 'callback' );
+		if(!empty($cart_array))
+		{
+			$data ['cart'] = (!empty($cart_array['cart']))?$cart_array['cart']:'';
+		}
+		$this->layout->display_site ( $this->folder . $this->module . "-cart", $data);
 	}
+	public function updatecartitem($item_id)
+	{
+		$result=$response_array=array();
+		check_site_ajax_request();
+		// $data = $this->load_module_info ();
+		if (($this->input->post ( 'action' ) == "Updateqty") && ($item_id != "")) 
+		{
+			$customer_id=get_user_id ();
+			$reference_id="";
+			$reference_id = ($reference_id == "" ? $this->input->post ( 'reference_id' ) : $reference_id); 
+			$customer_id = ($customer_id != "" ? $customer_id : $this->input->post ( 'customer_id' ));
+			$_POST['item_id'] = $itemId =  decode_value($item_id);
+			$product_qty=$this->input->post('product_qty');
+			$select_array=array ('cart_item_cart_id',
+					'cart_item_qty',
+					'cart_item_total_price',
+					'cart_item_id',
+					'cart_item_unit_price','cart_item_shipping_product_price', 
+			);
+			$item_details = $this->Mydb->get_record ($select_array , 'cart_items', array ('cart_item_id' => $itemId ) );
+			if (! empty ( $item_details )) 
+			{
+				$update_qty = $product_qty;
+				$update_total_amount = $update_qty * $item_details ['cart_item_unit_price'];
+				$this->Mydb->update ( 'cart_items', array ('cart_item_id' => $itemId ), 
+													array ('cart_item_qty' => $update_qty,
+														   'cart_item_total_price' => $update_total_amount) 
+									);
+
+/*				$cart_items = $this->Mydb->get_all_records ( $select_array, 'cart_items',array('cart_item_cart_id' => 
+				$item_details ['cart_item_cart_id']) );	
+				$total_items=$sub_total=$shipping_fees=0;
+				if(!empty($cart_items))
+				{
+					foreach($cart_items as $key=>$cartItem)
+					{
+						$total_items+=$cartItem['cart_item_qty'];
+						$sub_total+=$cartItem['cart_item_total_price'];
+						$shipping_fees+=$cartItem['cart_item_shipping_product_price'];
+					}
+					$grand_total=($sub_total+$shipping_fees);
+					$this->Mydb->update ( 'cart_details', array ('cart_id' => $item_details ['cart_item_cart_id'] ), 
+														array ('cart_total_items' => $total_items,
+															   'cart_delivery_charge' => $shipping_fees,
+															   'cart_sub_total' => $sub_total,
+															   'cart_grand_total' => $grand_total,
+															) 
+										);					
+				}*/	
+				$response_array=update_cart_details($item_details ['cart_item_cart_id']);
+				$cart_item_count = (!empty($response_array))?$response_array['total_items']:0;
+				$contents = $this->get_cart_contents ( $reference_id, $customer_id, 'callback' );
+				$result = array ('status' => "success",
+									    'response' => $contents,
+										'cart_count' => $cart_item_count,
+										'message' => get_label ( 'rest_product_added' ) 
+								      );
+			}
+			else 
+			{
+				$result ['status'] = 'error';
+				$result ['message'] = "";
+			}			
+
+		}
+		else
+		{
+			$result ['status'] = 'error';
+			$result ['message'] = '';			
+		}
+		echo json_encode ( $result );
+		exit ();
+
+	}	
+	public function removecartitem($item_id)
+	{
+		$result=$response_array=array();
+		check_site_ajax_request();
+		$data = $this->load_module_info ();
+		if (($this->input->post ( 'action' ) == "Removeitem") && ($item_id != "")) 
+		{
+			$customer_id=get_user_id ();
+			$reference_id="";
+			$reference_id = ($reference_id == "" ? $this->input->post ( 'reference_id' ) : $reference_id); 
+			$customer_id = ($customer_id != "" ? $customer_id : $this->input->post ( 'customer_id' ));
+
+			$_POST['item_id'] = $itemId =  decode_value($item_id);
+			$this->form_validation->set_rules('item_id','lang:item_id','required|trim');			
+			if ($this->form_validation->run () == TRUE) 
+			{
+
+				$where_array=array('cart_item_id'=>$itemId);
+				$item_details = $this->Mydb->get_record ('*' , 'cart_items', $where_array );
+				$this->Mydb->delete ( 'cart_items',$where_array );
+
+/*				$cart_items = $this->Mydb->get_all_records ( '*', 'cart_items',array('cart_item_cart_id' => 
+				$item_details ['cart_item_cart_id']) );	
+				$total_items=$sub_total=$shipping_fees=0;
+				if(!empty($cart_items))
+				{
+					foreach($cart_items as $key=>$cartItem)
+					{
+						$total_items+=$cartItem['cart_item_qty'];
+						$sub_total+=$cartItem['cart_item_total_price'];
+						$shipping_fees+=$cartItem['cart_item_shipping_product_price'];
+					}
+					$grand_total=($sub_total+$shipping_fees);
+					$this->Mydb->update ( 'cart_details', array ('cart_id' => $item_details ['cart_item_cart_id'] ), 
+														array ('cart_total_items' => $total_items,
+															   'cart_delivery_charge' => $shipping_fees,
+															   'cart_sub_total' => $sub_total,
+															   'cart_grand_total' => $grand_total,
+															) 
+										);					
+				}*/			
+				$response_array=update_cart_details($item_details ['cart_item_cart_id']);
+				$cart_item_count = (!empty($response_array))?$response_array['total_items']:0;
+				$contents = $this->get_cart_contents ( $reference_id, $customer_id, 'callback' );
+				$result = array ('status' => "success",
+									    'response' => $contents,
+										'cart_count' => $cart_item_count,
+										'message' => get_label ( 'rest_product_added' ) 
+								      );
+			}
+			else 
+			{
+				$result ['status'] = 'error';
+				$result ['message'] = "";
+			}
+		}
+		else
+		{
+			$result ['status'] = 'error';
+			$result ['message'] = '';			
+		}
+		echo json_encode ( $result );
+		exit ();
+
+	}	
+	public function removecart($cart_id)
+	{
+		$result=array();
+		check_site_ajax_request();
+		$this->authentication->user_authentication();
+		$data = $this->load_module_info ();
+		if (($this->input->post ( 'action' ) == "Removecart") && ($cart_id != "")) 
+		{
+			$customer_id=get_user_id ();
+			$reference_id="";
+			$reference_id = ($reference_id == "" ? $this->input->post ( 'reference_id' ) : $reference_id); 
+			$customer_id = ($customer_id != "" ? $customer_id : $this->input->post ( 'customer_id' ));
+
+			$_POST['cart_id'] = $cartId =  decode_value($cart_id);
+			$this->form_validation->set_rules('cart_id','lang:cart_id','required|trim');			
+			if ($this->form_validation->run () == TRUE) 
+			{
+				$insert_id = $this->Mydb->delete ( 'cart_details',array('cart_id'=>$cartId) );
+				$insert_id = $this->Mydb->delete ( 'cart_items',array('cart_item_cart_id'=>$cartId));
+				$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_delete' ), $this->module_label ) );
+
+				$response_array=update_cart_details($cartId);
+				$cart_item_count = (!empty($response_array))?$response_array['total_items']:0;
+				$contents = $this->get_cart_contents ( $reference_id, $customer_id, 'callback' );
+				$result = array ('status' => "success",
+									    'response' => $contents,
+										'cart_count' => $cart_item_count,
+										'message' => get_label ( 'rest_product_added' ) 
+								      );
+			}
+			else 
+			{
+				$result ['status'] = 'error';
+				$result ['message'] = validation_errors ();
+			}
+		}
+		else
+		{
+			$result ['status'] = 'error';
+			$result ['message'] = '';			
+		}
+		echo json_encode ( $result );
+		exit ();
+	}	
 	
 	/* this method used to common module labels */
 	private function load_module_info() {

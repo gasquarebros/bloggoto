@@ -263,7 +263,52 @@ if (!function_exists('find_discount')) {
 		return ceil($discount_percent);
 	}
 }
-
+/* this function used to show output status */
+if (!function_exists('update_cart_details')) {
+	function update_cart_details($cartId) {
+		$CI=& get_instance();
+		$result=array();
+		$total_items=$sub_total=$shipping_fees=0;
+		if($cartId>0 && $cartId != '')
+		{
+			$cart_items = $CI->Mydb->get_all_records ( '*', 'cart_items',array('cart_item_cart_id' => 
+			$cartId) );					
+			if(!empty($cart_items))
+			{
+				foreach($cart_items as $key=>$cartItem)
+				{
+					$total_items+=$cartItem['cart_item_qty'];
+					$sub_total+=$cartItem['cart_item_total_price'];
+					$shipping_fees+=$cartItem['cart_item_shipping_product_price'];
+				}
+				$grand_total=($sub_total+$shipping_fees);
+				$CI->Mydb->update ( 'cart_details', array ('cart_id' => $cartId ), 
+													array ('cart_total_items' => $total_items,
+														   'cart_delivery_charge' => $shipping_fees,
+														   'cart_sub_total' => $sub_total,
+														   'cart_grand_total' => $grand_total,
+														) 
+									);					
+				$result['total_items']=$total_items;
+			}
+		}
+		return $result;
+	}
+}
+/* this function used to show output status */
+if (!function_exists('get_cart_item_count')) {
+	function get_cart_item_count($cartItemsArray) {
+		$item_count = 0;
+   		if(!empty($cartItemsArray))
+		{
+			foreach($cartItemsArray as $key=>$cartItem)
+			{
+				$item_count+=$cartItem['cart_item_qty'];
+			}
+		}
+		return $item_count;
+	}
+}
 
 
 
