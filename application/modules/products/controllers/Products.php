@@ -538,11 +538,15 @@ class Products extends CI_Controller {
 					$shipping = explode('--',$this->input->post('shipping_method'));
 					$products['assigned_shipping'] = array();
 					$delivery_charge = 0;
+					$product_price_info = $this->get_product_price($products);
+					$product_price = $product_price_info['product_current_price'];
 					if(count($shipping) == 2)
 					{
 						$shipping_id = decode_value($shipping[0]);
 						$shipping_method_assigned = $this->Mydb->get_record ( '*', 'product_assigned_shipping_methods', array('prod_ass_ship_method_shipid'=>$shipping_id,'prod_ass_ship_method_prodid'=>decode_value($product_id)));
+
 						$products['assigned_shipping'] = $shipping_method_assigned;
+
 						if(!empty($shipping_method_assigned)) {
 							$shipping_option = array('shipping_id'=>$shipping_id,'shipping_name'=>$shipping[1],'shipping_method_price'=>$shipping_method_assigned['prod_ass_ship_method_price']);
 							$delivery_charge = $shipping_method_assigned['prod_ass_ship_method_price'];
@@ -590,6 +594,7 @@ class Products extends CI_Controller {
 
 							$shipping_option['cartid'] = $cart_unique_id;
 							$insert_shipping_id = $this->Mydb->insert ( 'cart_item_shipping', $shipping_option );
+
 							$products['assigned_shipping']['insert_shipping_id'] = $insert_shipping_id;
 
 							$result = $this->insert_cart_items ( $cart_unique_id, $_POST,$products); 
@@ -664,6 +669,23 @@ class Products extends CI_Controller {
 		}
 		return true;
 	}
+
+	private function get_product_price($products)
+	{
+		$discount_percent = 0;
+		$product_special_from_date = ($products['product_special_price_from_date'] !='' && $products['product_special_price_from_date'] !='0000-00-00 00:00:00')?date('Y-m-d',strtotime($products['product_special_price_from_date'])):'';
+		$product_special_to_date = ($products['product_special_price_to_date'] !='' && $products['product_special_price_to_date'] !='0000-00-00 00:00:00')?date('Y-m-d',strtotime($products['product_special_price_to_date'])):'';
+		if($products['product_special_price'] !='')
+		{
+			$discount_percent = find_discount($products['product_price'],$products['product_special_price'],$product_special_from_date,$product_special_to_date);
+		}
+		if($discount_percent > 0){
+			$product_current_price = $products['product_special_price'];
+		} else { 
+			$product_current_price = $products['product_price']; 
+		}
+		return array('product_current_price'=>$product_current_price,'discount_percent'=>$discount_percent);
+	}
 	
 	
 	/* this method used to insert cart items */
@@ -677,19 +699,10 @@ class Products extends CI_Controller {
 		$product_qty = $this->input->post ( 'product_qty' );
 		$product_remarks = ($this->input->post ( 'product_remarks' )!="")?$this->input->post('product_remarks'):"";
 		
-		$discount_percent = 0;
-		$product_special_from_date = ($products['product_special_price_from_date'] !='' && $products['product_special_price_from_date'] !='0000-00-00 00:00:00')?date('Y-m-d',strtotime($products['product_special_price_from_date'])):'';
-		$product_special_to_date = ($products['product_special_price_to_date'] !='' && $products['product_special_price_to_date'] !='0000-00-00 00:00:00')?date('Y-m-d',strtotime($products['product_special_price_to_date'])):'';
-		if($products['product_special_price'] !='')
-		{
-			$discount_percent = find_discount($products['product_price'],$products['product_special_price'],$product_special_from_date,$product_special_to_date);
-		}
-		if($discount_percent > 0){
-			$product_current_price = $products['product_special_price'];
-		} else { 
-			$product_current_price = $products['product_price']; 
-		}
-		
+		$product_current_price_info = $this->get_product_price($products);
+		$product_current_price = $product_current_price_info['product_current_price'];
+		$discount_percent = $product_current_price_info['discount_percent'];
+
 		$cart_items = array (
 			'cart_item_customer_id' => $customer_id,
 			'cart_item_session_id' => $reference_id,
@@ -720,7 +733,9 @@ class Products extends CI_Controller {
 		{
 			$this->_insert_item_modifier($cart_item_id,$post_arary['selected_attribute_values'],$cart_unique_id);
 		}
-		
+		/* update cart total items */
+		$this->update_cart_total_items($cart_unique_id);
+
 		/* get cart details */
 		$contents = $this->contents_get ( $reference_id, $customer_id, 'callback' );
 		
@@ -730,6 +745,11 @@ class Products extends CI_Controller {
 				'cart_item_id' => $cart_item_id,
 				'message' => get_label ( 'rest_product_added' ) 
 		);
+	}
+
+	private function update_cart_total_items($cart_unique_id) {
+		$record = $this->Mydb->get_record('sum(cart_item_qty) as totalcount','cart_items',array('cart_item_cart_id'=>$cart_unique_id));
+		$this->Mydb->update ( 'cart_details', array ('cart_id' => $cart_unique_id ), array ('cart_total_items' => $record['totalcount']) );
 	}
 
 	/* this method used to update cart items */
@@ -759,7 +779,8 @@ class Products extends CI_Controller {
 					'cart_item_total_price' => $new_total_amount 
 			) );
 			
-			
+			$this->update_cart_total_items($cart_id);
+
 			$contents = $this->contents_get ( $reference_id, $customer_id, 'callback' );
 			
 			return $return_array = array (
@@ -816,7 +837,7 @@ class Products extends CI_Controller {
 			$join = "";
 			$join [0] ['select'] = "shipping_name,shipping_method_price,ship_track_url";
 			$join [0] ['table'] = "cart_item_shipping";
-			$join [0] ['condition'] = "shipping_id = cart_item_shiiping_id";
+			$join [0] ['condition'] = "id = cart_item_shiiping_id";
 			$join [0] ['type'] = "LEFT";
 
 			//$join [1] ['select'] = "group_concat('~',attribute_name) as attributename, group_concat('~',attribute_value_name)";
@@ -869,6 +890,26 @@ class Products extends CI_Controller {
 		$customer_array = ($reference_id == "" ? array ('cart_customer_id' => $customer_id) : 
 												 array ('cart_session_id' => $reference_id ));
 
+
+		$result = $this->contents_get ( $reference_id, $customer_id, 'callback' );						
+		if(!empty($result) && !empty($result['cart_details']))
+		{
+
+			$response ['status'] = "success";
+			if ($returndata == "callback") 
+			{
+				$cart_details_html =get_template($this->folder . $this->module . "-cart-details", $result);  
+				$response ['cart'] = $cart_details_html;
+			}
+			else
+			{
+				$response['result_set']=  $result;
+			} 
+			return $response;
+		} else {
+			return array ('status' => "success",'message' => get_label ( 'rest_cart_empty'));
+		}				 
+		/*
 		$cart_details = $this->Mydb->get_record ( '*', 'cart_details', $customer_array, array ('cart_id' => 'DESC') );
 
 		if (! empty ( $cart_details )) 
@@ -882,7 +923,7 @@ class Products extends CI_Controller {
 					'cart_item_qty',
 					'cart_item_unit_price',
 					'cart_item_total_price',
-					'cart_item_type',
+					'cart_item_product_type',
 					'cart_item_shipping_product_price',
 					'cart_item_merchant_name'
 			);
@@ -892,6 +933,9 @@ class Products extends CI_Controller {
 			{
 				$result ['cart_details'] = $cart_details;
 				$result ['cart_items'] = $cart_items;
+				echo "<pre>";
+				print_r($result);
+				exit;
 				$response ['status'] = "success";
 				if ($returndata == "callback") 
 				{
@@ -906,7 +950,7 @@ class Products extends CI_Controller {
 			}
 		} else {
 			return array ('status' => "success",'message' => get_label ( 'rest_cart_empty'));
-		}
+		}*/
 	}
 	public function cart()
 	{
@@ -916,12 +960,13 @@ class Products extends CI_Controller {
 		$reference_id="";
 		$customer_id=get_user_id ();
 		$reference_id = ($reference_id == "" ? $this->input->get ( 'reference_id' ) : $reference_id); 
-		$customer_id = ($customer_id != "" ? $customer_id : $this->input->get ( 'customer_id' ));
+		$customer_id = ($customer_id != "" ? $customer_id : get_user_id());
 		$cart_array = $this->get_cart_contents ( $reference_id, $customer_id, 'callback' );
 		if(!empty($cart_array))
 		{
 			$data ['cart'] = (!empty($cart_array['cart']))?$cart_array['cart']:'';
 		}
+
 		$this->layout->display_site ( $this->folder . $this->module . "-cart", $data);
 	}
 	public function updatecartitem($item_id)

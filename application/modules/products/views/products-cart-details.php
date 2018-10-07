@@ -18,10 +18,11 @@
                     </tr>
                 </thead>
                 <tbody>
-<?php
-$proId="";
-$cart_ship_price=0;
-$cart_sub_total=0;
+                <?php
+                
+                    $proId="";
+                    $cart_ship_price=0;
+                    $cart_sub_total=0;
                     $cart_ship_price=($cart_details['cart_delivery_charge'] >0)?$cart_details['cart_delivery_charge'] :0;
                     $cart_sub_total=($cart_details['cart_sub_total'])?$cart_details['cart_sub_total']:0;
                     $cart_total=($cart_details['cart_grand_total'])?$cart_details['cart_grand_total']:0;
@@ -44,8 +45,12 @@ $cart_sub_total=0;
                                             </span>
                             <p class="desc"><?php echo output_value($cart_item['cart_item_product_name']); ?></p>
                             <p>
-                                <span class="color">First Flavor Choice: <strong>Original</strong></span>
-                                <span class="color">Second Flavor Choice: <strong>Cheese</strong></span>
+                                <?php if($cart_item['attributename'] !='') { 
+                                    $item_modifiers = explode(',',$cart_item['attributename']);
+                                    $item_modifiers_values = explode(',',$cart_item['attributevaluename']);
+								if(!empty($item_modifiers)) { foreach($item_modifiers as $key=>$modifiers) { ?>
+                                <span class="color"><?php echo $modifiers; ?> <strong><?php echo $item_modifiers_values[$key]; ?></strong></span>
+                                <?php } } } ?>
                             </p>
                         </td>
                         <td class="qty">
@@ -58,36 +63,36 @@ $cart_sub_total=0;
                                 <a title="Update Quantity" class="update_cart_qty" href="<?php echo base_url().'products/updatecartitem/'.encode_value($cart_item['cart_item_id']); ?>" >Update Qty</a>
                             </span>
                         </td>
-                        <td class="price"><?php echo output_value($item_price); ?></td>
+                        <td class="price"><?php echo show_price($item_price); ?></td>
                         <td class="delete">
                             <a title="Delete Item" class="remove_cart_item" href="<?php echo base_url().'products/removecartitem/'.encode_value($cart_item['cart_item_id']); ?>" class="delete-icon"><i class="fa fa-trash-o" style="font-size:24px;color:red"></i></a>
                         </td>
                     </tr>
-                    <?php if($item_ship_price>0)
+                    <?php if($cart_item['cart_item_shiiping_id'] != '' )
                     {
                     ?>
-<tr>
-                                    <td colspan="4" class="inner_table">
-                                        <table>
-                                            <tbody><tr>
-                                                <td class="ship_method">
-                                                    <p>Delivery Type: <strong>Free Shipping</strong></p>
-                                                </td>
-                                                <td class="ship_charge">
-                                                    <p>Delivery Fees: <strong><?php echo output_value($item_ship_price); ?></strong></p>
-                                                </td>
-                                                <td class="ship_price">
-                                                    <p>Total Price: <strong><?php echo output_value($item_total_price); ?></strong></p>
-                                                </td>
-                                            </tr>
-                                        </tbody></table>
-                                    </td>
-                                </tr>                    
-<?php } } ?>
+                        <tr>
+                            <td colspan="4" class="inner_table">
+                                <table>
+                                    <tbody><tr>
+                                        <td class="ship_method">
+                                            <p>Delivery Type: <strong><?php echo $cart_item['shipping_name']; ?></strong></p>
+                                        </td>
+                                        <td class="ship_charge">
+                                            <p>Delivery Fees: <strong><?php echo show_price($cart_item['shipping_method_price']); ?></strong></p>
+                                        </td>
+                                        <td class="ship_price">
+                                            <p>Total Price: <strong><?php echo show_price($item_total_price); ?></strong></p>
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>                    
+                    <?php } 
+                }  ?>
                 </tbody>
             </table>
         </div>
-        <p class="tablscroll-view bottom" style="display:none;">Scroll to view more <i class="fa fa-long-arrow-right" aria-hidden="true"></i></p>
 
         <div class="buyer_production">
             <a class="remove_cart removeall_link" href="<?php echo base_url().'products/removecart/'.encode_value($cart_details['cart_id']); ?>" title="Remove All Item">Remove All</a>
@@ -105,19 +110,19 @@ $cart_sub_total=0;
                     <tbody>
                         <tr>
                             <th>Subtotal:</th>
-                            <td><?php echo output_value($cart_sub_total); ?></td>
+                            <td><?php echo show_price($cart_sub_total); ?></td>
                         </tr>
                     <?php if($cart_ship_price>0)
                           {
                     ?>                        
                         <tr>
                             <th>Shipping Fees:</th>
-                            <td><?php echo output_value($cart_ship_price); ?></td>
+                            <td><?php echo show_price($cart_ship_price); ?></td>
                         </tr>                        
                     <?php } ?>                        
                         <tr>
                             <th>Total:</th>
-                            <td class="total"><?php echo output_value($cart_total); ?></td>
+                            <td class="total"><?php echo show_price($cart_total); ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -125,7 +130,7 @@ $cart_sub_total=0;
             <div class="clear"></div>
         </div>
         <div class="button-part">
-            <a class="button" title="Proceed to Checkout" href="<?php echo base_url().'products/checkout'; ?>">Proceed to Checkout</a>
+            <a class="button" title="Proceed to Checkout" href="<?php echo base_url().'checkout'; ?>">Proceed to Checkout</a>
         </div>
 <?php
         }

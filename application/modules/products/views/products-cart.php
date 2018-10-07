@@ -450,12 +450,7 @@ ins {
 .main_shopping_cart table .inner_table {
     background: #f5f5f5;
 }
-.main_shopping_cart table td {
-    border-right: 0;
-    padding: 25px 15px;
-    position: relative;
-    border-bottom: 1px solid #bbb;
-}
+
 </style>
 <script type="text/javascript" src="<?php echo skin_url(); ?>js/products.js"></script>
 
