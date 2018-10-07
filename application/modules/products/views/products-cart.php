@@ -447,6 +447,10 @@ ins {
     color: #3a3a3a;
     text-transform: uppercase
 }
+.main_shopping_cart table .inner_table {
+    background: #f5f5f5;
+}
+
 </style>
 <script type="text/javascript" src="<?php echo skin_url(); ?>js/products.js"></script>
 
