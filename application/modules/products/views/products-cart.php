@@ -453,7 +453,7 @@ ins {
 <section>
    <div class="inner_content">
    <div id="cart" class="container">
-    <?php echo $cart; ?>
+    <?php echo ($cart!= "")?$cart:""; ?>
         <div class="main_shopping_cart" id="cart-empty" style="display:<?php echo ($cart !="")?'none':'display'; ?>">
             <div class="cart-empty txtc">
                 <img src="<?php echo media_url().'cart.png'; ?>" alt="cart-empty" style="display:none">
