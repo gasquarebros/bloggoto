@@ -812,9 +812,28 @@ class Products extends CI_Controller {
 					'cart_item_shipping_product_price',
 					'cart_item_shiiping_id' 
 			);
-			$all_items = $this->Mydb->get_all_records ( $select, 'cart_items', array (
-					'cart_item_cart_id' => $cart_details ['cart_id'] 
-			) );
+
+			$join = "";
+			$join [0] ['select'] = "shipping_name,shipping_method_price,ship_track_url";
+			$join [0] ['table'] = "cart_item_shipping";
+			$join [0] ['condition'] = "shipping_id = cart_item_shiiping_id";
+			$join [0] ['type'] = "LEFT";
+
+			//$join [1] ['select'] = "group_concat('~',attribute_name) as attributename, group_concat('~',attribute_value_name)";
+			$join [1] ['select'] = "group_concat(attribute_name) as attributename,group_concat(attribute_value_name) as attributevaluename,group_concat(attribute_value_image) as value_images";
+			$join [1] ['table'] = "cart_attributes";
+			$join [1] ['condition'] = "itemid = cart_item_id";
+			$join [1] ['type'] = "LEFT";
+/*
+			$join [2] ['select'] = "product_modifier_values.*";
+			$join [2] ['table'] = "product_modifier_values";
+			$join [2] ['condition'] = "pro_modifier_value_id = product_assigned_attributes.prod_ass_att_attribute_value_id";
+			$join [2] ['type'] = "LEFT";*/
+
+			$where = array (
+				'cart_item_cart_id' => $cart_details ['cart_id'] 
+			);
+			$all_items = $this->Mydb->get_all_records ( $select,'cart_items', $where, '', '', '', '',array('cart_item_id'), $join );
 			$fianl = array ();
 			if (! empty ( $all_items )) {
 
@@ -840,15 +859,11 @@ class Products extends CI_Controller {
 	{
 		//echo "inn"; exit;
 		$data = $this->load_module_info ();	
-		$product_category = $this->Mydb->get_all_records('*',$this->product_categorytable,array('pro_cate_status' => 'A'));
-		if(!empty($product_category))
-		{
-			foreach($product_category as $procat)
-			{
-				$category[$procat['pro_cate_id']] = $procat['pro_cate_name'];
-			}
-		}
-		$data['product_category'] = $category;
+		$reference_id = '';
+		$customer_id = get_user_id();
+		$cart_content = $this->contents_get ( $reference_id, $customer_id, 'callback' );
+		//echo "<pre>"; print_r($cart_content); exit;
+		$data['cart_content'] = $cart_content;
 		$this->layout->display_site ( $this->folder . $this->module . "-cart", $data );
 	}
 	

@@ -267,6 +267,67 @@ if (!function_exists('find_discount')) {
 
 
 
+if(!function_exists('get_order_item_modifier'))
+{
+	function get_order_item_modifier($item_id='') {
+		if($item_id !='')
+		{
+			$CI=& get_instance();
+			$where = array(
+				'order_modifier_itemid' => $item_id
+			);
+						
+			return $item_modifiers = $CI->Mydb->get_all_records('*','order_item_modifiers',$where);
+		} else {
+			return array();
+		}
+		
+	}
+}
+
+
+/*  this function used to get all modifier dropdown  */
+if(!function_exists('get_order_status_dropdown'))
+{
+	function get_order_status_dropdown($where='',$selected='',$extra='',$multiple=null,$filed_name=null,$name=null)
+	{
+		$CI=& get_instance();
+		$where_array=($where=='')? array('status'=>'A') :  $where ;
+		$records=$CI->Mydb->get_all_records('id,status,name,sequence','order_item_status',$where_array,'','',array('sequence'=>"ASC"));
+		$data = ($multiple =="" ) ? array(''=>get_label('product_modifier_select')) : array();
+		$filed_name = ($filed_name == "")?  'id' : $filed_name;
+		if(!empty($records))
+		{
+			foreach($records as $value)
+			{
+				$data[$value[$filed_name]] = ucfirst(stripslashes($value['name']));
+			}
+		}
+		$extra=($extra!='')?  $extra : 'class="form-control order_status"  required ' ;
+		$array_input = ($multiple == "")? "" : "[]";
+		
+		$name = ($name == ""? "order_status" : $name );
+		return  form_dropdown($name.$array_input,$data,$selected,$extra.$multiple);
+	}
+}
+/*  this function used to get all modifier dropdown  */
+if(!function_exists('display_order_status_dropdown'))
+{
+	function display_order_status_dropdown($selected='')
+	{
+		$selvalue = '';
+		$CI=& get_instance();
+		$where_array=array('status'=>'A','id'=>$selected);
+		$records=$CI->Mydb->get_record('id,status,name,sequence','order_item_status',$where_array,'','',array('sequence'=>"ASC"));
+		if(!empty($records))
+		{
+			$selvalue = $records['name'];
+		}
+		return $selvalue;
+	}
+}
+
+
 /*  this function used to get all company avilability  list  
 if(!function_exists('get_product_availability'))
 {

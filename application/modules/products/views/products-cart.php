@@ -422,6 +422,15 @@ ins {
     color: #3a3a3a;
     text-transform: uppercase
 }
+.main_shopping_cart table .inner_table {
+    background: #f5f5f5;
+}
+.main_shopping_cart table td {
+    border-right: 0;
+    padding: 25px 15px;
+    position: relative;
+    border-bottom: 1px solid #bbb;
+}
 </style>
 <?php
 echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css'));
@@ -430,7 +439,6 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 <section>
    <div class="inner_content">
    <div class="container">
-      <h2 class="main_heading">Magazines</h2>
 <div class="main_shopping_cart">
     <h4>Your Shopping Cart <span>(1 Items)</span></h4>
     <a class="continue_link" href="/flash-sale"><i class="fa fa-angle-left" aria-hidden="true"></i> Continue Shopping</a>
