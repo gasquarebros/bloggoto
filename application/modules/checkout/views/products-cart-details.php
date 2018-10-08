@@ -125,7 +125,7 @@ $cart_sub_total=0;
             <div class="clear"></div>
         </div>
         <div class="button-part">
-            <a class="button" title="Proceed to Checkout" href="<?php echo base_url().'products/checkout'; ?>">Proceed to Checkout</a>
+            <a class="button" title="Proceed to Checkout" href="<?php echo base_url().'checkout/shipping'; ?>">Proceed to Checkout</a>
         </div>
 <?php
         }
