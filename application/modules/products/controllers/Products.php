@@ -841,7 +841,7 @@ class Products extends CI_Controller {
 			$join [0] ['type'] = "LEFT";
 
 			//$join [1] ['select'] = "group_concat('~',attribute_name) as attributename, group_concat('~',attribute_value_name)";
-			$join [1] ['select'] = "group_concat(attribute_name) as attributename,group_concat(attribute_value_name) as attributevaluename,group_concat(attribute_value_image) as value_images";
+			$join [1] ['select'] = "group_concat(attribute_name) as attributename,group_concat(attribute_value_name) as attributevaluename,group_concat(attribute_value_image) as value_images, group_concat(attribute_id) as attributeid, group_concat(attribute_value_id) as attributevalueid";
 			$join [1] ['table'] = "cart_attributes";
 			$join [1] ['condition'] = "itemid = cart_item_id";
 			$join [1] ['type'] = "LEFT";
@@ -1152,6 +1152,365 @@ class Products extends CI_Controller {
 		echo json_encode ( $result );
 		exit ();
 	}	
+
+	public function checkout()
+	{
+		$data = $this->load_module_info();
+		$this->layout->display_site ( $this->folder . $this->module . "-checkout", $data );
+	}
+
+	public function add_shipping()
+	{
+		check_site_ajax_request();
+		$data = $this->load_module_info ();
+		$like = array ();
+		print_r($_POST);
+	}
+
+	private function placeorder($orderPost)
+	{
+		$guid = get_guid('orders','order_id');
+		$ip = get_ip ();
+		$status ="error";
+		$errorMsg = array();
+
+		if($orderPost['order_source'] == 'mobile')
+		{
+			$orderPost['OrderItems'] = json_decode($orderPost['OrderItems'],true);
+		}
+		$online_amount = 0;
+		$shipping_amount = 0;
+		$payment_type ='online';
+		$online_amount = $orderPost['order_total'];
+
+		if(empty($errorMsg) && !empty($orderPost['OrderItems'])) {
+
+			$order_local_no = date('dmyHis').'F'.rand(0, 999);
+			$order = array(
+				'order_id' => $guid,
+				'order_local_no' => $order_local_no,
+				'order_customer_id' => get_user_id(),
+				'order_delivery_charge' => $orderPost['cart_delivery_charge'],
+				'order_sub_total' => $orderPost['order_subtotal'],
+				'order_total_amount' 	=> $orderPost['order_total'],
+				'order_payment_mode'	=> 'online',
+				'order_payment_getway_status' => 'Failure',
+				'order_date'	=> date('Y-m-d H:i:s'),
+				'order_status'	=> 2,
+				'order_source'	=> 'Web',
+				'order_contact_number'	=> $orderPost['order_contact_number'],
+				'order_created_on' => date('Y-m-d H:i:s'),
+				'order_created_by'	=> get_user_id(),
+				'order_created_ip'	=> get_ip(),
+				'order_remarks'		=> $orderPost['order_remarks']
+			);
+			$order_ID = $this->Mydb->insert ( 'orders', $order );
+			
+			if(!empty($order_ID)){
+				$status = 'success';
+
+				$orderItemId = $this->_insert_order_items($order_ID, $guid, $orderPost['OrderItems'],$orderPost['customer_id']);
+				$orderCustomerId = $this->_insert_order_customer($order_ID, $guid, $orderPost);	
+				
+				/*if(isset($orderPost['order_status']) && $orderPost['order_status'] == '1')
+				{
+					$orders = Orders::find()->joinWith(['ordercustomer','ordercustomer.orderUser','orderItems','orderItems.orderItemModifiers'])->where("order_id='".$order_ID."'")->one();
+					if(!empty($orders['ordercustomer']))
+					{
+						$user = $orders['ordercustomer']['orderUser'];
+						$this->_send_notification_order_email($orders,$user);
+					}
+				}*/
+			}
+			
+		}
+		else {
+			$status = 'fail';
+			$guid = '';
+			$order_local_no = '';
+			$order_ID = '';
+		}
+
+		return array(
+			'status' =>$status,
+			'message'=>$errorMsg,
+			'order_id'=>$guid,
+			'order_primary_id'=>$order_ID,
+			'order_number'=>$order_local_no
+		);
+	}
+
+	//Order Customer
+	private function _insert_order_customer($order_ID, $guid, $orderPost) {
+	
+		$address_id = '';
+		$order_customer = array(
+			'order_customer_order_primary_id' => $order_ID,
+			'order_customer_order_id'	=> $guid,
+			'order_customer_address_id'	=> $address_id,
+			'order_customer_id'	=> $address_id,
+			'order_customer_fname'	=> $address_id,
+			'order_customer_lname'	=> $address_id,
+			'order_customer_email'	=> $address_id,
+			'order_customer_mobile_no'	=> $address_id,
+			'order_customer_unit_no1'	=> $address_id,
+			'order_customer_unit_no2'	=> $address_id,
+			'order_customer_address_line1'	=> $address_id,
+			'order_customer_address_line2'	=> $address_id,
+			'order_customer_city'	=> $address_id,
+			'order_customer_state'	=> $address_id,
+			'order_customer_country'	=> $address_id,
+			'order_customer_postal_code'	=> $address_id,
+			'order_customer_created_on'	=> date('Y-m-d H:i:s')
+		);
+		return $order_customer__ID = $this->Mydb->insert ( 'orders_customer_details', $order_customer );
+	}
+
+	//Order Item
+	private function _insert_order_items($order_ID, $guid, $orderItemPost, $customerID) {
+
+		if(!empty($orderItemPost)) {
+			foreach ($orderItemPost as $key => $val) {   
+				// insert order item shipping
+				$itemshipping = array(
+					'shipping_orderid'	=> $guid,
+					'shipping_order_primary_id' => $order_ID,
+					'shipping_id' => $val['cart_item_shiiping_id'],
+					'shipping_name'	=> $val['shipping_name'],
+					'shipping_method_price'	=> $val['shipping_method_price'],
+				);
+				$orderItemShippingId = $this->Mydb->insert ( 'order_item_shipping', $itemshipping );
+
+				$orderitems = array(
+					'item_order_primary_id'	=> $order_ID,
+					'item_order_id'	=> $guid,
+					'item_product_id'	=> $val['cart_item_product_id'],
+					'item_order_primary_id'	=> $val['cart_item_subproduct_id'],
+					'item_subproduct_name'	=> $val['cart_item_subproduct_name'],
+					'item_name'	=> $val['cart_item_product_name'],
+					'item_image'	=> $val['cart_item_product_image'],
+					'item_sku'	=> $val['cart_item_product_sku'],
+					'item_slug'	=> '',
+					'item_specification'	=> '',
+					'item_qty'	=> $val['cart_item_qty'],
+					'item_unit_price'	=> $val['cart_item_unit_price'],
+					'item_total_amount'	=> $val['cart_item_total_price'],
+					'shiiping_id'	=> $orderItemShippingId,
+					'item_order_status'	=> 1,
+					'item_created_on'=>date('Y-m-d H:i:s'),
+					'item_placed_on'	=> date('Y-m-d H:i:s'),
+					'item_remarks'	=> '',
+					'item_merchant_id'	=> $val['cart_item_merchant_id'],
+					'item_merchant_name'	=> $val['cart_item_merchant_name'],
+				);      
+				$orderItemId = $this->Mydb->insert ( 'orders', $order );
+				if(!empty($val['attributename'])) {
+					$orderOutletId = $this->_insert_order_attributes($order_ID, $guid, $orderItemId, $val); 
+				}				
+				 //Multi Based On Order Item
+			}
+			return true;
+		} 
+
+	}
+
+	//Order Attributes
+	private function _insert_order_attributes($order_ID, $guid, $orderItemId, $postData) { 
+
+		if(!empty($postData)) {
+			$attributes = explode(',',$postData['attributename']);
+			$attributes_values = explode(',',$postData['attributevaluename']);
+			$attributeids = explode(',',$postData['attributeid']);
+			$attributevalueids = explode(',',$postData['attributevalueid']);
+			if(!empty($attributeids)){
+
+				$attribute_primary_ids = $this->Mydb->get_all_records('pro_modifier_primary_id,pro_modifier_id','product_modifiers',array('pro_modifier_id IN '.implode(',',$attributeids)));
+				$att_orginal_primary_id = array();
+				if(!empty($attribute_primary_ids)){
+					foreach($attribute_primary_ids as $attval) {
+						$att_orginal_primary_id[$attval['pro_modifier_id']] = $attval['pro_modifier_primary_id'];
+					}
+				}
+
+				$attribute_primary_value_ids = $this->Mydb->get_all_records('pro_modifier_value_primary_id,pro_modifier_value_id','product_modifier_values',array('pro_modifier_value_id IN '.implode(',',$attributevalueids)));
+
+				$att_value_orginal_primary_id = array();
+				if(!empty($attribute_primary_value_ids)){
+					foreach($attribute_primary_value_ids as $attvalues) {
+						$att_value_orginal_primary_id[$attvalues['pro_modifier_value_id']] = $attvalues['pro_modifier_value_primary_id'];
+					}
+				}
+
+				foreach($attributeids as $key=>$values){
+
+					$orderitem_modifiers = array(
+						'order_modifier_itemid'	=> $orderItemId,
+						'order_modifier_orderid'	=> $guid,
+						'order_modifier_order_primary_id'	=> $order_ID,
+						'order_modifier_id'	=> $att_orginal_primary_id[$attvalues],
+						'order_modifier_name'	=> $attributes[$key],
+						'order_modifier_value_id'	=> $att_value_orginal_primary_id[$attributevalueids[$key]],
+						'order_modifier_value_name'	=> $attributes_values[$key],
+					);      
+					$modifier_ids = $this->Mydb->insert ( 'order_item_modifiers', $orderitem_modifiers );
+				}
+			}
+		}
+		return true;   
+	}
+
+	private function validateorder($orderPost){
+		$errorMsg = array();
+		if(empty($orderPost['order_total'])) {
+			$errorMsg[] = 'Required Order Total';
+		}
+		if(empty($orderPost['order_subtotal'])) {
+			$errorMsg[] = 'Required Order Sub Total';
+		}
+		if(empty($orderPost['order_contact_number'])) {
+			$errorMsg[] = 'Required Contact Number';
+		}
+		if(empty($orderPost['OrderItems'])) {
+			$errorMsg[] = 'Please buy atleast one product'; 
+		}
+		$payment_type ='online';
+		$status = 'fails';
+		if(empty($errorMsg)) 
+		{
+			$orderItem = (!empty($orderPost['source']) && $orderPost['source'] == 'mobile')?json_decode($orderPost['OrderItems'],true):$orderPost['OrderItems'];
+			//echo "<pre>"; print_r($orderItem); exit;
+			if(!empty($orderItem))
+			{
+				$product_qty_info = array();
+				foreach ($orderItem as $key => $val) {
+					$product_id = $val['cart_item_product_id'];
+					$subproduct_id = $val['cart_item_subproduct_id'];
+					$products = $this->validate_product($product_id,$subproduct_id);
+
+					$product_qty_info[$products['product_primary_id']] = $products['product_quantity'];
+
+					if($val['cart_item_qty'] > $products['product_quantity']) {
+						$errorMsg[] = $products['product_name'].' - Invalid quantity';
+					}
+
+					$product_special_to_date = $product_special_from_date = '';
+					
+					if($products['product_special_price_from_date'] !='0000-00-00 00:00:00') $product_special_from_date = $products['product_special_price_from_date'];
+
+					if($products['product_special_price_to_date'] !='0000-00-00 00:00:00') $product_special_to_date = $products['product_special_price_to_date'];
+
+					$discount = 0;
+					if($products['product_special_price'] !='')
+					{
+						$discount = find_discount($products['product_price'],$products['product_special_price'],$product_special_from_date,$product_special_to_date);
+					}
+					if($discount>0) {
+						$product_price = $products['product_special_price'];
+					}
+					else {
+						$product_price = $products['product_price'];       
+					}
+
+					if($val['cart_item_unit_price'] != $product_price) {
+						$errorMsg[] = $products['product_name'].' - Invalid price'; 
+					}
+				}
+
+				if(empty($errorMsg)) {
+					foreach ($orderItem as $key => $val) {
+						$product_id = $val['cart_item_product_id'];
+						$subproduct_id = $val['cart_item_subproduct_id'];
+						$update_product_id = ($subproduct_id)?$subproduct_id:$product_id;
+						if($product_qty_info[$update_product_id])
+						{
+							$new_qty = $product_qty_info[$update_product_id] - $val['cart_item_qty'];
+							$this->Mydb->update ( 'products', array ('product_primary_id' => $update_product_id ), array ('product_quantity' => $new_qty) );
+						}	
+					}
+					$status = 'success';
+					$errorMsg[] = 'Continue to proceed';
+				}
+			}
+			else{
+				$errorMsg[] = "Invalid Order Items";
+			}
+			
+		}
+
+		return [
+		'status' =>$status,
+		'message'=>$errorMsg,
+		];	
+	}
+
+	public function ordervalidate()
+	{
+		//check_site_ajax_request();
+		$params = $response = array();
+		$status= "failed";
+		$form_error = array();
+		$records = '';
+
+		$api_data['reference_id'] = get_user_id();
+		$api_data['customer_id'] = get_user_id();
+			
+		$cart = $this->contents_get ( $api_data['reference_id'],$api_data['customer_id'], 'callback' );		
+		echo "<pre>"; print_r($cart); exit;
+		if(!empty($cart))
+		{
+			$order_data = array('order_total'=>$cart['cart_details']['grandtotal'],'order_subtotal'=>$cart['cart_details']['subtotal'],'order_contact_number'=>$this->session->userdata('order_contact_number'),'order_remarks'=>$this->session->userdata('order_additional_info'),'is_default'=>$this->session->userdata('order_is_default'));
+			$orderitems = $cart['cart_items'];
+			$order_data['cart_delivery_charge'] = (!empty($cart['cart_delivery_charge']))?$cart['cart_delivery_charge']:0;
+			$order_data['OrderItems'] = $orderitems;
+			$order_data['cart_quantity'] = $cart['cart_details']['total_items'];
+		}
+
+		$order_data['customer_id'] = get_user_id();
+		$order_data['customer_first_name'] = $this->session->userdata('bg_first_name');
+		$order_data['customer_last_name'] = $this->session->userdata('bg_last_name');
+		$order_data['customer_address_line1'] = $this->session->userdata('order_address_line1');
+		$order_data['customer_address_line2'] = $this->session->userdata('order_address_line2');
+		$order_data['customer_postal_code'] = $this->session->userdata('order_address_postalcode');
+
+		$validate_order = $this->validateorder($order_data,'YES');
+		if(!empty($validate_order) && $validate_order['status'] == 'success')
+		{
+			$payment_method = "online";
+
+			/*place order service */
+			$order_data['order_payment_mode'] = $payment_method;
+			$order_data['order_source'] = 'Web';
+			$order_data['order_remarks'] = '';
+			$order_data['OrderItems'] = json_encode($orderitems);
+			$place_order = $this->placeorder($order_data, 'YES');
+			if(!empty($place_order) && $place_order['status'] == 'success')
+			{
+				$this->session->set_userdata('order_reference',$place_order['order_id']);
+				$status = 'success';
+				$records = "razorpay";
+			}
+			else if(!empty($place_order))
+			{
+				$form_error = $place_order['message'];
+				/*error in processing the order*/
+			}
+			else{
+				$records = $form_error = "Something Wrong";
+			}
+		}
+		elseif(!empty($validate_order)) {
+			$form_error = $validate_order['message'];
+		}
+		else
+		{
+			$records = $form_error = "Something Wrong";
+		}
+		return array(
+			'status' =>$status,
+			'data'=>$records,
+			'form_error'=>$form_error,
+		);
+	}
 	
 	/* this method used to common module labels */
 	private function load_module_info() {

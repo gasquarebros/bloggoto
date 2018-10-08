@@ -102,6 +102,7 @@ $route['home/likeuser/(.*)'] = 'home/likeuser/$1';
 $route['home/view/(.*)'] = 'home/view/$1';
 $route['home/(.*)'] = 'home/index/$1';
 $route['cart'] = 'products/cart';
+$route['checkout'] = 'products/checkout';
 $route['products'] = 'products/index';
 $route['products/(.*)'] = 'products/$1';
 $route['manageproducts'] = 'manageproducts/index';
