@@ -597,7 +597,7 @@ class Products extends CI_Controller {
 
 							$products['assigned_shipping']['insert_shipping_id'] = $insert_shipping_id;
 
-							$result = $this->insert_cart_items ( $cart_unique_id, $_POST,$products); 
+							$result = $this->insert_cart_items( $cart_unique_id, $_POST,$products); 
 
 						} else {
 
@@ -719,7 +719,7 @@ class Products extends CI_Controller {
 			//'cart_item_special_notes' => $product_remarks,
 			'cart_item_product_type'  => ($products['product_parent_id'] !='')?'attribute':$products['product_type'],
 			'cart_item_product_discount' => $discount_percent,
-			'cart_item_subproduct_id' 	=> $this->input->post('subproduct'),
+			'cart_item_subproduct_id' 	=> $products['product_primary_id'],
 			'cart_item_subproduct_name' 	=> $products['product_name'],
 			'cart_item_merchant_id' 	=> $products['product_customer_id'],
 			'cart_item_merchant_name' 	=> $products['customer_username'],

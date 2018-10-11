@@ -130,11 +130,7 @@
             <div class="clear"></div>
         </div>
         <div class="button-part">
-<<<<<<< HEAD
             <a class="button" title="Proceed to Checkout" href="<?php echo base_url().'checkout/shipping'; ?>">Proceed to Checkout</a>
-=======
-            <a class="button" title="Proceed to Checkout" href="<?php echo base_url().'checkout'; ?>">Proceed to Checkout</a>
->>>>>>> c12702e5e72deccc9275e57a5b7eb655dbca500d
         </div>
 <?php
         }

@@ -12533,348 +12533,322 @@ body.checkout .ui-widget.ui-widget-content{
     width:100%
 }
 </style>
-<section>
-   <div class="inner-main">
-    <div class="container">
-        <!-- Select your Shipping Address -->
-        <div class="ship_add_full">
-            <div class="progress_bar">
-                    <ul>
-                        <li>
-                            <a href="javascript:void(0);">
-                                Profile
-                                <span>
-                                    <img class="lazy" src="<?php echo media_url().'profile-icon.png';?>" alt="">
-                                    <img class="alternate" src="<?php  media_url().'profile-icon-hover.png';?>" alt="">
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/checkout/shipping">
-                                Shipping address
-                                <span>
-                                    <img class="lazy" src="<?php echo media_url().'ship-icon.png';?>" alt="">
-                                    <img class="alternate" src="<?php  media_url().'ship-icon-hover.png';?>" alt="">
-                                </span>
-                            </a>
-                        </li>
-                        <li class="active">
-                            <a href="javascript:void(0);">
-                                Payment
-                                <span>
-                                    <img class="lazy" src="<?php echo media_url().'payment-icon.png';?>" alt="">
-                                    <img class="alternate" src="<?php  media_url().'payment-icon-hover.png';?>" alt="">
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                completed
-                                <span>
-                                    <img class="lazy" src="<?php echo media_url().'complete-icon.png';?>" alt="">
-                                    <img class="alternate" src="<?php  media_url().'complete-icon-hover.png';?>" alt="">
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
 
-            </div>
-            <div class="shipping_address my_acc_part">
-            <div class="ship_add">
-                        <h3 class="txtc">Select your Shipping Address</h3>
-                        <input type="hidden" name="url" id="url" value="/checkout/shipping">
-                                                <ul class="address_list">
-                                                                <li class="address address_one edit  active" id="131">
-                                        <div class="address_one_inner" style="height: 134px;">
-                                            <h6 class="set_active" id="131">
-                                                Tst                                             </h6>
-                                            <div class="three-icons">
-                                                    <a href="javascript:void(0);" class="delviery edit_icon delivery_icon " title="Set Default" id="131"></a>
-                                                    <a href="javascript:void(0);" class="edit_icon edit_address"></a>
-                                                    <a href="javascript:void(0);" class="edit_icon delete_icon delete_address " id="131" title="Delete"></a>
-                                            </div>
-                                            <div class="set_active description" id="131">
-                                                                                            # 12-56 Floor 1B, No. 81                                            </div>
-                                        </div>
-                                        <div class="ship_edit_icon">
-                                           <h3> Edit your delivery address</h3>
-                                           <form id="w0" action="/checkout/shipping" method="post">                                        
-                                                                                    <ul class="ship_edit_iconinner">
-                                                <li>
-                                                    <div class="form-field">
-                                                        <div class="form-group field-shippingaddress-first_name required">
-<label class="control-label" for="shippingaddress-first_name">FULL NAME</label>
-<input type="text" id="shippingaddress-first_name" class="form-control" name="Shippingaddress[first_name]" value="tst" maxlength="50">
+<!-- merchant part-->
+<div class="inner-main">
+	<div class="container">
+		<!-- Select your Shipping Address -->
+		<div class="ship_add_full">
+			<div class="progress_bar">
+				<ul>
+					<li>
+						<a href="javascript:void(0);">
+							Profile
+							<span>
+								<img class="lazy" src="<?php echo skin_url(); ?>/images/profile-icon.png" alt="" />
+								<img class="alternate" src="<?php echo skin_url(); ?>/images/profile-icon-hover.png" alt="" />
+							</span>
+						</a>
+					</li>
+					<li class="active">
+						<a href="javascript:void(0);">
+							Shipping address
+							<span>
+								<img class="lazy" src="<?php echo skin_url(); ?>/images/ship-icon.png" alt="" />
+								<img class="alternate" src="<?php echo skin_url(); ?>/images/ship-icon-hover.png" alt="" />
+							</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							Payment
+							<span>
+								<img class="lazy" src="<?php echo skin_url(); ?>/images/payment-icon.png" alt="" />
+								<img class="alternate" src="<?php echo skin_url(); ?>/images/payment-icon-hover.png" alt="" />
+							</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							completed
+							<span>
+								<img class="lazy" src="<?php echo skin_url(); ?>/images/complete-icon.png" alt="" />
+								<img class="alternate" src="<?php echo skin_url(); ?>/images/complete-icon-hover.png" alt="" />
+							</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="shipping_address my_acc_part">
+			<div class="ship_add">
+						<h3 class="txtc">Select your Shipping Address</h3>
+						<input type="hidden" name="url" id="url" value="<?php echo base_url(); ?>checkout/shipping">
+						<?php if(!empty($form_error)) { 
+							foreach($form_error as $formerror) {
+								echo "<p class='error'>".$formerror."</p>";
+							}
+						}
+						else if(!empty($error)) { 
+							echo "<p class='error'>".$error."</p>";
+						}
+						?>
+						<ul class="address_list">
+							<?php
+							$is_default = 0;
+							if(!empty($shippingaddress)) { 
+	
+								foreach ($shippingaddress as $address) {
+									if($address['is_default']==1) {
+										$is_default = $address['address_id'];
+									}
 
-<div class="help-block"></div>
+									?>
+									<li class="address address_one edit  <?=($address['is_default']=='1')?'active':''?>" id="<?=$address['address_id']?>">
+										<div class="address_one_inner">
+											<h6 class="set_active" id="<?=$address['address_id']?>">
+												<?=ucwords($address['first_name'].' '.$address['last_name'])?>
+											</h6>
+											<div class="three-icons">
+													<a href="javascript:void(0);" class="delviery <?=($address['is_default']=='1')?'edit_icon delivery_icon':''?> " title="Set Default" id="<?=$address['address_id']?>"></a>
+													<a href="javascript:void(0);" class="edit_icon edit_address"></a>
+													<a href="javascript:void(0);" class="edit_icon delete_icon delete_address "id="<?=$address['address_id']?>" title="Delete"></a>
+											</div>
+											<div class="set_active description" id="<?=$address['address_id']?>">
+											<?php /*
+												# <?=$address['floor'].'-'.$address['unit'].' '.$address['building_name'].'<br />SINGAPORE '.$address['postal_code']*/?>
+												# <?=$address['floor'].'-'.$address['unit'].' '.$address['building_name']?>
+											</div>
+										</div>
+										<div class="ship_edit_icon">
+										   <h3> Edit your delivery address</h3>
+                                           <?php echo form_open(base_url(),array("class"=>"action_form update_form"));?>
+										   <?php //echo "<pre>"; print_r($shippingaddress); exit; ?>
+											<ul class="ship_edit_iconinner">
+												<li>
+													<div class="form-field">
+                                                        <label>First Name</label>
+                                                        <input type="text" maxlength="50" name="first_name" value="<?php echo $address['first_name']; ?>"  readonly class="required">
+														<span class="help-block"></span>
+													</div>
+												</li>
+												<li>
+													<div class="form-field">
+                                                        <label>Last Name</label>
+                                                        <input type="text" maxlength="50" name="last_name" readonly value="<?php echo $address['last_name']; ?>" class="required">
+														<span class="help-block"></span>
+                                                        
+													</div>
+												</li>
+												<li>
+													<div class="form-field">
+                                                        <label>Building Name</label>
+                                                        <input type="text" maxlength="50" name="building_name" value="<?php echo $address['building_name']; ?>" class="">
+														<span class="help-block"></span>
+                                                        
+														
+													</div>
+												</li>
+												<li>
+													<div class="form-field">
+                                                        <label>Postal Code</label>
+                                                        <input type="text" maxlength="50" name="postal_code" value="<?php echo $address['postal_code']; ?>" readonly class="required">
+														<span class="help-block"></span>
+                                                        
+													</div>
+												</li>
+												<li>
+												   <div class="ship_icon_left_one">
+														<div class="form-field">
+                                                            <label>floor</label>
+                                                            <input type="text" maxlength="50" name="floor" value="<?php echo $address['floor']; ?>" class="required">
+                                                            <span class="help-block"></span>
+                                                            
+															
+														</div>
+													</div>
+													<div class="ship_icon_left_two">
+														<div class="form-field">
+                                                            <label>unit</label>
+                                                            <input type="text" maxlength="50" name="unit" value="<?php echo $address['unit']; ?>" class="required">
+                                                            <span class="help-block"></span>
+                                                            
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="form-field">
+                                                        <label>Company Name</label>
+                                                        <input type="text" maxlength="50" name="company_name" value="<?php echo $address['company_name']; ?>" class="required">
+                                                        <span class="help-block"></span>
+                                                          
+													</div>
+												</li>
+
+												<li class="shipping_address">
+													<div class="form-field">
+                                                    <label>Special Info</label>
+                                                        <textarea  name="special_info" class="required"><?php echo $address['special_info']; ?></textarea>
+                                                        <span class="help-block"></span>
+													</div>
+												</li>
+												<div class="form_delete">
+													<div class="form_delete_inner">
+														<div class="form_delete_left">
+															<?php /*<span><i class="fa fa-angle-left"></i>Close</span>*/ ?>
+														</div>
+														<div class="form_deleteright">
+															<input type="hidden" name="address_id" value="<?=$address['address_id']?>">
+															<input type="hidden" name="action" value="update">
+                                                            <input class="secure_key" name="secure_key" value="" type="textbox"/>
+															<input value="save" type="submit">
+														</div>
+													</div>
+												</div>
+											</ul>
+											<?php echo form_close();?>  
+											<span class="close_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+										</div>
+									</li>
+
+									<?php
+								}
+							}
+							?>
+							<li class="address add">
+
+                            <?php echo form_open(base_url(),array("id"=>'shipping_form',"class"=>"action_form"));?>
+								<div class="address_inner txtc">
+									<span class="add_address">Add new delivery address</span>
+								</div>
+								<div class="address_form">
+									<div class="delivery_address" >
+										<div class="delivery_add_one" >
+											<div class="delivery_add_left fl">
+												<p class="title"><span class="count">1</span> Add a Delivery Address</p>
+													<div class="form-field">
+														<label>ENTER YOUR POSTAL CODE</label>
+														<input type="text" name="addressSearch" id="addressSearch" class="required">
+                                                        <span class="help-block"></span>
+													</div>
+													<div class="form-field required has-error">
+														<label>BUILDING NAME (OPTIONAL)</label>
+														<input type="text" maxlength="50" name="building_name" value="">
+                                                        <span class="help-block"></span>
+													</div>
+													<div class="form-field required has-error">
+														<div class="odd fl">
+															<label>FLOOR <span class="required">*</span></label>
+                                                            <input type="text" maxlength="50" name="floor" value="" class="required">
+															
+														</div>
+														<div class="odd even fr required has-error">
+															<label>UNIT</label>
+                                                            <input type="text" maxlength="50" name="unit" value="" class="required">
+															<span class="help-block"></span>
+														</div>
+														<div class="clear"></div>
+													</div>
+													<input type="button" value="Select This Address" id="address_next">
+											</div>
+											<div class="delivery_add_right fr">
+												
+											</div>
+											<span class="close_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+											<div class="clear"></div>
+										</div>
+										<div class="delivery_add_two" style="display:none;">
+											<p class="title"><span class="count">2</span> Just a bit more</p>
+											<p>We'll need your name to be able to address you for the delivery.</p>
+
+												<div class="form-field-left fl">
+													<div class="form-field">
+                                                        <label>FIRST NAME <span class="require">*</span></label>
+                                                        <input type="text" maxlength="50" name="first_name" value="" class="required">
+														<span class="help-block"></span>
+													</div>
+													<div class="form-field">
+														<label>LAST NAME <span class="require">*</span></label>
+														<input type="text" maxlength="50" name="last_name" value="" class="required">
+                                                        <span class="help-block"></span>
+													</div>
+													<div class="form-field">
+														<label>COMPANY NAME (OPTIONAL)</label>
+                                                        <input type="text" maxlength="50" name="company_name" value="" >
+														<span class="help-block"></span>
+													</div>
+												</div>
+												<div class="form-field-left form-field-right fr">
+													<div class="form-field">
+														<label>Address specific instructions (optional)<span class="require">*</span></label>
+                                                        <textarea name="special_info"></textarea>
+													</div>
+												</div>
+												<div class="form_change">
+													<div class="form_change_inner">
+														<div class="form_left">
+															<span id="initial_address"><i class="fa fa-angle-left"></i>Change address</span>
+														</div>
+														<div class="form_right">
+															<input type="submit" value="save" id="save_address">
+															<input type="hidden" name="action" value="create">
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											<span class="close_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+										</div>
+									</div>
+								</div>
+								<?php echo form_close();?>  
+							</li>
+						</ul>
+
+						<div class="clear"></div>
+					</div>
+					<div class="contact_info">
+						<h3>Just for this Order <span>( We require this information )</span></h3>
+						<?php echo form_open(base_url(),array("class"=>"action_form",'id'=>'common_shipping_form'));?>
+							<input type="hidden" name="is_default" id="is_default" value="<?=$is_default?>">
+							<div class="form-field">
+								<div class="label_part fl">
+									<label>Contact Number<span class="required">*</span></label>
+								</div>
+								<div class="input_part fl">
+									<div class="input_part_left fl">
+									<?php
+									$contact_number = '';
+									?>
+                                        <input type="text" maxlength="50" name="contact_number" value="<?php echo $contact_number; ?>" placeholder='Enter Your Contact Number' class="required">
+                                        <span class="help-block"></span>
+									</div>
+									<div class="input_part_right fr">
+										<span class="sidetext"><span class="required">*</span>Just in case we need to call or sms you regarding the delivery</span>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+
+							<div class="form-field">
+								<div class="label_part fl">
+									<label>Any Special Instructions?</label>
+								</div>
+								<div class="input_part fl">
+									<div class="input_part_left fl">
+										<?php $additional_info  = ''; ?>
+                                        <textarea placeholder="Message" name="additional_info"><?php echo $additional_info; ?></textarea>             
+									</div>
+									<div class="input_part_right fr">
+										<span class="sidetext">(Optional)</span>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<p class="txtc next_but" style="margin-bottom:0px;"><input type="submit" value="Next"></p>
+                        <?php echo form_close();?>  
+					</div>
+
+			</div>
+		</div>
+	</div>
 </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="form-field">
-                                                        <div class="form-group field-shippingaddress-last_name">
-<label class="control-label" for="shippingaddress-last_name">Address Label</label>
-<input type="text" id="shippingaddress-last_name" class="form-control" name="Shippingaddress[last_name]" value="" maxlength="50">
-
-<div class="help-block"></div>
-</div>                                                  </div>
-                                                </li>
-                                                <li>
-                                                    <div class="form-field">
-                                                        <div class="form-group field-shippingaddress-building_name required">
-<label class="control-label" for="shippingaddress-building_name">Address</label>
-<input type="text" id="shippingaddress-building_name" class="form-control" name="Shippingaddress[building_name]" value="Floor 1B, No. 81" readonly="readonly" maxlength="50">
-
-<div class="help-block"></div>
-</div>                                                  </div>
-                                                </li>
-                                                <li>
-                                                    <div class="form-field">
-                                                        <div class="form-group field-shippingaddress-postal_code required">
-<label class="control-label" for="shippingaddress-postal_code">POSTAL CODE</label>
-<input type="text" id="shippingaddress-postal_code" class="form-control" name="Shippingaddress[postal_code]" value="65478" readonly="readonly" maxlength="50">
-
-<div class="help-block"></div>
-</div>                                                  </div>
-                                                </li>
-                                                <li>
-                                                   <div class="ship_icon_left_one">
-                                                        <div class="form-field">
-                                                            <div class="form-group field-shippingaddress-floor">
-<label class="control-label" for="shippingaddress-floor">FLOOR</label>
-<input type="text" id="shippingaddress-floor" class="form-control" name="Shippingaddress[floor]" value="12" maxlength="50">
-
-<div class="help-block"></div>
-</div>                                                      </div>
-                                                    </div>
-                                                    <div class="ship_icon_left_two">
-                                                        <div class="form-field">
-                                                            <div class="form-group field-shippingaddress-unit required">
-<label class="control-label" for="shippingaddress-unit">UNIT</label>
-<input type="text" id="shippingaddress-unit" class="form-control" name="Shippingaddress[unit]" value="56" maxlength="50">
-
-<div class="help-block"></div>
-</div>                                                      </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="form-field">
-                                                        <div class="form-group field-shippingaddress-company_name">
-<label class="control-label" for="shippingaddress-company_name">COMPANY NAME (OPTIONAL)</label>
-<input type="text" id="shippingaddress-company_name" class="form-control" name="Shippingaddress[company_name]" value="" maxlength="50">
-
-<div class="help-block"></div>
-</div>                                                  </div>
-                                                </li>
-
-                                                <li class="shipping_address">
-                                                    <div class="form-field">
-                                                        <div class="form-group field-shippingaddress-special_info">
-<label class="control-label" for="shippingaddress-special_info">ADDRESS SPECIFIC INSTRUCTIONS (OPTIONAL)</label>
-<textarea id="shippingaddress-special_info" class="form-control" name="Shippingaddress[special_info]" maxlength="50"></textarea>
-
-<div class="help-block"></div>
-</div>                                                  </div>
-                                                </li>
-                                                <div class="form_delete">
-                                                    <div class="form_delete_inner">
-                                                        <div class="form_delete_left">
-                                                                                                                    </div>
-                                                        <div class="form_deleteright">
-                                                            <input type="hidden" name="address_id" value="131">
-                                                            <input type="hidden" name="action" value="update">
-                                                            <input value="save" type="submit">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </ul>
-                                            </form>                                         <span class="close_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                        </div>
-                                    </li>
-
-                                                                <li class="address add">
-                            <form id="shipping_form" action="/checkout/shipping" method="post">                             <div class="address_inner txtc">
-                                    <span class="add_address">Add new delivery address</span>
-                                </div>
-                                <div class="address_form">
-                                    <div class="delivery_address">
-                                        <div class="delivery_add_one">
-                                            <div class="delivery_add_left fl">
-                                                <p class="title"><span class="count">1</span> Add a Delivery Address</p>
-                                                    <div class="form-field">
-                                                        <label>ENTER YOUR POSTAL CODE</label>
-                                                        <input type="text" name="addressSearch" id="addressSearch">
-                                                        <input type="hidden" name="Shippingaddress[postal_code]" id="postal_code">
-                                                    </div>
-                                                    <div class="form-field required has-error">
-                                                        <!-- <label>BUILDING NAME (OPTIONAL)</label> -->
-                                                        <div class="form-group field-shippingaddress-building_name required">
-<label class="control-label" for="shippingaddress-building_name">Address</label>
-<input type="text" id="shippingaddress-building_name" class="required" name="Shippingaddress[building_name]" value="" maxlength="50">
-
-<div class="help-block"></div>
-</div>                                                  </div>
-                                                    <div class="form-field required has-error">
-                                                        <div class="odd fl">
-                                                            <!-- <label>FLOOR <span class="required">*</span></label> -->
-                                                            <div class="form-group field-shippingaddress-floor">
-<label class="control-label" for="shippingaddress-floor">FLOOR</label>
-<input type="text" id="shippingaddress-floor" class="required" name="Shippingaddress[floor]" value="" maxlength="50">
-
-<div class="help-block"></div>
-</div>                                                      </div>
-                                                        <div class="odd even fr required has-error">
-                                                            <!-- <label>UNIT</label> -->
-                                                            <div class="form-group field-shippingaddress-unit required">
-<label class="control-label" for="shippingaddress-unit">UNIT</label>
-<input type="text" id="shippingaddress-unit" class="required" name="Shippingaddress[unit]" value="" maxlength="50">
-
-<div class="help-block"></div>
-</div>                                                      </div>
-                                                        <div class="clear"></div>
-                                                    </div>
-                                                    <input type="button" value="Select This Address" id="address_next">
-                                            </div>
-                                            <div class="delivery_add_right fr">
-                                                <div id="map">
-                                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255281.15075051071!2d103.70692991430242!3d1.3147268215754426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da11238a8b9375%3A0x887869cf52abf5c4!2sSingapore!5e0!3m2!1sen!2sin!4v1496154387003" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen=""></iframe>
-                                                </div>
-                                                </div>
-                                            <span class="close_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                            <div class="clear"></div>
-                                        </div>
-                                        <div class="delivery_add_two" style="display:none;">
-                                            <p class="title"><span class="count">2</span> Just a bit more</p>
-                                            <p>We'll need your name to be able to address you for the delivery.</p>
-
-                                                <div class="form-field-left fl">
-                                                    <div class="form-field">
-                                                        <div class="form-group field-shippingaddress-first_name required">
-<label class="control-label" for="shippingaddress-first_name">FULL NAME</label>
-<input type="text" id="shippingaddress-first_name" class="form-control" name="Shippingaddress[first_name]" value="" maxlength="50">
-
-<div class="help-block"></div>
-</div>                                                  </div>
-                                                    <div class="form-field">
-                                                        <!-- <label>LAST NAME <span class="require">*</span></label> -->
-                                                        <div class="form-group field-shippingaddress-last_name">
-<label class="control-label" for="shippingaddress-last_name">Address Label</label>
-<input type="text" id="shippingaddress-last_name" class="form-control" name="Shippingaddress[last_name]" value="" maxlength="50">
-
-<div class="help-block"></div>
-</div>
-                                                    </div>
-                                                    <div class="form-field">
-                                                        <!-- <label>COMPANY NAME (OPTIONAL)</label> -->
-                                                        <div class="form-group field-shippingaddress-company_name">
-<label class="control-label" for="shippingaddress-company_name">COMPANY NAME (OPTIONAL)</label>
-<input type="text" id="shippingaddress-company_name" class="form-control" name="Shippingaddress[company_name]" value="" maxlength="50">
-
-<div class="help-block"></div>
-</div>                                                  </div>
-                                                </div>
-                                                <div class="form-field-left form-field-right fr">
-                                                    <div class="form-field">
-                                                        <!-- <label>Address specific instructions (optional)<span class="require">*</span></label> -->
-                                                        <div class="form-group field-shippingaddress-special_info">
-<label class="control-label" for="shippingaddress-special_info">ADDRESS SPECIFIC INSTRUCTIONS (OPTIONAL)</label>
-<textarea id="shippingaddress-special_info" class="form-control" name="Shippingaddress[special_info]" maxlength="50"></textarea>
-
-<div class="help-block"></div>
-</div>                                                  </div>
-                                                </div>
-                                                <div class="form_change">
-                                                    <div class="form_change_inner">
-                                                        <div class="form_left">
-                                                            <span id="initial_address"><i class="fa fa-angle-left"></i>Change address</span>
-                                                        </div>
-                                                        <div class="form_right">
-                                                            <input type="submit" value="save" id="save_address">
-                                                            <input type="hidden" name="action" value="create">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            <span class="close_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                </form>                         </li>
-                        </ul>
-
-                        <div class="clear"></div>
-                    </div>
-                    <div class="contact_info">
-                        <h3>Just for this Order <span>( We require this information )</span></h3>
-                        <form id="w1" action="/checkout/shipping" method="post">                            <input type="hidden" name="is_default" id="is_default" value="131">
-                            <div class="form-field">
-                                <div class="label_part fl">
-                                    <label>Contact Number<span class="required">*</span></label>
-                                </div>
-                                <div class="input_part fl">
-                                    <div class="input_part_left fl">
-                                    
-                                        <div class="form-group field-shippingaddress-contact_number">
-
-<input type="text" id="shippingaddress-contact_number" class="required" name="Shippingaddress[contact_number]" value="" maxlength="50" placeholder="Enter Your Contact Number">
-
-<div class="help-block"></div>
-</div>
-                                    </div>
-                                    <div class="input_part_right fr">
-                                        <span class="sidetext"><span class="required">*</span>Just in case we need to call or sms you regarding the delivery</span>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-
-                            <div class="form-field">
-                                <div class="label_part fl">
-                                    <label>Any Special Instructions?</label>
-                                </div>
-                                <div class="input_part fl">
-                                    <div class="input_part_left fl">
-                                        
-                                        <div class="form-group field-shippingaddress-additional_info">
-
-<textarea id="shippingaddress-additional_info" class="form-control" name="Shippingaddress[additional_info]" maxlength="50" placeholder="Message"></textarea>
-
-<div class="help-block"></div>
-</div>
-                                    </div>
-                                    <div class="input_part_right fr">
-                                        <span class="sidetext">(Optional)</span>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <p class="txtc next_but" style="margin-bottom:0px;"><input type="submit" value="Next"></p>
-                        </form>                 </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-</section>
-
-<?php
-	echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js'));
-?>
-	<script> 
-		$(window).on("load",function(){
-			$(".mCustomScrollbar").mCustomScrollbar({
-				autoHideScrollbar:true,
-			});
-		});
-		
-	</script>
-<!-- <script>
-/*  load initial content.. */
-$(window).load(function(){
-	$(".mCustomScrollbar").mCustomScrollbar({
-		autoHideScrollbar:true,
-		   axis:"x", // horizontal scrollbar
-		theme:"rounded"
-	});	
-});
-</script> -->
+<script type="text/javascript" src="<?php echo skin_url(); ?>js/shipping.js"></script>

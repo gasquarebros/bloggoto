@@ -10,13 +10,17 @@ jQuery(document).on("click",".delete_address", function() {
 	 if(confirm("Are you sure you want to delete this address?")){
 	var current = jQuery(this);
 	address_id = this.id;
-	url = jQuery('#url').val()
+	url = jQuery('#url').val();
+	alert(url);
 	jQuery.ajax({
 		url    : url,
 		type   : "POST",
-		data   : { "Shippingaddress[delete]":1,"address_id":address_id},
-		success: function (response) 
+		data   : { "Shippingaddress[delete]":1,"address_id":address_id,'secure_key':secure_key },
+		success: function (data) 
 		{
+			var response = jQuery.parseJSON(data);
+			console.log(response);
+			console.log(response.status);
 			if(response.status == 'success') {
 				current.parents('li').remove();
 			}
@@ -48,14 +52,17 @@ jQuery(document).on("click",".address_list .set_active", function() {
 	 if(confirm("Are you sure you want to set shipping address?")){
 	var current = jQuery(this);
 	address_id = this.id;
-	url = jQuery('#url').val()
+	url = jQuery('#url').val();
 	jQuery.ajax({
 		url    : url,
 		type   : "POST",
-		data   : { "Shippingaddress[default]":1,"address_id":address_id},
-		success: function (response) 
+		data   : { "Shippingaddress[default]":1,"address_id":address_id,'secure_key':secure_key},
+		success: function (data) 
 		{
-			if(response.status == 'Success')
+			var response = jQuery.parseJSON(data);
+			console.log(data);
+			console.log(response);
+			if(response.status == 'success')
 			{
 				jQuery('#is_default').val(address_id);
 				jQuery('.address_list li').removeClass('active');
@@ -93,7 +100,9 @@ jQuery(document).on("click",".address_list .set_active", function() {
 
 jQuery(document).on("click","#address_next", function() {
 	var error = 0;
-	$( "#shipping_form input.required" ).each(function( index ) {
+	/*
+	alert();
+	$( ".delivery_add_one input.required" ).each(function( index ) {
 		if(jQuery(this).val()=='') {
 			error++;
 			jQuery(this).siblings('.help-block').html(jQuery(this).prev().html()+' cannot be blank.');
@@ -102,6 +111,7 @@ jQuery(document).on("click","#address_next", function() {
 			jQuery(this).siblings('.help-block').html('');
 		}
 	});
+	alert(error);*/
 	if(error==0) {
 		jQuery('.delivery_add_one').hide();
 		jQuery('.delivery_add_two').show();	
@@ -127,22 +137,72 @@ $('.address_list .edit_address').click(function() {
     jQuery(this).parents('li').addClass('ship_edit');
 });
 
+jQuery(document).on("submit",".update_form", function() 
+{
+	var current = $(this);
+	jQuery('.secure_key').val(secure_key);
+	$.ajax({
+		url: jQuery('#url').val(),
+		data : current.serialize(),
+		type :'POST', 
+		dataType:"json",
+		success:function(data){
+			console.log(data);
+			if(data.status == 'success') {
+				window.location.reload();
+			}
+			console.log(data);
+		}
+	});
+	return false;
+});	
+
 $(window).load(function() { 
     $("#shipping_form").validate(
         {
             ignore : "",
             submitHandler : function() {
                 $.ajax({
-                    url: SITE_URL+'products/add_shipping/',
+                    url: jQuery('#url').val(),
                     data : $('#shipping_form').serialize(),
                     type :'POST', 
                     dataType:"json",
                     success:function(data){
+						console.log(data);
+
+						if(data.status == 'success') {
+							window.location.reload();
+						}
                         console.log(data);
                     }
                 });
                 return false;
             }
-        });
+		});
+
+	$("#common_shipping_form").validate(
+	{
+		ignore : "",
+		submitHandler : function() {
+			alert(jQuery('#url').val());
+			$.ajax({
+				url: jQuery('#url').val(),
+				data : $('#common_shipping_form').serialize(),
+				type :'POST', 
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+
+					if(data.status == 'success') {
+						window.location.reload();
+					}
+					console.log(data);
+				}
+			});
+			return false;
+		}
+	});	
+		
+		
         
 })

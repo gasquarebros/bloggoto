@@ -501,13 +501,13 @@ body.checkout .ui-widget.ui-widget-content{
                                 </div>
                             </div>
                             <div class="order_coupen">
-                                <h6>Use Coupon Code <span><i class="fa fa-info-circle" data-toggle="tooltip" title="Cashback will not be awarded when use with a coupon discount code." aria-hidden="true"></i></span></h6>
+                                <?php /*<h6>Use Coupon Code <span><i class="fa fa-info-circle" data-toggle="tooltip" title="Cashback will not be awarded when use with a coupon discount code." aria-hidden="true"></i></span></h6>
                                 <form id="coupon-form" action="/checkout/payment" method="post" enctype="multipart/form-data">                                  <p class="error coupon_error"></p>  
                                     <input type="text" name="coupon_code" id="coupon_code" value="" placeholder="Enter coupon code">
                                     <div class="submit_section"><input type="submit" name="submit_coupon" id="submit_coupon" value="Apply"><a class="clear" href="/checkout/payment">Clear</a></div>
                                     
                                 </form> 
-                                <p>*Coupon code amount will get discounted from total amount</p>
+                                <p>*Coupon code amount will get discounted from total amount</p>*/ ?>
                             </div>
                         </div>
                     </div>
