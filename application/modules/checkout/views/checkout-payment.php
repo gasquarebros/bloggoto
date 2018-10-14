@@ -555,3 +555,68 @@ body.checkout .ui-widget.ui-widget-content{
     </div>
 </section>
 
+<script>
+function loading()
+{
+    return  '<img src="'+SITE_URL+'lib/theme/images/loading_icon_default.gif" alt="loading.."  class="loading" />';
+}
+jQuery("#proceed_payment").click(function (){
+	jQuery(this).hide();
+	jQuery(this).parent("p").append(loading);
+	var current = this;
+	jQuery('.error_order_summary').html('');
+	var url = SITE_URL;
+	var subval = '';
+	var usage = '';
+	var error =0;
+
+	
+    val ="online";
+
+		
+		//current.parent('p').append(loading);
+		jQuery.ajax({
+			url    : url+'checkout/ordervalidate',
+			type   : "post",
+			dataType:'json',
+			data: {'value':val,'secure_key': secure_key},
+			success: function (response) 
+			{
+				jQuery('.loading').remove();
+				jQuery(current).show();
+				if(response.status == 'success')
+				{
+					window.location.href=SITE_URL+response.data;
+				}
+				else{
+					if(response.data != "undefined")
+					{
+						var data = response.data;
+					}
+					else{
+						data = '';
+					}
+					
+					if(response.form_error != "undefined" && response.form_error.length > 0)
+					{
+						jQuery(".error_order_summary").html(response.form_error);
+					}
+					else if(data.message != "undefined")
+					{
+						jQuery(".error_order_summary").html(data.message);
+					}
+					else
+					{
+						jQuery(".error_order_summary").html("Something went wrong!!!");
+					}
+				}
+
+			},
+			error : function () 
+			{
+				console.log("internal server error");
+			}
+		});
+	
+});
+</script>

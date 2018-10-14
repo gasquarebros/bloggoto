@@ -1034,7 +1034,6 @@ $("#zoom_image").bind("click", function(e) {
 
 		function trigger_zoom()
 		{
-            alert();
 			if(jQuery(window).width() <= 640)
 			{
 				var imageElement = jQuery("#elevatezoom-0");
@@ -1046,7 +1045,6 @@ $("#zoom_image").bind("click", function(e) {
 			}
 			else
 			{
-                alert('ass');
 				jQuery("#elevatezoom-0").elevateZoom({"zoomType":"lens","containLensZoom":true,"borderSize":0,"scrollZoom":false,"gallery":"galez"});
 			}
 		}

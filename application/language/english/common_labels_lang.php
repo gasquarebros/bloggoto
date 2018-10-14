@@ -67,6 +67,7 @@ $lang ['customer_brand_type'] = "I'm Business";
 $lang ['postal_code_max_length'] = 8;
 $lang ['phone_max_length'] = 12;
 $lang ['post_photo'] = "Image";
+$lang ['product_added'] = "Product added successfully.";
 $lang ['account_success_created'] = " Account created successfully.";
 
 

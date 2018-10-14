@@ -561,7 +561,7 @@ class Products extends CI_Controller {
 						'cart_session_id' => $reference_id 
 					);
 					
-					$cart_exists = $this->Mydb->get_record ( 'cart_id', 'cart_details', $user_where );
+					$cart_exists = $this->Mydb->get_record ( 'cart_id,cart_delivery_charge,cart_sub_total,cart_grand_total', 'cart_details', $user_where );
 					
 					if (empty ( $cart_exists )) {
 						$delivery_charge = $cart_exists['cart_delivery_charge'] + $delivery_charge;
@@ -580,15 +580,30 @@ class Products extends CI_Controller {
 						
 						$insert_id = $this->Mydb->insert ( 'cart_details', $cart );
 						
+					} else {
+						$delivery_charge = $cart_exists['cart_delivery_charge'] + $delivery_charge;
+						$sub_total = $cart_exists['cart_sub_total'] + $product_price;
+						$grand_total =  $sub_total + $delivery_charge;
+						$up_data = array(
+							'cart_delivery_charge' => $delivery_charge,
+							'cart_sub_total' => $sub_total,
+							'cart_grand_total' => $grand_total,
+						);
+						$this->Mydb->update('cart_details',array('cart_id'=>$cart_exists['cart_id']),$up_data);
+						//echo $this->db->last_query();
+						//exit;
 					}
 					$cart_unique_id = (! empty ( $cart_exists )) ? $cart_exists ['cart_id'] : $insert_id;
 					
 					if ($cart_unique_id != "") {
-						$simple_items = $this->Mydb->get_record ( 'cart_item_id,cart_item_cart_id', 'cart_items', array (
-							'cart_item_cart_id' => $cart_unique_id,
-							'cart_item_product_id' => decode_value($product_id)
-						) );
 						
+						if($this->input->post('subproduct') !=''){
+							$where = array('cart_item_cart_id'=>$cart_unique_id,'cart_item_subproduct_id'=>$products['product_primary_id']);
+						} else {
+							$where = array('cart_item_cart_id'=>$cart_unique_id,'cart_item_product_id'=>$products['product_primary_id']);
+						}
+						$simple_items = $this->Mydb->get_record ( 'cart_item_id,cart_item_cart_id', 'cart_items', $where );
+						//echo $this->db->last_query();
 							
 						if (empty ( $simple_items )  ) {
 
@@ -743,7 +758,7 @@ class Products extends CI_Controller {
 				'status' => "ok",
 				'contents' => $contents,
 				'cart_item_id' => $cart_item_id,
-				'message' => get_label ( 'rest_product_added' ) 
+				'message' => get_label('product_added')
 		);
 	}
 
@@ -787,7 +802,7 @@ class Products extends CI_Controller {
 					'status' => "ok",
 					'contents' => $contents,
 					'cart_item_id' => $eqaul_cart_id,
-					'message' => get_label ( 'rest_product_added' ) 
+					'message' => get_label('product_added')
 			);
 		}
 	}
@@ -1024,7 +1039,7 @@ class Products extends CI_Controller {
 				$result = array ('status' => "success",
 									    'response' => $contents,
 										'cart_count' => $cart_item_count,
-										'message' => get_label ( 'rest_product_added' ) 
+										'message' => get_label('product_added')
 								      );
 			}
 			else 
@@ -1090,7 +1105,7 @@ class Products extends CI_Controller {
 				$result = array ('status' => "success",
 									    'response' => $contents,
 										'cart_count' => $cart_item_count,
-										'message' => get_label ( 'rest_product_added' ) 
+										'message' => get_label('product_added') 
 								      );
 			}
 			else 
@@ -1135,7 +1150,7 @@ class Products extends CI_Controller {
 				$result = array ('status' => "success",
 									    'response' => $contents,
 										'cart_count' => $cart_item_count,
-										'message' => get_label ( 'rest_product_added' ) 
+										'message' => get_label('product_added') 
 								      );
 			}
 			else 

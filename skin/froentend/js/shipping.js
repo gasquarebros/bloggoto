@@ -11,7 +11,6 @@ jQuery(document).on("click",".delete_address", function() {
 	var current = jQuery(this);
 	address_id = this.id;
 	url = jQuery('#url').val();
-	alert(url);
 	jQuery.ajax({
 		url    : url,
 		type   : "POST",
@@ -184,7 +183,6 @@ $(window).load(function() {
 	{
 		ignore : "",
 		submitHandler : function() {
-			alert(jQuery('#url').val());
 			$.ajax({
 				url: jQuery('#url').val(),
 				data : $('#common_shipping_form').serialize(),
@@ -194,7 +192,7 @@ $(window).load(function() {
 					console.log(data);
 
 					if(data.status == 'success') {
-						window.location.reload();
+						window.location.href = SITE_URL+'checkout/payment';	
 					}
 					console.log(data);
 				}

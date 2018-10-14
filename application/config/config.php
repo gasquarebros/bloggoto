@@ -110,7 +110,7 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = TRUE;
+$config['enable_hooks'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -456,7 +456,9 @@ $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = FALSE;
 $config ['csrf_exclude_uris'] = array (
 	'api/insert',
-	'api/login'
+	'api/login',
+	'checkout/success',
+	'checkout/failure'
 );
 
 /*

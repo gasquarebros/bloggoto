@@ -7,6 +7,10 @@ Description		: Page contains frontend panel login and forgot password functions.
 
 ***************************/
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+
+require_once ('razorpay\Razorpay.php');
+use Razorpay\Api\Api as RazorpayApi;
+
 class Checkout extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
@@ -23,6 +27,11 @@ class Checkout extends CI_Controller {
 		$this->primary_key='product_primary_id';
 		$this->load->library('common');
 		$this->load->helper('products');
+
+		// razor payment sandbox credentials
+		$this->keyId = "rzp_test_Q6q1V4sCVacNNX";
+		$this->keySecret = "5voqCW6B3hgFxjwsVOSykbF7";
+		$this->displayCurrency = "INR";
 	}
 	
 	/* this method used to check login */
@@ -62,120 +71,101 @@ class Checkout extends CI_Controller {
 
 
 			$cart_details = $this->Mydb->get_record ( '*', 'cart_details', $customer_array, array ('cart_id' => 'DESC') );
+			if(empty($cart_details)){
+				redirect(base_url().'cart');
+				exit;
+			}
 			$data['cart_details']=$cart_details;
 
 		$this->layout->display_site ( $this->folder . $this->module . "-payment", $data );
 
 	}
 
-
 	public function proceedpayment()
 	{
-		
 		if($this->session->userdata('order_reference'))
 		{
 
 			$api_data['reference_id'] = get_user_id();
 			$api_data['customer_id'] = get_user_id();
-			
-			
-			$cart = Yii::$app->CommonFunctions->getservicemethod('products/cartcontents',$api_data);
 
-			$data['order_id'] = Yii::$app->session->get('order_reference');
-			$order = Yii::$app->CommonFunctions->getservicemethod('order/listorders',$data);
-
+			$cart = $this->contents_get(get_user_id(),get_user_id(),'callback');
+			$data['order_id'] = $this->session->userdata('order_reference');
+			
+			$order = $this->Mydb->get_record('*','orders',array('order_id'=>$data['order_id']));
+			
 			if(!empty($cart) && !empty($order))
 			{
-				if($cart['able_proceed_checkout'] == 'true')
-				{
-					$secret_key = $this->secret_key;
-					$merchant = $this->merchant;
-					$action ="pay";
-					$ref_id = Yii::$app->session->get('order_reference');
-					$total_amount=$order[0]['online_amount'];
-					$wallet_amount=($order[0]['wallet_amount'] > 0)?$order[0]['wallet_amount']:'0.00';
-					$order_discount_amt=($order[0]['order_discount_amt'] > 0)?$order[0]['order_discount_amt']:'0.00';
-					$currency = "SGD";
-					
-					$discount_amount = $wallet_amount + $order_discount_amt;
+			
 
-					$shipping_amount = '0.00';
-					$item_where = "cartid = ".$cart['cart_details']['id'];
-					//$order_item_shipping = CartItemShipping::find()->select('SUM(shipping_method_price) as shipping_price')->where($item_where)->one();
-					$order_item_shipping = array();
-					if(!empty($order_item_shipping))
-					{
-						$shipping_amount = ($order_item_shipping['shipping_price']>0)?$order_item_shipping['shipping_price']:'0.00';
-					}
-					
-					$dataToBeHashed = $secret_key.$merchant.$action.$ref_id.$total_amount.$currency;
-					$utfString = mb_convert_encoding($dataToBeHashed, "UTF-8");
-					$signature = sha1($utfString, false);
-					$item ="";
-					$i=1;
-					if($total_amount > 0) {
-						if(!empty($cart['cart_items']))
-						{
-							foreach($cart['cart_items'] as $cartitem)
-							{
-								//foreach($cartitems as $cartitem)
-								//{echo "<pre>"; print_r($cartitem); exit;
-									
-									//foreach($cartitemval as $cartitem)
-									//{
-										$item.='
-											<input type="hidden" name="item_name_'.$i.'" value="'.$cartitem['product_name'].'" />
-											<input type="hidden" name="item_description_'.$i.'" value="'.$cartitem['product_sku'].'" />
-											<input type="hidden" name="item_quantity_'.$i.'" value="'.$cartitem['product_qty'].'" />
-											<input type="hidden" name="item_amount_'.$i.'" value="'.$cartitem['product_price'].'" />
-										';
-										$i++;
-									//}
-								//}
-							}
-						}
-						$form = '<form action="'.$this->api_url.'" id="payment_form" method="post">
-							<input type="hidden" name="action" value="pay" />
-							<input type="hidden" name="currency" value="SGD" />
-							<input type="hidden" name="version" value="2.0" />'.$item.'
-							<input type="hidden" name="merchant" value="'.$merchant.'" />
-							<input type="hidden" name="ref_id" value="'.Yii::$app->session->get('order_reference').'" />
-							<input type="hidden" name="delivery_charge" value="'.$shipping_amount.'" />
-							<input type="hidden" name="tax_amount" value="0.00" />
-							<input type="hidden" name="discount_amount" value="'.$discount_amount.'" />
-							<input type="hidden" name="tax_percentage" value="0.00" />
-							<input type="hidden" name="total_amount" value="'.$total_amount.'" />
-							
-							<input type="hidden" name="str_url" value="'.Url::base(Yii::$app->params['server_scheme']).Url::toRoute('checkout/successhandling').'" />
-							<input type="hidden" name="success_url" value="'.Url::base(Yii::$app->params['server_scheme']).Url::toRoute('checkout/success').'" />
-							<input type="hidden" name="cancel_url" value="'.Url::base(Yii::$app->params['server_scheme']).Url::toRoute('checkout/failure').'" />
-							<input type="hidden" name="signature" value="'.$signature.'" />
-							<input type="hidden" name="signature_algorithm" value="sha1" />
-							<input type="hidden" name="skip_success_page" value="1" />
-							<input type="submit" id="submit" name="submit v2" value="Redirect Now" alt="SmoovPay!" />
-						</form>';
-						return $this->render('proceedpayment', [
-							'form' => $form
-						]);
-					}
-					else
-					{
-						return $this->redirect(['/cart']); 
-					}
-				}
-				else
+				$customer = $this->Mydb->get_record('*','orders_customer_details',array('order_customer_order_id'=>$data['order_id']));
+				$total_amount=$order['order_total_amount'];
+				$currency = "INR";
+
+				$i=1;
+				$api = new RazorpayApi($this->keyId, $this->keySecret);
+				$orderData = [
+					'receipt'         => $this->session->userdata('order_reference'),
+					'amount'          => $total_amount * 100, // 2000 rupees in paise
+					'currency'        => 'INR',
+					'payment_capture' => 1 // auto capture
+				];
+				$razorpayOrder = $api->order->create($orderData);
+				$razorpayOrderId = $razorpayOrder['id'];
+				$this->session->set_userdata('razorpay_order_id',$razorpayOrderId);
+
+				$displayAmount = $amount = $orderData['amount'];
+				if ($this->displayCurrency !== 'INR')
 				{
-					return $this->redirect(['/cart']); 
+					$url = "https://api.fixer.io/latest?symbols=$this->displayCurrency&base=INR";
+					$exchange = json_decode(file_get_contents($url), true);
+					$displayAmount = $exchange['rates'][$this->displayCurrency] * $amount / 100;
 				}
+				$checkout = 'automatic';
+				
+				$data = [
+					"key"               => $this->keyId,
+					"amount"            => $amount,
+					"name"              => "Bloggoto",
+					"description"       => "",
+					"image"             => base_url().'/images/logo-1.png',
+					"prefill"           => [
+						"name"          => $customer['order_customer_fname']." ".$customer['order_customer_lname'],
+						"email"         => $customer['order_customer_email'],
+						"contact"       => $customer['order_customer_mobile_no'],
+					],
+					"notes"             => [
+						"address"           => "",
+						"merchant_order_id" => "",
+					],
+					"theme"             => [
+						"color"             => "#F37254"
+					],
+					"order_id"          => $razorpayOrderId,
+				];
+
+				if ($this->displayCurrency !== 'INR')
+				{
+					$data['display_currency']  = $this->displayCurrency;
+					$data['display_amount']    = $displayAmount;
+				}
+
+				$json = json_encode($data);
+				
+				$data = $this->load_module_info ();	
+				$data['json'] = $json; 
+				$this->layout->display_site ( $this->folder . $this->module . "-razorpay", $data );
 			}
 			else
 			{
-				return $this->redirect(['/cart']); 
+				redirect(base_url().'cart');
+					exit;
 			}
 		}
 		else
 		{
-			return $this->redirect(['/checkout/payment']); 
+			redirect(base_url().'checkout/payment'); 
+			exit;
 		}
 	}
 
@@ -293,25 +283,29 @@ class Checkout extends CI_Controller {
 		if(empty($errorMsg)) 
 		{
 			$orderItem = (!empty($orderPost['source']) && $orderPost['source'] == 'mobile')?json_decode($orderPost['OrderItems'],true):$orderPost['OrderItems'];
+			
 			if(!empty($orderItem))
 			{
 				$overall_products = array();
-				foreach ($orderItem as $key => $valus) {
-					foreach($valus as $val) {
-						$ppid = ($val['cart_item_subproduct_id'] !='' && $val['cart_item_subproduct_id'] >0)?$val['cart_item_subproduct_id']:$val['cart_item_product_id'];
-						$products = $this->Mydb->get_record('*','products',array('product_id'=>$ppid));
+				foreach ($orderItem as $key => $val) { //print_r($val);exit;
+						//echo $val['cart_item_subproduct_id'];
+					$ppid = ($val['cart_item_subproduct_id'] !='' && $val['cart_item_subproduct_id'] >0)?$val['cart_item_subproduct_id']:$val['cart_item_product_id'];
+					$products = $this->Mydb->get_record('*','products',array('product_primary_id'=>$ppid));
+
+					if(!empty($products)) {
+
 						$overall_products[$ppid] = $products;       
-						if($val['product_qty'] > $products['product_qty']) {
+						if($val['cart_item_qty'] > $products['product_quantity']) {
 							$errorMsg[] = $products['product_name'].' - Invalid quantity';
 						}
 
 						$product_special_to_date = $product_special_from_date = '';
-						if($products['product_special_from_date'] !='0000-00-00 00:00:00') $product_special_from_date = $products['product_special_from_date'];
-						if($products['product_special_to_date']!='0000-00-00 00:00:00') $product_special_to_date = $products['product_special_to_date'];
+						if($products['product_special_price_from_date'] !='0000-00-00 00:00:00') $product_special_from_date = $products['product_special_price_from_date'];
+						if($products['product_special_price_to_date']!='0000-00-00 00:00:00') $product_special_to_date = $products['product_special_price_to_date'];
 
 						$discount = find_discount($products['product_price'],$products['product_special_price'],$product_special_from_date,$product_special_to_date);
 						
-
+						
 						if($discount>0) {
 							$product_price = $products['product_special_price'];
 						}
@@ -319,20 +313,23 @@ class Checkout extends CI_Controller {
 							$product_price = $products['product_price'];         
 						}
 
-						if($val['product_price']!=$product_price) {
+						if($val['cart_item_unit_price']!=$product_price) {
 							$errorMsg[] = $products['product_name'].' - Invalid price'; 
 						}
+					} else {
+						$errorMsg[] = ' Invalid Product';
 					}
+					
 				}
 
 				if(empty($errorMsg)) {
-					foreach ($orderItem as $key => $valus) {
-						foreach($valus as $val) {
-							$products = $overall_products[$val['subproduct_id']];
-							$new_qty = $products['product_qty']-$val['product_qty'];
-							$this->Mydb->update('products',array('product_primary_id'=>$products['product_primary_id']),array('product_qty'=>$new_qty));
-							//Products::updateAll(['product_qty' => $new_qty],$cartitemwhere);
-						}
+					foreach ($orderItem as $key => $val) {
+						$ppid = ($val['cart_item_subproduct_id'] !='' && $val['cart_item_subproduct_id'] >0)?$val['cart_item_subproduct_id']:$val['cart_item_product_id'];
+						$products = $overall_products[$ppid];
+						$new_qty = $products['product_quantity']-$val['cart_item_qty'];
+						$this->Mydb->update('products',array('product_primary_id'=>$products['product_primary_id']),array('product_quantity'=>$new_qty));
+						//Products::updateAll(['product_qty' => $new_qty],$cartitemwhere);
+					
 					}
 					$status = 'success';
 					$errorMsg[] = 'Continue to proceed';
@@ -343,11 +340,13 @@ class Checkout extends CI_Controller {
 			}
 			
 		}
-
-		return [
-		'status' =>$status,
-		'message'=>$errorMsg,
-		];
+		return array (
+				'status' => $status,
+				'message' => $errorMsg 
+		);
+		
+		
+		
 	}
 
 	private function placeorder($orderPost) {
@@ -380,7 +379,7 @@ class Checkout extends CI_Controller {
 				'order_payment_mode'	=> 'online',
 				'order_payment_getway_status' => 'Failure',
 				'order_date'	=> date('Y-m-d H:i:s'),
-				'order_status'	=> 2,
+				'order_status'	=> 6,
 				'order_source'	=> 'Web',
 				'order_contact_number'	=> $orderPost['order_contact_number'],
 				'order_created_on' => date('Y-m-d H:i:s'),
@@ -458,29 +457,28 @@ class Checkout extends CI_Controller {
 
 	//Order Shipping address
 	private function _insert_order_shipping_address($order_ID, $guid, $orderPost) {
-		if($orderPost['is_default'] !='')
-		{
-			$address = $this->Mydb->get_record('*','shipping_address',array('userid'=>get_user_id(),'is_default'=>1));
-			if(!empty($address)) {
+
+		$address = $this->Mydb->get_record('*','shipping_address',array('userid'=>get_user_id(),'is_default'=>1));
+		if(!empty($address)) {
 
 
-				$order_shipping = array(
-					'order_shipping_order_primary_id' => $order_ID,
-					'order_shipping_order_id'	=> $guid,
-					'order_shipping_address_id'	=> $address['address_id'],
-					'order_shipping_first_name'	=>$address['first_name'],
-					'order_shipping_last_name'	=> $address['last_name'],
-					'order_shipping_company_name'	=> $address['company_name'],
-					'order_shipping_floor'	=> $address['floor'],
-					'order_shipping_unit'	=> $address['unit'],
-					'order_shipping_building_name'	=> $address['building_name'],
-					'order_shipping_address'	=> $address['address'],
-					'order_shipping_special_info'	=> $address['special_info'],
-					'order_shipping_postal_code'	=> $address['postal_code']
-				);
-				return $orderShipID = $this->Mydb->insert ( 'order_shipping_address', $order_shipping );
-			}
+			$order_shipping = array(
+				'order_shipping_order_primary_id' => $order_ID,
+				'order_shipping_order_id'	=> $guid,
+				'order_shipping_address_id'	=> $address['address_id'],
+				'order_shipping_first_name'	=>$address['first_name'],
+				'order_shipping_last_name'	=> $address['last_name'],
+				'order_shipping_company_name'	=> $address['company_name'],
+				'order_shipping_floor'	=> $address['floor'],
+				'order_shipping_unit'	=> $address['unit'],
+				'order_shipping_building_name'	=> $address['building_name'],
+				'order_shipping_address'	=> $address['address'],
+				'order_shipping_special_info'	=> $address['special_info'],
+				'order_shipping_postal_code'	=> $address['postal_code']
+			);
+			return $orderShipID = $this->Mydb->insert ( 'order_shipping_address', $order_shipping );
 		}
+		
 		return true;
 	}
 
@@ -522,7 +520,7 @@ class Checkout extends CI_Controller {
 					'item_merchant_id'	=> $val['cart_item_merchant_id'],
 					'item_merchant_name'	=> $val['cart_item_merchant_name'],
 				);      
-				$orderItemId = $this->Mydb->insert ( 'orders', $order );
+				$orderItemId = $this->Mydb->insert ( 'order_items', $orderitems );
 				if(!empty($val['attributename'])) {
 					$orderOutletId = $this->_insert_order_attributes($order_ID, $guid, $orderItemId, $val); 
 				}				
@@ -537,12 +535,12 @@ class Checkout extends CI_Controller {
 	private function _insert_order_attributes($order_ID, $guid, $orderItemId, $postData) { 
 
 		if(!empty($postData)) {
+			//echo "<pre>"; print_r($postData); exit;
 			$attributes = explode(',',$postData['attributename']);
 			$attributes_values = explode(',',$postData['attributevaluename']);
 			$attributeids = explode(',',$postData['attributeid']);
 			$attributevalueids = explode(',',$postData['attributevalueid']);
 			if(!empty($attributeids)){
-
 				$attribute_primary_ids = $this->Mydb->get_all_records('pro_modifier_primary_id,pro_modifier_id','product_modifiers',array('pro_modifier_id IN '.implode(',',$attributeids)));
 				$att_orginal_primary_id = array();
 				if(!empty($attribute_primary_ids)){
@@ -561,12 +559,11 @@ class Checkout extends CI_Controller {
 				}
 
 				foreach($attributeids as $key=>$values){
-
 					$orderitem_modifiers = array(
 						'order_modifier_itemid'	=> $orderItemId,
 						'order_modifier_orderid'	=> $guid,
 						'order_modifier_order_primary_id'	=> $order_ID,
-						'order_modifier_id'	=> $att_orginal_primary_id[$attvalues],
+						'order_modifier_id'	=> $att_orginal_primary_id[$values],
 						'order_modifier_name'	=> $attributes[$key],
 						'order_modifier_value_id'	=> $att_value_orginal_primary_id[$attributevalueids[$key]],
 						'order_modifier_value_name'	=> $attributes_values[$key],
@@ -578,7 +575,7 @@ class Checkout extends CI_Controller {
 		return true;   
 	}
 
-	public function actionOrdervalidate()
+	public function ordervalidate()
 	{
 		check_ajax_request (); /* skip direct access */
 		$params = $response = array();
@@ -587,16 +584,16 @@ class Checkout extends CI_Controller {
 		$records = '';
 
 
-		$api_data['reference_id'] = get_user_id();
-		$api_data['customer_id'] = get_user_id();
+		$reference_id = get_user_id();
+		$customer_id = get_user_id();
 		
 		$cart = $this->contents_get ( $reference_id, $customer_id, 'callback' );
 		
 		if(!empty($cart))
 		{
-			$order_data = array('order_total'=>$cart['cart_details']['grandtotal'],'order_subtotal'=>$cart['cart_details']['subtotal'],'order_contact_number'=>$this->session->userdata('contact_number'));
+			$order_data = array('order_total'=>$cart['cart_details']['cart_grand_total'],'order_subtotal'=>$cart['cart_details']['cart_sub_total'],'cart_delivery_charge'=>$cart['cart_details']['cart_delivery_charge'],'order_contact_number'=>$this->session->userdata('contact_number'));
 			$order_data['OrderItems'] = $cart['cart_items'];
-			$order_data['cart_quantity'] = $cart['cart_details']['total_items'];
+			$order_data['cart_quantity'] = $cart['cart_details']['cart_total_items'];
 		}
 
 		$order_data['customer_id'] = get_user_id();
@@ -610,7 +607,6 @@ class Checkout extends CI_Controller {
 		
 		$validate_order = $this->validateorder($order_data);
 		
-
 		if(!empty($validate_order) && $validate_order['status'] == 'success')
 		{
 			$payment_method = "online";
@@ -619,6 +615,7 @@ class Checkout extends CI_Controller {
 			$order_data['order_source'] = 'web';
 			$order_data['order_remarks'] = '';
 			$place_order = $this->placeorder($order_data);
+
 			if(!empty($place_order) && $place_order['status'] == 'success')
 			{
 				$this->session->set_userdata('order_reference',$place_order['order_id']);
@@ -651,12 +648,12 @@ class Checkout extends CI_Controller {
 		{
 			$records = $form_error = "Something Wrong";
 		}
-
-		return [
+		echo json_encode( array(
 			'status' =>$status,
 			'data'=>$records,
 			'form_error'=>$form_error,
-		];
+		));
+		exit;
 	
 	}
 
@@ -855,8 +852,9 @@ class Checkout extends CI_Controller {
 				$this->session->set_userdata('contact_number',$_REQUEST['contact_number']);
 				$this->session->set_userdata('additional_info',$_REQUEST['additional_info']);
 				$this->session->set_userdata('is_default',$_REQUEST['is_default']);
-				return $this->redirect(['checkout/payment']);
-				exit;
+				
+				echo json_encode ( array('status'=> 'success') );
+						exit ();
 			}
 
 			if(!empty($this->input->post('address_id'))) {
@@ -988,6 +986,128 @@ class Checkout extends CI_Controller {
 			}
 			$data['shippingaddress'] = $records;
 			$this->layout->display_site ( $this->folder . $this->module . "-shipping", $data );
+	}
+
+	private function destroyitem() {
+		$status = "error";
+		$records = array('message'=>'Invalid Post Params');
+		$form_error = array();
+		$customer_id = get_user_id();
+		if($customer_id)
+		{
+			$reference_id = ''; /* mobile device id or browser session id */
+			$customer_id = $customer_id;
+			
+			$cart_where = array();
+			if($customer_id !='')
+			{
+				$cart_where["cart_customer_id"] = $customer_id;
+			}
+			else if($reference_id !='')
+			{
+				$cart_where["cart_session_id"] = $reference_id;
+			}
+			/* Validate Cart */
+			$validate = $this->Mydb->delete('cart_details',$cart_where);
+			$validate = $this->Mydb->delete('cart_items',array('cart_item_customer_id'=>$customer_id));
+			$status ="success";
+			$records = array('message'=>'Cart Deleted Successfully');
+			
+		}
+		return array(
+			'status' =>$status,
+			'data'=>$records,
+			'form_error'=>$form_error,
+		);
+	}
+
+	public function success() {
+		if($this->session->userdata('order_reference') !='' && $_REQUEST['razorpay_payment_id'] !='' && $_REQUEST['razorpay_signature'] !='') {
+			$like = array ();
+			$where = array (
+				"order_id" => $data['order_id'],
+				'order_customer_id'	=> get_user_id()
+			);
+			$order_by = array ();
+
+			/* update the order payment keys */
+			$this->Mydb->update('orders',$where,array('payment_signature'=>$_REQUEST['razorpay_signature'],'payment_refer_id'=>$_REQUEST['razorpay_payment_id'],'order_status'=>2));
+			$data = $this->load_module_info();
+			$api_data['reference_id'] = get_user_id();
+			$api_data['customer_id'] = get_user_id();
+			$cart = $this->destroyitem($api_data);
+			$order_ref = $this->session->userdata('order_reference');
+			$data['order_id'] = $order_ref;
+			//$order = $this->Mydb->get_record('*','orders',array('order_id'=>$data['order_id']));
+			
+			
+			
+			
+			$join = "";
+			
+			$join [0] ['select'] = "customer_first_name,customer_last_name,customer_phone,customer_email";
+			$join [0] ['table'] = "pos_customers";
+			$join [0] ['condition'] = "order_customer_id = customer_id";
+			$join [0] ['type'] = "LEFT";
+			
+			$join [1] ['select'] = "status_name";
+			$join [1] ['table'] = "pos_order_status";
+			$join [1] ['condition'] = "order_status = status_id";
+			$join [1] ['type'] = "INNER";
+			
+			$join [2] ['select'] = "item_id,item_order_primary_id,item_product_id,item_subproductid,item_subproduct_name,item_name,item_image,item_sku,item_slug,item_specification,item_qty,item_unit_price,item_total_amount,item_merchant_name,item_merchant_id, item_order_status,shiiping_id";
+			$join [2] ['table'] = "pos_order_items";
+			$join [2] ['condition'] = "item_order_primary_id = order_primary_id";
+			$join [2] ['type'] = "LEFT";
+			
+			
+			$join [3] ['select'] = "pos_order_shipping_address.*";
+			$join [3] ['table'] = "pos_order_shipping_address";
+			$join [3] ['condition'] = "order_shipping_order_primary_id = order_primary_id";
+			$join [3] ['type'] = "LEFT";
+
+			$join [4] ['select'] = "pos_order_item_shipping.*";
+			$join [4] ['table'] = "pos_order_item_shipping";
+			$join [4] ['condition'] = "shipping_id = shiiping_id";
+			$join [4] ['type'] = "LEFT";
+			
+			$groupby = "";
+			$select_array = array (
+				'pos_orders.*'
+			);
+			$record = $this->Mydb->get_all_records ( $select_array, 'orders', $where, '','', $order_by, $like,$groupby, $join );
+			//(empty ( $record )) ? redirect ( base_url () . $this->module ) : '';
+			//$data['records'] 	= 	$record;
+			//$this->session->set_userdata('order_reference','');
+			if(!empty($record))
+			{
+				$data['order'] = $record;
+	//echo "<pre>"; print_r($data); exit;
+				$this->layout->display_site ( $this->folder . $this->module . "-thankyou", $data );
+			}
+			else
+			{
+				redirect(base_url().'checkout/payment');
+			}
+		}
+		else
+		{
+			redirect(base_url().'checkout/payment');
+		}
+	}
+
+	public function failure()
+	{
+		//print_r($_REQUEST);
+		 
+		if($this->session->userdata('order_reference') !='') {
+			$this->session->set_userdata('order_reference','');
+			$this->layout->display_site ( $this->folder . $this->module . "-failure", $data );
+		}
+		else
+		{
+			redirect(base_url().'checkout/payment');
+		}
 	}
 	
 	/* this method used to common module labels */
