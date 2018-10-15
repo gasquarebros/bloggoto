@@ -186,7 +186,19 @@ position: relative; overflow: visible !important; }
 	.profile_wrap { padding:0px; margin-bottom: 0px;overflow:hidden }
 	.followers ul li { width:auto !important; }
 	.newsfeed_menu { margin:0px; }
-	.share_n_text { margin-left: 65%; } 
+    .share_n_text { margin-left: 65%; } 
+    .ui-tabs .ui-tabs-nav {
+        width:95% !important;
+    }
+    .tab-content {
+        width: 100% !important;
+    }
+    .tab-content label {
+        width: auto !important;
+    }
+    .tab-content .form-group div {
+        clear:both;
+    }
 }
 
 @media screen and (max-width: 600px) {

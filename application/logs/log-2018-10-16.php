@@ -1,0 +1,31 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2018-10-16 00:00:10 --> 404 Page Not Found: ../modules/manageproducts/controllers/Manageproducts/images
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "select_products"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "select_products"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "category_select"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "category_select"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "category_select"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "category_modifier"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-10-16 00:00:26 --> Could not find the language line "product_spl_price_to_ttip"
+ERROR - 2018-10-16 00:00:28 --> 404 Page Not Found: ../modules/manageproducts/controllers/Manageproducts/get_combo_html
+ERROR - 2018-10-16 00:00:43 --> Could not find the language line "product_settings_ttip"
+ERROR - 2018-10-16 00:00:43 --> Could not find the language line "product_categorie_ttip"
+ERROR - 2018-10-16 00:00:43 --> Could not find the language line "category_select"
+ERROR - 2018-10-16 00:00:43 --> Could not find the language line "category_select"
+ERROR - 2018-10-16 00:00:43 --> Could not find the language line "category_select"
+ERROR - 2018-10-16 00:00:43 --> Could not find the language line "category_modifier"
+ERROR - 2018-10-16 00:00:43 --> Could not find the language line "modifier_enabled_ttip"
+ERROR - 2018-10-16 00:00:43 --> Severity: Notice --> Undefined variable: assigned_modifiers D:\xampp\htdocs\bloggotoweb\application\modules\manageproducts\views\manageproducts-edit.php 210
+ERROR - 2018-10-16 00:00:43 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-10-16 00:00:43 --> Could not find the language line "product_price_ttip"
+ERROR - 2018-10-16 00:00:43 --> Could not find the language line "product_spl_price_ttip"
+ERROR - 2018-10-16 00:00:43 --> Could not find the language line "product_spl_price_from_ttip"
+ERROR - 2018-10-16 00:00:43 --> Could not find the language line "product_spl_price_to_ttip"

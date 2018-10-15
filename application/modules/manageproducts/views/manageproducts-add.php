@@ -239,7 +239,7 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 									</div> 
 								</div>
                                 <!-- tab 7 -->
-								<div aria-labelledby="dropdown1-tab" id="stepv7" class="tab-pane fade " role="tabpanel">
+								<div aria-labelledby="dropdown1-tab" id="stepv7" class="tab-pane fade shipping_method" role="tabpanel">
 									<table class="table table-bordered table-striped">
 										<thead>
 											<tr>
@@ -492,4 +492,5 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover{ border-color: #252525;
 table { width:100%; text-align:center; }
 .custom_file { display:none; }
 .brows { border:0px; }
+.shipping_method, .associate_product_tabs { overflow-x:auto; max-width: 100%; }
 </style>
