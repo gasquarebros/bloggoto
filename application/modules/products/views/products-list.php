@@ -901,23 +901,16 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 
     //flash sale list view grid view part start
 	$('.list-grid-button ul li.list-view a').click(function(){
-		$('.flash_sale_deals, .redemption_list').addClass('list-view');
-		$('.flash_sale_deals, .redemption_list').removeClass('grid-view');
-
+		$('.flash_sale_deals').addClass('list-view');
+		$('.flash_sale_deals').removeClass('grid-view');
 		$('.list-grid-button ul li.grid-view a').removeClass('active');
 		$(this).addClass('active');
-
-		
 	});
 
 	$('.list-grid-button ul li.grid-view a').click(function(){
-		alert('asd');
-		$('.flash_sale_deals, .redemption_list').addClass('grid-view');
-		$('.flash_sale_deals, .redemption_list').removeClass('list-view');
-
+		$('.flash_sale_deals').addClass('grid-view');
+		$('.flash_sale_deals').removeClass('list-view');
 		$('.list-grid-button ul li.list-view a').removeClass('active');
 		$(this).addClass('active');
-
-		
 	});
 </script>
