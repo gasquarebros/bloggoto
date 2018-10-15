@@ -25,12 +25,10 @@ table {
 							</div>
 						</div>
 					</div>                    
-					<div class="card-body">
+					<div class="card-body" style="overflow-x: auto;">
 					<ul class=" alert_msg  alert-danger  alert container_alert" style="display: none;">
 					
-					</ul>
-					<?php echo form_open_multipart(admin_url().$module.'/'.encode_value($records[0]['order_primary_id']),' class="form-horizontal" id="common_form" ' );?>
-											
+					</ul>				
 						<table style="background-color: #ffffff; border-collapse: collapse; margin:0 auto;color: #565656;font-family: Arial, sans-serif;font-size: 14px;line-height: 20px;border:0px;" width="100%" cellspacing="0" cellpadding="0">
 							<tbody>
 								<tr>
@@ -201,13 +199,12 @@ table {
 																					<tbody>
 																						<tr>
 																							<td>
-																								<?php echo get_order_status_dropdown('',$record['item_order_status'],'','','','orderitems[item_status]['.$item_id.']'); ?>		
+																								<?php echo display_order_status_dropdown($record['item_order_status']); ?>		
 																								<input name="orderitems[item_shipping][<?php echo $item_id; ?>]" value="<?php echo $record['shiiping_id']; ?>" type="hidden">
-
 																								<input name="item_status_old[<?php echo $item_id; ?>]" value="<?php echo $record['item_order_status']; ?>" type="hidden">
 																							</td>
 																							<td>
-																									<input <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 ) { ?>style="display:block;" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_id][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_code']; ?>" type="text">
+																								<p <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 ) { ?>style="display:block;" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info"><?php echo $record['shipping_track_code']; ?></p>
 																							</td>
 																						</tr>
 																					</tbody>
@@ -270,15 +267,6 @@ table {
 								</tr>
 							</tbody>
 						</table>
-
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary">Update</button>	
-							<a class="btn btn-info" href="<?php echo base_url().$module;?>"><?php echo get_label('cancel');?></a>	
-						</div>
-					<?php
-					echo form_hidden ( 'action', 'Add' );
-					echo form_close ();
-					?>
 					</div>
 				</div>
 			</div>

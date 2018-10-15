@@ -79,6 +79,10 @@ $(window).load(function(){
 });
 </script>
 <style>
+.table_overflow {
+    overflow-x: auto;
+    max-width: 100%;
+}
 table { 
     border-collapse: collapse;
     width: 100%;

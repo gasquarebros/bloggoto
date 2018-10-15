@@ -25,7 +25,7 @@ table {
 							</div>
 						</div>
 					</div>                    
-					<div class="card-body">
+					<div class="card-body" style="overflow-x: auto;">
 					<ul class=" alert_msg  alert-danger  alert container_alert" style="display: none;">
 					
 					</ul>
