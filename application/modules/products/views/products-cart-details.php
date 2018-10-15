@@ -6,7 +6,6 @@
         <h4>Your Shopping Cart (<span class="cart-number"><?php echo $cart_details['cart_total_items']; ?> Items</span>)</h4>
         <a class="continue_link" href="<?php echo base_url().'products'; ?>"><i class="fa fa-angle-left" aria-hidden="true"></i> Continue Shopping</a>
 
-        <p class="tablscroll-view" style="display:none;">Scroll to view more <i class="fa fa-long-arrow-right" aria-hidden="true"></i></p>
         <div class="res-table">
             <table>
                 <thead>

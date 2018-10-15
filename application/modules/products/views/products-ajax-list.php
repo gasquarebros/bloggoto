@@ -20,10 +20,14 @@
     max-height: 34px;
     overflow: hidden;
 }
+.list_prod_section {
+	height:400px;
+}
 </style>
 <?php if(!empty($records)) { ?>
+<ul>
 <?php $i=0; foreach($records as $record) {  ?>
-	<div class="list_prod_section">
+	<li class="list_prod_section">
 		<?php $discount = find_discount($record['product_price'],$record['product_special_price'],$record['product_special_price_from_date'],$record['product_special_price_to_date']); ?>
 		<div class="img_part">
 			<?php if($record['product_thumbnail'] !=''){ $photo=media_url().$this->lang->line ( 'product_main_image_folder_name' )."/".$record['product_thumbnail']; } else { $photo=media_url().$this->lang->line('post_photo_folder_name')."default.png"; } ?>
@@ -39,7 +43,7 @@
 		</div>
 		<div class="cont_part">
 			<a class="main-title " title="<?php echo $record['product_name']; ?>" href="<?php echo base_url().$module.'/view/'.$record['product_slug']; ?>"><?php echo $record['product_name']; ?></a> 
-			<?php echo substr_close_tags($record['product_short_description']); ?>
+			<p><?php echo substr_close_tags($record['product_short_description']); ?></p>
 
 			<a href="<?php echo base_url().'myprofile/'.encode_value($record['customer_id']); ?>" class="product_merchant"><?php echo $record['customer_username']; ?></a> 
 
@@ -59,8 +63,9 @@
 		<div class="button_bar"> 
 			<a href="<?php echo base_url().$module.'/view/'.$record['product_slug']; ?>" class=" common_but"> <span>Buy Now</span> </a> 
 		</div>
-	</div>
+	</li>
 <?php } ?> 
+</ul>
 <div class="clear"></div>
 <div class="more_details_par txtc">
 	<h5> <span> <span class="display_current_count"><?php echo $current_records; ?></span> of <span class="total_current_count"><?php echo $total_rows; ?></span> </span> </h5>

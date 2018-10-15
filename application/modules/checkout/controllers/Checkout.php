@@ -8,7 +8,7 @@ Description		: Page contains frontend panel login and forgot password functions.
 ***************************/
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
-require_once ('razorpay\Razorpay.php');
+require_once (FCPATH.'razorpay/Razorpay.php');
 use Razorpay\Api\Api as RazorpayApi;
 
 class Checkout extends CI_Controller {
@@ -1022,7 +1022,13 @@ class Checkout extends CI_Controller {
 	}
 
 	public function success() {
+		//print_r($_REQUEST);
+		//echo $this->session->userdata('order_reference'); exit;
 		if($this->session->userdata('order_reference') !='' && $_REQUEST['razorpay_payment_id'] !='' && $_REQUEST['razorpay_signature'] !='') {
+			$data = $this->load_module_info();
+			$order_ref = $this->session->userdata('order_reference');
+			$data['order_id'] = $order_ref;
+
 			$like = array ();
 			$where = array (
 				"order_id" => $data['order_id'],
@@ -1032,12 +1038,10 @@ class Checkout extends CI_Controller {
 
 			/* update the order payment keys */
 			$this->Mydb->update('orders',$where,array('payment_signature'=>$_REQUEST['razorpay_signature'],'payment_refer_id'=>$_REQUEST['razorpay_payment_id'],'order_status'=>2));
-			$data = $this->load_module_info();
+			
 			$api_data['reference_id'] = get_user_id();
 			$api_data['customer_id'] = get_user_id();
 			$cart = $this->destroyitem($api_data);
-			$order_ref = $this->session->userdata('order_reference');
-			$data['order_id'] = $order_ref;
 			//$order = $this->Mydb->get_record('*','orders',array('order_id'=>$data['order_id']));
 			
 			
@@ -1076,6 +1080,9 @@ class Checkout extends CI_Controller {
 				'pos_orders.*'
 			);
 			$record = $this->Mydb->get_all_records ( $select_array, 'orders', $where, '','', $order_by, $like,$groupby, $join );
+			//print_r($record);
+			//echo $this->db->last_query();
+			//exit;
 			//(empty ( $record )) ? redirect ( base_url () . $this->module ) : '';
 			//$data['records'] 	= 	$record;
 			//$this->session->set_userdata('order_reference','');
@@ -1087,12 +1094,12 @@ class Checkout extends CI_Controller {
 			}
 			else
 			{
-				redirect(base_url().'checkout/payment');
+				redirect(base_url().'cart');
 			}
 		}
 		else
 		{
-			redirect(base_url().'checkout/payment');
+			redirect(base_url().'products');
 		}
 	}
 

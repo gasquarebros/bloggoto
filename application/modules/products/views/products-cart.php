@@ -453,7 +453,7 @@ ins {
 
 </style>
 <script type="text/javascript" src="<?php echo skin_url(); ?>js/products.js"></script>
-
+<link rel="stylesheet" type="text/css" href="<?php echo skin_url(); ?>css/responsive-style.css">
 <section>
    <div class="inner_content">
    <div id="cart" class="container">

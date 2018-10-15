@@ -676,17 +676,17 @@ var module_action="addpost";
     overflow: hidden
 }
 
-.shopping_cart_left .slider-part .elevatezoom #galez {
+.shopping_cart_left .slider-part .elevatezoom #gal1 {
     margin-top: 15px
 }
 
-.shopping_cart_left .slider-part .elevatezoom #galez:after {
+.shopping_cart_left .slider-part .elevatezoom #gal1:after {
     clear: both;
     display: block;
     content: ''
 }
 
-.shopping_cart_left .slider-part .elevatezoom #galez a {
+.shopping_cart_left .slider-part .elevatezoom #gal1 a {
     display: block;
     width: 90px;
     height: 90px;
@@ -698,13 +698,12 @@ var module_action="addpost";
     transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease
 }
-
-.shopping_cart_left .slider-part .elevatezoom #galez a:hover,
-.shopping_cart_left .slider-part .elevatezoom #galez a.zoomGalleryActive {
+.shopping_cart_left .slider-part .elevatezoom #gal1 a:hover,
+.shopping_cart_left .slider-part .elevatezoom #gal1 a.zoomGalleryActive {
     border: 1px solid #53a318
 }
 
-.shopping_cart_left .slider-part .elevatezoom #galez a img {
+.shopping_cart_left .slider-part .elevatezoom #gal1 a img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -844,23 +843,26 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                     $img_thumb = media_url(). $this->lang->line('product_main_image_folder_name')."/".$records[0]['product_thumbnail'];
                 } else { $img_thumb = "" ; } 
                 ?>
-                <img class="" id="zoom_image" src="<?php echo $img_thumb; ?>">
-                <?php 
-                if(!empty($gallery_images)) { ?>
-                    <div id="gal1">
-                    <?php
-                        foreach($gallery_images as $gallery) {
-                    ?>       
-                            <a href="#" data-image="<?php echo media_url()."/". $this->lang->line('product_gallery_image_folder_name')."/".$gallery['pro_gallery_image'];?>" data-zoom-image="<?php echo media_url()."/". $this->lang->line('product_gallery_image_folder_name')."/".$gallery['pro_gallery_image'];?>">
-                                <img src="<?php echo media_url()."/". $this->lang->line('product_gallery_image_folder_name')."/".$gallery['pro_gallery_image'];?>" />
+                <div id="elevatezoom" class="elevatezoom">
+                    <img class="" id="zoom_image" src="<?php echo $img_thumb; ?>">
+                    <?php 
+                    if(!empty($gallery_images)) { ?>
+                        <div id="gal1">
+                            <a href="#" data-image="<?php echo $img_thumb; ?>" data-zoom-image="<?php echo $img_thumb; ?>">
+                                <img src="<?php echo $img_thumb; ?>" />
                             </a>
-                        <?php } ?>
-                    </div>    
-                <?php } ?>
+                        <?php
+                            foreach($gallery_images as $gallery) { if($gallery['pro_gallery_image'] !='') {
+                        ?>       
+                                <a href="#" data-image="<?php echo media_url(). $this->lang->line('product_gallery_image_folder_name')."/".$gallery['pro_gallery_image'];?>" data-zoom-image="<?php echo media_url(). $this->lang->line('product_gallery_image_folder_name')."/".$gallery['pro_gallery_image'];?>">
+                                    <img src="<?php echo media_url(). $this->lang->line('product_gallery_image_folder_name')."/".$gallery['pro_gallery_image'];?>" />
+                                </a>
+                            <?php } } ?>
+                        </div>    
+                    <?php } ?>
+                </div>    
             </div>
-            <div class="slider-desc">
-                <?php echo $records[0]['product_short_description']; ?>
-            </div>
+
             <div class="desc-part">
                 <?php echo $records[0]['product_long_description']; ?>
             </div>
@@ -1020,6 +1022,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 <?php
 	echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js'));
 ?>
+<link rel="stylesheet" type="text/css" href="<?php echo skin_url(); ?>css/responsive-style.css">
 <script type="text/javascript" src="<?php echo skin_url().'js/jquery.elevatezoom.js' ?>"></script>
 <script type="text/javascript" src="<?php echo skin_url(); ?>js/products.js"></script>
 <script>
@@ -1045,7 +1048,7 @@ $("#zoom_image").bind("click", function(e) {
 			}
 			else
 			{
-				jQuery("#elevatezoom-0").elevateZoom({"zoomType":"lens","containLensZoom":true,"borderSize":0,"scrollZoom":false,"gallery":"galez"});
+				jQuery("#elevatezoom-0").elevateZoom({"zoomType":"lens","containLensZoom":true,"borderSize":0,"scrollZoom":false,"gallery":"gal1"});
 			}
 		}
 		jQuery(window).resize(function() {

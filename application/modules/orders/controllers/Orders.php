@@ -109,7 +109,7 @@ class Orders extends CI_Controller
 		$limit = (( int ) $admin_records == 0) ? 25 : $admin_records;
 		$offset = (( int ) $page == 0) ? 0 : $page;
 		$uri_segment = $this->uri->total_segments ();
-		$uri_string = camp_url () . $this->module . "/ajax_pagination";
+		$uri_string = base_url () . $this->module . "/ajax_pagination";
 
 		$config = pagination_config ( $uri_string, $totla_rows, $limit, $uri_segment );
 		$this->pagination->initialize ( $config );
@@ -206,12 +206,12 @@ class Orders extends CI_Controller
 		$join [0] ['select'] = "customer_first_name,customer_last_name,customer_phone,customer_email";
 		$join [0] ['table'] = "pos_customers";
 		$join [0] ['condition'] = "order_customer_id = customer_id";
-		$join [0] ['type'] = "INNER";
+		$join [0] ['type'] = "LEFT";
 		
 		$join [1] ['select'] = "status_name";
 		$join [1] ['table'] = "pos_order_status";
 		$join [1] ['condition'] = "order_status = status_id";
-		$join [1] ['type'] = "INNER";
+		$join [1] ['type'] = "LEFT";
 		
 		$join [2] ['select'] = "item_id,item_order_primary_id,item_product_id,item_subproductid,item_subproduct_name,item_name,item_image,item_sku,item_slug,item_specification,item_qty,item_unit_price,item_total_amount,item_merchant_name,item_merchant_id, item_order_status,shiiping_id";
 		$join [2] ['table'] = "pos_order_items";
@@ -222,12 +222,12 @@ class Orders extends CI_Controller
 		$join [3] ['select'] = "pos_order_shipping_address.*";
 		$join [3] ['table'] = "pos_order_shipping_address";
 		$join [3] ['condition'] = "order_shipping_order_primary_id = ".$this->primary_key;
-		$join [3] ['type'] = "INNER";
+		$join [3] ['type'] = "LEFT";
 
 		$join [4] ['select'] = "pos_order_item_shipping.*";
 		$join [4] ['table'] = "pos_order_item_shipping";
 		$join [4] ['condition'] = "shipping_id = shiiping_id";
-		$join [4] ['type'] = "INNER";
+		$join [4] ['type'] = "LEFT";
 		
 		$groupby = "";
 		$select_array = array (

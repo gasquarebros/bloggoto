@@ -12699,7 +12699,7 @@ body.checkout .ui-widget.ui-widget-content{
 														<div class="form_deleteright">
 															<input type="hidden" name="address_id" value="<?=$address['address_id']?>">
 															<input type="hidden" name="action" value="update">
-                                                            <input class="secure_key" name="secure_key" value="" type="textbox"/>
+                                                            <input class="secure_key" name="secure_key" value="" type="hidden"/>
 															<input value="save" type="submit">
 														</div>
 													</div>
@@ -12851,4 +12851,5 @@ body.checkout .ui-widget.ui-widget-content{
 		</div>
 	</div>
 </div>
+<link rel="stylesheet" type="text/css" href="<?php echo skin_url(); ?>css/responsive-style.css">
 <script type="text/javascript" src="<?php echo skin_url(); ?>js/shipping.js"></script>

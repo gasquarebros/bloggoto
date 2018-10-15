@@ -308,3 +308,5 @@ ERROR - 2018-10-14 10:37:42 --> Could not find the language line "products_modul
 ERROR - 2018-10-14 10:37:42 --> Could not find the language line "products_module_label"
 ERROR - 2018-10-14 10:37:42 --> Could not find the language line "rest_cart_empty"
 ERROR - 2018-10-14 10:37:42 --> Could not find the language line "rest_cart_empty"
+ERROR - 2018-10-14 19:15:24 --> Could not find the language line "user_registration"
+ERROR - 2018-10-14 19:15:25 --> Could not find the language line "firsttime_user"

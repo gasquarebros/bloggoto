@@ -554,7 +554,7 @@ body.checkout .ui-widget.ui-widget-content{
         </div>
     </div>
 </section>
-
+<link rel="stylesheet" type="text/css" href="<?php echo skin_url(); ?>css/responsive-style.css">
 <script>
 function loading()
 {

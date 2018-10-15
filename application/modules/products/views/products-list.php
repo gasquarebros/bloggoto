@@ -10,6 +10,8 @@ ul {
 .search-key-box {
     width: 75%;
 }
+.chosen-container-single { width: 100% !important; }
+ 
 .search-key-box input[type="text"] {
     border: none;
     font-family: 'proxima_novasemibold';
@@ -822,6 +824,25 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="mobile-sortby-sec" style="display:none;">
+                                <div class="filter_sortby">
+                                     <select id="product-sort" name="sort_by">
+                                        <option value="" selected="">Select Sort By</option>
+                                        <option value="price-low">Price Low to High</option>
+                                        <option value="price-high">Price High to Low</option>
+                                        <option value="asc">A-Z </option>
+                                        <option value="desc">Z-A </option>
+                                    </select>
+                                </div>
+                                <div class="list-grid-button">
+                                    <ul>
+                                        <li class="list-view"><a  href="javascript:void(0)"><i class="fa fa-th-list" aria-hidden="true"></i></a></li>
+                                        <li class="grid-view"><a class="active" href="javascript:void(0)"><i class="fa fa-th-large" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
                             <div class="clear"></div>
                         <?php echo form_close(); ?>
                         <div class="clear"></div>
@@ -829,7 +850,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                     
                     <br>      
 
-                    <div class="deals_part flash_sale_deals append_html">
+                    <div class="deals_part flash_sale_deals append_html grid-view">
                         <!--<div class="deals_part flash_sale_deals">
                             <ul class="append_html">
                             </ul>
@@ -851,6 +872,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 	echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js'));
 ?> 
 
+<link rel="stylesheet" type="text/css" href="<?php echo skin_url(); ?>css/responsive-style.css">
 
 <script> 
     $(window).on("load",function(){
@@ -876,4 +898,26 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
     $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +" - $" + $( "#slider-range" ).slider( "values", 1 ) );
     $('#price_from').val($( "#slider-range" ).slider( "values", 0 ));
     $('#price_end').val($( "#slider-range" ).slider( "values", 1 ));
+
+    //flash sale list view grid view part start
+	$('.list-grid-button ul li.list-view a').click(function(){
+		$('.flash_sale_deals, .redemption_list').addClass('list-view');
+		$('.flash_sale_deals, .redemption_list').removeClass('grid-view');
+
+		$('.list-grid-button ul li.grid-view a').removeClass('active');
+		$(this).addClass('active');
+
+		
+	});
+
+	$('.list-grid-button ul li.grid-view a').click(function(){
+		alert('asd');
+		$('.flash_sale_deals, .redemption_list').addClass('grid-view');
+		$('.flash_sale_deals, .redemption_list').removeClass('list-view');
+
+		$('.list-grid-button ul li.list-view a').removeClass('active');
+		$(this).addClass('active');
+
+		
+	});
 </script>

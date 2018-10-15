@@ -12598,8 +12598,6 @@ body.checkout .ui-widget.ui-widget-content{
 							</div>
 							<div class="clear"></div>
 						</div>
-
-						<p class="tablscroll-view" style="display:none;">Scroll to view more <i class="fa fa-long-arrow-right" aria-hidden="true"></i></p>
 						<div class="res-table">
 							<?php if(!empty($order)){ ?>
 							<table>
@@ -12671,3 +12669,4 @@ body.checkout .ui-widget.ui-widget-content{
 	</div>
 </div>
 </div>
+<link rel="stylesheet" type="text/css" href="<?php echo skin_url(); ?>css/responsive-style.css">
