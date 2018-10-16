@@ -1,8 +1,8 @@
 function get_content()
 {
 	
-	var type = $('.cate_list li.active').data('type');
-	var subcat = $('.subcate_list li.active').data('type');
+	var type = $('.cate_list li.active a').data('type');
+	var subcat = $('.subcate_list li.active a').data('type');
 	var price_from = $('#price_from').val();
 	var price_end = $('#price_end').val();
 	var sortby = $('#product-sort').val();
@@ -313,10 +313,7 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$('body').on('submit','#common_search',function() {
-		get_content();
-		return false;
-	});
+
 	$('body').on('click','.cate_list .categories',function(e) {
 		$('.cate_list').find('.categories').removeClass('active');
 		$(this).addClass('active');
@@ -327,6 +324,11 @@ $(document).ready(function(){
 		$('.subcate_list').find('.categories').removeClass('active');
 		$(this).addClass('active');
 		get_content();
+	});
+
+	$('body').on('submit','#common_search',function() {
+		get_content();
+		return false;
 	});
 
 	$('body').on('click','.allcategories',function(e) {

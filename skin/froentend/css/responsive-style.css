@@ -145,8 +145,8 @@
 .search-operate-box .chosen-container-single .chosen-single:after{line-height:50px;}
 .search-key-box input[type="text"]{border-right:0px solid #e7e7e7;border-bottom:1px solid #e7e7e7;padding:10px 15px;}
 .custom-select:after{line-height:50px;}
-.search-operate-box input[type="submit"], .cate_right .search-operate-box button[type="submit"]{background:url(../images/search.png) no-repeat scroll center center #fe9b1a;width:60px;}
-.search-operate-box input[type="submit"]:hover, .cate_right .search-operate-box button[type="submit"]:hover{background:url(../images/search.png) no-repeat scroll center center #004282;}
+.search-operate-box input[type="submit"], .cate_right .search-operate-box button[type="submit"]{width:60px;}
+/*.search-operate-box input[type="submit"]:hover, .cate_right .search-operate-box button[type="submit"]:hover{ } */
 .search-operate-box{padding-right:59px;}
 .cate_right .search-operate-box button[type="submit"]{height:50px;}
 .cate_right .search-operate-box button[type="submit"]

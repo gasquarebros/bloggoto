@@ -84,9 +84,9 @@ class Products extends CI_Controller {
 		}*/
 		
 		if ($search != "") {
-			$where = array_merge ( $where, array (
-				"product_name" => $search 
-			));
+			$like = array (
+				'product_name' => $search 
+			);
 		}
 		
 		if ($cat != "" && $cat != 'undefined') {

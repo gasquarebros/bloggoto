@@ -16,7 +16,7 @@ ul {
     border: none;
     font-family: 'proxima_novasemibold';
     font-size: 17px;
-    color: #ffffff;
+    color: #000000;
     height: 55px;
     margin-bottom: 0px;
     padding: 10px 25px;
@@ -208,7 +208,6 @@ ul {
 .cate_right .search-operate-box button[type="submit"] {
     border-radius: 0 5px 5px 0;
     -webkit-border-radius: 0 5px 5px 0;
-    background: url(media/common/search-icon.png) no-repeat scroll center center #00c853;
     height: 55px;
     width: 70px;
     transition: all 0.3s ease;
@@ -219,6 +218,10 @@ ul {
 }
 .cate_right .search-operate-box button[type="submit"]:hover {
     background: url(media/common/search-icon.png) no-repeat scroll center center #2596b1;
+}
+
+.search-operate-box i {
+    font-size:30px;
 }
 .filter_part { 
     width: 20%;
@@ -804,9 +807,9 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                          <?php echo form_open('',' id="common_search" class="form-inline"');?>
                             <div class="search-key-box fl">
                                 <div class="form-group field-products-product_name required"> 
-                                    <input type="text" id="products-product_name" class="search-key" name="Products[product_name]" placeholder="I'm shopping for..." autocomplete="off"> 
+                                    <input type="text" id="products-product_name" class="search-key" name="search_section" placeholder="I'm shopping for..." autocomplete="off"> 
                                     <div class="search-operate-box fl">
-                                    <button type="submit" class="search-button"></button> 
+                                    <button type="submit" class="search-button"><i class="fa fa-search"></i></button> 
                                     </div>
                                 </div>
                             </div>
