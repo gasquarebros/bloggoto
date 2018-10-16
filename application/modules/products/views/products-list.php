@@ -10,6 +10,7 @@ ul {
 .search-key-box {
     width: 75%;
 }
+.filter_enable { display:none; }
 .chosen-container-single { width: 100% !important; }
  
 .search-key-box input[type="text"] {
@@ -28,7 +29,8 @@ ul {
     float:left;
 }
 .cate_left {
-    width: 19.0625%
+    width: 19.0625%;
+    display:block;
 }
 
 .cate_main {
@@ -813,6 +815,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                                     </div>
                                 </div>
                             </div>
+                            <div class="filter_enable"><a class="mobile_filter" ><i class="fa fa-filter"></i></a></div>
                             <div class="filter_part">
                                 <div class="filter_heading"> <span>Sort By</span> </div>
                                 <div class="filter_section">

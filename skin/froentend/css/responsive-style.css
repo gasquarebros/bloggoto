@@ -568,6 +568,21 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 }
 @media(max-width:730px){.deals_part{margin-top:20px;}
 .filter_part{display:none;}
+.filter_enable {
+    display: block;
+    width: auto;
+    float: left;
+    text-align: center;
+    margin: 0 auto;
+    height: 50px;
+}
+.mobile_filter {
+    margin: 0 auto;
+    text-align: center;
+    line-height: 61px;
+    font-size: 37px;
+    color: #000000;
+}
 .mobile-sortby-sec{display:block !important;position:relative;padding-right:110px; clear: both;}
 .mobile-sortby-sec .list-grid-button{position:absolute;right:0;top:0;}
 .mobile-sortby-sec .list-grid-button ul{padding:0;}
@@ -596,6 +611,8 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 .redemption-main .redemption_list.grid-view ul li .cont_part{float:none;width:100%;}
 .flash_sale_deals ul li{margin-bottom:3% !important;}
 .list_prod_section { height:auto !important; }
+.cate_left { display:none; }
+.filter_enable { display:block; }
 }
 @media(max-width:667px){
 .head-bot-left .logo{max-width:170px;}
@@ -720,18 +737,21 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 .cate_right #form-freedeal-searchbar .search-key-box input[type="text"], .cate_right #form-merchant-searchbar .search-key-box input[type="text"], .cate_right #form-merchantdetail-searchbar .search-key-box input[type="text"]{border-radius:0;-webkit-border-radius:0;}
 .cate_right #form-freedeal-searchbar, .cate_right #form-merchant-searchbar, .cate_right #form-merchantdetail-searchbar{border-radius:0px;}
 .cate_right .search-operate-box button[type="submit"]{height:45px;width:45px;border-radius:0;right:0;}
-.search-key-box input[type="text"]{padding:10px 15px;height:45px;}
+.search-key-box input[type="text"]{padding:10px 15px;height:45px; width: calc(100% - 60px) !important;}
+.field-products-product_name { width:100%; float:left; }
 .search-operate-box .chosen-container-single .chosen-single,
 .search-operate-box .chosen-container-single .chosen-single:after{line-height:45px;}
 .custom-select:after{line-height:40px;}
 .search-operate-box{padding-right:45px;}
+.mobile_filter { line-height: 41px; }
 .search-operate-box input[type="submit"]{width:45px;right:0;border-radius:0px;-webkit-border-radius:0px;height:45px;}
 .stickytop .search-operate-box input[type="submit"]{border-radius:0 5px 4px 0;-webkit-border-radius:0 5px 4px 0;}
 .header_inner .search-operate-box input[type="submit"]{border-radius:0 5px 4px 0;-webkit-border-radius:0 5px 4px 0;}
 .merchant-list-details .search-key-box input[type="text"], .merchant-list-details .search-operate-box button[type="submit"]{height:40px;}
 .merchant-list-details .search-operate-box{padding-right:45px;}
 .merchant-list-details .search-key-box input[type="text"], .merchant-list-details .custom-select select, .merchant-list-details .search-operate-box button[type="submit"]{height:40px;}
-.search-key-box, .search-operate-box, .category_with_search #form-freedeal-searchbar .search-key-box, .category_with_search #form-freedeal-searchbar .search-operate-box{width:100%;float:none; margin: 10px 0px;}
+.search-key-box,  .category_with_search #form-freedeal-searchbar .search-key-box{width:85%;float:none; margin: 10px 0px;}
+.category_with_search #form-freedeal-searchbar .search-operate-box { width:50px; float:none; margin: 10px 0px; }
 .nice-select:after{line-height:40px;}
 .sub-bot-right form input[type="text"], .sub-bot-right form button[type="submit"]{height:45px;position:relative;border-radius:5px;-webkit-border-radius:5px;}
 .sub-bot-right form input[type="text"]{margin-bottom:8px;padding:10px;}

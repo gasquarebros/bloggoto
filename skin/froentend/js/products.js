@@ -320,6 +320,17 @@ $(document).ready(function(){
 		get_content();
 	});
 
+	$('body').on('change','#product-sort',function(e) {
+		get_content();
+	});
+
+	$('body').on('click','.mobile_filter',function(e) {
+		$('.cate_left').toggle('slow');
+	});
+
+	
+	
+
 	$('body').on('click','.subcate_list .categories',function(e) {
 		$('.subcate_list').find('.categories').removeClass('active');
 		$(this).addClass('active');
