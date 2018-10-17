@@ -184,6 +184,8 @@ class Products extends CI_Controller
 	public function add() 
 	{
 		$data = $this->load_module_info ();
+        $settings = $this->Mydb->get_record('*','settings');
+        $data['commission_price'] = $settings['setting_ecommerce_percentage'];
 		/* form submit */
 		if ($this->input->post ( 'action' ) == "Add") {
 
@@ -448,7 +450,8 @@ class Products extends CI_Controller
 	public function edit($edit_id = NULL) 
 	{
 		$data = $this->load_module_info ();
-
+$settings = $this->Mydb->get_record('*','settings');
+        $data['commission_price'] = $settings['setting_ecommerce_percentage'];
 		$id = addslashes ( decode_value ( $edit_id ) );
 		$response = $image_arr = array ();
 		$record = $this->Mydb->get_record ( '*', $this->table, array (

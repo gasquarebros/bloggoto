@@ -171,7 +171,7 @@ var module_action = '<?php echo 'view/'.encode_value($records[0]['order_primary_
 																</table>
 															</td>
 															<td style="padding:10px; font-size:15px; text-align: center; width:20%;text-transform:uppercase"><?php echo $record['item_qty']; ?></td>
-															<td style="padding:10px; font-size:15px; text-align: center; width:20%;"><?php echo show_price($record['item_total_amount']); ?></td>
+															<td style="padding:10px; font-size:15px; text-align: center; width:20%;"><?php echo show_price($record['item_total_amount']); ?> (<?php echo show_price($record['item_merchant_price']); ?>)</td>
 														</tr>
 														<tr>
 															<td colspan="4" class="inner_table">

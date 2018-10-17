@@ -258,6 +258,7 @@ $lang['product_choose_multi_image'] = "Select Multiple Images";
 $lang['product_max_image_count'] = "15 images are allowed ";
 $lang['product_cost'] = "Cost";
 $lang['product_price'] = "Price";
+$lang['product_price_after_commission'] = "Merchant Receiving Price";
 $lang['product_alt_price'] = "Alternative Price";
 $lang['product_spl_price'] = "Special Price";
 $lang['product_spl_price_from'] = "Special Price From Date";

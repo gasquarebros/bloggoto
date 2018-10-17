@@ -68,6 +68,7 @@ $lang ['postal_code_max_length'] = 8;
 $lang ['phone_max_length'] = 12;
 $lang ['post_photo'] = "Image";
 $lang ['product_added'] = "Product added successfully.";
+$lang['product_price_after_commission'] = "Merchant Receiving Price";
 $lang ['account_success_created'] = " Account created successfully.";
 
 

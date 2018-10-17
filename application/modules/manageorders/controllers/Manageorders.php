@@ -102,7 +102,7 @@ class Manageorders extends CI_Controller
 
 		$join [2] ['select'] = "item_merchant_id";
 		$join [2] ['table'] = "order_items";
-		$join [2] ['condition'] = "item_order_primary_id = order_primary_id";
+		$join [2] ['condition'] = "item_order_primary_id = order_primary_id AND item_merchant_id = ".get_user_id();
 		$join [2] ['type'] = "INNER";
 		
 		$groupby = "order_primary_id";
@@ -215,7 +215,7 @@ class Manageorders extends CI_Controller
 		
 		$join [2] ['select'] = "item_id,item_order_primary_id,item_product_id,item_subproductid,item_subproduct_name,item_name,item_image,item_sku,item_slug,item_specification,item_qty,item_unit_price,item_total_amount,item_merchant_name,item_merchant_id, item_order_status,shiiping_id";
 		$join [2] ['table'] = "pos_order_items";
-		$join [2] ['condition'] = "item_order_primary_id = ".$this->primary_key;
+		$join [2] ['condition'] = "item_order_primary_id = ".$this->primary_key." AND item_merchant_id = ".get_user_id();
 		$join [2] ['type'] = "LEFT";
 		
 		
@@ -226,7 +226,7 @@ class Manageorders extends CI_Controller
 
 		$join [4] ['select'] = "pos_order_item_shipping.*";
 		$join [4] ['table'] = "pos_order_item_shipping";
-		$join [4] ['condition'] = "shipping_id = shiiping_id";
+		$join [4] ['condition'] = "id= shiiping_id";
 		$join [4] ['type'] = "LEFT";
 		
 		$groupby = "";

@@ -226,7 +226,7 @@ class Orders extends CI_Controller
 
 		$join [4] ['select'] = "pos_order_item_shipping.*";
 		$join [4] ['table'] = "pos_order_item_shipping";
-		$join [4] ['condition'] = "shipping_id = shiiping_id";
+		$join [4] ['condition'] = "id = shiiping_id";
 		$join [4] ['type'] = "LEFT";
 		
 		$groupby = "";

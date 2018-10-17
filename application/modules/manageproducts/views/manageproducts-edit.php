@@ -9,6 +9,7 @@
 <script>
 var validation_container ="Yes";
 var gallery_image_label = "<?php echo get_label('product_gallery');?>";
+var commission_price = '<?php echo $commission_price; ?>';
 </script>
 <div class="container-fluid product_add">
 	<div class="side-body">
@@ -227,10 +228,28 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 												</div>
 											</div>
 										</div>
+
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price_after_commission').add_tooltip('product_price');?></label>
+											<div class="col-sm-8">
+												<div class="input_box commission_price">
+												<?php echo $records['product_price'] - (($records['product_price'] * $commission_price)/100); ?>
+												</div>
+											</div>
+										</div>
+										
 										
 										<div class="form-group">
 											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price').add_tooltip('product_spl_price');?></label>
 											<div class="col-sm-8"><div class="input_box"><input type="number"  value="<?php echo  output_integer($records['product_special_price']);?>" class="form-control " name="product_spl_price" onkeypress="return isFloat(event)"  id="product_spl_price"> </div></div>
+										</div>
+
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price_after_commission').add_tooltip('product_price');?></label>
+											<div class="col-sm-8">
+												<div class="input_box commission_special_price"><?php echo $records['product_special_price'] - (($records['product_special_price'] * $commission_price)/100); ?>
+												</div>
+											</div>
 										</div>
 															
 										<div class="form-group">
@@ -564,9 +583,17 @@ jQuery("#dynamic-form").on("click", ".remove-shipping", function(e) {
 		jQuery('.datepickerchange2').datepicker({'format': 'dd-mm-yyyy','startDate':'today'})
 	}
 
+jQuery('body').on('blur','#product_price', function() {
+    var orginal_price = jQuery(this).val();
+    var commision_after = orginal_price - ((parseFloat(orginal_price) * parseFloat(commission_price) )/ 100);
+    jQuery('.commission_price').html(commision_after);
+});
 
-//jQuery('.datepicker').datepicker({changeMonth: true,changeYear: true,dateFormat: 'dd-mm-yy'});
-
+jQuery('body').on('blur','#product_spl_price', function() {
+    var orginal_special_price = jQuery(this).val();
+    var commision_after = orginal_special_price - ((parseFloat(orginal_special_price) * parseFloat(commission_price) )/ 100);
+    jQuery('.commission_special_price').html(commision_after);
+});
 </script>	
 <style>
 #common_form .chosen-container {

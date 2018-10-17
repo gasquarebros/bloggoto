@@ -487,6 +487,8 @@ class Checkout extends CI_Controller {
 	private function _insert_order_items($order_ID, $guid, $orderItemPost, $customerID) {
 
 		if(!empty($orderItemPost)) {
+$settings = $this->Mydb->get_record('*','settings');
+$commission = $settings['setting_ecommerce_percentage'];
 			foreach ($orderItemPost as $key => $val) {   
 				// insert order item shipping
 				$itemshipping = array(
@@ -497,7 +499,8 @@ class Checkout extends CI_Controller {
 					'shipping_method_price'	=> $val['shipping_method_price'],
 				);
 				$orderItemShippingId = $this->Mydb->insert ( 'order_item_shipping', $itemshipping );
-
+$orginal_item_without_shipping = $val['cart_item_unit_price'] * $val['cart_item_qty'];
+$item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without_shipping * $commission)/100) + $val['shipping_method_price'];
 				$orderitems = array(
 					'item_order_primary_id'	=> $order_ID,
 					'item_order_id'	=> $guid,
@@ -519,6 +522,7 @@ class Checkout extends CI_Controller {
 					'item_remarks'	=> '',
 					'item_merchant_id'	=> $val['cart_item_merchant_id'],
 					'item_merchant_name'	=> $val['cart_item_merchant_name'],
+'item_merchant_price' => $item_merchant_price
 				);      
 				$orderItemId = $this->Mydb->insert ( 'order_items', $orderitems );
 				if(!empty($val['attributename'])) {

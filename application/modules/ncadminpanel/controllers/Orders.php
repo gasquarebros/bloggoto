@@ -192,7 +192,7 @@ class Orders extends CI_Controller
 		$data = $this->load_module_info ();
 		$like = array ();
 		$where = array (
-			" $this->primary_key !=" => '',
+			"order_primary_id" => $id,
 		);
 		$order_by = array (
 			$this->primary_key => 'DESC' 
@@ -204,15 +204,15 @@ class Orders extends CI_Controller
 		$join [0] ['select'] = "customer_first_name,customer_last_name,customer_phone,customer_email";
 		$join [0] ['table'] = "pos_customers";
 		$join [0] ['condition'] = "order_customer_id = customer_id";
-		$join [0] ['type'] = "INNER";
+		$join [0] ['type'] = "LEFT";
 		
 		$join [1] ['select'] = "status_name";
 		$join [1] ['table'] = "pos_order_status";
 		$join [1] ['condition'] = "order_status = status_id";
-		$join [1] ['type'] = "INNER";
+		$join [1] ['type'] = "LEFT";
 		
-		//$join [2] ['select'] = "item_id,item_order_primary_id,item_product_id,item_subproductid,item_subproduct_name,item_name,item_image,item_sku,item_slug,item_specification,item_qty,item_unit_price,item_total_amount,item_merchant_name,item_merchant_id, item_order_status,shiiping_id, (select shipping_name from pos_order_item_shipping where shipping_id = shiiping_id) as item_shipping_details,(select shipping_track_url from pos_order_item_shipping where shipping_id = shiiping_id) as item_shipping_url,(select shipping_track_code from pos_order_item_shipping where shipping_id = shiiping_id) as item_shipping_code";
-		$join [2] ['select'] = "item_id,item_order_primary_id,item_product_id,item_subproductid,item_subproduct_name,item_name,item_image,item_sku,item_slug,item_specification,item_qty,item_unit_price,item_total_amount,item_merchant_name,item_merchant_id, item_order_status,shiiping_id";
+		//$join [2] ['select'] = "item_id,item_order_primary_id,item_product_id,item_subproductid,item_subproduct_name,item_name,item_image,item_sku,item_slug,item_specification,item_qty,item_unit_price,item_total_amount,item_merchant_name,item_merchant_id, item_merchant_price, item_order_status,shiiping_id, (select shipping_name from pos_order_item_shipping where shipping_id = shiiping_id) as item_shipping_details,(select shipping_track_url from pos_order_item_shipping where shipping_id = shiiping_id) as item_shipping_url,(select shipping_track_code from pos_order_item_shipping where shipping_id = shiiping_id) as item_shipping_code";
+		$join [2] ['select'] = "item_id,item_order_primary_id,item_product_id,item_subproductid,item_subproduct_name,item_name,item_image,item_sku,item_slug,item_specification,item_qty,item_unit_price,item_total_amount,item_merchant_name,item_merchant_price,item_merchant_id, item_order_status,shiiping_id";
 		$join [2] ['table'] = "pos_order_items";
 		$join [2] ['condition'] = "item_order_primary_id = ".$this->primary_key;
 		$join [2] ['type'] = "LEFT";
@@ -221,21 +221,19 @@ class Orders extends CI_Controller
 		$join [3] ['select'] = "pos_order_shipping_address.*";
 		$join [3] ['table'] = "pos_order_shipping_address";
 		$join [3] ['condition'] = "order_shipping_order_primary_id = ".$this->primary_key;
-		$join [3] ['type'] = "INNER";
+		$join [3] ['type'] = "LEFT";
 
 		$join [4] ['select'] = "pos_order_item_shipping.*";
 		$join [4] ['table'] = "pos_order_item_shipping";
-		$join [4] ['condition'] = "shipping_id = shiiping_id";
-		$join [4] ['type'] = "INNER";
+		$join [4] ['condition'] = "id= shiiping_id";
+		$join [4] ['type'] = "LEFT";
 		
-		$groupby = "order_primary_id";
+		$groupby = "";
 		$select_array = array (
 			'pos_orders.*'
 		);
 		$record = $this->Mydb->get_all_records ( $select_array, $this->table, $where, '','', $order_by, $like,$groupby, $join );
-		//echo "<pre>";
-		//print_r($record);
-		//exit;
+	
 		(empty ( $record )) ? redirect ( admin_url () . $this->module ) : '';
 		
 		$data['records'] 	= 	$record;
