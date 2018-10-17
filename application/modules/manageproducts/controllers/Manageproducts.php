@@ -187,6 +187,7 @@ class Manageproducts extends CI_Controller
 		/* form submit */
 		if ($this->input->post ( 'action' ) == "Add") {
 
+
 			$product_tags = $this->input->post ( 'product_tags' );
 			check_ajax_request (); /* skip direct access */
 
@@ -197,11 +198,10 @@ class Manageproducts extends CI_Controller
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			//$this->form_validation->set_rules ( 'product_customer_id', 'lang:product_customer_id', 'required' );
 		
-			/*$this->form_validation->set_rules ( 'product_category', 'lang:product_categorie', 'required|callback_validate_category' );
+			/*$this->form_validation->set_rules ( 'product_category', 'lang:product_categorie', 'required|callback_validate_category' );*/
 			
 			$this->form_validation->set_rules ( 'product_thumbnail', 'lang:product_thumbnail', 'trim|callback_validate_image' );
-	
-			   if special price enabled. */
+
 			if (( int ) $this->input->post ( 'product_spl_price' ) != 0) {
 				
 				$this->form_validation->set_rules ( 'product_spl_price', 'lang:product_spl_price', 'required' );
@@ -210,7 +210,6 @@ class Manageproducts extends CI_Controller
 			}
 			
 			if ($this->form_validation->run () == TRUE) {
-			
 
 				$product_id = get_guid ( $this->table, 'product_id' );
 				$product_slug = make_slug ( $this->input->post ( 'product_name' ), $this->table, 'product_slug' );
@@ -782,10 +781,12 @@ class Manageproducts extends CI_Controller
 			if ($this->common->valid_image ( $_FILES ['product_thumbnail'] ) == "No") {
 				$this->form_validation->set_message ( 'validate_image', get_label ( 'upload_valid_image' ) );
 				return false;
+			} else {
+				return true;
 			}
 		}
-		
-		return true;
+		$this->form_validation->set_message ( 'validate_image', get_label ( 'upload_valid_image' ) );
+		return false;
 	}
 	
 	/* this method used check product name or alredy exists or not */
