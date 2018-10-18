@@ -198,7 +198,10 @@ class Manageproducts extends CI_Controller
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			//$this->form_validation->set_rules ( 'product_customer_id', 'lang:product_customer_id', 'required' );
 		
-			/*$this->form_validation->set_rules ( 'product_category', 'lang:product_categorie', 'required|callback_validate_category' );*/
+			$this->form_validation->set_rules ( 'subcategory', 'lang:subcategory', 'required' );
+
+			$this->form_validation->set_rules ( 'ProductShipping[prod_ass_ship_method_shipid]', 'lang:shipping', 'required' );
+			
 			
 			$this->form_validation->set_rules ( 'product_thumbnail', 'lang:product_thumbnail', 'trim|callback_validate_image' );
 
@@ -210,7 +213,7 @@ class Manageproducts extends CI_Controller
 			}
 			
 			if ($this->form_validation->run () == TRUE) {
-
+echo "asdsa"; exit;
 				$product_id = get_guid ( $this->table, 'product_id' );
 				$product_slug = make_slug ( $this->input->post ( 'product_name' ), $this->table, 'product_slug' );
 				$product_sequence = (( int ) $this->input->post ( 'product_sequence' ) == 0) ? get_sequence ( 'product_sequence', $this->table, array (
@@ -489,6 +492,14 @@ class Manageproducts extends CI_Controller
 			$this->form_validation->set_rules ( 'product_thumbnail', 'lang:product_thumbnail', 'trim|callback_validate_image' );
 	
 			   if special price enabled. */
+
+			$this->form_validation->set_rules ( 'subcategory', 'lang:subcategory', 'required' );
+
+			$this->form_validation->set_rules ( 'ProductShipping[prod_ass_ship_method_shipid]', 'lang:shipping', 'required' );
+			   
+			   
+			  // $this->form_validation->set_rules ( 'product_thumbnail', 'lang:product_thumbnail', 'trim|callback_validate_image' );
+	  
 			if (( int ) $this->input->post ( 'product_spl_price' ) != 0) {
 				
 				$this->form_validation->set_rules ( 'product_spl_price', 'lang:product_spl_price', 'required' );
