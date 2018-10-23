@@ -261,19 +261,23 @@ $(document).ready(function(){
 						}
 					}
 					else{
-						var result = responses.contents;
+						var result = responses;
+                        console.log(result.form_error);
+                        console.log(responses.form_error);
 						if(typeof result.form_error != 'undefined')
 						{
 							var error ='<ul class="cart_error">';
-							jQuery(result.form_error).each(function(key,val){
+							/*jQuery(result.form_error).each(function(key,val){
 								error+="<li>"+val+"</li>"
-							});
+							});*/
+                           error += result.form_error;
 							error +="</ul>";
 						}
 						else {
-							var error =result.message;
+							var error = result.message;
 						}
-						current.parent().append('<p class="error error-info">'+error+'</p>');
+                        console.log(error);
+						current.parent().append('<div class="error error-info">'+error+'</div>');
 					}
 				},
 				error : function ()

@@ -252,6 +252,7 @@ $lang['product_barcode'] = "Bar Code";
 $lang['product_short_description'] = "Short Description";
 $lang['product_long_description'] = "Description ";
 $lang['product_sequence'] = "Sort Order"; 
+$lang['product_is_display'] = "Is Display in List"; 
 $lang['product_thumbnail'] = "Thumbnail Image";
 $lang['product_gallery'] = "Gallery Images";  
 $lang['product_choose_multi_image'] = "Select Multiple Images";
