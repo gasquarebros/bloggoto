@@ -131,6 +131,8 @@ class Subcategories extends CI_Controller {
 			check_ajax_request (); /* skip direct access */
 			
 			$this->form_validation->set_rules ( 'pro_subcate_name', 'lang:pro_subcate_name', 'required|callback_category_exists' );
+            $this->form_validation->set_rules ( 'product_category', 'lang:product_category', 'required|callback_maincategory_exists' );
+            
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			$this->form_validation->set_rules ( 'pro_subcate_image', 'lang:pro_subcate_image', 'callback_validate_image' );
 
@@ -145,11 +147,12 @@ class Subcategories extends CI_Controller {
 					$pro_cate_image = $this->common->upload_image ( 'pro_subcate_image', get_company_folder() . "/".$this->lang->line('product_subcategory_image_folder_name') );
 				}
 				
-				
+				$category = $this->Mydb->get_record('*',$this->category_table,array('pro_cate_id'=>post_value('product_category')));
 				$insert_array = array (
 						'pro_subcate_name' => post_value ( 'pro_subcate_name' ),
 						'pro_subcate_id' => $pro_subcate_id,
-						'pro_subcate_category_primary_id' => post_value('product_category'),
+						'pro_subcate_category_primary_id' => $category['pro_cate_primary_id'],
+                        'pro_subcate_category_id'   => $category['pro_cate_id'],
 						'pro_subcate_slug'=>$pro_subcate_slug,
 						'pro_subcate_short_description' => post_value ( 'pro_subcate_short_desc' ),
 						'pro_subcate_description' => post_value ( 'pro_subcate_desc' ),
@@ -206,6 +209,7 @@ class Subcategories extends CI_Controller {
 		if ($this->input->post ( 'action' ) == "edit") {
 			check_ajax_request (); /* skip direct access */
 			$this->form_validation->set_rules ( 'pro_subcate_name', 'lang:pro_subcate_name', 'required|callback_category_exists' );
+            $this->form_validation->set_rules ( 'product_category', 'lang:product_category', 'required|callback_maincategory_exists' );
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			$this->form_validation->set_rules ( 'pro_subcate_image', 'lang:pro_subcate_image', 'callback_validate_image' );
 			//$this->form_validation->set_rules ( 'custom_title', 'lang:menu_custom_title', 'trim' );
@@ -216,10 +220,13 @@ class Subcategories extends CI_Controller {
 				$pro_subcate_slug  = make_slug($this->input->post('pro_subcate_name'),$this->table,'pro_subcate_slug',array($this->primary_key."!=" =>$record [$this->primary_key]));
 				$pro_subcate_sequence = ((int)$this->input->post('pro_subcate_sequence') == 0)?  get_sequence('pro_subcate_sequence',$this->table) : $this->input->post('pro_subcate_sequence');
 				
+                $category = $this->Mydb->get_record('*',$this->category_table,array('pro_cate_id'=>post_value('product_category')));
+
 				$update_array = array (
 						'pro_subcate_name' => post_value ( 'pro_subcate_name' ),
 						'pro_subcate_slug'=>$pro_subcate_slug,
-						'pro_subcate_category_primary_id' => post_value('product_category'),
+                        'pro_subcate_category_primary_id' => $category['pro_cate_primary_id'],
+                        'pro_subcate_category_id'   => $category['pro_cate_id'],
 						'pro_subcate_short_description' => post_value ( 'pro_subcate_short_desc' ),
 						'pro_subcate_description' => post_value ( 'pro_subcate_desc' ),
 						'pro_subcate_status' => (post_value('status')=="A" ? 'A' : 'I'),
@@ -467,10 +474,12 @@ class Subcategories extends CI_Controller {
 	/* this method used check category or alredy exists or not */
 	public function category_exists() {
 		$name = $this->input->post ( 'pro_subcate_name' );
+        $category = $this->input->post ( 'product_category' );
 		$edit_id = $this->input->post ( 'edit_id' );
 	
 		$where = array (
-				'pro_subcate_name' => trim ( $name )
+			'pro_subcate_name' => trim ( $name ),
+            'pro_subcate_category_id'  => $category
 		);
 		if ($edit_id != "") {
 			$where = array_merge ( $where, array (
@@ -487,6 +496,22 @@ class Subcategories extends CI_Controller {
 		}
 	}
 	
+
+    /* this method used check category or alredy exists or not */
+	public function maincategory_exists() {
+		$name = $this->input->post ( 'product_category' );
+	
+		$where = array (
+				'pro_cate_id' => trim ( $name )
+		);
+		$result = $this->Mydb->get_record ( 'pro_cate_primary_id', $this->category_table, $where );
+		if (empty ( $result ) ) {
+			$this->form_validation->set_message ( 'category_exists', get_label ( 'category_invalid' ) );
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	/* this method used to clear all session values and reset search values */
 	function refresh() {

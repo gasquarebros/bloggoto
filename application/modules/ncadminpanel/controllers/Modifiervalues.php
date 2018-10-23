@@ -523,12 +523,12 @@ class Modifiervalues extends CI_Controller {
 			$ids = (is_array($ids))?  $ids : array($ids);
 			
 			/* delete product  modifiers details  tabel */
-			$modifier_id = $this->Mydb->get_all_records_where_in('pro_modifier_value_id','product_modifier_values','pro_modifier_value_primary_id',$ids);
+			/*$modifier_id = $this->Mydb->get_all_records_where_in('pro_modifier_value_id','product_modifier_values','pro_modifier_value_primary_id',$ids);
 			if(!empty($modifier_id)){
 				$modifier_ids = array_column($modifier_id, 'pro_modifier_value_id');
-				$this->Mydb->delete_where_in('product_assigned_modifiers','psm_modifier_value_id',$modifier_ids);
+				$this->Mydb->delete_where_in('product_assigned_modifiers','assigned_mod_modifier_id',$modifier_ids);
 			
-			}
+			} */
 			
 			/*master table */
 			$this->common->delete_unlink_image($this->lang->line('product_modifiervalues_image_folder_name'), "pro_modifier_value_image",$this->primary_key ,$this->table,$ids);
