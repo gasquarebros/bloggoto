@@ -1,11 +1,10 @@
-<!--<link href="<?php echo load_lib()?>bootstrap-datepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">-->
+
+
+<link href="<?php echo load_lib()?>bootstrap-datepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo load_lib()?>timepicker-master/jquery-ui-1.10.0.custom.min.css" type="text/css" />
-<script type="text/javascript" src="<?php echo load_lib()?>timepicker-master/jquery.ui.core.min.js"></script>
-<script type="text/javascript" src="<?php echo admin_skin()?>js/timepicker_outlet.js"></script>	
-<!--<script type="text/javascript"
-	src="<?php echo load_lib()?>bootstrap-datepicker/js/bootstrap-datepicker.js"></script>-->
-<script type="text/javascript"
-	src="<?php echo admin_skin()?>js/products.js"></script>
+<script type="text/javascript" src="<?php echo load_lib()?>bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="<?php echo skin_url()?>js/products_manage.js"></script>
+
 <script>
 var validation_container ="Yes";
 var gallery_image_label = "<?php echo get_label('product_gallery');?>";

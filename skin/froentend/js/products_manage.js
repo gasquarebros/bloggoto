@@ -255,6 +255,7 @@ function get_attribute_enabled()
 					$(".modi_div").html(data.html);
 					$('.product_associate_section').html(data.associate);
 					$('#product_modifier').chosen({});
+					$('#stepv6').hide();
 				}
 
 			}
