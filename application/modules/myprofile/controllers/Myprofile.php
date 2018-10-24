@@ -21,14 +21,17 @@ class Myprofile extends CI_Controller {
 		$this->blog_categorytable = "blog_category";
 		$this->customers = "customers";
 		$this->customers_followers = "customers_followers";
+		$this->products = "products";
 		$this->post_likes = "post_likes";
 		$this->post_favor = "post_favor";
 		$this->post_tags = "post_tags";
 		$this->post_comments = "post_comments";
 		$this->professions = "professions";
 		$this->primary_key='post_id';
+		$this->product_primary_key = "product_primary_id";
 		$this->load->library('common');
 		$this->load->helper('security');
+		$this->load->helper('products');
 	}
 	
 	/* this method used to to check validate image file */
@@ -1361,6 +1364,75 @@ class Myprofile extends CI_Controller {
 		{
 			redirect(base_url());
 		}
+
+	}
+
+	public function products($userid = null)
+	{
+		$this->authentication->user_authentication();
+		check_site_ajax_request();
+		
+		if($userid == null)
+		{
+			$userid = get_user_id();
+		}
+		else
+		{
+			$userid = decode_value($userid);
+		}
+
+		$data= $this->load_module_info();
+
+		$where = array('product_status'=>'A','product_is_display'=>1,'product_customer_id'=>$userid);
+
+		$like = $order_by = array();
+
+		$join = "";
+		
+		$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_email";
+		$join [0] ['table'] = "pos_customers";
+		$join [0] ['condition'] = "product_customer_id = customer_id";
+		$join [0] ['type'] = "INNER";
+		/* not in product availability id condition  */
+		$join [1] ['select'] = "pro_cate_primary_id,pro_cate_id,pro_cate_name";
+		$join [1] ['table'] = "pos_product_categories";
+		$join [1] ['condition'] = "product_category_id = pro_cate_primary_id";
+		$join [1] ['type'] = "LEFT";	
+		$groupby = "product_primary_id";
+
+		$totla_rows = $this->Mydb->get_num_join_rows ( $this->product_primary_key, $this->products, $where, null, null, null, $like, $groupby, $join );
+
+
+		$limit = 12;
+		$page = post_value ( 'page' )?post_value ( 'page' ):1;
+		$offset = post_value ( 'page' )?((post_value ( 'page' )-1) * $limit):0;
+		$offset = post_value ( 'offset' )?post_value ( 'offset' ):$offset;
+		$next_offset = $offset+$limit;
+		$next_set = ($totla_rows > $next_offset)?($offset+$limit):'';
+
+		$data['offset'] = $offset;
+
+		
+		/* pagination part end */
+		
+		$select_array = array ($this->products.'.*');
+		$data ['records'] = $this->Mydb->get_all_records ( $select_array, $this->products, $where, $limit, $offset, $order_by, $like,$groupby, $join );
+
+		$current_records = (($page-1)*$limit)+count($data ['records']);
+		$data['current_records'] = $current_records;
+		$data['total_rows'] = $totla_rows;
+		$data['page'] = $page;
+
+		$page_relod = ($totla_rows > 0 && $offset > 0 && empty ( $data ['records'] )) ? 'Yes' : 'No';
+		$html = get_template ( $this->folder . $this->module . '-product-ajax-list', $data );
+		echo json_encode ( array (
+				'status' => 'success',
+				'offset' => $offset,
+				'page_reload' => $page_relod,
+				'html' => $html 
+		) );
+		exit ();
+
 
 	}
 	
