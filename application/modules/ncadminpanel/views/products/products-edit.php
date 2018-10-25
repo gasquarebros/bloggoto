@@ -184,6 +184,18 @@ var commission_price = '<?php echo $commission_price; ?>';
 										</div>
 									</div>
 
+                                    <div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_is_display');?></label>
+										<div class="col-sm-<?php echo get_form_size();?>">
+											<div class="input_box">
+                                                <input name="product_is_display]" value="0" class="" type="hidden">
+													<label>
+														<input class="" name="product_is_display" value="1" type="checkbox" <?php if($records['product_is_display'] == 1) { echo "checked='checked'"; } ?>>
+													</label>
+                                            </div>
+										</div>
+									</div>
+
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('status').get_required();?></label>
 										<div class="col-sm-<?php echo get_form_size();?>">

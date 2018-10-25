@@ -61,7 +61,7 @@ class Products extends CI_Controller {
 		$order_by = array (
 				$this->primary_key => 'DESC' 
 		);
-		$where = array('product_status'=>'A');
+		$where = array('product_status'=>'A','product_is_display'=>1);
 		/* Search part start */
 		
 		if (post_value ( 'paging' ) == "") {

@@ -213,7 +213,6 @@ class Manageproducts extends CI_Controller
 			}
 			
 			if ($this->form_validation->run () == TRUE) {
-echo "asdsa"; exit;
 				$product_id = get_guid ( $this->table, 'product_id' );
 				$product_slug = make_slug ( $this->input->post ( 'product_name' ), $this->table, 'product_slug' );
 				$product_sequence = (( int ) $this->input->post ( 'product_sequence' ) == 0) ? get_sequence ( 'product_sequence', $this->table, array (
@@ -247,6 +246,7 @@ echo "asdsa"; exit;
 					'product_price' => post_value ( 'product_price' ),
 					'product_alt_price' => post_value ( 'product_alt_price' ),
 					'product_quantity' => post_value ( 'product_quantity' ),
+                    'product_is_display' => post_value ( 'product_is_display' ),
 					'product_special_price' => post_value ( 'product_spl_price' ),
 					'product_special_price_from_date' => (post_value ( 'product_spl_price_from' ))?date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_from' ) ) ):'',
 					'product_special_price_to_date' => (post_value ( 'product_spl_price_to' ))?date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_to' ) ) ):'',
@@ -532,6 +532,7 @@ echo "asdsa"; exit;
 					//'product_thumbnail' => $product_image,
 					'product_status' => (post_value ( 'status' ) == "A" ? 'A' : 'I'),
 					'product_sequence' => $product_sequence,
+                    'product_is_display' => post_value ( 'product_is_display' ),
 					'product_price' => post_value ( 'product_price' ),
 					'product_special_price' => post_value ( 'product_spl_price' ),
 					'product_special_price_from_date' => (post_value ( 'product_spl_price_from' ))?date ( "Y-m-d", strtotime ( post_value ( 'product_spl_price_from' ) ) ):'',

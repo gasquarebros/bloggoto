@@ -822,6 +822,12 @@ var module_action="addpost";
     font-size: 16px;
 }
 
+.error {
+    color: red;
+}
+.error  ul {
+    list-style:none;
+}
 </style>
 <?php
 echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css'));
@@ -942,9 +948,8 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 				<?php } $attribu++; } ?>
             </div>
         <?php } ?>
-    
-        <?php if(!empty($assigned_shipping)) { ?>
-            <div class="selectship-part">
+        <div class="selectship-part">
+            <?php if(!empty($assigned_shipping)) { ?>
                 <h6>SELECT SHIPPING <span class="estimate"></span></h6>
                 <select name="shpping_method" id="shipping_method">
                     <option value="">Select Shipping Method</option>
@@ -961,8 +966,8 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                 <?php /* if($enable == 1) { 
                     echo "<p class='shipping_combine_enable'>".($merchant['count_products']>0)?"Available for combine shipping (<a href='".Url::toRoute('merchants/detail/'.$merchant['slug'])."#shopping' target='_self'>".$merchant['count_products']."</a>)":'Available for combine shipping '."</p>";
                 } */ ?>
-            </div>
-        <?php } ?>
+            <?php } ?>
+        </div>
             
         <div class="qty-box-full-outer">
             <p class="error qty_exceed_error" style="display:none;"></p>
