@@ -134,6 +134,9 @@ var module_action="addpost";
 				<?php } else { ?> 
 					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio/".encode_value($info['customer_id']); ?>" class=" profile_section">Profile</a></li>
 				<?php } ?>
+				<?php if($info['customer_type'] == 0) { ?> 
+					<li style="display:none;"><a data-section="products" href="<?php echo base_url()."myprofile/products/".encode_value($info['customer_id']); ?>" class=" profile_section product_section">Products</a></li>
+				<?php } ?>
 			</ul>
 			<div class="boi_data">
 			

@@ -26,7 +26,7 @@
 						<div class="form-group">
 							<label for="pro_cate_name" class="col-sm-2 control-label"><?php echo get_label('pro_cate_name').get_required();?></label>
 							<div class="col-sm-<?php echo get_form_size();?>"><div class="input_box">
-								<?php echo get_product_category('',$records['pro_subcate_category_primary_id']); ?>
+								<?php echo get_product_category('',$records['pro_subcate_category_id']); ?>
 							</div></div>
 						</div>
 						

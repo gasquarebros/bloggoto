@@ -104,14 +104,14 @@ var commission_price = '<?php echo $commission_price; ?>';
 							<div class="tab-content">
 								<!-- tab1  -->
 								<div aria-labelledby="home-tab" id="stepv1" class="tab-pane fade active in " role="tabpanel">
-                                    <div class="form-group">
+                                    <?php /* <div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_parent');?></label>
 										<div class="col-sm-8">
 											<div class="input_box">
 												<?php echo get_product_list(array('product_status'=>'A','product_parent_id' =>''),'','class="form-control search_select check_option" id="products_list"  data-placeholder="'.get_label('select_products').'" ','','','1','parent_product');?>
 											</div>
 										</div>
-									</div>
+									</div> */ ?>
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_name').get_required();?></label>
 										<div class="col-sm-8">
