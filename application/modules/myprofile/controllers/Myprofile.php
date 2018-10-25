@@ -1384,6 +1384,7 @@ class Myprofile extends CI_Controller {
 		$data= $this->load_module_info();
 
 		$where = array('product_status'=>'A','product_is_display'=>1,'product_customer_id'=>$userid);
+		//$where = array('product_customer_id'=>$userid);
 
 		$like = $order_by = array();
 

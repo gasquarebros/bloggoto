@@ -309,7 +309,6 @@ $(document).ready(function(){
 			async:false,
 			success : function(data) {
 				hide_content_loading();
-				console.log(data);
 				if (data.status == "ok") {
 					$('.more_details_par').remove();
 					$(".append_html").append(data.html);

@@ -683,5 +683,28 @@ $(document).ready(function(){
 		$(this).parent().parent().find(".msgbox").hide();
 		$(this).parent().parent().find(".comment").focus();
 	});
+
+
+	$('body').on('click','.lazy_load_flashsale',function(e) {
+		e.stopPropagation();		  
+		var page = $(this).data('nextpage');
+		show_content_loading(); 
+		$('.load_more').hide();
+		var url = $('.product_section').attr('href');
+		$.ajax({
+			url : url,
+			data : $('#common_search').serialize() + "&page="+page+"&secure_key="+secure_key,
+			type : 'POST',
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				hide_content_loading();
+				if (data.status == "success") {
+					$('.more_details_par').remove();
+					$(".boi_data").append(data.html);
+				}
+			}
+		});
+	});
 	
 });
