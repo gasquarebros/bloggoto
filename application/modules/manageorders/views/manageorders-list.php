@@ -41,7 +41,7 @@
                                  <?php echo get_status_dropdown(get_session_value($module."_search_status"),'','style="width: 120px ! important;"');?>
                             </div>                                
                             <div class="form-group">
-                                <button class="btn btn-primary" type="button" id="submit_search" onclick="get_content('')"><i class="fa fa-search"></i></button> <a class="btn btn-info"  id="reset_search"  href="<?php echo admin_url().$module."/refresh"?>"><i class="fa fa-refresh"></i>&nbsp; <?php echo get_label('reset');?></a> 
+                                <button class="btn btn-primary" type="button" id="submit_search" onclick="get_content('')"><i class="fa fa-search"></i></button> <a class="btn btn-info"  id="reset_search"  href="<?php echo base_url().$module."/refresh"?>"><i class="fa fa-refresh"></i>&nbsp; <?php echo get_label('reset');?></a> 
                             </div> 
 						 
                              <?php echo form_close(); ?>    
@@ -52,7 +52,7 @@
                         
 						
 						
-					  <?php echo form_open(admin_url().$module."/action",array("id"=>"mainform","class"=>"action_form"));?>
+					  <?php echo form_open(base_url().$module."/action",array("id"=>"mainform","class"=>"action_form"));?>
 						<input  type="hidden"  name="postaction"  id="actionid" value=""> 
 						<input  type="hidden"  name="changeId"  id="changeId"  value="">
 						<input  type="hidden"  name="multiaction"  id="multiaction"  value="">
