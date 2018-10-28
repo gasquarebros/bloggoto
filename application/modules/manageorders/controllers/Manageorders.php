@@ -283,7 +283,7 @@ class Manageorders extends CI_Controller
 		print_r($record);
 		exit;
 		
-		(empty ( $record )) ? redirect ( admin_url () . $this->module ) : '';
+		(empty ( $record )) ? redirect ( base_url () . $this->module ) : '';
 		
 		$data['records'] 	= 	$record;
 		
@@ -297,7 +297,7 @@ class Manageorders extends CI_Controller
 		$this->session->unset_userdata ( $this->module . "_order_by_value" );
 		$this->session->unset_userdata ( $this->module . "_order_by_value" );
 		$this->session->unset_userdata ( $this->module . "_category_id" );
-		redirect ( admin_url () . $this->module );
+		redirect ( base_url () . $this->module );
 	}
 	
 	/* this method used to common module labels */
