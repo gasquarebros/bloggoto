@@ -39,6 +39,7 @@
 							<li><a href="<?php echo admin_url()."modifiervalues"; ?>"><?php echo get_label('pro_modifier_value_label');?></a></li>
 							<li><a href="<?php echo admin_url()."shippingmethods"; ?>"><?php echo get_label('pro_shipping_label');?></a></li>
 							<li><a href="<?php echo admin_url()."products"?>"> <?php echo get_label('product_labels');?></a></li> 
+              <li><a href="<?php echo admin_url()."orders"?>"> <?php echo get_label('order_labels');?></a></li> 
 						</ul>	
 					</li>	  
                 </ul>

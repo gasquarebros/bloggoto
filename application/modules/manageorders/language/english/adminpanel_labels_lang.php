@@ -17,4 +17,6 @@ $lang['order_sub_total'] = "Sub Total";
 $lang['order_total_amount'] = "Total";
 $lang['order_status'] = "Status";
 $lang['order_created_on'] = "Created on";
+$lang['product_name'] = "Product Name";
+$lang['product_sku'] = "Product Sku";
 

@@ -35,7 +35,7 @@ class Manageorders extends CI_Controller
 	/* this method used list ajax listing... */
 	function ajax_pagination($page = 0) 
 	{
-		check_ajax_request (); /* skip direct access */
+		check_site_ajax_request (); /* skip direct access */
 		$data = $this->load_module_info ();
 		$like = array ();
 		$where = array (
@@ -69,7 +69,7 @@ class Manageorders extends CI_Controller
 
 		if (get_session_value ( $this->module . "_search_status" ) != "") {
 			$where = array_merge ( $where, array (
-					'product_status' => get_session_value ( $this->module . "_search_status" ) 
+					'order_status' => get_session_value ( $this->module . "_search_status" ) 
 			) );
 		}
 

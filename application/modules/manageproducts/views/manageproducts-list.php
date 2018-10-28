@@ -30,7 +30,7 @@
                              		'product_sku' => get_label('product_sku'),
                              );
                              
-                             echo form_dropdown('search_field',$search_array,get_session_value($module."_search_field"),' style="width:100px  !important; " ');
+                             echo form_dropdown('search_field',$search_array,get_session_value($module."_search_field"),' style="width:200px  !important; " ');
                              
                              ?>
                             </div>
@@ -44,7 +44,7 @@
                             </div> 
                            
                                 <div class="form-group">
-                                 <?php echo get_status_dropdown(get_session_value($module."_search_status"),'','style="width: 120px ! important;"');?>
+                                 <?php echo get_status_dropdown(get_session_value($module."_search_status"),'','style="width: 200px ! important;"');?>
                             </div>                                
                             <div class="form-group">
                                 <button class="btn btn-primary" type="button" id="submit_search" onclick="get_content('')"><i class="fa fa-search"></i></button> <a class="btn btn-info"  id="reset_search"  href="<?php echo base_url().$module."/refresh"?>"><i class="fa fa-refresh"></i>&nbsp; <?php echo get_label('reset');?></a> 
@@ -430,4 +430,21 @@ function cancelform(url)
     var url;
 	window.location=url; 
 }
+
+$(".append_html").on("click", ".pagination a", function(e) {
+    e.preventDefault();
+
+    var pass_url = $(this).attr('href');
+    if (typeof (pass_url) != 'undefined' && pass_url != null) {
+        show_content_loading();
+        $.get(pass_url+"?paging=true", function(data) {
+            hide_content_loading();
+            var response = jQuery.parseJSON(data);
+            $(".append_html").html(response.html);
+            $("#page_id").val(response.offset);
+
+        });
+    }
+
+});
 </script>

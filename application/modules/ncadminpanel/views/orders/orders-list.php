@@ -25,8 +25,8 @@
                             <div class="form-group">
                              <?php  $search_array = array(
                              		 '' => get_label('select'),
-                             	     'product_name' => get_label('product_name'),
-                             		'product_sku' => get_label('product_sku'),
+                             	     'customer_first_name' => get_label('customer_name'),
+                             		'order_local_no' => get_label('order_local_no'),
                              );
                              
                              echo form_dropdown('search_field',$search_array,get_session_value($module."_search_field"),' style="width:100px  !important; " ');

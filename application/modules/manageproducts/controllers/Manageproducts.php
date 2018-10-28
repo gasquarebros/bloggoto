@@ -111,7 +111,7 @@ class Manageproducts extends CI_Controller
 
 		/* pagination part start */
 		$admin_records = 0;
-		$limit = (( int ) $admin_records == 0) ? 25 : $admin_records;
+		$limit = (( int ) $admin_records == 0) ? 5 : $admin_records;
 		$offset = (( int ) $page == 0) ? 0 : $page;
 		$uri_segment = $this->uri->total_segments ();
 		$uri_string = base_url () . $this->module . "/ajax_pagination";

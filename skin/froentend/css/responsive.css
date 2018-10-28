@@ -5,6 +5,18 @@
     .list_col { width: 530px; }
     .list_img { background: #FFFFFF; }
     .profile_active_details { width: 825px; }
+
+    .page-title {
+        width:100%; float:left;
+    }
+    .page-title .tt_left {
+        width: 68%;
+        float: left;
+    }
+    .page-title .pull-right {
+        float: right;
+        width: 80px;
+    }
 }
 
 @media screen and (max-width: 1120px) {
@@ -62,6 +74,8 @@ position: relative; overflow: visible !important; }
 	.list_row { width: 48%; }
 	video { max-height:500px; }
     .post_media {width: 100% !important;}
+
+    
 }
 
 @media screen and (max-width: 768px) {
@@ -199,6 +213,8 @@ position: relative; overflow: visible !important; }
     .tab-content .form-group div {
         clear:both;
     }
+
+    
 }
 
 @media screen and (max-width: 600px) {

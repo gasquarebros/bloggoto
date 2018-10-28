@@ -296,3 +296,40 @@ ERROR - 2018-10-28 16:41:10 --> Could not find the language line "product_name"
 ERROR - 2018-10-28 16:41:10 --> Could not find the language line "product_sku"
 ERROR - 2018-10-28 16:41:25 --> Could not find the language line "product_name"
 ERROR - 2018-10-28 16:41:25 --> Could not find the language line "product_sku"
+ERROR - 2018-10-28 16:44:20 --> Could not find the language line "product_name"
+ERROR - 2018-10-28 16:44:20 --> Could not find the language line "product_sku"
+ERROR - 2018-10-28 16:44:31 --> Could not find the language line "product_name"
+ERROR - 2018-10-28 16:44:31 --> Could not find the language line "product_sku"
+ERROR - 2018-10-28 16:44:33 --> Could not find the language line "product_name"
+ERROR - 2018-10-28 16:44:33 --> Could not find the language line "product_sku"
+ERROR - 2018-10-28 20:16:36 --> Could not find the language line "user_registration"
+ERROR - 2018-10-28 20:16:36 --> Could not find the language line "firsttime_user"
+ERROR - 2018-10-28 20:16:44 --> Could not find the language line "product_name"
+ERROR - 2018-10-28 20:16:44 --> Could not find the language line "product_sku"
+ERROR - 2018-10-28 20:35:10 --> Could not find the language line "product_name"
+ERROR - 2018-10-28 20:35:10 --> Could not find the language line "product_sku"
+ERROR - 2018-10-28 20:39:06 --> Query error: Unknown column 'product_status' in 'where clause' - Invalid query: SELECT `customer_first_name`, `customer_last_name`, `status_name`, `order_primary_id`
+FROM `pos_orders`
+INNER JOIN `pos_customers` ON `order_customer_id` = `customer_id`
+INNER JOIN `pos_order_status` ON `order_status` = `status_id`
+WHERE `order_primary_id` != ''
+AND `order_customer_id` = '4'
+AND `product_status` = '6'
+GROUP BY `order_primary_id`
+ERROR - 2018-10-28 20:39:14 --> Query error: Unknown column 'product_status' in 'where clause' - Invalid query: SELECT `customer_first_name`, `customer_last_name`, `status_name`, `order_primary_id`
+FROM `pos_orders`
+INNER JOIN `pos_customers` ON `order_customer_id` = `customer_id`
+INNER JOIN `pos_order_status` ON `order_status` = `status_id`
+WHERE `order_primary_id` != ''
+AND `order_customer_id` = '4'
+AND `product_status` = '6'
+GROUP BY `order_primary_id`
+ERROR - 2018-10-28 21:09:18 --> Could not find the language line "products_module_label"
+ERROR - 2018-10-28 21:09:18 --> Could not find the language line "products_module_label"
+ERROR - 2018-10-28 21:09:18 --> Could not find the language line "rest_cart_empty"
+ERROR - 2018-10-28 21:09:18 --> Could not find the language line "rest_cart_empty"
+ERROR - 2018-10-28 21:09:20 --> Could not find the language line "products_module_label"
+ERROR - 2018-10-28 21:09:20 --> Could not find the language line "products_module_label"
+ERROR - 2018-10-28 21:09:21 --> Could not find the language line "products_module_label"
+ERROR - 2018-10-28 21:09:21 --> Could not find the language line "products_module_label"
+ERROR - 2018-10-28 21:11:25 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
