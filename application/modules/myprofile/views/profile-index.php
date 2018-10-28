@@ -260,7 +260,13 @@ var module_action="addpost";
 </section>
 <script>
 $(window).load(function() {
+	var hash = $(location).attr('hash');
+	if(hash == '#products') {
+		$('.product_section').trigger('click');
+	}
 	get_profile_section();
+
+	
 });
 
 $('#blog_post_title').blur(function() { 

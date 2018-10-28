@@ -22,10 +22,6 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Modules <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="<?php echo admin_url()."blogcategories"; ?>"><?php echo get_label('blogcategories');?></a></li>
-						  <li><a href="<?php echo admin_url()."categories"; ?>"><?php echo get_label('pro_cate_label');?></a></li>
-						  <li><a href="<?php echo admin_url()."subcategories"; ?>"><?php echo get_label('pro_subcate_label');?></a></li>
-						  <li><a href="<?php echo admin_url()."modifiers"; ?>"><?php echo get_label('pro_modifier_label');?></a></li>
-						  <li><a href="<?php echo admin_url()."modifiervalues"; ?>"><?php echo get_label('pro_modifier_value_label');?></a></li>
 						  <li> <a href="<?php echo admin_url()."cmspage/";?>" > <?php echo get_label('cmspage');?></a></li>
 						  <li> <a href="<?php echo admin_url()."banner/";?>" > <?php echo get_label('banner_label');?></a></li>
 						  <li> <a href="<?php echo admin_url()."professions/";?>" > <?php echo get_label('pro_prof_label');?></a></li>

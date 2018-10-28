@@ -499,7 +499,7 @@ class Products extends CI_Controller {
 		$join [0] ['condition'] = "customer_id = product_customer_id";
 		$join [0] ['type'] = "INNER";
 		if($subproductid !=''){
-			$where = array('product_id'=>$subproductid);
+			$where = array('product_primary_id'=>$subproductid);
 		} else {
 			$where = array('product_primary_id'=>decode_value($productid));
 		}

@@ -349,8 +349,8 @@ if (! function_exists ( 'post_push_notify' )){
 				   /********for ios user*****/
 				   if($device_type == 'ios')
 				   {
-						$status = $CI->push->push_message_ios ( $device_id, $data,$countPush );
-						$countPush++;
+						// $status = $CI->push->push_message_ios ( $device_id, $data,$countPush );
+						// $countPush++;
 				   }
 				}				
 			}
