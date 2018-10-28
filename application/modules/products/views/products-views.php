@@ -923,10 +923,10 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 						<ul data-section_selection="sku-<?php echo $attribute['pro_modifier_id']; ?>" >
                             <?php 
                                 if($attribute['value_name'] !='') {
-                                    $attribute_values_names_array = explode(',',$attribute['value_name'] );
-                                    $attribute_values_ids_array = explode(',',$attribute['value_id'] );
-                                    $attribute_values_primary_ids_array = explode(',',$attribute['value_primary_id'] );
-                                    $attribute_values_images_array = explode(',',$attribute['value_images']);
+                                    $attribute_values_names_array = array_unique(explode(',',$attribute['value_name'] ));
+                                    $attribute_values_ids_array = array_unique(explode(',',$attribute['value_id'] ));
+                                    $attribute_values_primary_ids_array = array_unique(explode(',',$attribute['value_primary_id'] ));
+                                    $attribute_values_images_array = array_unique(explode(',',$attribute['value_images']));
                                     
 
                                 foreach($attribute_values_ids_array as $key=>$attribute_values) {
