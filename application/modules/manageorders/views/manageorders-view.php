@@ -10,6 +10,9 @@ table {
 	text-align: center;
 	padding: 10px;
 }
+.card-body {
+	width:100%;
+}
 </style>
 <div class="container-fluid">
 	<div class="side-body">
@@ -207,9 +210,8 @@ table {
 																								<input name="orderitems[item_shipping][<?php echo $item_id; ?>]" value="<?php echo $record['shiiping_id']; ?>" type="hidden">
 
 																								<input name="item_status_old[<?php echo $item_id; ?>]" value="<?php echo $record['item_order_status']; ?>" type="hidden">
-																							</td>
-																							<td>
-																									<input <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 ) { ?>style="display:block;" readonly="readonly" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_id][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_code']; ?>" type="text">
+																							
+																								<input <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 ) { ?>style="display:block;" readonly="readonly" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_id][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_code']; ?>" type="text">
 																							</td>
 																						</tr>
 																					</tbody>

@@ -411,7 +411,7 @@ class Products extends CI_Controller {
 							$product_special_to_date = ($product['product_special_price_to_date'] !='' && $product['product_special_price_to_date'] !='0000-00-00 00:00:00')?date('Y-m-d',strtotime($product['product_special_price_to_date'])):'';
 						
 							$discount_percent = 0;
-							if($product['product_special_price'] !='')
+							if($product['product_special_price'] !='' && $product['product_special_price'] > 0)
 							{
 								$discount_percent = find_discount($product['product_price'],$product['product_special_price'],$product_special_from_date,$product_special_to_date);
 							}
@@ -420,7 +420,7 @@ class Products extends CI_Controller {
 							{
 								$product_image = Url::base(Yii::$app->params['server_scheme']).Yii::$app->params['thumb_prod_img_350'].$product['productsGalleries'][0]['prod_gallery_image_name'];
 							}*/		
-							$records[] = array('id'=>$product['product_primary_id'],'name'=>$product['product_name'],'product_slug'=>$product['product_slug'],'product_description'=>$product['product_long_description'],'product_short_description'=>$product['product_short_description'],'product_price'=>$product['product_price'],'product_special_price'=>$product['product_special_price'],'product_special_from_date'=>$product_special_from_date,'product_special_to_date'=>$product_special_to_date,'discount_percent'=>$discount_percent,'product_qty'=>$product['product_quantity'],'product_image'=>$product_image);
+							$records[] = array('id'=>$product['product_primary_id'],'name'=>$product['product_name'],'product_slug'=>$product['product_slug'],'product_description'=>$product['product_long_description'],'product_short_description'=>$product['product_short_description'],'product_price'=>$product['product_price'],'product_special_price'=>($product['product_special_price'] > 0 )?$product['product_special_price']:'','product_special_from_date'=>$product_special_from_date,'product_special_to_date'=>$product_special_to_date,'discount_percent'=>$discount_percent,'product_qty'=>$product['product_quantity'],'product_image'=>$product_image);
 						}
 					} 		
 					// get the sub product entry prices and its info
@@ -663,7 +663,7 @@ class Products extends CI_Controller {
 		$join [2] ['condition'] = "pro_modifier_value_id = product_assigned_attributes.prod_ass_att_attribute_value_id";
 		$join [2] ['type'] = "LEFT";
 
-		$where = array('product_id' => $this->input->post('subproduct'));
+		$where = array('product_primary_id' => $this->input->post('subproduct'));
 		$modifiers_section = $this->Mydb->get_all_records ( $this->table.'.*', $this->table, $where, '', '', '', '','', $join );
 		$modifiers_insert = array();
 		if(!empty($modifiers_section)){
@@ -718,7 +718,7 @@ class Products extends CI_Controller {
 		$product_current_price_info = $this->get_product_price($products);
 		$product_current_price = $product_current_price_info['product_current_price'];
 		$discount_percent = $product_current_price_info['discount_percent'];
-
+		$product_item_image = ($products['product_thumbnail'])?$products['product_thumbnail']:'no-image.jpg';
 		$cart_items = array (
 			'cart_item_customer_id' => $customer_id,
 			'cart_item_session_id' => $reference_id,
@@ -726,7 +726,7 @@ class Products extends CI_Controller {
 			'cart_item_product_id' => decode_value($product_id),
 			'cart_item_product_name' => addslashes ( urldecode($this->input->post ( 'product_name' ) )),
 			'cart_item_product_sku' => addslashes ( $this->input->post ( 'product_sku' ) ),
-			'cart_item_product_image' => addslashes ( $products['product_thumbnail'] ),
+			'cart_item_product_image' => addslashes ( $product_item_image ),
 			'cart_item_qty' => $product_qty,
 			'cart_item_unit_price' => $product_current_price,
 			'cart_item_product_orginal_price' => $products['product_price'],
@@ -744,10 +744,10 @@ class Products extends CI_Controller {
 		);
 		
 		$cart_item_id = $this->Mydb->insert('cart_items', $cart_items);
-		
+	
 		if($cart_item_id !='' && !empty($post_arary['selected_attribute_values']))
 		{
-			$this->_insert_item_modifier($cart_item_id,$post_arary['selected_attribute_values'],$cart_unique_id);
+			$modifiers_insert = $this->_insert_item_modifier($cart_item_id,$post_arary['selected_attribute_values'],$cart_unique_id);
 		}
 		/* update cart total items */
 		$this->update_cart_total_items($cart_unique_id);
@@ -1470,8 +1470,7 @@ class Products extends CI_Controller {
 		$api_data['reference_id'] = get_user_id();
 		$api_data['customer_id'] = get_user_id();
 			
-		$cart = $this->contents_get ( $api_data['reference_id'],$api_data['customer_id'], 'callback' );		
-		echo "<pre>"; print_r($cart); exit;
+		$cart = $this->contents_get ( $api_data['reference_id'],$api_data['customer_id'], 'callback' );	
 		if(!empty($cart))
 		{
 			$order_data = array('order_total'=>$cart['cart_details']['grandtotal'],'order_subtotal'=>$cart['cart_details']['subtotal'],'order_contact_number'=>$this->session->userdata('order_contact_number'),'order_remarks'=>$this->session->userdata('order_additional_info'),'is_default'=>$this->session->userdata('order_is_default'));

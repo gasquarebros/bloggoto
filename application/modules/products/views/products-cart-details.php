@@ -44,7 +44,7 @@
                                             </span>
                             <p class="desc"><?php echo output_value($cart_item['cart_item_product_name']); ?></p>
                             <p>
-                                <?php if($cart_item['attributename'] !='') { 
+                                <?php  if($cart_item['attributename'] !='') { 
                                     $item_modifiers = explode(',',$cart_item['attributename']);
                                     $item_modifiers_values = explode(',',$cart_item['attributevaluename']);
 								if(!empty($item_modifiers)) { foreach($item_modifiers as $key=>$modifiers) { ?>
