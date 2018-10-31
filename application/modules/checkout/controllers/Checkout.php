@@ -1076,7 +1076,7 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 
 			$join [4] ['select'] = "pos_order_item_shipping.*";
 			$join [4] ['table'] = "pos_order_item_shipping";
-			$join [4] ['condition'] = "shipping_id = shiiping_id";
+			$join [4] ['condition'] = "id = shiiping_id";
 			$join [4] ['type'] = "LEFT";
 			
 			$groupby = "";
@@ -1084,16 +1084,10 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 				'pos_orders.*'
 			);
 			$record = $this->Mydb->get_all_records ( $select_array, 'orders', $where, '','', $order_by, $like,$groupby, $join );
-			//print_r($record);
-			//echo $this->db->last_query();
-			//exit;
-			//(empty ( $record )) ? redirect ( base_url () . $this->module ) : '';
-			//$data['records'] 	= 	$record;
-			//$this->session->set_userdata('order_reference','');
 			if(!empty($record))
 			{
 				$data['order'] = $record;
-	//echo "<pre>"; print_r($data); exit;
+				$this->order_email($record);
 				$this->layout->display_site ( $this->folder . $this->module . "-thankyou", $data );
 			}
 			else
@@ -1104,6 +1098,73 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 		else
 		{
 			redirect(base_url().'products');
+		}
+	}
+
+	public function checkmail()
+	{
+			$data = $this->load_module_info();
+			$order_ref = '0AE635CC-0E2D-48D0-9396-324C13CE82B0';
+
+			$like = array ();
+			$where = array (
+				"order_id" => $order_ref,
+				//'order_customer_id'	=> get_user_id()
+			);
+			$order_by = array ();
+
+			$join = "";
+			
+			$join [0] ['select'] = "customer_first_name,customer_last_name,customer_phone,customer_email";
+			$join [0] ['table'] = "pos_customers";
+			$join [0] ['condition'] = "order_customer_id = customer_id";
+			$join [0] ['type'] = "LEFT";
+			
+			$join [1] ['select'] = "status_name";
+			$join [1] ['table'] = "pos_order_status";
+			$join [1] ['condition'] = "order_status = status_id";
+			$join [1] ['type'] = "INNER";
+			
+			$join [2] ['select'] = "item_id,item_order_primary_id,item_product_id,item_subproductid,item_subproduct_name,item_name,item_image,item_sku,item_slug,item_specification,item_qty,item_unit_price,item_total_amount,item_merchant_name,item_merchant_id, item_order_status,shiiping_id";
+			$join [2] ['table'] = "pos_order_items";
+			$join [2] ['condition'] = "item_order_primary_id = order_primary_id";
+			$join [2] ['type'] = "LEFT";
+			
+			$join [3] ['select'] = "pos_order_shipping_address.*";
+			$join [3] ['table'] = "pos_order_shipping_address";
+			$join [3] ['condition'] = "order_shipping_order_primary_id = order_primary_id";
+			$join [3] ['type'] = "LEFT";
+
+			$join [4] ['select'] = "pos_order_item_shipping.*";
+			$join [4] ['table'] = "pos_order_item_shipping";
+			$join [4] ['condition'] = "id = shiiping_id";
+			$join [4] ['type'] = "LEFT";
+		
+			
+			$groupby = "";
+			$select_array = array (
+				'pos_orders.*'
+			);
+			$record = $this->Mydb->get_all_records ( $select_array, 'orders', $where, '','', $order_by, $like,$groupby, $join );
+			
+			if(!empty($record))
+			{
+				$data['order'] = $record;
+				echo $content = $this->order_email($record);
+				exit;
+			}
+	}
+
+	private function order_email($record) {
+		$data['records'] = $record;
+		$content = $this->load->view($this->folder . $this->module . "-order_email",$data,true);
+		$emai_logo = base_url()."/media/email-logo/email-logo.jpg";
+		$this->load->library('myemail');
+		$check_arr = array('[LOGOURL]','[NAME]','[ORDER_DETAILS]');
+		$replace_arr = array( $emai_logo,ucfirst(stripslashes($data['order'][0]['customer_first_name'].' '.$data['order'][0]['customer_last_name'])),$content);
+		$email_template_id = '6';
+		if($email_template_id != '') {
+			$mail_res = $this->myemail->send_admin_mail($data['order'][0]['customer_email'],$email_template_id,$check_arr,$replace_arr);
 		}
 	}
 
