@@ -1,3 +1,5 @@
+  
+
 <?php
 /**************************
 Project Name	: POS
@@ -100,11 +102,17 @@ class Manageorders extends CI_Controller
 		$join [1] ['condition'] = "order_status = status_id";
 		$join [1] ['type'] = "INNER";
 
-		$join [2] ['select'] = "item_merchant_id";
+		$join [2] ['select'] = "item_merchant_id, sum(item_total_amount) as order_items_price";
 		$join [2] ['table'] = "order_items";
 		$join [2] ['condition'] = "item_order_primary_id = order_primary_id AND item_merchant_id = ".get_user_id();
 		$join [2] ['type'] = "INNER";
 		
+
+        $join [3] ['select'] = "sum(shipping_method_price) as order_item_delivery";
+		$join [3] ['table'] = "order_item_shipping";
+		$join [3] ['condition'] = "shipping_order_primary_id = order_primary_id AND order_item_shipping.id = order_items.shiiping_id";
+		$join [3] ['type'] = "INNER";
+
 		$groupby = "order_primary_id";
 
 		$totla_rows = $this->Mydb->get_num_join_rows ( $this->primary_key, $this->table, $where, null, null, null, $like, $groupby, $join );
@@ -129,7 +137,8 @@ class Manageorders extends CI_Controller
 		);
 
 		$data ['records'] = $this->Mydb->get_all_records ( $select_array, $this->table, $where, $limit, $offset, $order_by, $like,$groupby, $join );
-
+//echo $this->db->last_query();
+//exit;
 		$page_relod = ($totla_rows > 0 && $offset > 0 && empty ( $data ['records'] )) ? 'Yes' : 'No';
 		$html = get_template ( $this->folder . $this->module . '-ajax-list', $data );
 		echo json_encode ( array (
@@ -311,3 +320,4 @@ class Manageorders extends CI_Controller
 	
 }
 /* End of file products.php  */
+

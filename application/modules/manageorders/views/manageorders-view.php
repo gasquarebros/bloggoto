@@ -144,7 +144,9 @@ table {
 												</tr>
 											</thead>
 											<tbody>	
-												<?php if(!empty($records)) { ?> 
+												<?php $subtotal_merchant_wise = 0; 
+													$delivery_merchant_wise = 0; 
+													if(!empty($records)) {  ?> 
 													<?php foreach($records as $record) { 
 														$item_id = $record["item_id"];	
 													?> 
@@ -186,7 +188,7 @@ table {
 																</table>
 															</td>
 															<td style="padding:10px; font-size:15px; text-align: center; width:20%;text-transform:uppercase"><?php echo $record['item_qty']; ?></td>
-															<td style="padding:10px; font-size:15px; text-align: center; width:20%;"><?php echo show_price($record['item_total_amount']); ?></td>
+															<td style="padding:10px; font-size:15px; text-align: center; width:20%;"><?php $subtotal_merchant_wise+= $record['item_total_amount']; echo show_price($record['item_total_amount']); ?></td>
 														</tr>
 														<tr>
 															<td colspan="4" class="inner_table">
@@ -197,7 +199,7 @@ table {
 																				<p>DELIVERY TYPE: <strong><?php echo $record['shipping_name']; ?></strong></p>
 																			</td>
 																			<td class="ship_charge" style="text-align: left; width:30%;">
-																				<p>DELIVERY FEES: <strong><?php echo show_price($record['shipping_method_price']); ?></strong></p>
+																				<p>DELIVERY FEES: <strong><?php $delivery_merchant_wise+=$record['shipping_method_price'];  echo show_price($record['shipping_method_price']); ?></strong></p>
 																			</td>
 																			<td class="select-box" style="text-align: center; width:30%;">
 																				<table>
@@ -249,20 +251,20 @@ table {
 																<tr>
 																	<td style="width:60%"></td>
 																	<td style="font-size:14px;width:20%; color:#565656;padding:5px 10px; line-height: normal;text-align: left;">Subtotal</td>
-																	<td style="font-size:14px;width:20%; color:#565656;padding:5px 10px; line-height: normal;text-align: right;" class="price"><?php echo show_price($records[0]['order_sub_total']); ?></td>
+																	<td style="font-size:14px;width:20%; color:#565656;padding:5px 10px; line-height: normal;text-align: right;" class="price"><?php echo show_price($subtotal_merchant_wise); ?></td>
 																</tr>
 
-																<?php if($records[0]['order_delivery_charge'] > 0) { ?>
+																<?php if($delivery_merchant_wise > 0) { ?>
 																	<tr>
 																		<td style="width:60%"></td>
 																		<td style="font-size:14px;width:20%; color:#565656;padding:5px 10px; line-height: normal;text-align: left;">Delivery Charge</td>
-																		<td style="font-size:14px;width:20%; color:#565656;padding:5px 10px; line-height: normal;text-align: right;" class="price"><?php echo show_price($records[0]['order_delivery_charge']); ?></td>
+																		<td style="font-size:14px;width:20%; color:#565656;padding:5px 10px; line-height: normal;text-align: right;" class="price"><?php echo show_price($delivery_merchant_wise); ?></td>
 																	</tr>
 																<?php }	?>													
 																<tr>
 																	<td style="width:60%"></td>
 																	<td style="width:20%; font-size:14px; color:#565656;padding:5px 10px; line-height: normal;text-align: left;">Grand Total</td>
-																	<td style="width:20%; font-size: 14px; color:#565656;padding:5px 10px; line-height: normal;text-align: right;" class="price"><?php echo show_price($records[0]['order_total_amount']); ?></td>
+																	<td style="width:20%; font-size: 14px; color:#565656;padding:5px 10px; line-height: normal;text-align: right;" class="price"><?php echo show_price($subtotal_merchant_wise + $delivery_merchant_wise); ?></td>
 																</tr>
 															</tbody>
 														</table>

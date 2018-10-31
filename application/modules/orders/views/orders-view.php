@@ -10,6 +10,9 @@ table {
 	text-align: center;
 	padding: 10px;
 }
+.card-body {
+	width:100%;
+}
 </style>
 <div class="container-fluid">
 	<div class="side-body">

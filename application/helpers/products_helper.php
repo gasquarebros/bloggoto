@@ -255,7 +255,7 @@ if (!function_exists('find_discount')) {
 		{
 			$valid = false;
 		}
-		if($valid == true && $special_price !='')
+		if($valid == true && $special_price !='' && $special_price >0)
 		{
 			$discount_price = $orginal_price - $special_price;
 			$discount_percent = (($discount_price * 100)/$orginal_price);  

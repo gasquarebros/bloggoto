@@ -34,8 +34,8 @@
 				<td><?php echo get_date_formart($val['order_created_on']);?></td>
 				<td><?php echo output_value($val['order_local_no']);?></td>
 				<td><?php echo stripslashes($val['customer_first_name']);?></td>
-				<td><?php echo show_price($val['order_sub_total']);?></td>	 
-				<td><?php echo show_price($val['order_total_amount']); ?></td>
+				<td><?php echo show_price($val['order_items_price']);?></td>	 
+				<td><?php echo show_price($val['order_items_price'] + $val['order_item_delivery']); ?></td>
 				<td><?php echo output_value($val['status_name']); ?></td>
 				<td> 
 					<a href="<?php echo base_url().$module.'/view/'.encode_value($val['order_primary_id']);?>"><i class="fa fa-eye" title="<?php echo get_label('view')?>"></i></a>&nbsp;

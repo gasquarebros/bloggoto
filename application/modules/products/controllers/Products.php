@@ -691,7 +691,7 @@ class Products extends CI_Controller {
 		$discount_percent = 0;
 		$product_special_from_date = ($products['product_special_price_from_date'] !='' && $products['product_special_price_from_date'] !='0000-00-00 00:00:00')?date('Y-m-d',strtotime($products['product_special_price_from_date'])):'';
 		$product_special_to_date = ($products['product_special_price_to_date'] !='' && $products['product_special_price_to_date'] !='0000-00-00 00:00:00')?date('Y-m-d',strtotime($products['product_special_price_to_date'])):'';
-		if($products['product_special_price'] !='')
+		if($products['product_special_price'] !='' && $products['product_special_price'] > 0)
 		{
 			$discount_percent = find_discount($products['product_price'],$products['product_special_price'],$product_special_from_date,$product_special_to_date);
 		}
