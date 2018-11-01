@@ -195,7 +195,8 @@ var module_action = '<?php echo 'view/'.encode_value($records[0]['order_primary_
 																								<input name="item_status_old[<?php echo $item_id; ?>]" value="<?php echo $record['item_order_status']; ?>" type="hidden">
 																							</td>
 																							<td>
-																									<input <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 ) { ?>style="display:block;" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_id][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_code']; ?>" type="text">
+																									<input placeholder="Shipping Tracking URL" <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6) { ?>style="display:block;" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_id][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_code']; ?>" type="text">
+																									<input placeholder="Shipping Airway Bill No." <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6)  { ?>style="display:block;" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_bill][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_airway_bill']; ?>" type="text">
 																							</td>
 																						</tr>
 																					</tbody>

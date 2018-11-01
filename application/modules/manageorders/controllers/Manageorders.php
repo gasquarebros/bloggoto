@@ -154,37 +154,64 @@ class Manageorders extends CI_Controller
 	{
 		$id=decode_value($view_id);
 		if ($this->input->post ( 'action' ) == "Add") {
+
+
+
 			//if ($this->form_validation->run () == TRUE) {
 				$order_items = $_POST['orderitems'];
 				if(!empty($order_items)) {
 					$item_statuses = $order_items['item_status'];
 					$item_shipping = $order_items['shiiping_id'];
+					$item_shipping_bill = $order_items['shiiping_bill'];
 					$shipping_items = $order_items['item_shipping'];
 					
 					$all_item_update = 1;
 					if(!empty($item_statuses)){
-						foreach($item_statuses as $item_key=>$item_status)
-						{
-							$update_array = array(
-								'item_order_status' => $item_status
-							);
-							$this->Mydb->update ( 'pos_order_items', array ('item_id' => $item_key ), $update_array );
-							$i_shipping = $shipping_items[$item_key];
-							
-							$shipping_update = array(
-								'shipping_track_code' => $item_shipping[$item_key]
-							);
-							$this->Mydb->update ( 'order_item_shipping', array ('shipping_id' => $i_shipping ), $shipping_update );
-
-							if($item_status != 2){
-								$all_item_update = 0;
+						$error = 0;
+						foreach($item_statuses as $item_key=>$item_status) {
+							if($item_status == 5 && ($item_shipping[$item_key] == '' || $item_shipping_bill[$item_key]  == '' )){
+								$error = 1;
 							}
-							
+						}
+						if($error == 0) {
+							foreach($item_statuses as $item_key=>$item_status)
+							{
+								$update_array = array(
+									'item_order_status' => $item_status
+								);
+								$this->Mydb->update ( 'pos_order_items', array ('item_id' => $item_key ), $update_array );
+								$i_shipping = $shipping_items[$item_key];
+								
+								$shipping_update = array(
+									'shipping_track_code' => $item_shipping[$item_key],
+									'shipping_track_airway_bill'	=> $item_shipping_bill[$item_key]
+								);
+								$this->Mydb->update ( 'order_item_shipping', array ('id' => $i_shipping ), $shipping_update );
+
+								if($item_status != 2){
+									$all_item_update = 0;
+								}
+							}
+						} else {
+							$status = "error";
+							$errorMsg = array('Shipping Tracking URL and Airway Bill No. is Required');
+							$response = array (
+								'status' => $status,
+								'message' => $errorMsg 
+							);
+							echo json_encode ( $response );
+							exit ();
 						}
 					}
 				}
 				if($all_item_update == 1){
-					$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>5) );
+
+					$total_record = $this->Mydb->get_num_rows('*','order_items',array('item_order_primary_id'=>$id));
+					if($total_record == 0){
+						$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>5) );
+					} else {
+						$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>1) );
+					}
 				} else {
 					$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>1) );
 				}

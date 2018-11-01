@@ -29,11 +29,11 @@ table {
 						</div>
 					</div>                    
 					<div class="card-body" style="overflow-x: auto;">
-					<ul class=" alert_msg  alert-danger  alert container_alert" style="display: none;">
 					
-					</ul>
 					<?php echo form_open_multipart(admin_url().$module.'/'.encode_value($records[0]['order_primary_id']),' class="form-horizontal" id="common_form" ' );?>
-											
+						<ul class=" alert_msg  alert-danger  alert container_alert" style="display: none;">
+						
+						</ul>					
 						<table style="background-color: #ffffff; border-collapse: collapse; margin:0 auto;color: #565656;font-family: Arial, sans-serif;font-size: 14px;line-height: 20px;border:0px;" width="100%" cellspacing="0" cellpadding="0">
 							<tbody>
 								<tr>
@@ -206,14 +206,23 @@ table {
 																					<tbody>
 																						<tr>
 																							<td>
-																								<?php if($record['item_order_status'] <= 1 ) { echo get_order_status_dropdown('',$record['item_order_status'],'','','','orderitems[item_status]['.$item_id.']'); } else { 
+																								<?php 
+																								if($record['item_order_status'] == 1) {
+																									$where_status_array = array('status'=>'A','id != 2 and id != 6'=>null);
+																								} else {
+																									$where_status_array = array('status'=>'A','id != 1 and id != 2 and id != 3'=>null);
+																								}
+																								if($record['item_order_status'] == 1 || $record['item_order_status'] == 5 ) { echo get_order_status_dropdown($where_status_array,$record['item_order_status'],'','','','orderitems[item_status]['.$item_id.']'); } else { 
+																									
 																									echo "<p>".display_order_status_dropdown($record['item_order_status'])."</p>";
-																								} ?>		
-																								<input name="orderitems[item_shipping][<?php echo $item_id; ?>]" value="<?php echo $record['shiiping_id']; ?>" type="hidden">
+																								}  ?>		
+																								<input  name="orderitems[item_shipping][<?php echo $item_id; ?>]" value="<?php echo $record['shiiping_id']; ?>" type="hidden">
 
-																								<input name="item_status_old[<?php echo $item_id; ?>]" value="<?php echo $record['item_order_status']; ?>" type="hidden">
+																								<input  name="item_status_old[<?php echo $item_id; ?>]" value="<?php echo $record['item_order_status']; ?>" type="hidden">
 																							
-																								<input <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 ) { ?>style="display:block;" readonly="readonly" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_id][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_code']; ?>" type="text">
+																								<input placeholder="Shipping Tracking URL" <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6) { ?>style="display:block;" readonly="readonly" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_id][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_code']; ?>" type="text">
+
+																								<input placeholder="Shipping Airway Bill No." <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6) { ?>style="display:block;" readonly="readonly" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_bill][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_airway_bill']; ?>" type="text">
 																							</td>
 																						</tr>
 																					</tbody>

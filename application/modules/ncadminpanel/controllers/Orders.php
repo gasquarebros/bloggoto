@@ -149,6 +149,7 @@ class Orders extends CI_Controller
 				if(!empty($order_items)) {
 					$item_statuses = $order_items['item_status'];
 					$item_shipping = $order_items['shiiping_id'];
+					$item_shipping_bill = $order_items['shiiping_bill'];
 					$shipping_items = $order_items['item_shipping'];
 					
 					$all_item_update = 1;
@@ -162,9 +163,10 @@ class Orders extends CI_Controller
 							$i_shipping = $shipping_items[$item_key];
 							
 							$shipping_update = array(
-								'shipping_track_code' => $item_shipping[$item_key]
+								'shipping_track_code' => $item_shipping[$item_key],
+								'shipping_track_airway_bill'	=> $item_shipping_bill[$item_key]
 							);
-							$this->Mydb->update ( 'order_item_shipping', array ('shipping_id' => $i_shipping ), $shipping_update );
+							$this->Mydb->update ( 'order_item_shipping', array ('id' => $i_shipping ), $shipping_update );
 
 							if($item_status != 2){
 								$all_item_update = 0;
@@ -174,7 +176,12 @@ class Orders extends CI_Controller
 					}
 				}
 				if($all_item_update == 1){
-					$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>5) );
+					$total_record = $this->Mydb->get_num_rows('*','order_items',array('item_order_primary_id'=>$id));
+					if($total_record == 0){
+						$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>5) );
+					} else {
+						$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>1) );
+					}
 				} else {
 					$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>1) );
 				}

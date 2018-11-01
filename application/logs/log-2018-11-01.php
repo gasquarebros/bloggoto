@@ -316,3 +316,77 @@ ERROR - 2018-11-01 13:57:58 --> Severity: Notice --> Undefined index: merchantla
 ERROR - 2018-11-01 13:57:58 --> Severity: Notice --> Undefined index: merchantmail D:\xampp\htdocs\bloggotoweb\application\modules\checkout\controllers\Checkout.php 1175
 ERROR - 2018-11-01 13:58:51 --> Could not find the language line "products_module_label"
 ERROR - 2018-11-01 13:58:51 --> Could not find the language line "products_module_label"
+ERROR - 2018-11-01 14:59:25 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): No connection could be made because the target machine actively refused it.
+ D:\xampp\htdocs\bloggotoweb\system\database\drivers\mysqli\mysqli_driver.php 202
+ERROR - 2018-11-01 14:59:25 --> Unable to connect to the database
+ERROR - 2018-11-01 15:01:35 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:15:08 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-11-01 15:26:40 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:28:09 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:28:17 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:31:14 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:44:27 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:44:27 --> Severity: Notice --> Undefined index: shipping_track_airway_bill D:\xampp\htdocs\bloggotoweb\application\modules\manageorders\views\manageorders-view.php 224
+ERROR - 2018-11-01 15:52:22 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:52:33 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:53:26 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:53:56 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:54:08 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:54:24 --> Severity: Notice --> Array to string conversion D:\xampp\htdocs\bloggotoweb\system\database\DB_query_builder.php 662
+ERROR - 2018-11-01 15:54:24 --> Query error: Unknown column 'Array' in 'where clause' - Invalid query: SELECT `id`, `status`, `name`, `sequence`
+FROM `pos_order_item_status`
+WHERE `status` = 'A'
+AND `id` != `Array`
+ORDER BY `sequence` ASC
+ERROR - 2018-11-01 15:56:08 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:56:22 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 15:56:27 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 16:21:20 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 17:21:50 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 17:22:37 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 17:22:47 --> Severity: Notice --> Undefined variable: status D:\xampp\htdocs\bloggotoweb\application\modules\manageorders\controllers\Manageorders.php 197
+ERROR - 2018-11-01 17:22:47 --> Severity: Notice --> Undefined variable: errorMsg D:\xampp\htdocs\bloggotoweb\application\modules\manageorders\controllers\Manageorders.php 199
+ERROR - 2018-11-01 17:22:49 --> Severity: Notice --> Undefined variable: status D:\xampp\htdocs\bloggotoweb\application\modules\manageorders\controllers\Manageorders.php 197
+ERROR - 2018-11-01 17:22:49 --> Severity: Notice --> Undefined variable: errorMsg D:\xampp\htdocs\bloggotoweb\application\modules\manageorders\controllers\Manageorders.php 199
+ERROR - 2018-11-01 17:22:57 --> Severity: Notice --> Undefined variable: status D:\xampp\htdocs\bloggotoweb\application\modules\manageorders\controllers\Manageorders.php 197
+ERROR - 2018-11-01 17:22:57 --> Severity: Notice --> Undefined variable: errorMsg D:\xampp\htdocs\bloggotoweb\application\modules\manageorders\controllers\Manageorders.php 199
+ERROR - 2018-11-01 17:24:00 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 17:32:38 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 17:33:35 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 17:34:45 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 17:43:21 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 17:46:19 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 17:47:09 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 17:47:31 --> Could not find the language line "product_modifier_select"
+ERROR - 2018-11-01 20:21:33 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:21:33 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:21:40 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:21:40 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:21:44 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:21:44 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:21:49 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:21:49 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:21:55 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:21:55 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:22:00 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:22:00 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:22:05 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:22:05 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:22:10 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:22:10 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:22:14 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:22:14 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:22:19 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:22:19 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:22:25 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:22:25 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:22:30 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:22:30 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:22:35 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:22:35 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:22:40 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:22:40 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:22:45 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:22:45 --> Could not find the language line "firsttime_user"
+ERROR - 2018-11-01 20:22:49 --> Could not find the language line "user_registration"
+ERROR - 2018-11-01 20:22:49 --> Could not find the language line "firsttime_user"
