@@ -187,7 +187,7 @@ class Manageproducts extends CI_Controller
         $data['commission_price'] = $settings['setting_ecommerce_percentage'];
 		/* form submit */
 		if ($this->input->post ( 'action' ) == "Add") {
-
+//echo "<pre>"; print_r($_POST); exit;
 
 			$product_tags = $this->input->post ( 'product_tags' );
 			check_ajax_request (); /* skip direct access */
@@ -478,7 +478,7 @@ class Manageproducts extends CI_Controller
 		(empty ( $record )) ? redirect ( base_url () . $this->module ) : '';
 
 		if ($this->input->post ( 'action' ) == "edit") {
-
+//echo "<pre>"; print_r($_POST);exit;
 			$product_alias = $this->input->post ( 'product_alias' );
 			check_ajax_request (); /* skip direct access */
 			
