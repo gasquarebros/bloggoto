@@ -1053,9 +1053,9 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 			
 			$join = "";
 			
-			$join [0] ['select'] = "customer_first_name,customer_last_name,customer_phone,customer_email";
+			$join [0] ['select'] = "pos_customers.customer_first_name,pos_customers.customer_last_name,pos_customers.customer_phone,pos_customers.customer_email";
 			$join [0] ['table'] = "pos_customers";
-			$join [0] ['condition'] = "order_customer_id = customer_id";
+			$join [0] ['condition'] = "order_customer_id = pos_customers.customer_id";
 			$join [0] ['type'] = "LEFT";
 			
 			$join [1] ['select'] = "status_name";
@@ -1078,6 +1078,11 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 			$join [4] ['table'] = "pos_order_item_shipping";
 			$join [4] ['condition'] = "id = shiiping_id";
 			$join [4] ['type'] = "LEFT";
+
+			$join [5] ['select'] = "merchants.customer_first_name as merchantfirstname,merchants.customer_last_name as merchantlastname,merchants.customer_phone as merchantphone,merchants.customer_email as merchantmail";
+			$join [5] ['table'] = "pos_customers as merchants";
+			$join [5] ['condition'] = "pos_order_items.item_merchant_id = merchants.customer_id";
+			$join [5] ['type'] = "LEFT";
 			
 			$groupby = "";
 			$select_array = array (
