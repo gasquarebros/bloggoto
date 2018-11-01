@@ -1158,13 +1158,13 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 	private function order_email($record) {
 		$data['records'] = $record;
 		$content = $this->load->view($this->folder . $this->module . "-order_email",$data,true);
-		$emai_logo = base_url()."/media/email-logo/email-logo.jpg";
+		
 		$this->load->library('myemail');
-		$check_arr = array('[LOGOURL]','[NAME]','[ORDER_DETAILS]');
-		$replace_arr = array( $emai_logo,ucfirst(stripslashes($data['order'][0]['customer_first_name'].' '.$data['order'][0]['customer_last_name'])),$content);
+		$check_arr = array('[NAME]','[ORDER_DETAILS]');
+		$replace_arr = array( ucfirst(stripslashes($record[0]['customer_first_name'].' '.$record[0]['customer_last_name'])),$content);
 		$email_template_id = '6';
 		if($email_template_id != '') {
-			$mail_res = $this->myemail->send_admin_mail($data['order'][0]['customer_email'],$email_template_id,$check_arr,$replace_arr);
+			$mail_res = $this->myemail->send_admin_mail($record[0]['customer_email'],$email_template_id,$check_arr,$replace_arr);
 		}
 	}
 
