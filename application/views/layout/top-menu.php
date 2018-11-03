@@ -58,7 +58,7 @@
 				<li><a data-section="Others" href="<?php echo base_url()."home/others"; ?>" <?php if($activesegment =='others') { ?> class="active" <?php } ?>>Others</a></li>
 			</ul>
 			<ul class="main_menu">
-				<li><a href="javascript:void(0)">Shop <span style="font-size:9px;">(coming soon)</span></a></li>
+				<li><a href="<?php echo base_url()."products"; ?>">Shop <?php /*<span style="font-size:9px;">(coming soon)</span> */ ?></a></li>
 			</ul>
 			<?php if(get_user_id() != '') { ?>
 			<ul class="main_menu profile_menu">
@@ -88,7 +88,7 @@
 					<li><a data-section="life style" href="<?php echo base_url()."home/life-style"; ?>" <?php if($activesegment=='life-style') { ?> class="active" <?php } ?>>Lifestyle</a></li>
 					<li><a data-section="Paparazzi" href="<?php echo base_url()."home/paparazzi"; ?>" <?php if($activesegment=='paparazzi') { ?> class="active" <?php } ?>>Paparazzi</a></li>
 					<li><a data-section="Others" href="<?php echo base_url()."home/others"; ?>" <?php if($activesegment =='others') { ?> class="active" <?php } ?>>Others</a></li>
-					<li><a href="javascript:void(0)">Shop <span style="font-size:9px;">(coming soon)</span></a></li>
+					<li><a href="<?php echo base_url()."products"; ?>">Shop <?php /*<span style="font-size:9px;">(coming soon)</span>*/ ?></a></li>
 				</ul>
 			</div>
 		</div>

@@ -1,5 +1,7 @@
 <script type="text/javascript" src="<?php echo load_lib();?>ckeditor/ckeditor/ckeditor.js"></script>
 <!--<script type="text/javascript" src="<?php echo load_lib();?>ckeditor/_samples/sample.js"></script>-->
+<link rel="stylesheet" type="text/css" href="<?php echo skin_url(); ?>css/responsive-style.css">
+<script type="text/javascript" src="<?php echo skin_url();?>js/waterfall.js"></script>
 <script>
 var module = "home";
 var module_action="addpost";
@@ -134,9 +136,9 @@ var module_action="addpost";
 				<?php } else { ?> 
 					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio/".encode_value($info['customer_id']); ?>" class=" profile_section">Profile</a></li>
 				<?php } ?>
-				<?php if($info['customer_type'] == 0) { ?> 
-					<li style="display:none;"><a data-section="products" href="<?php echo base_url()."myprofile/products/".encode_value($info['customer_id']); ?>" class=" profile_section product_section">Products</a></li>
-				<?php } ?>
+				<?php /*if($info['customer_type'] == 1) {*/ ?> 
+					<li><a data-section="products" href="<?php echo base_url()."myprofile/products/".encode_value($info['customer_id']); ?>" class=" profile_section product_section">Products</a></li>
+				<?php /*}*/ ?>
 			</ul>
 			<div class="boi_data">
 			
@@ -266,7 +268,7 @@ $(window).load(function() {
 	}
 	get_profile_section();
 
-	
+	waterfall('.my-grid');
 });
 
 $('#blog_post_title').blur(function() { 

@@ -435,9 +435,9 @@
 
 </style>
 <?php if(!empty($records)) { ?>
-<ul>
+<ul class="my-grid">
 <?php $i=0; foreach($records as $record) {  ?>
-	<li class="list_prod_section">
+	<li class="list_prod_section item">
 		<?php $discount = find_discount($record['product_price'],$record['product_special_price'],$record['product_special_price_from_date'],$record['product_special_price_to_date']); ?>
 		<div class="img_part">
 			<?php if($record['product_thumbnail'] !=''){ $photo=media_url().$this->lang->line ( 'product_main_image_folder_name' )."/".$record['product_thumbnail']; } else { $photo=media_url().$this->lang->line('post_photo_folder_name')."default.png"; } ?>
@@ -470,9 +470,10 @@
 			<?php } ?>
 			<div class="clear"></div>
 		</div>
+        <?php /*
 		<div class="button_bar"> 
 			<a href="<?php echo base_url().'products/view/'.$record['product_slug']; ?>" class=" common_but"> <span>Buy Now</span> </a> 
-		</div>
+		</div>*/ ?>
 	</li>
 <?php } ?> 
 </ul>

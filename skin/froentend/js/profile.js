@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 	$(document).on('click', '.follow_users', function(e) {		
 		var url = $(this).attr('href');
@@ -232,8 +231,16 @@ $(document).ready(function(){
 	
 	$('.profile_section').click(function() {
 		$('.profile_section').removeClass('active');
+		var current_section = $(this).attr('data-section');
 		$(this).addClass('active');
+		if(current_section == 'products')
+		{
+			$('.boi_data').addClass('deals_part flash_sale_deals grid-view');
+		} else {
+			$('.boi_data').removeClass('deals_part flash_sale_deals grid-view');
+		}
 		get_profile_section();
+		waterfall('.my-grid');
 		return false;
 	});
 
