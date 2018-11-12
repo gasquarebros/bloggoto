@@ -250,7 +250,7 @@
 							</div>
 							<div class="comment_box_wrap">
 								<input type="hidden" name="post_record" value="<?php echo encode_value($record['post_id']); ?>" />
-								<input type="text" class="comment" name="comments" placeholder="Write a comment..." />
+								<input type="text" class="comment" name="comments" placeholder="Your Thought..." />
 								<button type="submit" class="comment_submit"><i class="fa fa-location-arrow"></i></button>
 							</div>
 							<div class="clear"></div>

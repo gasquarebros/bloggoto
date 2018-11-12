@@ -16,7 +16,7 @@
 					<?php } ?>	
 				</div> -->
 				<div class="comment_box_wrap">
-					<input type="text" name="comments" value="<?php echo $record['post_comment_post_id']; ?>"  class="comment" placeholder="Write a comment..." />
+					<input type="text" name="comments" value="<?php echo $record['post_comment_post_id']; ?>"  class="comment" placeholder="Your Thought..." />
 				</div>
 				<div class="clear"></div>
 				<div class="alert_msg"></div>

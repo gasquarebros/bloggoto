@@ -35,8 +35,8 @@
 						<span class="comment_content" style="display:none">
 						<?php echo form_open_multipart(base_url().'myprofile/addcomments',' class="upcomment_form" autocomplete="'.form_autocomplte().'" ' );?>
 							<div class="comment_box_wrap">
-								<!--<input type="text" value="<?php echo output_value(json_decode($record['post_comment_message'])); ?>" id="comment_data" name="comment_data"  class="upcomment"  placeholder="Write a comment..." />-->
-								<input type="text" style="display:none" class="comment_edit_section" name="comment_data" placeholder="Write a comment..." />
+								<!--<input type="text" value="<?php echo output_value(json_decode($record['post_comment_message'])); ?>" id="comment_data" name="comment_data"  class="upcomment"  placeholder="Your Thought..." />-->
+								<input type="text" style="display:none" class="comment_edit_section" name="comment_data" placeholder="Your Thought..." />
 								<div class="comment"  contenteditable="true"><?php echo json_decode($record['post_comment_message']); ?> </div>
 								<button type="submit" class="comment_submit">></button>
 								<input type="hidden" id="post_record" name="post_record" value="<?php echo encode_value($record['post_id']); ?>" />
