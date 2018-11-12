@@ -240,7 +240,9 @@ $(document).ready(function(){
 			$('.boi_data').removeClass('deals_part flash_sale_deals grid-view');
 		}
 		get_profile_section();
-		waterfall('.my-grid');
+		if($('.my-grid').length) {
+			waterfall('.my-grid');
+		}
 		return false;
 	});
 

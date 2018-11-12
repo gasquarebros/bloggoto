@@ -267,8 +267,9 @@ $(window).load(function() {
 		$('.product_section').trigger('click');
 	}
 	get_profile_section();
-
-	waterfall('.my-grid');
+	if($('.my-grid').length) {
+		waterfall('.my-grid');
+	}
 });
 
 $('#blog_post_title').blur(function() { 
