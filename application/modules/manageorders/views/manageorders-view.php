@@ -14,6 +14,24 @@ table {
 	width:100%;
 }
 </style>
+<script>
+function printDiv() 
+{
+
+  var divToPrint=document.getElementById('DivIdToPrint');
+
+  var newWin=window.open('','Print-Window');
+
+  newWin.document.open();
+
+  newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+
+  newWin.document.close();
+
+  setTimeout(function(){newWin.close();},100);
+
+}
+</script>
 <div class="container-fluid">
 	<div class="side-body">
 		<div class="row">
@@ -25,16 +43,17 @@ table {
 								<h1 class="title page-header text-overflow"><?php echo 'View Order'; ?> </h1>
 							</div>
 							<div class="pull-right">
+								<a onclick="printDiv();">Print PDF</a>
 							</div>
 						</div>
 					</div>                    
-					<div class="card-body" style="overflow-x: auto;">
+					<div  class="card-body" style="overflow-x: auto;">
 					
 					<?php echo form_open_multipart(admin_url().$module.'/'.encode_value($records[0]['order_primary_id']),' class="form-horizontal" id="common_form" ' );?>
 						<ul class=" alert_msg  alert-danger  alert container_alert" style="display: none;">
 						
 						</ul>					
-						<table style="background-color: #ffffff; border-collapse: collapse; margin:0 auto;color: #565656;font-family: Arial, sans-serif;font-size: 14px;line-height: 20px;border:0px;" width="100%" cellspacing="0" cellpadding="0">
+						<table id="DivIdToPrint" style="background-color: #ffffff; border-collapse: collapse; margin:0 auto;color: #565656;font-family: Arial, sans-serif;font-size: 14px;line-height: 20px;border:0px;" width="100%" cellspacing="0" cellpadding="0">
 							<tbody>
 								<tr>
 									<td style="padding:12px 20px;background-color: #f7f4f8; color: #3b3b3b; font-family: Arial, sans-serif; font-size: 17px; line-height: 16px;border-bottom: 1px dashed #d0d0d0;border-top: 1px dashed #d0d0d0;"><span style="font-weight: bold; font-size: 16px; ">Order Details</span>
