@@ -919,7 +919,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                     }
                 ?>
                      <div class="value_section_selection <?php echo $class; ?>">
-						<h6>SELECT <?php echo $attribute['pro_modifier_name']; ?></h6>
+						<h6><b>Select <?php echo $attribute['pro_modifier_name']; ?></b></h6>
 						<ul data-section_selection="sku-<?php echo $attribute['pro_modifier_id']; ?>" >
                             <?php 
                                 if($attribute['value_name'] !='') {
@@ -1013,7 +1013,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 
         <div class="cancel-policy">
             <h6>Cancellation Policy</h6>
-            <p>We accept a 7 days cancellation policy on your purchase with refunds to your E-Wallet. Not valid for in-store cashback purchase. Contact us at <a href="mailto:#">#</a> if you have any enquiries </p>
+            <p>We accept a Cancellation on your purchase before your item is processed or delivered. </p>
 
         </div>
 
@@ -1031,14 +1031,6 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 <script type="text/javascript" src="<?php echo skin_url().'js/jquery.elevatezoom.js' ?>"></script>
 <script type="text/javascript" src="<?php echo skin_url(); ?>js/products.js"></script>
 <script>
-		$("#zoom_image").elevateZoom({gallery:'gal1', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true,"zoomType":"lens","containLensZoom":true,"borderSize":0,"scrollZoom":false, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'}); 
-
-//pass the images to Fancybox
-$("#zoom_image").bind("click", function(e) {  
-  var ez =   $('#zoom_image').data('elevateZoom');	
-	$.fancybox(ez.getGalleryList());
-  return false;
-});
 
 		function trigger_zoom()
 		{
@@ -1053,29 +1045,23 @@ $("#zoom_image").bind("click", function(e) {
 			}
 			else
 			{
-				jQuery("#elevatezoom-0").elevateZoom({"zoomType":"lens","containLensZoom":true,"borderSize":0,"scrollZoom":false,"gallery":"gal1"});
+				$("#zoom_image").elevateZoom({gallery:'gal1', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true,"zoomType":"lens","containLensZoom":true,"borderSize":0,"scrollZoom":false, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'}); 
 			}
 		}
 		jQuery(window).resize(function() {
 			setTimeout(trigger_zoom, 100);
 		});
-		setTimeout(trigger_zoom, 300);
-			
+		setTimeout(trigger_zoom, 2000);
+        $("#zoom_image").bind("click", function(e) {  
+            var ez =   $('#zoom_image').data('elevateZoom');	
+            $.fancybox(ez.getGalleryList());
+            return false;
+        });
 </script>
-	<script> 
-		$(window).on("load",function(){
-			$(".mCustomScrollbar").mCustomScrollbar({
-				autoHideScrollbar:true,
-			});
-        });	
-	</script>
-<!-- <script>
-/*  load initial content.. */
-$(window).load(function(){
-	$(".mCustomScrollbar").mCustomScrollbar({
-		autoHideScrollbar:true,
-		   axis:"x", // horizontal scrollbar
-		theme:"rounded"
-	});	
-});
-</script> -->
+<script> 
+    $(window).on("load",function(){
+        $(".mCustomScrollbar").mCustomScrollbar({
+            autoHideScrollbar:true,
+        });
+    });	
+</script>

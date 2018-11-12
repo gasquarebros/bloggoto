@@ -38,7 +38,8 @@ class Manageproducts extends CI_Controller
 		$like = array ();
 		$where = array (
 			" $this->primary_key !=" => '',
-			'product_customer_id'	=> get_user_id()
+			'product_customer_id'	=> get_user_id(),
+			'product_parent_id IS NULL' => NULL 
 		);
 		$order_by = array (
 				$this->primary_key => 'DESC' 

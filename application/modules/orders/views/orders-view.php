@@ -207,7 +207,8 @@ table {
 																								<input name="item_status_old[<?php echo $item_id; ?>]" value="<?php echo $record['item_order_status']; ?>" type="hidden">
 																							</td>
 																							<td>
-																								<p <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 ) { ?>style="display:block;" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info"><?php echo $record['shipping_track_code']; ?></p>
+																								<p <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6) { ?>style="display:block;"  <?php } else { ?>style="display:none;" <?php } ?>><span class="label">Tracking URl: </span><?php echo $record['shipping_track_code']; ?></p>
+																								<p <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6) { ?>style="display:block;" <?php } else { ?>style="display:none;" <?php } ?> ><span class="label">Airway bill No. </span> <?php echo $record['shipping_track_airway_bill']; ?></p>
 																							</td>
 																						</tr>
 																					</tbody>

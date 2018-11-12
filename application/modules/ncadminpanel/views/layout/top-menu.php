@@ -42,6 +42,15 @@
               <li><a href="<?php echo admin_url()."orders"?>"> <?php echo get_label('order_labels');?></a></li> 
 						</ul>	
 					</li>	  
+
+          <li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Service Modules <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="<?php echo admin_url()."servicecategories"; ?>"><?php echo get_label('pro_cate_label');?></a></li>
+							<li><a href="<?php echo admin_url()."servicesubcategories"; ?>"><?php echo get_label('pro_subcate_label');?></a></li>
+							<li><a href="<?php echo admin_url()."services"?>"> <?php echo get_label('services_labels');?></a></li> 
+						</ul>	
+					</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
    

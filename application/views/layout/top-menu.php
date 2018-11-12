@@ -67,6 +67,10 @@
 						<li><a href="<?php echo base_url().'myprofile'; ?>">Profile</a></li>
  						<li><a href="<?php echo base_url().'myprofile/favorlist'; ?>">Favourites</a></li>
  						<li><a href="<?php echo base_url().'home/draftpost'; ?>">Draft </a></li>
+						<li><a href="<?php echo base_url().'orders'; ?>">My Purchases </a></li> 
+						<li><a href="<?php echo base_url().'manageorders'; ?>">Manage Orders </a></li>
+						<li><a href="<?php echo base_url().'manageproducts'; ?>">Manage Products </a></li>
+						 
  						<?php /*<li><a href="#" class="account_delete" data-action='Submit' action="<?php echo base_url().'myprofile/accountdelete/'.encode_value(get_user_id()); ?>">Delete Account</a></li> */ ?>
 					</ul>
 				</li>
