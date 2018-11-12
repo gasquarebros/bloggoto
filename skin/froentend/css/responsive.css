@@ -64,6 +64,7 @@
     .header_form { width: 255px; }
     .icons_wrap { width: 150px; }
     .main_menu { display: none; }
+    .profile_account_menu_mobile { display:block; }
     .nav_triger{ display: block; }
 	.profile_menu { display: block;
 float: right !important;
@@ -83,7 +84,7 @@ position: relative; overflow: visible !important; }
     .foot_logo, .policy, .comp_info, .foot_rgt { width: 100%; float: none; margin: 15px 0;padding: 15px; }  
     .list_decp, .list_img, .list_col_inner { width: 100%; display: block; }
     .header_form { width: 100%; margin: 0; }
-    .signup_wrap, .category_menu { margin: 0; }
+    .signup_wrap, .category_menu { margin: 5px 0px; }
     .section_menu{ margin-bottom: 30px; height: 45px; overflow: hidden; padding-right: 30px; background: #616161; }
     .section_menu.more_menu { height: auto; min-height: 45px; }
     .more_items { display: block; }
@@ -188,7 +189,8 @@ position: relative; overflow: visible !important; }
 	{
 		margin-bottom:0px;
 	}
-	.main_menu .submenu { width:100%; }
+    .main_menu .submenu { width:100%; }
+    .profile_account_menu_mobile { display:block; }
 	.list_decp > span { min-height: auto !important; }
 	.chosen-container { width:100%!important; }
 	.input_field.show_image_box { margin-top: 15px; }

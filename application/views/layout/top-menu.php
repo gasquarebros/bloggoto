@@ -44,8 +44,49 @@
 	</div>
 	<div class="header_menuwrap">
 		<div class="container">
-		<?php $activesegment = $this->uri->segment(2); ?>
-			<ul class="main_menu blog_section">
+			<ul class="category_menu main_menu_top main_menu">
+				<li><a data-section="Fashion" href="<?php echo base_url()."home/wall"; ?>">Social Network</a></li>
+				<li><a data-section="Fashion" href="<?php echo base_url()."home/fashion"; ?>" >Ecommerce</a></li>
+				<li><a data-section="Fashion" href="#" >Services</a></li>
+				<?php if(get_user_id() != '') { ?>
+					<li style="float:right !important;">
+						<ul class="main_menu profile_menu" >
+							<li><a href="javascript:void(0)" class="<?php if($this->uri->segment(1)== 'myprofile' || $this->uri->segment(2) == 'draftpost') { echo "active"; } ?>">My Account</a>
+								<ul class="submenu">
+									<li><a href="<?php echo base_url().'myprofile'; ?>">Profile</a></li>
+									<li><a href="<?php echo base_url().'myprofile/favorlist'; ?>">Favourites</a></li>
+									<li><a href="<?php echo base_url().'home/draftpost'; ?>">Draft </a></li>
+									<li><a href="<?php echo base_url().'orders'; ?>">My Purchases </a></li> 
+									<li><a href="<?php echo base_url().'manageorders'; ?>">Manage Orders </a></li>
+									<li><a href="<?php echo base_url().'manageproducts'; ?>">Manage Products </a></li>
+									
+									<?php /*<li><a href="#" class="account_delete" data-action='Submit' action="<?php echo base_url().'myprofile/accountdelete/'.encode_value(get_user_id()); ?>">Delete Account</a></li> */ ?>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				<?php } ?>
+			</ul>
+			<?php if(get_user_id() != '') { ?>
+					
+						<ul class="profile_account_menu_mobile main_menu profile_menu" >
+							<li><a href="javascript:void(0)" class="<?php if($this->uri->segment(1)== 'myprofile' || $this->uri->segment(2) == 'draftpost') { echo "active"; } ?>">My Account</a>
+								<ul class="submenu">
+									<li><a href="<?php echo base_url().'myprofile'; ?>">Profile</a></li>
+									<li><a href="<?php echo base_url().'myprofile/favorlist'; ?>">Favourites</a></li>
+									<li><a href="<?php echo base_url().'home/draftpost'; ?>">Draft </a></li>
+									<li><a href="<?php echo base_url().'orders'; ?>">My Purchases </a></li> 
+									<li><a href="<?php echo base_url().'manageorders'; ?>">Manage Orders </a></li>
+									<li><a href="<?php echo base_url().'manageproducts'; ?>">Manage Products </a></li>
+									
+									<?php /*<li><a href="#" class="account_delete" data-action='Submit' action="<?php echo base_url().'myprofile/accountdelete/'.encode_value(get_user_id()); ?>">Delete Account</a></li> */ ?>
+								</ul>
+							</li>
+						</ul>
+					
+				<?php } ?>
+			<?php $activesegment = $this->uri->segment(2); ?>
+			<?php /*<ul class="main_menu blog_section">
 				<li><a data-section="Fashion" href="<?php echo base_url()."home/fashion"; ?>" <?php if($activesegment=='' || $activesegment=='fashion') { ?> class="active" <?php } ?>>Fashion</a></li>
 				<li><a data-section="General" href="<?php echo base_url()."home/general"; ?>" <?php if($activesegment=='general') { ?> class="active" <?php } ?>>General</a></li>
 				<li><a data-section="Travel" href="<?php echo base_url()."home/travel"; ?>" <?php if($activesegment=='travel') { ?> class="active" <?php } ?>>Travel</a></li>
@@ -58,31 +99,23 @@
 				<li><a data-section="Others" href="<?php echo base_url()."home/others"; ?>" <?php if($activesegment =='others') { ?> class="active" <?php } ?>>Others</a></li>
 			</ul>
 			<ul class="main_menu">
-				<li><a href="<?php echo base_url()."products"; ?>">Shop <?php /*<span style="font-size:9px;">(coming soon)</span> */ ?></a></li>
-			</ul>
-			<?php if(get_user_id() != '') { ?>
-			<ul class="main_menu profile_menu">
-				<li><a href="javascript:void(0)" class="<?php if($this->uri->segment(1)== 'myprofile' || $this->uri->segment(2) == 'draftpost') { echo "active"; } ?>">My Account</a>
-					<ul class="submenu">
-						<li><a href="<?php echo base_url().'myprofile'; ?>">Profile</a></li>
- 						<li><a href="<?php echo base_url().'myprofile/favorlist'; ?>">Favourites</a></li>
- 						<li><a href="<?php echo base_url().'home/draftpost'; ?>">Draft </a></li>
-						<li><a href="<?php echo base_url().'orders'; ?>">My Purchases </a></li> 
-						<li><a href="<?php echo base_url().'manageorders'; ?>">Manage Orders </a></li>
-						<li><a href="<?php echo base_url().'manageproducts'; ?>">Manage Products </a></li>
-						 
- 						<?php /*<li><a href="#" class="account_delete" data-action='Submit' action="<?php echo base_url().'myprofile/accountdelete/'.encode_value(get_user_id()); ?>">Delete Account</a></li> */ ?>
-					</ul>
-				</li>
-			</ul>
-			<?php } ?>
+				<li><a href="<?php echo base_url()."products"; ?>">Shop </a></li>
+			</ul> */ ?>
+			
 			 <div style="position:relative;">
 				 <div class="nav_triger">
 					<span class="icon-bar"></span>
 					 <span class="icon-bar"></span>
 					 <span class="icon-bar"></span>
 				 </div>
-				 <ul class="device_nav blog_section">
+				<ul class="device_nav blog_section">
+					<li><a href="<?php echo base_url()."home/wall"; ?>" >Social Network</a></li>
+					<li><a data-section="Fashion" href="<?php echo base_url()."home/fashion"; ?>" >Ecommerce</a></li>
+					<li><a data-section="Fashion" href="#" >Services</a></li>
+					
+				</ul>	
+				
+				<?php /* <ul class="device_nav blog_section">
 					<li><a data-section="Fashion" href="<?php echo base_url()."home/fashion"; ?>" <?php if($activesegment=='' || $activesegment=='fashion') { ?> class="active" <?php } ?>>Fashion</a></li>
 					<li><a data-section="Travel" href="<?php echo base_url()."home/travel"; ?>" <?php if($activesegment=='travel') { ?> class="active" <?php } ?>>Travel</a></li>
 					<li><a data-section="Food" href="<?php echo base_url()."home/food"; ?>" <?php if($activesegment=='food') { ?> class="active" <?php } ?>>Food</a></li>
@@ -92,8 +125,8 @@
 					<li><a data-section="life style" href="<?php echo base_url()."home/life-style"; ?>" <?php if($activesegment=='life-style') { ?> class="active" <?php } ?>>Lifestyle</a></li>
 					<li><a data-section="Paparazzi" href="<?php echo base_url()."home/paparazzi"; ?>" <?php if($activesegment=='paparazzi') { ?> class="active" <?php } ?>>Paparazzi</a></li>
 					<li><a data-section="Others" href="<?php echo base_url()."home/others"; ?>" <?php if($activesegment =='others') { ?> class="active" <?php } ?>>Others</a></li>
-					<li><a href="<?php echo base_url()."products"; ?>">Shop <?php /*<span style="font-size:9px;">(coming soon)</span>*/ ?></a></li>
-				</ul>
+					<li><a href="<?php echo base_url()."products"; ?>">Shop </a></li>
+				</ul> */ ?>
 			</div>
 		</div>
 	</div>

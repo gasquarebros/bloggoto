@@ -592,8 +592,15 @@ a.btn:hover {
 }
 
 ul.main_menu {
-    float: left;
+    /*float: left;*/
     overflow: hidden;
+}
+
+.main_menu_top {
+    background:none !important;
+}
+.main_menu_top li {
+    float:none !important;
 }
 
 ul.profile_rgt {
@@ -631,7 +638,7 @@ ul.profile_rgt {
 
 .category_menu {
     padding: 0;
-    margin: 15px 0 30px;
+    margin: 5px 0;
     background: #616161;
 	width: auto;
 	text-align: center;
@@ -1115,6 +1122,7 @@ ul.device_nav li {
     position: relative;
     border-bottom: 1px solid #f5f5f5;
     border-bottom: 1px solid rgba(157, 157, 157, 0.33);
+    width:100%;
 }
 
 ul.device_nav li:last-child {
@@ -1138,6 +1146,7 @@ ul.device_nav li a {
     -moz-transition: all ease-in-out 400ms;
     -ms-transition: all ease-in-out 400ms;
     transition: all ease-in-out 400ms;
+    text-align:center;
 }
 
 ul.device_nav ul a {
@@ -2775,6 +2784,7 @@ td p {
     transition: all 0.5s ease;
     z-index: 9;
 }
+.profile_account_menu_mobile { display:none; }
 
 .header_menuwrap ul li .submenu li {
     display: block;
