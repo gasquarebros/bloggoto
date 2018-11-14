@@ -1045,7 +1045,12 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 				jQuery("#elevatezoom-0").removeAttr("data-zoom-image");
 				jQuery("#elevatezoom-0").removeData("elevateZoom");
 				jQuery("#elevatezoom-0").removeData("zoomImage");
-				jQuery.removeData(imageElement, "elevateZoom");
+                jQuery.removeData(imageElement, "elevateZoom");
+                jQuery('#gal1 a').on('click',function() { 
+                    var dataimg = jQuery(this).attr('data-image');
+                    jQuery('#zoom_image').attr('src',dataimg);
+                    return false;
+                });
 			}
 			else
 			{
