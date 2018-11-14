@@ -268,7 +268,7 @@ $(window).load(function() {
 	}
 	get_profile_section();
 	if($('.my-grid').length) {
-		waterfall('.my-grid');
+		/*waterfall('.my-grid');*/
 	}
 });
 

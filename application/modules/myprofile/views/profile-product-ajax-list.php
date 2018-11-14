@@ -61,7 +61,8 @@
 }
 
 .list_prod_section .cont_part {
-    padding: 10px 10px 15px 10px
+    padding: 10px 10px 15px 10px;
+    height: 120px;
 }
 
 .list_prod_section .cont_part .freedeals_list_bottom {
@@ -454,9 +455,6 @@
 		<div class="cont_part">
 			<a class="main-title " title="<?php echo $record['product_name']; ?>" href="<?php echo base_url().'products/view/'.$record['product_slug']; ?>"><?php echo $record['product_name']; ?></a> 
 			<p><?php echo substr_close_tags($record['product_short_description']); ?></p>
-
-			<a href="<?php echo base_url().urlencode($record['customer_username'])."#products"; ?>" class="product_merchant"><?php echo $record['customer_username']; ?></a> 
-
 			<?php 
 			if($record['product_special_price'] !='' && $discount > 0) {?>
 				<div class="price-part fr txtr">
