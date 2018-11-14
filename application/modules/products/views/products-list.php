@@ -762,7 +762,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                                 $i=1;
                                 foreach($product_category as $prokey=>$productcategory) { 
                                     if($i > 5) { $active="category_product show_less_category"; } ?> 
-                                    <li class=" categories <?php echo $active; ?>"> <a data-type="<?php echo $prokey; ?>" href="javascript:void(0)" class=""><?php echo $productcategory; ?></a> </li>
+                                    <li class=" categories <?php echo $active; ?>"> <a data-type="<?php echo $prokey; ?>" href="javascript:void(0)" class=""><?php echo stripslashes($productcategory); ?></a> </li>
                                 <?php $i++; } ?>  
                                 <?php if($i > 5) { ?>                      	
                                     <li class="allcategories"> <a class="freedeal_filters">View More</a> </li>
@@ -785,7 +785,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                                 $i=1;
                                 foreach($product_subcategory as $prokey=>$productsubcategory) { 
                                     if($i > 5) { $active="subcategory_product show_less_subcategory"; } ?> 
-                                    <li class="categories <?php echo $active; ?>"> <a data-type="<?php echo $prokey; ?>" href="javascript:void(0)" class=""><?php echo $productsubcategory; ?></a> </li>
+                                    <li class="categories <?php echo $active; ?>"> <a data-type="<?php echo $prokey; ?>" href="javascript:void(0)" class=""><?php echo stripslashes($productsubcategory); ?></a> </li>
                                 <?php $i++; } ?>  
                                 <?php if($i > 5) { ?>                      	
                                     <li class="allsubcategories"> <a class="freedeal_filters">View More</a> </li>
