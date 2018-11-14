@@ -2963,7 +2963,8 @@ i.fa.fa-location-arrow {
 .popup-gallery a{ display: block}
 .mfp-arrow:hover, .mfp-arrow:focus,.mfp-close:hover {  background-color: unset;}
 .mfp-close{color:#0a0a0a !important;}
-.post_media {width: 50%;}
+.post_media {width: 100%;}
+figure { margin:10px; }
 /****************** End Image popup Gallery *****************/
 
 /* custom alert box css end here */

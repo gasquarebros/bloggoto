@@ -440,7 +440,7 @@ ul {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -49px;
+    bottom: -18px;
     padding: 0 10px 10px 10px;
     z-index: 10;
     filter: alpha(opacity=0);
@@ -621,12 +621,13 @@ ul {
 .flash_sale_deals ul li .cont_part a.main-title {
     font-family: "proxima_nova_rgbold";
     text-transform: none;
-    font-size: 15px;
+    font-size: 16px;
     line-height: normal;
     display: block;
     margin-bottom: 10px;
     max-height: 38px;
-    overflow: hidden
+    overflow: hidden;
+    font-weight: bold;
 }
 
 .flash_sale_deals ul li .cont_part a.main-title:hover {

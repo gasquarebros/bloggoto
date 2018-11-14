@@ -45,8 +45,8 @@
 	<div class="header_menuwrap">
 		<div class="container">
 			<ul class="category_menu main_menu_top main_menu">
-				<li><a data-section="Fashion" href="<?php echo base_url()."home/wall"; ?>">Social Network</a></li>
-				<li><a data-section="Fashion" href="<?php echo base_url()."products"; ?>" >Ecommerce</a></li>
+				<li><a data-section="Fashion" href="<?php echo base_url()."home/wall"; ?>">Social Media</a></li>
+				<li><a data-section="Fashion" href="<?php echo base_url()."products"; ?>" >Products</a></li>
 				<li><a data-section="Fashion" href="#" >Services</a></li>
 				<?php if(get_user_id() != '') { ?>
 					<li style="float:right !important;">
@@ -109,8 +109,8 @@
 					 <span class="icon-bar"></span>
 				 </div>
 				<ul class="device_nav blog_section">
-					<li><a href="<?php echo base_url()."home/wall"; ?>" >Social Network</a></li>
-					<li><a data-section="Fashion" href="<?php echo base_url()."products"; ?>" >Ecommerce</a></li>
+					<li><a href="<?php echo base_url()."home/wall"; ?>" >Social Media</a></li>
+					<li><a data-section="Fashion" href="<?php echo base_url()."products"; ?>" >Products</a></li>
 					<li><a data-section="Fashion" href="#" >Services</a></li>
 					
 				</ul>	

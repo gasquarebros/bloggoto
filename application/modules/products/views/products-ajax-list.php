@@ -12,6 +12,7 @@
     font-size: 14px;
     font-family: 'proxima_nova_rgbold';
     color: #2a2a2a;
+	font-weight:bold;
     clear: both;
     display: block;
     transition: all 0.3s ease;

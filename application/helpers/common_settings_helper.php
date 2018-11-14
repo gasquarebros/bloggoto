@@ -140,7 +140,7 @@ if(!function_exists('get_currency_symbol'))
 {
 	function get_currency_symbol($val=null)
 	{
-		return '$'.$val;
+		return '₹'.$val;
 	}
 }
 
@@ -149,7 +149,7 @@ if(!function_exists('show_price'))
 {
 	function show_price($price)
 	{
-		return '$'.number_format($price,2);
+		return '₹'.number_format($price,2);
 	}
 }
 

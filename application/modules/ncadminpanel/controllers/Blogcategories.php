@@ -167,7 +167,7 @@ class Blogcategories extends CI_Controller {
 		/* Common labels */
 		$data ['breadcrumb'] = $data ['form_heading'] = get_label ( 'add' ) . ' ' . $this->module_label;
 		$data ['module_action'] = 'add';
-		$this->layout->display_company_admin ( $this->folder . $this->module . '-add', $data );
+		$this->layout->display_admin ( $this->folder . $this->module . '-add', $data );
 	}
 	
 	/* this method used to update record info.. */
@@ -300,7 +300,7 @@ class Blogcategories extends CI_Controller {
 		/* Common labels */
 		$data ['breadcrumb'] = $data ['form_heading'] = get_label ( 'edit' ) . ' ' . $this->module_label;
 		$data ['module_action'] = 'edit/' . encode_value ( $record [$this->primary_key] );
-		$this->layout->display_company_admin ( $this->folder . $this->module . '-edit', $data );
+		$this->layout->display_admin ( $this->folder . $this->module . '-edit', $data );
 	}
 	
 	

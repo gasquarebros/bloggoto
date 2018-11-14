@@ -7,16 +7,16 @@ var module_action="addpost";
     <div class="container">
         <h2 class="main_heading">Magazines</h2>
 		<?php $activesegment = $this->uri->segment(2); ?>
-		<ul class="category_menu blog_section">
+		<ul class="category_menu blog_section inner_section">
+			<li><a data-section="General" href="<?php echo base_url()."home/general"; ?>" <?php if($activesegment=='general') { ?> class="active" <?php } ?>>General</a></li>	
 			<li><a data-section="Fashion" href="<?php echo base_url()."home/fashion"; ?>" <?php if($activesegment=='' || $activesegment=='fashion') { ?> class="active" <?php } ?>>Fashion</a></li>
-			<li><a data-section="General" href="<?php echo base_url()."home/general"; ?>" <?php if($activesegment=='general') { ?> class="active" <?php } ?>>General</a></li>
 			<li><a data-section="Travel" href="<?php echo base_url()."home/travel"; ?>" <?php if($activesegment=='travel') { ?> class="active" <?php } ?>>Travel</a></li>
 			<li><a data-section="Food" href="<?php echo base_url()."home/food"; ?>" <?php if($activesegment=='food') { ?> class="active" <?php } ?>>Food</a></li>
 			<li><a data-section="Tech" href="<?php echo base_url()."home/tech"; ?>" <?php if($activesegment=='tech') { ?> class="active" <?php } ?>>Tech</a></li>
 			<li><a data-section="Business" href="<?php echo base_url()."home/business"; ?>" <?php if($activesegment=='business') { ?> class="active" <?php } ?>>Business</a></li>
 			<li><a data-section="Health" href="<?php echo base_url()."home/health"; ?>" <?php if($activesegment=='health') { ?> class="active" <?php } ?>>Health</a></li>
 			<li><a data-section="life style" href="<?php echo base_url()."home/life-style"; ?>" <?php if($activesegment=='life-style') { ?> class="active" <?php } ?>>Lifestyle</a></li>
-			<li><a data-section="Paparazzi" href="<?php echo base_url()."home/paparazzi"; ?>" <?php if($activesegment=='paparazzi') { ?> class="active" <?php } ?>>Paparazzi</a></li>
+			<li><a data-section="Entertainment" href="<?php echo base_url()."home/entertainment"; ?>" <?php if($activesegment=='entertainment') { ?> class="active" <?php } ?>>Entertainment</a></li>
 			<li><a data-section="Others" href="<?php echo base_url()."home/others"; ?>" <?php if($activesegment =='others') { ?> class="active" <?php } ?>>Others</a></li>
 		</ul>
 

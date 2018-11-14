@@ -810,9 +810,13 @@ var module_action="addpost";
     padding: 0 3px
 }
 
-.color-size-ship .size-part ul li a:hover,
-.color-size-ship .size-part ul li a.active {
+.color-size-ship .size-part ul li a:hover
+{
     border: 1px solid #53a318
+}
+.color-size-ship .size-part ul li a.active {
+    background: #53a318;
+    color:white;
 }
 
 .selectship-part { 
@@ -1052,11 +1056,12 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 			setTimeout(trigger_zoom, 100);
 		});
 		setTimeout(trigger_zoom, 2000);
-        $("#zoom_image").bind("click", function(e) {  
+        /*$("#zoom_image").bind("click", function(e) {  
+            alert();
             var ez =   $('#zoom_image').data('elevateZoom');	
             $.fancybox(ez.getGalleryList());
             return false;
-        });
+        });*/
 </script>
 <script> 
     $(window).on("load",function(){

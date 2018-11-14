@@ -211,7 +211,7 @@ $(document).ready(function(){
 			}
 			else
 			{
-				jQuery('.attributes_sections').append('<p class="error error-info attribute_add_error">Please select the selection</p>');
+				jQuery('.attributes_sections').append('<p class="error error-info attribute_add_error">please any one selection of attributes to buy</p>');
 			}
 			// attribute product
 		}
