@@ -41,6 +41,13 @@ var module_action="addpost";
 					?>					
 						<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class="<?php if($i==0) echo 'active'; ?>"><?php echo $cat; ?></a></li>
 					<?php $i++; } } ?>
+					<!-- <li class="fr other_options">
+						
+					</li>	 -->
+				</ul>
+				<ul class="fr other_options">
+					<li class="ecomm-prod"><a href="<?php echo base_url().'products'; ?>">Sell Products</a></li>
+					<li class="serv-sec"><a href="#">Hot Services</a></li>
 				</ul>
 			</div>
 			<div class="cat_list">

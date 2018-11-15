@@ -1259,6 +1259,29 @@ ul.device_nav li.active > .s_arrow {
     padding: 25px;
 }
 
+
+element {
+
+}
+.cat_list ul li {
+
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0 3px 0 0;
+
+}
+.ecomm-prod, .serv-sec {
+    background: #97901E;
+}
+.ecomm-prod a {
+    background: #A94803 !important;
+    color: white !important;
+}
+.serv-sec a {
+    background: #469197 !important;
+    color: white !important;
+}
 .cat_list h5 {
     color: #444444;
     font-size: 16px;

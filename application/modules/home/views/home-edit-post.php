@@ -31,6 +31,10 @@ var module_action="updatepost";
 					<li><a data-section="Others" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Others') ? 'active': '';?>">Others</a></li>
 					
 				</ul>
+				<ul class="fr other_options">
+					<li class="ecomm-prod"><a href="<?php echo base_url().'products'; ?>">Sell Products</a></li>
+					<li class="serv-sec"><a href="#">Hot Services</a></li>
+				</ul>
 			</div>
 			<div class="cat_list">
 				<h5>Choose what you post</h5>

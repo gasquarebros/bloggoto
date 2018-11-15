@@ -108,6 +108,10 @@ var module_action="addpost";
 					<?php $i++; } } ?>
 					
 				</ul>
+				<ul class="fr other_options">
+					<li class="ecomm-prod"><a href="<?php echo base_url().'products'; ?>">Sell Products</a></li>
+					<li class="serv-sec"><a href="#">Hot Services</a></li>
+				</ul>
 			</div>
 			<div class="cat_list">
 				<h5>Choose what you posting</h5>
