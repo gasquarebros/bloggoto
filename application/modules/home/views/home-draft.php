@@ -117,7 +117,7 @@ if($i%2 == 0 || count($records) < $i){
 							</div>
 							<div class="form_field">
 								<div class="">
-									<input type="text" name="post_embed_video_url" placeholder="Youtube Embed Video URL"  id="post_embed_video_url" class="form-control"  />
+									<input type="text" name="post_embed_video_url" placeholder="Youtube Video URL"  id="post_embed_video_url" class="form-control"  />
 								</div>
 							</div>
 							<div class="form_field tagging_section">
@@ -131,7 +131,7 @@ if($i%2 == 0 || count($records) < $i){
 										}
 									}
 								?>
-								<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Title" id="post_tags" style="width:100%" multiple="multiple"');?>
+								<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Title" id="post_tags" data-placeholder="Tag Bloggotians" style="width:100%" multiple="multiple"');?>
 							</div>
 							<div class="form_field video_section" style="display:none;">
 								<div class="left_fm_field">
@@ -154,7 +154,7 @@ if($i%2 == 0 || count($records) < $i){
 									<input type="hidden" name="post_type" id="post_type" value="" />
 									<input type="hidden" name="post_category" id="post_category" value="" />
 									<input type="hidden" name="record_id" id="record_id" value="" />
-									<input type="button" value="Sava as draft" class="grey_btn draft_post">
+									<input type="button" value="Save as draft" class="grey_btn draft_post">
 									<input type="submit" value="Publish">
 								</div>
 								<div class="clear"></div>

@@ -136,7 +136,7 @@ var module_action="updatepost";
 					<div class="form_field ">						
 						<div class="rgt_fm_field btn_submit_div">
 							<input type="hidden" name="status" id="status" value="" />
-							<input type="hidden" value="Sava as draft" class="grey_btn draft_post">
+							<input type="hidden" value="Save as draft" class="grey_btn draft_post">
 							<input type="submit" value="Publish">
 						</div>
 						<div class="clear"></div>

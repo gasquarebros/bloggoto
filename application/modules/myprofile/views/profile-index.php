@@ -200,7 +200,7 @@ var module_action="addpost";
 					</div>
 					<div class="form_field">
 						<div class="">
-							<input type="text" name="post_embed_video_url" placeholder="Youtube Embed Video URL"  id="post_embed_video_url" class="form-control"  />
+							<input type="text" name="post_embed_video_url" placeholder="Youtube Video URL"  id="post_embed_video_url" class="form-control"  />
 						</div>
 					</div>
 					<div class="form_field tagging_section">
@@ -221,7 +221,7 @@ var module_action="addpost";
 								}
 							}
 						?>
-						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag Bloggotians" title="Tag Bloggotians" id="post_tags" style="width:100%"');?>
+						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag Bloggotians" data-placeholder="Tag Bloggotians" title="Tag Bloggotians" id="post_tags" style="width:100%"');?>
 					</div>
 					
 					<div class="form_field">
@@ -243,7 +243,7 @@ var module_action="addpost";
 					<div class="form_field">						
 						<div class="rgt_fm_field btn_submit_div">
 							<input type="hidden" name="status" id="status" value="" />
-							<input type="button" value="Sava as draft" class="grey_btn draft_post">
+							<input type="button" value="Save as draft" class="grey_btn draft_post">
 							<input type="submit" value="Publish">
 						</div>
 						<div class="clear"></div>

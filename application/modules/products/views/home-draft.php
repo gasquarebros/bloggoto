@@ -131,7 +131,7 @@ var custom_redirect_url="home/draftpost";
 										}
 									}
 								?>
-								<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Title" id="post_tags" style="width:400px" multiple="multiple"');?>
+								<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Title" id="post_tags" data-placeholder="Tag Bloggotians" style="width:400px" multiple="multiple"');?>
 							</div>
 							<div class="form_field video_section" style="display:none;">
 								<div class="left_fm_field">
@@ -147,7 +147,7 @@ var custom_redirect_url="home/draftpost";
 								<div class="rgt_fm_field">
 									<input type="hidden" name="status" id="status" value="" />
 									<input type="hidden" name="record_id" id="record_id" value="" />
-									<input type="button" value="Sava as draft" class="grey_btn draft_post">
+									<input type="button" value="Save as draft" class="grey_btn draft_post">
 									<input type="submit" value="Publish">
 								</div>
 								<div class="clear"></div>

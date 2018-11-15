@@ -19,9 +19,10 @@ var module_action="addpost";
 			<div class="cate_wrap">
 			<div class="cat_list">
 				<h5>Choose your category</h5>
-				<input type="hidden" id="post_category" name="post_category" value="Fashion" />
+				<input type="hidden" id="post_category" name="post_category" value="General" />
 				<ul class="post_category_selection">
-					<li><a data-section="Fashion" href="javascript:void(0)" class="active">Fashion</a></li>
+					<li><a data-section="General" href="javascript:void(0)" class="active">General</a></li>	
+					<li><a data-section="Fashion" href="javascript:void(0)" >Fashion</a></li>
 					<li><a data-section="Travel" href="javascript:void(0)" >Travel</a></li>
 					<li><a data-section="Food" href="javascript:void(0)" >Food</a></li>
 					<li><a data-section="Tech" href="javascript:void(0)" >Tech</a></li>
@@ -72,7 +73,7 @@ var module_action="addpost";
 								}
 							}
 						?>
-						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag Bloggotians" title="Tag Bloggotians" id="post_tags" style="width:100%" multiple="multiple"');?>
+						<?php  echo form_dropdown('post_tags[]',$followers,'',' class="form-control"  placeholder="Tag Bloggotians" data-placeholder="Tag Bloggotians"  title="Tag Bloggotians" id="post_tags" style="width:100%" multiple="multiple"');?>
 					</div>
 					<div class="form_field video_section" style="display:none;">
 						<div class="left_fm_field">
@@ -85,7 +86,7 @@ var module_action="addpost";
 						</div>
 						<div class="rgt_fm_field btn_submit_div">
 							<input type="hidden" name="status" id="status" value="" />
-							<input type="button" value="Sava as draft" class="grey_btn draft_post">
+							<input type="button" value="Save as draft" class="grey_btn draft_post">
 							<input type="submit" value="Publish">
 						</div>
 						<div class="clear"></div>
