@@ -8,6 +8,7 @@ var module_action="addpost";
         <h2 class="main_heading">Magazines</h2>
 		<?php $activesegment = $this->uri->segment(2); ?>
 		<ul class="category_menu blog_section inner_section">
+			<li><a data-section="" style="background: #65121A !important;" href="<?php echo base_url()."wall"; ?>" <?php if($activesegment=='' || $activesegment=="wall") { ?> class="active" <?php } ?>>Your Feed</a></li>	
 			<li><a data-section="General" href="<?php echo base_url()."home/general"; ?>" <?php if($activesegment=='general') { ?> class="active" <?php } ?>>General</a></li>	
 			<li><a data-section="Fashion" href="<?php echo base_url()."home/fashion"; ?>" <?php if($activesegment=='' || $activesegment=='fashion') { ?> class="active" <?php } ?>>Fashion</a></li>
 			<li><a data-section="Travel" href="<?php echo base_url()."home/travel"; ?>" <?php if($activesegment=='travel') { ?> class="active" <?php } ?>>Travel</a></li>
