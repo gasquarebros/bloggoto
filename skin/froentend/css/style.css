@@ -643,6 +643,11 @@ ul.profile_rgt {
 	width: auto;
 	text-align: center;
 }
+.innser_section_bottom {
+    background:#6D3139;
+    width:50%;
+    margin:0 auto;
+}
 
 .category_menu li {
     display: inline-block;

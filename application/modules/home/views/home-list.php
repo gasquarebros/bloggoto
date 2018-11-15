@@ -21,7 +21,7 @@ var module_action="addpost";
 		</ul>
 
         <div class="section_menu">
-            <ul class="category_menu blog_category">
+            <ul class="category_menu blog_category innser_section_bottom">
                 <li><a data-type="blog" href="javascript:void(0)" class="active">Blogs</a></li>
                 <li><a data-type="picture" href="javascript:void(0)">Pictures</a></li>
                 <li><a data-type="video" href="javascript:void(0)">Videos</a></li>

@@ -85,10 +85,11 @@ position: relative; overflow: visible !important; }
     .list_decp, .list_img, .list_col_inner { width: 100%; display: block; }
     .header_form { width: 100%; margin: 0; }
     .signup_wrap, .category_menu { margin: 5px 0px; }
-    .section_menu{ margin-bottom: 30px; height: 45px; overflow: hidden; padding-right: 30px; background: #616161; }
+    .section_menu{ margin-bottom: 30px; height: 45px; overflow: hidden; padding-right: 30px; }
     .section_menu.more_menu { height: auto; min-height: 45px; }
-    .more_items { display: block; }
+    .more_items { display: block; color:#6D3139;}
     .category_menu li { margin-bottom: 5px; }
+    .innser_section_bottom { width:100%; }
     .signup_wrap_inner { width: 100%; }
     .double_input .form_field_inner:first-child { margin-right: 0px;  }
     .signup_form_section label { font-size: 12px; }
