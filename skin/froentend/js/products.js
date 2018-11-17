@@ -321,6 +321,21 @@ $(document).ready(function(){
 		$('.cate_list').find('.categories').removeClass('active');
 		$(this).addClass('active');
 		get_content();
+		var cat = $(this).children('a').attr('data-type');
+		var url = SITE_URL+"products/getSortSubcategory";	 
+		$.ajax({
+			url : url,
+			data : "secure_key="+secure_key+"&category="+cat,
+			type : 'POST',
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				$('.subcate_list').html(data.html);
+				$(".subcate_list .mCustomScrollbar").mCustomScrollbar({
+					autoHideScrollbar:true,
+				});
+			}
+		});    
 	});
 
 	$('body').on('change','#product-sort',function(e) {
@@ -718,5 +733,8 @@ $(document).on('click', '.update_cart_qty', function(e) {
 	        });
    		}
         return false;
-    });        	
+	}); 
+	
+	
+	
     

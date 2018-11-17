@@ -44,10 +44,11 @@
 	</div>
 	<div class="header_menuwrap">
 		<div class="container">
+			<?php $firstsegment = $this->uri->segment(1); ?>
 			<ul class="category_menu main_menu_top main_menu">
-				<li><a data-section="Fashion" href="<?php echo base_url()."home/wall"; ?>">Social Media</a></li>
-				<li><a data-section="Fashion" href="<?php echo base_url()."products"; ?>" >Products</a></li>
-				<li><a data-section="Fashion" href="#" >Services</a></li>
+				<li><a <?php if($firstsegment=='home' || $firstsegment=='wall') { ?> class="active" <?php } ?> data-section="Social Media" href="<?php echo base_url()."home/wall"; ?>">Social Media</a></li>
+				<li><a <?php if($firstsegment=='cart' || $firstsegment=='products' || $firstsegment == 'checkout') { ?> class="active" <?php } ?> data-section="Products" href="<?php echo base_url()."products"; ?>" >Products</a></li>
+				<li><a <?php if($firstsegment=='services') { ?> class="active" <?php } ?> data-section="Services" href="#" >Services</a></li>
 				<?php if(get_user_id() != '') { ?>
 					<li style="float:right !important;">
 						<ul class="main_menu profile_menu" >
@@ -109,9 +110,9 @@
 					 <span class="icon-bar"></span>
 				 </div>
 				<ul class="device_nav blog_section">
-					<li><a href="<?php echo base_url()."home/wall"; ?>" >Social Media</a></li>
-					<li><a data-section="Fashion" href="<?php echo base_url()."products"; ?>" >Products</a></li>
-					<li><a data-section="Fashion" href="#" >Services</a></li>
+					<li><a <?php if($firstsegment=='home' || $firstsegment=='wall') { ?> class="active" <?php } ?> href="<?php echo base_url()."home/wall"; ?>" >Social Media</a></li>
+					<li><a <?php if($firstsegment=='cart' || $firstsegment=='products' || $firstsegment == 'checkout') { ?> class="active" <?php } ?> data-section="Products" href="<?php echo base_url()."products"; ?>" >Products</a></li>
+					<li><a <?php if($firstsegment=='services') { ?> class="active" <?php } ?> data-section="Services" href="#" >Services</a></li>
 					
 				</ul>	
 				

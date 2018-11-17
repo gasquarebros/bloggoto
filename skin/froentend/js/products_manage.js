@@ -65,10 +65,11 @@ $(document).ready(function() {
 		if(x <= max_fields){  
 			x++;  
 	
-		var html = '<div class="form_field">'+
+
+		var html = '<div class="image_browser_section_gallery ">'+
 			'<div class="remove_gallery"><span class="remove_field more_link fa fa-close"></span></div>'+
-			'<input type="file" name="product_gallery[]" class="ajax_image notneeded" ><span class="result"><span class="brows">+ '+gallery_image_label+'</span></span>'+
-			'</div>';			  
+			'<div class="custom_file"><input type="file" style="width:auto; opacity:1;" name="product_gallery[]" class="ajax_image notneeded" >'+
+			'</div></div>';			  
            
 			$(".multi_field").last().after(html);  
 		}

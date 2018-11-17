@@ -211,6 +211,25 @@ if(!function_exists('get_subcategory'))
 
 
 
+/*  this function to get all  subcategories list   */
+if(!function_exists('get_filter_subcategory'))
+{
+	function get_filter_subcategory($where=array(),$select=null)
+	{
+		$CI=& get_instance();
+
+		$join = '';
+		$order_by = array('pro_subcate_sequence'=>'ASC');
+		$join [0] ['select'] = "pro_cate_id,pro_cate_primary_id";
+		$join [0] ['table'] = 'product_categories';
+		$join [0] ['condition'] = "pro_cate_primary_id = pro_subcate_category_primary_id";
+		$join [0] ['type'] = "INNER";
+		return $records = $CI->Mydb->get_all_records('pro_subcate_primary_id,pro_subcate_category_primary_id,pro_subcate_id,pro_subcate_name,pro_subcate_sequence,pro_subcate_status','product_subcategories',$where,$limit='', $offset='', $order_by, $like='', $groupby=array(), $join );
+	}
+}
+
+
+
 /*  this function to get modifier values list   */
 if(!function_exists('get_modifier_list'))
 {

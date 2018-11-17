@@ -1526,6 +1526,31 @@ class Products extends CI_Controller {
 			'form_error'=>$form_error,
 		);
 	}
+
+	public function getSortSubcategory() {
+		check_site_ajax_request();
+		$cat = $this->input->post('category');
+		$where= array('pro_subcate_status'=>'A');
+		if($cat !='')
+		{
+			$where['pro_cate_id'] = $cat;
+		}
+		$product_subcategory  = get_filter_subcategory($where);
+		$html = ' <ul class="mCustomScrollbar">
+		<li class="categories active"><a data-type="">All Sub Categories</a></li>';
+		if(!empty($product_subcategory)){
+			$active = "subcategory_product";
+			$i=1;
+			foreach($product_subcategory as $prokey=>$productsubcategory) { 
+				if($i > 5) { $active="subcategory_product show_less_subcategory"; }
+				$html .= '<li class="categories '.$active.'"> <a data-type="'.$productsubcategory['pro_subcate_id'].'" href="javascript:void(0)" class="">'.stripslashes($productsubcategory['pro_subcate_name']).'</a> </li>';
+			}
+		}
+		$html.='</ul>';
+		echo json_encode (array(
+			'html' =>$html,
+		));
+	}
 	
 	/* this method used to common module labels */
 	private function load_module_info() {

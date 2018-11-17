@@ -4,7 +4,80 @@
 <link rel="stylesheet" href="<?php echo load_lib()?>timepicker-master/jquery-ui-1.10.0.custom.min.css" type="text/css" />
 <script type="text/javascript" src="<?php echo load_lib()?>bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="<?php echo skin_url()?>js/products_manage.js"></script>
+<link rel="stylesheet" href="<?php echo load_lib()?>/theme/css/custom.css">
+<style>
+header { margin:0px; }
+.flat-blue .card { display:inline-block; padding:6px 0; width:100%; }
+.card-header { margin-top:0px !important; }
+.card .card-header .card-title { padding-top: 6px; }
+/*left side tab section */
+.tabs-left > .nav-tabs { float:left; }
+.ui-tabs-anchor div {
+    float: left;
+}
 
+/*for images section*/
+.image_browser_section {
+width: 60%;
+float: left;
+}
+.addmorefiles { width:10%; float:left;}
+.result_browsefile { display:none;}
+.remove_gallery { float:left; }
+.image_browser_section_gallery {
+width: 100%;
+margin: 10px;
+float: left;
+}
+/*Right Side section */
+.tab-content {
+    width: calc(100% - 260px);
+    float: left;
+}
+.tabs-left { display:inline-block; }
+#common_form .chosen-container {
+	width: 100% !important;
+	margin-top:0px !important;
+}
+.col-sm-2 {
+	width:25%;
+	float:left;
+	padding-right:15px;
+}
+.col-sm-8 {
+	width:75%;
+	float:left;
+	
+
+}
+.form-group {
+    margin: 15px 5px;
+}
+.card-header {
+	width: 100%;
+	float: left;
+	clear: both;
+	margin-top: 21px;
+	padding-right: 30px;
+}
+.card-title{
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	width: calc(100% - 100px);
+	float: left;
+}
+#common_form {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin: 5px;
+}
+.btn_submit_div {
+	width: 100%;
+	text-align: center;
+}
+</style>
 <script>
 var validation_container ="Yes";
 var gallery_image_label = "<?php echo get_label('product_gallery');?>";
@@ -334,8 +407,8 @@ var commission_price = '<?php echo $commission_price; ?>';
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_thumbnail');?></label>
 										<div class="col-sm-8">
-											<div class="input_box">
-												<div class="custom_browsefile"> <?php echo form_upload('product_thumbnail');?> <span
+											<div class="input_boxs">
+												<div class="custom_browsefiles"> <?php echo form_upload('product_thumbnail');?> <span
 														class="result_browsefile"><span class="brows"></span> + <?php echo get_label('product_thumbnail');?></span>
 												</div>
 											</div>
@@ -357,15 +430,15 @@ var commission_price = '<?php echo $commission_price; ?>';
 															
 									<div class="form-group multi_field">
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_gallery');?></label>
-										<div class="col-sm-8 ">
-											<div class="input_box">
-												<div class="custom_browsefile"> <?php echo form_upload('product_gallery[]');?> <span
+										<div class="image_browser_section ">
+											<div class="input_boxs">
+												<div class="custom_browsefiles"> <?php echo form_upload('product_gallery[]');?> <span
 														class="result_browsefile"><span class="brows"></span> + <?php echo get_label('product_gallery');?></span>
 												</div>
 											</div>
 											<span class="hint"><?php echo "* ". get_label('product_max_image_count');?></span>
 										</div>
-										<div class="col-sm-2 ">
+										<div class="addmorefiles ">
 											<span class="more_link add_field_button fa fa-plus"></span>
 										</div>
 
@@ -605,7 +678,8 @@ jQuery('body').on('blur','#product_spl_price', function() {
     var commision_after = orginal_special_price - ((parseFloat(orginal_special_price) * parseFloat(commission_price) )/ 100);
     jQuery('.commission_special_price').html(commision_after);
 });
-</script>	
+</script>
+<?php /*	
 <style>
 #common_form .chosen-container {
     min-width: 200px !important;
@@ -705,4 +779,4 @@ table { width:100%; text-align:center; }
 .custom_file { display:none; }
 .brows { border:0px; }
 .shipping_method, .associate_product_tab { overflow-x:auto; max-width: 100%; }
-</style>
+</style>*/ ?>
