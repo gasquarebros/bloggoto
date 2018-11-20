@@ -542,11 +542,16 @@ class Home extends CI_Controller {
 		$data = $this->load_module_info ();
 		if ($this->input->post ( 'action' ) == "Add") {
 			
+
 			$this->form_validation->set_rules('post_title','lang:post_title','required|trim|strip_tags');			
 			$this->form_validation->set_rules('post_description','lang:post_description','required');
 			$this->form_validation->set_rules('post_category','lang:post_category','required');
 			$this->form_validation->set_rules('post_type','lang:post_type','required');
-			$this->form_validation->set_rules ( 'post_video', 'lang:post_video', 'trim|callback_validate_image' );
+			$this->form_validation->set_rules ( 'post_video', 'lang:post_video', 'trim|callback_validate_video' );
+			
+			if((post_value('post_type') == 'picture') && (empty($_FILES['post_photo']['name']))) { 
+				$this->form_validation->set_rules ( 'post_photo[]', 'lang:post_photo', 'required' );
+			}
 			
 			//$this->form_validation->set_rules('post_title','lang:post_title','required|trim|strip_tags');			
 		//	$this->form_validation->set_rules('post_description','lang:post_description','required');
@@ -567,12 +572,16 @@ class Home extends CI_Controller {
 				
 				
 				/* upload image */
-
+				if (isset ( $_FILES ['post_photo'] ['name'] ) && $_FILES ['post_photo'] ['name'] != "") 
+				{
+					$this->do_multi_upload("post_photo",$this->lang->line('post_photo_folder_name'),$record_id);
+				}	
+				/*
 				$post_photo = $record['post_photo'];
 
 				if (isset ( $_FILES ['post_photo'] ['name'] ) && $_FILES ['post_photo'] ['name'] != "") {
 					$post_photo = $this->common->upload_image ( 'post_photo', $this->lang->line('post_photo_folder_name') );
-				}
+				}*/
 				
 				/* upload video */
 				$post_video = $record['post_video'];
@@ -632,7 +641,6 @@ class Home extends CI_Controller {
 							//'post_type' => post_value ( 'post_type' ),
 							'post_title' => post_value ( 'post_title' ),
 							'post_description' => json_encode(get_censored_string($this->input->post ( 'post_description',FALSE ))),
-							'post_photo' => $post_photo,
 							'post_video' => $post_video,
 							'post_pdf' => $post_pdf,
 							'post_embed_video_url' => $embed_video_url,
