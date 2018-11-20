@@ -301,7 +301,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 								<div aria-labelledby="dropdown1-tab" id="stepv3"
 									class="tab-pane fade " role="tabpanel">
 										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price').get_required().add_tooltip('product_price');?></label>
+											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price').get_required().add_tooltip('product_price');?><br><span> (Update price Incl. of all taxes)</span></label>
 											<div class="col-sm-8">
 												<div class="input_box">
 													<input type="number"
@@ -324,7 +324,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 										
 										
 										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price').add_tooltip('product_spl_price');?></label>
+											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price').add_tooltip('product_spl_price');?><br><span> (Update price Incl. of all taxes)</span></label>
 											<div class="col-sm-8"><div class="input_box"><input type="number"  value="<?php echo  output_integer($records['product_special_price']);?>" class="form-control " name="product_spl_price" onkeypress="return isFloat(event)"  id="product_spl_price"> </div></div>
 										</div>
 
