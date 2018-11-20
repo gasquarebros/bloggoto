@@ -61,7 +61,17 @@ $lang['category_invalid'] = "Selected Category (OR) Subcategory Invalid";
 $lang['menu_custom_title'] = "Custom Title";
 
 
-
+/* service category module */
+$lang['ser_cate_label'] = "Service Category";
+$lang['ser_cate_labels'] = "Service Categories";
+$lang['ser_cate_name'] = "Category Name";
+$lang['ser_cate_short_desc'] = "Short Description";
+$lang['ser_cate_sequence'] = "Sort Order";
+$lang['ser_cate_desc'] = "Description";
+$lang['ser_cate_image'] = "Image";
+$lang['ser_cate_default_image'] = "Default Icon Image";
+$lang['ser_cate_active_image'] = "Active Icon Image";
+$lang['ser_cate_Sort Orderuence'] = "Sort Order";
 
 /* subcategory module */
 $lang['pro_subcate_label'] = "Subcategory";
@@ -279,6 +289,31 @@ $lang['product_sku_exist'] = "This Product SKU already exists";
 $lang['product_type'] = "Product Type";
 $lang['product_customer'] = "Product Customer";
 /* Product modules ends here */
+
+/* Service Modules starts here */
+$lang['services_labels'] = "Services";
+$lang['services_label'] = "Services";
+$lang['services_module'] = "Services";
+$lang['ser_title'] = "Title";
+$lang['ser_gallery'] = "Images";
+$lang['ser_slug'] = "Slug";
+$lang['ser_description'] = "Description";
+$lang['ser_category'] = "Category";
+$lang['ser_subcategory'] = "Subcategory";
+$lang['ser_price'] = "Price";
+$lang['ser_pricet_type'] = "Price Type";
+$lang['ser_discount_price'] = "Discount Price";
+$lang['ser_discount_start_date'] = "Discount Start Date";
+$lang['ser_discount_end_date'] = "Discount End Date";
+$lang['ser_status'] = "Status";
+$lang['ser_created_on'] = "Created On";
+$lang['ser_created_ip'] = "Ip";
+$lang['ser_created_by'] = "Created By";
+$lang['service_value_exist'] = "This Service Name already exists";
+$lang['service_customer'] = "Service Customer";
+$lang['ser_availability'] = "Service Availability";
+
+/* Service Modules ends here */
 
 
 /* professions module */

@@ -94,6 +94,12 @@ $lang['product_gallery_image_folder_name'] = "products/gallery-image";
 $lang['product_main_image_folder_name'] = "products/main-image";
 $lang['country_image_folder_name'] = "country";
 
+
+$lang['service_category_image_folder_name'] = "services/category-image";
+$lang['service_subcategory_image_folder_name'] = "services/subcategory-image";
+$lang['service_gallery_image_folder_name'] = "services/gallery-image";
+
+
 $lang['add_celebrity_bage'] = "add celebrity bage";
 $lang['remove_celebrity_bage'] = "remove celebrity bage";
 $lang['placeholder_post_title'] = "Enter the title";
