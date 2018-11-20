@@ -821,7 +821,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                                 <div class="filter_heading"> <span>Sort By</span> </div>
                                 <div class="filter_section">
                                     <div class="filter_sortby">
-                                        <select id="product-sort" name="sort_by">
+                                        <select id="product-sort-web" class="sortby" name="sort_by">
                                             <option value="" selected="">Select Sort By</option>
                                             <option value="price-low">Price Low to High</option>
                                             <option value="price-high">Price High to Low</option>
@@ -831,10 +831,10 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                                     </div>
                                 </div>
                             </div>
-                            
+                            <input type="hidden" name="product_sort" id="product-sort" value="" />
                             <div class="mobile-sortby-sec" style="display:none;">
                                 <div class="filter_sortby">
-                                     <select id="product-sort" name="sort_by">
+                                     <select id="product-sort-mobile" class="sortby" name="sort_by">
                                         <option value="" selected="">Select Sort By</option>
                                         <option value="price-low">Price Low to High</option>
                                         <option value="price-high">Price High to Low</option>
@@ -906,7 +906,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
     $('#price_from').val($( "#slider-range" ).slider( "values", 0 ));
     $('#price_end').val($( "#slider-range" ).slider( "values", 1 ));
 
-    //flash sale list view grid view part start
+
 	$('.list-grid-button ul li.list-view a').click(function(){
 		$('.flash_sale_deals').addClass('list-view');
 		$('.flash_sale_deals').removeClass('grid-view');

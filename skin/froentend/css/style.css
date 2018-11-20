@@ -2810,7 +2810,7 @@ td p {
     background: #045575;
     display: none;
     transition: all 0.5s ease;
-    z-index: 9;
+    z-index: 99;
 }
 .profile_account_menu_mobile { display:none; }
 
