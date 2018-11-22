@@ -20,7 +20,17 @@ var module_action="updatepost";
 				<h5>Choose your category</h5>
 				<input type="hidden" id="post_category" name="post_category" value="<?php echo $result['blog_cat_name'];?>" />
 				<ul class="post_category_selection">
-					<li><a data-section="Fashion" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Fashion') ? 'active': '';?>">Fashion</a></li>
+					<?php $categories = get_blog_category(); 
+					if(!empty($categories)) 
+						{ 
+							$i=0; 
+							foreach($categories as $catkey=>$cat) 
+							{  
+						?>				
+								<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class="<?php if($result['blog_cat_name'] == $catkey) echo 'active'; ?>"><?php echo $cat; ?></a></li>
+					<?php   } 
+						} ?>
+					<?php /*<li><a data-section="Fashion" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Fashion') ? 'active': '';?>">Fashion</a></li>
 					<li><a data-section="Travel" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Travel') ? 'active': '';?>">Travel</a></li>
 					<li><a data-section="Food" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Food') ? 'active': '';?>">Food</a></li>
 					<li><a data-section="Tech" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Tech') ? 'active': '';?>">Tech</a></li>
@@ -28,7 +38,7 @@ var module_action="updatepost";
 					<li><a data-section="Health" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Health') ? 'active': '';?>">Health</a></li>
 					<li><a data-section="Lifestyle" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Lifestyle') ? 'active': '';?>">Lifestyle</a></li>
 					<li><a data-section="Paparazzi" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Paparazzi') ? 'active': '';?>">Paparazzi</a></li>
-					<li><a data-section="Others" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Others') ? 'active': '';?>">Others</a></li>
+					<li><a data-section="Others" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Others') ? 'active': '';?>">Others</a></li>*/ ?>
 					
 				</ul>
 				<ul class="fr other_options">
