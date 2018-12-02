@@ -757,7 +757,7 @@ if(!function_exists('get_state_name'))
 }
 if(!function_exists('get_all_cities'))
 {
-	function get_all_cities($where='',$selected='',$extra='')
+	function get_all_cities($where='',$selected='',$extra='',$name='')
 	{
 	
 		$CI=& get_instance();
@@ -771,10 +771,31 @@ if(!function_exists('get_all_cities'))
 				$data[$value['city_id']] = stripslashes($value['city_name']);
 			}
 		}
-		$extra=($extra!='')?  $extra : 'class="form-control" id="customer_city" ' ;
+		$extra=($extra!='')?  $extra : 'class="form-control" data-placeholder="Select City" id="customer_city" ' ;
 		
-		 
-		return  form_dropdown('customer_city',$data,$selected,$extra);
+		$name=($name=='')? 'customer_city' :  $name ;
+		return  form_dropdown($name,$data,$selected,$extra);
+	}
+}
+
+
+if(!function_exists('get_cities'))
+{
+	function get_cities($where='')
+	{
+	
+		$CI=& get_instance();
+		$where_array=($where=='')? array('city_id !='=>'') :  $where ;
+		$records=$CI->Mydb->get_all_records('city_id,city_name','cities',$where_array,'','',array('city_name'=>"ASC"));
+		$data=array(''=>get_label('select_city'));
+		if(!empty($records))
+		{
+			foreach($records as $value)
+			{
+				$data[$value['city_id']] = stripslashes($value['city_name']);
+			}
+		}
+		return $data;
 	}
 }
 

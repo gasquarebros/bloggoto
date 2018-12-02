@@ -20,6 +20,7 @@ class Services extends CI_Controller
 		$this->module_labels = get_label ( 'services_labels' );
 		$this->folder = "services/";
 		$this->availability_table = "service_availability";
+		$this->service_city_table = "service_cities";
 		$this->table = "services";
 		$this->primary_key = 'ser_primary_id';
 		$this->load->library ( 'common' );
@@ -160,7 +161,7 @@ class Services extends CI_Controller
 			$this->form_validation->set_rules ( 'product_subcategory', 'lang:ser_subcategory', 'required' );
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			$this->form_validation->set_rules ( 'ser_availability', 'lang:ser_availability', 'required' );
-			
+			$this->form_validation->set_rules ( 'customer_city[]', 'lang:customer_city', 'required' );
 
 			if (( int ) $this->input->post ( 'ser_discount_price' ) != 0) {
 				
@@ -171,7 +172,7 @@ class Services extends CI_Controller
 			
 			if ($this->form_validation->run () == TRUE) {
 			
-
+				$availability = $this->input->post('ser_availability');
 				$product_id = get_guid ( $this->table, 'ser_service_id' );
 				$product_slug = make_slug ( $this->input->post ( 'ser_title' ), $this->table, 'ser_slug' );
 				$product_sequence = (( int ) $this->input->post ( 'ser_sequence' ) == 0) ? get_sequence ( 'ser_sequence', $this->table, array() )  : $this->input->post ( 'ser_sequence' );
@@ -191,6 +192,7 @@ class Services extends CI_Controller
                     'ser_discount_price' => post_value ( 'ser_discount_price' ),
 					'ser_discount_start_date' => (post_value ( 'ser_discount_start_date' ))?date ( "Y-m-d", strtotime ( post_value ( 'ser_discount_start_date' ) ) ):'',
 					'ser_discount_end_date' => (post_value ( 'ser_discount_end_date' ))?date ( "Y-m-d", strtotime ( post_value ( 'ser_discount_end_date' ) ) ):'',
+					'ser_available' => ",".implode(',',$availability).",",
 					'ser_created_on' => current_date (),
 					'ser_created_by' => get_admin_id (),
 					'ser_created_ip' => get_ip ()
@@ -200,7 +202,7 @@ class Services extends CI_Controller
 				
 				
 				if ($insert_id != "") {
-					$availability = $this->input->post('ser_availability');
+					
 					
 					$update_avail = array('ser_avail_serviceid'=>$insert_id);
 					if(!empty($ser_availability)) {
@@ -211,6 +213,19 @@ class Services extends CI_Controller
 					if(!empty($update_avail)) {
 						$avail_id = $this->Mydb->insert ( $this->availability_table, $update_avail );
 					}
+
+					$cities = $this->input->post('customer_city');
+					
+					$update_city = array();
+					if(!empty($cities)) {
+						foreach($cities as $city) {
+							$update_city[] = array('ser_service_id'=>$insert_id,'ser_city_id'=>$city);
+						}
+					}
+					if(!empty($update_city)) {
+						$avail_id = $this->Mydb->insert_batch ( $this->service_city_table, $update_city );
+					}
+					
 					/* insert gallery images */
 					if (! empty ( $_FILES ['product_gallery'] ['name'] )) {
 						//echo "inn";
@@ -260,6 +275,7 @@ class Services extends CI_Controller
 			$this->form_validation->set_rules ( 'product_category', 'lang:ser_category', 'required' );
 			$this->form_validation->set_rules ( 'product_subcategory', 'lang:ser_subcategory', 'required' );
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
+			$this->form_validation->set_rules ( 'customer_city[]', 'lang:customer_city', 'required' );
 
 			if (( int ) $this->input->post ( 'ser_discount_price' ) != 0) {
 				
@@ -273,7 +289,7 @@ class Services extends CI_Controller
 					$this->primary_key . "!=" => $record [$this->primary_key] 
 				));
 				$product_sequence = (( int ) $this->input->post ( 'ser_sequence' ) == 0) ? get_sequence ( 'ser_sequence', $this->table) : $this->input->post ( 'ser_sequence' );
-
+				$availability = $this->input->post('ser_availability');
 				$update_array = array (
 					'ser_title' => post_value ( 'ser_title' ),
 					'ser_slug' => $product_slug,
@@ -288,6 +304,7 @@ class Services extends CI_Controller
                     'ser_discount_price' => post_value ( 'ser_discount_price' ),
 					'ser_discount_start_date' => (post_value ( 'ser_discount_start_date' ))?date ( "Y-m-d", strtotime ( post_value ( 'ser_discount_start_date' ) ) ):'',
 					'ser_discount_end_date' => (post_value ( 'ser_discount_end_date' ))?date ( "Y-m-d", strtotime ( post_value ( 'ser_discount_end_date' ) ) ):'',
+					'ser_available' => ",".implode(',',$availability).",",
 					'ser_created_on' => current_date (),
 					'ser_created_by' => get_admin_id (),
 					'ser_created_ip' => get_ip ()
@@ -299,7 +316,7 @@ class Services extends CI_Controller
 					$this->primary_key => $record [$this->primary_key] 
 				), $update_array );
 
-				$availability = $this->input->post('ser_availability');
+				
 				
 				$update_avail = array();
 				$update_avail['ser_avail_mon'] = $update_avail['ser_avail_tue'] = $update_avail['ser_avail_wed'] = $update_avail['ser_avail_thu'] = $update_avail['ser_avail_fri'] = $update_avail['ser_avail_sat'] = $update_avail['ser_avail_sun'] = 0;
@@ -312,6 +329,19 @@ class Services extends CI_Controller
 					$avail_id = $this->Mydb->update ( $this->availability_table, array (
 						'ser_avail_serviceid' => $record [$this->primary_key] 
 					), $update_avail );
+				}
+
+				$cities = $this->input->post('customer_city');
+				$this->db->delete($this->service_city_table,array('ser_service_id' =>  $record [$this->primary_key] ));	
+				$update_city = array();
+				if(!empty($cities)) {
+					foreach($cities as $city) {
+						$update_city[] = array('ser_service_id'=> $record [$this->primary_key] ,'ser_city_id'=>$city);
+					}
+				}
+				//print_r($update_city); exit;
+				if(!empty($update_city)) {
+					$avail_id = $this->Mydb->insert_batch ( $this->service_city_table, $update_city );
 				}
 				
 				/* insert gallery images */
@@ -358,6 +388,20 @@ class Services extends CI_Controller
 			}
 		}
 		$data['availability'] = $service_availability;
+
+		/* get service city */
+		$cities = $this->Mydb->get_all_records ( '*', $this->service_city_table, array (
+			'ser_service_id' => $record [$this->primary_key] 
+		) );
+		$service_city = array();
+
+		if(!empty($cities)) {
+			foreach($cities as $city){
+				$service_city[] = $city['ser_city_id'];
+			}
+		}
+		$data['service_city'] = $service_city;
+
 		/* get gallery images */
 		$data ['gallery_images'] = $this->Mydb->get_all_records ( 'ser_gallery_id,ser_gallery_image,ser_gallery_ser_primary_id', 'service_gallery', array (
 				'ser_gallery_ser_primary_id' => $record [$this->primary_key] 

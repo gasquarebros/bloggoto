@@ -1,81 +1,62 @@
-<style>
-.discount-tag {
-    position: absolute;
-    left: 0;
-	bottom: 0;
-    background: #53a318;
-    color: #ffffff;
-    font-family: "proxima_nova_rgbold";
-    padding: 5px 10px 5px 10px;
-}
-.product_merchant {
-    font-size: 14px;
-    font-family: 'proxima_nova_rgbold';
-    color: #2a2a2a;
-    clear: both;
-    display: block;
-    transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
-    margin-bottom: 12px;
-    max-height: 34px;
-    overflow: hidden;
-}
-.list_prod_section {
-	height:400px;
-}
-</style>
+
 <?php if(!empty($records)) { ?>
-<ul>
-<?php $i=0; foreach($records as $record) {  ?>
-	<li class="list_prod_section">
-		<?php $discount = find_discount($record['product_price'],$record['product_special_price'],$record['product_special_price_from_date'],$record['product_special_price_to_date']); ?>
-		<div class="img_part">
-			<?php if($record['product_thumbnail'] !=''){ $photo=media_url().$this->lang->line ( 'product_main_image_folder_name' )."/".$record['product_thumbnail']; } else { $photo=media_url().$this->lang->line('post_photo_folder_name')."default.png"; } ?>
-			
-			<a class="main-title" title="<?php echo $record['product_name']; ?>" href="<?php echo base_url().$module.'/view/'.$record['product_slug']; ?>"> 
-				<img src="<?php echo $photo; ?>" alt="<?php echo $record['product_name']; ?>" />
-			</a>
-			<?php if($discount > 0 ) {?>
-				<span class="discount-tag">
-					<?php echo $discount; ?>% Off 
-				</span>
-			<?php } ?>
-		</div>
-		<div class="cont_part">
-			<a class="main-title " title="<?php echo $record['product_name']; ?>" href="<?php echo base_url().$module.'/view/'.$record['product_slug']; ?>"><?php echo $record['product_name']; ?></a> 
-			<p><?php echo substr_close_tags($record['product_short_description']); ?></p>
-
-			<a href="<?php echo base_url().urlencode($record['customer_username']).'#products'; ?>" class="product_merchant"><?php echo $record['customer_username']; ?></a> 
-
-			<?php 
-			if($record['product_special_price'] !='' && $discount > 0) {?>
-				<div class="price-part fr txtr">
-					<p class="old-price"><?php echo show_price($record['product_price']);?></p>
-					<p class="new-price"><?php echo show_price($record['product_special_price']);?></p>
+	<?php $i=0; foreach($records as $record) {  ?>
+		<div class="listing-two-item">
+			<div class="cover-photo">
+				<img src="img/photographer.jpg" alt="">
+				<div class="cover-photo-hover">
+					<div class="share-like-two">
+						<a href="#"><i class="fa fa-heart-o"></i></a>
+						<a href="#"><i class="fa fa-share-alt"></i></a>
+						<a href="#"><i class="fa fa-bookmark-o"></i></a>
+					</div>
 				</div>
-			<?php } else { ?>
-				<div class="price-part fr">
-					<p class="new-price"><?php echo show_price($record['product_price']);?></p>
+			</div>
+			<div class="listing-two-item-info">
+				<div class="user-two-pic">
+					<img src="img/avatar2.jpg" alt="">
 				</div>
-			<?php } ?>
-			<div class="clear"></div>
+				<h3><?php echo $record['ser_title']; ?></h3>
+				<strong><a href="<?php echo base_url().urlencode($record['customer_username']); ?>" class=""><?php echo $record['customer_username']; ?></a> -&gt; </strong> <span class="text-info"><?php echo $record['ser_cate_name']; ?></span>
+				<p><?php echo substr_close_tags($record['ser_description']); ?></p>
+				<div class="rating-bt">
+					<div class="rating-stars">
+						<?php $discount = find_discount($record['ser_price'],$record['ser_discount_price'],$record['ser_discount_start_date'],$record['ser_discount_end_date']);
+						$sprice = ""; 
+						if($record['ser_discount_price'] !='' && $discount > 0) {
+							$sprice = $record['ser_discount_price'];
+						?>
+						<p>
+						<span class="old-price"><?php echo show_price($record['ser_price']);?></span>
+						<span class="new-price"><?php echo show_price($record['ser_discount_price']);?></span></p>
+						<?php } else {
+							$sprice = $record['ser_price'];
+						?>
+						<p><span class="new-price"><?php echo show_price($record['ser_price']);?></span></p>
+						<?php } ?>
+					</div>
+					<?php /*<div class="rating-stars">
+						<i class="fa fa-star yel"></i>
+						<i class="fa fa-star yel"></i>
+						<i class="fa fa-star yel"></i>
+						<i class="fa fa-star-half-empty"></i>
+						<i class="fa fa-star-o yel"></i>
+						<span>(4.4/345 Reviews)</span>
+					</div>*/ ?>
+					<a href="<?php echo base_url().$module.'/view/'.$record['ser_slug']; ?>"><strong>View</strong> <i class="fa fa-angle-right"></i></a>
+				</div>
+			</div>
 		</div>
-		<div class="button_bar"> 
-			<a href="<?php echo base_url().$module.'/view/'.$record['product_slug']; ?>" class=" common_but"> <span>Buy Now</span> </a> 
-		</div>
-	</li>
-<?php } ?> 
-</ul>
-<div class="clear"></div>
-<div class="more_details_par txtc">
-	<h5> <span> <span class="display_current_count"><?php echo $current_records; ?></span> of <span class="total_current_count"><?php echo $total_rows; ?></span> </span> </h5>
-	<?php if($current_records < $total_rows) { ?>
-		<a data-nextpage="<?php echo $page+1; ?>" class="common_but lazy_load_flashsale load_more"> <span>Show more</span> </a> 
-	<?php }  ?>
-</div>
-<?php
-} else if($offset == 0) { ?>
-	<div class="list_row">
+	<?php } ?>
+	<div class="clear"></div>
+	<div class="more_details_par txtc">
+		<h5> <span> <span class="display_current_count"><?php echo $current_records; ?></span> of <span class="total_current_count"><?php echo $total_rows; ?></span> </span> </h5>
+		<?php if($current_records < $total_rows) { ?>
+			<a data-nextpage="<?php echo $page+1; ?>" class="common_but lazy_load_flashsale load_more"> <span>Show more</span> </a> 
+		<?php }  ?>
+	</div>
+<?php } else if($offset == 0) { ?>
+	<div class="list_row" style="width:100%;">
 		<p class="no_records">No Products Found</p>
 	</div>
 <?php } ?>

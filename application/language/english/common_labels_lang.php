@@ -43,6 +43,7 @@ $lang ['created_on'] = "Created On";
 $lang ['created_on_format'] = "(DD-MM-YYYY)";
 $lang ['select'] = "Select";
 $lang ['select_status'] = "Select Status";
+$lang['select_city'] = "Select City";
 $lang ['remove_image_title'] = "Click to Remove Image";
 $lang ['log_in'] = "Log In...";
 $lang ['forgot_password'] = "Forgot Password";

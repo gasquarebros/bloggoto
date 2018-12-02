@@ -143,7 +143,14 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 
 						<div class="form-group">
 							<label for="ser_availability" class="col-sm-2 control-label"><?php echo get_label('ser_availability').get_required();?></label>
-							<div class="col-sm-8"><div class="input_box"><?php echo form_dropdown('ser_availability[]',array(''=>'Select Availability','mon'=>'Monday','tue'=>'Tuesday','wed'=>'Wednesday','thu'=>'Thursday','fri'=>'Friday','sat'=>'Saturday','sun'=>'Sunday'),$availability,'class="form-control required " multiple="multiple" id="ser_avail"'); ?></div></div>
+							<div class="col-sm-8"><div class="input_box"><?php echo form_dropdown('ser_availability[]',array(''=>'Select Availability','mon'=>'Monday','tue'=>'Tuesday','wed'=>'Wednesday','thu'=>'Thursday','fri'=>'Friday','sat'=>'Saturday','sun'=>'Sunday'),$availability,'class="form-control required " multiple="multiple" data-placeholder="Select Availability" id="ser_avail"'); ?></div></div>
+						</div>
+
+						<div class="form-group">
+							<label for="customer_city" class="col-sm-2 control-label"><?php echo get_label('customer_city').get_required();?></label>
+							<div class="col-sm-8"><div class="input_box">
+							<?php echo get_all_cities('',$service_city,'class="form-control" required data-placeholder="Select City" id="customer_city" multiple="multiple" data-placeholder="Select City"','customer_city[]'); ?>
+							</div></div>
 						</div>
 						
 						
