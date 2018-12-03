@@ -26,8 +26,8 @@
                             <div class="form-group">
                              <?php  $search_array = array(
                              		 '' => get_label('select'),
-                             	     'product_name' => get_label('product_name'),
-                             		'product_sku' => get_label('product_sku'),
+                             	     'ser_title' => get_label('ser_title'),
+                             		'ser_slug' => get_label('ser_slug'),
                              );
                              
                              echo form_dropdown('search_field',$search_array,get_session_value($module."_search_field"),' style="width:200px  !important; " ');
@@ -40,7 +40,9 @@
                             
                              <?php /* category filter*/ ?>
                              <div class="form-group">
-                                 <?php //echo get_product_category(array('cate_availability_id !=' => 'EB62AF63-0410-47CC-9464-038E796E28C4'),get_session_value($module."_category_id"),'class="form-control search_select" id="product_category" ','pro_cate_id');?>
+							 	<?php 
+                             		echo get_service_category($where='',$selected='',$extra='class="form-control" id="product_category" ',$product_id='ser_cate_primary_id');
+                             	?>
                             </div> 
                            
                                 <div class="form-group">

@@ -18,23 +18,15 @@
 <table class="table " style="text-align: left;">
 	<thead class="first">
 		<tr>
-			<th width="10px">
-                    <?= form_checkbox('multicheck','Y',FALSE,' class="multicheck_top"  type="checkbox" id="mul_check_top" ');?>
-                    </th>
-					
-			<th><?=get_label('product_name').add_sort_by('product_name',$module);?></th>
-			
-			<th><?=get_label('product_alias');?></th>
-			
-			<th><?=get_label('product_price').add_sort_by('product_price',$module);?></th>
-			<th><?=get_label('product_sku').add_sort_by('product_sku',$module);?></th>
-			<th><?=get_label('product_type').add_sort_by('product_type',$module);?></th>
-				
-			<th><?=get_label('product_sequence').add_sort_by('product_sequence',$module);;?></th>
-		   <th><?= get_label('status');?></th>
-			<th width=""><?=get_label('actions');?></th>
-
-
+		<th width="10px"><div class="checkbox3 checkbox-inline checkbox-check checkbox-light">
+            <?= form_checkbox('multicheck','Y',FALSE,' class="multicheck_top"  type="checkbox" id="mul_check_top" ');?>
+            <label for="mul_check_top" class="chk_box_label"></label></div></th>
+            <th><?=get_label('ser_title');?><?php echo add_sort_by('ser_title',$module); ?></th>
+            <th><?=get_label('ser_category');?><?php echo add_sort_by('ser_category',$module); ?></th>
+            <th><?=get_label('ser_description');?></th>
+			<th width="150px"><?= get_label('created_on');?></th>
+			<th><?= get_label('status');?></th>
+			<th width="150px"><?=get_label('actions');?></th>
 		</tr>
 	</thead>
 
@@ -44,26 +36,19 @@
 	if (! empty ( $records )) {
 		foreach ( $records as $val ) {
 			?>
-<tr>
-			<td scope="row"><?php echo form_checkbox('id[]',$val['product_primary_id'],'',' class="multi_check" type="checkbox" id="'.$val['product_primary_id'].'"   ');?>
+		<tr>
+			<td><div class="checkbox3 checkbox-inline checkbox-check checkbox-light"><?php echo form_checkbox('id[]',$val['ser_primary_id'],'',' class="multi_check" type="checkbox" id="'.$val['ser_primary_id'].'"   ');?>
+            <label for="<?php echo $val['ser_primary_id'];?>" class="chk_box_label"></label>
+			</div></td>
+            <td><?php echo output_value($val['ser_title']);?> </td>
+            <td><?php echo output_value($val['ser_cate_name']);?> </td>
+            <td><?php echo output_value($val['ser_description']);?> </td>
+			<td><?php echo get_date_formart(($val['ser_created_on']));?></td>
+			<td class="top_input" ><a href="javascript:;"><?php echo show_status($val['ser_status'],$val['ser_primary_id']);?></a></td>
+			<td>
+			<a href="<?php echo base_url().$module.'/edit/'.encode_value($val['ser_primary_id']);?>"><i class="fa fa-edit" title="<?php echo get_label('edit')?>"></i></a>&nbsp;
+			<a href="javascript:;" class="delete_record" id="<?php echo encode_value($val['ser_primary_id']);?>" data="Delete"><i class="fa fa-trash" title="<?php echo get_label('delete')?>"></i></a>
 			</td>
-					
-			<td><?php echo stripslashes($val['product_name']);?></td>
-			<td><?php echo output_value(stripslashes($val['product_alias']));?></td>
-			<td><?php echo show_price($val['product_price']);?></td>
-			<td><?php echo output_value($val['product_sku']);?></td>	 
-			<td class="align-center"><?php echo output_value($val['product_type']); ?></td>
-			<td class="align-center"><?php echo $val['product_sequence']; ?></td>
-			<td class="align-center"><a href="javascript:;"><?php echo show_status($val['product_status'],$val['product_primary_id']);?></a> </td>
-
-			
-	<td> 
-
-		
-       
-	    <a href="<?php echo base_url().$module.'/edit/'.encode_value($val['product_primary_id']);?>"><i class="fa fa-edit" title="<?php echo get_label('edit')?>"></i></a>&nbsp;
-		<a href="javascript:;" class="delete_record" id="<?php echo encode_value($val['product_primary_id']);?>" data="Delete" ><i class="fa fa-trash" title="<?php echo get_label('delete')?>"></i></a>
-		</td>
 		</tr>
 <?php  } } else { ?>
 <tr class="no_records">
@@ -78,15 +63,15 @@
 	</tbody>
 	<thead class="last">
 		<tr>
-			<th> <?= form_checkbox('multicheck','Y',FALSE,' class="multicheck_bottom"  type="checkbox"  id="mul_check_bottom"');?> </th>
-			<th><?=get_label('product_name').add_sort_by('product_name',$module);?></th>
-			<th><?=get_label('product_alias');?></th>
-			<th><?=get_label('product_price').add_sort_by('product_price',$module);?></th>
-			<th><?=get_label('product_sku').add_sort_by('product_sku',$module);?></th>
-			<th><?=get_label('product_type').add_sort_by('product_type',$module);?></th>
-			<th><?=get_label('product_sequence').add_sort_by('product_sequence',$module);;?></th>
+			<th width="10px"><div class="checkbox3 checkbox-inline checkbox-check checkbox-light">
+            <?= form_checkbox('multicheck','Y',FALSE,' class="multicheck_top"  type="checkbox" id="mul_check_top" ');?>
+            <label for="mul_check_top" class="chk_box_label"></label></div></th>
+            <th><?=get_label('ser_title');?><?php echo add_sort_by('ser_title',$module); ?></th>
+            <th><?=get_label('ser_category');?><?php echo add_sort_by('ser_category',$module); ?></th>
+            <th><?=get_label('ser_description');?></th>
+			<th width="150px"><?= get_label('created_on');?></th>
 			<th><?= get_label('status');?></th>
-			<th><?=get_label('actions');?></th>
+			<th width="150px"><?=get_label('actions');?></th>
 		</tr>
 	</thead>
 

@@ -1,8 +1,4 @@
-
-
-<link href="<?php echo load_lib()?>bootstrap-datepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo load_lib()?>timepicker-master/jquery-ui-1.10.0.custom.min.css" type="text/css" />
-<script type="text/javascript" src="<?php echo load_lib()?>bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="<?php echo skin_url()?>js/products_manage.js"></script>
 <link rel="stylesheet" href="<?php echo load_lib()?>/theme/css/custom.css">
 <style>
@@ -10,18 +6,14 @@ header { margin:0px; }
 .flat-blue .card { display:inline-block; padding:6px 0; width:100%; }
 .card-header { margin-top:0px !important; }
 .card .card-header .card-title { padding-top: 6px; }
-/*left side tab section */
-.tabs-left > .nav-tabs { float:left; }
-.ui-tabs-anchor div {
-    float: left;
-}
 
 /*for images section*/
 .image_browser_section {
 width: 60%;
 float: left;
+clear:none !important
 }
-.addmorefiles { width:10%; float:left;}
+.addmorefiles { width:10%; float:left; clear:none !important}
 .result_browsefile { display:none;}
 .remove_gallery { float:left; }
 .image_browser_section_gallery {
@@ -29,26 +21,28 @@ width: 100%;
 margin: 10px;
 float: left;
 }
-/*Right Side section */
-.tab-content {
-    width: calc(100% - 260px);
-    float: left;
-}
-.tabs-left { display:inline-block; }
+
 #common_form .chosen-container {
 	width: 100% !important;
 	margin-top:0px !important;
+}
+.control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
 }
 .col-sm-2 {
 	width:25%;
 	float:left;
 	padding-right:15px;
 }
+.col-sm-4 {
+    width: 33.33333333%;
+	float:left;
+}
 .col-sm-8 {
 	width:75%;
 	float:left;
-	
-
 }
 .form-group {
     margin: 15px 5px;
@@ -98,527 +92,147 @@ var commission_price = '<?php echo $commission_price; ?>';
 							</div>
 						</div>
 					</div>
-					<?php echo form_open_multipart(base_url().$module."/$module_action",' class="form-horizontal" id="common_form" ' );?>
-
-					<div class="card-body">
-						<div class="container_div">
-							<ul class=" alert_msg  alert-danger  alert container_alert"
-								style="display: none;">
-							</ul>
-						</div>
-						<div class="step tabs-left card-no-padding">
-							<ul role="tablist" class="nav nav-tabs">
-								<li role="step" class="active"><a aria-expanded="false"
-									aria-controls="home" data-toggle="tab" role="tab"
-									id="step1-vtab" href="#stepv1">
-										<div class="icon fa fa-cutlery"></div>
-										<div class="step-title">
-											<div class="title"><?php echo get_label('product_tab1').get_required();?></div>
-
-										</div>
-								</a></li>
-								<li role="step" class=""><a aria-controls="profile"
-									data-toggle="tab" id="step2-vtab" role="tab" href="#stepv2"
-									aria-expanded="false">
-										<div class="icon fa fa-object-group"></div>
-										<div class="step-title">
-											<div class="title"><?php echo get_label('product_tab2').get_required();?></div>
-										</div>
-								</a></li>
-								
-								<li role="step" class=""><a aria-expanded="false"
-									aria-controls="home" data-toggle="tab" role="tab"
-									id="step3-vtab" href="#stepv3">
-										<div class="icon fa fa-dollar"></div>
-										<div class="step-title">
-											<div class="title"><?php echo get_label('product_tab3').get_required();?></div>
-
-										</div>
-								</a></li>
-								<li role="step" class=""><a aria-controls="profile"
-									data-toggle="tab" id="step7-vtab" role="tab" href="#stepv7"
-									aria-expanded="true">
-										<div class="icon fa fa-truck"></div>
-										<div class="step-title">
-											<div class="title"><?php echo get_label('product_tab7');?></div>
-											<div class="description"></div>
-										</div>
-								</a></li>
-								<li role="step" class=""><a aria-controls="profile"
-									data-toggle="tab" id="step4-vtab" role="tab" href="#stepv4"
-									aria-expanded="true">
-										<div class="icon fa fa-image"></div>
-										<div class="step-title">
-											<div class="title"><?php echo get_label('product_tab4');?></div>
-											<div class="description"></div>
-										</div>
-								</a></li>
-								<li role="step" class=""><a aria-controls="profile"
-									data-toggle="tab" id="step5-vtab" role="tab" href="#stepv5"
-									aria-expanded="true">
-										<div class="icon fa fa-tags"></div>
-										<div class="step-title">
-											<div class="title"><?php echo get_label('product_tab5');?></div>
-											<div class="description"></div>
-										</div>
-								</a></li> 
-								<li role="step" class="associate_product_tab" <?php if($records['product_type'] !='attribute') { ?> style="display:none;" <?php } ?>>
-									<a aria-controls="profile" data-toggle="tab" id="step6-vtab" role="tab" href="#stepv6" aria-expanded="true">
-										<div class="icon fa fa-tags"></div>
-										<div class="step-title">
-											<div class="title"><?php echo get_label('product_tab6');?></div>
-											<div class="description"></div>
-										</div>
-									</a>
-								</li> 	
-                            </ul>
-							<div class="tab-content">
-								<!-- tab1  -->
-								<div aria-labelledby="home-tab" id="stepv1" class="tab-pane fade active in " role="tabpanel">
-									<?php /*
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_parent');?></label>
-										<div class="col-sm-8">
-											<div class="input_box">
-												<?php echo get_product_list(array('product_status'=>'A','product_parent_id' =>''),'','class="form-control search_select check_option" id="products_list"  data-placeholder="'.get_label('select_products').'" ','','','1','parent_product');?>
-											</div>
-										</div>
-									</div>*/ ?>
-
-									
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_name').get_required();?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_input('product_name',stripslashes($records['product_name']),' class="form-control required" title="'.sprintf(get_label('product_errors'),get_label('product_name')).'"  ');?></div>
-										</div>
-									</div>
-                                    <div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_alias');?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_input('product_alias_text',stripslashes($records['product_alias']),'class="form-control" ');?></div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_short_description');?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_textarea('product_short_description',stripslashes($records['product_short_description']),' class="form-control"  ');?></div>
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_long_description');?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_textarea('product_long_description',stripslashes($records['product_long_description']),' class="form-control"   title="'.sprintf(get_label('product_errors'),get_label('product_long_description')).'" ');?></div>
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_sku').get_required();?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_input('product_sku',stripslashes($records['product_sku']),' class="form-control required"  title="'.sprintf(get_label('product_errors'),get_label('product_sku')).'" ');?></div>
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_quantity').get_required();?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_input('product_quantity',$records['product_quantity'],' class="form-control required"   title="'.sprintf(get_label('product_quantity'),get_label('product_quantity')).'"  ');?></div>
-										</div>
-									</div>
-									<?php /*
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_barcode');?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_input('product_barcode',stripslashes($records['product_barcode']),' class="form-control"   ');?></div>
-										</div>
-									</div>
-									*/ ?>
-
-									
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_sequence');?></label>
-										<div class="col-sm-8">
-											<div class="input_box">
-												<input type="number"
-													value="<?php echo output_integer($records['product_sequence']); ?>"
-													class="form-control " name="product_sequence"
-													id="product_sequence" onkeypress="return isNumber(event)">
-
-											</div>
-										</div>
-									</div>
-
-                                    <div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_is_display');?></label>
-										<div class="col-sm-<?php echo get_form_size();?>">
-											<div class="input_box">
-                                                <input name="product_is_display]" value="0" class="" type="hidden">
-													<label>
-														<input class="" name="product_is_display" value="1" type="checkbox" <?php if($records['product_is_display'] == 1) { echo "checked='checked'"; } ?>>
-													</label>
-                                            </div>
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('status').get_required();?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo get_status_dropdown($records['product_status'],'','class="required"  title="'.sprintf(get_label('product_errors'),get_label('status')).'"   ');;?></div>
-										</div>
-									</div>
-
-
-
-								</div>
-								
-								
-								
-								<!-- tab2  -->
-								<div aria-labelledby="profile-tab" id="stepv2" class="tab-pane fade " role="tabpanel">
-									<div class="form-group" id="">
-										<label for="product_settings_type" class="col-sm-2 control-label"><?php echo get_label('product_settings').get_required().add_tooltip('product_settings');?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_dropdown('product_settings',array('simple'=>'Simple Product','attribute'=>'Attribute Product'),$records['product_type'],'class="form-control required" onchange="get_attribute_enabled()" id="product_settings_type"' );?></div>
-										</div>
-									</div>
-									
-									<div class="form-group" id="">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_categorie').get_required().add_tooltip('product_categorie');?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo get_product_category_select_edit(array('pro_cate_status'=>'A'),$records['product_category_id']."~".$records['product_subcategory_id'], '  class="search_select required" id="prod_category" onchange="get_attribute_enabled()" ','pro_cate_id');?></div>
-										</div>
-									</div>
-									<div id="category_div"></div>
-									
-									<div class="form-group  associate_product_tab" <?php if($records['product_type'] !='attribute') { ?>style="display:none" <?php } ?>>
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('category_modifier').add_tooltip('modifier_enabled');?></label>
-										<div class="col-sm-8"><div class="input_box modi_div"><?php  echo get_product_modifier(array('pro_modifier_status' => 'A','pro_modifier_category_id'=>$records['product_category_id']),$assigned_modifiers,'class="form-control search_select " onchange="get_attribute_enabled()" id="product_modifier" ',' multiple="multiple" data-placeholder="'.get_label('product_modifier_select').'" ','pro_modifier_id');?></div></div>
-									</div>
-								</div>
-								
-								
-								<!-- tab3 -->
-								<div aria-labelledby="dropdown1-tab" id="stepv3"
-									class="tab-pane fade " role="tabpanel">
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price').get_required().add_tooltip('product_price');?></label>
-											<div class="col-sm-8">
-												<div class="input_box">
-													<input type="number"
-														title="<?php echo sprintf(get_label('product_errors'),get_label('product_price')); ?>"
-														value="<?php echo output_integer($records['product_price']);?>"
-														class="form-control required" name="product_price"
-														onkeypress="return isFloat(event)" id="product_price">
-												</div>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price_after_commission').add_tooltip('product_price');?></label>
-											<div class="col-sm-8">
-												<div class="input_box commission_price">
-												<?php echo $records['product_price'] - (($records['product_price'] * $commission_price)/100); ?>
-												</div>
-											</div>
-										</div>
-										
-										
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price').add_tooltip('product_spl_price');?></label>
-											<div class="col-sm-8"><div class="input_box"><input type="number"  value="<?php echo  output_integer($records['product_special_price']);?>" class="form-control " name="product_spl_price" onkeypress="return isFloat(event)"  id="product_spl_price"> </div></div>
-										</div>
-
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price_after_commission').add_tooltip('product_price');?></label>
-											<div class="col-sm-8">
-												<div class="input_box commission_special_price"><?php echo $records['product_special_price'] - (($records['product_special_price'] * $commission_price)/100); ?>
-												</div>
-											</div>
-										</div>
-															
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price_from').add_tooltip('product_spl_price_from');?></label>
-											<div class="col-sm-8"><div class="input_box">
-												<input type="text"  value="<?php echo ($records['product_special_price_from_date'] !='' && $records['product_special_price_from_date'] !="NULL" && $records['product_special_price_from_date'] != '0000-00-00 00:00:00' && $records['product_special_price_from_date'] != '1970-01-01')?stripslashes(date('d-m-Y',strtotime($records['product_special_price_from_date']))):"";?>" class="form-control datepickerchange1 valid datepicker" name="product_spl_price_from" id="product_spl_price_from" onkeypress="return isFloat(event)" >
-											</div></div>
-											<!--output_date( $records['product_special_price_from_date']) -->
-											<!--div class="col-sm-8"><div class="input_box"><?php  echo form_input('product_spl_price_from',($records['product_special_price_from_date'] !='' && $records['product_special_price_from_date'] !="NULL" && $records['product_special_price_from_date'] != '0000-00-00 00:00:00' )?stripslashes(date('d-m-Y',strtotime($records['product_special_price_from_date']))):"",' class="form-control datepickerchange1 required"  ','onkeypress="return isFloat(event)"');?></div></div-->					
-										</div>
-															
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price_to').add_tooltip('product_spl_price_to');?></label>
-											<div class="col-sm-8"><div class="input_box">
-											<input type="text"  value="<?php echo ($records['product_special_price_to_date'] !='' && $records['product_special_price_to_date'] !="NULL" && $records['product_special_price_to_date'] != '0000-00-00 00:00:00' && $records['product_special_price_to_date'] != '1970-01-01' )?stripslashes(date('d-m-Y',strtotime($records['product_special_price_to_date']))):"" ;?>" class="form-control datepickerchange2 valid datepicker" name="product_spl_price_to" id="product_spl_price_to" onkeypress="return isFloat(event)" >
-											</div></div>
-											<!--div class="col-sm-8"><div class="input_box"><?php  echo form_input('product_spl_price_to',($records['product_special_price_to_date'] !='' && $records['product_special_price_to_date'] !="NULL" && $records['product_special_price_to_date'] != '0000-00-00 00:00:00' )?stripslashes(date('d-m-Y',strtotime($records['product_special_price_to_date']))):"",' class="form-control datepickerchange2 required"  ','onkeypress="return isFloat(event)"');?></div></div-->					
-										</div>
-								</div>	
-								<!-- tab 7 -->
-								<div aria-labelledby="dropdown1-tab" id="stepv7" class="tab-pane fade shipping_method" role="tabpanel">
-									<table class="table table-bordered table-striped">
-										<thead>
-											<tr>
-												<th>Shipping Method</th>
-												<th>Shipping Delivery Price</th>
-												<th>Shipping Delivery Is Combined</th>
-												<th class="text-center" style="width: 90px;">
-													<button type="button" class="add-shipping btn btn-success btn-xs"><span class="fa fa-plus"></span></button>
-												</th>
-											</tr>
-										</thead>
-										<tbody class="container-shippingitems" data-count="1">
-											<?php $shipping_methods_list = get_shipping_list(array('ship_method_status'=>'A')); ?>
-											<?php if(!empty($assigned_shipping)) { 
-												foreach($assigned_shipping as $shipping) {
-											?>
-											<tr class="shipping-item" >
-												<td>
-													<select class="form-control" name="ProductShipping[prod_ass_ship_method_shipid][]">
-														<option value="">Select Shipping Method</option>
-														<?php foreach($shipping_methods_list as $shippingmethod) {  ?>
-														<option <?php if($shipping['prod_ass_ship_method_shipid'] == $shippingmethod['ship_method_id']) { echo "selected='selected'"; } ?>value="<?php echo $shippingmethod['ship_method_id']; ?>"><?php echo $shippingmethod['ship_method_name']; ?></option>
-														<?php } ?>
-													</select>
-												</td>
-												<td>
-													<input class="form-control input" name="ProductShipping[prod_ass_ship_method_price][]" type="text" value="<?php echo $shipping['prod_ass_ship_method_price']; ?>">
-												</td>
-												<td>
-													<input name="ProductShipping[prod_ass_ship_method_uncheck][0]" value="0" class="shipping_free_unassign" type="hidden">
-													<label>
-														<input class="display shipping_free_assign" name="ProductShipping[prod_ass_ship_method_is_combined][0]" value="1" type="checkbox" <?php if($shipping['prod_ass_ship_method_is_combined'] == 1) { echo "checked='checked'"; } ?>> 
-														Is Combined
-													</label>
-												</td>
-												<td class="text-center vcenter" style="width: 90px; verti">
-													<button type="button" class="remove-shipping btn btn-danger btn-xs"><span class="fa fa-minus"></span></button>
-												</td>
-											</tr>
-											<?php } } ?>
-										</tbody>
-									</table>
-								</div>
-                                
-								<!-- tab 7 -- >
-                                            
-                                <!-- tab 4  -->
-								<div aria-labelledby="dropdown1-tab" id="stepv4"
-									class="tab-pane fade " role="tabpanel">
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_thumbnail');?></label>
-										<div class="col-sm-8">
-											<div class="input_boxs">
-												<div class="custom_browsefiles"> <?php echo form_upload('product_thumbnail');?> <span
-														class="result_browsefile"><span class="brows"></span> + <?php echo get_label('product_thumbnail');?></span>
-												</div>
-											</div>
-										</div>
-									</div>
-																												
-									<?php if($records['product_thumbnail']){ ?>
-									 <div class="form-group show_image_box">
-										<div class="col-sm-offset-2 col-xs-10 col-md-10 ">
-											<a class="thumbnail" href="javascript:;"
-												title="<?php echo get_label('remove_image_title');?>"> <img
-												class="img-responsive common_delete_image"
-												style="width: 250px; height: 250px;"
-												src="<?php echo media_url(). $this->lang->line('product_main_image_folder_name')."/".$records['product_thumbnail'];?>">
-											</a>
-										</div>
-									</div>
-									<?php } ?>
-															
-									<div class="form-group multi_field">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_gallery');?></label>
-										<div class="image_browser_section ">
-											<div class="input_boxs">
-												<div class="custom_browsefiles"> <?php echo form_upload('product_gallery[]');?> <span
-														class="result_browsefile"><span class="brows"></span> + <?php echo get_label('product_gallery');?></span>
-												</div>
-											</div>
-											<span class="hint"><?php echo "* ". get_label('product_max_image_count');?></span>
-										</div>
-										<div class="addmorefiles ">
-											<span class="more_link add_field_button fa fa-plus"></span>
-										</div>
-
-
-									</div>
-									<?php if(!empty($gallery_images)) { ?>
-															
-															
-									<div class="gallery_images">
-
-										<div class="form-group image_outer ">
-
-											<div class="col-sm-offset-2 col-xs-9 col-md-9 ">
-												<div class="gallery_images_flow">
-															<?php foreach($gallery_images as $gallery ) { ?>
-															 
-														<a class="thumbnail gallery_delete"
-														id="<?php echo  encode_value($gallery['pro_gallery_primary_id']);?>"
-														href="javascript:;"
-														title="<?php echo get_label('remove_image_title');?>"> <img
-														class="img-responsive "
-														style="width: 250px; height: 250px;"
-														src="<?php echo media_url()."/". $this->lang->line('product_gallery_image_folder_name')."/".$gallery['pro_gallery_image'];?>">
-													</a>
-													
-							                         <?php } ?>
-                                                                  </div>
-											</div>
-										</div>
-									</div>
-															
-									<?php } ?>
-															
-														
-                                </div>
- 		
-                                <!-- tab 5  -->
-								<div aria-labelledby="dropdown1-tab" id="stepv5"
-									class="tab-pane fade " role="tabpanel">
-
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_meta_title');?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_input('product_meta_title',stripslashes($records['product_meta_title']),' class="form-control"  ');?></div>
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_meta_keywords');?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_textarea('product_meta_keywords',stripslashes($records['product_meta_keywords']),' class="form-control "  ');?></div>
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_meta_description');?></label>
-										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_textarea('product_meta_description',stripslashes($records['product_meta_description']),' class="form-control"  ');?></div>
-										</div>
-									</div>
-								</div>
-								
-								<!-- tab 6  -->
-								<div aria-labelledby="dropdown1-tab" id="stepv6" class="tab-pane fade associate_product_tab" role="tabpanel">
-									<div class="">
-										<table class="table table-bordered table-striped">
-											<thead>
-												<tr>
-													<th>Product Name</th>
-													<th>Product Sku</th>
-													<th>Product Attributes</th>
-													<th>Product Price</th>
-													<th>Product Special Price</th>
-													<th>Product Qty</th>
-													<th style="width: 90px;" class="text-center">
-														<button class="add-associates btn btn-success btn-xs" type="button"><span class="fa fa-plus"></span></button>
-													</th>
-												</tr>
-											</thead>
-											<tbody class="container-items1 product_associate_section">
-												<?php if(!empty($assigned_products)) { 
-													//echo "<pre>"; print_r($assigned_associate_attributes); print_r($assigned_modifiers); exit;
-													foreach($assigned_products as $subproduct) { 
-												?>
-														<tr class="associates-item">
-															<td>
-																<div class="form-group field-productassociates-0-product_name">
-																	<input name="ProductAssociates[0][product_name][]" class="form-control" id="productassociates-0-product_name" value="<?php echo $subproduct['product_name']; ?>" type="text">
-																	<input name="ProductAssociates[0][product_ids][]" class="form-control" id="productassociates-0-product_ids" value="<?php echo $subproduct['product_primary_id']; ?>" type="hidden">
-																</div>									
-															</td>
-															<td>
-																<div class="form-group field-productassociates-0-product_sku">
-																	<input name="ProductAssociates[0][product_sku][]" class="form-control" id="productassociates-0-product_sku" value="<?php echo $subproduct['product_sku']; ?>" type="text">
-																</div>									
-															</td>
-															<td class="associates_dropdown">
-																<?php if(!empty($assigned_modifiers)) { 
-																	$sel_ass_att_val = array();
-																	if(!empty($assigned_associate_attributes)){
-																		foreach($assigned_associate_attributes as $ass_asso_att)
-																		{
-																			$sel_ass_att_val[$ass_asso_att['prod_ass_att_product_id']][] = $ass_asso_att['prod_ass_att_attribute_value_id'];
-																		}
-																	}
-																	$subprodid= $subproduct['product_primary_id'];
-																	foreach($assigned_modifiers as $sel_modifier) { 
-																		$assigned_modifier_values = get_modifier_list(array('pro_modifier_value_modifier_id'=>$sel_modifier));
-
-																		if(!empty($assigned_modifier_values)) { 
-																?>
-																			<select name="ProductAssociates[0][attributes][<?php echo $sel_modifier; ?>][]">
-																				<?php 
-																				foreach($assigned_modifier_values as $modifiervalue) { ?>
-																					<option value="<?php echo $modifiervalue['pro_modifier_value_id']; ?>" <?php if(!empty($sel_ass_att_val[$subprodid]) && in_array($modifiervalue['pro_modifier_value_id'],$sel_ass_att_val[$subprodid])){ echo "selected='selected'"; } ?>><?php echo $modifiervalue['pro_modifier_value_name']; ?></option>
-																				<?php 
-																				}
-																				?>
-																			</select>	
-																<?php	}
-																?>
-																		
-																<?php }
-																} ?>
-															</td>
-															<td>
-																<div class="form-group field-productassociates-0-product_price">
-																	<input name="ProductAssociates[0][product_price][]" class="form-control" id="productassociates-0-product_price" value="<?php echo $subproduct['product_price']; ?>" type="text">
-																</div>									
-															</td>
-															<td>
-																<div class="form-group field-productassociates-0-product_special_price">
-																	<input name="ProductAssociates[0][product_special_price][]" class="form-control" id="productassociates-0-product_special_price" value="<?php echo $subproduct['product_special_price']; ?>" type="text">
-																</div>									
-															</td>
-															<td>
-																<div class="form-group field-productassociates-0-product_qty">
-																	<input name="ProductAssociates[0][product_qty][]" class="form-control" id="productassociates-0-product_qty" value="<?php echo $subproduct['product_quantity']; ?>" type="text">
-																</div>									
-															</td>
-															<td style="width: 90px; verti" class="text-center vcenter">
-																<button class="remove-associates btn btn-danger btn-xs" type="button"><span class="fa fa-minus"></span></button>
-															</td>
-														</tr>	
-												<?php	
-													}
-												}
-												?>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								
-
+					<?php echo form_open_multipart(admin_url().$module."/$module_action",' class="form-horizontal" id="common_form" ' );?>
+						<div class="form-group">
+							<label for="product_customer_id" class="col-sm-2 control-label"><?php echo get_label('service_customer').get_required();?></label>
+							<div class="col-sm-<?php echo get_form_size();?>"">
+								<div class="input_box">
+								<?php echo get_product_customer(array('customer_status'=>'A'),$records['ser_customer_id'],'class="form-control search_select" id="product_customer_id"  data-placeholder="'.get_label('product_customer_id').'" ','','','1','');?></div>
 							</div>
 						</div>
-
+						<div class="form-group">
+							<label for="post_category" class="col-sm-2 control-label"><?php echo get_label('ser_category').get_required();?></label>
+							<div class="col-sm-<?php echo get_form_size();?>"><div class="input_box"><?php echo get_service_category($where='',$records['ser_category'],$extra='class="form-control" id="ser_category" required onchange="get_subcategory()" ',$product_id='ser_cate_primary_id'); ?></div></div>
+						</div>
 
 						<div class="form-group">
-							<div
-								class="col-sm-offset-5 col-sm-<?php echo get_form_size();?>  btn_submit_div">
-								<button type="submit" class="btn btn-primary " name="submit"
-									value="Submit"><?php echo get_label('submit');?></button>
-								<a class="btn btn-info" href="<?php echo base_url().$module;?>"><?php echo get_label('cancel');?></a>
+							<label for="post_category" class="col-sm-2 control-label"><?php echo get_label('ser_subcategory').get_required();?></label>
+							<div class="col-sm-<?php echo get_form_size();?>"><div class="input_box modi_div"><?php echo get_service_subcategory(array('pro_subcate_category_primary_id'=>$records['ser_category']),$records['ser_subcategory'],$extra='class="form-control" required id="ser_subcategory"',''); ?></div></div>
+						</div>
+						
+						<div class="form-group">
+							<label for="ser_title" class="col-sm-2 control-label"><?php echo get_label('ser_title').get_required();?></label>
+							<div class="col-sm-<?php echo get_form_size();?>"><div class="input_box"><?php  echo form_input('ser_title',$records['ser_title'],' class="form-control required"  ');?></div></div>
+						</div>
+
+						<div class="form-group">
+							<label for="ser_description" class="col-sm-2 control-label"><?php echo get_label('ser_description').get_required();?></label>
+                            <div class="col-sm-8">
+								<div class="input_box"><?php  echo form_textarea('ser_description',$records['ser_description'],' class="form-control"  ');?></div>
 							</div>
 						</div>
 
+						<div class="form-group multi_field">
+							<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('ser_gallery');?></label>
+							<div class="col-sm-8 ">
+								<div class="input_box">
+									<div class="custom_browsefile"> <?php echo form_upload('product_gallery[]');?> <span class="result_browsefile"><span class="brows"></span> + <?php echo get_label('ser_gallery');?></span>
+									</div>
+								</div>
+								<?php /*<span class="hint"><?php echo "* ". get_label('product_max_image_count');?></span>*/ ?>
+							</div>
+							<?php /*<div class="col-sm-1 ">
+								<span class="add_field_button fa fa-plus  more_link"></span>
+							</div>*/ ?>
+						</div>
+						
+						<?php if(!empty($gallery_images)) { ?>
+							<div class="gallery_images">
+								<div class="form-group image_outer ">
+									<div class="col-sm-offset-2 col-xs-9 col-md-9 ">
+										<div class="gallery_images_flow">
+											<?php foreach($gallery_images as $gallery ) { ?>
+													 
+												<a class="thumbnail gallery_delete"
+												id="<?php echo  encode_value($gallery['ser_gallery_id']);?>"
+												href="javascript:;"
+												title="<?php echo get_label('remove_image_title');?>"> <img
+												class="img-responsive "
+												style="width: 250px; height: 250px;"
+												src="<?php echo media_url()."/". $this->lang->line('service_gallery_image_folder_name')."/".$gallery['ser_gallery_image'];?>">
+												</a>
+											 <?php } ?>
+										</div>
+									</div>
+								</div>
+							</div>					
+						<?php } ?>
 
+						<div class="form-group">
+							<label for="ser_pricet_type" class="col-sm-2 control-label"><?php echo get_label('ser_pricet_type').get_required();?></label>
+							<div class="col-sm-8"><div class="input_box"><?php echo form_dropdown('ser_pricet_type',array('day'=>'Day','hour'=>'Hour'),$records['ser_pricet_type'],'class="form-control required" id="ser_pricet_type"'); ?></div></div>
+						</div>
 
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('ser_price').get_required();?></label>
+							<div class="col-sm-8">
+								<div class="input_box">
+									<input type="number" value="<?php echo $records['ser_price']; ?>" required class="form-control required" title="<?php echo get_label('ser_price'); ?>" name="ser_price" onkeypress="return isFloat(event)" id="ser_price">
+								</div>
+							</div>
+						</div>
 
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('ser_discount_price');?></label>
+							<div class="col-sm-8">
+								<div class="input_box">
+									<input type="number" value="<?php echo $records['ser_discount_price']; ?>" class="form-control " name="ser_discount_price" onkeypress="return isFloat(event)" id="ser_discount_price">
+								</div>
+							</div>
+						</div>
 
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('ser_discount_start_date');?></label>
+							<div class="col-sm-8">
+								<div class="input_box">
+									<input type="text" value="<?php echo ($records['ser_discount_start_date'] !='' && $records['ser_discount_start_date'] !="NULL" && $records['ser_discount_start_date'] != '0000-00-00 00:00:00' && $records['ser_discount_start_date'] != '1970-01-01')?stripslashes(date('d-m-Y',strtotime($records['ser_discount_start_date']))):"";?>" class="form-control datepickerchange1 " name="ser_discount_start_date" id="ser_discount_start_date" >
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('ser_discount_end_date');?></label>
+							<div class="col-sm-8">
+								<div class="input_box">
+									<input type="text" value="<?php echo ($records['ser_discount_end_date'] !='' && $records['ser_discount_end_date'] !="NULL" && $records['ser_discount_end_date'] != '0000-00-00 00:00:00' && $records['ser_discount_end_date'] != '1970-01-01')?stripslashes(date('d-m-Y',strtotime($records['ser_discount_end_date']))):"";?>" class="form-control datepickerchange2 " name="ser_discount_end_date" id="ser_discount_end_date">
+								</div>
+							</div>
+						</div> 
+
+						<div class="form-group">
+							<label for="ser_availability" class="col-sm-2 control-label"><?php echo get_label('ser_availability').get_required();?></label>
+							<div class="col-sm-8"><div class="input_box"><?php echo form_dropdown('ser_availability[]',array(''=>'Select Availability','mon'=>'Monday','tue'=>'Tuesday','wed'=>'Wednesday','thu'=>'Thursday','fri'=>'Friday','sat'=>'Saturday','sun'=>'Sunday'),$availability,'class="form-control required " multiple="multiple" data-placeholder="Select Availability" id="ser_avail"'); ?></div></div>
+						</div>
+
+						<div class="form-group">
+							<label for="customer_city" class="col-sm-2 control-label"><?php echo get_label('customer_city').get_required();?></label>
+							<div class="col-sm-8"><div class="input_box">
+							<?php echo get_all_cities('',$service_city,'class="form-control" required data-placeholder="Select City" id="customer_city" multiple="multiple" data-placeholder="Select City"','customer_city[]'); ?>
+							</div></div>
+						</div>
+						
+						
+						<div class="form-group">
+							<label for="status" class="col-sm-2 control-label"><?php echo get_label('status').get_required();?></label>
+							<div class="col-sm-<?php echo get_form_size();?>"><div class="input_box"><?php  echo form_dropdown('status',array ('' => get_label('select_status'),'A' => 'Active','I' => 'Inactive'),$records['ser_status'],'class="form-control required" id="status" style="width:374px;"');?></div></div>
+						</div>
+
+						 <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-<?php echo get_form_size();?>  btn_submit_div">
+                                <button type="submit" class="btn btn-primary " name="submit"
+                                    value="Submit"><?php echo get_label('submit');?></button>
+                                <a class="btn btn-info" href="<?php echo admin_url().$module;?>"><?php echo get_label('cancel');?></a>
+                            </div>
+                        </div>
 					</div>
 
-					<input type="hidden" id="form_action" value="edit_from"> <input
-						type="hidden" value="" name="remove_image" id="remove_image">
 					<?php
-					echo form_hidden ( 'edit_id', $records ['product_primary_id'] );
+					echo form_hidden('edit_id',$records['ser_primary_id']);
 					echo form_hidden ( 'action', 'edit' );
 					echo form_close ();
 					?>
+			
+				
 			</div>
 			</div>
 		</div>
