@@ -237,6 +237,20 @@ var custom_redirect_url = "services/view/"+"<?php echo $records['ser_slug']; ?>"
                     <div class="form-group">
                       <?php  echo form_input('end_date',set_value('end_date'),' class="form-control required datepicker" placeholder="'.get_label('end_date').'" title="'.get_label('end_date').'  is required"  ');?>
                     </div>
+                    <?php if($records['ser_pricet_type'] == 'hour') { ?> 
+                      <div class="form-group">
+                          <?php  
+                            $removed = array('start_time'=>$records['ser_service_start_time'],'end_time'=>$records['ser_service_end_time']);
+                            echo get_time_dropdown('start_time','',$removed);
+                          ?>
+                      </div>
+                      <div class="form-group">
+                        <?php
+                          echo get_time_dropdown('end_time','',$removed);
+                        ?>
+                      </div>
+                      <br>
+                    <?php } ?>
                     <div class="form-group">
                       <?php  echo form_input('address_line1',set_value('address_line1'),' class="form-control required" placeholder="'.get_label('address_line1').'"  title="'.get_label('address_line1').'  is required"   ');?>
                     </div>
@@ -249,6 +263,7 @@ var custom_redirect_url = "services/view/"+"<?php echo $records['ser_slug']; ?>"
                     <div class="form-group">
                       <?php  echo get_all_states('','','class="form-control" title="State is required" data-placeholder="Select State" id="customer_state" required');?>
                     </div>
+                    <br>
                     <div class="form-group">
                       <?php  echo form_input('zipcode',set_value('zipcode'),' class="form-control required" placeholder="'.get_label('zipcode').'" title="'.get_label('zipcode').' is required"  ');?>
                     </div>

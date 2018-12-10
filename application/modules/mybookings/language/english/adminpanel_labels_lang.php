@@ -23,4 +23,5 @@ $lang['order_service_date'] = "Service Date";
 $lang['order_service_address'] = "Address"; 
 $lang['order_service_price'] = "Price";
 $lang['category_select'] = "Select Category";
+$lang['order_service_status'] = "Status";
  

@@ -162,6 +162,8 @@ class Services extends CI_Controller
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			$this->form_validation->set_rules ( 'ser_availability', 'lang:ser_availability', 'required' );
 			$this->form_validation->set_rules ( 'customer_city[]', 'lang:customer_city', 'required' );
+			$this->form_validation->set_rules ( 'time_start_time', 'lang:time_start_time', 'required' );
+			$this->form_validation->set_rules ( 'time_end_time', 'lang:time_end_time', 'required' );
 
 			if (( int ) $this->input->post ( 'ser_discount_price' ) != 0) {
 				
@@ -187,7 +189,9 @@ class Services extends CI_Controller
 					'ser_description' => post_value ( 'ser_description' ),
 					'ser_status' => (post_value ( 'status' ) == "A" ? 'A' : 'I'),
 					'ser_sequence' => $product_sequence,
-					'ser_price' => post_value ( 'ser_price' ),
+					'ser._price' => post_value ( 'ser_price' ),
+					'ser_service_start_time' => post_value('time_start_time'),
+					'ser_service_end_time' => post_value('time_end_time'),
 					'ser_pricet_type' => post_value ( 'ser_pricet_type' ),
                     'ser_discount_price' => post_value ( 'ser_discount_price' ),
 					'ser_discount_start_date' => (post_value ( 'ser_discount_start_date' ))?date ( "Y-m-d", strtotime ( post_value ( 'ser_discount_start_date' ) ) ):'',
@@ -276,6 +280,8 @@ class Services extends CI_Controller
 			$this->form_validation->set_rules ( 'product_subcategory', 'lang:ser_subcategory', 'required' );
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			$this->form_validation->set_rules ( 'customer_city[]', 'lang:customer_city', 'required' );
+			$this->form_validation->set_rules ( 'time_start_time', 'lang:time_start_time', 'required' );
+			$this->form_validation->set_rules ( 'time_end_time', 'lang:time_end_time', 'required' );
 
 			if (( int ) $this->input->post ( 'ser_discount_price' ) != 0) {
 				
@@ -301,6 +307,8 @@ class Services extends CI_Controller
 					'ser_sequence' => $product_sequence,
 					'ser_price' => post_value ( 'ser_price' ),
 					'ser_pricet_type' => post_value ( 'ser_pricet_type' ),
+					'ser_service_start_time' => post_value('time_start_time'),
+					'ser_service_end_time' => post_value('time_end_time'),
                     'ser_discount_price' => post_value ( 'ser_discount_price' ),
 					'ser_discount_start_date' => (post_value ( 'ser_discount_start_date' ))?date ( "Y-m-d", strtotime ( post_value ( 'ser_discount_start_date' ) ) ):'',
 					'ser_discount_end_date' => (post_value ( 'ser_discount_end_date' ))?date ( "Y-m-d", strtotime ( post_value ( 'ser_discount_end_date' ) ) ):'',

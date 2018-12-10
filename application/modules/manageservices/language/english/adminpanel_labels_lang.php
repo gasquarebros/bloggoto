@@ -35,4 +35,6 @@ $lang['service_customer'] = "Service Customer";
 $lang['ser_availability'] = "Service Availability";
 $lang['category_select'] = "Select Category";
 $lang['customer_city'] = "City";
+$lang['time_start_time'] = "Day Start Time";
+$lang['time_end_time'] = "Day End Time";
 /* Service Modules ends here */

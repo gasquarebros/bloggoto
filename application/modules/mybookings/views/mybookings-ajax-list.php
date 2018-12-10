@@ -21,6 +21,7 @@
 			<th><?=get_label('order_service_date');?></th>
 			<th><?=get_label('order_service_address');?></th>
 			<th><?=get_label('order_service_price');?></th>
+			<th><?=get_label('order_service_status').add_sort_by('order_service_status',$module);?></th>
 		</tr>
 	</thead>
 
@@ -39,9 +40,10 @@
 				<td><?php echo stripslashes($val['provider_first_name']." ".$val['provider_last_name']);?></td>
 				<td><?php echo stripslashes($val['ser_cate_name']);?></td>	 
 				<td><?php echo stripslashes($val['pro_subcate_name']); ?></td>
-				<td><?php echo get_date_formart($val['order_service_start_date'])." - ".get_date_formart($val['order_service_end_date']); ?></td>
+				<td><?php echo get_date_formart($val['order_service_start_date'])." - ".get_date_formart($val['order_service_end_date']); ?><br><?php echo ($val['order_service_start_time'] !='' && $val['order_service_end_time'] !='') ? $val['order_service_start_time']." - ".$val['order_service_end_time']:''; ?></td>
 				<td><?php echo $format_address; ?></td>
 				<td><?php echo show_price($val['order_service_price'])."/".$val['order_service_price_type']; ?></td>
+				<td><?php echo ucfirst($val['order_service_status']);?></td>
 			</tr>
 <?php  	} 
 	} 
@@ -64,6 +66,7 @@
 			<th><?=get_label('order_service_date');?></th>
 			<th><?=get_label('order_service_address');?></th>
 			<th><?=get_label('order_service_price');?></th>
+			<th><?=get_label('order_service_status').add_sort_by('order_service_status',$module);?></th>
 		</tr>
 	</thead>
 

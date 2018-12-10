@@ -309,6 +309,8 @@ class Services extends CI_Controller {
 						$order_service_image = post_value('cover_photo');
 						$end_date = date('Y-m-d',strtotime(post_value('end_date')));
 						$start_date = date('Y-m-d',strtotime(post_value('start_date')));
+						$start_time = post_value('start_time')?post_value('start_time'):$service['ser_service_start_time'];
+						$end_time = post_value('end_time')?post_value('end_time'):$service['ser_service_end_time'];
 						$discount = find_discount($service['ser_price'],$service['ser_discount_price'],$service['ser_discount_start_date'],$service['ser_discount_end_date']);
 						$price = ""; 
 						if($service['ser_discount_price'] !='' && $discount > 0) {
@@ -329,6 +331,8 @@ class Services extends CI_Controller {
 							'order_service_price_type' => $service['ser_pricet_type'],
 							'order_service_start_date' => $start_date,
 							'order_service_end_date' => $end_date,
+							'order_service_start_time' => $start_time,
+							'order_service_end_time' => $end_time,
 							'order_service_image' => $order_service_image,
 							'order_service_is_paid' => 0,
 							'order_service_address_line1' => post_value ( 'address_line1' ),
@@ -338,6 +342,7 @@ class Services extends CI_Controller {
 							'order_service_zipcode' => post_value ( 'zipcode' ),
 							'order_service_landmark' => post_value ( 'landmark' ),
 							'order_service_customer_id' => get_user_id(),
+							'order_service_status'	=> 'processing',
 							'order_service_created_on' => current_date (),
 							'order_service_created_ip' => get_ip ()
 						);

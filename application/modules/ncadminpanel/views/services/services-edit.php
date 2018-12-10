@@ -104,6 +104,16 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 							<label for="ser_pricet_type" class="col-sm-2 control-label"><?php echo get_label('ser_pricet_type').get_required();?></label>
 							<div class="col-sm-8"><div class="input_box"><?php echo form_dropdown('ser_pricet_type',array('day'=>'Day','hour'=>'Hour'),$records['ser_pricet_type'],'class="form-control required" id="ser_pricet_type"'); ?></div></div>
 						</div>
+						
+						<div class="form-group">
+							<label for="time_start_time" class="col-sm-2 control-label"><?php echo get_label('time_start_time').get_required();?></label>
+							<div class="col-sm-8"><div class="input_box"><?php echo get_time_dropdown('time_start_time',$records['ser_service_start_time']); ?></div></div>
+						</div>
+
+						<div class="form-group">
+							<label for="time_end_time" class="col-sm-2 control-label"><?php echo get_label('time_end_time').get_required();?></label>
+							<div class="col-sm-8"><div class="input_box"><?php echo get_time_dropdown('time_end_time',$records['ser_service_end_time']); ?></div></div>
+						</div>
 
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('ser_price').get_required();?></label>

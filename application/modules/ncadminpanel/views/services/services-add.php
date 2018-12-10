@@ -87,6 +87,16 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 						</div>
 
 						<div class="form-group">
+							<label for="time_start_time" class="col-sm-2 control-label"><?php echo get_label('time_start_time').get_required();?></label>
+							<div class="col-sm-8"><div class="input_box"><?php echo get_time_dropdown('time_start_time'); ?></div></div>
+						</div>
+
+						<div class="form-group">
+							<label for="time_end_time" class="col-sm-2 control-label"><?php echo get_label('time_end_time').get_required();?></label>
+							<div class="col-sm-8"><div class="input_box"><?php echo get_time_dropdown('time_end_time'); ?></div></div>
+						</div>
+
+						<div class="form-group">
 							<label for="ser_price" class="col-sm-2 control-label"><?php echo get_label('ser_price').get_required();?></label>
 							<div class="col-sm-8">
 								<div class="input_box">

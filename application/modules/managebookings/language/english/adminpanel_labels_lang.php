@@ -8,15 +8,25 @@ Description		: Page contains common label for adminpanel
 
 /* User registration */
 /*$lang['user_registration'] = 'Sign up';*/
-$lang['orders_module'] = "Orders";
-$lang['order_label'] = "Order";
-$lang['order_labels'] = "Orders";
-$lang['order_local_no'] = "Local Order No.";
+$lang['managebookings_module'] = "managebookings";
+$lang['managebookings_label'] = "Manage Booking";
+$lang['managebookings_labels'] = "Manage Bookings";
+$lang['order_service_local_no'] = "Local Order No.";
+$lang['provider_name'] = "Provider Name";
 $lang['customer_name'] = "Customer Name";
+$lang['order_service_category_id'] = "Category";
+$lang['order_service_subcategory_id'] = "Sub Category";
 $lang['order_sub_total'] = "Sub Total";
 $lang['order_total_amount'] = "Total";
 $lang['order_status'] = "Status";
-$lang['order_created_on'] = "Created on";
-$lang['product_name'] = "Product Name";
-$lang['product_sku'] = "Product Sku";
+$lang['order_service_created_on'] = "Created on";
+$lang['order_service_date'] = "Service Date";
+$lang['order_service_address'] = "Address"; 
+$lang['order_service_price'] = "Price";
+$lang['category_select'] = "Select Category";
+$lang['order_service_title'] = "Service Title";
+$lang['city'] = "City";
+$lang['order_service_amount'] = "Amount";
+$lang['order_service_slug'] = "Slug";
+$lang['order_service_status'] = "Status";
 

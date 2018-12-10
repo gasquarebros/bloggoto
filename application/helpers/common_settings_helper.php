@@ -1493,7 +1493,33 @@ if (! function_exists ( 'get_all_block_users' ))
 	}
 }
 
+if (! function_exists ( 'get_time_dropdown' )) 
+{
+	function get_time_dropdown($name,$selected="",$removed=array(),$extra='') 
+	{
 
+		$returnTimeFormat = "G:i";
+		$name = ($name == "")? 'time_day': $name;
+		$output = array(''=>'Select Time Range');
+
+		$interval = '+30 minutes';
+		$default = '19:00';
+		$current = strtotime( '00:00' );
+		$end = strtotime( '23:59' );
+
+		while( $current <= $end ) {
+			$time = date( 'H:i', $current );
+			$sel = ( $time == $default ) ? ' selected' : '';
+			$val = $time.$sel;
+			if(empty($removed) || (!empty($removed) && $val >= $removed['start_time'] && $val <= $removed['end_time'])) {
+				$output[$val] = date( 'h.i A', $current );
+			}
+			$current = strtotime( $interval, $current );
+		}
+		$extra = ($extra == "")?  'class="" id="time_day"' : $extra;
+		return form_dropdown ( $name, $output,$selected, $extra );
+	}
+}
 
 
 ?>

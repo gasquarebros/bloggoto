@@ -72,6 +72,8 @@ $lang['ser_cate_image'] = "Image";
 $lang['ser_cate_default_image'] = "Default Icon Image";
 $lang['ser_cate_active_image'] = "Active Icon Image";
 $lang['ser_cate_Sort Orderuence'] = "Sort Order";
+$lang['time_start_time'] = "Day Start Time";
+$lang['time_end_time'] = "Day End Time";
 
 /* subcategory module */
 $lang['pro_subcate_label'] = "Subcategory";
