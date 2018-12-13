@@ -458,6 +458,7 @@ $config ['csrf_exclude_uris'] = array (
 	'api/insert',
 	'api/login',
 	'checkout/success',
+	'managebookings/success',
 	'checkout/failure'
 );
 

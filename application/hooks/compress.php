@@ -4,7 +4,7 @@ function compress()
 {
 	$CI =& get_instance();
 	$buffer = $CI->output->get_output();
-	if($CI ->router->class !="checkout"){
+	if($CI ->router->class !="checkout" && $CI ->router->class !="managebookings" ){
 		$search = array(
 			'/\n/',			// replace end of line by a space
 			'/\>[^\S ]+/s',		// strip whitespaces after tags, except space

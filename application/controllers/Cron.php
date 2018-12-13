@@ -8,15 +8,59 @@ class Cron extends CI_Controller {
 		parent::__construct ();
 		$this->load->library ('push');
 		//$this->load->library ('gcm');
+		$this->service_categorytable = "service_categories";
+		$this->customers = "customers";
+		$this->service_subcategorytable = "service_subcategories";
+		$this->city_table = "cities";
+		$this->table = "order_service";
+		$this->primary_key = 'order_service_id';
 	}
 	public function index()
 	{
-		$this->pushnotification();
-		
-		//$insert_id = $this->Mydb->insert('cron_log',array('cron_status'=>'Y','cron_text'=>'test push mail','cron_created_on'=>current_date()));
-		
-		/* send email notification to admin and client */
-		 
+		$this->pushnotification();	 
+	}
+	public function service_validate() {
+		$current_time = strtotime(date('Y-m-d H:i:s'));
+		$before_two_hours = strtotime('-2 hour', $current_time);
+		$before_date = date('Y-m-d H:i:s',$before_two_hours);
+
+
+		$where = array (
+			"order_service_created_on <=" => $before_date,
+			'order_service_status'	=> 'processing'
+		);
+		$join = "";	
+		$join [0] ['select'] = "customers.customer_id,customers.customer_first_name,customers.customer_last_name,customers.customer_username,customers.customer_email";
+		$join [0] ['table'] = $this->customers;
+		$join [0] ['condition'] = "order_service_customer_id = ".$this->customers.".customer_id";
+		$join [0] ['type'] = "LEFT";
+		$select_array = array (
+			$this->table.'.*'
+		);
+		$groupby = 'order_service_id';
+		$record = $this->Mydb->get_all_records ( $select_array, $this->table, $where, '', '', '', '',$groupby, $join );
+
+		if(!empty($record)){
+			$value="rejected";
+			$email_template_id = '10';
+			foreach($record as $rec) {
+				
+				$where = array (
+					"order_service_id" => $rec['order_service_id']
+				);
+				$this->Mydb->update($this->table,$where,array('order_service_status'=>$value));
+
+				$date = get_date_formart($rec['order_service_start_date'])." - ".get_date_formart($rec['order_service_end_date']). "<br>". ($rec['order_service_start_time'] !='' && $rec['order_service_end_time'] !='') ?  date( 'h.i A', $rec['order_service_start_time'])." - ". date( 'h.i A', $rec['order_service_end_time']):'';
+
+				$this->load->library('myemail');
+				$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[Title]','[DATE]');
+				$replace_arr = array( ucfirst(stripslashes($rec['customer_first_name'].' '.$rec['customer_last_name'])),$rec['order_service_local_no'],stripslashes($rec['order_service_title']),$date);
+				if($email_template_id != '') {
+					$mail_res = $this->myemail->send_admin_mail($rec['customer_email'],$email_template_id,$check_arr,$replace_arr);
+				}
+			}
+		}
+
 	}
 	public function testpush()
 	{

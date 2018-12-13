@@ -48,7 +48,7 @@
 			<ul class="category_menu main_menu_top main_menu">
 				<li><a <?php if($firstsegment=='home' || $firstsegment=='wall') { ?> class="active" <?php } ?> data-section="Social Media" href="<?php echo base_url()."home/wall"; ?>">Social Media</a></li>
 				<li><a <?php if($firstsegment=='cart' || $firstsegment=='products' || $firstsegment == 'checkout') { ?> class="active" <?php } ?> data-section="Products" href="<?php echo base_url()."products"; ?>" >Products</a></li>
-				<li><a <?php if($firstsegment=='services') { ?> class="active" <?php } ?> data-section="Services" href="#" >Services</a></li>
+				<li><a <?php if($firstsegment=='services') { ?> class="active" <?php } ?> data-section="Services" href="<?php echo base_url()."services"; ?>" >Services</a></li>
 				<?php if(get_user_id() != '') { ?>
 					<li style="float:right !important;">
 						<ul class="main_menu profile_menu" >
@@ -60,6 +60,9 @@
 									<li><a href="<?php echo base_url().'orders'; ?>">My Purchases </a></li> 
 									<li><a href="<?php echo base_url().'manageorders'; ?>">Manage Orders </a></li>
 									<li><a href="<?php echo base_url().'manageproducts'; ?>">Manage Products </a></li>
+									<li><a href="<?php echo base_url().'mybookings'; ?>">My Bookings </a></li> 
+									<li><a href="<?php echo base_url().'manageservices'; ?>">Manage Services </a></li>
+									<li><a href="<?php echo base_url().'managebookings'; ?>">Manage Bookings </a></li>
 									
 									<?php /*<li><a href="#" class="account_delete" data-action='Submit' action="<?php echo base_url().'myprofile/accountdelete/'.encode_value(get_user_id()); ?>">Delete Account</a></li> */ ?>
 								</ul>
@@ -79,6 +82,9 @@
 									<li><a href="<?php echo base_url().'orders'; ?>">My Purchases </a></li> 
 									<li><a href="<?php echo base_url().'manageorders'; ?>">Manage Orders </a></li>
 									<li><a href="<?php echo base_url().'manageproducts'; ?>">Manage Products </a></li>
+									<li><a href="<?php echo base_url().'mybookings'; ?>">My Bookings </a></li> 
+									<li><a href="<?php echo base_url().'manageservices'; ?>">Manage Services </a></li>
+									<li><a href="<?php echo base_url().'managebookings'; ?>">Manage Bookings </a></li>
 									
 									<?php /*<li><a href="#" class="account_delete" data-action='Submit' action="<?php echo base_url().'myprofile/accountdelete/'.encode_value(get_user_id()); ?>">Delete Account</a></li> */ ?>
 								</ul>
@@ -112,7 +118,7 @@
 				<ul class="device_nav blog_section">
 					<li><a <?php if($firstsegment=='home' || $firstsegment=='wall') { ?> class="active" <?php } ?> href="<?php echo base_url()."home/wall"; ?>" >Social Media</a></li>
 					<li><a <?php if($firstsegment=='cart' || $firstsegment=='products' || $firstsegment == 'checkout') { ?> class="active" <?php } ?> data-section="Products" href="<?php echo base_url()."products"; ?>" >Products</a></li>
-					<li><a <?php if($firstsegment=='services') { ?> class="active" <?php } ?> data-section="Services" href="#" >Services</a></li>
+					<li><a <?php if($firstsegment=='services') { ?> class="active" <?php } ?> data-section="Services" href="<?php echo base_url()."services"; ?>" >Services</a></li>
 					
 				</ul>	
 				

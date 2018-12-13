@@ -1210,6 +1210,20 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 		}
 	}
 	
+	public function testingtransfer()
+	{
+		$api = new RazorpayApi($this->keyId, $this->keySecret);
+		$orderData = [
+			'account'         => 'acc_9euWsoluAQIMuB',
+			'amount'          => 10000, // 2000 rupees in paise
+			'currency'        => 'INR',
+		];
+		$razorpayOrder = $api->transfer->create($orderData);
+		echo "<pre>";
+		print_r($razorpayOrder);
+		exit;
+	}
+	
 	/* this method used to common module labels */
 	private function load_module_info() {
 		$data = array ();

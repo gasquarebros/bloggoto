@@ -229,6 +229,66 @@ if(!function_exists('get_filter_subcategory'))
 }
 
 
+/*  this function used to get all category dropdown */
+if(!function_exists('get_service_category'))
+{
+	function get_service_category($where='',$selected='',$extra='',$product_id=null)
+	{
+		$CI=& get_instance();
+		$join=array();
+		$groupby="";
+		$where_array=($where=='')? array('ser_cate_primary_id !='=>'') :  $where ;
+		
+
+
+		$groupby = "ser_cate_primary_id";
+		$records=$CI->Mydb->get_all_records('ser_cate_primary_id,ser_cate_name,ser_cate_id','service_categories',$where_array,'','',array('ser_cate_name'=>"ASC"),'',$groupby,$join='');
+		
+		$data=array(''=>get_label('category_select'));
+		$product_id = ($product_id == "")?  'ser_cate_id' : $product_id;
+		if(!empty($records))
+		{
+			foreach($records as $value)
+			{
+				$data[$value[$product_id]] = ucfirst(stripslashes($value['ser_cate_name']));
+			}
+		}
+		$extra=($extra!='')?  $extra : 'class="form-control" id="product_category" required ' ;
+			
+		return  form_dropdown('product_category',$data,$selected,$extra);
+	}
+}
+
+
+/*  this function used to get all category dropdown */
+if(!function_exists('get_service_subcategory'))
+{
+	function get_service_subcategory($where='',$selected='',$extra='',$product_id=null)
+	{
+		$CI=& get_instance();
+		$join=array();
+		$groupby="";
+		$where_array=($where=='')? array('pro_subcate_primary_id !='=>'') :  $where ;
+		$groupby = "pro_subcate_primary_id";
+		$records=$CI->Mydb->get_all_records('pro_subcate_primary_id,pro_subcate_id,pro_subcate_category_primary_id,pro_subcate_name,pro_subcate_category_id','service_subcategories',$where_array,'','',array('pro_subcate_name'=>"ASC"),'',$groupby,$join='');
+		
+		$data=array(''=>get_label('subcategory_select'));
+		$product_id = ($product_id == "")?  'pro_subcate_primary_id' : $product_id;
+		if(!empty($records))
+		{
+			foreach($records as $value)
+			{
+				$data[$value[$product_id]] = ucfirst(stripslashes($value['pro_subcate_name']));
+			}
+		}
+		$extra=($extra!='')?  $extra : 'class="form-control" id="product_subcategory" required ' ;
+			
+		return  form_dropdown('product_subcategory',$data,$selected,$extra);
+	}
+}
+
+
+
 
 /*  this function to get modifier values list   */
 if(!function_exists('get_modifier_list'))

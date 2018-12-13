@@ -757,7 +757,7 @@ if(!function_exists('get_state_name'))
 }
 if(!function_exists('get_all_cities'))
 {
-	function get_all_cities($where='',$selected='',$extra='')
+	function get_all_cities($where='',$selected='',$extra='',$name='')
 	{
 	
 		$CI=& get_instance();
@@ -771,10 +771,31 @@ if(!function_exists('get_all_cities'))
 				$data[$value['city_id']] = stripslashes($value['city_name']);
 			}
 		}
-		$extra=($extra!='')?  $extra : 'class="form-control" id="customer_city" ' ;
+		$extra=($extra!='')?  $extra : 'class="form-control" data-placeholder="Select City" id="customer_city" ' ;
 		
-		 
-		return  form_dropdown('customer_city',$data,$selected,$extra);
+		$name=($name=='')? 'customer_city' :  $name ;
+		return  form_dropdown($name,$data,$selected,$extra);
+	}
+}
+
+
+if(!function_exists('get_cities'))
+{
+	function get_cities($where='')
+	{
+	
+		$CI=& get_instance();
+		$where_array=($where=='')? array('city_id !='=>'') :  $where ;
+		$records=$CI->Mydb->get_all_records('city_id,city_name','cities',$where_array,'','',array('city_name'=>"ASC"));
+		$data=array(''=>get_label('select_city'));
+		if(!empty($records))
+		{
+			foreach($records as $value)
+			{
+				$data[$value['city_id']] = stripslashes($value['city_name']);
+			}
+		}
+		return $data;
 	}
 }
 
@@ -1472,7 +1493,33 @@ if (! function_exists ( 'get_all_block_users' ))
 	}
 }
 
+if (! function_exists ( 'get_time_dropdown' )) 
+{
+	function get_time_dropdown($name,$selected="",$removed=array(),$extra='') 
+	{
 
+		$returnTimeFormat = "G:i";
+		$name = ($name == "")? 'time_day': $name;
+		$output = array(''=>'Select Time Range');
+
+		$interval = '+30 minutes';
+		$default = '19:00';
+		$current = strtotime( '00:00' );
+		$end = strtotime( '23:59' );
+
+		while( $current <= $end ) {
+			$time = date( 'H:i', $current );
+			$sel = ( $time == $default ) ? ' selected' : '';
+			$val = $time.$sel;
+			if(empty($removed) || (!empty($removed) && $val >= $removed['start_time'] && $val <= $removed['end_time'])) {
+				$output[$val] = date( 'h.i A', $current );
+			}
+			$current = strtotime( $interval, $current );
+		}
+		$extra = ($extra == "")?  'class="" id="time_day"' : $extra;
+		return form_dropdown ( $name, $output,$selected, $extra );
+	}
+}
 
 
 ?>
