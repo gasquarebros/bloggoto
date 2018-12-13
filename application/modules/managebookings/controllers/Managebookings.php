@@ -276,6 +276,35 @@ class Managebookings extends CI_Controller
 			);
 			$this->Mydb->update($this->table,$where,array('order_service_status'=>$value));
 			
+			$join = "";	
+			$join [0] ['select'] = "customers.customer_id,customers.customer_first_name,customers.customer_last_name,customers.customer_username,customers.customer_email";
+			$join [0] ['table'] = $this->customers;
+			$join [0] ['condition'] = "order_service_customer_id = ".$this->customers.".customer_id";
+			$join [0] ['type'] = "LEFT";
+			$select_array = array (
+				$this->table.'.*'
+			);
+			$groupby = 'order_service_id';
+			$record = $this->Mydb->get_all_records ( $select_array, $this->table, $where, '', '', '', '',$groupby, $join );
+
+			$data['records'] = $record;
+			
+			$date = get_date_formart($record[0]['order_service_start_date'])." - ".get_date_formart($record[0]['order_service_end_date']). "<br>". ($record[0]['order_service_start_time'] !='' && $record[0]['order_service_end_time'] !='') ?  date( 'h.i A', $record[0]['order_service_start_time'])." - ". date( 'h.i A', $record[0]['order_service_end_time']):'';
+
+			$this->load->library('myemail');
+			$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[Title]','[DATE]');
+			$replace_arr = array( ucfirst(stripslashes($record[0]['customer_first_name'].' '.$record[0]['customer_last_name'])),$record[0]['order_service_local_no'],stripslashes($record[0]['order_service_title']),$date);
+			
+			
+			if($value == 'accepted') {
+				$email_template_id = '11';
+			} else {
+				$email_template_id = '10';
+			}
+
+			if($email_template_id != '') {
+				$mail_res = $this->myemail->send_admin_mail($record[0]['customer_email'],$email_template_id,$check_arr,$replace_arr);
+			}
 			echo json_encode ( array (
 				'status' => 'success',
 				'data' => 'managebookings',

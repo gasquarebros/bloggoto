@@ -29,7 +29,6 @@ class Services extends CI_Controller {
 	
 	/* this method used to check login */
 	public function index() {
-		
 		//echo "inn"; exit;
 		$data = $this->load_module_info ();	
 		$service_category = $this->Mydb->get_all_records('*',$this->service_categorytable,array('ser_cate_status' => 'A'));
@@ -350,6 +349,18 @@ class Services extends CI_Controller {
 						$insert_id = $this->Mydb->insert ( $this->order_table, $insert_array );
 						if($insert_id) {
 							//send mail and notification with success message
+							$date = get_date_formart($insert_array['order_service_start_date'])." - ".get_date_formart($insert_array['order_service_end_date']). "<br>". ($insert_array['order_service_start_time'] !='' && $insert_array['order_service_end_time'] !='') ?  date( 'h.i A', $insert_array['order_service_start_time'])." - ". date( 'h.i A', $insert_array['order_service_end_time']):'';
+
+							$name = $this->session->userdata('bg_first_name')." ".$this->session->userdata('bg_last_name');
+							$email = $this->session->userdata('bg_user_email');
+							$this->load->library('myemail');
+							$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[Title]','[DATE]');
+							$replace_arr = array( ucfirst(stripslashes($name)),$insert_array['order_service_local_no'],stripslashes($insert_array['order_service_title']),$date);
+							$email_template_id = '12';
+							if($email_template_id != '') {
+								$mail_res = $this->myemail->send_admin_mail($email,$email_template_id,$check_arr,$replace_arr);
+							}
+
 							$result ['status'] = 'success';
 							$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_ordered' ), $this->module_label ) );
 						}

@@ -57,6 +57,7 @@ $route['logout'] = 'login/logout';
 $route['login'] = 'login/index';
 $route['applogin'] = 'login/applogin';
 $route['faq/(.*)'] = 'faq/index/$1';
+$route['cron/(.*)'] = 'cron/$1';
 $route['ncadminpanel'] = 'ncadminpanel/index';
 $route['ncadminpanel/(.*)'] = 'ncadminpanel/$1';
 $route['myprofile/products'] = 'myprofile/products';
