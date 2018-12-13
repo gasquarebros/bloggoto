@@ -3,17 +3,27 @@
 	<?php $i=0; foreach($records as $record) {  ?>
 		<div class="listing-two-item">
 			<div class="cover-photo">
-				<img src="img/photographer.jpg" alt="">
-				<div class="cover-photo-hover">
+				<?php if($record['galleryimages'] !='') {  ?>
+					<?php $gallery = explode('~',$record['galleryimages']); ?>
+					<img src="<?php echo media_url(). $this->lang->line('service_gallery_image_folder_name')."/".$gallery[0]; ?>" alt="">
+				<?php } else { ?>
+					<img src="<?php echo media_url().$this->lang->line('post_photo_folder_name')."default.png"; ?>" alt="">
+				<?php } ?>
+				<!--<div class="cover-photo-hover">
 					<div class="share-like-two">
 						<a href="#"><i class="fa fa-heart-o"></i></a>
 						<a href="#"><i class="fa fa-share-alt"></i></a>
 						<a href="#"><i class="fa fa-bookmark-o"></i></a>
 					</div>
-				</div>
+				</div>-->
 			</div>
 			<div class="listing-two-item-info">
 				<div class="user-two-pic">
+					<?php if($record['customer_photo'] !='') { ?>
+                        <img class="service_prof_photo" src="<?php echo media_url(). $this->lang->line('customer_image_folder_name').$record['customer_photo'];?>" alt="profile" />
+                    <?php } else { ?> 
+                        <img class="service_prof_photo" src="<?php echo skin_url(); ?>images/profile.jpg" alt="profile" />
+                    <?php } ?>
 					<img src="img/avatar2.jpg" alt="">
 				</div>
 				<h3><?php echo $record['ser_title']; ?></h3>

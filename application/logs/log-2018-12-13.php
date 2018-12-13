@@ -53,3 +53,18 @@ ERROR - 2018-12-13 11:30:06 --> Could not find the language line "pay"
 ERROR - 2018-12-13 21:58:10 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): No connection could be made because the target machine actively refused it.
  D:\xampp\htdocs\bloggotoweb\system\database\drivers\mysqli\mysqli_driver.php 202
 ERROR - 2018-12-13 21:58:10 --> Unable to connect to the database
+ERROR - 2018-12-13 22:52:37 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-12-13 22:54:49 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-12-13 23:23:55 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-13 23:23:55 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-13 23:23:57 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-13 23:23:57 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-13 23:24:13 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-13 23:24:13 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-13 23:24:15 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-13 23:24:15 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-13 23:31:22 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-13 23:31:22 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-13 23:31:25 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-13 23:31:25 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-13 23:35:43 --> Could not find the language line "select_state"

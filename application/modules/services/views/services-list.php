@@ -463,7 +463,8 @@ echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScro
   border: 2px solid #ff008f;
   border-radius: 50%; }
 .listings .listing-two-item .listing-two-item-info .user-two-pic img {
-  width: 100%;
+  height: 51px;
+width: 51px;
   border-radius: inherit; }
 .listings .listing-two-item .listing-two-item-info p {
   color: #707070; }
@@ -473,6 +474,51 @@ echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScro
   justify-content: space-between; }
 .listings .listing-two-item .listing-two-item-info .rating-bt .rating-stars span {
   font-size: 0.88rem; }
+
+.more_details_par {
+    margin-top: 30px;
+}
+.more_details_par h5 {
+font-family: 'proxima_nova_rgregular';
+color: #787878;
+text-align: center;
+margin: 0 0 10px;
+font-size: 16px;  \
+}
+.more_details_par h5 span {
+    position: relative;
+}
+.more_details_par h5 > span::before, .more_details_par h5 > span::after {
+    width: 26px;
+    height: 1px;
+    background: #787878;
+    position: absolute;
+    left: -40px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    content: '';
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+}
+.more_details_par h5 > span::after {
+    right: -40px;
+    left: inherit;
+}
+.txtc {
+    text-align: center;
+}
+.more_details_par .common_but {
+    font: 13px/20px 'proxima_nova_rgbold';
+    border-radius: 0px;
+    background: transparent;
+    border: 2px solid #787878;
+    padding: 6px 10px 5px 10px;
+    min-width: 200px;
+    color: #787878;
+    cursor: pointer;
+}
+
 @media (max-width: 25em) {
   .listings .listing-two-item .listing-two-item-info .rating-bt {
     display: block; } }

@@ -135,7 +135,7 @@ class Services extends CI_Controller {
 		$join [0] ['condition'] = "ser_cate_primary_id = ser_category";
 		$join [0] ['type'] = "LEFT";
 		
-		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_email";
+		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_photo";
 		$join [1] ['table'] = $this->customers;
 		$join [1] ['condition'] = "ser_customer_id = customer_id";
 		$join [1] ['type'] = "LEFT";
@@ -149,6 +149,11 @@ class Services extends CI_Controller {
 		$join [3] ['table'] = $this->service_cities;
 		$join [3] ['condition'] = $this->service_cities.".ser_service_id = ser_primary_id";
 		$join [3] ['type'] = "LEFT";
+
+		$join [4] ['select'] = "group_concat(ser_gallery_image,'~') as galleryimages";
+		$join [4] ['table'] = 'service_gallery';
+		$join [4] ['condition'] = "service_gallery.ser_gallery_ser_primary_id = ser_primary_id";
+		$join [4] ['type'] = "LEFT";
 		/*
 		$join [2] ['select'] = "group_concat(',',post_tag_user_id) as post_tag_ids,group_concat(',',post_tag_user_name) as post_tag_names";
 		$join [2] ['table'] = $this->post_tags;
@@ -167,7 +172,7 @@ class Services extends CI_Controller {
 		}
 		//print_r(post_value('page'));
 		//exit;
-		$limit = 1;
+		$limit = 12;
 		$page = post_value ( 'page' )?post_value ( 'page' ):1;
 		$offset = post_value ( 'page' )?((post_value ( 'page' )-1) * $limit):0;
 		$offset = post_value ( 'offset' )?post_value ( 'offset' ):$offset;
