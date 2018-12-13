@@ -292,7 +292,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 								<!-- tab 3  -->
 								<div aria-labelledby="dropdown1-tab" id="stepv3" class="tab-pane fade " role="tabpanel">
 									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price').get_required().add_tooltip('product_price');?></label>
+										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price').get_required().add_tooltip('product_price');?> <br><span> (Update price Incl. of all taxes)</span></label>
 										<div class="col-sm-8">
 											<div class="input_box">
 												<input type="number" value="" class="form-control required" title="<?php echo sprintf(get_label('product_errors'),get_label('product_price')); ?>" name="product_price" onkeypress="return isFloat(event)" id="product_price">
@@ -309,7 +309,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 									</div>
 										
 									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price').add_tooltip('product_spl_price');?></label>
+										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price').add_tooltip('product_spl_price');?><br><span> (Update price Incl. of all taxes)</span></label>
 										<div class="col-sm-8">
 											<div class="input_box">
 												<input type="number" value="" class="form-control " name="product_spl_price" onkeypress="return isFloat(event)" id="product_spl_price">

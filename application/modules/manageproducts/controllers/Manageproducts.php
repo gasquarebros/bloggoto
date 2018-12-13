@@ -179,10 +179,20 @@ class Manageproducts extends CI_Controller
 		) );
 		exit ();
 	}
+
+	private function _validategst() {
+		$where = array('customer_id'=>get_user_id(),'customer_gst_no !='=>'');
+		$user_avail = $this->Mydb->get_num_rows('*', 'customers', $where);
+		if($user_avail <= 0){
+			$this->session->set_flashdata ( 'admin_error', sprintf ( $this->lang->line ( 'error_gst_required_products' ), $this->module_label ) );
+			redirect ( base_url () .'myprofile'); 
+		}
+	}
 	
 	/* this method used to add record . */
 	public function add() 
 	{
+		$this->_validategst();
 		$data = $this->load_module_info ();
 		$settings = $this->Mydb->get_record('*','settings');
         $data['commission_price'] = $settings['setting_ecommerce_percentage'];
@@ -468,6 +478,7 @@ class Manageproducts extends CI_Controller
 	/* this method used to update record info.. */
 	public function edit($edit_id = NULL) 
 	{
+		$this->_validategst();
 		$data = $this->load_module_info ();
 		$settings = $this->Mydb->get_record('*','settings');
         $data['commission_price'] = $settings['setting_ecommerce_percentage'];

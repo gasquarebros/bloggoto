@@ -61,11 +61,18 @@
 						</div>
 						<div class="clear"></div>
 					</div>
-					<div class="form_field">
+					<div class="form_field" style="margin-bottom:20px;">
 						<label>Profession</label>
 						<div class="input_field">			
 							<?php $cust_prof = explode(',',$info['customer_prof_profession']); echo form_dropdown('customer_prof_profession[]',$professions,$cust_prof,'multiple="multiple"'); 
 							?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form_field">
+						<label>GST No</label>
+						<div class="input_field">
+							<?php  echo form_input('customer_gst_no',stripslashes($info['customer_gst_no']),' class="form-control"');?>
 						</div>
 						<div class="clear"></div>
 					</div>
@@ -823,6 +830,16 @@
 		<div class="clear"></div>
 	</div> */ ?>
 	<?php } ?>
+	<?php if($info['customer_gst_no']) {?>
+	<div class="form_field">
+		<label>GST No.</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".$info['customer_gst_no']."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+
 	<?php if($info['customer_gender']) {?>
 	<div class="form_field">
 		<label>Gender</label>
