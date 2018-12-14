@@ -533,7 +533,13 @@ font-size: 16px;  \
 @media (max-width: 51.875em) {
   .listings .listing-two-item {
     display: block; } }
-
+  @media (max-width: 800px) {
+    .content-wrapper .listings-banner {
+      height: auto !important; } 
+    .ms-parent.wide {
+      width: 100% !important;
+    }  
+  }
 
 @keyframes anim-list-item {
   0% {
