@@ -92,7 +92,7 @@ var custom_redirect_url = "services/view/"+"<?php echo $records['ser_slug']; ?>"
                     <h5>Gallery</h5>
                     <?php if(!empty($gallery_images)) { 
                       foreach($gallery_images as $gallery) { 
-                        $cover_photo = media_url(). $this->lang->line('service_gallery_image_folder_name')."/".$gal_iamge['ser_gallery_image'];
+                        $cover_photo = media_url(). $this->lang->line('service_gallery_image_folder_name')."/".$gallery['ser_gallery_image'];
                     ?>
                     <a href="<?php echo $cover_photo; ?>">
                       <img class="responsive "  src="<?php echo $cover_photo; ?>" >
@@ -539,6 +539,11 @@ color: red;
     width:100px;
     height:100px;
   }
+.popup-gallery a {
+display: block;
+float: left;
+margin-right: 10px;
+}
 .service-container .service-info .service-description .reviews {
   margin-top: 3rem; }
 .service-container .service-info .service-description .reviews h5 {
