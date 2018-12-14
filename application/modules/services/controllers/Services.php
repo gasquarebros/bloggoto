@@ -243,7 +243,7 @@ class Services extends CI_Controller {
 				redirect(base_url().'services');
 			}
 			$data ['records'] = $records[0];
-			$data ['gallery_images'] = $this->Mydb->get_record ( 'ser_gallery_id,ser_gallery_image,ser_gallery_ser_primary_id', 'service_gallery', array (
+			$data ['gallery_images'] = $this->Mydb->get_all_records ( 'ser_gallery_id,ser_gallery_image,ser_gallery_ser_primary_id', 'service_gallery', array (
 					'ser_gallery_ser_primary_id' => $records[0] [$this->primary_key] 
 			) );
 			$where_city = '';
@@ -338,7 +338,7 @@ class Services extends CI_Controller {
 							'order_service_start_time' => $start_time,
 							'order_service_end_time' => $end_time,
 							'order_service_image' => $order_service_image,
-							'order_service_is_paid' => 0,
+							'order_service_is_paid' => 1,
 							'order_service_address_line1' => post_value ( 'address_line1' ),
 							'order_service_address_line2' => post_value ( 'address_line2' ),
 							'order_service_city' => post_value ( 'customer_city' ),
@@ -353,8 +353,17 @@ class Services extends CI_Controller {
 						
 						$insert_id = $this->Mydb->insert ( $this->order_table, $insert_array );
 						if($insert_id) {
+
+							$st_date = $insert_array['order_service_start_date'];
+							$ed_date = $insert_array['order_service_end_date'];
+							if($service['ser_pricet_type'] == 'hour') {
+								$st_time = ($insert_array['order_service_start_time'] !=''  && $insert_array['order_service_start_time'] != '00:00') ?  date( 'h.i A', $insert_array['order_service_start_time']):'';
+								$ed_time = ($insert_array['order_service_end_time'] !=''  && $insert_array['order_service_end_time'] != '00:00') ?  date( 'h.i A', $insert_array['order_service_end_time']):'';
+							} else {
+								$st_time = $ed_time = '';
+							}
 							//send mail and notification with success message
-							$date = get_date_formart($insert_array['order_service_start_date'])." - ".get_date_formart($insert_array['order_service_end_date']). "<br>". ($insert_array['order_service_start_time'] !='' && $insert_array['order_service_end_time'] !='') ?  date( 'h.i A', $insert_array['order_service_start_time'])." - ". date( 'h.i A', $insert_array['order_service_end_time']):'';
+							$date =  $st_date." - ".$ed_date. "<br>".$st_time." - ".$ed_time;
 
 							$name = $this->session->userdata('bg_first_name')." ".$this->session->userdata('bg_last_name');
 							$email = $this->session->userdata('bg_user_email');
@@ -364,6 +373,24 @@ class Services extends CI_Controller {
 							$email_template_id = '12';
 							if($email_template_id != '') {
 								$mail_res = $this->myemail->send_admin_mail($email,$email_template_id,$check_arr,$replace_arr);
+							}
+
+							
+							$provider = $this->Mydn->get_record('*','customers',array('customer_id'=>$service['ser_customer_id']));
+							if(!empty($provider)) {
+								$name = $provider['customer_first_name']." ".$provider['customer_last_name'];
+								$email = $provider['customer_email'];
+								if($name == '' && $provider['customer_username'] !='') {
+									$name = $provider['customer_username'];
+								} else if($name == '') {
+									$name = "Provider";
+								}
+								$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[Title]');
+								$replace_arr = array( ucfirst(stripslashes($name)),$insert_array['order_service_local_no'],stripslashes($insert_array['order_service_title']));
+								$email_template_id = '13';
+								if($email_template_id != '') {
+									$mail_res = $this->myemail->send_admin_mail($email,$email_template_id,$check_arr,$replace_arr);
+								}
 							}
 
 							$result ['status'] = 'success';

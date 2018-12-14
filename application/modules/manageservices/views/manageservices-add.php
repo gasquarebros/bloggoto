@@ -44,6 +44,10 @@ float: left;
 	width:75%;
 	float:left;
 }
+.col-sm-5 {
+	width:50%;
+	float:left;
+}
 .form-group {
     margin: 15px 5px;
 }
@@ -123,17 +127,17 @@ var commission_price = '<?php echo $commission_price; ?>';
 
 						<div class="form-group multi_field">
 							<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('ser_gallery');?></label>
-							<div class="col-sm-8 ">
+							<div class="col-sm-5">
 								<div class="input_box">
 									<div class="custom_browsefile"> <?php echo form_upload('product_gallery[]');?> <span class="result_browsefile"><span class="brows"></span> + <?php echo get_label('ser_gallery');?></span>
 									</div>
 								</div>
 								<?php /*<span class="hint"><?php echo "* ". get_label('product_max_image_count');?></span>*/ ?>
 							</div>
-							<?php /*
+							
 							<div class="col-sm-1 " >
 								<span class="add_field_button fa fa-plus  more_link"></span>
-							</div> */ ?>
+							</div>
 						</div>
 
 						

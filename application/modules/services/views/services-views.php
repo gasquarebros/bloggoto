@@ -9,8 +9,9 @@ var custom_redirect_url = "services/view/"+"<?php echo $records['ser_slug']; ?>"
             <div class="detail-cover-img">
                 <?php 
                   $cover_photo = "";
-                  if(!empty($gallery_images)) { 
-                    $cover_photo = media_url(). $this->lang->line('service_gallery_image_folder_name')."/".$gallery_images['ser_gallery_image'];
+                  if(!empty($gallery_images)) {
+                    $gal_iamge = $gallery_images[0];
+                    $cover_photo = media_url(). $this->lang->line('service_gallery_image_folder_name')."/".$gal_iamge['ser_gallery_image'];
                   } else {
                     $cover_photo = media_url().$this->lang->line('post_photo_folder_name')."default.png";
                   }
@@ -85,6 +86,19 @@ var custom_redirect_url = "services/view/"+"<?php echo $records['ser_slug']; ?>"
                         }
                       }
                     }
+                    ?>
+                </div>
+                <div class="privileges gallery popup-gallery">
+                    <h5>Gallery</h5>
+                    <?php if(!empty($gallery_images)) { 
+                      foreach($gallery_images as $gallery) { 
+                        $cover_photo = media_url(). $this->lang->line('service_gallery_image_folder_name')."/".$gal_iamge['ser_gallery_image'];
+                    ?>
+                    <a href="<?php echo $cover_photo; ?>">
+                      <img class="responsive "  src="<?php echo $cover_photo; ?>" >
+                    </a>  
+                    <?php  }
+                    } 
                     ?>
                 </div>
                 <?php /*
@@ -521,6 +535,10 @@ color: red;
 .service-container .service-info .service-description .privileges label {
   display: inline-block;
   margin-right: 1.1rem; }
+  .detail-content .gallery .responsive {
+    width:100px;
+    height:100px;
+  }
 .service-container .service-info .service-description .reviews {
   margin-top: 3rem; }
 .service-container .service-info .service-description .reviews h5 {
@@ -885,6 +903,7 @@ color: red;
 }
 /* Ends Here */
     </style>
-    <script>
-    $('.datepicker').datepicker({minDate: +1,changeMonth: true,changeYear: true,dateFormat: 'dd-mm-yy'});
-    </script>
+<script>
+$('.datepicker').datepicker({minDate: +1,changeMonth: true,changeYear: true,dateFormat: 'dd-mm-yy'});
+</script>
+<script type='text/javascript' src='<?php echo skin_url(); ?>js/image_popup.js'></script>    
