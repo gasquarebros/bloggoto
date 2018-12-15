@@ -9,13 +9,19 @@
 				<?php } else { ?>
 					<img src="<?php echo media_url().$this->lang->line('post_photo_folder_name')."default.png"; ?>" alt="">
 				<?php } ?>
-				<!--<div class="cover-photo-hover">
+
+
+				<?php $page_url = base_url()."services/view/".$record['ser_slug']; ?>
+                
+				<div class="cover-photo-hover">
 					<div class="share-like-two">
-						<a href="#"><i class="fa fa-heart-o"></i></a>
-						<a href="#"><i class="fa fa-share-alt"></i></a>
-						<a href="#"><i class="fa fa-bookmark-o"></i></a>
+						<a target="_blank" href="https://www.facebook.com/sharer.php?u=<?php echo $page_url; ?>"><i class="fa fa-facebook"></i></a>
+						<a target="_blank" href="https://plus.google.com/share?url=<?php echo $page_url; ?>"><i class="fa fa-google"></i></a>
+						<a target="_blank" href="https://web.whatsapp.com/send?text=<?php echo $page_url; ?>"><i class="fa fa-whatsapp"></i></a>
+						<a target="_blank" href="https://twitter.com/share?text=<?php echo $page_url; ?>"><i class="fa fa-twitter"></i></a>
+						<a target="_blank" href="mailto:?subject=Referal&amp;body=<?php echo $page_url; ?>"><i class="fa fa-envelope"></i></a>
 					</div>
-				</div>-->
+				</div>
 			</div>
 			<div class="listing-two-item-info">
 				<div class="user-two-pic">
@@ -24,9 +30,8 @@
                     <?php } else { ?> 
                         <img class="service_prof_photo" src="<?php echo skin_url(); ?>images/profile.jpg" alt="profile" />
                     <?php } ?>
-					<img src="img/avatar2.jpg" alt="">
 				</div>
-				<h3><?php echo $record['ser_title']; ?></h3>
+				<h3><a href="<?php echo $page_url; ?>"><?php echo $record['ser_title']; ?></a></h3>
 				<strong><a href="<?php echo base_url().urlencode($record['customer_username']); ?>" class=""><?php echo $record['customer_username']; ?></a> -&gt; </strong> <span class="text-info"><?php echo $record['ser_cate_name']; ?></span>
 				<p><?php echo substr_close_tags($record['ser_description']); ?></p>
 				<div class="rating-bt">

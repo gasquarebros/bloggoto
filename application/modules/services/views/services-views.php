@@ -40,15 +40,18 @@ var custom_redirect_url = "services/view/"+"<?php echo $records['ser_slug']; ?>"
                     </strong>
                 </div>
             </div>
-            <?php /*
+
             <div class="detail-action">
-                <strong><i class="fa fa-check-circle-o text-success"></i> Verified Listing</strong>
+                <strong><!--<i class="fa fa-check-circle-o text-success"></i> Verified Listing--></strong>
                 <div class="action">
-                    <a href="#"><i class="fa fa-heart-o"></i></a>
-                    <a href="#"><i class="fa fa-share-alt"></i></a>
-                    <a href="#"><i class="fa fa-bookmark-o"></i></a>
+                    <?php $page_url = base_url()."services/view/".$records['ser_slug']; ?>
+                    <a target="_blank" href="https://www.facebook.com/sharer.php?u=<?php echo $page_url; ?>"><i class="fa fa-facebook"></i></a>
+                    <a target="_blank" href="https://plus.google.com/share?url=<?php echo $page_url; ?>"><i class="fa fa-google"></i></a>
+                    <a target="_blank" href="https://web.whatsapp.com/send?text=<?php echo $page_url; ?>"><i class="fa fa-whatsapp"></i></a>
+                    <a target="_blank" href="https://twitter.com/share?text=<?php echo $page_url; ?>"><i class="fa fa-twitter"></i></a>
+                    <a target="_blank" href="mailto:?subject=Referal&amp;body=<?php echo $page_url; ?>"><i class="fa fa-envelope"></i></a>
                 </div>
-            </div>*/ ?>
+            </div>
             <p class="detail-description">
                 <?php echo $records['ser_description']; ?>
             </p>
