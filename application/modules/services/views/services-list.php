@@ -414,10 +414,10 @@ echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScro
     height: 100%; } }
 .listings .listing-two-item .cover-photo .cover-photo-hover {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: calc(100% - 15px);
-  height: 100.5%;
+  height: 50px;
   margin-left: 15px;
   background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
   border-radius: 3px; }

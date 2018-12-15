@@ -3,15 +3,17 @@
 	<?php $i=0; foreach($records as $record) {  ?>
 		<div class="listing-two-item">
 			<div class="cover-photo">
+				<?php $page_url = base_url()."services/view/".$record['ser_slug']; ?>
+				<a href="<?php echo $page_url; ?>">
 				<?php if($record['galleryimages'] !='') {  ?>
 					<?php $gallery = explode('~',$record['galleryimages']); ?>
 					<img src="<?php echo media_url(). $this->lang->line('service_gallery_image_folder_name')."/".$gallery[0]; ?>" alt="">
 				<?php } else { ?>
 					<img src="<?php echo media_url().$this->lang->line('post_photo_folder_name')."default.png"; ?>" alt="">
 				<?php } ?>
+				</a>	
 
-
-				<?php $page_url = base_url()."services/view/".$record['ser_slug']; ?>
+				
                 
 				<div class="cover-photo-hover">
 					<div class="share-like-two">
