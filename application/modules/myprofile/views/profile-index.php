@@ -139,6 +139,7 @@ var module_action="addpost";
 				<?php /*if($info['customer_type'] == 1) {*/ ?> 
 					<li><a data-section="products" href="<?php echo base_url()."myprofile/products/".encode_value($info['customer_id']); ?>" class=" profile_section product_section">Products</a></li>
 				<?php /*}*/ ?>
+				<li><a data-section="services" href="<?php echo base_url()."myprofile/services/".encode_value($info['customer_id']); ?>" class=" profile_section service_section">Services</a></li>
 			</ul>
 			<div class="boi_data">
 			

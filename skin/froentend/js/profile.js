@@ -233,7 +233,7 @@ $(document).ready(function(){
 		$('.profile_section').removeClass('active');
 		var current_section = $(this).attr('data-section');
 		$(this).addClass('active');
-		if(current_section == 'products')
+		if(current_section == 'products' || current_section == 'services' )
 		{
 			$('.boi_data').addClass('deals_part flash_sale_deals grid-view');
 		} else {
@@ -700,6 +700,28 @@ $(document).ready(function(){
 		show_content_loading(); 
 		$('.load_more').hide();
 		var url = $('.product_section').attr('href');
+		$.ajax({
+			url : url,
+			data : $('#common_search').serialize() + "&page="+page+"&secure_key="+secure_key,
+			type : 'POST',
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				hide_content_loading();
+				if (data.status == "success") {
+					$('.more_details_par').remove();
+					$(".boi_data").append(data.html);
+				}
+			}
+		});
+	});
+
+	$('body').on('click','.lazy_load_flashsale_services',function(e) {
+		e.stopPropagation();		  
+		var page = $(this).data('nextpage');
+		show_content_loading(); 
+		$('.load_more').hide();
+		var url = $('.service_section').attr('href');
 		$.ajax({
 			url : url,
 			data : $('#common_search').serialize() + "&page="+page+"&secure_key="+secure_key,

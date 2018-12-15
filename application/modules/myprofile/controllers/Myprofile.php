@@ -1436,6 +1436,82 @@ class Myprofile extends CI_Controller {
 
 
 	}
+
+	public function services($userid = null)
+	{
+		$this->authentication->user_authentication();
+		check_site_ajax_request();
+		
+		if($userid == null)
+		{
+			$userid = get_user_id();
+		}
+		else
+		{
+			$userid = decode_value($userid);
+		}
+
+		$data= $this->load_module_info();
+
+		$where = array('ser_status'=>'A','ser_customer_id'=>$userid);
+		//$where = array('product_customer_id'=>$userid);
+
+		$like = $order_by = array();
+
+		$join = "";
+		
+		$join [0] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_email";
+		$join [0] ['table'] = "pos_customers";
+		$join [0] ['condition'] = "ser_customer_id = customer_id";
+		$join [0] ['type'] = "INNER";
+		/* not in product availability id condition  */
+		$join [1] ['select'] = "ser_cate_primary_id,ser_cate_id,ser_cate_name";
+		$join [1] ['table'] = "service_categories";
+		$join [1] ['condition'] = "ser_category = ser_cate_primary_id";
+		$join [1] ['type'] = "LEFT";	
+
+		$join [2] ['select'] = "group_concat(ser_gallery_image,'~') as galleryimages";
+		$join [2] ['table'] = 'service_gallery';
+		$join [2] ['condition'] = "service_gallery.ser_gallery_ser_primary_id = ser_primary_id";
+		$join [2] ['type'] = "LEFT";
+
+		$groupby = "ser_primary_id";
+
+		$totla_rows = $this->Mydb->get_num_join_rows ( 'ser_primary_id', 'services', $where, null, null, null, $like, $groupby, $join );
+
+
+		$limit = 12;
+		$page = post_value ( 'page' )?post_value ( 'page' ):1;
+		$offset = post_value ( 'page' )?((post_value ( 'page' )-1) * $limit):0;
+		$offset = post_value ( 'offset' )?post_value ( 'offset' ):$offset;
+		$next_offset = $offset+$limit;
+		$next_set = ($totla_rows > $next_offset)?($offset+$limit):'';
+
+		$data['offset'] = $offset;
+
+		
+		/* pagination part end */
+		
+		$select_array = array ('services.*');
+		$data ['records'] = $this->Mydb->get_all_records ( $select_array, 'services', $where, $limit, $offset, $order_by, $like,$groupby, $join );
+
+		$current_records = (($page-1)*$limit)+count($data ['records']);
+		$data['current_records'] = $current_records;
+		$data['total_rows'] = $totla_rows;
+		$data['page'] = $page;
+
+		$page_relod = ($totla_rows > 0 && $offset > 0 && empty ( $data ['records'] )) ? 'Yes' : 'No';
+		$html = get_template ( $this->folder . $this->module . '-service-ajax-list', $data );
+		echo json_encode ( array (
+				'status' => 'success',
+				'offset' => $offset,
+				'page_reload' => $page_relod,
+				'html' => $html 
+		) );
+		exit ();
+
+
+	}
 	
 	/* this method used to common module labels */
 	private function load_module_info() {
