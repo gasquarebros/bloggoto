@@ -376,7 +376,7 @@ class Services extends CI_Controller {
 							}
 
 							
-							$provider = $this->Mydn->get_record('*','customers',array('customer_id'=>$service['ser_customer_id']));
+							$provider = $this->Mydb->get_record('*','customers',array('customer_id'=>$service['ser_customer_id']));
 							if(!empty($provider)) {
 								$name = $provider['customer_first_name']." ".$provider['customer_last_name'];
 								$email = $provider['customer_email'];

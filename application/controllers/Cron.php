@@ -52,7 +52,7 @@ class Cron extends CI_Controller {
 
 				$st_date = $rec['order_service_start_date'];
 				$ed_date = $rec['order_service_end_date'];
-				if($service['ser_pricet_type'] == 'hour') {
+				if($rec['ser_pricet_type'] == 'hour') {
 					$st_time = ($rec['order_service_start_time'] !=''  && $rec['order_service_start_time'] != '00:00') ?  date( 'h.i A', $rec['order_service_start_time']):'';
 					$ed_time = ($rec['order_service_end_time'] !=''  && $rec['order_service_end_time'] != '00:00') ?  date( 'h.i A', $rec['order_service_end_time']):'';
 				} else {
