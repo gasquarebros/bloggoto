@@ -50,7 +50,16 @@ class Cron extends CI_Controller {
 				);
 				$this->Mydb->update($this->table,$where,array('order_service_status'=>$value));
 
-				$date = get_date_formart($rec['order_service_start_date'])." - ".get_date_formart($rec['order_service_end_date']). "<br>". ($rec['order_service_start_time'] !='' && $rec['order_service_end_time'] !='') ?  date( 'h.i A', $rec['order_service_start_time'])." - ". date( 'h.i A', $rec['order_service_end_time']):'';
+				$st_date = $rec['order_service_start_date'];
+				$ed_date = $rec['order_service_end_date'];
+				if($service['ser_pricet_type'] == 'hour') {
+					$st_time = ($rec['order_service_start_time'] !=''  && $rec['order_service_start_time'] != '00:00') ?  date( 'h.i A', $rec['order_service_start_time']):'';
+					$ed_time = ($rec['order_service_end_time'] !=''  && $rec['order_service_end_time'] != '00:00') ?  date( 'h.i A', $rec['order_service_end_time']):'';
+				} else {
+					$st_time = $ed_time = '';
+				}
+				//send mail and notification with success message
+				$date =  $st_date." - ".$ed_date. "<br>".$st_time." - ".$ed_time;
 
 				$this->load->library('myemail');
 				$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[Title]','[DATE]');
