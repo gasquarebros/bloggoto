@@ -289,7 +289,17 @@ class Managebookings extends CI_Controller
 
 			$data['records'] = $record;
 			
-			$date = get_date_formart($record[0]['order_service_start_date'])." - ".get_date_formart($record[0]['order_service_end_date']). "<br>". ($record[0]['order_service_start_time'] !='' && $record[0]['order_service_end_time'] !='') ?  date( 'h.i A', $record[0]['order_service_start_time'])." - ". date( 'h.i A', $record[0]['order_service_end_time']):'';
+			$st_date = $record[0]['order_service_start_date'];
+			$ed_date = $record[0]['order_service_end_date'];
+			if($record[0]['order_service_price_type'] == 'hour') {
+				$st_time = ($record[0]['order_service_start_time'] !=''  && $record[0]['order_service_start_time'] != '00:00') ?  date( 'h.i A', strtotime($record[0]['order_service_start_time'])):'';
+				$ed_time = ($record[0]['order_service_end_time'] !=''  && $record[0]['order_service_end_time'] != '00:00') ?  date( 'h.i A',strtotime( $record[0]['order_service_end_time'])):'';
+			} else {
+				$st_time = $ed_time = '';
+			}
+			//send mail and notification with success message
+			$date =  $st_date." - ".$ed_date. "<br>".$st_time." - ".$ed_time;
+			
 
 			$this->load->library('myemail');
 			$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[Title]','[DATE]');

@@ -53,7 +53,7 @@
 <?php  } } else { ?>
 <tr class="no_records">
 
-			<td colspan="15" class=""><?php echo sprintf(get_label('admin_no_records_found'),$module_labels); ?></td>
+			<td colspan="15" class=""><?php echo sprintf(get_label('admin_no_service_found'),$module_labels); ?></td>
 		</tr>
 
 <?php } ?>

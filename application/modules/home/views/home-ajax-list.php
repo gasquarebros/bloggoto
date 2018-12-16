@@ -16,7 +16,24 @@ if($i%2 == 0){ ?>
 			<div class="list_img">
 
 				<?php if($record['post_photo'] !='' && file_exists(FCPATH."media/".$this->lang->line('post_photo_folder_name').$record['post_photo'])){ $photo=media_url().$this->lang->line('post_photo_folder_name').$record['post_photo']; } else if($record['customer_photo'] !=''&& file_exists(FCPATH."media/".$this->lang->line('customer_image_folder_name').$record['customer_photo'])) { $photo = media_url().$this->lang->line('customer_image_folder_name')."/".$record['customer_photo'];  } else { $photo=media_url().$this->lang->line('post_photo_folder_name')."default.png"; } ?>
-				<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
+				
+				<?php 
+				if($record['post_by'] == 'admin')
+				{
+					$url ="";									
+				} 
+				else 
+				{ 
+					$username = get_tag_username($record['customer_id']);
+					$url =base_url().urlencode($username);
+				}
+				if($url !='') { ?> 
+					<a href="<?php echo $url; ?>"> 
+				<?php } ?>
+					<img src="<?php echo $photo; ?>" alt="<?php echo $record['post_title']; ?>" />
+				<?php if($url !='') { ?> 
+				</a>
+				<?php } ?>
 			</div>
 			<div class="list_decp">
 				<h3>

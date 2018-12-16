@@ -37,4 +37,5 @@ $lang['category_select'] = "Select Category";
 $lang['customer_city'] = "City";
 $lang['time_start_time'] = "Day Start Time";
 $lang['time_end_time'] = "Day End Time";
+$lang['admin_no_service_found'] = "No services hosted";
 /* Service Modules ends here */

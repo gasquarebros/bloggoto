@@ -29,4 +29,5 @@ $lang['city'] = "City";
 $lang['order_service_amount'] = "Amount";
 $lang['order_service_slug'] = "Slug";
 $lang['order_service_status'] = "Status";
+$lang['pay'] = "Pay";
 

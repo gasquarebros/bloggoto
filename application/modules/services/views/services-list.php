@@ -16,39 +16,42 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                     <?php echo form_open('',' id="common_search" class="form-inline"');?>
                     <div class="listings-banner">
                         <input type="hidden" name="product_sort" id="product-sort" value="" /> 
-                        <div class="select-fields">
-                            <div class="sel service_category">
-                                <select name="category" title="Services Category" class="wide" >
-                                      <option value="" >Select Category</option> 
-                                    <?php foreach($service_category as $key=>$cat){ ?>
-                                      <option value="<?php echo $key; ?>" ><?php echo $cat; ?></option> 
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="sel service_subcategory">
-                                <select title="Subcategory" name="subcategory" class="wide" >
-                                    <option value="" >Select Subcategory</option> 
-                                    <?php foreach($service_subcategory as $skey=>$subcat){ ?>
-                                      <option value="<?php echo $skey; ?>" ><?php echo $subcat; ?></option> 
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="sel service_availability">
-                                <select name="availability[]" title="Availability" data-placeholder="Select Availability" multiple class="wide" style="width:200px;" >
-                                    <option value="mon">Mon</option>
-                                    <option value="tue">Tue</option>
-                                    <option value="wed">Wed</option>
-                                    <option value="thu">Thu</option>
-                                    <option value="fri">Fri</option>
-                                    <option value="sat">Sat</option>
-                                    <option value="sun">Sun</option>
-                                </select>
-                            </div>
-                            <div class="sel service_city">
-                                <?php echo get_all_cities(); ?>
-                                
-                            </div>
-                            <button type="submit" class="ui-btn dark-blue">Start Now</button>
+                        <div class="search-fields">
+                          <input type="text" name="search_field" placeholder="Search with title..." value="" id="search_field" />
+                          <div class="select-fields">
+                              <div class="sel service_category">
+                                  <select name="category" title="Services Category" class="wide" >
+                                        <option value="" >Select Category</option> 
+                                      <?php foreach($service_category as $key=>$cat){ ?>
+                                        <option value="<?php echo $key; ?>" ><?php echo $cat; ?></option> 
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                              <div class="sel service_subcategory">
+                                  <select title="Subcategory" name="subcategory" class="wide" >
+                                      <option value="" >Select Subcategory</option> 
+                                      <?php foreach($service_subcategory as $skey=>$subcat){ ?>
+                                        <option value="<?php echo $skey; ?>" ><?php echo $subcat; ?></option> 
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                              <div class="sel service_availability">
+                                  <select name="availability[]" title="Availability" data-placeholder="Select Availability" multiple class="wide" style="width:200px;" >
+                                      <option value="mon">Mon</option>
+                                      <option value="tue">Tue</option>
+                                      <option value="wed">Wed</option>
+                                      <option value="thu">Thu</option>
+                                      <option value="fri">Fri</option>
+                                      <option value="sat">Sat</option>
+                                      <option value="sun">Sun</option>
+                                  </select>
+                              </div>
+                              <div class="sel service_city">
+                                  <?php echo get_all_cities(); ?>
+                                  
+                              </div>
+                              <button type="submit" class="ui-btn dark-blue">Start Now</button>
+                          </div>
                         </div>
                     </div>
                     <?php echo form_close(); ?>
@@ -94,15 +97,15 @@ echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScro
 <style>
 
 .old-price {
-    color: #787878;
-    font-size: 14px;
+    color: black;
+    font-size: 17px !important;
     text-decoration: line-through;
     margin-bottom: 7px
 }
 
 .new-price {
-    color: #53a318;
-    font-size: 15px;
+    color: black;
+    font-size: 17px !important;
     font-family: 'proxima_nova_rgbold';
     margin: 0px
 }
@@ -182,7 +185,7 @@ echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScro
 .content-wrapper .listings-banner {
   width: 100%;
   height: 200px;
-  background: linear-gradient(to bottom, rgba(57, 67, 131, 0.87), rgba(57, 67, 131, 0.78)), url("../img/workers.png");
+  background: linear-gradient(to bottom, rgba(57, 67, 131, 0.87), rgba(57, 67, 131, 0.78));
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -191,7 +194,13 @@ echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScro
 @media (min-width: 760px) and (max-width: 1200px) {
   .content-wrapper .listings-banner {
     padding: 0 6rem; } }
+    .search-fields  #search_field {  
+      width:94% !important
+    }
 @media (max-width: 47.5em) {
+  .search-fields  #search_field {  
+    width:84% !important
+  }
   .content-wrapper .listings-banner {
     padding: 0 5rem; } }
 @media (max-width: 25em) {
@@ -206,10 +215,18 @@ echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScro
               TWO - INDEX_ONE STYLES
 --------------------------------------------------- */
 
-
+.search-fields {
+  background: white;
+}
+.search-fields  #search_field { 
+  margin: 10px 0px 10px 20px;
+  width: 97%;
+  float: left;
+  display: block;
+}
 .select-fields {
   width: 100%;
-  margin-top: 3.5rem;
+  /*margin-top: 3.5rem;*/
   display: flex;
   background: white;
   padding: 1rem;
@@ -249,7 +266,7 @@ echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScro
   display: block;
   align-items: center; }
 .switcher div h6 {
-  margin: 0; font-size:1rem;color: #607d8b;}
+  margin: 0; font-size:1rem;color: #607d8b;line-height: 63px;}
 @media (max-width: 47.5em) {
   .switcher div em {
     display: none; } }

@@ -1,6 +1,6 @@
 <script>
 var module_action = "booknow";
-var custom_redirect_url = "services/view/"+"<?php echo $records['ser_slug']; ?>";
+var custom_redirect_url = "services/thankyou";
 </script>
 
 <div class="listing-detail">
@@ -36,13 +36,13 @@ var custom_redirect_url = "services/view/"+"<?php echo $records['ser_slug']; ?>"
                       } else {
                         $price = $records['ser_price'];
                       } 
-                      echo show_price($price); ?>
+                      echo show_price($price)."/".$records['ser_pricet_type']; ?>
                     </strong>
                 </div>
             </div>
 
             <div class="detail-action">
-                <strong><!--<i class="fa fa-check-circle-o text-success"></i> Verified Listing--></strong>
+                <strong>Service Provided by <a href="<?php echo base_url().urlencode($records['customer_username']); ?>" class=""><?php echo $records['customer_username']; ?></a><!--<i class="fa fa-check-circle-o text-success"></i> Verified Listing--></strong>
                 <div class="action">
                     <?php $page_url = base_url()."services/view/".$records['ser_slug']; ?>
                     <a target="_blank" href="https://www.facebook.com/sharer.php?u=<?php echo $page_url; ?>"><i class="fa fa-facebook"></i></a>

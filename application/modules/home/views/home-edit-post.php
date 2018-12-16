@@ -43,7 +43,7 @@ var module_action="updatepost";
 				</ul>
 				<ul class="fr other_options">
 					<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
-					<li class="serv-sec"><a href="#">Host services</a></li>
+					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host services</a></li>
 				</ul>
 			</div>
 			<div class="cat_list">

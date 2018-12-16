@@ -203,7 +203,7 @@
 							<div class="comment_box_wrap">
 								<input type="hidden" name="post_record" value="<?php echo encode_value($record['post_id']); ?>" />
 								<input type="text" style="display:none" class="comment_edit_section" name="comment_data" placeholder="Your Thought..." />
-								<div class="comment"  placeholder=" Your Thought..." contenteditable="true"><?php echo json_decode($record['post_comment_message']); ?> </div>
+								<div class="comment"  placeholder=" Your Thought..." contenteditable="true"></div>
 								<button type="submit" class="comment_submit">></button>
 							</div>
 							<div class='display'></div>

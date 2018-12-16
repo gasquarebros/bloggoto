@@ -92,6 +92,12 @@ class Services extends CI_Controller {
 				));
 			}
 		}
+
+		if($search_field !='' && $search_field != 'undefined') {
+			$like = array_merge ( $like, array (
+				"ser_title" => $search_field 
+			));
+		}
 		
 
 		if ($cat != "" && $cat != 'undefined') {
@@ -357,8 +363,8 @@ class Services extends CI_Controller {
 							$st_date = $insert_array['order_service_start_date'];
 							$ed_date = $insert_array['order_service_end_date'];
 							if($service['ser_pricet_type'] == 'hour') {
-								$st_time = ($insert_array['order_service_start_time'] !=''  && $insert_array['order_service_start_time'] != '00:00') ?  date( 'h.i A', $insert_array['order_service_start_time']):'';
-								$ed_time = ($insert_array['order_service_end_time'] !=''  && $insert_array['order_service_end_time'] != '00:00') ?  date( 'h.i A', $insert_array['order_service_end_time']):'';
+								$st_time = ($insert_array['order_service_start_time'] !=''  && $insert_array['order_service_start_time'] != '00:00') ?  date( 'h.i A', strtotime($insert_array['order_service_start_time'])):'';
+								$ed_time = ($insert_array['order_service_end_time'] !=''  && $insert_array['order_service_end_time'] != '00:00') ?  date( 'h.i A',strtotime( $insert_array['order_service_end_time'])):'';
 							} else {
 								$st_time = $ed_time = '';
 							}
@@ -368,7 +374,7 @@ class Services extends CI_Controller {
 							$name = $this->session->userdata('bg_first_name')." ".$this->session->userdata('bg_last_name');
 							$email = $this->session->userdata('bg_user_email');
 							$this->load->library('myemail');
-							$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[Title]','[DATE]');
+							$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[TITLE]','[DATE]');
 							$replace_arr = array( ucfirst(stripslashes($name)),$insert_array['order_service_local_no'],stripslashes($insert_array['order_service_title']),$date);
 							$email_template_id = '12';
 							if($email_template_id != '') {
@@ -385,7 +391,7 @@ class Services extends CI_Controller {
 								} else if($name == '') {
 									$name = "Provider";
 								}
-								$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[Title]');
+								$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[TITLE]');
 								$replace_arr = array( ucfirst(stripslashes($name)),$insert_array['order_service_local_no'],stripslashes($insert_array['order_service_title']));
 								$email_template_id = '13';
 								if($email_template_id != '') {
@@ -413,6 +419,11 @@ class Services extends CI_Controller {
 			echo json_encode ( $result );
 			exit ();
 		}
+	}
+
+	public function thankyou() {
+		$data = $this->load_module_info ();	
+		$this->layout->display_site ( $this->folder . $this->module . "-thankyou", $data );
 	}
 	/* this method used to common module labels */
 	private function load_module_info() {

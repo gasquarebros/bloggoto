@@ -42,7 +42,7 @@
 				<td><?php echo get_date_formart($val['order_service_start_date'])." - ".get_date_formart($val['order_service_end_date']); ?><br>
 					<?php 
 					if($val['order_service_price_type'] == 'hour') { 
-						echo ($val['order_service_start_time'] !='' && $val['order_service_end_time'] !='') ?  date( 'h.i A', $val['order_service_start_time'])." - ". date( 'h.i A', $val['order_service_end_time']):''; 
+						echo ($val['order_service_start_time'] !='' && $val['order_service_end_time'] !='') ?  date( 'h.i A', strtotime($val['order_service_start_time']))." - ". date( 'h.i A', strtotime($val['order_service_end_time'])):''; 
 					}
 					?>
 				

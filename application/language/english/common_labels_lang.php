@@ -71,6 +71,7 @@ $lang ['post_photo'] = "Image";
 $lang ['product_added'] = "Product added successfully.";
 $lang['product_price_after_commission'] = "Merchant Receiving Price";
 $lang ['account_success_created'] = " Account created successfully.";
+$lang['select_state'] =  "Select State";
 
 
 /*  upload folder name  */$lang['client_min_amount'] = "Minimum Amount For Free Delivery";

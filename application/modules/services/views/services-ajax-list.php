@@ -45,11 +45,11 @@
 						?>
 						<p>
 						<span class="old-price"><?php echo show_price($record['ser_price']);?></span>
-						<span class="new-price"><?php echo show_price($record['ser_discount_price']);?></span></p>
+						<span class="new-price"><?php echo show_price($record['ser_discount_price']);?>/<?php echo $record['ser_pricet_type']; ?></span></p>
 						<?php } else {
 							$sprice = $record['ser_price'];
 						?>
-						<p><span class="new-price"><?php echo show_price($record['ser_price']);?></span></p>
+						<p><span class="new-price"><?php echo show_price($record['ser_price']);?></span>/<?php echo $record['ser_pricet_type']; ?></p>
 						<?php } ?>
 					</div>
 					<?php /*<div class="rating-stars">
