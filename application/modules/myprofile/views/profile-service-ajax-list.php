@@ -486,6 +486,6 @@
 <?php
 } else if($offset == 0) { ?>
 	<div class="list_row">
-		<p class="no_records">No Products Found</p>
+		<p class="no_records">No services hosted</p>
 	</div>
 <?php } ?>

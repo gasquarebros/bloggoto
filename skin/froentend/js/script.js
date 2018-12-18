@@ -251,7 +251,7 @@ window.setInterval(function() {
 	$(document).on('click', '.post_delete', function(e) {		
 		var dataid = $(this).attr('data-id');
 		var action = $(this).attr('title');
-			customAlertmsg("Are you sure you want to delete permanently? Yes, No");	
+			customAlertmsg("Are you sure you want to delete permanently?");	
 	   $( "#alt1" ).click(function() {		
 		//show_content_loading(); 
 		//$('.load_more').hide();

@@ -107,12 +107,15 @@ var module_action="addpost";
 						?>						
 						<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class="<?php if($i==0) echo 'active'; ?>"><?php echo $cat; ?></a></li>
 					<?php $i++; } } ?>
+					<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
+					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host Services</a></li>
 					
 				</ul>
+				<?php /*
 				<ul class="fr other_options">
 					<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
 					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host Services</a></li>
-				</ul>
+				</ul>*/ ?>
 			</div>
 			<div class="cat_list">
 				<h5>Choose what you posting</h5>

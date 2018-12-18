@@ -39,12 +39,16 @@ var module_action="updatepost";
 					<li><a data-section="Lifestyle" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Lifestyle') ? 'active': '';?>">Lifestyle</a></li>
 					<li><a data-section="Paparazzi" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Paparazzi') ? 'active': '';?>">Paparazzi</a></li>
 					<li><a data-section="Others" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Others') ? 'active': '';?>">Others</a></li>*/ ?>
+
+					<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
+					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host services</a></li>
 					
 				</ul>
+				<?php /*
 				<ul class="fr other_options">
 					<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
 					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host services</a></li>
-				</ul>
+				</ul> */ ?>
 			</div>
 			<div class="cat_list">
 				<h5>Choose what you post</h5>

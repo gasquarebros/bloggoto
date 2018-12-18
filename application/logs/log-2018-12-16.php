@@ -1807,3 +1807,4 @@ ERROR - 2018-12-16 18:29:03 --> Severity: Notice --> Undefined variable: records
 ERROR - 2018-12-16 18:29:40 --> Severity: Notice --> Undefined index: ser_pricet_type D:\xampp\htdocs\bloggotoweb\application\modules\managebookings\controllers\Managebookings.php 294
 ERROR - 2018-12-16 18:30:50 --> Could not find the language line "pay"
 ERROR - 2018-12-16 18:30:50 --> Could not find the language line "pay"
+ERROR - 2018-12-16 18:40:24 --> Could not find the language line "product_modifier_select"

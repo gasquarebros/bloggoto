@@ -66,6 +66,7 @@ $(document).ready(function(){
 		$('#search_category').trigger("chosen:updated");
 
 		get_content();
+		return false;
 	});
 	$(document).on('click', '.blog_category li a', function(e) {		
 		$('.blog_category li a').removeClass('active');
@@ -74,6 +75,7 @@ $(document).ready(function(){
 		$('#load_offset').val('');
 		$(".append_html").html('');
 		get_content();
+		return false;
 	});
 
 	$(document).on('change', '#search_category', function(e) {	
@@ -84,6 +86,7 @@ $(document).ready(function(){
 		$('#load_offset').val('');
 		$(".append_html").html('');
 		get_content();
+		return false;
 	});
 	
 	$(document).on('change', '#order_field', function(e) {	
@@ -91,9 +94,11 @@ $(document).ready(function(){
 		$('#load_offset').val('');
 		$(".append_html").html('');
 		get_content();
+		return false;
 	});
 	
 	$('.more_posts').click(function() {
 		get_content();
+		return false;
 	});
 });

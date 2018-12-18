@@ -12545,7 +12545,10 @@ body.checkout .ui-widget.ui-widget-content{
 					<div class="thank_part txtc">
 						<p class="tick "><span class="circle"><i class="fa fa-check" aria-hidden="true"></i></span></p>
 						<h2>Thankyou</h2>
-						<p class="order_para">Your Booking has been placed successfully.<br> <?php /*<span class="order_no_title">Order Number:</span> <span class="order_no"><?php echo 'booking_no'; ?></span>*/ ?></p>
+						<p class="order_para">Your Booking has been placed successfully.<br> <?php /*<span class="order_no_title">Order Number:</span> <span class="order_no"><?php echo 'booking_no'; ?></span>*/ ?>
+                            
+                        </p>
+                        <p class="order_no_title">Merchant should confirm the booking in a span of 2 hours else the booking will be cancelled</p>
                         <p><a href="<?php echo base_url()."services"; ?>">View Services</a></p>
 					</div>
 

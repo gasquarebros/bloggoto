@@ -16,6 +16,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                     <?php echo form_open('',' id="common_search" class="form-inline"');?>
                     <div class="listings-banner">
                         <input type="hidden" name="product_sort" id="product-sort" value="" /> 
+                        <p class="slogan">SERVICE FOR THE PEOPLE WHO WANT MORE</p>
                         <div class="search-fields">
                           <input type="text" name="search_field" placeholder="Search with title..." value="" id="search_field" />
                           <div class="select-fields">
@@ -191,6 +192,13 @@ echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScro
   justify-content: flex-end;
   align-items: center;
   padding: 0 100px; }
+
+
+.slogan {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 10px;
+}  
 @media (min-width: 760px) and (max-width: 1200px) {
   .content-wrapper .listings-banner {
     padding: 0 6rem; } }
@@ -555,6 +563,11 @@ font-size: 16px;  \
       height: auto !important; } 
     .ms-parent.wide {
       width: 100% !important;
+    }  
+    .slogan {
+      font-size: 12px;
+      margin-bottom: 10px;
+      margin-top: 10px;
     }  
   }
 
