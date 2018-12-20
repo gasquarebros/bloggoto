@@ -308,7 +308,8 @@ position: relative; overflow: visible !important; }
 	}	
 	.sort_by form .form_field { width:49%; margin-right:0px; margin-bottom: 10px;}
 	.show_post_options { margin-top:0px; }
-	.share_n_text { margin-left: 29%; } 
+    .share_n_text { margin-left: 29%; } 
+    .cat_list ul li a { font-size: 13px; }
 }
 
 @media screen and (max-width: 320px) {

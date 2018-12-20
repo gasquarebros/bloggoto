@@ -1,8 +1,11 @@
-$('.copy_to_clipboard').click(function(){
-  var text=$(this).attr('data-text');
-  var self=$(this);
-  copyToClipboard(self,text);
+
+$(document).on('click','.copy_to_clipboard', function () {
+	var text=$(this).attr('data-text');
+	var self=$(this);
+	copyToClipboard(self,text);
 });
+  
+
 function copyToClipboard(current,text) {
   var temp = $("<input>");
   $("body").append(temp);
@@ -13,7 +16,7 @@ function copyToClipboard(current,text) {
   current.append('<span id="success-alert">Copied to Clipboard</span>');
   setTimeout(function() { 
 	current.parent().find("#success-alert").remove();
-  }, 3000);
+  }, 1000);
 }
 
 $('.device_nav li').each(function() {
@@ -323,7 +326,7 @@ $(document).on('click','.post_options_action',function(e) {
 		var url = $(this).attr('action');
 		var dataaction = $(this).attr('data-action');
             // showInfo("Please select category.", "Message");		
-			customAlertmsg("Are you sure you want to delete permanently? Yes, No");	
+			customAlertmsg("Are you sure you want to delete permanently?");	
 	   $( "#alt1" ).click(function() {
 			//show_content_loading(); 
 			$.ajax({

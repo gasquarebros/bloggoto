@@ -1007,7 +1007,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                 <?php $page_url = base_url()."products/view/".$records[0]['product_slug']; ?>
                 <li class="face"><a target="_blank" href="https://www.facebook.com/sharer.php?u=<?php echo $page_url; ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                 <li class="goog"><a target="_blank" href="https://plus.google.com/share?url=<?php echo $page_url; ?>"><i class="fa fa-google" aria-hidden="true"></i></a></li>
-                <li class="whatsapp"><a target="_blank" href="https://web.whatsapp.com/send?text=<?php echo $page_url; ?>"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
+                <li class="whatsapp"><a class="copy_to_clipboard" data-text="<?php echo $page_url; ?>" ><i class="fa fa-copy" aria-hidden="true"></i></a></li>
                 <li class="twitter"><a target="_blank" href="https://twitter.com/share?text=<?php echo $page_url; ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                 <li class="email"><a target="_blank" href="mailto:?subject=Referal&amp;body=<?php echo $page_url; ?>"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
 

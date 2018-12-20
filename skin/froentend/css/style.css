@@ -776,7 +776,7 @@ ul.profile_rgt {
 .list_img img {
     display: inline-block;
 	width: 100%;
-	/*height: 200px;*/
+	height: 200px;
 }
 
 * .list_decp {

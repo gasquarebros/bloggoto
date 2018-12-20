@@ -35,7 +35,12 @@ var module_action="addpost";
         </div>
         <div class="comment_section">
             <div class="cmt_img">
-                <a href="javascript:void(0)" class="img_lft">
+				<?php if($this->session->userdata('customer_username')) {
+					$loggin_url = base_url().$this->session->userdata('customer_username');
+				} else { 
+					$loggin_url = "javascript:void(0)";
+				} ?>
+                <a href="<?php echo $loggin_url; ?>" class="img_lft">
 				<?php if($this->session->userdata('bg_user_profile_picture')) { ?>
 					<img style="width:50px" class="img-circle" src="<?php echo $this->session->userdata('bg_user_profile_picture'); ?>" alt="man" />
 				<?php } else {?>

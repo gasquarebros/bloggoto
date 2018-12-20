@@ -11,12 +11,12 @@ class Servicecategories extends CI_Controller {
 	public function __construct() {
 		
 		parent::__construct ();
-		$this->module = "Servicecategories";
+		$this->module = "servicecategories";
 		
 		$this->authentication->admin_authentication();
 		$this->module_label = get_label ( 'ser_cate_label' );
 		$this->module_labels = get_label ( 'ser_cate_labels' );
-		$this->folder = "Servicecategories/";
+		$this->folder = "servicecategories/";
 		$this->table = "service_categories";
 		$this->menu_table = "menu_navigation";
 		$this->primary_key = 'ser_cate_primary_id';
