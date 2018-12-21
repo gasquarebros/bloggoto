@@ -274,7 +274,7 @@ class Managebookings extends CI_Controller
 				"order_service_guid" => $service_id,
 				'order_service_provider_id'	=> get_user_id()
 			);
-			$this->Mydb->update($this->table,$where,array('order_service_status'=>$value));
+			$this->Mydb->update($this->table,$where,array('order_service_status'=>$value,'order_service_updated_on'=>date('Y-m-d H:i:s'),'order_service_updated_ip'=>get_ip()));
 			
 			$join = "";	
 			$join [0] ['select'] = "customers.customer_id,customers.customer_first_name,customers.customer_last_name,customers.customer_username,customers.customer_email";

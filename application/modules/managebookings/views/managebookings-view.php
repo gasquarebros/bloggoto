@@ -46,6 +46,14 @@ function printDiv()
 								<!--<a onclick="printDiv();">Print PDF</a>-->
 								<?php if($records[0]['order_service_status'] == 'processing') { ?>
 								<button type="button" data-option="accepted" class="btn btn-primary action_btns">Accept</button>	
+								<?php } 
+								$after_two_hours = '';
+								$current_time = strtotime(date('Y-m-d H:i:s'));
+								if($records[0]['order_service_updated_on'] != '' && $records[0]['order_service_updated_on'] != '0000-00-00 00:00:00') {
+									
+									$after_two_hours = strtotime('+2 hour', strtotime($records[0]['order_service_updated_on']));
+								}
+								if($records[0]['order_service_status'] == 'processing' || ($records[0]['order_service_status'] == 'accepted' && $after_two_hours !='' && $after_two_hours >= $current_time )) { ?>
 								<button type="button" data-option="rejected" class="btn btn_red action_btns">Reject</button>	
 								<?php } ?>
 							</div>
