@@ -144,6 +144,10 @@ function printDiv()
 													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;">Amount</td>
 													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;"> <?php echo show_price($records[0]['order_service_price'])."/".$records[0]['order_service_price_type']; ?></td>
 												</tr>
+												<tr>
+													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;">Additional Message</td>
+													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;"> <?php echo output_value($records[0]['order_service_message']); ?></td>
+												</tr>
 											</tbody>
 										</table>
 									</td>

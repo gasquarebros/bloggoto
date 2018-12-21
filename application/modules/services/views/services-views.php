@@ -285,8 +285,12 @@ var custom_redirect_url = "services/thankyou";
                       <?php  echo form_input('zipcode',set_value('zipcode'),' class="form-control required" placeholder="'.get_label('zipcode').'" title="'.get_label('zipcode').' is required"  ');?>
                     </div>
                     <div class="form-group">
-                      <?php  echo form_input('landmark',set_value('landmark'),' class="form-control" placeholder="'.get_label('landmark').'" title="'.get_label('landmark').' is required"  ');?>
+                      <?php  echo form_input('landmark',set_value('landmark'),' class="form-control" placeholder="'.get_label('landmark').'" title="'.get_label('landmark').'"  ');?>
                     </div>
+                    <div class="form-group">
+                      <?php  echo form_input('order_service_message',set_value('order_service_message'),' class="form-control" placeholder="'.get_label('order_service_message').'" title="'.get_label('order_service_message').'"  ');?>
+                    </div>
+                    
                     <button type="submit" name="submit" class="btn ui-btn dark-blue btn-block">Book Now</button>
                   <?php
                   echo form_hidden ( 'service', $records['ser_service_id'] );

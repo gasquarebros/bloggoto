@@ -192,7 +192,7 @@ class Manageproducts extends CI_Controller
 	/* this method used to add record . */
 	public function add() 
 	{
-		$this->_validategst();
+		//$this->_validategst();
 		$data = $this->load_module_info ();
 		$settings = $this->Mydb->get_record('*','settings');
         $data['commission_price'] = $settings['setting_ecommerce_percentage'];
@@ -478,7 +478,7 @@ class Manageproducts extends CI_Controller
 	/* this method used to update record info.. */
 	public function edit($edit_id = NULL) 
 	{
-		$this->_validategst();
+		//$this->_validategst();
 		$data = $this->load_module_info ();
 		$settings = $this->Mydb->get_record('*','settings');
         $data['commission_price'] = $settings['setting_ecommerce_percentage'];

@@ -19,4 +19,5 @@ $lang['city'] = "City";
 $lang['state'] = "State";
 $lang['zipcode'] = "Zipcode";
 $lang['landmark'] = "Landmark";
+$lang['order_service_message'] = "Additional Message";
 $lang['success_message_ordered'] = "Your Booking is Successfully Placed.";

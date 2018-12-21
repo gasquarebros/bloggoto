@@ -351,6 +351,7 @@ class Services extends CI_Controller {
 							'order_service_state' => post_value ( 'customer_state' ),
 							'order_service_zipcode' => post_value ( 'zipcode' ),
 							'order_service_landmark' => post_value ( 'landmark' ),
+							'order_service_message'	=> post_value('order_service_message'),
 							'order_service_customer_id' => get_user_id(),
 							'order_service_status'	=> 'processing',
 							'order_service_created_on' => current_date (),
