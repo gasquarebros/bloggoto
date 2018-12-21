@@ -187,3 +187,7 @@ ERROR - 2018-12-21 21:41:00 --> Could not find the language line "firsttime_user
 ERROR - 2018-12-21 21:53:27 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
 ERROR - 2018-12-21 22:13:05 --> Severity: Notice --> A non well formed numeric value encountered D:\xampp\htdocs\bloggotoweb\application\modules\managebookings\views\managebookings-view.php 54
 ERROR - 2018-12-21 22:14:52 --> Severity: Notice --> A non well formed numeric value encountered D:\xampp\htdocs\bloggotoweb\application\modules\managebookings\views\managebookings-view.php 55
+ERROR - 2018-12-21 22:37:25 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-12-21 22:37:32 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-12-21 22:37:36 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive
+ERROR - 2018-12-21 22:37:43 --> 404 Page Not Found: ../modules/ncadminpanel/controllers/Ncadminpanel/keep_alive

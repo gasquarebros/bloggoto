@@ -227,7 +227,11 @@ function printDiv()
 																							<td>
 																								<?php 
 																								if($record['item_order_status'] == 1) {
-																									$where_status_array = array('status'=>'A','id != 2 and id != 6'=>null);
+																									if($record['shipping_name'] == 'Pick from Store') {
+																										$where_status_array = array('status'=>'A','id != 2 and id != 5'=>null);
+																									} else {
+																										$where_status_array = array('status'=>'A','id != 2 and id != 6'=>null);
+																									}
 																								} else {
 																									$where_status_array = array('status'=>'A','id != 1 and id != 2 and id != 3'=>null);
 																								}
@@ -241,11 +245,21 @@ function printDiv()
 																							
 																								<input placeholder="Shipping Tracking URL" <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6) { ?>style="display:block;" readonly="readonly" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_id][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_code']; ?>" type="text">
 
-																								<input placeholder="Shipping Airway Bill No." <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6) { ?>style="display:block;" readonly="readonly" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_bill][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_airway_bill']; ?>" type="text">
+																								
 																							</td>
 																						</tr>
 																					</tbody>
 																				</table>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td colspan="2">
+																				<p style="color:red;" class="error">Register here to pick your product from your place and update the shipping tracking URL and Airway bill number.</p>
+																				<p style="color:red;" class="error">We do not take the responsibility for logistics yet.</p>
+																				<p><a target="_blank" href="http://direct.delhivery.com/delhiverydirect/shipment/home">http://direct.delhivery.com/delhiverydirect/shipment/home</a> <span style="color:red;">or</span> <a target="_blank" href="https://shiprocket.in">https://shiprocket.in</a></p>
+																			</td>
+																			<td>
+																				<input placeholder="Shipping Airway Bill No." <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6) { ?>style="display:block;" readonly="readonly" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_bill][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_airway_bill']; ?>" type="text">
 																			</td>
 																		</tr>
 																	</tbody>
