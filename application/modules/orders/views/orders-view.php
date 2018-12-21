@@ -174,7 +174,7 @@ function printDiv()
 																			<table>
 																				<tr><td>Item Name: <?php echo $record['item_name']; ?></td></tr>
 																				<tr><td>Sub product Name: <?php echo output_value($record['item_subproduct_name']); ?></td></tr>
-																				<tr><td>Merchant Name: <?php echo $record['item_merchant_name']; ?></td></tr>
+																				<tr><td>Merchant Name: <a href="<?php echo base_url().get_tag_username($record['item_merchant_id']); ?>"><?php echo $record['item_merchant_name']; ?></a></td></tr>
 																				
 																				<?php if($record['item_subproductid'] !='') { $item_modifiers = get_order_item_modifier($record['item_id']); 
 																					if(!empty($item_modifiers)) { ?>

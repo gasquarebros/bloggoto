@@ -11,7 +11,7 @@ class Servicesubcategories extends CI_Controller {
 	public function __construct() {
 		
 		parent::__construct ();
-		$this->module = "Servicesubcategories";
+		$this->module = "servicesubcategories";
 		
 		$this->authentication->admin_authentication();
 		$this->module_label = get_label ( 'pro_subcate_label' );

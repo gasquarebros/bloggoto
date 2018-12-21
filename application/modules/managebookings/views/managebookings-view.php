@@ -97,15 +97,15 @@ function printDiv()
 											<tbody>
 												<tr>
 													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left; width:50%;">Order By</td>
-													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;"> <?php echo $records[0]['customer_first_name']." ".$records[0]['customer_last_name']; ?> </td>
+													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;"> <a href="<?php echo base_url().$records[0]["customer_username"]; ?>"><?php echo $records[0]['customer_first_name']." ".$records[0]['customer_last_name']; ?></a></td>
 												</tr>
 												<tr>
 													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;">Customer Mobile No</td>
-													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;"> <?php echo $records[0]['customer_phone']; ?> </td>
+													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;"> <a href="tel:<?php echo $records[0]["customer_phone"]; ?>"><?php echo $records[0]['customer_phone']; ?></a></td>
 												</tr>
 												<tr>
 													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;">Customer Email</td>
-													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;"> <?php echo $records[0]['customer_email']; ?></td>
+													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;"> <a href="mailto:<?php echo $records[0]["customer_email"]; ?>"><?php echo $records[0]['customer_email']; ?></a></td>
 												</tr>
 											</tbody>
 										</table>

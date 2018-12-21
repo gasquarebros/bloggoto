@@ -56,3 +56,10 @@ ERROR - 2018-12-21 01:18:10 --> Could not find the language line "products_modul
 ERROR - 2018-12-21 01:18:10 --> Could not find the language line "products_module_label"
 ERROR - 2018-12-21 01:18:26 --> Could not find the language line "products_module_label"
 ERROR - 2018-12-21 01:18:26 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-21 10:50:23 --> Could not find the language line "user_registration"
+ERROR - 2018-12-21 10:50:23 --> Could not find the language line "firsttime_user"
+ERROR - 2018-12-21 10:50:29 --> Could not find the language line "user_registration"
+ERROR - 2018-12-21 10:50:29 --> Could not find the language line "firsttime_user"
+ERROR - 2018-12-21 10:56:05 --> Severity: Notice --> Undefined index: customer_username D:\xampp\htdocs\bloggotoweb\application\modules\manageorders\views\manageorders-view.php 96
+ERROR - 2018-12-21 11:02:37 --> Could not find the language line "products_module_label"
+ERROR - 2018-12-21 11:02:37 --> Could not find the language line "products_module_label"

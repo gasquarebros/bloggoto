@@ -76,7 +76,7 @@
 					</div>
 					<input type="hidden" value="" name="remove_image" id="remove_image">
 					<?php
-					echo form_hidden('edit_id',$records['pro_cate_primary_id']);
+					echo form_hidden('edit_id',$records['ser_cate_primary_id']);
 					echo form_hidden ( 'action', 'edit' );
 					echo form_close ();
 					?>

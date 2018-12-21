@@ -320,7 +320,7 @@ $notify_logo = skin_url('images/db-logo2.png');
 							
 							<div class="timeline-stat" >
 								<?php
-				 if($notification[0]['message_type'] != 'N') { 
+							if($notification[0]['message_type'] != 'N') { 
 
 								if($val['message_type']=='N' || $val['msg_type']='R') {
 									$notify_logo = skin_url('images/man.png');
@@ -333,17 +333,19 @@ $notify_logo = skin_url('images/db-logo2.png');
 									   
 									}
 									$username=($allusers[$user_id1]['customer_type']==1)?$allusers[$user_id1]['company_name']:$allusers[$user_id1]['customer_first_name'];
+									$href=base_url().get_tag_username($user_id1);
 								}
 							}
 							else
 							{
 								$username='';
 								$notify_logo = skin_url('images/man.png');
+								$href="javascript:;";
 							}
 								?>
-								<small ><img class="circle-md" src="<?=$notify_logo?>" alt="Bloggotoweb"></small>
+								<small ><a href="<?php echo $href; ?>"><img class="circle-md" src="<?=$notify_logo?>" alt="Bloggotoweb"></a></small>
 								<div class="message-heading">
-									<h3 class="panel-title panel-title-small"><?php echo ($username)?$username:'Anonymous';?></h3>
+									<a href="<?php echo $href; ?>"><h3 class="panel-title panel-title-small"><?php echo ($username)?$username:'Anonymous';?></h3></a>
 									<span class="datetime" style="float: left;"><i class="fa fa-clock-o fa-fw margin-right-5"></i><?=date('d F Y',strtotime($val['created_on']));?></span>
 								</div>
 							</div>

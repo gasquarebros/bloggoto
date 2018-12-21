@@ -239,7 +239,7 @@ class Manageorders extends CI_Controller
 		
 		$join = "";
 		
-		$join [0] ['select'] = "customer_first_name,customer_last_name,customer_phone,customer_email";
+		$join [0] ['select'] = "customer_first_name,customer_last_name,customer_username,customer_phone,customer_email";
 		$join [0] ['table'] = "pos_customers";
 		$join [0] ['condition'] = "order_customer_id = customer_id";
 		$join [0] ['type'] = "LEFT";
