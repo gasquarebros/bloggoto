@@ -843,7 +843,12 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
             <div class="shopping_cart">
                 <h2><?php echo $records[0]['product_name']; ?></h2>
                 <p>
-                    <span class="small_desc"><a href="<?php echo base_url().urlencode($records[0]['customer_username']).'#products'; ?>"><?php echo $records[0]['customer_username']; ?></a></span>
+                    <span class="small_desc"><a href="<?php echo base_url().urlencode($records[0]['customer_username']).'#products'; ?>">
+                        <?php if($records['customer_gst_no'] !='' ) { ?>
+                            <i class="fa fa-check-circle"></i> 
+                        <?php } ?>
+                        <?php echo $records[0]['customer_username']; ?>
+                    </a></span>
                 </p>
 
     <div class="shopping_cart_left fl">

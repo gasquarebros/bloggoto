@@ -42,7 +42,12 @@ var custom_redirect_url = "services/thankyou";
             </div>
 
             <div class="detail-action">
-                <strong>Service Provided by <a href="<?php echo base_url().urlencode($records['customer_username']); ?>" class=""><?php echo $records['customer_username']; ?></a><!--<i class="fa fa-check-circle-o text-success"></i> Verified Listing--></strong>
+                <strong>Service Provided by <a href="<?php echo base_url().urlencode($records['customer_username']); ?>" class="">
+                  <?php if($records['customer_gst_no'] !='' ) { ?>
+                    <i class="fa fa-check-circle"></i>  
+                  <?php } ?>
+                  <?php echo $records['customer_username']; ?>
+                </a><!--<i class="fa fa-check-circle-o text-success"></i> Verified Listing--></strong>
                 <div class="action">
                     <?php $page_url = base_url()."services/view/".$records['ser_slug']; ?>
                     <a target="_blank" href="https://www.facebook.com/sharer.php?u=<?php echo $page_url; ?>"><i class="fa fa-facebook"></i></a>
@@ -243,7 +248,7 @@ var custom_redirect_url = "services/thankyou";
                     <?php } ?>  
                 </ul>
                 
-                <?php echo form_open_multipart(base_url().$module.'/bookservice',' class="form-horizontal" id="common_form" autocomplete="'.form_autocomplte().'" ' );?>
+                <?php echo form_open_multipart(base_url().$module.'/bookservice',' class="form-horizontal" id="common_form" data-confirm="yes" autocomplete="'.form_autocomplte().'" ' );?>
                     <h4>Book Service</h4> 
                     <hr>
                     <ul class=" alert_msg  alert-danger  alert container_alert" style="display: none;">
@@ -291,7 +296,7 @@ var custom_redirect_url = "services/thankyou";
                       <?php  echo form_input('order_service_message',set_value('order_service_message'),' class="form-control" placeholder="'.get_label('order_service_message').'" title="'.get_label('order_service_message').'"  ');?>
                     </div>
                     
-                    <button type="submit" name="submit" class="btn ui-btn dark-blue btn-block">Book Now</button>
+                    <button type="submit" id="booknow" name="submit" class="btn ui-btn dark-blue btn-block">Book Now</button>
                   <?php
                   echo form_hidden ( 'service', $records['ser_service_id'] );
                   echo form_hidden ( 'cover_photo', $cover_photo );
@@ -918,4 +923,15 @@ margin-right: 10px;
 <script>
 $('.datepicker').datepicker({minDate: +1,changeMonth: true,changeYear: true,dateFormat: 'dd-mm-yy'});
 </script>
-<script type='text/javascript' src='<?php echo skin_url(); ?>js/image_popup.js'></script>    
+<script type='text/javascript' src='<?php echo skin_url(); ?>js/image_popup.js'></script>
+<script>
+  $('#booknow').click(function() {
+    /*var confirm = confirm('Are you sure you want to book? Once booked cannot able to cancel.');*/
+    var cf = confirm('Are you sure you want to book? Once booked cannot able to cancel.');
+    if(cf == true){
+      return true;
+    } else {
+      return false;
+    }
+  });
+</script>    

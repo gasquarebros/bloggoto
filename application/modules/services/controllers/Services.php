@@ -141,7 +141,7 @@ class Services extends CI_Controller {
 		$join [0] ['condition'] = "ser_cate_primary_id = ser_category";
 		$join [0] ['type'] = "LEFT";
 		
-		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_photo";
+		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_photo,customer_gst_no";
 		$join [1] ['table'] = $this->customers;
 		$join [1] ['condition'] = "ser_customer_id = customer_id";
 		$join [1] ['type'] = "LEFT";
@@ -227,7 +227,7 @@ class Services extends CI_Controller {
 			$join [0] ['condition'] = "ser_cate_primary_id = ser_category";
 			$join [0] ['type'] = "LEFT";
 			
-			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_phone,customer_city,customer_state,customer_facebook_link,customer_instagram_link,customer_twitter_link,customer_youtube_link,customer_linkedin_link,customer_photo";
+			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_phone,customer_city,customer_state,customer_facebook_link,customer_instagram_link,customer_twitter_link,customer_youtube_link,customer_linkedin_link,customer_photo,customer_gst_no";
 			$join [1] ['table'] = $this->customers;
 			$join [1] ['condition'] = "ser_customer_id = customer_id";
 			$join [1] ['type'] = "LEFT";

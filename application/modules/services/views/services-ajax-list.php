@@ -34,7 +34,13 @@
                     <?php } ?>
 				</div>
 				<h3><a href="<?php echo $page_url; ?>"><?php echo $record['ser_title']; ?></a></h3>
-				<strong><a href="<?php echo base_url().urlencode($record['customer_username']); ?>" class=""><?php echo $record['customer_username']; ?></a> -&gt; </strong> <span class="text-info"><?php echo $record['ser_cate_name']; ?></span>
+				<strong>
+					<a href="<?php echo base_url().urlencode($record['customer_username']); ?>" class="">
+						<?php if($record['customer_gst_no'] !='' ) { ?>
+							<i class="fa fa-check-circle"></i> 
+						<?php } ?>
+						<?php echo $record['customer_username']; ?>
+					</a> -&gt; </strong> <span class="text-info"><?php echo $record['ser_cate_name']; ?></span>
 				<p><?php echo substr_close_tags($record['ser_description']); ?></p>
 				<div class="rating-bt">
 					<div class="rating-stars">

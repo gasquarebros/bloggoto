@@ -146,7 +146,7 @@ class Products extends CI_Controller {
 		$join [0] ['condition'] = "pro_cate_id = product_category_id";
 		$join [0] ['type'] = "LEFT";
 		
-		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_email";
+		$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_username,customer_email,customer_gst_no";
 		$join [1] ['table'] = $this->customers;
 		$join [1] ['condition'] = "product_customer_id = customer_id";
 		$join [1] ['type'] = "LEFT";
@@ -209,7 +209,7 @@ class Products extends CI_Controller {
 			$join [0] ['condition'] = "pro_cate_id = product_category_id";
 			$join [0] ['type'] = "LEFT";
 			
-			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_username";
+			$join [1] ['select'] = "customer_id,customer_first_name,customer_last_name,customer_email,customer_photo,customer_username,customer_gst_no";
 			$join [1] ['table'] = $this->customers;
 			$join [1] ['condition'] = "product_customer_id = customer_id";
 			$join [1] ['type'] = "LEFT";
