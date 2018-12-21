@@ -41,6 +41,7 @@ function printDiv()
 						<div class="page-title">
 							<div class="tt_left">
 								<h1 class="title page-header text-overflow"><?php echo 'View Order'; ?> </h1>
+								<p style="color:red;">Bloggoto is just an platform provider to Merchant and Customers we are not responsible for any shopping or booking conflicts and hence if at all arises has to be resolved by them self with the help of contact details provided. Hence we warn you from fraudulent activities and mischief behaviour which may lead to legal and severe action and cancellation of profile</p>
 							</div>
 							<div class="pull-right">
 								<a onclick="printDiv();">Print PDF</a>
