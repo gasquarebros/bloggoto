@@ -44,7 +44,8 @@ function printDiv()
 								<p style="color:red;">Bloggoto is just an platform provider to Merchant and Customers we are not responsible for any shopping or booking conflicts and hence if at all arises has to be resolved by them self with the help of contact details provided. Hence we warn you from fraudulent activities and mischief behaviour which may lead to legal and severe action and cancellation of profile</p>
 							</div>
 							<div class="pull-right">
-								<a onclick="printDiv();">Print PDF</a>
+								<a class="btn btn-primary" onclick="printDiv();">Print PDF</a>
+								<a class="btn btn-primary" href="<?php echo base_url().'orders/generate_pdf?local_order='.$records[0]['order_local_no']; ?>" target="_blank">Invoice PDF</a>
 							</div>
 						</div>
 					</div>                    

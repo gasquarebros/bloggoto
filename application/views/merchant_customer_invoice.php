@@ -214,6 +214,18 @@
                                 </table>
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="" style="padding:20px;">
+                                <table style="width: 100%;  border-spacing:0;">
+                                    <tbody>
+                                        <tr>
+                                            <td style=" padding:10px; font-size:15px;text-align: left;width:50%;"><a style="float:left; width: 50%;" href="<?php echo base_url(); ?>page/terms-of-use">Terms and Conditions</a></td>
+                                            <td style="padding:10px; font-size:15px;text-align: right; width:50%">Seller Signature</td>
+                                        </tr>
+                                    </tbody>
+                                </table>    
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </td>

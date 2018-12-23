@@ -335,6 +335,16 @@ class Manageorders extends CI_Controller
 		$this->session->unset_userdata ( $this->module . "_category_id" );
 		redirect ( base_url () . $this->module );
 	}
+
+	public function generate_pdf() {
+		if(isset($_GET['local_order']) && $_GET['local_order'] != '') {
+			$order_local_no = $_GET['local_order'];
+			$pdf = generate_invoice_product($order_local_no,'merchant','');
+		} else {
+			redirect ( base_url () . $this->module );
+		}
+		
+	}
 	
 	/* this method used to common module labels */
 	private function load_module_info() {
@@ -344,6 +354,7 @@ class Manageorders extends CI_Controller
 		$data ['module'] = $this->module;
 		return $data;
 	}
+	
 	
 }
 /* End of file products.php  */
