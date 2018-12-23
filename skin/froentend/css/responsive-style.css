@@ -600,7 +600,7 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 .flashsale-main .deals_part ul li .button_bar{display:none;}
 .flash_sale_deals ul li .cont_part a.main-title + p{display:none;}
 .flashsale-main .flash_sale_deals.grid-view ul li,
-.redemption-main .redemption_list.grid-view ul li{width:48.5%;margin-bottom:3%;float:left;}
+.redemption-main .redemption_list.grid-view ul li{width:100%;margin-bottom:3%;float:left;}
 .flashsale-main .flash_sale_deals.grid-view ul li:nth-child(even),
 .redemption-main .redemption_list.grid-view ul li:nth-child(even){float:right;margin-right:0px;}
 .flashsale-main .flash_sale_deals.grid-view ul li .img_part,
@@ -872,10 +872,10 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 .flash_sale_deals .discount-part .discount{font-size:10px;}
 .flash_sale_deals .discount-part .sold{font-size:11px;}
 .flash_sale_deals .price-part .old-price{font-size:12px;}
-.flash_sale_deals .price-part .new-price{font-size:13px;}
+.flash_sale_deals .price-part .new-price{font-size:15px;}
 .brand_banner .merchant_cashpay{width:100%;padding:0 15px;}
 .brand_banner .merchant_cashpay .cashback{font-size:17px;}
-.pro-com.sale-sec .discount-part .discount{font-size:13px;}
+.pro-com.sale-sec .discount-part .discount{font-size:15px;}
 .pro-com.sale-sec .price-part .old-price{font-size:14px;}
 .pro-com.sale-sec .price-part .new-price, .pro-com.sale-sec .price-part .price{font:15px 'proxima_nova_rgbold';}
 .pro-com.sale-sec .discount-part .sold{font-size:13px;padding:0 0 0 17px;background-size:contain;}
