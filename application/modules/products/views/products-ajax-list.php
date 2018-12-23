@@ -47,7 +47,7 @@
 			<p><?php echo substr_close_tags($record['product_short_description']); ?></p>
 
 			<a href="<?php echo base_url().urlencode($record['customer_username']).'#products'; ?>" class="product_merchant">
-				<?php if($records['customer_gst_no'] !='' ) { ?>
+				<?php if($record['customer_gst_no'] !='' ) { ?>
                     <i class="fa fa-check-circle"></i> 
                 <?php } ?>
 			<?php echo $record['customer_username']; ?></a> 

@@ -16,7 +16,7 @@ public function __construct()
 	
 /* this function used to send e-email in masteradmin panel */
  
- function send_admin_mail($to_email_address,$template_id,$chk_arr,$rep_arr)
+ function send_admin_mail($to_email_address,$template_id,$chk_arr,$rep_arr,$pdf_url='')
  {
     $site_title = 'Bloggoto';
    	$this->ci =  & get_instance();
@@ -112,6 +112,10 @@ public function __construct()
 			$this->ci->email->subject($subjects);
 			$this->ci->email->message($message);
 			
+			if(!empty($pdf_url))
+			{
+				$this->ci->email->attach($pdf_url);
+			}
 			
 			$email_status = $this->ci->email->send();
 			// echo "<pre>";

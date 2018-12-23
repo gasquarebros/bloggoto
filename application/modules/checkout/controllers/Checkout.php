@@ -1173,11 +1173,18 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 		if(!empty($record)){
 			foreach($record as $data){
 				if(!in_array($data['merchantmail'],$datas)) {
+
+					$datas['records'] = $data;
+					$content = $this->load->view($this->folder . $this->module . "-order_email",$datas,true);
 					$datas[] = $data['merchantmail'];
 					//$merchant_data[$data['item_merchant_id']] = array('firstname'=>$data['merchantfirstname'],'lastname'=>$data['merchantlastname'],'phone'=>$data['merchantphone'],'email'=>$data['merchantmail']);	
-					$check_arr = array('[NAME]','[ORDER_DATE]','[LOCAL_ORDER_NO]','[CUSTOMERNAME]');
-					$replace_arr = array($data['merchantfirstname']." ".$data['merchantlastname'],$data['order_created_on'],$data['order_local_no'],$data['customer_first_name']." ".$data['customer_last_name']);
-					$mail_res = $this->myemail->send_admin_mail($data['merchantmail'],$email_template_id,$check_arr,$replace_arr);
+					$check_arr = array('[NAME]','[ORDER_DATE]','[LOCAL_ORDER_NO]','[CUSTOMERNAME]','[ORDER_DETAILS]');
+					$replace_arr = array($data['merchantfirstname']." ".$data['merchantlastname'],$data['order_created_on'],$data['order_local_no'],$data['customer_first_name']." ".$data['customer_last_name'],$content);
+
+					$order_local_no = $data['order_local_no'];
+					$pdf = generate_invoice_product($order_local_no,'merchant',true);
+
+					$mail_res = $this->myemail->send_admin_mail($data['merchantmail'],$email_template_id,$check_arr,$replace_arr,$pdf);
 				}
 			}
 		}
@@ -1192,7 +1199,9 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 		$replace_arr = array( ucfirst(stripslashes($record[0]['customer_first_name'].' '.$record[0]['customer_last_name'])),$content);
 		$email_template_id = '6';
 		if($email_template_id != '') {
-			$mail_res = $this->myemail->send_admin_mail($record[0]['customer_email'],$email_template_id,$check_arr,$replace_arr);
+			$order_local_no = $record[0]['order_local_no'];
+			$pdf = generate_invoice_product($order_local_no,'customer',true);
+			$mail_res = $this->myemail->send_admin_mail($record[0]['customer_email'],$email_template_id,$check_arr,$replace_arr,$pdf);
 		}
 	}
 

@@ -452,6 +452,89 @@ if(!function_exists('display_order_status_dropdown'))
 }
 
 
+if(!function_exists('generate_invoice_product'))
+{
+	function generate_invoice_product($order_ref='',$invoice_type='',$save='')
+	{
+		$CI=& get_instance();
+		if($order_ref =='' || $invoice_type == ''){
+			return '';
+			exit;
+		}
+		$CI->load->helper('products');
+		$CI->load->library('pdf');
+		$like = array ();
+		$where = array (
+			"order_local_no" => $order_ref,
+			//'order_customer_id'	=> get_user_id()
+		);
+		$order_by = array ();
+
+		$join = "";
+		
+		$join [0] ['select'] = "pos_customers.customer_first_name,pos_customers.customer_last_name,pos_customers.customer_phone,pos_customers.customer_email";
+		$join [0] ['table'] = "pos_customers";
+		$join [0] ['condition'] = "order_customer_id = pos_customers.customer_id";
+		$join [0] ['type'] = "LEFT";
+		
+		$join [1] ['select'] = "status_name";
+		$join [1] ['table'] = "pos_order_status";
+		$join [1] ['condition'] = "order_status = status_id";
+		$join [1] ['type'] = "INNER";
+		
+		$join [2] ['select'] = "item_id,item_order_primary_id,item_product_id,item_subproductid,item_subproduct_name,item_name,item_image,item_sku,item_slug,item_specification,item_qty,item_unit_price,item_total_amount,item_merchant_name,item_merchant_id, item_order_status,shiiping_id";
+		$join [2] ['table'] = "pos_order_items";
+		$join [2] ['condition'] = "item_order_primary_id = order_primary_id";
+		$join [2] ['type'] = "LEFT";
+		
+		$join [3] ['select'] = "pos_order_shipping_address.*";
+		$join [3] ['table'] = "pos_order_shipping_address";
+		$join [3] ['condition'] = "order_shipping_order_primary_id = order_primary_id";
+		$join [3] ['type'] = "LEFT";
+
+		$join [4] ['select'] = "pos_order_item_shipping.*";
+		$join [4] ['table'] = "pos_order_item_shipping";
+		$join [4] ['condition'] = "id = shiiping_id";
+		$join [4] ['type'] = "LEFT";
+
+		$join [5] ['select'] = "merchants.customer_first_name as merchantfirstname,merchants.customer_last_name as merchantlastname,merchants.customer_phone as merchantphone,merchants.customer_email as merchantmail";
+		$join [5] ['table'] = "pos_customers as merchants";
+		$join [5] ['condition'] = "pos_order_items.item_merchant_id = merchants.customer_id";
+		$join [5] ['type'] = "LEFT";
+	
+		
+		$groupby = "";
+		$select_array = array (
+			'pos_orders.*'
+		);
+		$record = $CI->Mydb->get_all_records ( $select_array, 'orders', $where, '','', $order_by, $like,$groupby, $join );
+		//print_r($record);
+		if(!empty($record))
+		{
+			$data['records'] = $record;
+		}
+
+		$genpdf = new pdf();
+		if($invoice_type == 'merchant') {
+			$filename = "merchant_product-".$order_ref.".pdf";
+			$pdf = $genpdf->load_view('merchant_customer_invoice',$data);
+		} else {
+			$filename = "customer_product-".$order_ref.".pdf";
+			$pdf = $genpdf->load_view('product_customer_invoice',$data);
+		}
+		$genpdf->render();
+		if($save == true){
+			$output = $genpdf->output();
+			file_put_contents(FCPATH.'media/pdf/'.$filename, $output);
+			return media_url()."pdf/".$filename;
+		} else {
+			$genpdf->stream("invoice.pdf");
+		}
+		exit;	
+	}
+}
+
+
 /*  this function used to get all company avilability  list  
 if(!function_exists('get_product_availability'))
 {

@@ -298,7 +298,4 @@ class Cron extends CI_Controller {
 		   }
 		    
 	}
-	
- 
-	
 }
