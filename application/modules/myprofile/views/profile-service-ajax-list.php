@@ -433,7 +433,13 @@
     color: #53a318
 }
 
-
+.my-grid {
+    width: 100%;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+    background: rgb(244, 245, 249);
+}
 </style>
 <?php if(!empty($records)) { ?>
 <ul class="my-grid">
