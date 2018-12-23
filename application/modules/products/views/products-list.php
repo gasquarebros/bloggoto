@@ -737,7 +737,11 @@ select {
 .ui-slider-handle {
     border-radius: 50%;
 }
-
+@media screen and (max-width: 700px) {
+    .cate_left {
+        display:none;
+    }
+}
 </style>
 <?php
 echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css'));
@@ -748,7 +752,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
         <div class="inner-main flashsale-main leftcatdisplay">
             <div class="category_part">
                 <div class="container">
-                <div class="cate_left fl" style="display:block;">
+                <div class="cate_left fl" >
                     <div class="cate_main">
                         <div class="cate_title">
                             <h6> <i class="fa fa-bars" aria-hidden="true"></i> CATEGORIES </h6>

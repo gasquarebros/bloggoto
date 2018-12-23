@@ -8,7 +8,7 @@ Description		: Page contains common label for adminpanel
 
 /* User registration */
 /*$lang['user_registration'] = 'Sign up';*/
-$lang['home_module_label'] = 'Home';
+$lang['products_module_label'] = 'products';
 $lang['home_module_labels'] = 'Home';
 $lang['shipping_method'] = 'Shipping Method';
 
