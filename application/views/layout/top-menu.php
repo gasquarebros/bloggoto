@@ -115,7 +115,7 @@
 					 <span class="icon-bar"></span>
 					 <span class="icon-bar"></span>
 				 </div>
-				<ul class="device_nav blog_section">
+				<ul class="device_nav blog_sections">
 					<li><a <?php if($firstsegment=='home' || $firstsegment=='wall') { ?> class="active" <?php } ?> href="<?php echo base_url()."home/wall"; ?>" >Social Media</a></li>
 					<li><a <?php if($firstsegment=='cart' || $firstsegment=='products' || $firstsegment == 'checkout') { ?> class="active" <?php } ?> data-section="Products" href="<?php echo base_url()."products"; ?>" >Products</a></li>
 					<li><a <?php if($firstsegment=='services') { ?> class="active" <?php } ?> data-section="Services" href="<?php echo base_url()."services"; ?>" >Services</a></li>

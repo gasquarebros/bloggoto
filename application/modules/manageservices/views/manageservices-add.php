@@ -37,7 +37,7 @@ float: left;
 	padding-right:15px;
 }
 .col-sm-4 {
-    width: 33.33333333%;
+    width: 65%;
 	float:left;
 }
 .col-sm-8 {

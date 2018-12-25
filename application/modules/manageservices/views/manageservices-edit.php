@@ -37,7 +37,7 @@ float: left;
 	padding-right:15px;
 }
 .col-sm-4 {
-    width: 33.33333333%;
+    width: 65%;
 	float:left;
 }
 .col-sm-8 {
@@ -121,7 +121,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 
 						<div class="form-group">
 							<label for="ser_description" class="col-sm-2 control-label"><?php echo get_label('ser_description').get_required();?></label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-4">
 								<div class="input_box"><?php  echo form_textarea('ser_description',$records['ser_description'],' class="form-control"  ');?></div>
 							</div>
 						</div>
@@ -164,22 +164,22 @@ var commission_price = '<?php echo $commission_price; ?>';
 
 						<div class="form-group">
 							<label for="ser_pricet_type" class="col-sm-2 control-label"><?php echo get_label('ser_pricet_type').get_required();?></label>
-							<div class="col-sm-8"><div class="input_box"><?php echo form_dropdown('ser_pricet_type',array('day'=>'Day','hour'=>'Hour'),$records['ser_pricet_type'],'class="form-control required" id="ser_pricet_type"'); ?></div></div>
+							<div class="col-sm-4"><div class="input_box"><?php echo form_dropdown('ser_pricet_type',array('day'=>'Day','hour'=>'Hour'),$records['ser_pricet_type'],'class="form-control required" id="ser_pricet_type"'); ?></div></div>
 						</div>
 
 						<div class="form-group">
 							<label for="time_start_time" class="col-sm-2 control-label"><?php echo get_label('time_start_time').get_required();?></label>
-							<div class="col-sm-8"><div class="input_box"><?php echo get_time_dropdown('time_start_time',$records['ser_service_start_time']); ?></div></div>
+							<div class="col-sm-4"><div class="input_box"><?php echo get_time_dropdown('time_start_time',$records['ser_service_start_time']); ?></div></div>
 						</div>
 
 						<div class="form-group">
 							<label for="time_end_time" class="col-sm-2 control-label"><?php echo get_label('time_end_time').get_required();?></label>
-							<div class="col-sm-8"><div class="input_box"><?php echo get_time_dropdown('time_end_time',$records['ser_service_end_time']); ?></div></div>
+							<div class="col-sm-4"><div class="input_box"><?php echo get_time_dropdown('time_end_time',$records['ser_service_end_time']); ?></div></div>
 						</div>
 
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('ser_price').get_required();?></label>
-							<div class="col-sm-8">
+							<div class="col-sm-4">
 								<div class="input_box">
 									<input type="number" value="<?php echo $records['ser_price']; ?>" required class="form-control required" title="<?php echo get_label('ser_price'); ?>" name="ser_price" onkeypress="return isFloat(event)" id="ser_price">
 								</div>
@@ -188,7 +188,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('ser_discount_price');?></label>
-							<div class="col-sm-8">
+							<div class="col-sm-4">
 								<div class="input_box">
 									<input type="number" value="<?php echo $records['ser_discount_price']; ?>" class="form-control " name="ser_discount_price" onkeypress="return isFloat(event)" id="ser_discount_price">
 								</div>
@@ -197,7 +197,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('ser_discount_start_date');?></label>
-							<div class="col-sm-8">
+							<div class="col-sm-4">
 								<div class="input_box">
 									<input type="text" value="<?php echo ($records['ser_discount_start_date'] !='' && $records['ser_discount_start_date'] !="NULL" && $records['ser_discount_start_date'] != '0000-00-00 00:00:00' && $records['ser_discount_start_date'] != '1970-01-01')?stripslashes(date('d-m-Y',strtotime($records['ser_discount_start_date']))):"";?>" class="form-control datepickerchange1 " name="ser_discount_start_date" id="ser_discount_start_date" >
 								</div>
@@ -206,7 +206,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('ser_discount_end_date');?></label>
-							<div class="col-sm-8">
+							<div class="col-sm-4">
 								<div class="input_box">
 									<input type="text" value="<?php echo ($records['ser_discount_end_date'] !='' && $records['ser_discount_end_date'] !="NULL" && $records['ser_discount_end_date'] != '0000-00-00 00:00:00' && $records['ser_discount_end_date'] != '1970-01-01')?stripslashes(date('d-m-Y',strtotime($records['ser_discount_end_date']))):"";?>" class="form-control datepickerchange2 " name="ser_discount_end_date" id="ser_discount_end_date">
 								</div>
@@ -215,12 +215,12 @@ var commission_price = '<?php echo $commission_price; ?>';
 
 						<div class="form-group">
 							<label for="ser_availability" class="col-sm-2 control-label"><?php echo get_label('ser_availability').get_required();?></label>
-							<div class="col-sm-8"><div class="input_box"><?php echo form_dropdown('ser_availability[]',array(''=>'Select Availability','mon'=>'Monday','tue'=>'Tuesday','wed'=>'Wednesday','thu'=>'Thursday','fri'=>'Friday','sat'=>'Saturday','sun'=>'Sunday'),$availability,'class="form-control required " multiple="multiple" data-placeholder="Select Availability" id="ser_avail"'); ?></div></div>
+							<div class="col-sm-4"><div class="input_box"><?php echo form_dropdown('ser_availability[]',array(''=>'Select Availability','mon'=>'Monday','tue'=>'Tuesday','wed'=>'Wednesday','thu'=>'Thursday','fri'=>'Friday','sat'=>'Saturday','sun'=>'Sunday'),$availability,'class="form-control required " multiple="multiple" data-placeholder="Select Availability" id="ser_avail"'); ?></div></div>
 						</div>
 
 						<div class="form-group">
 							<label for="customer_city" class="col-sm-2 control-label"><?php echo get_label('customer_city').get_required();?></label>
-							<div class="col-sm-8"><div class="input_box">
+							<div class="col-sm-4"><div class="input_box">
 							<?php echo get_all_cities('',$service_city,'class="form-control" required data-placeholder="Select City" id="customer_city" multiple="multiple" data-placeholder="Select City"','customer_city[]'); ?>
 							</div></div>
 						</div>
@@ -228,11 +228,11 @@ var commission_price = '<?php echo $commission_price; ?>';
 						
 						<div class="form-group">
 							<label for="status" class="col-sm-2 control-label"><?php echo get_label('status').get_required();?></label>
-							<div class="col-sm-<?php echo get_form_size();?>"><div class="input_box"><?php  echo form_dropdown('status',array ('' => get_label('select_status'),'A' => 'Active','I' => 'Inactive'),$records['ser_status'],'class="form-control required" id="status" style="width:374px;"');?></div></div>
+							<div class="col-sm-4"><div class="input_box"><?php  echo form_dropdown('status',array ('' => get_label('select_status'),'A' => 'Active','I' => 'Inactive'),$records['ser_status'],'class="form-control required" id="status" style="width:374px;"');?></div></div>
 						</div>
 
 						 <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-<?php echo get_form_size();?>  btn_submit_div">
+                            <div class="col-sm-offset-3 col-sm-4  btn_submit_div">
                                 <button type="submit" class="btn btn-primary " name="submit"
                                     value="Submit"><?php echo get_label('submit');?></button>
                                 <a class="btn btn-info" href="<?php echo admin_url().$module;?>"><?php echo get_label('cancel');?></a>

@@ -927,7 +927,7 @@ $('.datepicker').datepicker({minDate: +1,changeMonth: true,changeYear: true,date
 <script>
   $('#booknow').click(function() {
     /*var confirm = confirm('Are you sure you want to book? Once booked cannot able to cancel.');*/
-    var cf = confirm('Are you sure you want to book? Once booked cannot able to cancel.');
+    var cf = confirm('Are you sure you want to book? Please check the booking details twice before Booking. Once Merchant Accepts the booking cannot be cancelled.');
     if(cf == true){
       return true;
     } else {
