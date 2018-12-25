@@ -597,10 +597,10 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 .shopping_slide_part{margin-bottom:20px;}
 .deals_part ul li{float:none;width:100% !important;padding:13px;margin-bottom:3%;}
 .deals_part ul li:after{clear:both;display:block;content:'';}
-.deals_part ul li .img_part{width:41%;float:left;margin-bottom:0;}
-.deals_part ul li .cont_part{width:56%;float:right;}
+.deals_part ul li .img_part{width:41%;float:left;margin-bottom: 0; }
+.deals_part ul li .cont_part{width:56%;float:right; height: 90px;}
 .deals_part ul li .button_bar{display:none;}
-.flash_sale_deals ul li .cont_part a.main-title + p{display:none;}
+.flash_sale_deals ul li .cont_part a.main-title + p{display:block;}
 .flashsale-main .flash_sale_deals.grid-view ul li,
 .redemption-main .redemption_list.grid-view ul li{width:100%;margin-bottom:3%;float:left;}
 .flashsale-main .flash_sale_deals.grid-view ul li:nth-child(even),
@@ -618,6 +618,8 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 }
 @media(max-width:667px){
 .head-bot-left .logo{max-width:170px;}
+.price-part.fr { margin-top: 80px;}
+.flash_sale_deals ul li .cont_part p { height:60px; max-height:60px; }
 .authenpart .authen_com{padding:25px;}
 .authenpart .authen_com{float:left;width:100%;}
 .authenpart .authenpart-left{min-height:inherit;height:inherit !important;}
@@ -804,9 +806,12 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 }
 @media(max-width:480px){
 .notify-list-page .notify-header{padding:10px 10px 10px 30px;}
+.flash_sale_deals ul li .cont_part > p { display:none !important; }
+.flash_sale_deals.grid-view .price-part { margin-top:46px !important; }
+.price-part p {display:block}
 
 .notify-list-page .notify-header ul{position: relative;margin-top: 5px;display: block;left: 0; bottom: 0;top: inherit;right: inherit;}
-	.notify-list-page .notify-header ul li a{}
+.price-part.fr { margin-top: 17px; margin-right: 10px;}	
 
 .redem_bottom_right .points span{font-size:18px;}
 .delivery_address form input[type="submit"]{margin-top:20px;height:auto;padding:10px 15px;font-size:15px;width:100%;}
@@ -870,7 +875,7 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 @media(max-width:450px){.thank_order_summary{padding-left:0;padding-right:0;}
 .thank_part h2{font-size:34px;}
 .thank_part .circle{width:60px;height:60px;line-height:60px;font-size:30px;}
-.flash_sale_deals ul li{padding:10px;}
+.flash_sale_deals ul li{padding:5px 5px;}
 .flash_sale_deals .discount-part .discount{font-size:10px;}
 .flash_sale_deals .discount-part .sold{font-size:11px;}
 .flash_sale_deals .price-part .old-price{font-size:12px;}
@@ -931,7 +936,7 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 }
 @media(max-width:374px){.flash_sale_deals.grid-view .discount-part,
 .flash_sale_deals.grid-view .price-part{float:none;width:100%;text-align:center;}
-.flash_sale_deals.grid-view .price-part{margin-top:2px;}
+.flash_sale_deals.grid-view .price-part{margin-top: 33px !important;;}
 .flash_sale_deals.grid-view .price-part p{display:inline-block;margin:1px !important;vertical-align:middle;}
 .flash_sale_deals.grid-view .discount-part .sold{padding:0 0 0 15px;display:inline-block;}
 }
@@ -939,10 +944,12 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 .shopping_cart_right .qty-box{position:static;}
 .shopping_cart_right .common_but{margin-top:10px;}
 }
-@media(min-width:1026px) and (max-width:1280px){.fs_slide_left, .fs_slide_right{float:none;width:100%;}
+@media(min-width:1026px) and (max-width:1280px){.fs_slide_left, .fs_slide_right{float:none;width:100%;} .list_prod_section .img_part { margin-bottom:0px; }
 .fs_slide_right{margin-top:20px;}
 }
-@media(min-width:1024px) and (max-width:1180px){header .menu_bar{right:55px;}
+@media(min-width:1200px) and (max-width:1400px){ .list_prod_section .img_part { margin-bottom:0px !important; }
+}
+@media(min-width:1024px) and (max-width:1180px){header .menu_bar{right:55px; } .price-part.fr { margin-top: 32px; }
 }
 @media(min-width:1026px) and (max-width:1226px){}
 @media(min-width:992px) and (max-width:1100px){.payment_method_inner ul li .slider_partial p .avail_credit,
@@ -952,6 +959,9 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 @media(min-width:768px) and (max-width:1024px){.deals_part ul li .cont_part .freedeals_list_bottom .quiz_merchant_sec,
 .deals_part ul li .cont_part .freedeals_list_bottom .endby{width:49%;float:left;}
 .deals_part ul li .cont_part .freedeals_list_bottom .endby{float:right;margin-top:0px;}
+.list_prod_section .cont_part { height:120px !important; }
+.price-part.fr { margin-top:20px;}
+.flash_sale_deals ul li .cont_part p { height:40px; max-height:40px;}
 }
 @media(min-width:768px) and (max-width:992px){.refer_friend .refer_friend_top .refer_myaccount,
 .refer_friend .refer_friend_top .refer_myinvite,

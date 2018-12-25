@@ -368,7 +368,8 @@
 
 .flash_sale_deals ul li .cont_part p {
     font: 14px 'proxima_nova_rgregular';
-    max-height: 32px
+    max-height: 40px;
+    height:40px;
 }
 
 .flash_sale_deals .more_details_par .common_but:hover {
@@ -395,19 +396,25 @@
     margin: 0;
     background-size: contain
 }
-
+.flash_sale_deals .price-part {
+    width:100%;
+}
 .flash_sale_deals .price-part .old-price {
     color: #787878;
     font-size: 14px;
     text-decoration: line-through;
-    margin-bottom: 7px
+    margin-bottom: 7px;
+    float:right;
+    margin-right:10px;
 }
 
 .flash_sale_deals .price-part .new-price {
-    color: #53a318;
+    color: black;
     font-size: 15px;
     font-family: 'proxima_nova_rgbold';
-    margin: 0px
+    margin: 0px;
+    float:right;
+    font-weight:bold;
 }
 
 .flash_sale_deals .price-part .old-price,
@@ -464,12 +471,13 @@
 			<?php 
 			if($record['product_special_price'] !='' && $discount > 0) {?>
 				<div class="price-part fr txtr">
-					<p class="old-price"><?php echo show_price($record['product_price']);?></p>
-					<p class="new-price"><?php echo show_price($record['product_special_price']);?></p>
+					
+                    <span class="new-price"><?php echo show_price($record['product_special_price']);?></span>
+                    <span class="old-price"><?php echo show_price($record['product_price']);?></span>
 				</div>
 			<?php } else { ?>
 				<div class="price-part fr">
-					<p class="new-price"><?php echo show_price($record['product_price']);?></p>
+                    <span class="new-price"><?php echo show_price($record['product_price']);?></span>&nbsp;
 				</div>
 			<?php } ?>
 			<div class="clear"></div>
