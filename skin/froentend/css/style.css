@@ -463,6 +463,7 @@ a.btn:hover {
 
 .logo_wrap {
     float: left;
+    width: 50px;
 }
 
 .logo_wrap a {
