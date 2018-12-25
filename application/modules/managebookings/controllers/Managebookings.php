@@ -302,7 +302,7 @@ class Managebookings extends CI_Controller
 			
 
 			$this->load->library('myemail');
-			$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[Title]','[DATE]');
+			$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[TITLE]','[DATE]');
 			$replace_arr = array( ucfirst(stripslashes($record[0]['customer_first_name'].' '.$record[0]['customer_last_name'])),$record[0]['order_service_local_no'],stripslashes($record[0]['order_service_title']),$date);
 			
 			

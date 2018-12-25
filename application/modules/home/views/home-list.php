@@ -21,7 +21,7 @@ var module_action="addpost";
 			<li><a data-section="Others" href="<?php echo base_url()."home/others"; ?>" <?php if($activesegment =='others') { ?> class="active" <?php } ?>>Others</a></li>
 		</ul>
 
-        <div class="section_menu">
+        <div class="section_menu more_menu">
             <ul class="category_menu blog_category innser_section_bottom">
                 <li><a data-type="blog" href="javascript:void(0)" class="active">Blogs</a></li>
                 <li><a data-type="picture" href="javascript:void(0)">Pictures</a></li>
@@ -31,7 +31,7 @@ var module_action="addpost";
                 <li><a data-type="qa" href="javascript:void(0)">Review</a></li>
                 <?php /*<li><a data-type="must_see" href="javascript:void(0)">Must See</a></li>*/ ?>
             </ul>
-            <a href="javascript:void(0)" class="more_items"><i class="fa fa-angle-double-down" aria-hidden="true"></i></a>
+            <?php /* <a href="javascript:void(0)" class="more_items"><i class="fa fa-angle-double-down" aria-hidden="true"></i></a>*/ ?>
         </div>
         <div class="comment_section">
             <div class="cmt_img">

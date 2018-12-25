@@ -13,6 +13,14 @@ table {
 .card-body {
 	width:100%;
 }
+.mrgtop {
+	margin: 10px;
+	float: right;
+	padding: 5px !important;
+}
+.pull-right{
+	width: 32% !important;
+}
 </style>
 <script>
 function printDiv() 
@@ -41,11 +49,10 @@ function printDiv()
 						<div class="page-title">
 							<div class="tt_left">
 								<h1 class="title page-header text-overflow"><?php echo 'View Order'; ?> </h1>
-								<p style="color:red;">Bloggoto is just an platform provider to Merchant and Customers we are not responsible for any shopping or booking conflicts and hence if at all arises has to be resolved by them self with the help of contact details provided. Hence we warn you from fraudulent activities and mischief behaviour which may lead to legal and severe action and cancellation of profile</p>
 							</div>
 							<div class="pull-right">
-								<a class="btn btn-primary" onclick="printDiv();">Print PDF</a>
-								<a class="btn btn-primary" href="<?php echo base_url().'orders/generate_pdf?local_order='.$records[0]['order_local_no']; ?>" target="_blank">Invoice PDF</a>
+								<a class="btn btn-primary mrgtop" onclick="printDiv();">Print PDF</a>
+								<a class="btn btn-primary mrgtop" href="<?php echo base_url().'orders/generate_pdf?local_order='.$records[0]['order_local_no']; ?>" target="_blank">Invoice PDF</a>
 							</div>
 						</div>
 					</div>                    
@@ -292,6 +299,7 @@ function printDiv()
 								</tr>
 							</tbody>
 						</table>
+						<p style="color:red;">Bloggoto is just an platform provider to Merchant and Customers, <br> we are not responsible for any shopping or booking conflicts and hence if at all arises has to be resolved by them self with the help of contact details provided. <br> Hence we warn you from fraudulent activities and mischief behaviour which may lead to legal and severe action and cancellation of profile</p>
 					</div>
 				</div>
 			</div>

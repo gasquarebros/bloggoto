@@ -431,8 +431,8 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 .merchant_detail_content .flash_sale_deals ul li:nth-of-type(4n+4){margin-right:1.4018691588785047%;float:left;}
 }
 @media(max-width:900px){.deals_part ul li, .merchants_section_contents ul li{width:48.5%;float:left;margin-bottom:3%;}
-.deals_part ul li:nth-child(even){float:right;margin-right:0px;}
-.deals_part ul li:nth-child(3n+3), .merchants_section_contents ul li:nth-child(3n+3){margin-right:0%;}
+/*.deals_part ul li:nth-child(even){float:right;margin-right:0px;}
+.deals_part ul li:nth-child(3n+3), .merchants_section_contents ul li:nth-child(3n+3){margin-right:0%;} */
 .deals_part ul li .cont_part { height: 70px; }
 .deals_part ul li .cont_part h5, .deals_part ul li .cont_part p{margin-bottom:8px;}
 .offer_box_left, .offer_box_right{float:left;width:100%;padding-left:15px;}
