@@ -1161,7 +1161,7 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 			if(!empty($record))
 			{
 				$data['order'] = $record;
-				echo $content = $this->order_email($record);
+				$content = $this->order_email($record);
 				$this->order_merchant_notify($record);
 				exit;
 			}
@@ -1170,6 +1170,7 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 	private function order_merchant_notify($record){
 		$merchant_data = $datas = array();
 		$email_template_id = '9';
+		$this->load->library('myemail');
 		if(!empty($record)){
 			foreach($record as $data){
 				if(!in_array($data['merchantmail'],$datas)) {
@@ -1182,9 +1183,9 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 					$replace_arr = array($data['merchantfirstname']." ".$data['merchantlastname'],$data['order_created_on'],$data['order_local_no'],$data['customer_first_name']." ".$data['customer_last_name'],$content);
 
 					$order_local_no = $data['order_local_no'];
-					$pdf = generate_invoice_product($order_local_no,'merchant',true);
+					$pdfs = generate_invoice_product($order_local_no,'merchant',true);
 
-					$mail_res = $this->myemail->send_admin_mail($data['merchantmail'],$email_template_id,$check_arr,$replace_arr,$pdf);
+					$mail_res = $this->myemail->send_admin_mail($data['merchantmail'],$email_template_id,$check_arr,$replace_arr,$pdfs);
 				}
 			}
 		}

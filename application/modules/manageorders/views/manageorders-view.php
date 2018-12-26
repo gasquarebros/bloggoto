@@ -330,7 +330,7 @@ function printDiv()
 							</tbody>
 						</table>
 
-						<div class="form-group" style="text-align: center; padding-bottom: 10px; background: #ffffff;">
+						<div class="form-group btn_submit_div" style="text-align: center; padding-bottom: 10px; background: #ffffff;">
 							<button type="submit" class="btn btn-primary">Update</button>	
 							<a class="btn btn-info" href="<?php echo base_url().$module;?>"><?php echo get_label('cancel');?></a>	
 						</div>
@@ -352,9 +352,9 @@ function printDiv()
 jQuery('.order_status').on('change',function() {
 	if(jQuery(this).val() == 2 || jQuery(this).val() == 5)
 	{
-		jQuery(this).parent().parent().find('.tracking_code_info').show();
+		jQuery('.tracking_code_info').show();
 	} else {
-		jQuery(this).parent().parent().find('.tracking_code_info').hide();
+		jQuery('.tracking_code_info').hide();
 	}
 });
 </script>

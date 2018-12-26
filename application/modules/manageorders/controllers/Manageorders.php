@@ -153,90 +153,6 @@ class Manageorders extends CI_Controller
 	function view($view_id)
 	{
 		$id=decode_value($view_id);
-		if ($this->input->post ( 'action' ) == "Add") {
-
-
-
-			//if ($this->form_validation->run () == TRUE) {
-				$order_items = $_POST['orderitems'];
-				if(!empty($order_items)) {
-					$item_statuses = $order_items['item_status'];
-					$item_shipping = $order_items['shiiping_id'];
-					$item_shipping_bill = $order_items['shiiping_bill'];
-					$shipping_items = $order_items['item_shipping'];
-					
-					$all_item_update = 1;
-					if(!empty($item_statuses)){
-						$error = 0;
-						foreach($item_statuses as $item_key=>$item_status) {
-							if($item_status == 5 && ($item_shipping[$item_key] == '' || $item_shipping_bill[$item_key]  == '' )){
-								$error = 1;
-							}
-						}
-						if($error == 0) {
-							foreach($item_statuses as $item_key=>$item_status)
-							{
-								$update_array = array(
-									'item_order_status' => $item_status
-								);
-								$this->Mydb->update ( 'pos_order_items', array ('item_id' => $item_key ), $update_array );
-								$i_shipping = $shipping_items[$item_key];
-								
-								$shipping_update = array(
-									'shipping_track_code' => $item_shipping[$item_key],
-									'shipping_track_airway_bill'	=> $item_shipping_bill[$item_key]
-								);
-								$this->Mydb->update ( 'order_item_shipping', array ('id' => $i_shipping ), $shipping_update );
-
-								if($item_status != 2){
-									$all_item_update = 0;
-								}
-							}
-						} else {
-							$status = "error";
-							$errorMsg = array('Shipping Tracking URL and Airway Bill No. is Required');
-							$response = array (
-								'status' => $status,
-								'message' => $errorMsg 
-							);
-							echo json_encode ( $response );
-							exit ();
-						}
-					}
-				}
-				if($all_item_update == 1){
-
-					$total_record = $this->Mydb->get_num_rows('*','order_items',array('item_order_primary_id'=>$id));
-					if($total_record == 0){
-						$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>5) );
-					} else {
-						$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>1) );
-					}
-				} else {
-					$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>1) );
-				}
-
-				$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_edit' ), $this->module_label ) );
-				$response ['status'] = 'success';
-			/*} else {
-				$result ['status'] = 'error';
-				$result ['message'] = validation_errors ();
-			}*/
-			
-			echo json_encode ( $response );
-			exit ();
-		}
-		$data = $this->load_module_info ();
-		$like = array ();
-		$where = array (
-			" $this->primary_key" => $id,
-			'item_merchant_id'	=> get_user_id()
-		);
-		$order_by = array (
-			$this->primary_key => 'DESC' 
-		);
-		
-		
 		$join = "";
 		
 		$join [0] ['select'] = "customer_first_name,customer_last_name,customer_username,customer_phone,customer_email";
@@ -269,6 +185,98 @@ class Manageorders extends CI_Controller
 		$select_array = array (
 			'pos_orders.*'
 		);
+		$data = $this->load_module_info ();
+		$like = array ();
+		$where = array (
+			" $this->primary_key" => $id,
+			'item_merchant_id'	=> get_user_id()
+		);
+		$order_by = array (
+			$this->primary_key => 'DESC' 
+		);
+		if ($this->input->post ( 'action' ) == "Add") {
+			//if ($this->form_validation->run () == TRUE) {
+				$order_items = $_POST['orderitems'];
+				if(!empty($order_items)) {
+					$item_statuses = $order_items['item_status'];
+					$item_shipping = $order_items['shiiping_id'];
+					$item_shipping_bill = $order_items['shiiping_bill'];
+					$shipping_items = $order_items['item_shipping'];
+					
+					$all_item_update = 1;
+					if(!empty($item_statuses)){
+						$error = 0;
+						foreach($item_statuses as $item_key=>$item_status) {
+							if($item_status == 5 && ($item_shipping[$item_key] == '' || $item_shipping_bill[$item_key]  == '' )){
+								$error = 1;
+							}
+						}
+						if($error == 0) {
+							foreach($item_statuses as $item_key=>$item_status)
+							{
+								$update_array = array(
+									'item_order_status' => $item_status
+								);
+								$this->Mydb->update ( 'pos_order_items', array ('item_id' => $item_key ), $update_array );
+								$i_shipping = $shipping_items[$item_key];
+								
+								$shipping_update = array(
+									'shipping_track_code' => $item_shipping[$item_key],
+									'shipping_track_airway_bill'	=> $item_shipping_bill[$item_key]
+								);
+								$this->Mydb->update ( 'order_item_shipping', array ('id' => $i_shipping ), $shipping_update );
+	
+								
+								if($item_status != 2){
+									$all_item_update = 0;
+								}
+							}
+						} else {
+							$status = "error";
+							$errorMsg = array('Shipping Tracking URL and Airway Bill No. is Required');
+							$response = array (
+								'status' => $status,
+								'message' => $errorMsg 
+							);
+							echo json_encode ( $response );
+							exit ();
+						}
+					}
+				}
+				if($all_item_update == 1){
+
+					$total_record = $this->Mydb->get_num_rows('*','order_items',array('item_order_primary_id'=>$id));
+					if($total_record == 0){
+						$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>5) );
+					} else {
+						$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>1) );
+					}
+				} else {
+					$this->Mydb->update ( 'orders', array ('order_primary_id' => $id ), array('order_status'=>1) );
+				}
+				$this->load->library('myemail');
+				$datas = $this->Mydb->get_all_records ( $select_array, $this->table, $where, '','', $order_by, $like,$groupby, $join );
+				$page_url = base_url()."orders/view/".$view_id;
+				$email_template_id = '14';
+				$check_arr = array('[ORDER_PAGE_URL]');
+				$replace_arr = array($page_url);
+
+				$order_local_no = $datas[0]['order_local_no'];
+				$pdf = generate_invoice_product($order_local_no,'merchant',true);
+
+				$mail_res = $this->myemail->send_admin_mail($datas[0]['customer_email'],$email_template_id,$check_arr,$replace_arr,$pdf);
+
+				$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_edit' ), $this->module_label ) );
+				$response ['status'] = 'success';
+			/*} else {
+				$result ['status'] = 'error';
+				$result ['message'] = validation_errors ();
+			}*/
+			
+			echo json_encode ( $response );
+			exit ();
+		}
+
 		$record = $this->Mydb->get_all_records ( $select_array, $this->table, $where, '','', $order_by, $like,$groupby, $join );
 
 		(empty ( $record )) ? redirect ( base_url () . $this->module ) : '';
