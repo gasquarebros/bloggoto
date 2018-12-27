@@ -344,7 +344,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 									</div> 
 								</div>
                                 <!-- tab 7 -->
-								<div aria-labelledby="dropdown1-tab" id="stepv7" class="tab-pane fade shipping_method" role="tabpanel">
+								<div aria-labelledby="dropdown1-tab" id="stepv7" class="tab-pane fade shipping_method table_overflow" role="tabpanel">
 									<table class="table table-bordered table-striped">
 										<thead>
 											<tr>
@@ -465,7 +465,7 @@ var commission_price = '<?php echo $commission_price; ?>';
                                                            
                                 <!-- tab 6  -->
 								<div aria-labelledby="dropdown1-tab" id="stepv6" class="tab-pane fade associate_product_tabs" role="tabpanel">
-									<div class="">
+									<div class="table_overflow">
 										<table class="table table-bordered table-striped">
 											<thead>
 												<tr>

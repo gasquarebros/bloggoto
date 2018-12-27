@@ -57,4 +57,5 @@ $lang['product_value_exist'] = "This Product Name already exists";
 $lang['product_sku_exist'] = "This Product SKU already exists";
 $lang['product_type'] = "Product Type";
 $lang['product_customer'] = "Product Customer";
+$lang['category_modifier'] = "Modifiers";
 
