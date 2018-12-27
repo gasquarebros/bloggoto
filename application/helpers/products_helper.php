@@ -497,7 +497,7 @@ if(!function_exists('generate_invoice_product'))
 		$join [4] ['condition'] = "id = shiiping_id";
 		$join [4] ['type'] = "LEFT";
 
-		$join [5] ['select'] = "merchants.customer_first_name as merchantfirstname,merchants.customer_last_name as merchantlastname,merchants.customer_phone as merchantphone,merchants.customer_email as merchantmail";
+		$join [5] ['select'] = "merchants.customer_first_name as merchantfirstname,merchants.customer_last_name as merchantlastname,merchants.customer_phone as merchantphone,merchants.customer_email as merchantmail,merchants.customer_gst_no as merchantgst";
 		$join [5] ['table'] = "pos_customers as merchants";
 		$join [5] ['condition'] = "pos_order_items.item_merchant_id = merchants.customer_id";
 		$join [5] ['type'] = "LEFT";

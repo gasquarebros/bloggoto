@@ -246,7 +246,7 @@ function printDiv()
 																								} else {
 																									$where_status_array = array('status'=>'A','id != 1 and id != 2 and id != 3'=>null);
 																								}
-																								if($record['item_order_status'] == 1 || $record['item_order_status'] == 5 ) { echo get_order_status_dropdown($where_status_array,$record['item_order_status'],'','','','orderitems[item_status]['.$item_id.']'); } else { 
+																								if($record['item_order_status'] == 1 || $record['item_order_status'] == 5 ) { echo get_order_status_dropdown($where_status_array,$record['item_order_status'],'class="form-control order_status"  required style="min-width:200px;"','','','orderitems[item_status]['.$item_id.']'); } else { 
 																									
 																									echo "<p>".display_order_status_dropdown($record['item_order_status'])."</p>";
 																								}  ?>		
@@ -254,7 +254,7 @@ function printDiv()
 
 																								<input  name="item_status_old[<?php echo $item_id; ?>]" value="<?php echo $record['item_order_status']; ?>" type="hidden">
 																							
-																								<input placeholder="Shipping Tracking URL" <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6) { ?>style="display:block;" readonly="readonly" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_id][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_code']; ?>" type="text">
+																								<input placeholder="Shipping Tracking URL" <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6) { ?>style="display:block; min-width:200px;" readonly="readonly" <?php } else { ?>style="display:none; min-width:200px;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_id][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_code']; ?>" type="text">
 
 																								
 																							</td>
@@ -270,7 +270,7 @@ function printDiv()
 																				<p><a target="_blank" href="http://direct.delhivery.com/delhiverydirect/shipment/home">http://direct.delhivery.com/delhiverydirect/shipment/home</a> <span style="color:red;">or</span> <a target="_blank" href="https://shiprocket.in">https://shiprocket.in</a></p>
 																			</td>
 																			<td>
-																				<input placeholder="Shipping Airway Bill No." <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6) { ?>style="display:block;" readonly="readonly" <?php } else { ?>style="display:none;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_bill][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_airway_bill']; ?>" type="text">
+																				<input placeholder="Shipping Airway Bill No." <?php if($record['item_order_status'] == 2 || $record['item_order_status'] == 5 || $record['item_order_status'] == 6) { ?>style="display:block; min-width:200px;" readonly="readonly" <?php } else { ?>style="display:none; min-width:200px;" <?php } ?> class="tracking_code_info" name="orderitems[shiiping_bill][<?php echo $item_id; ?>]" value="<?php echo $record['shipping_track_airway_bill']; ?>" type="text">
 																			</td>
 																		</tr>
 																	</tbody>

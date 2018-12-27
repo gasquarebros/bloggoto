@@ -116,11 +116,14 @@
                                     <td style="padding:10px; font-size:15px; text-align: left; width:45%;">
                                         <table>
                                             <tr>
-                                                <td class="pro_pic" style="padding:5px;"><img src="<?php echo $record['item_image']; ?>" alt="" style="border:1px solid #eaeaea; width:60px;"></td>
+                                                <td class="pro_pic" style="padding:5px;"><img src="<?php echo skin_url().'images/no-image.jpg'; ?>" alt="" style="border:1px solid #eaeaea; width:60px;"></td>
                                                 <td>
                                                     <table>
                                                         <tr><td>Item Name: <?php echo $record['item_name']; ?></td></tr>
-                                                        <tr><td>Sub product Name: <?php echo output_value($record['item_subproduct_name']); ?></td></tr>
+                                                        <?php /*<tr><td>Sub product Name: <?php echo output_value($record['item_subproduct_name']); ?></td></tr>*/ ?>
+                                                        <?php if($record['merchantgst'] !='') { ?>
+                                                        <tr><td>GST No.: <?php echo $record['merchantgst']; ?></td></tr>
+                                                        <?php } ?>
                                                         <tr><td>Merchant Name: <?php echo $record['item_merchant_name']; ?></td></tr>
                                                         
                                                         <?php if($record['item_subproductid'] !='') { $item_modifiers = get_order_item_modifier($record['item_id']); 
