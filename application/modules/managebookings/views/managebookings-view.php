@@ -141,7 +141,7 @@ function printDiv()
 												</tr>
 												<tr>
 													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;">Service Period</td>
-													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;"> <?php echo get_date_formart($records[0]['order_service_start_date'])." - ".get_date_formart($records[0]['order_service_end_date']); ?><br><?php echo ($records[0]['order_service_start_time'] !='' && $records[0]['order_service_end_time'] !='') ?  date( 'h.i A', strtotime($records[0]['order_service_start_time']))." - ". date( 'h.i A', strtotime($records[0]['order_service_end_time'])):''; ?></td>
+													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;"> <?php echo get_date_formart($records[0]['order_service_start_date']); echo ($records[0]['order_service_end_date'] !='' && $records[0]['order_service_end_date'] !='0000-00-00')?" - ".get_date_formart($records[0]['order_service_end_date']):""; ?><br><?php echo ($records[0]['order_service_start_time'] !='' && $records[0]['order_service_end_time'] !='') ?  date( 'h.i A', strtotime($records[0]['order_service_start_time']))." - ". date( 'h.i A', strtotime($records[0]['order_service_end_time'])):''; ?></td>
 												</tr>
 												<tr>
 													<td style="font-size: 14px;color: #565656;    padding: 5px 10px;    line-height: normal;    text-align: left;width:50%;">Location</td>

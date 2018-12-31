@@ -256,9 +256,11 @@ var custom_redirect_url = "services/thankyou";
                     <div class="form-group">
                       <?php  echo form_input('start_date',set_value('start_date'),' class="form-control required datepicker" placeholder="'.get_label('start_date').'" title="'.get_label('start_date').' is required"  ');?>
                     </div>
+                    <?php if($records['ser_pricet_type'] == 'day' || $records['ser_pricet_type'] == 'hour') { ?> 
                     <div class="form-group">
                       <?php  echo form_input('end_date',set_value('end_date'),' class="form-control required datepicker" placeholder="'.get_label('end_date').'" title="'.get_label('end_date').'  is required"  ');?>
                     </div>
+                    <?php } ?>
                     <?php if($records['ser_pricet_type'] == 'hour') { ?> 
                       <div class="form-group">
                           <?php  
@@ -295,7 +297,7 @@ var custom_redirect_url = "services/thankyou";
                     <div class="form-group">
                       <?php  echo form_input('order_service_message',set_value('order_service_message'),' class="form-control" placeholder="'.get_label('order_service_message').'" title="'.get_label('order_service_message').'"  ');?>
                     </div>
-                    
+                    <input type="hidden" name="ser_pricet_type" id="ser_pricet_type" value="<?php echo $records['ser_pricet_type']; ?>" />
                     <button type="submit" id="booknow" name="submit" class="btn ui-btn dark-blue btn-block">Book Now</button>
                   <?php
                   echo form_hidden ( 'service', $records['ser_service_id'] );

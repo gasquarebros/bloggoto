@@ -278,7 +278,9 @@ class Services extends CI_Controller {
 		check_site_ajax_request();
 		if ($this->input->post ( 'action' ) == "Add") {
 			$this->form_validation->set_rules ( 'start_date', 'lang:start_date', 'required' );
-			$this->form_validation->set_rules ( 'end_date', 'lang:end_date', 'required' );
+			if(post_value('ser_pricet_type') == 'day' || post_value('ser_pricet_type') == 'hour') {
+				$this->form_validation->set_rules ( 'end_date', 'lang:end_date', 'required' );
+			}
 			$this->form_validation->set_rules ( 'address_line1', 'lang:address_line1', 'required' );
 			$this->form_validation->set_rules ( 'customer_city', 'lang:city', 'required' );
 			$this->form_validation->set_rules ( 'customer_state', 'lang:state', 'required' );
@@ -317,7 +319,11 @@ class Services extends CI_Controller {
 					if(empty($diff) && $error == 0){
 						$order_service_guid = get_guid ( $this->order_table, 'order_service_guid' );
 						$order_service_image = post_value('cover_photo');
-						$end_date = date('Y-m-d',strtotime(post_value('end_date')));
+						if(post_value('ser_pricet_type') == 'day' || post_value('ser_pricet_type') == 'hour'){
+							$end_date = date('Y-m-d',strtotime(post_value('end_date')));
+						} else {
+							$end_date = '';
+						}
 						$start_date = date('Y-m-d',strtotime(post_value('start_date')));
 						$start_time = post_value('start_time')?post_value('start_time'):$service['ser_service_start_time'];
 						$end_time = post_value('end_time')?post_value('end_time'):$service['ser_service_end_time'];
@@ -420,6 +426,31 @@ class Services extends CI_Controller {
 			echo json_encode ( $result );
 			exit ();
 		}
+	}
+
+	public function getsubcategory() {
+		check_site_ajax_request();
+		$cat = $this->input->post('category');
+		$where= array('pro_subcate_status'=>'A');
+		if($cat !='')
+		{
+			$where['pro_subcate_category_primary_id'] = $cat;
+		}
+		$subcategories = $this->Mydb->get_all_records('*',$this->service_subcategorytable,$where);
+		$data = array(''=>'Select Subcategory');
+		if(!empty($subcategories))
+		{
+			foreach($subcategories as $subcategory)
+			{
+				$data[$subcategory['pro_subcate_primary_id']] = ucfirst(stripslashes($subcategory['pro_subcate_name']));
+			}
+		}
+		$extra = 'class="wide" id="service_subcategory" ' ;
+		$html = form_dropdown('subcategory',$data,'',$extra);
+
+		echo json_encode (array(
+			'html' =>$html,
+		));
 	}
 
 	public function thankyou() {

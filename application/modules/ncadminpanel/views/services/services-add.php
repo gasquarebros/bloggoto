@@ -83,7 +83,7 @@ var gallery_image_label = "<?php echo get_label('product_gallery');?>";
 
 						<div class="form-group">
 							<label for="ser_pricet_type" class="col-sm-2 control-label"><?php echo get_label('ser_pricet_type').get_required();?></label>
-							<div class="col-sm-8"><div class="input_box"><?php echo form_dropdown('ser_pricet_type',array('day'=>'Day','hour'=>'Hour'),'','class="form-control required" id="ser_pricet_type"'); ?></div></div>
+							<div class="col-sm-8"><div class="input_box"><?php echo form_dropdown('ser_pricet_type',array('day'=>'Day','hour'=>'Hour','per session'=>'Per Session','per week'=>'Per Week'),'','class="form-control required" id="ser_pricet_type"'); ?></div></div>
 						</div>
 
 						<div class="form-group">

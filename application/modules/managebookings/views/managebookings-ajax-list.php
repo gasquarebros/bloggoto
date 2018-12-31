@@ -39,7 +39,7 @@
 				<td><?php echo stripslashes($val['order_service_title']);?></td>
 				<td><?php echo stripslashes($val['ser_cate_name']);?></td>	 
 				<td><?php echo stripslashes($val['pro_subcate_name']); ?></td>
-				<td><?php echo get_date_formart($val['order_service_start_date'])." - ".get_date_formart($val['order_service_end_date']); ?><br>
+				<td><?php echo get_date_formart($val['order_service_start_date']); echo ($val['order_service_end_date'] !='' && $records[0]['order_service_end_date'] !='0000-00-00')?" - ".get_date_formart($val['order_service_end_date']):''; ?><br>
 					<?php 
 					if($val['order_service_price_type'] == 'hour') { 
 						echo ($val['order_service_start_time'] !='' && $val['order_service_end_time'] !='') ?  date( 'h.i A', strtotime($val['order_service_start_time']))." - ". date( 'h.i A', strtotime($val['order_service_end_time'])):''; 

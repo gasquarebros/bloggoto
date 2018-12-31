@@ -21,7 +21,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                           <input type="text" name="search_field" placeholder="Search with title..." value="" id="search_field" />
                           <div class="select-fields">
                               <div class="sel service_category">
-                                  <select name="category" title="Services Category" class="wide" >
+                                  <select name="category" id="service_category" onchange="get_service_subcategory()" title="Services Category" class="wide" >
                                         <option value="" >Select Category</option> 
                                       <?php foreach($service_category as $key=>$cat){ ?>
                                         <option value="<?php echo $key; ?>" ><?php echo $cat; ?></option> 

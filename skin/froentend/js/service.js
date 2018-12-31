@@ -34,6 +34,22 @@ function get_content()
 	});
 }
 
+function get_service_subcategory() {
+	var cat = $('#service_category').val();
+	var url = SITE_URL+"services/getsubcategory";	
+	$.ajax({
+		url : url,
+		data : "secure_key="+secure_key+"&category="+cat,
+		type : 'POST',
+		dataType : "json",
+		async:false,
+		success : function(data) {
+			$('.service_subcategory').html(data.html);
+			$('#service_subcategory').chosen();
+		}
+	});  
+}
+
 $(document).ready(function(){
 	$('.more_posts').click(function() {
 		get_content();
