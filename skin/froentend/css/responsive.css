@@ -292,6 +292,16 @@ position: relative; overflow: visible !important; }
         float: left !important;
         margin-left: 5px !important;
     } 
+    .profilewrap_popup .profile_photo_wrap {
+        width: 100% !important;
+    }
+    .profilewrap_popup .profile_photo_wrap .pro_pic {
+        height:auto !important;
+    }
+    .profilewrap_popup .profile_photo_wrap .pro_pic img {
+        height: 50px !important;
+        width: 50px !important;
+    }
     .profile_photo_wrap .pro_pic img {
         border-radius: 50% !important;
         height: 100px !important;
@@ -301,8 +311,12 @@ position: relative; overflow: visible !important; }
         width: calc(100% - 110px) !important;
         float: left !important;
     }
+    .profilewrap_popup .profile_photo_wrap .prof_dest {
+        width: calc(100% - 120px) !important; 
+    }
     .profile_photo_wrap .prof_dest span {
         font-size: 18px !important;
+        font-weight:bold;
     }
     .profile_photo_wrap .prof_dest .username_info {
         text-align: center !important;
@@ -336,6 +350,7 @@ position: relative; overflow: visible !important; }
     }
     .profile_social_share ul{
         margin: 0px !important;
+        padding: 0px !important;
         width: 100% !important;
         float: left !important;
         text-align: center !important;
@@ -354,22 +369,41 @@ position: relative; overflow: visible !important; }
         width:auto !important;
         margin: 7px 8px 7px 8px !important;
     }
+    .suggestion_bloggotians { display:none; }
     .followers ul li span.following_count, .post_type_sec {
         margin: 0 !important;
         float: left !important;
         font-size: 14px !important;
     }
+    .follow_popup span {
+        font-weight: bold !important;
+    }
+    .follow_request ul {
+        border-top: 1px solid black;
+    }
+    .follow_request ul li {
+        width: 30%;
+        margin: 12px 2px !important;
+    }
+    .lft_img_fllw img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
     .followers ul li span, .foll_desc p, .foll_desc h6 {
         display: block !important;
-        font-size: 14px !important;
+        font-size: 15px !important;
         color: #444444 !important;
-        font-weight: normal !important;
+        font-weight: normal ;
         margin-top: 0px !important;
         float: left !important;
         margin-left: 5px !important;
     }
     .fllow_bns {
         text-align: center !important;
+        margin-bottom: 10px;
+        width: 100%;
+        float: left;
     }
     .fllow_bns a.btn {
         width: 43% !important;
@@ -400,7 +434,9 @@ position: relative; overflow: visible !important; }
         width: 100%;
     }
     .follow_request {
-        padding: 0 10px !important;
+        padding: 10px !important;
+        width: 100%;
+        float: left;
     }
 	
 }

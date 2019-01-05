@@ -283,7 +283,7 @@ class Myprofile extends CI_Controller {
 		$suggestions = array();
 		if($info['customer_id'] == get_user_id())
 		{
-			$suggestions = $this->Mydb->get_all_records('*',$this->customers,$where ,$limit = 4,$offset = '', array('random'));
+			$suggestions = $this->Mydb->get_all_records('*',$this->customers,$where ,$limit = 3,$offset = '', array('random'));
 		}
 
 		$data['suggestions'] = $suggestions;

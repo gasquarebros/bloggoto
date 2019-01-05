@@ -66,6 +66,12 @@ var module_action="addpost";
 						<?php }
 						} ?> 
                     </ul>
+				</div>
+				<div class="foll_desc">
+					<?php if($info['customer_notes']) { ?>
+						<p><?php echo $info['customer_notes']; ?></p>
+					<?php } ?>
+                    <?php /* <h6 class="active_status"><i class="fa fa-clock-o" aria-hidden="true"></i> One Hour Ago</h6> */ ?>
                 </div>
 				<?php if(get_user_id() !='' && $info['customer_id'] != get_user_id() && !(in_array($info['customer_id'],$blocked_users))) { ?>
 					<div class="fllow_bns">
@@ -88,12 +94,7 @@ var module_action="addpost";
 						</ul>
 					</div>
 				<?php } ?>
-                <div class="foll_desc">
-					<?php if($info['customer_notes']) { ?>
-						<p><?php echo $info['customer_notes']; ?></p>
-					<?php } ?>
-                    <?php /* <h6 class="active_status"><i class="fa fa-clock-o" aria-hidden="true"></i> One Hour Ago</h6> */ ?>
-                </div>
+                
                 <div class="follow_request">
                     <?php if(!empty($suggestions) && $info['customer_id'] == get_user_id()) { ?>
 						<h3 class="suggestion_bloggotians">Suggested Bloggotians</h3>
