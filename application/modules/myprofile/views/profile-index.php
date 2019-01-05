@@ -31,7 +31,8 @@ var module_action="addpost";
 					$celebrity_badge_class='';
 				}                	
 			?>
-                    <h4><span class="<?php echo $celebrity_badge_class; ?>"><?php echo ($info['customer_type'] == '0')?$info['customer_first_name']." ".$info['customer_last_name']:$info['company_name']; ?></span></h4>
+					<h4><span class="<?php echo $celebrity_badge_class; ?>"><?php echo ($info['customer_type'] == '0')?$info['customer_first_name']." ".$info['customer_last_name']:$info['company_name']; ?></span></h4>
+					<p class="username_info"><?php echo "@".$info['customer_username']; ?></p>
 					<?php if($info['customer_prof_profession'] !='') { $prof = explode(',',$info['customer_prof_profession']);   ?>
 						<ul>
 							<?php foreach($prof as $profs) { if(trim($profs) !='') { ?>
@@ -39,7 +40,7 @@ var module_action="addpost";
 							<?php } } ?>
 						</ul>
 					<?php } ?>
-					<p class="username_info"><?php echo "@".$info['customer_username']; ?></p>
+					
                 </div>
             </div>
             <div class="profile_active_details">
@@ -60,7 +61,7 @@ var module_action="addpost";
 						<?php if(!empty($post_infos)) { 
 							foreach($post_infos as $postinfo){ ?> 
 								<li>
-									<?php echo thousandsCurrencyFormat($postinfo['postcount']); ?><span><?php echo ucfirst((get_label($postinfo['post_type']))?get_label($postinfo['post_type']):$postinfo['post_type']); ?></span>
+									<span class="post_type_sec"><?php echo thousandsCurrencyFormat($postinfo['postcount']); ?></span><span><?php echo ucfirst((get_label($postinfo['post_type']))?get_label($postinfo['post_type']):$postinfo['post_type']); ?></span>
 								</li>
 						<?php }
 						} ?> 

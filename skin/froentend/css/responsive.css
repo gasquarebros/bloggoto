@@ -279,7 +279,129 @@ position: relative; overflow: visible !important; }
     .follow_request .lft_img_fllw, .follow_request .rgt_txt_fllw { width: 100%; }
 	.list_row { width: 469px; }
 	.inbx_left .btn-success { width: 60%;text-align: center;display: block;margin: 0 auto; }
-	.share_n_text { margin-left: 60%; } 
+    .share_n_text { margin-left: 60%; } 
+    
+    .profile_photo_wrap {
+        width: 100% !important;
+        display: inline-block !important;
+        text-align: center !important;
+    }
+    .profile_photo_wrap .pro_pic {
+        height: 100px !important;
+        width: 100px !important;
+        float: left !important;
+        margin-left: 5px !important;
+    } 
+    .profile_photo_wrap .pro_pic img {
+        border-radius: 50% !important;
+        height: 100px !important;
+        width: 100px !important;
+    }
+    .profile_photo_wrap .prof_dest {
+        width: calc(100% - 110px) !important;
+        float: left !important;
+    }
+    .profile_photo_wrap .prof_dest span {
+        font-size: 18px !important;
+    }
+    .profile_photo_wrap .prof_dest .username_info {
+        text-align: center !important;
+        padding-top: 3px !important;
+        margin-bottom: 0px !important;
+    }
+    .profile_photo_wrap .prof_dest ul {
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        width: 100% !important;
+        float: left !important;
+        margin-left: 6px !important;
+    }
+    .profile_photo_wrap .prof_dest ul li {
+        word-wrap: break-word;
+        max-width: calc(100% - 10px) !important;
+        text-align: center !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
+    }
+    .profile_active_details {
+        width: 100% !important;
+        display: inline-block !important;
+        margin: 0 !important;
+        text-align: center !important;
+    }
+    .share_n_text {
+        display:none;
+        margin-left:0px !important;
+    }
+    .profile_social_share ul{
+        margin: 0px !important;
+        width: 100% !important;
+        float: left !important;
+        text-align: center !important;
+        display: inline-block !important;
+    }
+    .profile_social_share li {
+        list-style: none !important;
+        display: inline-block !important;
+        float: none;
+    }
+    .profile_active_details .followers ul {
+        margin: 0px !important;
+        float: left !important;
+    }
+    .profile_active_details .followers ul li {
+        width:auto !important;
+        margin: 7px 8px 7px 8px !important;
+    }
+    .followers ul li span.following_count, .post_type_sec {
+        margin: 0 !important;
+        float: left !important;
+        font-size: 14px !important;
+    }
+    .followers ul li span, .foll_desc p, .foll_desc h6 {
+        display: block !important;
+        font-size: 14px !important;
+        color: #444444 !important;
+        font-weight: normal !important;
+        margin-top: 0px !important;
+        float: left !important;
+        margin-left: 5px !important;
+    }
+    .fllow_bns {
+        text-align: center !important;
+    }
+    .fllow_bns a.btn {
+        width: 43% !important;
+        float: left !important;
+        display: block !important;
+        margin: 5px 0 5px 12px !important;
+        text-align: center !important;
+        padding: 4px 0 !important;
+        font-size: 13px !important;
+    }
+    .fllow_bns a.btn.bt_green {
+        background: black !important;
+        border-color: black !important;
+    }
+    a.btn.bt_green::before {
+        background: #6A7665 !important;
+        border-color: #6A7665 !important;
+    }
+    .foll_desc {
+        margin-top: 10px !important;
+        width: 100% !important;
+        float: left !important;
+    }
+    .foll_desc p {
+        padding-bottom: 0 !important;
+        clear: both;
+        text-align: center;
+        width: 100%;
+    }
+    .follow_request {
+        padding: 0 10px !important;
+    }
 	
 }
 

@@ -389,9 +389,17 @@ a.btn:hover {
     margin-right: 2px;
 	display: inline-block;
 }
-
+/*
 .fllow_bns a.btn.bt_green {
     background: #00c853;
+}*/
+.fllow_bns a.btn.bt_green {
+    background: black !important;
+    border-color: black !important;
+}
+a.btn.bt_green::before {
+    background: #6A7665 !important;
+    border-color: #6A7665 !important;
 }
 
 /* Bounce To Right */
@@ -1787,7 +1795,7 @@ input[type="file"] {
     display: inline-block;
     vertical-align: top;
     margin-right: 40px;
-    font-size: 33px;
+    font-size: 16px;
     color: #2e3d44;
     font-weight: bold;
 
@@ -1818,6 +1826,7 @@ input[type="file"] {
 
 .foll_desc p,
 .foll_desc h6 {
+    clear:both;
     margin: 0 0 20px;
 }
 
