@@ -9,7 +9,7 @@
 					<p>Social Media Made More Easy, Fast and Relevant. </p>
 				</div>
 				<div class="policy">
-					<h4>Agreement</h4>
+					<h4>AGREEMENT</h4>
 					<ul>
 						<li><a href="<?php echo base_url()."page/user-agreement"; ?>">User Agreement</a></li>
 						<li><a href="<?php echo base_url()."page/bloggoto-product-user-agreement"; ?>">Bloggoto Product User Agreement</a></li>
