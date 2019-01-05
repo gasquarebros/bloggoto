@@ -45,11 +45,15 @@ var module_action="addpost";
             <div class="profile_active_details">
                 <div class="followers">
                     <ul>
-                        <li><a class="follow_popup " data-pop-type="following" data-target="follow_modal" href="<?php echo base_url().'myprofile/get_followers_profile/'.encode_value($info['customer_id']); ?>">
-                            <span class="following_count"><?php echo thousandsCurrencyFormat($follow_count); ?></span><span>Followers</span></a>
+                        <li>
+							<a class="follow_popup " data-pop-type="following" data-target="follow_modal" href="<?php echo base_url().'myprofile/get_followers_profile/'.encode_value($info['customer_id']); ?>">
+								<span class="following_count"><?php echo thousandsCurrencyFormat($follow_count); ?></span><span>Followers</span>
+							</a>
                         </li>
-						<li><a class="follow_popup " data-pop-type="follow"  data-target="follow_modal"   href="<?php echo base_url().'myprofile/get_following_profile/'.encode_value($info['customer_id']); ?>">
-                            <span class="follow_count"><?php echo thousandsCurrencyFormat($following_count); ?></span><span>Following</span></a>
+						<li>
+							<a class="follow_popup " data-pop-type="follow"  data-target="follow_modal"   href="<?php echo base_url().'myprofile/get_following_profile/'.encode_value($info['customer_id']); ?>">
+								<span class="follow_count"><?php echo thousandsCurrencyFormat($following_count); ?></span><span>Following</span>
+							</a>
                         </li>
 					</ul>
 					<ul>		
@@ -128,18 +132,53 @@ var module_action="addpost";
 		<div class="newsfeed_wrap">
 			<ul class="newsfeed_menu">
 				
-				<li><a data-section="blogs" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="active profile_section">BLOGS / STORIES</a></li>
-				<li><a data-section="pictures" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="profile_section">Gallery</a></li>
-				<li><a data-section="tags" href="<?php echo base_url()."myprofile/viewtags/".encode_value($info['customer_id']); ?>" class="profile_section">TAGS</a></li>
+				<li>
+					<a data-section="blogs" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="active profile_section">
+						<img src="<?php echo skin_url().'images/blogging.png'?>" class="icon_profile_menu">	
+						<span class="text_profile_menu">BLOGS / STORIES</span>
+					</a>
+				</li>
+				<li>
+					<a data-section="pictures" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="profile_section">
+						<img src="<?php echo skin_url().'images/Gallery.png'?>" class="icon_profile_menu">	
+						<span class="text_profile_menu">Gallery</span>
+					</a>
+				</li>
+				<li>
+					<a data-section="tags" href="<?php echo base_url()."myprofile/viewtags/".encode_value($info['customer_id']); ?>" class="profile_section">
+						<img src="<?php echo skin_url().'images/bookmark.png'?>" class="icon_profile_menu">	
+						<span class="text_profile_menu">TAGS</span>
+					</a>
+				</li>
 				<?php if($info['customer_id'] == get_user_id()) { ?>
-					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio"; ?>" class="profile_section">Profile</a></li>
+					<li>
+						<a data-section="bio" href="<?php echo base_url()."myprofile/viewbio"; ?>" class="profile_section">
+							<img src="<?php echo skin_url().'images/user.png'?>" class="icon_profile_menu">	
+							<span class="text_profile_menu">Profile</span>
+						</a>
+					</li>
 				<?php } else { ?> 
-					<li><a data-section="bio" href="<?php echo base_url()."myprofile/viewbio/".encode_value($info['customer_id']); ?>" class=" profile_section">Profile</a></li>
+					<li>
+						<a data-section="bio" href="<?php echo base_url()."myprofile/viewbio/".encode_value($info['customer_id']); ?>" class=" profile_section">
+							<img src="<?php echo skin_url().'images/user.png'?>" class="icon_profile_menu">	
+							<span class="text_profile_menu">Profile</span>
+						</a>
+					</li>
 				<?php } ?>
 				<?php /*if($info['customer_type'] == 1) {*/ ?> 
-					<li><a data-section="products" href="<?php echo base_url()."myprofile/products/".encode_value($info['customer_id']); ?>" class=" profile_section product_section">Products</a></li>
+					<li>
+						<a data-section="products" href="<?php echo base_url()."myprofile/products/".encode_value($info['customer_id']); ?>" class=" profile_section product_section">
+							<img src="<?php echo skin_url().'images/product.png'?>" class="icon_profile_menu">	
+							<span class="text_profile_menu">Products</span>
+						</a>
+					</li>
 				<?php /*}*/ ?>
-				<li><a data-section="services" href="<?php echo base_url()."myprofile/services/".encode_value($info['customer_id']); ?>" class=" profile_section service_section">Services</a></li>
+				<li>
+					<a data-section="services" href="<?php echo base_url()."myprofile/services/".encode_value($info['customer_id']); ?>" class=" profile_section service_section">
+						<img src="<?php echo skin_url().'images/Service.png'?>" class="icon_profile_menu">	
+						<span class="text_profile_menu">Services</span>
+					</a>
+				</li>
 			</ul>
 			<div class="boi_data">
 			

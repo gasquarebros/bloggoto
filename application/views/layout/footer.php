@@ -9,12 +9,21 @@
 					<p>Social Media Made More Easy, Fast and Relevant. </p>
 				</div>
 				<div class="policy">
+					<h4>Agreement</h4>
+					<ul>
+						<li><a href="<?php echo base_url()."page/user-agreement"; ?>">User Agreement</a></li>
+						<li><a href="<?php echo base_url()."page/bloggoto-product-user-agreement"; ?>">Bloggoto Product User Agreement</a></li>
+						<li><a href="<?php echo base_url()."page/bloggoto-service-user-agreement"; ?>">Bloggoto Service User Agreement</a></li>
+						
+					</ul>
+				</div>
+				<div class="policy">
 					<h4>POLICY INFO</h4>
 					<ul>
-						<li><a href="<?php echo base_url()."page/privacy-policy"; ?>">Privacy Policy</a></li>
-						<li><a href="<?php echo base_url()."page/user-agreement"; ?>">User Agreement</a></li>
+					<li><a href="<?php echo base_url()."page/privacy-policy"; ?>">Privacy Policy</a></li>
 						<li><a href="<?php echo base_url()."page/terms-of-use"; ?>">Terms of Use</a></li>
 						<li><a href="<?php echo base_url()."page/report-abuse-takedown-policy"; ?>">Report Abuse & Takedown Policy</a></li>
+						<li><a href="<?php echo base_url()."page/infrignment-policy"; ?>">Infrignment Policy</a></li>
 					</ul>
 				</div>
 				<div class="comp_info">
@@ -23,7 +32,8 @@
 						<li><a href="<?php echo base_url()."page/about"; ?>">About Us</a></li>
 						<li><a href="<?php echo base_url()."page/faq"; ?>">FAQ</a></li>
 						<li><a href="<?php echo base_url()."page/how-it-works"; ?>">How it Works</a></li>
-						<?php /*<li><a href="<?php echo base_url()."contact"; ?>">Contact Us</a></li> */ ?>
+						<li><a href="<?php echo base_url()."page/buyers-protection"; ?>">Buyers protection</a></li>
+						<li><a href="<?php echo base_url()."page/bloggoto-services-code-of-conduct"; ?>">Bloggoto Services Code of Conduct</a></li>
 					</ul>
 				</div>
 				<div class="foot_rgt">

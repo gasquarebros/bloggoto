@@ -893,9 +893,9 @@ ul.profile_rgt {
 .foot_logo,
 .policy,
 .comp_info {
-    width: 200px;
+    width: 150px;
     float: left;
-    margin-right: 100px;
+    margin-right: 85px;
 }
 
 .comp_info {
@@ -1934,6 +1934,8 @@ input[type="file"] {
     background: #fafbff;
     border-bottom-color: #089aaa;
 }
+.text_profile_menu { display: block; }
+.icon_profile_menu { display:none; }
 
 .newsfeed_wrap .form_field label {
     font-weight: bold;

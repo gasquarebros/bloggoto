@@ -5,7 +5,7 @@ var module_action="addpost";
 ul {
     /*margin: 0px !important;*/
 }
-.inner-main {padding: 20px;}
+.inner-main {padding-top: 20px;}
 .mCustomScrollbar{height: 150px;}
 .search-key-box {
     width: 75%;
@@ -748,7 +748,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 ?>
 <script type="text/javascript" src="<?php echo skin_url(); ?>js/products.js"></script>
 <section>
-    <div class="container">
+    <div class="containers">
         <div class="inner-main flashsale-main leftcatdisplay">
             <div class="category_part">
                 <div class="container">

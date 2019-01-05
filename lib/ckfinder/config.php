@@ -64,11 +64,11 @@ ATTENTION: The trailing slash is required.
 
 //$baseUrl
 if(isset($_SESSION['login_appid'])){
-    $baseUrl = 'http://ccpl.ninjaos.com/media/ckfinder/'.$_SESSION['login_appid'].'/';
+    $baseUrl = 'http://bloggoto.com/media/ckfinder/'.$_SESSION['login_appid'].'/';
     $baseDir = '/home/ninjaos/public_html/media/ckfinder/'.$_SESSION['login_appid'].'/';
 } else {
-	$baseUrl = 'http://ccpl.ninjaos.com/media/ckfinder/';
-    $baseDir = '/home/ninjaos/public_html/media/ckfinder/';
+	$baseUrl = 'http://bloggoto.com/media/ckfinder/';
+    $baseDir = '/home/pjao8pw8046j/public_html/bloggoto.com/media/ckfinder/';
 }
 /** this is the old method baseurl ***/
 //$baseUrl = 'http://ccpl.ninjaos.com/media/ckfinder/';

@@ -35,7 +35,8 @@
     margin-right: 1%;
     margin-bottom: 1.568627450980392%;
     position: relative;
-    padding: 15px 15px 15px 15px
+    padding: 15px 15px 15px 15px;
+    height: auto;
 }
 
 .list_prod_section:hover {

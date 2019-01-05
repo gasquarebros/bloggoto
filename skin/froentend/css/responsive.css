@@ -107,6 +107,8 @@ position: relative; overflow: visible !important; }
     .feed_like_share ul li a { font-size: 12px; }
     .feed_like_share ul li a i { font-size: 18px; }
     .newsfeed_menu li a { font-size: 14px; padding: 8px; }
+    .text_profile_menu { display:none; }
+    .icon_profile_menu { display:block; }
     .write_img, .write_text { float: none; width: 100%; text-align: center; }
     .toggle_feed { float: right; }
     .feed_name h4, .feed_body_text h4 { font-size: 20px; margin: 0; }
@@ -224,7 +226,7 @@ position: relative; overflow: visible !important; }
     .post_media {width: 100% !important;}
     .write_post .form_field { width: 100%; display: block; }
     .write_text input[type="text"], .write_text input[type="email"], .write_text input[type="password"], .write_text textarea, .write_text select { margin-bottom: 15px; }
-    .newsfeed_menu li { width: 50%; border: 1px solid #ccc;}
+    .newsfeed_menu li { width: calc(100%/6); border: 1px solid #ccc;}
 	.list_row { width: 565px; }
 	.write_img { width: 20%; float: left; }
 	.mail-time{
