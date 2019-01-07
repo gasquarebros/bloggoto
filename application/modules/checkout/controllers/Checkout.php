@@ -1178,9 +1178,10 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 					$datas['records'] = $data;
 					$content = $this->load->view($this->folder . $this->module . "-order_email",$datas,true);
 					$datas[] = $data['merchantmail'];
+					$link = base_url().'manageorders/view/'.encode_value($data['order_primary_id']);
 					//$merchant_data[$data['item_merchant_id']] = array('firstname'=>$data['merchantfirstname'],'lastname'=>$data['merchantlastname'],'phone'=>$data['merchantphone'],'email'=>$data['merchantmail']);	
-					$check_arr = array('[NAME]','[ORDER_DATE]','[LOCAL_ORDER_NO]','[CUSTOMERNAME]','[ORDER_DETAILS]');
-					$replace_arr = array($data['merchantfirstname']." ".$data['merchantlastname'],$data['order_created_on'],$data['order_local_no'],$data['customer_first_name']." ".$data['customer_last_name'],$content);
+					$check_arr = array('[NAME]','[ORDER_DATE]','[LOCAL_ORDER_NO]','[CUSTOMERNAME]','[ORDER_DETAILS]','[ORDERLINK]');
+					$replace_arr = array($data['merchantfirstname']." ".$data['merchantlastname'],$data['order_created_on'],$data['order_local_no'],$data['customer_first_name']." ".$data['customer_last_name'],$content,$link);
 
 					$order_local_no = $data['order_local_no'];
 					$pdfs = generate_invoice_product($order_local_no,'merchant',true);
@@ -1196,8 +1197,9 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 		$content = $this->load->view($this->folder . $this->module . "-order_email",$data,true);
 		
 		$this->load->library('myemail');
-		$check_arr = array('[NAME]','[ORDER_DETAILS]');
-		$replace_arr = array( ucfirst(stripslashes($record[0]['customer_first_name'].' '.$record[0]['customer_last_name'])),$content);
+		$link = base_url().'orders/view/'.encode_value($data['order_primary_id']);
+		$check_arr = array('[NAME]','[ORDER_DETAILS]','[ORDERLINK]');
+		$replace_arr = array( ucfirst(stripslashes($record[0]['customer_first_name'].' '.$record[0]['customer_last_name'])),$content,$link);
 		$email_template_id = '6';
 		if($email_template_id != '') {
 			$order_local_no = $record[0]['order_local_no'];

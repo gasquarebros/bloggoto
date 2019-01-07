@@ -30,6 +30,8 @@ if(category_val !="" )
 
 });	
 
+
+
 /*  show and hide menu set component div */
 $("#product_type").change(function(){ return  false;
 	
@@ -210,6 +212,29 @@ $(window).load(function() {
 	}
 });
 
+function get_subcategory() {
+	var cat = $('#ser_category').val();
+	var url = SITE_URL+"services/getsubcategory";	
+	$.ajax({
+		url : url,
+		data : "secure_key="+secure_key+"&category="+cat,
+		type : 'POST',
+		dataType : "json",
+		async:false,
+		success : function(data) {
+			$('.service_subcategory').html(data.html);
+			$('#service_subcategory').chosen();
+		}
+	});  
+}
+
+function show_booking_quantity() {
+	if($('#ser_pricet_type').val() == 'per session') {
+		$('.show_booking_qty').show();
+	} else {
+		$('.show_booking_qty').hide();
+	}
+}
 
 function load_combo_html() {  
 

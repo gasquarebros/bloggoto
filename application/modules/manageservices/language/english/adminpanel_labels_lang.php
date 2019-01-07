@@ -38,4 +38,5 @@ $lang['customer_city'] = "City";
 $lang['time_start_time'] = "Day Start Time";
 $lang['time_end_time'] = "Day End Time";
 $lang['admin_no_service_found'] = "No services hosted";
+$lang['number_count_day'] = "No. of bookings";
 /* Service Modules ends here */

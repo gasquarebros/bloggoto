@@ -62,7 +62,7 @@
 							<div class="form_field_inner fl">
 								<p class="term">
 								<?php  echo form_checkbox('agree','1','0','id="agree" class="toggle-checkbox required"'); ?>
-								<label for="agree">I agree to our <a target="_blank" href="<?php echo base_url()."page/terms-of-use"; ?>">terms & conditions</a>.</label>
+								<label class="agree" for="agree">I agree to our <a target="_blank" href="<?php echo base_url()."page/terms-of-use"; ?>">terms & conditions</a>.</label>
 								</p>
 							</div>                        
 						</div>

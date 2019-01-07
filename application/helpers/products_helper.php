@@ -263,7 +263,7 @@ if(!function_exists('get_service_category'))
 /*  this function used to get all category dropdown */
 if(!function_exists('get_service_subcategory'))
 {
-	function get_service_subcategory($where='',$selected='',$extra='',$product_id=null)
+	function get_service_subcategory($where='',$selected='',$extra='',$product_id=null,$name="")
 	{
 		$CI=& get_instance();
 		$join=array();
@@ -282,8 +282,10 @@ if(!function_exists('get_service_subcategory'))
 			}
 		}
 		$extra=($extra!='')?  $extra : 'class="form-control" id="product_subcategory" required ' ;
-			
-		return  form_dropdown('product_subcategory',$data,$selected,$extra);
+		if($name ==''){
+			$name = 'product_subcategory';
+		}
+		return  form_dropdown($name,$data,$selected,$extra);
 	}
 }
 

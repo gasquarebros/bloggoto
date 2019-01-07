@@ -51,7 +51,9 @@
     width: 100%;
     margin-bottom: 17px
 }
-
+.img_part img{
+    height:260px;
+}
 .list_prod_section .img_part .deal_icon {
     position: absolute;
     z-index: 1;

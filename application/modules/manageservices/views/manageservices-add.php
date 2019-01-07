@@ -110,7 +110,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 
 						<div class="form-group">
 							<label for="post_subcategory" class="col-sm-2 control-label"><?php echo get_label('ser_subcategory').get_required();?></label>
-							<div class="col-sm-4"><div class="input_box modi_div"><?php echo get_service_subcategory($where='',$selected='',$extra='class="form-control" required id="ser_subcategory" data-placeholder="Select Subcategory"',''); ?></div></div>
+							<div class="col-sm-4"><div class="input_box modi_div service_subcategory"><?php echo get_service_subcategory($where='',$selected='',$extra='class="form-control" required id="ser_subcategory" data-placeholder="Select Subcategory"','','subcategory'); ?></div></div>
 						</div>
 						
 						<div class="form-group">
@@ -144,7 +144,12 @@ var commission_price = '<?php echo $commission_price; ?>';
 
 						<div class="form-group">
 							<label for="ser_pricet_type" class="col-sm-2 control-label"><?php echo get_label('ser_pricet_type').get_required();?></label>
-							<div class="col-sm-4"><div class="input_box"><?php echo form_dropdown('ser_pricet_type',array('day'=>'Day','hour'=>'Hour','per session'=>'Per Session','per visit'=>'Per Visit'),'','class="form-control required" id="ser_pricet_type"'); ?></div></div>
+							<div class="col-sm-4"><div class="input_box"><?php echo form_dropdown('ser_pricet_type',array('day'=>'Day','hour'=>'Hour','per session'=>'Per Session','per visit'=>'Per Visit'),'','class="form-control required" id="ser_pricet_type" onchange="show_booking_quantity()"'); ?></div></div>
+						</div>
+
+						<div class="form-group show_booking_qty" <?php if(set_value('max_limit') == 'per session') { echo "style='display:block;'"; } else { echo "style='display:none;'"; } ?>>
+							<label for="time_start_time" class="col-sm-2 control-label"><?php echo get_label('number_count_day');?></label>
+							<div class="col-sm-4"><div class="input_box"><?php  echo form_input('max_limit',set_value('max_limit'),' class="form-control"  ');?></div></div>
 						</div>
 
 						<div class="form-group">
@@ -207,7 +212,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 						
 						<div class="form-group">
 							<label for="status" class="col-sm-2 control-label"><?php echo get_label('status').get_required();?></label>
-							<div class="col-sm-4"><div class="input_box"><?php  echo form_dropdown('status',array ('' => get_label('select_status'),'A' => 'Active','I' => 'Inactive'),'','class="form-control required" id="status" style="width:374px;"');?></div></div>
+							<div class="col-sm-4"><div class="input_box"><?php  echo form_dropdown('status',array ('' => get_label('select_status'),'A' => 'Active','I' => 'Inactive'),'','class="form-control required" id="status" style="max-width:374px;"');?></div></div>
 						</div>
 
 						 <div class="form-group">

@@ -316,6 +316,14 @@ class Services extends CI_Controller {
 							}
 						}
 					}
+
+					if($service['ser_pricet_type'] == 'per session' && $service['max_limit'] !='' && $service['max_limit'] > 0 ) {
+						$date_st = date('Y-m-d',strtotime(post_value('start_date')));
+						$order_booked_count = $this->Mydb->get_num_rows(array('order_service_id'),'order_service',array('DATE(order_service_start_date)'=>$date_st,'order_service_serviceid'=>$service['ser_primary_id']));
+						if($order_booked_count >= $service['max_limit']) {
+							$error = 1;
+						}
+					}
 					if(empty($diff) && $error == 0){
 						$order_service_guid = get_guid ( $this->order_table, 'order_service_guid' );
 						$order_service_image = post_value('cover_photo');
@@ -338,6 +346,7 @@ class Services extends CI_Controller {
 						$insert_array = array (
 							'order_service_guid' => $order_service_guid,
 							'order_service_local_no' => $order_service_local_no,
+							'order_service_serviceid'=> $service['ser_primary_id'],
 							'order_service_title' => $service['ser_title'],
 							'order_service_provider_id' => $service['ser_customer_id'],
 							'order_service_slug' => $service['ser_title'],
@@ -411,7 +420,7 @@ class Services extends CI_Controller {
 						}
 					} else {
 						$result ['status'] = 'error';
-						$result ['message'] = "The Service is unavailable for certain days or cities";
+						$result ['message'] = "The Service is unavailable for certain days or cities or fullfilled for the day";
 					}
 					
 				} else {

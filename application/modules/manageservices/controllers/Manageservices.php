@@ -161,7 +161,7 @@ class Manageservices extends CI_Controller
 			$this->form_validation->set_rules ( 'ser_price', 'lang:ser_price', 'required' );
 			//$this->form_validation->set_rules ( 'product_customer_id', 'lang:service_customer', 'required' );
 			$this->form_validation->set_rules ( 'product_category', 'lang:ser_category', 'required' );
-			$this->form_validation->set_rules ( 'product_subcategory', 'lang:ser_subcategory', 'required' );
+			$this->form_validation->set_rules ( 'subcategory', 'lang:ser_subcategory', 'required' );
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			$this->form_validation->set_rules ( 'ser_availability[]', 'lang:ser_availability', 'required' );
 			$this->form_validation->set_rules ( 'customer_city[]', 'lang:customer_city', 'required' );
@@ -188,12 +188,13 @@ class Manageservices extends CI_Controller
 					'ser_slug' => $product_slug,
 					'ser_customer_id' => get_user_id(),
 					'ser_category' => post_value('product_category'),
-					'ser_subcategory' => post_value('product_subcategory'),
+					'ser_subcategory' => post_value('subcategory'),
 					'ser_description' => post_value ( 'ser_description' ),
 					'ser_status' => (post_value ( 'status' ) == "A" ? 'A' : 'I'),
 					'ser_sequence' => $product_sequence,
 					'ser_price' => post_value ( 'ser_price' ),
 					'ser_pricet_type' => post_value ( 'ser_pricet_type' ),
+					'ser_pricet_type' => post_value ( 'max_limit' ),
 					'ser_service_start_time' => post_value('time_start_time'),
 					'ser_service_end_time' => post_value('time_end_time'),
                     'ser_discount_price' => post_value ( 'ser_discount_price' ),
@@ -275,7 +276,7 @@ class Manageservices extends CI_Controller
 			$this->form_validation->set_rules ( 'ser_price', 'lang:ser_price', 'required' );
 			//$this->form_validation->set_rules ( 'product_customer_id', 'lang:service_customer', 'required' );
 			$this->form_validation->set_rules ( 'product_category', 'lang:ser_category', 'required' );
-			$this->form_validation->set_rules ( 'product_subcategory', 'lang:ser_subcategory', 'required' );
+			$this->form_validation->set_rules ( 'subcategory', 'lang:ser_subcategory', 'required' );
 			$this->form_validation->set_rules ( 'status', 'lang:status', 'required' );
 			$this->form_validation->set_rules ( 'ser_availability[]', 'lang:ser_availability', 'required' );
 			$this->form_validation->set_rules ( 'customer_city[]', 'lang:customer_city', 'required' );
@@ -300,12 +301,13 @@ class Manageservices extends CI_Controller
 					'ser_slug' => $product_slug,
 					'ser_customer_id' => get_user_id(),
 					'ser_category' => post_value('product_category'),
-					'ser_subcategory' => post_value('product_subcategory'),
+					'ser_subcategory' => post_value('subcategory'),
 					'ser_description' => post_value ( 'ser_description' ),
 					'ser_status' => (post_value ( 'status' ) == "A" ? 'A' : 'I'),
 					'ser_sequence' => $product_sequence,
 					'ser_price' => post_value ( 'ser_price' ),
 					'ser_pricet_type' => post_value ( 'ser_pricet_type' ),
+					'max_limit' => post_value ( 'max_limit' ),
 					'ser_service_start_time' => post_value('time_start_time'),
 					'ser_service_end_time' => post_value('time_end_time'),
                     'ser_discount_price' => post_value ( 'ser_discount_price' ),
