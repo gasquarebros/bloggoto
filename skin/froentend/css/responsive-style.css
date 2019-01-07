@@ -808,7 +808,7 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 @media(max-width:480px){
 .notify-list-page .notify-header{padding:10px 10px 10px 30px;}
 .flash_sale_deals ul li .cont_part > p { display:none !important; }
-.flash_sale_deals.grid-view .price-part { margin-top:46px !important; }
+.flash_sale_deals.grid-view .price-part { margin-top:22px !important; }
 .price-part p {display:block}
 
 .notify-list-page .notify-header ul{position: relative;margin-top: 5px;display: block;left: 0; bottom: 0;top: inherit;right: inherit;}
