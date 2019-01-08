@@ -440,8 +440,8 @@ class Services extends CI_Controller {
 		}
 		else
 		{
-			$result['status'] = "failed";
-			$result['redirect_url'] = base_url();
+			$result['status'] = "error";
+			$result ['message'] = "You have to do login inorder to book service";
 			echo json_encode($result);
 		}
 		
