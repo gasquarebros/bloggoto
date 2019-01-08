@@ -276,165 +276,175 @@ class Services extends CI_Controller {
 	public function booknow() 
 	{
 		check_site_ajax_request();
-		if ($this->input->post ( 'action' ) == "Add") {
-			$this->form_validation->set_rules ( 'start_date', 'lang:start_date', 'required' );
-			if(post_value('ser_pricet_type') == 'day' || post_value('ser_pricet_type') == 'hour') {
-				$this->form_validation->set_rules ( 'end_date', 'lang:end_date', 'required' );
-			}
-			$this->form_validation->set_rules ( 'address_line1', 'lang:address_line1', 'required' );
-			$this->form_validation->set_rules ( 'customer_city', 'lang:city', 'required' );
-			$this->form_validation->set_rules ( 'customer_state', 'lang:state', 'required' );
-			$this->form_validation->set_rules ( 'zipcode', 'lang:zipcode', 'required' );
-			if ($this->form_validation->run () == TRUE) {
-				$service = $this->Mydb->get_record('*',$this->table,array('ser_service_id'=>post_value('service'),'ser_status'=>'A'));
-				if(!empty($service)){
-					$available = explode(',',$service['ser_available']);
-					$start = strtotime(post_value('start_date'));
-					$end = strtotime(post_value('end_date'));
-					$dates = array();
-					while($start <= $end)
-					{
-						array_push(
-							$dates,
-							strtolower(date(
-								'D',
-								$start
-							))
-						);
-						$start += 86400;
-					}
-					$dates = array_unique($dates);
-					$diff = array_diff($dates,$available);
-					$available_cities_list = $this->Mydb->get_all_records('*',$this->service_cities,array('ser_service_id'=>$service['ser_primary_id']));
-					$error = 1;
-					if(!empty($available_cities_list))
-					{
-						foreach($available_cities_list as $acity){
-							if($acity['ser_city_id'] == post_value('customer_city') ){
-								$error = 0;
-								break;
-							}
+		$userid = get_user_id();
+		if($userid !='') {
+			if ($this->input->post ( 'action' ) == "Add") {
+				$this->form_validation->set_rules ( 'start_date', 'lang:start_date', 'required' );
+				if(post_value('ser_pricet_type') == 'day' || post_value('ser_pricet_type') == 'hour') {
+					$this->form_validation->set_rules ( 'end_date', 'lang:end_date', 'required' );
+				}
+				$this->form_validation->set_rules ( 'address_line1', 'lang:address_line1', 'required' );
+				$this->form_validation->set_rules ( 'customer_city', 'lang:city', 'required' );
+				$this->form_validation->set_rules ( 'customer_state', 'lang:state', 'required' );
+				$this->form_validation->set_rules ( 'zipcode', 'lang:zipcode', 'required' );
+				if ($this->form_validation->run () == TRUE) {
+					$service = $this->Mydb->get_record('*',$this->table,array('ser_service_id'=>post_value('service'),'ser_status'=>'A'));
+					if(!empty($service)){
+						$available = explode(',',$service['ser_available']);
+						$start = strtotime(post_value('start_date'));
+						$end = strtotime(post_value('end_date'));
+						$dates = array();
+						while($start <= $end)
+						{
+							array_push(
+								$dates,
+								strtolower(date(
+									'D',
+									$start
+								))
+							);
+							$start += 86400;
 						}
-					}
-
-					if($service['ser_pricet_type'] == 'per session' && $service['max_limit'] !='' && $service['max_limit'] > 0 ) {
-						$date_st = date('Y-m-d',strtotime(post_value('start_date')));
-						$order_booked_count = $this->Mydb->get_num_rows(array('order_service_id'),'order_service',array('DATE(order_service_start_date)'=>$date_st,'order_service_serviceid'=>$service['ser_primary_id']));
-						if($order_booked_count >= $service['max_limit']) {
-							$error = 1;
-						}
-					}
-					if(empty($diff) && $error == 0){
-						$order_service_guid = get_guid ( $this->order_table, 'order_service_guid' );
-						$order_service_image = post_value('cover_photo');
-						if(post_value('ser_pricet_type') == 'day' || post_value('ser_pricet_type') == 'hour'){
-							$end_date = date('Y-m-d',strtotime(post_value('end_date')));
-						} else {
-							$end_date = '';
-						}
-						$start_date = date('Y-m-d',strtotime(post_value('start_date')));
-						$start_time = post_value('start_time')?post_value('start_time'):$service['ser_service_start_time'];
-						$end_time = post_value('end_time')?post_value('end_time'):$service['ser_service_end_time'];
-						$discount = find_discount($service['ser_price'],$service['ser_discount_price'],$service['ser_discount_start_date'],$service['ser_discount_end_date']);
-						$price = ""; 
-						if($service['ser_discount_price'] !='' && $discount > 0) {
-							$price = $service['ser_discount_price'];
-						} else {
-							$price = $service['ser_price'];
-						}
-						$order_service_local_no = date('dmyHis').'F'.rand(0, 999);
-						$insert_array = array (
-							'order_service_guid' => $order_service_guid,
-							'order_service_local_no' => $order_service_local_no,
-							'order_service_serviceid'=> $service['ser_primary_id'],
-							'order_service_title' => $service['ser_title'],
-							'order_service_provider_id' => $service['ser_customer_id'],
-							'order_service_slug' => $service['ser_title'],
-							'order_service_price' => $price,
-							'order_service_category_id' => $service['ser_category'],
-							'order_service_subcategory_id' => $service['ser_subcategory'],
-							'order_service_price_type' => $service['ser_pricet_type'],
-							'order_service_start_date' => $start_date,
-							'order_service_end_date' => $end_date,
-							'order_service_start_time' => $start_time,
-							'order_service_end_time' => $end_time,
-							'order_service_image' => $order_service_image,
-							'order_service_is_paid' => 1,
-							'order_service_address_line1' => post_value ( 'address_line1' ),
-							'order_service_address_line2' => post_value ( 'address_line2' ),
-							'order_service_city' => post_value ( 'customer_city' ),
-							'order_service_state' => post_value ( 'customer_state' ),
-							'order_service_zipcode' => post_value ( 'zipcode' ),
-							'order_service_landmark' => post_value ( 'landmark' ),
-							'order_service_message'	=> post_value('order_service_message'),
-							'order_service_customer_id' => get_user_id(),
-							'order_service_status'	=> 'processing',
-							'order_service_created_on' => current_date (),
-							'order_service_created_ip' => get_ip ()
-						);
-						
-						$insert_id = $this->Mydb->insert ( $this->order_table, $insert_array );
-						if($insert_id) {
-
-							$st_date = $insert_array['order_service_start_date'];
-							$ed_date = $insert_array['order_service_end_date'];
-							if($service['ser_pricet_type'] == 'hour') {
-								$st_time = ($insert_array['order_service_start_time'] !=''  && $insert_array['order_service_start_time'] != '00:00') ?  date( 'h.i A', strtotime($insert_array['order_service_start_time'])):'';
-								$ed_time = ($insert_array['order_service_end_time'] !=''  && $insert_array['order_service_end_time'] != '00:00') ?  date( 'h.i A',strtotime( $insert_array['order_service_end_time'])):'';
-							} else {
-								$st_time = $ed_time = '';
-							}
-							//send mail and notification with success message
-							$date =  $st_date." - ".$ed_date. "<br>".$st_time." - ".$ed_time;
-
-							$name = $this->session->userdata('bg_first_name')." ".$this->session->userdata('bg_last_name');
-							$email = $this->session->userdata('bg_user_email');
-							$this->load->library('myemail');
-							$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[TITLE]','[DATE]');
-							$replace_arr = array( ucfirst(stripslashes($name)),$insert_array['order_service_local_no'],stripslashes($insert_array['order_service_title']),$date);
-							$email_template_id = '12';
-							if($email_template_id != '') {
-								$mail_res = $this->myemail->send_admin_mail($email,$email_template_id,$check_arr,$replace_arr);
-							}
-
-							
-							$provider = $this->Mydb->get_record('*','customers',array('customer_id'=>$service['ser_customer_id']));
-							if(!empty($provider)) {
-								$name = $provider['customer_first_name']." ".$provider['customer_last_name'];
-								$email = $provider['customer_email'];
-								if($name == '' && $provider['customer_username'] !='') {
-									$name = $provider['customer_username'];
-								} else if($name == '') {
-									$name = "Provider";
+						$dates = array_unique($dates);
+						$diff = array_diff($dates,$available);
+						$available_cities_list = $this->Mydb->get_all_records('*',$this->service_cities,array('ser_service_id'=>$service['ser_primary_id']));
+						$error = 1;
+						if(!empty($available_cities_list))
+						{
+							foreach($available_cities_list as $acity){
+								if($acity['ser_city_id'] == post_value('customer_city') ){
+									$error = 0;
+									break;
 								}
-								$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[TITLE]');
-								$replace_arr = array( ucfirst(stripslashes($name)),$insert_array['order_service_local_no'],stripslashes($insert_array['order_service_title']));
-								$email_template_id = '13';
+							}
+						}
+
+						if($service['ser_pricet_type'] == 'per session' && $service['max_limit'] !='' && $service['max_limit'] > 0 ) {
+							$date_st = date('Y-m-d',strtotime(post_value('start_date')));
+							$order_booked_count = $this->Mydb->get_num_rows(array('order_service_id'),'order_service',array('DATE(order_service_start_date)'=>$date_st,'order_service_serviceid'=>$service['ser_primary_id']));
+							if($order_booked_count >= $service['max_limit']) {
+								$error = 1;
+							}
+						}
+						if(empty($diff) && $error == 0){
+							$order_service_guid = get_guid ( $this->order_table, 'order_service_guid' );
+							$order_service_image = post_value('cover_photo');
+							if(post_value('ser_pricet_type') == 'day' || post_value('ser_pricet_type') == 'hour'){
+								$end_date = date('Y-m-d',strtotime(post_value('end_date')));
+							} else {
+								$end_date = '';
+							}
+							$start_date = date('Y-m-d',strtotime(post_value('start_date')));
+							$start_time = post_value('start_time')?post_value('start_time'):$service['ser_service_start_time'];
+							$end_time = post_value('end_time')?post_value('end_time'):$service['ser_service_end_time'];
+							$discount = find_discount($service['ser_price'],$service['ser_discount_price'],$service['ser_discount_start_date'],$service['ser_discount_end_date']);
+							$price = ""; 
+							if($service['ser_discount_price'] !='' && $discount > 0) {
+								$price = $service['ser_discount_price'];
+							} else {
+								$price = $service['ser_price'];
+							}
+							$order_service_local_no = date('dmyHis').'F'.rand(0, 999);
+							$insert_array = array (
+								'order_service_guid' => $order_service_guid,
+								'order_service_local_no' => $order_service_local_no,
+								'order_service_serviceid'=> $service['ser_primary_id'],
+								'order_service_title' => $service['ser_title'],
+								'order_service_provider_id' => $service['ser_customer_id'],
+								'order_service_slug' => $service['ser_title'],
+								'order_service_price' => $price,
+								'order_service_category_id' => $service['ser_category'],
+								'order_service_subcategory_id' => $service['ser_subcategory'],
+								'order_service_price_type' => $service['ser_pricet_type'],
+								'order_service_start_date' => $start_date,
+								'order_service_end_date' => $end_date,
+								'order_service_start_time' => $start_time,
+								'order_service_end_time' => $end_time,
+								'order_service_image' => $order_service_image,
+								'order_service_is_paid' => 1,
+								'order_service_address_line1' => post_value ( 'address_line1' ),
+								'order_service_address_line2' => post_value ( 'address_line2' ),
+								'order_service_city' => post_value ( 'customer_city' ),
+								'order_service_state' => post_value ( 'customer_state' ),
+								'order_service_zipcode' => post_value ( 'zipcode' ),
+								'order_service_landmark' => post_value ( 'landmark' ),
+								'order_service_message'	=> post_value('order_service_message'),
+								'order_service_customer_id' => get_user_id(),
+								'order_service_status'	=> 'processing',
+								'order_service_created_on' => current_date (),
+								'order_service_created_ip' => get_ip ()
+							);
+							
+							$insert_id = $this->Mydb->insert ( $this->order_table, $insert_array );
+							if($insert_id) {
+
+								$st_date = $insert_array['order_service_start_date'];
+								$ed_date = $insert_array['order_service_end_date'];
+								if($service['ser_pricet_type'] == 'hour') {
+									$st_time = ($insert_array['order_service_start_time'] !=''  && $insert_array['order_service_start_time'] != '00:00') ?  date( 'h.i A', strtotime($insert_array['order_service_start_time'])):'';
+									$ed_time = ($insert_array['order_service_end_time'] !=''  && $insert_array['order_service_end_time'] != '00:00') ?  date( 'h.i A',strtotime( $insert_array['order_service_end_time'])):'';
+								} else {
+									$st_time = $ed_time = '';
+								}
+								//send mail and notification with success message
+								$date =  $st_date." - ".$ed_date. "<br>".$st_time." - ".$ed_time;
+
+								$name = $this->session->userdata('bg_first_name')." ".$this->session->userdata('bg_last_name');
+								$email = $this->session->userdata('bg_user_email');
+								$this->load->library('myemail');
+								$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[TITLE]','[DATE]');
+								$replace_arr = array( ucfirst(stripslashes($name)),$insert_array['order_service_local_no'],stripslashes($insert_array['order_service_title']),$date);
+								$email_template_id = '12';
 								if($email_template_id != '') {
 									$mail_res = $this->myemail->send_admin_mail($email,$email_template_id,$check_arr,$replace_arr);
 								}
-							}
 
-							$result ['status'] = 'success';
-							$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_ordered' ), $this->module_label ) );
+								
+								$provider = $this->Mydb->get_record('*','customers',array('customer_id'=>$service['ser_customer_id']));
+								if(!empty($provider)) {
+									$name = $provider['customer_first_name']." ".$provider['customer_last_name'];
+									$email = $provider['customer_email'];
+									if($name == '' && $provider['customer_username'] !='') {
+										$name = $provider['customer_username'];
+									} else if($name == '') {
+										$name = "Provider";
+									}
+									$check_arr = array('[NAME]','[LOCAL_ORDER_NO]','[TITLE]');
+									$replace_arr = array( ucfirst(stripslashes($name)),$insert_array['order_service_local_no'],stripslashes($insert_array['order_service_title']));
+									$email_template_id = '13';
+									if($email_template_id != '') {
+										$mail_res = $this->myemail->send_admin_mail($email,$email_template_id,$check_arr,$replace_arr);
+									}
+								}
+
+								$result ['status'] = 'success';
+								$this->session->set_flashdata ( 'admin_success', sprintf ( $this->lang->line ( 'success_message_ordered' ), $this->module_label ) );
+							}
+						} else {
+							$result ['status'] = 'error';
+							$result ['message'] = "The Service is unavailable for certain days or cities or fullfilled for the day";
 						}
+						
 					} else {
 						$result ['status'] = 'error';
-						$result ['message'] = "The Service is unavailable for certain days or cities or fullfilled for the day";
+						$result ['message'] = "The Service is unavailable";
 					}
-					
 				} else {
+					
 					$result ['status'] = 'error';
-					$result ['message'] = "The Service is unavailable";
+					$result ['message'] = validation_errors ();
 				}
-			} else {
-				
-				$result ['status'] = 'error';
-				$result ['message'] = validation_errors ();
+				echo json_encode ( $result );
+				exit ();
 			}
-			echo json_encode ( $result );
-			exit ();
 		}
+		else
+		{
+			$result['status'] = "failed";
+			$result['redirect_url'] = base_url();
+			echo json_encode($result);
+		}
+		
 	}
 
 	public function getsubcategory() {
