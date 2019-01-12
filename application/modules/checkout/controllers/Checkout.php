@@ -1197,7 +1197,7 @@ $item_merchant_price = $orginal_item_without_shipping  - (($orginal_item_without
 		$content = $this->load->view($this->folder . $this->module . "-order_email",$data,true);
 		
 		$this->load->library('myemail');
-		$link = base_url().'orders/view/'.encode_value($data['order_primary_id']);
+		$link = base_url().'orders/view/'.encode_value($record[0]['order_primary_id']);
 		$check_arr = array('[NAME]','[ORDER_DETAILS]','[ORDERLINK]');
 		$replace_arr = array( ucfirst(stripslashes($record[0]['customer_first_name'].' '.$record[0]['customer_last_name'])),$content,$link);
 		$email_template_id = '6';

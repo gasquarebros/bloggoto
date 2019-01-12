@@ -616,6 +616,9 @@ header.small_sticky{position:fixed;top:0;left:0;right:0;background:#fff;}
 .list_prod_section { height:auto !important; }
 .cate_left { display:none; }
 .filter_enable { display:block; }
+.img_part img {
+    height:auto !important;
+}
 }
 @media(max-width:667px){
 .head-bot-left .logo{max-width:170px;}
