@@ -91,3 +91,8 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('PASSWORD_LENGTH',6);
 define('PERMISSION_MODULE_ID',14);
 define('DEFAULT_FOLDER','devteam');
+
+
+define('CASHFREE_CLIENTID','CF3044TX451W9FQVIUE22');
+define('CASHFREE_SECRET','8106e85b99bf177a2d777ee6409d97d4bf745ebc');
+define('API_URL','https://ces-gamma.cashfree.com/ces/v1/'); 

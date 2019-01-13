@@ -30,6 +30,7 @@ class Myprofile extends CI_Controller {
 		$this->primary_key='post_id';
 		$this->product_primary_key = "product_primary_id";
 		$this->load->library('common');
+		$this->load->library(array('mcurl','curl'));
 		$this->load->helper('security');
 		$this->load->helper('products');
 	}
@@ -71,6 +72,15 @@ class Myprofile extends CI_Controller {
 			return true;
 		}
 	}
+
+	private function cashfree_curl($url, $post_data,$headers){
+		
+		$this->curl->create(API_URL . $url);
+		$this->curl->post($post_data);
+		$this->curl->option(CURLOPT_HTTPHEADER, $headers);
+		$curl_result = $this->curl->execute();
+		return $result = (json_decode($curl_result));
+	}
 	
 	
 	/* this method used to check login */
@@ -99,7 +109,7 @@ class Myprofile extends CI_Controller {
 		//echo "inn"; exit;
 		$data = $this->load_module_info ();	
 		//$info = $this->Mydb->get_record('customer_type,customer_photo',$this->customers,array('customer_id'=>$userid));
-		$info = $this->Mydb->get_record('customer_id,customer_type,customer_photo',$this->customers,array('customer_username'=>$userid));
+		$info = $this->Mydb->get_record('customer_id,customer_type,customer_photo,customer_email,customer_cashfree_id',$this->customers,array('customer_username'=>$userid));
 
 		if(!empty($info)) 
 		{
@@ -189,6 +199,7 @@ class Myprofile extends CI_Controller {
 					'business_establishment'=>post_value ( 'business_establishment' ),
 					'customer_notes'=>post_value ( 'customer_notes' ),
 					'address'=>post_value ( 'address' ),
+					'address_line2' => post_value('address_line2'),
 					'fax'=>post_value ( 'fax' ),
 					'business_model'=>post_value ( 'business_model' ),
 					'customer_prof_profession'=>(!empty($profession))?implode(',',$this->input->post( 'customer_prof_profession' )):'',
@@ -213,6 +224,76 @@ class Myprofile extends CI_Controller {
 					'customer_gst_no'=>post_value ( 'customer_gst_no' ),
 					'customer_tin_no'=>post_value ( 'customer_tin_no' ),					
 				);
+				$post_data = array();
+				$headers = array('Content-Type: application/json', "X-Client-Id : ".CASHFREE_CLIENTID,'X-Client-Secret :'.CASHFREE_SECRET);
+				$url = "authorize";
+				$result_token = $this->cashfree_curl($url,$post_data,$headers);	
+				if($info['customer_cashfree_id'] == '') {	
+					if($result_token->status == 'SUCCESS') {
+						if($result_token->data) {
+							$token = $result_token->data->token;
+							if($token !='') {
+								$add_vendeor_url = "addVendor";
+								$add_vendor_headers = array('Authorization: Bearer '.$token);
+								$add_vendor_post_data = json_encode(array(
+									"vendorId" => "BLOGGOTO".$info['customer_id'],
+									"name" => $userid,
+									"phone" => post_value ( 'customer_phone' ),
+									"email" => $info['customer_email'],
+									"bankAccount" => post_value ( 'customer_account_no' ),
+									"accountHolder" => post_value ( 'customer_account_holder_name' ),
+									"ifsc" => post_value ( 'customer_ifsc_code' ),
+									"address1" => post_value ( 'address' ),
+									"address2" => post_value('address_line2'),
+									"city" => get_city_name(post_value ( 'customer_city' )),
+									"state" => get_state_name(post_value ( 'customer_state' )),
+									"pincode" => post_value ( 'customer_postal_code' )
+								));
+								$add_vendor_result = $this->cashfree_curl($add_vendeor_url,$add_vendor_post_data,$add_vendor_headers);
+								if($add_vendor_result->status == 'ERROR') {
+									$result ['status'] = 'error';
+									$this->session->set_flashdata('admin_error',$add_vendor_result->message);
+									$result ['message'] = $add_vendor_result->message;
+									echo json_encode ( $result ); exit;
+								}
+								if($add_vendor_result->status == 'SUCCESS') {
+									$update_array['customer_cashfree_id'] = -"BLOGGOTO".$info['customer_id'];
+								}
+							}
+						}
+					}
+				} else {
+					if($result_token->status == 'SUCCESS') {
+						if($result_token->data) {
+							$token = $result_token->data->token;
+							if($token !='') {
+								$edit_vendeor_url = "editVendor/BLOGGOTO".$info['customer_id'];
+								$edit_vendor_headers = array('Authorization: Bearer '.$token);
+								$edit_vendor_post_data = json_encode(array(
+									"name" => $userid,
+									"phone" => post_value ( 'customer_phone' ),
+									"email" => $info['customer_email'],
+									"bankAccount" => post_value ( 'customer_account_no' ),
+									"accountHolder" => post_value ( 'customer_account_holder_name' ),
+									"ifsc" => post_value ( 'customer_ifsc_code' ),
+									"address1" => post_value ( 'address' ),
+									"address2" => post_value('address_line2'),
+									"city" => get_city_name(post_value ( 'customer_city' )),
+									"state" => get_state_name(post_value ( 'customer_state' )),
+									"pincode" => post_value ( 'customer_postal_code' )
+								));
+								$edit_vendor_result = $this->cashfree_curl($edit_vendeor_url,$edit_vendor_post_data,$edit_vendor_headers);
+								if($edit_vendor_result->status == 'ERROR') {
+									$result ['status'] = 'error';
+									$this->session->set_flashdata('admin_error',$edit_vendor_result->message);
+									$result ['message'] = $edit_vendor_result->message;
+									echo json_encode ( $result ); exit;
+								}
+								
+							}
+						}
+					}
+				}
 
 				$res=$this->Mydb->update ( $this->customers, array ('customer_id' => get_user_id() ), $update_array );
 				$blocked_lists=$this->input->post( 'blocked_lists' );

@@ -1524,7 +1524,7 @@ input[type="file"] {
 .boi_data {
     /*padding: 15px; */
 }
-.boi_data  #profile_form { padding:0px 20px; }
+.boi_data  #profile_form,.boi_data #profile_bus_form { padding:0px 20px; }
 .edit_profile { float:right; font-size:13px; cursor: pointer !important;}
 
 .boi_data .form_field label {

@@ -19,4 +19,8 @@ $lang['qa'] = 'Review';
 $lang['customer_photo'] = "Profile Picture";
 $lang['customer_notes'] = "Bio";
 $lang['post_comment_module_label'] = "Comment";
-
+$lang['customer_country'] = "Country";
+$lang['customer_first_name'] = "First Name";
+$lang['customer_phone'] = "Phone";
+$lang['customer_photo'] = "Photo";
+$lang['company_name'] = "Company Name";

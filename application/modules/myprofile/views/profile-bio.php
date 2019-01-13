@@ -1,5 +1,6 @@
 <?php if($info['customer_id'] == get_user_id()) { if($info['customer_type'] == 0) {  ?>
-				<?php echo form_open_multipart(base_url().'myprofile',' class="form-horizontal profile_edit_form" id="profile_form" style="display:none;"' );?>
+	<div class="alert_msg error" style="list-style:none; color:red; padding:0px 20px"></div>
+			<?php echo form_open_multipart(base_url().'myprofile',' class="form-horizontal profile_edit_form" id="profile_form" style="display:none;"' );?>
 					<h3>General</h3>
 					<div class="form_field">
 						<label>First Name</label>
@@ -29,6 +30,24 @@
 						<label>Birthday </label>
 						<div class="input_field">
 							<?php  echo form_input('customer_birthdate',($info['customer_birthdate'] !='' && $info['customer_birthdate'] !='0000-00-00' && $info['customer_birthdate'] != '1970-01-01')?date('d-m-Y',strtotime($info['customer_birthdate'])):'',' class="form-control birthday datepicker"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+
+					
+				
+					<div class="form_field">
+						<label>Address Line 1 </label>
+						<div class="input_field">
+						<?php  echo form_input('address',($info['address'] !='')?$info['address']:'',' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="form_field">
+						<label>Address Line 2</label>
+						<div class="input_field">
+						<?php  echo form_input('address_line2',($info['address_line2'] !='')?$info['address_line2']:'',' class="form-control"');?>
 						</div>
 						<div class="clear"></div>
 					</div>
@@ -69,6 +88,31 @@
 						</div>
 						<div class="clear"></div>
 					</div>
+
+					<div class="form_field">
+						<label>Bank Account Number</label>
+						<div class="input_field">
+							<?php  if($info['customer_account_no'] !='' && $info['customer_account_no'] != '0') { echo "<label>".stripslashes($info['customer_account_no'])."</label>"; echo "<input type='hidden' name='customer_account_no' value='".stripslashes($info['customer_account_no'])."'/>"; } else { echo form_input('customer_account_no',stripslashes($info['customer_account_no']),' class="form-control"'); } ?>
+						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="form_field">
+						<label>Bank Holder Name</label>
+						<div class="input_field">
+							<?php if($info['customer_account_holder_name'] !='') { echo "<label>".stripslashes($info['customer_account_holder_name'])."</label>"; echo "<input type='hidden' name='customer_account_holder_name' value='".stripslashes($info['customer_account_holder_name'])."'/>"; } else {  echo form_input('customer_account_holder_name',stripslashes($info['customer_account_holder_name']),' class="form-control"'); } ?>
+						</div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="form_field">
+						<label>IFSC Code</label>
+						<div class="input_field">
+							<?php if($info['customer_ifsc_code'] !='') { echo "<label>".stripslashes($info['customer_ifsc_code'])."</label>"; echo "<input type='hidden' name='customer_ifsc_code' value='".stripslashes($info['customer_ifsc_code'])."'/>"; } else {  echo form_input('customer_ifsc_code',stripslashes($info['customer_ifsc_code']),' class="form-control"'); } ?>
+						</div>
+						<div class="clear"></div>
+					</div>
+
 					<div class="form_field">
 						<label>GST No</label>
 						<div class="input_field">
@@ -402,6 +446,7 @@
 				?>	
 			
 <?php } if($info['customer_type'] == 1) { ?> 
+	<div class="alert_msg error" style="list-style:none; color:red; padding:0px 20px;"></div>
 				<?php echo form_open_multipart(base_url().'myprofile',' class="form-horizontal profile_edit_form" id="profile_bus_form" style="display:none;" ' );?>
 					<h3>General</h3>
 					<div class="form_field">
@@ -458,6 +503,22 @@
 						<label>Point of Contact</label>
 						<div class="input_field">
 							<?php  echo form_input('customer_last_name',stripslashes($info['customer_last_name']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="form_field">
+						<label>Address Line 1</label>
+						<div class="input_field">
+							<?php  echo form_input('address',stripslashes($info['address']),' class="form-control"');?>
+						</div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="form_field">
+						<label>Address Line 2</label>
+						<div class="input_field">
+							<?php  echo form_input('address_line2',stripslashes($info['address_line2']),' class="form-control"');?>
 						</div>
 						<div class="clear"></div>
 					</div>
@@ -551,21 +612,21 @@
 					<div class="form_field">
 						<label>Account Holder Name </label>
 						<div class="input_field">
-							<?php  echo form_input('customer_account_holder_name',stripslashes($info['customer_account_holder_name']),' class="form-control"');?>
+							<?php  if($info['customer_account_holder_name'] !='') { echo "<label>".stripslashes($info['customer_account_holder_name'])."</label>"; echo "<input type='hidden' name='customer_account_holder_name' value='".stripslashes($info['customer_account_holder_name'])."'/>";  } else { echo form_input('customer_account_holder_name',stripslashes($info['customer_account_holder_name']),' class="form-control"'); } ?>
 						</div>
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
 						<label>Account No</label>
 						<div class="input_field">
-							<?php  echo form_input('customer_account_no',stripslashes($info['customer_account_no']),' class="form-control"');?>
+							<?php  if($info['customer_account_no'] !='' && $info['customer_account_no'] !='0') { echo "<label>".stripslashes($info['customer_account_no'])."</label>"; echo "<input type='hidden' name='customer_account_no' value='".stripslashes($info['customer_account_no'])."'/>";  } else {  echo form_input('customer_account_no',stripslashes($info['customer_account_no']),' class="form-control"'); }?>
 						</div>
 						<div class="clear"></div>
 					</div>
 					<div class="form_field">
 						<label>Ifsc code</label>
 						<div class="input_field">
-							<?php  echo form_input('customer_ifsc_code',stripslashes($info['customer_ifsc_code']),' class="form-control"');?>
+							<?php if($info['customer_ifsc_code'] !='') { echo "<label>".stripslashes($info['customer_ifsc_code'])."</label>"; echo "<input type='hidden' name='customer_ifsc_code' value='".stripslashes($info['customer_ifsc_code'])."'/>"; } else { echo form_input('customer_ifsc_code',stripslashes($info['customer_ifsc_code']),' class="form-control"'); } ?>
 						</div>
 						<div class="clear"></div>
 					</div>					
@@ -732,6 +793,7 @@
 				echo form_hidden ( 'action', 'edit' );
 				echo form_close ();
 				?>	
+
 <?php } }  if($info['customer_type'] == 0) { ?> 
 	<div class="profile_display_section">
 	<h3>General <?php if($info['customer_id'] == get_user_id()) { ?><a class="edit_profile"><i class="fa fa-edit"></i>Edit Profile</a><?php } ?></h3>
@@ -771,6 +833,31 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
+	
+	<?php if($info['address']) {?>
+	<div class="form_field">
+		<label>Address Line 1 </label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>"; ?>
+				<?php  echo $info['address']; ?>
+			<?php echo "</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	
+	<?php if($info['address_line2']) {?>
+	<div class="form_field">
+		<label>Address Line 2 </label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>"; ?>
+				<?php  echo $info['address_line2']; ?>
+			<?php echo "</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+
 	<?php if($info['customer_country']) {?>
 	<div class="form_field">
 		<label>Country </label>
@@ -1221,6 +1308,24 @@
 		<div class="clear"></div>
 	</div>
 	<?php } ?>
+	<?php if($info['address']) {?>
+	<div class="form_field">
+		<label>Address Line 1</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".stripslashes($info['address'])."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
+	<?php if($info['address_line2']) {?>
+	<div class="form_field">
+		<label>Address Line 2</label>
+		<div class="input_field">
+			<?php echo "<label class='display_info'>".stripslashes($info['address_line2'])."</label>"; ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<?php } ?>
 	<?php if($info['customer_country']) {?>
 	<div class="form_field">
 		<label>Business Place Of Country </label>
@@ -1464,7 +1569,7 @@ $("#profile_form").validate(
 				} else if (response.status == "error") {
 					$(".alert_msg,.container_div").show();
 					$(".alert_msg").html(data.message);
-					$('.side-body').scrollView();
+					$('.alert_msg').scrollView();
 					
 				}
 
@@ -1521,7 +1626,7 @@ $("#profile_bus_form").validate(
 				} else if (response.status == "error") {
 					$(".alert_msg,.container_div").show();
 					$(".alert_msg").html(data.message);
-					$('.side-body').scrollView();
+					$('.alert_msg').scrollView();
 					
 				}
 
