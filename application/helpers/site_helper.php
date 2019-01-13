@@ -299,11 +299,20 @@ if (! function_exists ( 'get_cart_count' )){
 		$cart_count = 0;
 		$customer_id = ($CI->session->userdata('bg_user_id'))?$CI->session->userdata('bg_user_id'):'';
 		if($customer_id !='') {
-			$where =array("cart_customer_id"=>$customer_id);
-			$cart_count_details = $CI->Mydb->get_record('cart_total_items','cart_details',$where);	
+			$where =array("cart_details.cart_customer_id"=>$customer_id);
+			$join = '';
+			$join [0] ['select'] = "group_concat(cart_item_id) as cartitemids";
+			$join [0] ['table'] = 'cart_items';
+			$join [0] ['condition'] = "cart_item_cart_id = cart_details.cart_id";
+			$join [0] ['type'] = "INNER";
+			$order_by = array('cart_id'=>'ASC');
+			$cart_count_details = $CI->Mydb->get_all_records('cart_details.*','cart_details',$where,$limit='', $offset='', $order_by, $like='', $groupby=array('cart_details.cart_id'), $join );
+
+
+			//$cart_count_details = $CI->Mydb->get_record('cart_total_items','cart_details',$where);	
 			if(!empty($cart_count_details))
 			{
-				$cart_count = $cart_count_details['cart_total_items'];
+				$cart_count = $cart_count_details[0]['cart_total_items'];
 			}
 		}	
 		return $cart_count;		
