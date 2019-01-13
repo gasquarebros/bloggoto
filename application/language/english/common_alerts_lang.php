@@ -61,6 +61,7 @@ $lang['success_message_removepromotion1'] = "Successfully removed from Promotion
 $lang['success_message_addchief'] = "Product successfully add as Chef Recommended.";
 $lang['success_message_removechief'] = "Product successfully removed from Chef Recommended.";
 $lang['error_gst_required_products'] = "GST No. is required to create products";
+$lang['error_bank_account_required_products'] = "Bank Details are required to create products, Update the details in profile";
 /*use in busness pannel login and switch in client pannnel*/
 $lang['no_outlet_found'] = "Outlet";
 $lang['invalid_app_id'] = "Invalid App Id";

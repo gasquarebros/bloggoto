@@ -112,6 +112,10 @@
 						</div>
 						<div class="clear"></div>
 					</div>
+					<div class="form_field">
+						<span>(Bank Details such as Account Number, Holder Name and IFSC can be able to add it only once.)</span>
+						<div class="clear"></div>
+					</div>
 
 					<div class="form_field">
 						<label>GST No</label>
@@ -629,7 +633,12 @@
 							<?php if($info['customer_ifsc_code'] !='') { echo "<label>".stripslashes($info['customer_ifsc_code'])."</label>"; echo "<input type='hidden' name='customer_ifsc_code' value='".stripslashes($info['customer_ifsc_code'])."'/>"; } else { echo form_input('customer_ifsc_code',stripslashes($info['customer_ifsc_code']),' class="form-control"'); } ?>
 						</div>
 						<div class="clear"></div>
-					</div>					
+					</div>		
+					
+					<div class="form_field">
+						<span>(Bank Details such as Account Number, Holder Name and IFSC can be able to add it only once.)</span>
+						<div class="clear"></div>
+					</div>			
 					<div class="form_field">
 						<label>Pan No</label>
 						<div class="input_field">
