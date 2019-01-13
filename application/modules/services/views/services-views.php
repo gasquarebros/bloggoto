@@ -385,7 +385,16 @@ color: red;
 @media (max-width: 30em) {
   .listing-detail .detail-main-section .detail-cover-img .cover-shade h5 {
     font-size: 1rem;
-    margin-bottom: 4px; } }
+    margin-bottom: 4px; } 
+    .listing-detail .detail-main-section .detail-action  {
+    display: block !important;
+    padding-top: 10px !important;
+  }
+  .listing-detail .detail-main-section .detail-action .action {
+    margin-top: 11px;
+    margin-bottom: 10px;
+  }    
+    }
 .listing-detail .detail-main-section .detail-cover-img .cover-shade strong {
   color: white; }
 .listing-detail .detail-main-section .detail-cover-img .cover-shade strong i {
@@ -493,13 +502,23 @@ color: red;
   border-radius: inherit; }
 @media (max-width: 25em) {
   .service-container .provider-info .prov-info .provider-photo {
-    margin: 0 auto 0.6rem auto; } }
+    margin: 0 auto 0.6rem auto; } 
+  .listing-detail .detail-main-section .detail-action  {
+    display: block;
+    padding-top: 10px;
+  }
+  .listing-detail .detail-main-section .detail-action .action {
+    margin-top: 11px;
+    margin-bottom: 10px;
+  }    
+}
 .service-container .provider-info .prov-info h6 {
   margin-bottom: 0; }
 .service-container .provider-info .prov-info p {
   margin: 0; }
 .service-container .provider-info .prov-info p em {
   font-size: 0.8rem; }
+
 @media (max-width: 25em) {
   .service-container .provider-info .prov-info {
     margin-bottom: 1rem; } }
@@ -608,7 +627,8 @@ margin-right: 10px;
   margin-bottom: 2rem; }
 .service-sidebar .cont-info li {
   margin-bottom: 0.4rem; }
-.service-sidebar .cont-info li i {
+.service-sidebar .cont-inf
+o li i {
   display: inline-block;
   margin-right: 0.5rem; }
 .service-sidebar #map {

@@ -1022,7 +1022,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
 
         <div class="cancel-policy">
             <h6>Cancellation Policy</h6>
-            <p>We accept a Cancellation on your purchase before your item is processed or delivered. </p>
+            <p>Cancellation of the order only can be processed before merchant ships the product. Once product is shipped contact the merchant for any kind of product related queries.</p>
 
         </div>
 

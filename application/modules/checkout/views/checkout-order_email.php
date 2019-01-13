@@ -124,7 +124,7 @@
                                                         <?php if($record['merchantgst'] !='') { ?>
                                                         <tr><td>GST No.: <?php echo $record['merchantgst']; ?></td></tr>
                                                         <?php } ?>
-                                                        <tr><td>Merchant Name: <?php echo $record['item_merchant_name']; ?></td></tr>
+                                                        <tr><td>Merchant Name: <a href="<?php echo base_url().get_tag_username($record['item_merchant_id']); ?>"><?php echo $record['item_merchant_name']; ?></a></td></tr>
                                                         
                                                         <?php if($record['item_subproductid'] !='') { $item_modifiers = get_order_item_modifier($record['item_id']); 
                                                             if(!empty($item_modifiers)) { ?>
@@ -153,7 +153,7 @@
                                         </table>
                                     </td>
                                     <td style="padding:10px; font-size:15px; text-align: center; width:20%;text-transform:uppercase"><?php echo $record['item_qty']; ?></td>
-                                    <td style="padding:10px; font-size:15px; text-align: center; width:20%;"><?php echo show_price($record['item_total_amount']); ?></td>
+                                    <td style="padding:10px; font-size:15px; text-align: center; width:20%;"><span style="font-family: DejaVu Sans; sans-serif;">&#8377;</span><?php echo number_format($record['item_total_amount'],2); ?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="4" class="inner_table">
@@ -164,7 +164,7 @@
                                                         <p>DELIVERY TYPE: <strong><?php echo $record['shipping_name']; ?></strong></p>
                                                     </td>
                                                     <td class="ship_charge" style="text-align: left; width:30%;">
-                                                        <p>DELIVERY FEES: <strong><?php echo show_price($record['shipping_method_price']); ?></strong></p>
+                                                        <p>DELIVERY FEES: <strong><span style="font-family: DejaVu Sans; sans-serif;">&#8377;</span><?php echo number_format($record['shipping_method_price'],2); ?></strong></p>
                                                     </td>
                                                     <td class="select-box" style="text-align: center; width:30%;">
                                                         <table>
@@ -214,20 +214,20 @@
                                         <tr>
                                             <td style="width:60%"></td>
                                             <td style="font-size:14px;width:20%; color:#565656;padding:5px 10px; line-height: normal;text-align: left;">Subtotal</td>
-                                            <td style="font-size:14px;width:20%; color:#565656;padding:5px 10px; line-height: normal;text-align: right;" class="price"><?php echo show_price($records[0]['order_sub_total']); ?></td>
+                                            <td style="font-size:14px;width:20%; color:#565656;padding:5px 10px; line-height: normal;text-align: right;" class="price"><span style="font-family: DejaVu Sans; sans-serif;">&#8377;</span><?php echo number_format($records[0]['order_sub_total'],2); ?></td>
                                         </tr>
 
                                         <?php if($records[0]['order_delivery_charge'] > 0) { ?>
                                             <tr>
                                                 <td style="width:60%"></td>
                                                 <td style="font-size:14px;width:20%; color:#565656;padding:5px 10px; line-height: normal;text-align: left;">Delivery Charge</td>
-                                                <td style="font-size:14px;width:20%; color:#565656;padding:5px 10px; line-height: normal;text-align: right;" class="price"><?php echo show_price($records[0]['order_delivery_charge']); ?></td>
+                                                <td style="font-size:14px;width:20%; color:#565656;padding:5px 10px; line-height: normal;text-align: right;" class="price"><span style="font-family: DejaVu Sans; sans-serif;">&#8377;</span><?php echo number_format($records[0]['order_delivery_charge'],2); ?></td>
                                             </tr>
                                         <?php }	?>													
                                         <tr>
                                             <td style="width:60%"></td>
                                             <td style="width:20%; font-size:14px; color:#565656;padding:5px 10px; line-height: normal;text-align: left;">Grand Total</td>
-                                            <td style="width:20%; font-size: 14px; color:#565656;padding:5px 10px; line-height: normal;text-align: right;" class="price"><?php echo show_price($records[0]['order_total_amount']); ?></td>
+                                            <td style="width:20%; font-size: 14px; color:#565656;padding:5px 10px; line-height: normal;text-align: right;" class="price"><span style="font-family: DejaVu Sans; sans-serif;">&#8377;</span><?php echo number_format($records[0]['order_total_amount'],2); ?></td>
                                         </tr>
                                     </tbody>
                                 </table>
