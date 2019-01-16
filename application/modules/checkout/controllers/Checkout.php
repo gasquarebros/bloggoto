@@ -29,8 +29,10 @@ class Checkout extends CI_Controller {
 		$this->load->helper('products');
 
 		// razor payment sandbox credentials
-		$this->keyId = "rzp_test_Q6q1V4sCVacNNX";
-		$this->keySecret = "5voqCW6B3hgFxjwsVOSykbF7";
+		//$this->keyId = "rzp_test_Q6q1V4sCVacNNX";
+		//$this->keySecret = "5voqCW6B3hgFxjwsVOSykbF7";
+		$this->keyId = "rzp_live_WTq2SXYhBlP4s3";
+		$this->keySecret = "V12VthMj0xuIH7tGxIi3Ph96";
 		$this->displayCurrency = "INR";
 	}
 	
