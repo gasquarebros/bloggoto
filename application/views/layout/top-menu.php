@@ -16,6 +16,7 @@
 				<?php $CI = & get_instance (); if(get_user_id() == '') { ?>
 					<?php if($CI->uri->segment(1) == '' || $CI->uri->segment(1) == 'login' || $CI->uri->segment(1) == 'registration'){ ?>
 					<div class="signup_wrap">
+						<a href="<?php echo base_url().'login'; ?>" class="sign_btn">Sign In</a> | 
 						<a href="<?php echo base_url().'registration'; ?>" class="sign_btn">Sign Up</a>
 					</div>
 					<?php } else { ?>
