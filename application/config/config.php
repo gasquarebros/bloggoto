@@ -22,9 +22,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-
+if($_SERVER['HTTP_HOST']  == "localhost") {
 define('BASE_URL','http://localhost/bloggotoweb/' );
-
+} else {
+	define('BASE_URL','http://192.168.1.11:80/bloggotoweb/' );
+}
 $config['base_url'] = BASE_URL;
 $config['api_url'] = BASE_URL."api/";
 
@@ -457,9 +459,24 @@ $config['csrf_regenerate'] = FALSE;
 $config ['csrf_exclude_uris'] = array (
 	'api/insert',
 	'api/login',
+	'api/updateinfo',
+	'api/register',
+	'post/post_list',
+	'post/post_add',
+	'post/pdfupload',
+	'post/followers_list',
+	'post/postDelete',
+	'post/postReport',
+	'post/post_addcomments',
+	'post/deletecomment',
+	'post/uploadphoto',
+	'profile/viewblogs',
+	'profile/userFollow',
+	'profile/updateInfo',
 	'checkout/success',
 	'managebookings/success',
-	'checkout/failure'
+	'checkout/failure',
+	'post/testupload'
 );
 
 /*

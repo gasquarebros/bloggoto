@@ -83,6 +83,21 @@ public function product_modifiers_get($order_id="",$item_id="",$type,$field,$res
 	}
 	public function index()
 	{
+		//The file path of the file that we want to move.
+//In this case, we have a txt file called sample-file.txt
+$currentFilePath = FCPATH.'newfile.txt';
+
+//Where we want to move the file to. In this example, we
+//are moving the .txt file from directory_a to directory_b
+$newFilePath = FCPATH.'upload_photo/sample-file.txt';
+
+//Move the file using PHP's rename function.
+$fileMoved = rename($currentFilePath, $newFilePath);
+
+if($fileMoved){
+    echo 'Success!';
+}
+
 		 $this->load->view('welcome_message');
 	}
 	

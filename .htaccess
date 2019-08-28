@@ -1,3 +1,8 @@
+Header always set Access-Control-Allow-Origin "*"
+Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+Header always set Access-Control-Max-Age "1000"
+Header always set Access-Control-Allow-Headers "x-requested-with, Content-Type, origin, authorization, accept, client-security-token"
+ 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -9,3 +14,8 @@ php_value upload_max_filesize 3000M
 <IfModule mod_headers.c>
 Header always set Access-Control-Allow-Origin "*"                   
 </IfModule>
+
+# Apache config
+<FilesMatch ".(eot|ttf|otf|woff)">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>

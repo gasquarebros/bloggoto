@@ -368,7 +368,7 @@ class Myprofile extends CI_Controller {
 		}
 
 		$data['suggestions'] = $suggestions;
-
+		
 		$this->layout->display_site ( $this->folder . $this->module . "-index", $data );
 	}
 	

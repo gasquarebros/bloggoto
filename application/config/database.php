@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 
-$active_group = $active_group =  ($_SERVER['HTTP_HOST']  == "localhost")?  'default' : 'live'  ;
+$active_group = $active_group =  ($_SERVER['HTTP_HOST']  == "localhost")?  'default' : 'default'  ;
 
 $query_builder = TRUE;
 

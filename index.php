@@ -1,6 +1,11 @@
 <?php
 date_default_timezone_set('Asia/Singapore'); 
 header('Access-Control-Allow-Origin: *');
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+	header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+	header('Access-Control-Allow-Credentials: true');
+	header('Access-Control-Max-Age: 86400');    // cache for 1 day
+}
 /**
  * CodeIgniter
  *
@@ -77,7 +82,7 @@ else
 switch (ENVIRONMENT)
 {
 	case 'development':
-		error_reporting(-1);
+		//error_reporting(-1);
 		ini_set('display_errors', 1);
 	break;
 

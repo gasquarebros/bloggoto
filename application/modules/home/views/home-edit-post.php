@@ -27,7 +27,7 @@ var module_action="updatepost";
 							foreach($categories as $catkey=>$cat) 
 							{  
 						?>				
-								<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class="<?php if($result['blog_cat_name'] == $catkey) echo 'active'; ?>"><?php echo $cat; ?></a></li>
+								<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class="<?php if($result['*'] == $catkey) echo 'active'; ?>"><?php echo $cat; ?></a></li>
 					<?php   } 
 						} ?>
 					<?php /*<li><a data-section="Fashion" href="javascript:void(0)" class="<?php echo ($result['blog_cat_name'] == 'Fashion') ? 'active': '';?>">Fashion</a></li>
