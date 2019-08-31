@@ -20,8 +20,9 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                         <div class="search-fields">
                           <input type="text" name="search_field" placeholder="Search with title..." value="" id="search_field" />
                           <div class="select-fields">
+                            <div class="other_filters" style="display: none;" >
                               <div class="sel service_category">
-                                  <select name="category" id="service_category" onchange="get_service_subcategory()" title="Services Category" class="wide" >
+                                  <select name="category" id="service_category" onchange="get_service_subcategory()" title="Services Category" class="wide selectChosen" >
                                         <option value="" >Select Category</option> 
                                       <?php foreach($service_category as $key=>$cat){ ?>
                                         <option value="<?php echo $key; ?>" ><?php echo $cat; ?></option> 
@@ -29,7 +30,7 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                                   </select>
                               </div>
                               <div class="sel service_subcategory">
-                                  <select title="Subcategory" name="subcategory" class="wide" >
+                                  <select title="Subcategory" name="subcategory" class="wide selectChosen" >
                                       <option value="" >Select Subcategory</option> 
                                       <?php foreach($service_subcategory as $skey=>$subcat){ ?>
                                         <option value="<?php echo $skey; ?>" ><?php echo $subcat; ?></option> 
@@ -49,9 +50,13 @@ echo load_lib_css(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScr
                               </div>
                               <div class="sel service_city">
                                   <?php echo get_all_cities(); ?>
-                                  
                               </div>
-                              <button type="submit" class="ui-btn dark-blue">Start Now</button>
+                          </div>    
+                              <div class="action">
+                                <button type="submit" class="ui-btn dark-blue">Start Now</button>
+                                <span class="morefilters">Show more filter</span>
+                                <span class="lessfilters" style="display:none">hide more filters</span>
+                              </div>
                           </div>
                         </div>
                     </div>
@@ -92,11 +97,30 @@ echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScro
         $('.service_availability select').multipleSelect({placeholder: $(this).attr('data-placeholder')});
     });
 
+    $('.morefilters').click(function(){
+      $('.other_filters').show();
+      $('.lessfilters').show();
+      $('.morefilters').hide();
+      $('.selectChosen').chosen();
+      $('.service_city select').chosen();
+      $('.service_availability select').chosen('destroy');
+      $('.service_availability select').multipleSelect({placeholder: $(this).attr('data-placeholder')});
+    });
+
+    $('.lessfilters').click(function(){
+      $('.other_filters').hide();
+      $('.lessfilters').hide();
+      $('.morefilters').show();
+    });
+
+
     
 </script>
 
 <style>
-
+.chosen-container {
+  width: 155px !important;
+}
 .old-price {
     color: black;
     font-size: 17px !important;
@@ -105,7 +129,7 @@ echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScro
 }
 
 .new-price {
-    color: black;
+    color: red;
     font-size: 17px !important;
     font-family: 'proxima_nova_rgbold';
     margin: 0px
@@ -240,6 +264,14 @@ echo load_lib_js(array('malihu-custom-scrollbar-plugin-master/jquery.mCustomScro
   padding: 1rem;
   box-shadow: 0 2px 15px -4px #394383;
   border-radius: 2px; }
+  .other_filters {
+    width: 100%;
+    /* margin-top: 3.5rem; */
+    display: flex;
+    background: white;
+    padding: 1rem;
+    border-radius: 2px;
+  }
 .select-fields .sel {
   flex-basis: 43%; padding: 6px 3px;}
 .select-fields .sel .wide {

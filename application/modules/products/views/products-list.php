@@ -216,7 +216,8 @@ ul {
     -webkit-transition: all 0.3s ease;
     padding: 5px;
     border: none;
-    cursor: pointer
+    cursor: pointer;
+    background: #000;
 }
 .cate_right .search-operate-box button[type="submit"]:hover {
     background: url(media/common/search-icon.png) no-repeat scroll center center #2596b1;
@@ -474,7 +475,7 @@ ul {
 }
 
 .list_prod_section .button_bar .common_but:hover {
-    border: 1px solid #25c0d5;
+    border: 1px solid #53a318;
     color: #25c0d5;
     background-color: #fff
 }
@@ -672,7 +673,7 @@ ul {
 }
 
 .flash_sale_deals .price-part .new-price {
-    color: #53a318;
+    color: red;
     font-size: 15px;
     font-family: 'proxima_nova_rgbold';
     margin: 0px
@@ -684,17 +685,18 @@ ul {
 }
 
 .flash_sale_deals ul li .button_bar {
-    clear: both
+    clear: both;
+    opacity: 1;
 }
 
 .flash_sale_deals ul li .button_bar .common_but {
-    background-color: #53a318
+    background-color: #000
 }
 
 .flash_sale_deals ul li .button_bar .common_but:hover {
     border: 1px solid #53a318;
     color: #53a318;
-    background-color: #fff
+    background-color: #fff;
 }
 
 .flash_sale_deals ul li .button_bar .common_but:hover span {

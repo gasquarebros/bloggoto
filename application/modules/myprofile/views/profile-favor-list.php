@@ -31,8 +31,8 @@ var module_action="addpost";
 					<li><a data-section="life style" href="javascript:void(0)" >Lifestyle</a></li>
 					<li><a data-section="Paparazzi" href="javascript:void(0)" >Paparazzi</a></li>
 					<li><a data-section="Others" href="javascript:void(0)" >Others</a></li>
-					<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
-					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host Services</a></li>
+					<?php /*<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
+					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host Services</a></li>*/ ?>
 				</ul>
 				<?php /*
 				<ul class="fr other_options">

@@ -1,8 +1,8 @@
 
 
-<link href="<?php echo load_lib()?>bootstrap-datepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+<!--<link href="<?php echo load_lib()?>bootstrap-datepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">-->
 <link rel="stylesheet" href="<?php echo load_lib()?>timepicker-master/jquery-ui-1.10.0.custom.min.css" type="text/css" />
-<script type="text/javascript" src="<?php echo load_lib()?>bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<!--<script type="text/javascript" src="<?php echo load_lib()?>bootstrap-datepicker/js/bootstrap-datepicker.js"></script>-->
 <script type="text/javascript" src="<?php echo skin_url()?>js/products_manage.js"></script>
 <link rel="stylesheet" href="<?php echo load_lib()?>/theme/css/custom.css">
 <style>
@@ -278,7 +278,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 									<div class="form-group" id="">
 										<label for="product_settings_type" class="col-sm-2 control-label"><?php echo get_label('product_settings').get_required().add_tooltip('product_settings');?></label>
 										<div class="col-sm-8">
-											<div class="input_box"><?php  echo form_dropdown('product_settings',array('simple'=>'Simple Product','attribute'=>'Attribute Product'),$records['product_type'],'class="form-control required" onchange="get_attribute_enabled()" id="product_settings_type"' );?></div>
+											<div class="input_box"><?php  echo form_dropdown('product_settings',array('simple'=>'Single Product','attribute'=>'Variant Product'),$records['product_type'],'class="form-control required" onchange="get_attribute_enabled()" id="product_settings_type"' );?></div>
 										</div>
 									</div>
 									
@@ -292,7 +292,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 									
 									<div class="form-group  associate_product_tab" <?php if($records['product_type'] !='attribute') { ?>style="display:none" <?php } ?>>
 										<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('category_modifier').add_tooltip('modifier_enabled');?></label>
-										<div class="col-sm-8"><div class="input_box modi_div"><?php  echo get_product_modifier(array('pro_modifier_status' => 'A','pro_modifier_category_id'=>$records['product_category_id']),$assigned_modifiers,'class="form-control search_select " onchange="get_attribute_enabled()" id="product_modifier" ',' multiple="multiple" data-placeholder="'.get_label('product_modifier_select').'" ','pro_modifier_id');?></div></div>
+										<div class="col-sm-8"><div class="input_box modi_div"><?php  echo get_product_modifier(array('pro_modifier_status' => 'A','pro_modifier_category_id'=>$records['product_category_id']),$assigned_modifiers,'class="form-control search_select big_select" onchange="get_attribute_enabled()" id="product_modifier" ',' multiple="multiple" data-placeholder="'.get_label('product_modifier_select').'" ','pro_modifier_id');?></div></div>
 									</div>
 								</div>
 								
@@ -313,7 +313,15 @@ var commission_price = '<?php echo $commission_price; ?>';
 											</div>
 										</div>
 
+										
+										
+										
 										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price').add_tooltip('product_spl_price');?><br><span> (Update price Incl. of all taxes)</span></label>
+											<div class="col-sm-8"><div class="input_box"><input type="number"  value="<?php echo  output_integer($records['product_special_price']);?>" class="form-control " name="product_spl_price" onkeypress="return isFloat(event)"  id="product_spl_price"> </div></div>
+										</div>
+
+										<div class="form-group commission_price_section" <?php echo ($records['product_special_price'] !='' && $records['product_special_price'] > 0 && $records['product_special_price'] < $records['product_price']) ? "style='display:none'": ''; ?> >
 											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price_after_commission').add_tooltip('product_price');?></label>
 											<div class="col-sm-8">
 												<div class="input_box commission_price">
@@ -322,13 +330,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 											</div>
 										</div>
 										
-										
-										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_spl_price').add_tooltip('product_spl_price');?><br><span> (Update price Incl. of all taxes)</span></label>
-											<div class="col-sm-8"><div class="input_box"><input type="number"  value="<?php echo  output_integer($records['product_special_price']);?>" class="form-control " name="product_spl_price" onkeypress="return isFloat(event)"  id="product_spl_price"> </div></div>
-										</div>
-
-										<div class="form-group">
+										<div class="form-group commission_special_section" <?php echo ($records['product_special_price'] !='' && $records['product_special_price'] > 0 &&  $records['product_special_price'] < $records['product_price']) ? "": "style='display:none'"; ?>>
 											<label for="inputEmail3" class="col-sm-2 control-label"><?php echo get_label('product_price_after_commission').add_tooltip('product_price');?></label>
 											<div class="col-sm-8">
 												<div class="input_box commission_special_price"><?php echo $records['product_special_price'] - (($records['product_special_price'] * $commission_price)/100); ?>
@@ -387,7 +389,7 @@ var commission_price = '<?php echo $commission_price; ?>';
 													<input name="ProductShipping[prod_ass_ship_method_uncheck][0]" value="0" class="shipping_free_unassign" type="hidden">
 													<label>
 														<input class="display shipping_free_assign" name="ProductShipping[prod_ass_ship_method_is_combined][0]" value="1" type="checkbox" <?php if($shipping['prod_ass_ship_method_is_combined'] == 1) { echo "checked='checked'"; } ?>> 
-														Is Combined
+														Combine with Selling price
 													</label>
 												</td>
 												<td class="text-center vcenter" style="width: 90px; verti">
@@ -668,15 +670,51 @@ jQuery("#dynamic-form").on("click", ".remove-shipping", function(e) {
 	}
 
 jQuery('body').on('blur','#product_price', function() {
+	var orginal_price = parseFloat(jQuery('#product_price').val());
+	var special_price = parseFloat(jQuery('#product_spl_price').val());
+	if(special_price != '' && special_price < orginal_price) {
+		var commision_after = special_price - ((parseFloat(special_price) * parseFloat(commission_price) )/ 100);
+		jQuery('.commission_special_section').show();
+		jQuery('.commission_special_price').html(commision_after);
+		jQuery('.commission_price_section').hide();
+		var commision_price_after = orginal_price - ((parseFloat(orginal_price) * parseFloat(commission_price) )/ 100);
+		jQuery('.commission_price').html(commision_price_after);
+	} else {
+		var commision_after = orginal_price - ((parseFloat(orginal_price) * parseFloat(commission_price) )/ 100);
+		jQuery('.commission_price_section').show();
+		jQuery('.commission_special_section').hide();
+		jQuery('.commission_price').html(commision_after);
+		var commision_price_after = special_price - ((parseFloat(special_price) * parseFloat(commission_price) )/ 100);
+		jQuery('.commission_special_price').html(commision_price_after);
+	}
+	/*
     var orginal_price = jQuery(this).val();
     var commision_after = orginal_price - ((parseFloat(orginal_price) * parseFloat(commission_price) )/ 100);
-    jQuery('.commission_price').html(commision_after);
+    jQuery('.commission_price').html(commision_after);*/
 });
 
 jQuery('body').on('blur','#product_spl_price', function() {
+	var orginal_price = jQuery('#product_price').val();
+	var special_price = jQuery('#product_spl_price').val();
+	if(parseFloat(special_price) != '' && parseFloat(special_price) < parseFloat(orginal_price)) {
+		var commision_after = special_price - ((parseFloat(special_price) * parseFloat(commission_price) )/ 100);
+		jQuery('.commission_special_section').show();
+		jQuery('.commission_special_price').html(commision_after);
+		jQuery('.commission_price_section').hide();
+		var commision_price_after = orginal_price - ((parseFloat(orginal_price) * parseFloat(commission_price) )/ 100);
+		jQuery('.commission_price').html(commision_price_after);
+	} else {
+		var commision_after = orginal_price - ((parseFloat(orginal_price) * parseFloat(commission_price) )/ 100);
+		jQuery('.commission_price_section').show();
+		jQuery('.commission_special_section').hide();
+		jQuery('.commission_price').html(commision_after);
+		var commision_price_after = special_price - ((parseFloat(special_price) * parseFloat(commission_price) )/ 100);
+		jQuery('.commission_special_price').html(commision_price_after);
+	}
+	/*
     var orginal_special_price = jQuery(this).val();
     var commision_after = orginal_special_price - ((parseFloat(orginal_special_price) * parseFloat(commission_price) )/ 100);
-    jQuery('.commission_special_price').html(commision_after);
+    jQuery('.commission_special_price').html(commision_after);*/
 });
 </script>
 <?php /*	
@@ -780,3 +818,5 @@ table { width:100%; text-align:center; }
 .brows { border:0px; }
 .shipping_method, .associate_product_tab { overflow-x:auto; max-width: 100%; }
 </style>*/ ?>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

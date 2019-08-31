@@ -5,6 +5,11 @@ var module_action="addpost";
 .inner_content {
     padding: 50px 0;
 }
+.disable_cart {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: none;
+}
 .common_but {
     position: relative;
     margin: 0px auto;
@@ -15,7 +20,7 @@ var module_action="addpost";
     z-index: 8;
     transition: all 0.1s ease;
     -webkit-transition: all 0.1s ease;
-    background: #25c0d5;
+    background: #000;
     text-transform: uppercase;
     padding: 7px 10px 6px 10px;
     border-radius: 5px;
@@ -27,7 +32,6 @@ var module_action="addpost";
 .common_but:hover,
 .common_but:focus {
     background: #2a2a2a;
-    color: #fff !important
 }
 
 .sale_banner {
@@ -88,8 +92,14 @@ var module_action="addpost";
 .shopping_cart > p .small_desc a {
     transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
-    color: #787878
+    color: #787878;
+    font-size: 17px;
+    text-decoration: underline;
 }
+.shopping_cart > p .small_desc a i {
+    text-decoration: none;
+}
+
 
 .shopping_cart > p .small_desc a:hover {
     color: #53a318
@@ -336,15 +346,17 @@ var module_action="addpost";
     text-decoration: line-through
 }
 
-.shopping_cart_right .price-part .price .new-price {
-    font-size: 26px;
+.shopping_cart_right .price-part .new-price {
+    font-size: 18px;
     font-family: 'proxima_nova_rgbold';
-    color: #53a318
+    color: red;
+    margin-left: 10px;
 }
 
 .shopping_cart_right .price-part .old-price,
-.shopping_cart_right .price-part .price .new-price {
-    text-transform: uppercase
+.shopping_cart_right .price-part .new-price {
+    text-transform: uppercase;
+    float: left;
 }
 
 .shopping_cart_right .price-part .offer {
@@ -442,14 +454,17 @@ var module_action="addpost";
     display: block;
     font: 18px 'proxima_nova_rgbold';
     padding: 10px 10px;
-    background: #53a318;
+    background: #000;
+    color:#fff;
     max-width: 285px;
     margin: 0;
     cursor: pointer
 }
 
 .shopping_cart_right .common_but:hover {
-    background: #2a2a2a
+    background: #FFF;
+    color:#53a318;
+    border: 1px solid #53a318;
 }
 
 .shopping_cart_right #makefollow {

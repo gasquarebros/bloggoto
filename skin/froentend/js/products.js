@@ -530,6 +530,19 @@ function get_duplicate(arr)
 								jQuery('.subproduct_section_duplicate .new-price .priceval').html(product.product_price);
 								
 							}
+
+							if(product.product_qty <= 0) {
+								$('.buy_now_btn').removeClass('add_cart');
+								$('.buy_now_btn').addClass('disable_cart');
+							} else {
+								if(product.logged_in == true) {
+									$('.buy_now_btn').addClass('add_cart');
+									$('.buy_now_btn').removeClass('disable_cart');
+								} else {
+									$('.buy_now_btn').removeClass('disable_cart');
+								}
+							}
+
 							jQuery('.add_cart').removeAttr('disabled');
 							jQuery('.add_cart').css('opacity',1);
 							jQuery('#subproduct').val(product.id);

@@ -35,7 +35,7 @@
 				<?php } ?>
 				<form class="header_form" action="<?php echo base_url().'search'; ?>">
 					<div class="search_box">
-                        <input type="text" id="topic_title" name="term" class="ui-autocomplete-input text_search" placeholder="Search topics & blogger" />
+                        <input type="text" id="topic_title" name="term" class="ui-autocomplete-input text_search" placeholder="Search topics OR blogger" />
                         <input type="submit" class="btn_search" value="" />
 					</div>
 				</form>

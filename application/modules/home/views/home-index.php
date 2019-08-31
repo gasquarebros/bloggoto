@@ -44,8 +44,8 @@ var module_action="addpost";
 					<!-- <li class="fr other_options">
 						
 					</li>	 -->
-					<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
-					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host Services</a></li>
+					<?php /*<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
+					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host Services</a></li>*/ ?>
 				</ul>
 				<?php /*
 				<ul class="fr other_options">

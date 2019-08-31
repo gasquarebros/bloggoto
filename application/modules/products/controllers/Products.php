@@ -329,6 +329,11 @@ class Products extends CI_Controller {
 				$status = $combinations['status'];
 				$response = $combinations['data'][0];
 			}
+
+			$response['logged_in'] = false;
+			if(get_user_id() !='') { 
+				$response['logged_in'] = true;
+			}
 			echo json_encode ( array (
 					'status' => $status,
 					'response' => $response,

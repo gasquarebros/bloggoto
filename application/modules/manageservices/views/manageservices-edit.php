@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="<?php echo load_lib()?>timepicker-master/jquery-ui-1.10.0.custom.min.css" type="text/css" />
 <script type="text/javascript" src="<?php echo skin_url()?>js/products_manage.js"></script>
 <link rel="stylesheet" href="<?php echo load_lib()?>/theme/css/custom.css">
+<link href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
 <style>
 header { margin:0px; }
 .flat-blue .card { display:inline-block; padding:6px 0; width:100%; }

@@ -12532,6 +12532,9 @@ body.checkout .ui-widget.ui-widget-content{
     text-align:right;
     width:100%
 }
+.error {
+    color: red;
+}
 </style>
 
 <!-- merchant part-->

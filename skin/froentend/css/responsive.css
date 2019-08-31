@@ -109,6 +109,12 @@ position: relative; overflow: visible !important; }
     .newsfeed_menu li a { font-size: 14px; padding: 8px; }
     .text_profile_menu { display:none; }
     .icon_profile_menu { display:block; }
+    .active_icon { display: none; }
+    .newsfeed_menu .active .icon_profile_menu { display:none !important;}
+    .newsfeed_menu .active .active_icon { display: block !important; }
+    .newsfeed_menu .active {
+        background: #000 !important;
+    }
     .write_img, .write_text { float: none; width: 100%; text-align: center; }
     .toggle_feed { float: right; }
     .feed_name h4, .feed_body_text h4 { font-size: 20px; margin: 0; }
@@ -201,7 +207,7 @@ position: relative; overflow: visible !important; }
 	.single_feed { margin-bottom: 3px; }
 	.newsfeed_wrap .form_field label { margin-bottom: 0px !important; }
 	.display_info { margin: 0px !important; }
-	.followers ul { margin: 0px !important; float: left;}
+	.followers ul { margin: 10px 0px !important; float: left;}
 	.profile_wrap { padding:0px; margin-bottom: 0px;overflow:hidden }
 	.followers ul li { width:auto !important; }
 	.newsfeed_menu { margin:0px; }
@@ -344,6 +350,9 @@ position: relative; overflow: visible !important; }
         margin: 0 !important;
         text-align: center !important;
     }
+    .profile_active_details .followers {
+        margin-top: 15px;
+    }
     .share_n_text {
         display:none;
         margin-left:0px !important;
@@ -360,6 +369,9 @@ position: relative; overflow: visible !important; }
         list-style: none !important;
         display: inline-block !important;
         float: none;
+    }
+    .profile_active_details .followers {
+        margin-top: 15px;
     }
     .profile_active_details .followers ul {
         margin: 0px !important;

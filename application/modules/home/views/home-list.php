@@ -32,7 +32,8 @@ var module_action="addpost";
                 <?php /*<li><a data-type="must_see" href="javascript:void(0)">Must See</a></li>*/ ?>
             </ul>
             <?php /* <a href="javascript:void(0)" class="more_items"><i class="fa fa-angle-double-down" aria-hidden="true"></i></a>*/ ?>
-        </div>
+		</div>
+		<?php /*
         <div class="comment_section">
             <div class="cmt_img">
 				<?php if($this->session->userdata('customer_username')) {
@@ -59,7 +60,34 @@ var module_action="addpost";
                     </div>
                 </form>
             </div>
-        </div>
+		</div>
+		*/ ?>
+		<div class="comment_section">
+			<div class="cmt_img">
+				<?php if($this->session->userdata('customer_username')) {
+					$loggin_url = base_url().$this->session->userdata('customer_username');
+				} else { 
+					$loggin_url = "javascript:void(0)";
+				} ?>
+                <a href="<?php echo $loggin_url; ?>" class="img_lft">
+				<?php if($this->session->userdata('bg_user_profile_picture')) { ?>
+					<img style="width:50px" class="img-circle" src="<?php echo $this->session->userdata('bg_user_profile_picture'); ?>" alt="man" />
+				<?php } else {?>
+                    <img src="<?php echo skin_url(); ?>images/man.png" alt="man" />
+				<?php } ?>	
+                </a>
+                <h4><?php if(get_user_id() == '') { echo "Hi Guest"; } else { echo "Hi ".get_user_name().","; } ?></h4>
+			</div>
+			<div class="cmt_form">
+				<form>
+                    <div class="action_field">
+						<a  <?php if(get_user_id() == '') { ?> class="popup-modals available_service_action" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal available_service_action" href="#test-modal" <?php } ?>><img class="available_section" src="<?php echo skin_url().'images/post_wall.png'; ?>"></a>
+						<a  <?php if(get_user_id() == '') { ?> class="mrgt available_service_action" href="<?php echo base_url(); ?>" <?php } else { ?> class="mrgt available_service_action" href="<?php echo base_url().'manageproducts/add'; ?>" <?php } ?>><img class="available_section" src="<?php echo skin_url().'images/sell_products.png'; ?>"></a>
+						<a  <?php if(get_user_id() == '') { ?> class="mrgt available_service_action" href="<?php echo base_url(); ?>" <?php } else { ?> class="mrgt available_service_action" href="<?php echo base_url().'manageservices/add'; ?>" <?php } ?>><img class="available_section" src="<?php echo skin_url().'images/host_services.png'; ?>"></a>
+                    </div>
+                </form>
+			</div>
+		</div>
         <div class="sort_by">
             <?php echo form_open('',' id="common_search" class="form-inline"');?>
                 <div class="form_field">
@@ -112,8 +140,8 @@ var module_action="addpost";
 						?>						
 						<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class="<?php if($i==0) echo 'active'; ?>"><?php echo $cat; ?></a></li>
 					<?php $i++; } } ?>
-					<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
-					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host Services</a></li>
+					<?php /*<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
+					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host Services</a></li> */ ?>
 					
 				</ul>
 				<?php /*

@@ -207,8 +207,8 @@ class Common {
 			foreach ( $records as $image_name ) {
 				
 				if ($image_name[$field] != "") {
-					$user_folder = get_company_folder ();
-				  $image_path = FCPATH . "media/" . $user_folder . "/" . $folder_name . "/" . $image_name[$field];				
+					//$user_folder = get_company_folder ();
+				  $image_path = FCPATH . "media/"  . $folder_name . "/" . $image_name[$field];				
 					if (file_exists ( $image_path )) {
 						@unlink ( $image_path );
 					}

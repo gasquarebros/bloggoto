@@ -136,19 +136,22 @@ var module_action="addpost";
 				
 				<li>
 					<a data-section="blogs" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="active profile_section">
-						<img src="<?php echo skin_url().'images/blogging.png'?>" class="icon_profile_menu">	
+						<img src="<?php echo skin_url().'images/blogging.png'?>" class="icon_profile_menu">
+						<img src="<?php echo skin_url().'images/blogging_white.png'?>" class="active_icon">	
 						<span class="text_profile_menu">BLOGS / STORIES</span>
 					</a>
 				</li>
 				<li>
 					<a data-section="pictures" href="<?php echo base_url()."myprofile/viewblogs/".encode_value($info['customer_id']); ?>" class="profile_section">
 						<img src="<?php echo skin_url().'images/Gallery.png'?>" class="icon_profile_menu">	
+						<img src="<?php echo skin_url().'images/Gallery_white.png'?>" class="active_icon">	
 						<span class="text_profile_menu">Gallery</span>
 					</a>
 				</li>
 				<li>
 					<a data-section="tags" href="<?php echo base_url()."myprofile/viewtags/".encode_value($info['customer_id']); ?>" class="profile_section">
 						<img src="<?php echo skin_url().'images/bookmark.png'?>" class="icon_profile_menu">	
+						<img src="<?php echo skin_url().'images/bookmark_white.png'?>" class="active_icon">	
 						<span class="text_profile_menu">TAGS</span>
 					</a>
 				</li>
@@ -156,6 +159,7 @@ var module_action="addpost";
 					<li>
 						<a data-section="bio" href="<?php echo base_url()."myprofile/viewbio"; ?>" class="profile_section">
 							<img src="<?php echo skin_url().'images/user.png'?>" class="icon_profile_menu">	
+							<img src="<?php echo skin_url().'images/user_white.png'?>" class="active_icon">	
 							<span class="text_profile_menu">Profile</span>
 						</a>
 					</li>
@@ -163,6 +167,7 @@ var module_action="addpost";
 					<li>
 						<a data-section="bio" href="<?php echo base_url()."myprofile/viewbio/".encode_value($info['customer_id']); ?>" class=" profile_section">
 							<img src="<?php echo skin_url().'images/user.png'?>" class="icon_profile_menu">	
+							<img src="<?php echo skin_url().'images/user_white.png'?>" class="active_icon">	
 							<span class="text_profile_menu">Profile</span>
 						</a>
 					</li>
@@ -171,13 +176,15 @@ var module_action="addpost";
 					<li>
 						<a data-section="products" href="<?php echo base_url()."myprofile/products/".encode_value($info['customer_id']); ?>" class=" profile_section product_section">
 							<img src="<?php echo skin_url().'images/product.png'?>" class="icon_profile_menu">	
+							<img src="<?php echo skin_url().'images/product_white.png'?>" class="active_icon">	
 							<span class="text_profile_menu">Products</span>
 						</a>
 					</li>
 				<?php /*}*/ ?>
 				<li>
 					<a data-section="services" href="<?php echo base_url()."myprofile/services/".encode_value($info['customer_id']); ?>" class=" profile_section service_section">
-						<img src="<?php echo skin_url().'images/Service.png'?>" class="icon_profile_menu">	
+						<img src="<?php echo skin_url().'images/Service.png'?>" class="icon_profile_menu">
+						<img src="<?php echo skin_url().'images/Service_white.png'?>" class="active_icon">	
 						<span class="text_profile_menu">Services</span>
 					</a>
 				</li>
@@ -216,8 +223,8 @@ var module_action="addpost";
 					?>						
 						<li><a data-section="<?php echo $catkey; ?>" href="javascript:void(0)" class="<?php if($i==0) echo 'active'; ?>"><?php echo $cat; ?></a></li>
 					<?php $i++; } } ?>
-					<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
-					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host Services</a></li>
+					<?php /*<li class="ecomm-prod"><a href="<?php echo base_url().'manageproducts/add'; ?>">Sell Products</a></li>
+					<li class="serv-sec"><a href="<?php echo base_url().'manageservices/add'; ?>">Host Services</a></li>*/ ?>
 				</ul>
 				<?php /*
 				<ul class="fr other_options">

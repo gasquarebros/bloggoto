@@ -28,7 +28,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans';
+    font-family: Arial;
     background: #f4f5f9;
     color: #222222;
     line-height: normal;
@@ -52,7 +52,7 @@ ul {
 ul li {
     font-size: 18px;
     /*    line-height: 24px;*/
-    font-family: 'Open Sans';
+    font-family: Arial;
 }
 
 h1,
@@ -113,7 +113,7 @@ img {
 label,
 .light-weight {
     font-size: 14px;
-    font-family: 'Open Sans';
+    font-family: Arial;
     margin: 0 0 5px;
     display: inline-block;
     vertical-align: middle;
@@ -137,6 +137,9 @@ textarea {
     -webkit-appearance: none !important;
     appearance: none !important;
 }
+.big_select {
+    height: 75px;
+}
 
 input[type="text"],
 input[type="number"],
@@ -153,7 +156,7 @@ select {
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
-    font-family: 'Open Sans';
+    font-family: Arial;
     height: 36px;
     border-radius: 1px;
     box-sizing: border-box;
@@ -167,6 +170,16 @@ input[type="search"]:focus,
 input[type="password"]:focus,
 textarea:focus {
     border: 1px solid #ddddde;
+}
+
+.available_service_action {
+    background:none !important;
+}
+.mrgt {
+    margin-right: 20px;
+}
+img.available_section {
+    width: 100px;
 }
 
 input[type="reset"],
@@ -528,14 +541,14 @@ a.btn.bt_green::before {
 
 
 .signup_wrap h3 {
-    font-family: 'Open Sans';
+    font-family: Arial;
     color: #000;
     font-size: 14px;
     line-height: normal;
 }
 
 .signup_wrap ul li a {
-    font-family: 'Open Sans';
+    font-family: Arial;
     color: #f1304b;
     font-size: 13px;
     line-height: normal;
@@ -592,7 +605,7 @@ a.btn.bt_green::before {
 .header_menuwrap ul li a {
     display: block;
     padding: 13px 23px;
-    font-family: 'Open Sans';
+    font-family: Arial;
     color: #fff;
     font-size: 14px;
     -webkit-transition: all 0.5s ease;
@@ -670,7 +683,7 @@ ul.profile_rgt {
 .category_menu li a {
     display: block;
     padding: 12px 25px;
-    font-family: 'Open Sans';
+    font-family: Arial;
     color: #fff;
     font-size: 14px;
     -webkit-transition: all 0.5s ease;
@@ -710,7 +723,7 @@ ul.profile_rgt {
 }
 
 .action_field {
-    text-align: right;
+    text-align: center;
 }
 
 .sort_by form .form_field {
@@ -808,7 +821,7 @@ ul.profile_rgt {
     color: #444;
     font-size: 20px;
     text-transform: capitalize;
-    font-family: 'Open Sans';
+    font-family: Arial;
     /*    font-weight: 600;*/
 }
 
@@ -827,7 +840,7 @@ ul.profile_rgt {
 .list_decp p {
     color: #777777;
     font-size: 13px;
-    font-family: 'Open Sans';
+    font-family: Arial;
     line-height: 18px;
     margin-bottom: 15px;
     max-height: 50px;
@@ -937,7 +950,7 @@ footer ul li a,
 footer p {
     font-size: 13px;
     color: #8a8a8a;
-    font-family: 'Open Sans';
+    font-family: Arial;
     padding-bottom: 5px;
     display: inline-block;
 }
@@ -1152,7 +1165,7 @@ ul.device_nav li a {
     text-align: left;
     display: block;
     font-size: 24px;
-    font-family: 'Open Sans';
+    font-family: Arial;
     font-weight: bold;
     color: #fff;
     text-transform: uppercase;
@@ -1948,6 +1961,7 @@ input[type="file"] {
 }
 .text_profile_menu { display: block; }
 .icon_profile_menu { display:none; }
+.active_icon { display: none; }
 
 .newsfeed_wrap .form_field label {
     font-weight: bold;
@@ -2292,7 +2306,14 @@ li.shear-btn:hover .social-share {
 	width:calc(100% - 50px);
 }
 .feed_comment .comment_submit { 
-	height: 46px;width: 45px;text-align: center;padding: 0px;margin: 0px 0px 0px 3px; border-radius: 50%;
+    height: 31px;
+    width: 31px;
+    text-align: center;
+    padding: 0;
+    margin: 0px 0px 0px 10px;
+    border-radius: 50%;
+    margin-top: 10px;
+    background: black;
 }
 
 div .comment {
@@ -2950,7 +2971,8 @@ a.favor.active {
 .post_detail_wrap div .comment  {   line-height: 48px;    padding-left: 5px; }
 i.fa.fa-location-arrow {
     transform: rotate(43deg);
-    font-size: 25px;
+    font-size: 19px;
+    color: red;
 }
 .alert_header {
     background: #34353a;    

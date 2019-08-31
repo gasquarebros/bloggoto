@@ -410,7 +410,7 @@
 }
 
 .flash_sale_deals .price-part .new-price {
-    color: black;
+    color: red;
     font-size: 15px;
     font-family: 'proxima_nova_rgbold';
     margin: 0px;

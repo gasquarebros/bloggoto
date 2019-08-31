@@ -13,6 +13,7 @@
 <table class="table " style="text-align: left;">
 	<thead class="first">
 		<tr>
+			<th width=""><?=get_label('actions');?></th>
 			<th><?=get_label('order_service_created_on').add_sort_by('order_service_created_on',$module);?></th>
 			<th><?=get_label('order_service_local_no').add_sort_by('order_service_local_no',$module);?></th>
 			<th><?=get_label('order_service_title').add_sort_by('order_service_title',$module);?></th>
@@ -22,7 +23,6 @@
 			<th><?=get_label('order_service_amount');?></th>
 			<th><?=get_label('city');?></th>
 			<th><?=get_label('order_service_status').add_sort_by('order_service_status',$module);?></th>
-			<th width=""><?=get_label('actions');?></th>
 		</tr>
 	</thead>
 
@@ -33,7 +33,13 @@
 		foreach ( $records as $val ) {
 			?>
 			<tr>
-						
+				<td> 
+					<?php if($val['order_service_is_paid'] == 1) { ?>	
+						<a href="<?php echo base_url().$module.'/view/'.encode_value($val['order_service_id']);?>"><i class="fa fa-eye" title="<?php echo get_label('view')?>"></i></a>&nbsp;
+					<?php } else { ?>
+						<a href="<?php echo base_url().$module.'/pay/'.encode_value($val['order_service_id']);?>"><i class="fa fa-money" title="<?php echo get_label('pay')?>"></i></a>&nbsp;
+					<?php } ?>
+				</td>	
 				<td><?php echo get_date_formart($val['order_service_created_on']);?></td>
 				<td><?php echo output_value($val['order_service_local_no']);?></td>
 				<td><?php echo stripslashes($val['order_service_title']);?></td>
@@ -50,13 +56,6 @@
 				<td><?php echo show_price($val['order_service_price'])."/".$val['order_service_price_type']; ?></td>
 				<td><?php echo stripslashes($val['city_name']);?></td>
 				<td><?php echo ucfirst($val['order_service_status']);?></td>
-				<td> 
-					<?php if($val['order_service_is_paid'] == 1) { ?>	
-						<a href="<?php echo base_url().$module.'/view/'.encode_value($val['order_service_id']);?>"><i class="fa fa-eye" title="<?php echo get_label('view')?>"></i></a>&nbsp;
-					<?php } else { ?>
-						<a href="<?php echo base_url().$module.'/pay/'.encode_value($val['order_service_id']);?>"><i class="fa fa-money" title="<?php echo get_label('pay')?>"></i></a>&nbsp;
-					<?php } ?>
-				</td>
 			</tr>
 <?php  	} 
 	} 
@@ -71,6 +70,7 @@
 	</tbody>
 	<thead class="last">
 		<tr>
+			<th width=""><?=get_label('actions');?></th>
 			<th><?=get_label('order_service_created_on').add_sort_by('order_service_created_on',$module);?></th>
 			<th><?=get_label('order_service_local_no').add_sort_by('order_service_local_no',$module);?></th>
 			<th><?=get_label('order_service_title').add_sort_by('order_service_title',$module);?></th>
@@ -80,7 +80,6 @@
 			<th><?=get_label('order_service_amount');?></th>
 			<th><?=get_label('city');?></th>
 			<th><?=get_label('order_service_status').add_sort_by('order_service_status',$module);?></th>
-			<th width=""><?=get_label('actions');?></th>
 		</tr>
 	</thead>
 

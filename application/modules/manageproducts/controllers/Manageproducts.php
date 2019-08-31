@@ -228,7 +228,7 @@ class Manageproducts extends CI_Controller
 
 			if (( int ) $this->input->post ( 'product_spl_price' ) != 0) {
 				
-				$this->form_validation->set_rules ( 'product_spl_price', 'lang:product_spl_price', 'required' );
+				$this->form_validation->set_rules ( 'product_spl_price', 'lang:product_spl_price', 'required|callback_validatespecialPrice' );
 				$this->form_validation->set_rules ( 'product_spl_price_from', 'lang:product_spl_price_from', 'required' );
 				$this->form_validation->set_rules ( 'product_spl_price_to', 'lang:product_spl_price_to', 'required' );
 			}
@@ -525,7 +525,7 @@ class Manageproducts extends CI_Controller
 	  
 			if (( int ) $this->input->post ( 'product_spl_price' ) != 0) {
 				
-				$this->form_validation->set_rules ( 'product_spl_price', 'lang:product_spl_price', 'required' );
+				$this->form_validation->set_rules ( 'product_spl_price', 'lang:product_spl_price', 'callback_validatespecialPrice' );
 				$this->form_validation->set_rules ( 'product_spl_price_from', 'lang:product_spl_price_from', 'required' );
 				$this->form_validation->set_rules ( 'product_spl_price_to', 'lang:product_spl_price_to', 'required' );
 			}
@@ -828,7 +828,7 @@ class Manageproducts extends CI_Controller
 	public function productnameexists() {
 		$name = $this->input->post ( 'product_name' );
 		$edit_id = $this->input->post ( 'edit_id' );
-		$category = post_value ( 'category' );
+		// $category = post_value ( 'category' );
 		$where = array (
 				'product_name' => trim ( $name ) 
 		);
@@ -838,11 +838,15 @@ class Manageproducts extends CI_Controller
 			) );
 		}
 		
-		$where = array_merge ( array (
+		/*$where = array_merge ( array (
 				'product_category_id' => $category,
 		), $where );
+		*/
 		$result = $this->Mydb->get_record ( 'product_primary_id', $this->table, $where );
-		
+		//echo $this->db->last_query();
+		//print_r($_POST);
+		//print_r($result);
+		//exit;
 		if (! empty ( $result )) {
 			$this->form_validation->set_message ( 'productnameexists', get_label ( 'product_value_exist' ) );
 			return false;
@@ -873,6 +877,18 @@ class Manageproducts extends CI_Controller
 			return true;
 		}
 	}
+
+	public function validatespecialPrice() {
+		$price = (Float)($this->input->post ( 'product_price' ));
+		$specialPrice = (Float)($this->input->post ( 'product_spl_price' ));
+		if ($specialPrice > $price) {
+			$this->form_validation->set_message ( 'validatespecialPrice', 'Special Price is higher than Price' );
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	/* this method used to validate posted category and subcategory */
 	function validate_subcategory() {
 		/* validate category id */
