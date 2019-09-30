@@ -174,6 +174,8 @@ textarea:focus {
 
 .available_service_action {
     background:none !important;
+	float: left;
+    width: 30%;
 }
 .mrgt {
     margin-right: 20px;
@@ -189,10 +191,10 @@ button,
 .action_field a.popup-modals,
 .action_field a.popup-modal,
 #register-back-btn {
-    display: inline-block;
+	display: inline-block;
     height: 38px;
-    /*    margin-bottom: 10px;*/
-    padding: 0px 20px;
+    margin-bottom: 10px;
+    padding: 0px;
     -moz-appearance: none !important;
     -webkit-appearance: none !important;
     appearance: none !important;
@@ -204,7 +206,7 @@ button,
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     background: #00c853;
-    color: #fff;
+    /* color: #fff; */
     border-radius: 2px;
 }
 
@@ -221,6 +223,9 @@ button:hover,
 textarea {
     resize: none;
     min-height: 95px;
+}
+.available_service_action span {
+	display: none; 
 }
 
 .action_field a.popup-modals,
@@ -2031,7 +2036,7 @@ input[type="file"] {
 
 .write_post .btn_wrap,
 .write_post .action_field {
-    width: 20%;
+    width: 100%;
     display: inline-block;
     vertical-align: bottom;
     text-align: center;

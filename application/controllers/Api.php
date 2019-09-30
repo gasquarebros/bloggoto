@@ -322,5 +322,53 @@ class Api extends REST_Controller {
 		return true;
 	}
 	
+	public function countries_get() {
+	    $where_array = array('id !='=>'');
+		$type = $this->input->get('type');
+		$data = array();
+		if($type == 'country' || $type == 'all') {
+    		$countries_result=$this->Mydb->get_all_records('id,varName','countries',$where_array,'','',array('varName'=>"ASC"));
+    		$countries =array(''=>get_label('select_country'));
+    		/*if(!empty($countries_result))
+    		{
+    			foreach($countries_result as $value)
+    			{
+    				$countries[$value['id']] = stripslashes($value['varName']);
+    			}
+    		}*/
+    		$data['countries'] = $countries_result;
+		}
+		if($type == 'state' || $type == 'all') {
+    		$states_result =$this->Mydb->get_all_records('id,varStateName,intCountryId','states',array('intCountryId'=>99),'','',array('varStateName'=>"ASC"));
+    		$states = [];
+    		/*if(!empty($states_result))
+    		{
+    			foreach($states_result as $value)
+    			{
+    				$states[] = array('id'=>$value['id'], 'name'=>stripslashes($value['varStateName']),'countryid'=>$value['intCountryId']);
+    			}
+    		}*/
+    		$data['states'] = $states_result;
+		}
+		if($type == 'city' || $type == 'all') {
+    		$cities_result =$this->Mydb->get_all_records('city_id, city_name, city_state','cities','','','',array('city_name'=>"ASC"));
+    		$cities = [];
+    		/*
+    		if(!empty($cities_result))
+    		{
+    			foreach($cities_result as $value)
+    			{
+    				$cities[] = array('id'=>$value['city_id'], 'name'=>stripslashes($value['city_name']),'stateid'=>$value['city_state']);
+    			}
+    		}*/
+    		$data['cities'] = $cities_result;
+		}
+		
+		$result ['status'] = 'success';
+		$result['data'] = $data;
+		echo json_encode ( $result );
+		exit ();
+	}
+	
 	
 } /* end of files */

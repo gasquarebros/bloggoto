@@ -80,10 +80,10 @@ var module_action="addpost";
 			</div>
 			<div class="cmt_form">
 				<form>
-                    <div class="action_field">
-						<a  <?php if(get_user_id() == '') { ?> class="popup-modals available_service_action" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal available_service_action" href="#test-modal" <?php } ?>><img class="available_section" src="<?php echo skin_url().'images/post_wall.png'; ?>"></a>
-						<a  <?php if(get_user_id() == '') { ?> class="mrgt available_service_action" href="<?php echo base_url(); ?>" <?php } else { ?> class="mrgt available_service_action" href="<?php echo base_url().'manageproducts/add'; ?>" <?php } ?>><img class="available_section" src="<?php echo skin_url().'images/sell_products.png'; ?>"></a>
-						<a  <?php if(get_user_id() == '') { ?> class="mrgt available_service_action" href="<?php echo base_url(); ?>" <?php } else { ?> class="mrgt available_service_action" href="<?php echo base_url().'manageservices/add'; ?>" <?php } ?>><img class="available_section" src="<?php echo skin_url().'images/host_services.png'; ?>"></a>
+                    <div class="action_field service_action_section">
+						<a  <?php if(get_user_id() == '') { ?> class="popup-modals available_service_action" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal available_service_action" href="#test-modal" <?php } ?>><img class="available_section" src="<?php echo skin_url().'images/post_wall.png'; ?>"><span>Post</span></a>
+						<a  <?php if(get_user_id() == '') { ?> class="mrgt available_service_action" href="<?php echo base_url(); ?>" <?php } else { ?> class="mrgt available_service_action" href="<?php echo base_url().'manageproducts/add'; ?>" <?php } ?>><img class="available_section" src="<?php echo skin_url().'images/sell_products.png'; ?>"><span>Sell Products</span></a>
+						<a  <?php if(get_user_id() == '') { ?> class="mrgt available_service_action" href="<?php echo base_url(); ?>" <?php } else { ?> class="mrgt available_service_action" href="<?php echo base_url().'manageservices/add'; ?>" <?php } ?>><img class="available_section" src="<?php echo skin_url().'images/host_services.png'; ?>"><span>Host Services</span></a>
                     </div>
                 </form>
 			</div>

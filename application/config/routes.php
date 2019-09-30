@@ -142,6 +142,7 @@ $route['page/(.*)'] = 'home/page/$1';
 $route['api/(.*)'] = 'api/$1';
 $route['post/(.*)'] = 'post/$1';
 $route['profile/(.*)'] = 'profile/$1';
+$route['productsapi/(.*)'] = 'productsapi/$1';
 $route['welcome/(.*)'] = 'welcome/$1';
 $route['(.*)'] = 'myprofile/index/$1';
 $route['products/ajax_pagination'] = 'products/ajax_pagination';

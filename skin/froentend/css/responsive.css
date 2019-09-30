@@ -115,7 +115,7 @@ position: relative; overflow: visible !important; }
     .newsfeed_menu .active {
         background: #000 !important;
     }
-    .write_img, .write_text { float: none; width: 100%; text-align: center; }
+    .write_img, .write_text { float: none; width: 100% !important; text-align: center; }
     .toggle_feed { float: right; }
     .feed_name h4, .feed_body_text h4 { font-size: 20px; margin: 0; }
     .feed_name { width: 60%; }
@@ -234,7 +234,7 @@ position: relative; overflow: visible !important; }
     .write_text input[type="text"], .write_text input[type="email"], .write_text input[type="password"], .write_text textarea, .write_text select { margin-bottom: 15px; }
     .newsfeed_menu li { width: calc(100%/6); border: 1px solid #ccc;}
 	.list_row { width: 565px; }
-	.write_img { width: 20%; float: left; }
+	.write_img { width: 20%; float: left; display:none;}
 	.mail-time{
         position: static;
     right: inherit;
@@ -275,6 +275,48 @@ position: relative; overflow: visible !important; }
 	.share_n_text { margin-left: 60%; } 
     .popup-gallery img { width: 100%; }
     .inner_section { display:none;}
+	
+.cmt_form {
+	padding: 10px 10px 6px 5px;
+}    
+.service_action_section {
+	margin: 0 auto;
+	width: 100% !important;
+	float: left;
+	display: block;
+	text-align: center;
+    padding-left: 25px;
+    padding-left: 0px !important;
+	height: 82px;
+}
+.available_service_action {
+    float: left;
+    text-align: center;
+    padding-right: 0px;
+    margin-right: 0px !important;
+    width: 30%;
+    float: left;
+    color: black;
+    height: 100px;
+    padding: 0px !important;
+    line-height: 25px !important;
+}
+.available_service_action span {
+	width: 100%;
+    float: left;
+    font-size: 13px;
+    line-height: 13px !important;
+    text-align: center;
+    display: block;
+    color: black;
+    margin: 0 auto;
+    text-align: center;
+}
+.available_service_action img {
+    width: 50px !important;
+    text-align: center;
+    margin: 0 auto;
+}
 }
 
 @media screen and (max-width: 500px) {
@@ -482,6 +524,26 @@ position: relative; overflow: visible !important; }
 	.show_post_options { margin-top:0px; }
     .share_n_text { margin-left: 29%; } 
     .cat_list ul li a { font-size: 13px; }
+
+    
+.service_action_section {
+	margin: 0 auto;
+	width: 100%;
+	float: left;
+	display: block;
+	text-align: center;
+    padding-left: 25px;
+    padding-left: 0px !important;
+}
+.available_service_action {
+    float: left;
+    text-align: center;
+    padding-right: 17px;
+    margin-right: 0px !important;
+}
+.available_service_action img {
+    width: 50px !important;
+}
 }
 
 @media screen and (max-width: 320px) {

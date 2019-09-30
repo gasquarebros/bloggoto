@@ -8,11 +8,17 @@
 			</div>
 			<div class="write_text">
 				<form>
+				<?php /*
                     <div class="form_field">
                         <input type="text" id="blog_post_title" placeholder="<?php echo get_label('placeholder_post_title');?>">
                     </div>
                     <div class="action_field">
                         <a class="popup-modal" <?php if(get_user_id() == '') { ?>href="<?php echo base_url(); ?>" <?php } else { ?>href="#test-modal" <?php } ?> value="">Let's Go</a>
+                    </div> */ ?>
+					<div class="action_field service_action_section">
+						<a  <?php if(get_user_id() == '') { ?> class="popup-modals available_service_action" href="<?php echo base_url(); ?>" <?php } else { ?> class="popup-modal available_service_action" href="#test-modal" <?php } ?>><img class="available_section" src="<?php echo skin_url().'images/post_wall.png'; ?>"><span>Post</span></a>
+						<a  <?php if(get_user_id() == '') { ?> class="mrgt available_service_action" href="<?php echo base_url(); ?>" <?php } else { ?> class="mrgt available_service_action" href="<?php echo base_url().'manageproducts/add'; ?>" <?php } ?>><img class="available_section" src="<?php echo skin_url().'images/sell_products.png'; ?>"><span>Sell Products</span></a>
+						<a  <?php if(get_user_id() == '') { ?> class="mrgt available_service_action" href="<?php echo base_url(); ?>" <?php } else { ?> class="mrgt available_service_action" href="<?php echo base_url().'manageservices/add'; ?>" <?php } ?>><img class="available_section" src="<?php echo skin_url().'images/host_services.png'; ?>"><span>Host Services</span></a>
                     </div>
                 </form>
 			</div>

@@ -177,7 +177,7 @@ var module_action="addpost";
 						<a data-section="products" href="<?php echo base_url()."myprofile/products/".encode_value($info['customer_id']); ?>" class=" profile_section product_section">
 							<img src="<?php echo skin_url().'images/product.png'?>" class="icon_profile_menu">	
 							<img src="<?php echo skin_url().'images/product_white.png'?>" class="active_icon">	
-							<span class="text_profile_menu">Products</span>
+							<span class="text_profile_menu">Sell Products</span>
 						</a>
 					</li>
 				<?php /*}*/ ?>
@@ -185,7 +185,7 @@ var module_action="addpost";
 					<a data-section="services" href="<?php echo base_url()."myprofile/services/".encode_value($info['customer_id']); ?>" class=" profile_section service_section">
 						<img src="<?php echo skin_url().'images/Service.png'?>" class="icon_profile_menu">
 						<img src="<?php echo skin_url().'images/Service_white.png'?>" class="active_icon">	
-						<span class="text_profile_menu">Services</span>
+						<span class="text_profile_menu">Host Services</span>
 					</a>
 				</li>
 			</ul>
