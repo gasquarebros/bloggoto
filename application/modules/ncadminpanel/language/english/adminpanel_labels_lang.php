@@ -185,6 +185,7 @@ $lang['customer_prof_types'] = "Professional/Freelancer";
 $lang['customer_prof_rewards'] = "Rewards/Awards";
 $lang['customer_type'] = "Customer Type";
 
+
 /* customer modules ends here */
 
 /* posts modules starts here */
